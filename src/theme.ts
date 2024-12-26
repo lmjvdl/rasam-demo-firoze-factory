@@ -12,6 +12,12 @@ declare module "@mui/material/styles" {
   interface PaletteOptions {
     table: tableCustomPalleteOption;
   }
+   interface TypeBackground {
+     disable?: string;
+     enable?: string;
+   }
+
+ 
 }
 
 import { ColorSystemOptions, createTheme } from "@mui/material/styles";
@@ -27,6 +33,7 @@ const lightObject: ColorSystemOptions = {
     background: {
       default: "#F7F7F7",
       defaultChannel: "#FFFFFF",
+      disable: "#EDEDED",
     },
     table: {
       oddColumn: "#fff",
@@ -47,9 +54,10 @@ const darkObject: ColorSystemOptions = {
     background: {
       default: "#2E2E2E",
       defaultChannel: "#333333",
+      disable: "#3A3A3A",
+      enable: "#4C4C4C",
     },
     table: {
-      main: "#0000",
       header: "#0FBDA2",
       oddColumn: "#4C4C4C",
       evenColumn: "#646464",
