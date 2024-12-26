@@ -27,7 +27,7 @@ const DrawerSide = ({
   };
 
   const drawerItemInfoByKey: Record<string, {icon:ReactNode,to:string}> = {
-    'سلام': { icon: <Inbox />, to: "/inbox" },
+    'بسته بندی': { icon: <Inbox />, to: "/packaging" },
     خوبی: { icon: <Star />, to: "/starred" },
     "ایتم سومی ۳": { icon: <Email />, to: "/send-email" },
     بالمیل: { icon: <Drafts />, to: "/drafts" },

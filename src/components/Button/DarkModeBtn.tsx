@@ -1,7 +1,6 @@
-import { Opacity } from "@mui/icons-material";
 import { styled, Switch } from "@mui/material";
 
- const MaterialUISwitch = styled(Switch)(({ theme }) => ({
+ export const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
   height: 34,
   padding: 7,

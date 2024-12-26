@@ -4,7 +4,7 @@ import React from 'react'
 
 const page = () => {
   return (
-    <MainCard sx={{ gap: 1, flexDirection: "row" }}>
+    <MainCard sx={{ gap: 4, flexDirection: "row" }}>
       <Chamfer />
       <Chamfer on={false} />
       <Chamfer />

@@ -14,7 +14,6 @@ const Chamfer = ({
   return (
     <Stack
       component={Paper}
-      //   elevation={2}
       boxShadow={1}
       sx={{
         bgcolor: on ? "background.defaultChannel" : "background.default",

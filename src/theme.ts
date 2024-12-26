@@ -9,8 +9,6 @@ const lightObject: ColorSystemOptions = {
     },
     secondary: {
       main: "#E7F8F6",
-
-      
     },
     background: {
       default: "#F7F7F7",
@@ -42,6 +40,7 @@ const theme = createTheme({
     light: lightObject,
     dark: darkObject,
   },
+  shape:{borderRadius:6},
   typography: {
     fontFamily: "vazir",
   },
@@ -50,30 +49,32 @@ const theme = createTheme({
       defaultProps: {
         variant: "contained",
       },
-      styleOverrides: {},
+      styleOverrides: {
+        root: {
+          variants: [
+            {
+              props: { variant: "contained" },
+              style: {
+                color: "var(--mui-palette-common-white)",
+              },
+            },
+          ],
+        },
+      },
     },
     MuiAppBar: {
       styleOverrides: {
-        colorDefault:'#fff'
+        colorDefault: "#fff",
       },
       defaultProps: {
-        color:'default'
-      }
-    }
-    // MuiAlert: {
-    //   styleOverrides: {
-    //     root: {
-    //       variants: [
-    //         {
-    //           props: { severity: "info" },
-    //           style: {
-    //             backgroundColor: "#60a5fa",
-    //           },
-    //         },
-    //       ],
-    //     },
-    //   },
-    // },
+        color: "default",
+      },
+    },
+    MuiTextField: {
+      defaultProps: {
+        size: "small",
+      },
+    },
   },
 });
 
