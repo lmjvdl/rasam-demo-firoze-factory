@@ -6,6 +6,7 @@ import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import ReportDropdown from "@/components/ReportDropdown/ReportDropdown";
 import { KeyValBox } from "../Boxes/KeyValBox";
+import BarChart from "../BarChart";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -58,11 +59,7 @@ export default function BasicTabs() {
           </Tabs>
         </Box>
         <CustomTabPanel value={value} index={0}>
-          بسته بندی
-          <KeyValBox
-            header={"درجه ۱"}
-            keyValList={[{ key: "نعداد کاشی تولیدی", value: "۳۴۳۳" }]}
-          />
+          <BarChart ></BarChart>
         </CustomTabPanel>
       </Box>
       <Box sx={{ width: "5%" }}>
