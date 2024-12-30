@@ -2,13 +2,21 @@ import React from 'react';
 import { Box, Button } from '@mui/material';
 import RangeDropdown from '../../FiltersReportDropDown/Range';
 import DeviceDropdown from '../../FiltersReportDropDown/Device';
+import OneDayDropdown from '@/components/FiltersReportDropDown/OneDay';
+import { DateObject } from 'react-multi-date-picker';
 
 interface FiltersProps {
-  filters: { [key: string]: string | number | string[] };
-  onChange: (filterKey: string, value: string | number | string[]) => void;
+  filters: { 
+    timeRange: DateObject[]; 
+    oneDay: DateObject; 
+    device: string[]; 
+    [key: string]: any;
+  };
+  onChange: (filterKey: string, value: any) => void;
   onSearch: () => void;
   dropdownTypes: string[];
 }
+
 
 const Filters: React.FC<FiltersProps> = ({ filters, onChange, onSearch, dropdownTypes }) => {
   return (
@@ -24,18 +32,24 @@ const Filters: React.FC<FiltersProps> = ({ filters, onChange, onSearch, dropdown
     >
       {dropdownTypes.includes('range') && (
         <RangeDropdown
-          value={filters.timeRange as string}
-          onChange={(value) => onChange('timeRange', value)}
+          value={filters.timeRange}
+          onChange={(value: DateObject[]) => onChange('timeRange', value)}
+        />
+      )}
+
+      {dropdownTypes.includes('oneDay') && (
+        <OneDayDropdown
+          value={filters.oneDay}
+          onChange={(value: DateObject) => onChange('oneDay', value)}
         />
       )}
 
       {dropdownTypes.includes('device') && (
         <DeviceDropdown
-          value={filters.device && Array.isArray(filters.device) ? filters.device[0] : ''}
-          onChange={(value) => onChange('device', value)}
+          value={filters.device[0] || ''}
+          onChange={(value: string) => onChange('device', [value])}
         />
       )}
-
       <Box>
         <Button variant="contained" fullWidth onClick={onSearch}>
           جست‌وجو

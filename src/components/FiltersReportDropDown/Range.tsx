@@ -1,27 +1,21 @@
 import React from 'react';
-import { MenuItem, Select, Box } from '@mui/material';
+import { Box } from '@mui/material';
+import { DateObject } from 'react-multi-date-picker';
+import CustomDatePicker from '../DatePicker/CustomDatePicker';
+
 
 interface RangeDropdownProps {
-  value: string;
-  onChange: (value: string) => void;
+  value: DateObject[];
+  onChange: (selectedDates: DateObject[]) => void;
 }
 
 const RangeDropdown: React.FC<RangeDropdownProps> = ({ value, onChange }) => {
   return (
     <Box>
-      <Select
-        fullWidth
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        displayEmpty
-      >
-        <MenuItem value="">بازه زمانی</MenuItem>
-        <MenuItem value="lastWeek">هفته گذشته</MenuItem>
-        <MenuItem value="lastMonth">ماه گذشته</MenuItem>
-        <MenuItem value="custom">سفارشی</MenuItem>
-      </Select>
+      <CustomDatePicker value={value} onChange={onChange} />
     </Box>
   );
 };
+
 
 export default RangeDropdown;

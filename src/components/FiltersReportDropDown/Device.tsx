@@ -1,12 +1,12 @@
 import React from 'react';
 import { MenuItem, Select, Box } from '@mui/material';
 
-interface RangeDropdownProps {
+interface DeviceDropDownProps {
   value: string;
   onChange: (value: string) => void;
 }
 
-const RangeDropdown: React.FC<RangeDropdownProps> = ({ value, onChange }) => {
+const DeviceDropDown: React.FC<DeviceDropDownProps> = ({ value, onChange }) => {
   return (
     <Box>
       <Select
@@ -15,13 +15,12 @@ const RangeDropdown: React.FC<RangeDropdownProps> = ({ value, onChange }) => {
         onChange={(e) => onChange(e.target.value)}
         displayEmpty
       >
-        <MenuItem value="">بازه زمانی</MenuItem>
-        <MenuItem value="lastWeek">هفته گذشته</MenuItem>
-        <MenuItem value="lastMonth">ماه گذشته</MenuItem>
-        <MenuItem value="custom">سفارشی</MenuItem>
+        <MenuItem value="1">بالمیل 1</MenuItem>
+        <MenuItem value="2">بالمیل 2</MenuItem>
+        <MenuItem value="3">بالمیل 3</MenuItem>
       </Select>
     </Box>
   );
 };
 
-export default RangeDropdown;
+export default DeviceDropDown;

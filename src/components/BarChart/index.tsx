@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import BarChart from './ChartConfig/BarChart';
-import Filters from './SelectReport/Fiters';
-import { color } from 'chart.js/helpers';
+import Filters from './SelectReport/Filters';
+import { DateObject } from 'react-multi-date-picker';
 
 const Index: React.FC = () => {
-  const [filters, setFilters] = useState<{ [key: string]: string | number | string[] }>({
-    type: '',
-    timeRange: '',
-    device: [] // تغییرات: از string[] برای device استفاده می‌کنیم
+  const [filters, setFilters] = useState({
+    timeRange: [] as DateObject[], 
+    oneDay: undefined as DateObject | undefined, 
+    device: [] as string[],
   });
+  
 
   const [chartData, setChartData] = useState({
     labels: ['ژانویه', 'فوریه', 'مارس', 'آوریل', 'مه'],
@@ -53,7 +54,7 @@ const Index: React.FC = () => {
         filters={filters}
         onChange={handleFilterChange} 
         onSearch={handleSearch}
-        dropdownTypes={['range', 'device']}
+        dropdownTypes={['range', 'device', 'oneDay']}
       />
       <BarChart data={chartData} options={{ responsive: true }} />
     </div>
