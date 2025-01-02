@@ -3,16 +3,13 @@ import {
   Box,
   TextField,
   InputAdornment,
-  useTheme,
+  FormControl,
 } from "@mui/material";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import DatePicker, { DateObject } from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import weekends from "react-multi-date-picker/plugins/highlight_weekends";
 import persianFa from "./persianFa";
-import useOrientation from "@/hooks/UI/useOrientation";
-import "./mobile.css";
-import "./dark.css";
 
 const weekDays = ["ش", "ی", "د", "س", "چ", "پ", "ج"];
 
@@ -30,21 +27,22 @@ function InputContainer({ openCalendar, value }: CalendarInputProps) {
   const text = valueToInputText(value);
   const placeholderInput: string = text !== "" ? text : "تاریخ";
   return (
-    <TextField
-      variant="outlined"
-      placeholder={placeholderInput}
-      value={text}
-      onFocus={openCalendar}
-      InputProps={{
-        readOnly: true,
-        endAdornment: (
-          <InputAdornment position="end">
-            <CalendarTodayIcon />
-          </InputAdornment>
-        ),
-      }}
-      fullWidth
-    />
+      <TextField
+        variant="outlined"
+        fullWidth
+        placeholder={placeholderInput}
+        value={text}
+        onFocus={openCalendar}
+        InputProps={{
+          readOnly: true,
+          endAdornment: (
+            <InputAdornment position="end">
+              <CalendarTodayIcon />
+            </InputAdornment>
+          ),
+          style: { height: '57px' }
+        }}
+      />
   );
 }
 
@@ -55,24 +53,19 @@ export default function CustomDatePickerOneDay({
   value: DateObject | undefined;
   onChange: (selectedDate: DateObject) => void;
 }) {
-  const { isMobile } = useOrientation();
-  const theme = useTheme();
-  const isDarkMode = theme.palette.mode === "dark";
 
   return (
-    <Box>
+    <FormControl fullWidth>
       <DatePicker
-        className={`${isMobile ? "rmdp-mobile" : ""} ${isDarkMode ? "bg-dark" : ""}`}
         render={<InputContainer />}
-        calendar={persian}
         locale={persianFa}
         weekDays={weekDays}
-        calendarPosition="bottom-center"
+        calendar={persian}
         value={value}
         onChange={onChange}
         plugins={[weekends()]}
         portal
       />
-    </Box>
+    </FormControl>
   );
 }

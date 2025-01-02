@@ -4,6 +4,7 @@ import RangeDropdown from '../../FiltersReportDropDown/Range';
 import DeviceDropdown from '../../FiltersReportDropDown/Device';
 import OneDayDropdown from '@/components/FiltersReportDropDown/OneDay';
 import { DateObject } from 'react-multi-date-picker';
+import { Height } from '@mui/icons-material';
 
 interface FiltersProps {
   filters: { 
@@ -23,7 +24,7 @@ const Filters: React.FC<FiltersProps> = ({ filters, onChange, onSearch, dropdown
     <Box
       sx={{
         display: 'grid',
-        gridTemplateColumns: { xs: '1fr', md: 'repeat(3, 1fr)' },
+        gridTemplateColumns: { xs: '1fr', md: 'repeat(4, 1fr)' },
         gap: 2,
         p: 2,
         bgcolor: 'background.paper',
@@ -46,12 +47,18 @@ const Filters: React.FC<FiltersProps> = ({ filters, onChange, onSearch, dropdown
 
       {dropdownTypes.includes('device') && (
         <DeviceDropdown
+          placeholder='نوع دستگاه'
           value={filters.device[0] || ''}
           onChange={(value: string) => onChange('device', [value])}
         />
       )}
       <Box>
-        <Button variant="contained" fullWidth onClick={onSearch}>
+        <Button 
+          variant="contained" 
+          fullWidth 
+          onClick={onSearch}
+          style={{height: "56px"}}
+          >
           جست‌وجو
         </Button>
       </Box>

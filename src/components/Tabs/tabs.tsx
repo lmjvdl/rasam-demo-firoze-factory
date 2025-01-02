@@ -5,7 +5,6 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import ReportDropdown from "@/components/ReportDropdown/ReportDropdown";
-import { KeyValBox } from "../Boxes/KeyValBox";
 import BarChart from "../BarChart";
 
 interface TabPanelProps {
@@ -47,23 +46,39 @@ export default function BasicTabs() {
   };
 
   return (
-    <Box sx={{ display: "flex", width: "100%" }}>
-      <Box sx={{ width: "77%", paddingRight: "1%" }}>
-        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            aria-label="basic tabs example"
-          >
-            <Tab label="بسته بندی" {...a11yProps(0)} />
-          </Tabs>
+    <Box sx={{ width: "100%" }}>
+      <Box sx={{ width: "100%" }}>
+        <Box
+          sx={{
+            display: "grid",
+            gap: 2,
+            p: 2,
+            bgcolor: "background.paper",
+            borderRadius: 2,
+            gridTemplateColumns: {
+              xs: "1fr 3fr", // موبایل: باکس اول 25% و باکس دوم 75%
+              md: "3fr 1fr", // دسکتاپ و تبلت: باکس اول 75% و باکس دوم 25%
+            },
+          }}
+        >
+          <Box sx={{ width: "100%" }}>
+            <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+              <Tabs
+                value={value}
+                onChange={handleChange}
+                aria-label="basic tabs example"
+              >
+                <Tab label="بسته بندی" {...a11yProps(0)} />
+              </Tabs>
+            </Box>
+          </Box>
+          <Box sx={{ width: "100%" }}>
+            <ReportDropdown />
+          </Box>
         </Box>
-        <CustomTabPanel value={value} index={0}>
-          <BarChart ></BarChart>
-        </CustomTabPanel>
       </Box>
-      <Box sx={{ width: "5%" }}>
-        <ReportDropdown />
+      <Box>
+          <BarChart ></BarChart>
       </Box>
     </Box>
   );

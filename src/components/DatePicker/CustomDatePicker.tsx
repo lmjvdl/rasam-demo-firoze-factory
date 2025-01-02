@@ -1,92 +1,85 @@
 import React from "react";
-import { Box, TextField, IconButton } from "@mui/material";
+import { Box, TextField, IconButton, FormControl, InputAdornment, makeStyles } from "@mui/material";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import DatePicker, { DateObject } from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import weekends from "react-multi-date-picker/plugins/highlight_weekends";
 import persianFa from "./persianFa";
-import "./mobile.css";
-import "./dark.css";
-import useOrientation from "@/hooks/UI/useOrientation";
 
 const weekDays = ["ش", "ی", "د", "س", "چ", "پ", "ج"];
 
-const valueToInputText = (value?: string[] | any): string => {
-  if (!Array.isArray(value) || value.length === 0) return "";
-
-  if (value.length === 1) {
-    const [from] = value;
-    if (!from) return "";
-    return `${from}  تا این لحظه`;
+const valueToInputText = (val?: DateObject[]): string => {
+  const value = val ? val.toString() : "";
+  if (!value) {
+    return "";
   }
 
-  if (value.length === 2) {
-    const [from, to] = value;
-    if (!from || !to) return "";
+  const [from, to] = value.split("~").map((date) => date.trim());
+
+  if (!from && !to) {
+    return "";
+  }
+
+  if (from && !to) {
+    return `${from} تا این لحظه`;
+  }
+
+  if (from && to) {
     return `${from} تا ${to}`;
   }
-  
-  return value.join(",");
+
+  return "";
 };
 
-
 interface CalendarInputProps {
-  value?: string[];
+  value?: DateObject[];
   openCalendar?: () => void;
 }
 
 function InputContainer({ openCalendar, value }: CalendarInputProps) {
-  const text = valueToInputText(Array.isArray(value) ? value : []);
-  const placeholderInput: string = text !== "" ? text : "تاریخ";
-  console.log(placeholderInput)
+  const text: string = valueToInputText(value)
+  const placeholderInput: string = text !== "" ? text : "بازه زمانی";
   return (
-    <Box>
       <TextField
         variant="outlined"
+        fullWidth
         placeholder={placeholderInput}
-        aria-label="بازه زمانی"
-        onFocus={openCalendar}
         value={text}
+        onFocus={openCalendar}
         InputProps={{
           readOnly: true,
           endAdornment: (
-            <IconButton onClick={openCalendar}>
+            <InputAdornment position="end">
               <CalendarTodayIcon />
-            </IconButton>
+            </InputAdornment>
           ),
+          style: { height: '57px' }
         }}
-        fullWidth
       />
-    </Box>
   );
 }
 
 export default function CustomDatePicker({
-  value,
+  value = [],
   onChange,
 }: {
   value: DateObject[];
   onChange: (selectedDates: DateObject[]) => void;
 }) {
-  const { isMobile } = useOrientation();
 
   return (
-    <Box sx={{ width: "100%" }}>
+    <FormControl fullWidth>
       <DatePicker
-        className={isMobile ? "rmdp-mobile" : ""}
-        containerClassName="datepicker-container"
         render={<InputContainer />}
         range
-        calendar={persian}
         locale={persianFa}
         weekDays={weekDays}
-        calendarPosition="bottom-center"
+        calendar={persian}
         value={value}
         onChange={onChange}
         plugins={[weekends()]}
-        shadow={false}
         portal
       />
-    </Box>
+    </FormControl>
   );
 }

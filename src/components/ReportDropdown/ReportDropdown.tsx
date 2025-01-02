@@ -42,7 +42,7 @@ export default function ReportDropdown() {
   };
 
     return (
-      <Box sx={{ minWidth: 300 }}>
+      <Box sx={{ minWidth: 200 }}>
         <FormControl fullWidth>
           <InputLabel id="demo-multiple-name-label">انتخاب گزارش</InputLabel>
           <Select
