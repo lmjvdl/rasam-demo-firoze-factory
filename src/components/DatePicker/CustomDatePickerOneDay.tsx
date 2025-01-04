@@ -53,11 +53,10 @@ export default function CustomDatePickerOneDay({
   value: DateObject | undefined;
   onChange: (selectedDate: DateObject) => void;
 }) {
-
   return (
     <FormControl fullWidth>
       <DatePicker
-        render={<InputContainer />}
+        render={<InputContainer value={value} />}
         locale={persianFa}
         weekDays={weekDays}
         calendar={persian}

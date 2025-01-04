@@ -5,7 +5,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import ReportDropdown from "@/components/ReportDropdown/ReportDropdown";
-import BarChart from "../BarChart";
+import MajorChart from "../Chart";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -53,11 +53,10 @@ export default function BasicTabs() {
             display: "grid",
             gap: 2,
             p: 2,
-            bgcolor: "background.paper",
             borderRadius: 2,
             gridTemplateColumns: {
-              xs: "1fr 3fr", // موبایل: باکس اول 25% و باکس دوم 75%
-              md: "3fr 1fr", // دسکتاپ و تبلت: باکس اول 75% و باکس دوم 25%
+              xs: "1fr 3fr",
+              md: "3fr 1fr",
             },
           }}
         >
@@ -78,7 +77,7 @@ export default function BasicTabs() {
         </Box>
       </Box>
       <Box>
-          <BarChart ></BarChart>
+          <MajorChart ></MajorChart>
       </Box>
     </Box>
   );

@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
-import BarChart from './ChartConfig/BarChart';
+import MajorChart from './ChartConfig/MajorChart';
 import Filters from './SelectReport/Filters';
 import { DateObject } from 'react-multi-date-picker';
+import { Box } from '@mui/material';
+
 
 const Index: React.FC = () => {
   const [filters, setFilters] = useState({
     timeRange: [] as DateObject[], 
-    oneDay: undefined as DateObject | undefined, 
-    device: [] as string[],
+    oneDay: new DateObject(),
+    singleSelect: { placeholder: "دستگاه" as string, options: [] as string[] },
+    multiSelect: { placeholder: "دستگاه ها" as string, options: [] as string[] },
+    subRange: [] as string[]
   });
   
 
@@ -22,42 +26,59 @@ const Index: React.FC = () => {
         borderWidth: 1,
       },
     ],
+    type: "bar",
+    options: {
+      plugins: {
+        title: {
+          display: true,
+          text: "نمودار تهیه بدنه"
+        }
+      } 
+    }
   });
 
-  const handleFilterChange = (filterKey: string, value: string | number | string[]) => { // تغییر نوع value
+
+  const handleFilterChange = (filterKey: string, value: string | number | string[]) => {
     setFilters((prev) => ({ ...prev, [filterKey]: value }));
   };
   
   const handleSearch = () => {
     const newChartData = {
       labels: ['ژانویه', 'فوریه', 'مارس', 'آوریل', 'مه'],
+      chartTitle: "نمودار مصرفی تهیه بدنه",
       datasets: [
         {
           label: 'مقدار',
-          data:
-            filters.type === 'type1'
-              ? [12, 19, 3, 5, 2]
-              : [7, 11, 5, 8, 3],
+          data: [12, 19, 3, 5, 2],
           backgroundColor: ['rgba(75, 192, 192, 1)'],
           borderColor: ['rgba(75, 192, 192, 1)'],
           borderWidth: 1,
           borderRadius: 8,
         },
       ],
+      type: "bar",
+      options: {
+        plugins: {
+          title: {
+            display: true,
+            text: "نمودار تهیه بدنه"
+          }
+        } 
+      }
     };
     setChartData(newChartData);
   };
 
   return (
-    <div>
+    <Box>
       <Filters
         filters={filters}
         onChange={handleFilterChange} 
         onSearch={handleSearch}
-        dropdownTypes={['range', 'device', 'oneDay']}
+        dropdownTypes={['range', 'singleSelect', 'oneDay', 'multiSelect', 'subRange']}
       />
-      <BarChart data={chartData} options={{ responsive: true }} />
-    </div>
+      <MajorChart options={chartData.options} type='bar' data={chartData} />
+    </Box>
   );
 };
 
