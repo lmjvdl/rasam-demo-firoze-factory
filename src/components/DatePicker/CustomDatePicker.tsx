@@ -70,7 +70,7 @@ export default function CustomDatePicker({
   return (
     <FormControl fullWidth>
       <DatePicker
-        render={<InputContainer />}
+        render={<InputContainer value={value}/>}
         range
         locale={persianFa}
         weekDays={weekDays}

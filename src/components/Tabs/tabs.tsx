@@ -5,7 +5,8 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import ReportDropdown from "@/components/ReportDropdown/ReportDropdown";
-import MajorChart from "../Chart";
+import ExampleUsage from "@/app/(AppbarAndDrawer)/chartExample/ExampleUsageChart";
+import SampleUsage from "@/app/(AppbarAndDrawer)/tableExample/tableExample";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -77,7 +78,8 @@ export default function BasicTabs() {
         </Box>
       </Box>
       <Box>
-          <MajorChart ></MajorChart>
+          {/* <ExampleUsage ></ExampleUsage> */}
+          <SampleUsage ></SampleUsage>
       </Box>
     </Box>
   );

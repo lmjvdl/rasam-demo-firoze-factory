@@ -11,13 +11,14 @@ interface Dataset {
   inflateAmount?: number | "auto";
 }
 
+
 interface Options {
   responsive?: true,
   locale?: "fa-IR",
   plugins?: {
     title?: {
-      display?: true,
-      text?: string
+      display?: boolean,
+      text?: string | "نمودار"
     }
   } 
 }
