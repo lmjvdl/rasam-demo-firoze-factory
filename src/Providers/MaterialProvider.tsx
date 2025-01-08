@@ -1,5 +1,5 @@
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
-import Rtl from "./CacheProvider";
+import RtlProvider from "./RtlProvider";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ReactNode } from "react";
 import theme from "@/theme";
@@ -11,12 +11,12 @@ const MaterialProvider = ({
 }>) => {
   return (
     <AppRouterCacheProvider options={{ key: "css" }} >
-      <Rtl>
-        <ThemeProvider theme={theme} disableTransitionOnChange>
+      <RtlProvider>
+        <ThemeProvider theme={theme}  disableTransitionOnChange>
           <CssBaseline />
           {children}
         </ThemeProvider>
-      </Rtl>
+      </RtlProvider>
     </AppRouterCacheProvider>
   );
 };
