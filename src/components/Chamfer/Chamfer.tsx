@@ -16,7 +16,7 @@ const Chamfer = ({
       component={Paper}
       boxShadow={1}
       sx={{
-        bgcolor: on ? "background.defaultChannel" : "background.default",
+        bgcolor: on ? "background.enable" : "background.disable",
       }}
       width={350}
       height={150}
