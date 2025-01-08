@@ -3,6 +3,7 @@ import {  Controller, Control } from "react-hook-form";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import { TextField } from "@mui/material";
+
 export default function MyDatePicker({
   control,
   name,
@@ -21,6 +22,7 @@ export default function MyDatePicker({
       <Controller
         control={control}
         name={name}
+
         rules={{ required: required }} //optional
         render={({
           field: { onChange, name, value },
@@ -30,8 +32,10 @@ export default function MyDatePicker({
           return (
             <>
               <DatePicker
+                style={{width:'100%'}}
                 render={
                   <CustomInput
+                    
                     error={error}
                     label={label}
                     required={required}
@@ -79,15 +83,17 @@ export function CustomInput({
   required,
 }) {
   return (
-    <TextField
-      helperText={error ?? null}
-      error={!!error}
-      label={label}
-      onFocus={onFocus}
-      value={value}
-      onChange={onChange}
-      required={!!required}
-    />
+      <TextField
+      sx={{minWidth:'none'}}
+        helperText={error ?? null}
+        fullWidth
+        error={!!error}
+        label={label}
+        onFocus={onFocus}
+        value={value}
+        onChange={onChange}
+        required={!!required}
+      />
   );
   return <input />;
 }
