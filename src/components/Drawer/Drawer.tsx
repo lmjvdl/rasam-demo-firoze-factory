@@ -26,16 +26,15 @@ const DrawerSide = ({
     setMobileOpen(false);
   };
 
-  const drawerItemInfoByKey: Record<string, {icon:ReactNode,to:string}> = {
-    'بسته بندی': { icon: <Inbox />, to: "/packaging" },
+  const drawerItemInfoByKey: Record<string, { icon: ReactNode; to: string }> = {
+    "بسته بندی": { icon: <Inbox />, to: "/packaging" },
     خوبی: { icon: <Star />, to: "/starred" },
     "ایتم سومی ۳": { icon: <Email />, to: "/send-email" },
     بالمیل: { icon: <Drafts />, to: "/drafts" },
   };
   const drawer = (
-    <div>
+    <Box>
       <Toolbar />
-      <Divider />
       <List>
         {Object.keys(drawerItemInfoByKey).map((text, index) => (
           <DrawerItem
@@ -46,20 +45,8 @@ const DrawerSide = ({
           />
         ))}
       </List>
-      <Divider />
-      <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </div>
+   
+    </Box>
   );
 
   return (
@@ -67,7 +54,6 @@ const DrawerSide = ({
       component="nav"
       sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
       aria-label="mailbox folders"
-      
     >
       {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
       {/* Mobile Drawer */}
@@ -80,6 +66,7 @@ const DrawerSide = ({
         }}
         sx={{
           display: { xs: "block", sm: "none" },
+
           "& .MuiDrawer-paper": {
             boxSizing: "border-box",
             width: drawerWidth,
@@ -97,7 +84,9 @@ const DrawerSide = ({
           "& .MuiDrawer-paper": {
             boxSizing: "border-box",
             width: drawerWidth,
+            border: 0,
             dir: "rtl",
+            bgcolor: "background.defaultChannel",
           },
         }}
         open
