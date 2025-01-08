@@ -1,4 +1,6 @@
 "use client";
+import { faIR } from "@mui/material/locale";
+
 type tableCustomPalleteOption = {
   header?: string;
   oddColumn?: string;
@@ -12,12 +14,10 @@ declare module "@mui/material/styles" {
   interface PaletteOptions {
     table: tableCustomPalleteOption;
   }
-   interface TypeBackground {
-     disable?: string;
-     enable?: string;
-   }
-
- 
+  interface TypeBackground {
+    disable?: string;
+    enable?: string;
+  }
 }
 
 import { ColorSystemOptions, createTheme } from "@mui/material/styles";
@@ -65,91 +65,141 @@ const darkObject: ColorSystemOptions = {
   },
 };
 
-const theme = createTheme({
-  cssVariables: {
-    colorSchemeSelector: "class", // or 'data'
-  },
+const theme = createTheme(
+  {
+    cssVariables: {
+      colorSchemeSelector: "class", // or 'data'
+    },
 
-  direction: "rtl",
-  colorSchemes: {
-    light: lightObject,
-    dark: darkObject,
-  },
-  shape: { borderRadius: 6 },
-  typography: {
-    fontFamily: "vazir",
-  },
-  components: {
-    MuiButton: {
-      defaultProps: {
-        variant: "contained",
-      },
-      styleOverrides: {
-        root: {
-          variants: [
-            {
-              props: { variant: "contained" },
-              style: {
-                color: "var(--mui-palette-common-white)",
+    direction: "rtl",
+    colorSchemes: {
+      light: lightObject,
+      dark: darkObject,
+    },
+    shape: { borderRadius: 8 },
+    typography: {
+      fontFamily: "vazir",
+    },
+    components: {
+      MuiButton: {
+        defaultProps: {
+          variant: "contained",
+        },
+        styleOverrides: {
+          root: {
+            variants: [
+              {
+                props: { variant: "contained" },
+                style: {
+                  color: "var(--mui-palette-common-white)",
+                },
               },
-            },
-          ],
+            ],
+          },
         },
       },
-    },
-    MuiAppBar: {
-      styleOverrides: {
-        colorDefault: "#fff",
-      },
-      defaultProps: {
-        color: "default",
-      },
-    },
-    MuiTextField: {
-      defaultProps: {
-        size: "small",
-      },
-    },
-    MuiTableRow: {
-      styleOverrides: {
-        root: ({ theme }) => {
-          return {
-            "&:nth-of-type(odd)": {
-              backgroundColor: theme.palette.action.hover,
+      MuiAutocomplete: {
+        styleOverrides: {
+          inputRoot: {
+            "&:not(.Mui-focused)": {
+              flexWrap: "nowrap",
             },
-            // hide last border
-            "&:last-child td, &:last-child th": {
-              border: 0,
-            },
-          };
+          },
         },
       },
-    },
-    MuiTableContainer: {
-      styleOverrides: {
-        root: {
-          boxShadow: "none",
+      MuiAppBar: {
+        styleOverrides: {
+          colorDefault: "#fff",
+        },
+        defaultProps: {
+          color: "default",
         },
       },
-    },
-    MuiTableHead: {
-      styleOverrides: {
-        root: ({ theme }) => {
-          return {
-            backgroundColor: theme.palette.table.header,
-            th: {
-              color: theme.palette.common.white,
-              fontWeight: "bold",
+      MuiTextField: {
+        defaultProps: {
+          size: "small",
+        },
+        styleOverrides: {
+          root: ({ theme }) => {
+            return {
+              "& fieldset": {
+                borderWidth: "2px",
+                borderColor: theme.palette.divider,
+              },
+            };
+          },
+        },
+      },
+      MuiOutlinedInput: {
+        styleOverrides: {
+          root: ({ theme }) => {
+            return {
+              "&:hover:not(.Mui-focused) .MuiOutlinedInput-notchedOutline": {
+                borderColor: theme.palette.grey[400],
+              },
+            };
+          },
+        },
+      },
+      MuiInputBase: {
+        styleOverrides: {
+          root: {
+            "& .Mui-active ": {
+              borderWidth: "2px",
+              borderColor: "#f22",
+            },
+          },
+        },
+      },
+      MuiTableRow: {
+        styleOverrides: {
+          root: ({ theme }) => {
+            return {
+              "&:nth-of-type(odd)": {
+                backgroundColor: theme.palette.action.hover,
+              },
+              // hide last border
+              "&:last-child td, &:last-child th": {
+                border: 0,
+              },
+            };
+          },
+        },
+      },
+      MuiTableContainer: {
+        styleOverrides: {
+          root: {
+            boxShadow: "none",
+          },
+        },
+      },
+      MuiTableHead: {
+        styleOverrides: {
+          root: ({ theme }) => {
+            return {
+              backgroundColor: theme.palette.table.header,
+              th: {
+                color: theme.palette.common.white,
+                fontWeight: "bold",
 
-              ...theme.applyStyles("dark", {
-                color: theme.palette.common.black,
-              }),
-            },
-          };
+                ...theme.applyStyles("dark", {
+                  color: theme.palette.common.black,
+                }),
+              },
+            };
+          },
+        },
+      },
+      MuiChip: {
+        styleOverrides: {
+          root: {
+            borderRadius: 5,
+          },
         },
       },
     },
   },
-});
+  faIR
+);
 
 export default theme;
