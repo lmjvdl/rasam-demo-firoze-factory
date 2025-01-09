@@ -30,19 +30,23 @@ function InputContainer({ openCalendar, value }: CalendarInputProps) {
       <TextField
         variant="outlined"
         fullWidth
+        size="small"
         placeholder={placeholderInput}
         value={text}
         sx={{ minWidth: 200 }}
         onFocus={openCalendar}
-        InputProps={{
-          readOnly: true,
-          endAdornment: (
-            <InputAdornment position="end">
-              <CalendarTodayIcon />
-            </InputAdornment>
-          ),
-          style: { height: '57px' }
-        }}
+        slotProps={
+          {
+            input: {
+              readOnly: true,
+              endAdornment: (
+                <InputAdornment position="end">
+                  <CalendarTodayIcon />
+                </InputAdornment>
+              ),
+            }
+          }
+        }
       />
   );
 }

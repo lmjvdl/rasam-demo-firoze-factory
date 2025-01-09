@@ -147,7 +147,6 @@ const theme = createTheme(
           root: {
             "& .Mui-active ": {
               borderWidth: "2px",
-              borderColor: "#f22",
             },
           },
         },
@@ -182,7 +181,6 @@ const theme = createTheme(
               th: {
                 color: theme.palette.common.white,
                 fontWeight: "bold",
-
                 ...theme.applyStyles("dark", {
                   color: theme.palette.common.black,
                 }),
@@ -198,6 +196,27 @@ const theme = createTheme(
           },
         },
       },
+      MuiSelect: {
+        defaultProps: {
+          size: "small"
+        },
+        styleOverrides: {
+          root: ({ theme }) => {
+            return {
+              "& fieldset": {
+                borderWidth: "2px",
+                borderColor: theme.palette.divider,
+              },
+            };
+          },
+        },
+      },
+      MuiInputLabel: {
+        defaultProps: {
+          size: "small"
+        }
+      }
+      
     },
   },
   faIR

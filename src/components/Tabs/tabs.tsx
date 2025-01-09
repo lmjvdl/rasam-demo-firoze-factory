@@ -79,9 +79,9 @@ export default function BasicTabs() {
         </Box>
       </Box>
       <Box>
-          {/* <ExampleUsage ></ExampleUsage> */}
+          <ExampleUsage ></ExampleUsage>
           {/* <SampleUsage ></SampleUsage> */}
-          <BaalMillLive ></BaalMillLive>
+          {/* <BaalMillLive ></BaalMillLive> */}
       </Box>
     </Box>
   );

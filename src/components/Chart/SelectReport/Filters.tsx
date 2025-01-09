@@ -57,8 +57,8 @@ const Filters: React.FC<FiltersProps> = ({ filters, onChange, onSearch, dropdown
 
       {dropdownTypes.includes('multiSelect') && (
         <MultiSelect
-        placeholder = {filters.multiSelect.placeholder}
-        options = {filters.multiSelect.options}
+          placeholder = {filters.multiSelect.placeholder}
+          options = {filters.multiSelect.options}
           onChange = {(value: string[]) => onChange('multiSelect', [value])}
           />
       )}
@@ -73,10 +73,8 @@ const Filters: React.FC<FiltersProps> = ({ filters, onChange, onSearch, dropdown
       <Box>
         <Button 
           variant = "contained" 
-          sx={{ minWidth: 200 }}
           fullWidth 
           onClick = {onSearch}
-          style = {{height: "55px"}}
           >
           جست‌وجو
         </Button>
