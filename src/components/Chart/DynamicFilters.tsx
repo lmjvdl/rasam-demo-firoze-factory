@@ -2,12 +2,12 @@ import React from 'react';
 import Filters from './SelectReport/Filters';
 import { DateObject } from 'react-multi-date-picker';
 
-interface DynamicFiltersProps {
+export interface DynamicFiltersProps {
   filters: {
     timeRange: DateObject[];
     oneDay: DateObject;
-    singleSelect: { placeholder: string; options: string[] };
-    multiSelect: { placeholder: string; options: string[] };
+    singleSelect: { placeholder: string; options: string[],value:string };
+    multiSelect: { placeholder: string; options: string[] ,value:string[] };
     subRange: string[];
   };
   onChange: (filterKey: string, value: string | number | string[]) => void;
