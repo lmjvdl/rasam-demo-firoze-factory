@@ -1,0 +1,206 @@
+body {
+  scrollbar-width: none;
+  overflow: hidden;
+}
+
+/* -------------------- BACKGROUND-PART style -------------------- */
+.login-page {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100vw;
+  height: 100vh;
+  background: url("/login/background-image.png")
+    no-repeat left center;
+  background-size: cover;
+  box-sizing: border-box;
+}
+
+.login-card {
+  background-color: #ffffff;
+  --triangle-size: 150px;
+  position: relative;
+  width: 55%;
+  height: 100vh;
+  max-height: 70%;
+  border-radius: 10px;
+  padding-bottom: var(--triangle-size);
+  clip-path: polygon(
+    0 50%,
+    var(--triangle-size) 0,
+    100% 0,
+    100% 100%,
+    var(--triangle-size) 100%,
+    0 50%
+  );
+  opacity: 90%;
+}
+
+.login-card-wrap {
+  padding-right: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0px 4px 5px rgba(192, 192, 192, 0.14))
+    drop-shadow(0px 1px 10px rgba(0, 0, 0, 0.12))
+    drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.logo {
+  width: 15vw;
+  margin-top: 8vh;
+  height: 30vh;
+}
+/* ------------------ end BACKGROUND-PART style ------------------ */
+
+/* ---------------------- start TITLE-PART style ----------------------- */
+.typing-text {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+
+  border-left: 2px solid #333;
+  width: 0;
+  animation: typing 2.5s steps(40, end) forwards;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+/* ------------------ end TITLE-PART style ------------------ */
+
+
+/* ---------------------- INPUT-PART style ----------------------- */
+.form__group {
+  position: relative;
+  padding: 25px 0 0;
+  width: 50%;
+  margin: 10px 20px 0px 20px;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  margin-right: -5% !important;
+  padding-left: 50px;
+  padding-top: 70px;
+}
+
+.form__field {
+  font-family: inherit;
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid #181818;
+  outline: 0;
+  padding: 7px 0;
+  background: transparent;
+  transition: border-color 0.2s;
+  direction: ltr;
+}
+
+.login-button {
+  width: 120px;
+  height: 50px;
+  font-size: 18px !important; 
+  background-color: #333333;
+  color: #ffffff;
+  margin-top: 25% !important;
+  padding-bottom: 4px;
+  border-radius: 12px;
+  border: 1px solid;
+  transition: #5a5a5a 0.3s ease;
+}
+
+/* -------------------- end INPUT-PART style --------------------- */
+
+/* ---------------------- RESPONSIVE style ----------------------- */
+@media screen and (max-width: 992px) {
+  .login-card {
+    width: 75%;
+    height: 100vh;
+    max-height: 85%;
+  }
+  .login-card-wrap {
+    height: 90%;
+  }
+  .logo {
+    width: 25vw;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .login-card {
+    width: 85%;
+    height: 100vh;
+    max-height: 75%;
+  }
+  .login-card-wrap {
+    height: 100%;
+  }
+  .logo {
+    padding-top: 30px;
+  }
+  .login-button {
+    margin-top: 40px;
+  }
+  .form-container {
+    margin-left: 30px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .login-card {
+    width: 95%;
+    height: 100vh;
+    max-height: 80%;
+    opacity: 85%;
+  }
+
+  .login-card-wrap {
+    height: 90%;
+    padding-right: 10px;
+  }
+
+  .login-page {
+    background-image: url("/login/background-image-mobile.png");
+  }
+
+  .form__group {
+    width: 75%;
+  }
+
+  .logo {
+    width: 30vw;
+    margin-top: 8vh;
+    height: 30vh;
+    margin-left: 10%;
+  }
+
+  .field {
+    width: 70%;
+    margin-left: 10%
+  }
+
+  .login-button {
+    margin-top: 25% !important;
+    margin-right: -20% !important;
+    margin-bottom: 30% !important; 
+  }
+
+  .typing-text {
+    margin-right: -5% !important;
+  }
+}
+/* -------------------- end RESPONSIVE style --------------------- */

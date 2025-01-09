@@ -5,19 +5,13 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { Box } from "@mui/material";
+import { MenuProps } from "@/hooks/UI/globalStyleDropdown";
 
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-};
-
-const names = ["گزارش 1", "گزارش 2", "گزارش 3", "گزارش 4"];
+interface SingleDropDownProps {
+  options: string[];
+  onChange: (value: string) => void;
+  placeholder: string;
+} 
 
 function getStyles(name: string, personName: string[], theme: Theme) {
   return {
@@ -27,7 +21,7 @@ function getStyles(name: string, personName: string[], theme: Theme) {
   };
 }
 
-export default function ReportDropdown() {
+export default function SingleSelect({placeholder, options, onChange}: SingleDropDownProps) {
   const theme = useTheme();
   const [personName, setPersonName] = React.useState<string[]>([]);
 
@@ -36,7 +30,6 @@ export default function ReportDropdown() {
       target: { value },
     } = event;
     setPersonName(
-      // On autofill we get a stringified value.
       typeof value === "string" ? value.split(",") : value
     );
   };
@@ -44,16 +37,16 @@ export default function ReportDropdown() {
     return (
       <Box sx={{ minWidth: 200 }}>
         <FormControl fullWidth>
-          <InputLabel id="demo-multiple-name-label">انتخاب گزارش</InputLabel>
+          <InputLabel id="demo-multiple-name-label">{placeholder}</InputLabel>
           <Select
             labelId="demo-multiple-name-label"
             id="demo-multiple-name"
             value={personName}
-            label="انتخاب گزارش"
+            label={placeholder}
             onChange={handleChange}
             MenuProps={MenuProps}
           >
-            {names.map((name) => (
+            {options?.map((name) => (
               <MenuItem
                 key={name}
                 value={name}
@@ -66,4 +59,4 @@ export default function ReportDropdown() {
         </FormControl>
       </Box>
     );
-}
+  }

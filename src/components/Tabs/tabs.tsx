@@ -5,7 +5,9 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import ReportDropdown from "@/components/ReportDropdown/ReportDropdown";
-import { KeyValBox } from "../Boxes/KeyValBox";
+import ExampleUsage from "@/app/(AppbarAndDrawer)/chartExample/ExampleUsageChart";
+import SampleUsage from "@/app/(AppbarAndDrawer)/tableExample/tableExample";
+import BaalMillLive from "../baalMillLive";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -46,27 +48,40 @@ export default function BasicTabs() {
   };
 
   return (
-    <Box sx={{ display: "flex", width: "100%" }}>
-      <Box sx={{ width: "77%", paddingRight: "1%" }}>
-        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            aria-label="basic tabs example"
-          >
-            <Tab label="بسته بندی" {...a11yProps(0)} />
-          </Tabs>
+    <Box sx={{ width: "100%" }}>
+      <Box sx={{ width: "100%" }}>
+        <Box
+          sx={{
+            display: "grid",
+            gap: 2,
+            p: 2,
+            borderRadius: 2,
+            gridTemplateColumns: {
+              xs: "1fr 3fr",
+              md: "3fr 1fr",
+            },
+          }}
+        >
+          <Box sx={{ width: "100%" }}>
+            <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+              <Tabs
+                value={value}
+                onChange={handleChange}
+                aria-label="basic tabs example"
+              >
+                <Tab label="بسته بندی" {...a11yProps(0)} />
+              </Tabs>
+            </Box>
+          </Box>
+          <Box sx={{ width: "100%" }}>
+            <ReportDropdown />
+          </Box>
         </Box>
-        <CustomTabPanel value={value} index={0}>
-          بسته بندی
-          <KeyValBox
-            header={"درجه ۱"}
-            keyValList={[{ key: "نعداد کاشی تولیدی", value: "۳۴۳۳" }]}
-          />
-        </CustomTabPanel>
       </Box>
-      <Box sx={{ width: "5%" }}>
-        <ReportDropdown />
+      <Box>
+          {/* <ExampleUsage ></ExampleUsage> */}
+          {/* <SampleUsage ></SampleUsage> */}
+          <BaalMillLive ></BaalMillLive>
       </Box>
     </Box>
   );

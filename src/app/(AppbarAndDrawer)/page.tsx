@@ -9,8 +9,8 @@ export default function Home() {
   return (
     <MainCard>
       <Typography>
-      </Typography>
         <BasicTabs></BasicTabs>
+      </Typography>
     </MainCard>
   );
 }
