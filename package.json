@@ -29,6 +29,7 @@
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.54.1",
     "react-multi-date-picker": "^4.5.2",
+    "sass": "^1.83.1",
     "stylis": "^4.3.4",
     "stylis-plugin-rtl": "^2.1.1"
   },

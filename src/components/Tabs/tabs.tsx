@@ -7,6 +7,7 @@ import Box from "@mui/material/Box";
 import ReportDropdown from "@/components/ReportDropdown/ReportDropdown";
 import ExampleUsage from "@/app/(AppbarAndDrawer)/chartExample/ExampleUsageChart";
 import SampleUsage from "@/app/(AppbarAndDrawer)/tableExample/tableExample";
+import BaalMillLive from "../baalMillLive";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -79,7 +80,8 @@ export default function BasicTabs() {
       </Box>
       <Box>
           {/* <ExampleUsage ></ExampleUsage> */}
-          <SampleUsage ></SampleUsage>
+          {/* <SampleUsage ></SampleUsage> */}
+          <BaalMillLive ></BaalMillLive>
       </Box>
     </Box>
   );

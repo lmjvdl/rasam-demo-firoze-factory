@@ -32,6 +32,7 @@ function InputContainer({ openCalendar, value }: CalendarInputProps) {
         fullWidth
         placeholder={placeholderInput}
         value={text}
+        sx={{ minWidth: 200 }}
         onFocus={openCalendar}
         InputProps={{
           readOnly: true,

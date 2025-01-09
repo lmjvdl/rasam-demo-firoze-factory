@@ -73,6 +73,7 @@ const Filters: React.FC<FiltersProps> = ({ filters, onChange, onSearch, dropdown
       <Box>
         <Button 
           variant = "contained" 
+          sx={{ minWidth: 200 }}
           fullWidth 
           onClick = {onSearch}
           style = {{height: "55px"}}
