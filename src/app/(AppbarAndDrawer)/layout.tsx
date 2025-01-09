@@ -4,7 +4,6 @@ import DrawerSide from "@/components/Drawer/Drawer";
 import { useState } from "react";
 import AppbarComp, { drawerWidth } from "@/components/Appbar/Appbar";
 import { Box, Stack } from "@mui/material";
-import Login from "../(Login)/login";
 
 export default function Layout({
   children,
@@ -19,7 +18,7 @@ export default function Layout({
       height={"100%"}
       bgcolor={"background.default"}
     >
-      {/* <DrawerSide mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
+      <DrawerSide mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
       <Stack
         width={"100%"}
         height={"calc (100% -64px) "}
@@ -42,8 +41,7 @@ export default function Layout({
         >
           {children}
         </Box>
-      </Stack> */}
-      <Login ></Login>
+      </Stack>
     </Stack>
   );
 }

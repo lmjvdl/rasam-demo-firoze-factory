@@ -120,12 +120,9 @@ body {
   padding-bottom: 4px;
   border-radius: 12px;
   border: 1px solid;
-  transition: #000 0.3s ease;
+  transition: #5a5a5a 0.3s ease;
 }
 
-.login-button:hover {
-  background-color: #5a5a5a;
-}
 /* -------------------- end INPUT-PART style --------------------- */
 
 /* ---------------------- RESPONSIVE style ----------------------- */
