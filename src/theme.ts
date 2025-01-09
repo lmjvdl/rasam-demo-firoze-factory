@@ -32,7 +32,7 @@ const lightObject: ColorSystemOptions = {
     },
     background: {
       default: "#F7F7F7",
-      defaultChannel: "#FFFFFF",
+      defaultChannel: "#FFFFFF", //lighter
       disable: "#EDEDED",
     },
     table: {
@@ -53,9 +53,10 @@ const darkObject: ColorSystemOptions = {
 
     background: {
       default: "#2E2E2E",
-      defaultChannel: "#333333",
+      defaultChannel: "#333333", //lighter
       disable: "#3A3A3A",
       enable: "#4C4C4C",
+      paper: "#333333",
     },
     table: {
       header: "#0FBDA2",
