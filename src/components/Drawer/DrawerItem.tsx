@@ -1,3 +1,4 @@
+import theme from "@/theme";
 import { Done } from "@mui/icons-material";
 import {
   ListItem,
@@ -21,7 +22,14 @@ const DrawerItem = ({
     <ListItem key={text} disablePadding>
       <ListItemButton LinkComponent={Link} href={link}>
         <ListItemIcon>{icon}</ListItemIcon>
-        <ListItemText primary={text} />
+        <ListItemText
+          primary={text}
+          slotProps={{
+            primary: {
+              fontSize: "20px"
+            }
+          }}
+        />
       </ListItemButton>
     </ListItem>
   );

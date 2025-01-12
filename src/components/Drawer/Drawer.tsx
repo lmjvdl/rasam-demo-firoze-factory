@@ -1,17 +1,10 @@
 "use client";
-import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
 import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import MailIcon from "@mui/icons-material/Mail";
-import { Box, Toolbar } from "@mui/material";
-import { Dispatch, ReactNode, SetStateAction } from "react";
+import { Box, Toolbar, useColorScheme } from "@mui/material";
+import { Dispatch, SetStateAction } from "react";
 import DrawerItem from "./DrawerItem";
-import { Drafts, Email, Inbox, Star } from "@mui/icons-material";
+import { iconMap } from "@/utils/icons/iconsMenu";
 
 const DrawerSide = ({
   mobileOpen,
@@ -21,33 +14,44 @@ const DrawerSide = ({
   setMobileOpen: Dispatch<SetStateAction<boolean>>;
 }) => {
   const drawerWidth = 240;
-
+  const mode = useColorScheme();
+  console.log(mode)
   const handleDrawerClose = () => {
     setMobileOpen(false);
   };
 
-  const drawerItemInfoByKey: Record<string, { icon: ReactNode; to: string }> = {
-    "بسته بندی": { icon: <Inbox />, to: "/packaging" },
-    خوبی: { icon: <Star />, to: "/starred" },
-    "ایتم سومی ۳": { icon: <Email />, to: "/send-email" },
-    بالمیل: { icon: <Drafts />, to: "/drafts" },
+
+  const drawerItemInfoByKey: Record<string, { icon: string; to: string }> = {
+    "داشبورد": { icon: "Dashboard", to: "/dashboard" },
+    "بسته بندی": { icon: "Packaging", to: "/packaging" },
+    "تهیه بدنه": { icon: "BodyPrep", to: "/preparing-body" },
+    "تابلو برق": { icon: "PowerSupply", to: "/power-supply" },
+    "چمفر": { icon: "Chamfer", to: "/chamfer" },
+    "تنظمیات": { icon: "Settings", to: "/settings" },
+    "خروج": { icon: "Logout", to: "/login" },
   };
+  
+  
   const drawer = (
     <Box>
       <Toolbar />
+      <img src="" alt="" />
       <List>
-        {Object.keys(drawerItemInfoByKey).map((text, index) => (
-          <DrawerItem
-            key={index}
-            text={text}
-            link={drawerItemInfoByKey[text].to}
-            icon={drawerItemInfoByKey[text].icon}
-          />
-        ))}
+        {Object.entries(drawerItemInfoByKey).map(([text, { icon, to }], index) => {
+          const IconComponent = iconMap[icon];
+          return (
+            <DrawerItem
+              key={index}
+              text={text}
+              link={to}
+              icon={<IconComponent stroke={mode.colorScheme == "dark" ? "#fff" : "#292D32"} />}
+            />
+          );
+        })}
       </List>
-   
     </Box>
   );
+  
 
   return (
     <Box
