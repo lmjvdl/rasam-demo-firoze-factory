@@ -1,12 +1,13 @@
 "use client";
 import AppBar from "@mui/material/AppBar";
 import IconButton from "@mui/material/IconButton";
-
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
-import {  Box, useColorScheme } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { Dispatch, SetStateAction } from "react";
-import { Android12Switch } from "../Button/DarkModeBtn";
+import SwitchThemeBtn from "../SwitchModeTheme/SwitchThemeBtn";
+import currentDay from "@/utils/formatters/CurrentDay";
+import { IconCalendar } from '@tabler/icons-react';
 
 export const drawerWidth = 240;
 
@@ -17,24 +18,13 @@ export default function AppbarComp({
   mobileOpen: boolean;
   setMobileOpen: Dispatch<SetStateAction<boolean>>;
 }) {
-  // const [isClosing, setIsClosing] = React.useState(false);
-
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
-
-    // if (!isClosing) {
-    //   setMobileOpen(!mobileOpen);
-    // }
   };
-  const { mode, setMode } = useColorScheme();
 
-  if (!mode) {
-    return null;
-  }
   return (
     <AppBar
       position="fixed"
-      // sx={{ boxShadow: 0, bgcolor: "#fff" }}
       sx={{
         width: { sm: `calc(100% - ${drawerWidth}px)` },
         ml: { sm: `${drawerWidth}px` },
@@ -43,30 +33,49 @@ export default function AppbarComp({
       }}
       enableColorOnDark
     >
-      <Toolbar>
-        <IconButton
-          color="inherit"
-          aria-label="open drawer"
-          edge="start"
-          onClick={handleDrawerToggle}
-          sx={{ mr: 2, display: { sm: "none" } }}
-        >
-          <MenuIcon />
-        </IconButton>
-        <Android12Switch
-          // checkedIcon={
-          //   <BedtimeOutlined color="success" sx={{ p: 0, m: 0 }} />
-          // }
-          // icon={<WbSunnyOutlined color="success" sx={{ p: 0, m: 0 }} />}
-          checked={mode === "dark"}
-          onChange={() => {
-            if (mode === "dark") {
-              setMode("light");
-            } else {
-              setMode("dark");
-            }
+      <Toolbar
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="end"
+            onClick={handleDrawerToggle}
+            sx={{ mr: 2, display: { sm: "none" } }}
+          >
+            <MenuIcon />
+          </IconButton>
+          <IconCalendar stroke={1} />
+          <Typography sx={{paddingLeft: "10px"}}>{currentDay}</Typography>
+        </Box>
+
+        <Typography
+          sx={{
+            flexGrow: 1,
+            textAlign: "center",
           }}
-        />
+        >
+          به پنل مانیتورینگ کارخانه کاشی و سرامیک{" "}
+          <Typography
+            sx={{
+              color: "var(--mui-palette-primary-main)",
+              display: "inline-block",
+              fontWeight: "bold",
+            }}
+          >
+            ستاره میبد
+          </Typography>{" "}
+          خوش آمدید
+        </Typography>
+
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          <SwitchThemeBtn />
+        </Box>
       </Toolbar>
     </AppBar>
   );
