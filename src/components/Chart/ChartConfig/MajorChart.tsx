@@ -13,10 +13,10 @@ interface Dataset {
 
 interface Options {
   responsive?: boolean;
-  legend?: {
-    display?: boolean;
-  };
   plugins?: {
+    legend?: {
+      display?: boolean;
+    };
     title?: {
       display?: boolean;
       text?: string;
@@ -33,12 +33,22 @@ interface Options {
         drawTicks?: boolean;
       };
     };
+    y?: {
+      border?: {
+        display?: boolean;
+      };
+      grid?: {
+        display?: boolean;
+        drawOnChartArea?: boolean;
+        drawTicks?: boolean;
+      };
+    };
   };
 }
 
 interface ChartProps {
   data: {
-    labels: string[];
+    labels?: string[];
     datasets: Dataset[];
   };
   chartTitle: string;

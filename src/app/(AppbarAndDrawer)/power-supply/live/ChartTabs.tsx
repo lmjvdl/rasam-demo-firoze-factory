@@ -1,6 +1,8 @@
+"use client";
 import { Tabs, Tab, Box, Grid } from "@mui/material";
 import MajorChart from "@/components/Chart/ChartConfig/MajorChart";
 import React from "react";
+import MainCard from "@/components/CustomContiner/MainCard";
 
 interface DeviceData {
   device_name_fa: string;
@@ -42,7 +44,7 @@ const ChartTabs: React.FC<{ data: DeviceData[] }> = ({ data }) => {
   };
 
   return (
-    <Box sx={{ width: "100%" }}>
+    <MainCard sx={{ gap: 2, flexDirection: "column" }}>
       <Tabs value={value} onChange={handleChange} aria-label="chart tabs">
         {tabs.map((tab, index) => (
           <Tab
@@ -81,7 +83,6 @@ const ChartTabs: React.FC<{ data: DeviceData[] }> = ({ data }) => {
                     type="line"
                     chartTitle={device.device_name_fa}
                     data={{
-                      labels: ["زمان"],
                       datasets: [
                         {
                           label: device.allowed_data[tab],
@@ -95,8 +96,22 @@ const ChartTabs: React.FC<{ data: DeviceData[] }> = ({ data }) => {
                     }}
                     options={{
                       responsive: true,
-                      legend: {
-                        display: false,
+                      plugins: {
+                        legend: {
+                          display: false,
+                        },
+                      },
+                      scales: {
+                        x: {
+                          grid: {
+                            display: false,
+                          },
+                        },
+                        y: {
+                          grid: {
+                            display: false,
+                          },
+                        },
                       },
                     }}
                   />
@@ -106,7 +121,7 @@ const ChartTabs: React.FC<{ data: DeviceData[] }> = ({ data }) => {
           </Grid>
         </TabPanel>
       ))}
-    </Box>
+    </MainCard>
   );
 };
 
