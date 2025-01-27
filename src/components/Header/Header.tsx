@@ -11,7 +11,7 @@ import { IconCalendar } from '@tabler/icons-react';
 
 export const drawerWidth = 240;
 
-export default function AppbarComp({
+export default function Header({
   mobileOpen,
   setMobileOpen,
 }: {

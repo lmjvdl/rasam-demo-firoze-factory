@@ -5,6 +5,7 @@ import React from "react";
 import MainCard from "@/components/CustomContiner/MainCard";
 
 interface DeviceData {
+  device_id: number;
   device_name_fa: string;
   allowed_data: { [key: string]: string };
   data: { [key: string]: number }[];
@@ -44,7 +45,7 @@ const ChartTabs: React.FC<{ data: DeviceData[] }> = ({ data }) => {
   };
 
   return (
-    <MainCard sx={{ gap: 2, flexDirection: "column" }}>
+    <MainCard sx={{ gap: 0, flexDirection: "column" }}>
       <Tabs value={value} onChange={handleChange} aria-label="chart tabs">
         {tabs.map((tab, index) => (
           <Tab
@@ -56,15 +57,16 @@ const ChartTabs: React.FC<{ data: DeviceData[] }> = ({ data }) => {
       </Tabs>
       {tabs.map((tab, index) => (
         <TabPanel key={tab} value={value} index={index}>
-          <Grid container spacing={8}>
+          <Grid container spacing={4}>
             {data.map((device: DeviceData) => (
-              <Grid key={device.device_name_fa} item xs={12} sm={6} md={4}>
+              <Grid key={device.device_id} item xs={12} sm={6} md={4}>
                 <Box>
                   <Box
                     sx={{
                       display: "flex",
                       justifyContent: "space-between",
                       alignItems: "center",
+                      marginBlock: "20px"
                     }}
                   >
                     <h4>{device.device_name_fa}</h4>

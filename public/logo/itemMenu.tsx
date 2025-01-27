@@ -16,7 +16,6 @@ export const BodyPrep: React.FC<IconProps> = (props) => (
     viewBox="0 0 256 256"
     enableBackground="new 0 0 256 256"
   >
-    <metadata> Svg Vector Icons : http://www.onlinewebfonts.com/icon </metadata>
     <g>
       <g>
         <path
@@ -416,7 +415,6 @@ export const PowerSupply: React.FC<IconProps> = (props) => (
     viewBox="0 0 1707 1707"
   >
     <g id="Layer_x0020_1">
-      <metadata id="CorelCorpID_0Corel-Layer" />
       <g id="_337843408">
         <g>
           <g>

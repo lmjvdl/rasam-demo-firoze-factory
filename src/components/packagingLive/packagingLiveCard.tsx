@@ -23,7 +23,7 @@ export const T2 = ({
   );
 };
 
-export const KeyValBox = ({
+export const PackagingLiveCard = ({
   keyValList = [
     { key: "تعداد کاشی تولیدی :", value: "1234" },
     { key: "درصد کاشی تولیدی :", value: "۴۸٪" },
@@ -66,7 +66,7 @@ export const KeyValBox = ({
       sx={{
         p: 1,
         gap: 0.5,
-        width: "fit-content",
+        width: "full-width",
         height: "fit-content",
         ...sxContainer,
       }}

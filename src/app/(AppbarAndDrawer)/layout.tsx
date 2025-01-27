@@ -2,7 +2,7 @@
 // import type { Metadata } from "next";
 import DrawerSide from "@/components/Drawer/Drawer";
 import { useState } from "react";
-import AppbarComp, { drawerWidth } from "@/components/Appbar/Appbar";
+import Header, { drawerWidth } from "@/components/Header/Header";
 import { Box, Stack } from "@mui/material";
 
 export default function Layout({
@@ -29,7 +29,7 @@ export default function Layout({
           mt: "64px",
         }}
       >
-        <AppbarComp mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
+        <Header mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
         <Box
           component={"main"}
           width={"100%"}

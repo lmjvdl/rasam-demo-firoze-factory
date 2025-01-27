@@ -1,4 +1,4 @@
-import { KeyValBox } from "@/components/Boxes/KeyValBox";
+import { PackagingLiveCard } from "@/components/packagingLive/packagingLiveCard";
 import MainCard from "@/components/CustomContiner/MainCard";
 import {
   Paper,
@@ -15,11 +15,11 @@ const page = () => {
         elevation={3}
       >
         <Stack gap={1}>
-          <KeyValBox
+          <PackagingLiveCard
             sxKeyValContainer={{ width: 300 }}
             header={<Typography fontWeight={500}>درجه ۴</Typography>}
           />
-          <KeyValBox
+          <PackagingLiveCard
             sxKeyValContainer={{ width: 300 }}
             header={<Typography fontWeight={500}>درجه ۴</Typography>}
           />

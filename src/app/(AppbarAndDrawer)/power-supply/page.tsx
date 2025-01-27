@@ -6,7 +6,7 @@ const testDate = {
   data: [
     {
       device_name: "post2",
-      device_id: 0,
+      device_id: 1,
       device_name_fa: "پست 1",
       allowed_data: {
         phase1_current: "جریان فاز 1",
@@ -36,7 +36,7 @@ const testDate = {
     },
     {
       device_name: "post2",
-      device_id: 1,
+      device_id: 2,
       device_name_fa: "پست 2",
       allowed_data: {
         phase1_current: "جریان فاز 1",
@@ -66,7 +66,7 @@ const testDate = {
     },
     {
       device_name: "post3",
-      device_id: 2,
+      device_id: 3,
       device_name_fa: "پست 3",
       allowed_data: {
         phase1_current: "جریان فاز 1",
@@ -96,7 +96,7 @@ const testDate = {
     },
     {
       device_name: "post4",
-      device_id: 3,
+      device_id: 4,
       device_name_fa: "پست 4",
       allowed_data: {
         phase1_current: "جریان فاز 1",
@@ -126,7 +126,7 @@ const testDate = {
     },
     {
       device_name: "post2",
-      device_id: 0,
+      device_id: 5,
       device_name_fa: "پست 1",
       allowed_data: {
         phase1_current: "جریان فاز 1",
@@ -156,7 +156,7 @@ const testDate = {
     },
     {
       device_name: "post2",
-      device_id: 1,
+      device_id: 6,
       device_name_fa: "پست 2",
       allowed_data: {
         phase1_current: "جریان فاز 1",
@@ -186,7 +186,7 @@ const testDate = {
     },
     {
       device_name: "post3",
-      device_id: 2,
+      device_id: 7,
       device_name_fa: "پست 3",
       allowed_data: {
         phase1_current: "جریان فاز 1",
@@ -216,7 +216,7 @@ const testDate = {
     },
     {
       device_name: "post4",
-      device_id: 3,
+      device_id: 8,
       device_name_fa: "پست 4",
       allowed_data: {
         phase1_current: "جریان فاز 1",
@@ -246,7 +246,7 @@ const testDate = {
     },
     {
       device_name: "post4",
-      device_id: 3,
+      device_id: 9,
       device_name_fa: "پست 4",
       allowed_data: {
         phase1_current: "جریان فاز 1",

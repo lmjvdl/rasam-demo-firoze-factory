@@ -17,10 +17,11 @@ const Chamfer = ({
       boxShadow={1}
       sx={{
         bgcolor: on ? "background.enable" : "background.disable",
+        display: "flex",
+        flexDirection: "column",
+        width: "full-width",
+        height: "fit-content",
       }}
-      width={350}
-      height={150}
-      flexDirection={"column"}
       p={2}
     >
       <Stack
@@ -34,6 +35,7 @@ const Chamfer = ({
           gap={1}
           flexDirection={"row"}
           width={"inherit"}
+          flexWrap={"wrap"}
           alignItems={"center"}
         >
           <ChamferIcon />

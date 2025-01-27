@@ -9,7 +9,7 @@ import {
   IconAspectRatio,
 } from "@tabler/icons-react";
 
-const page = () => {
+const LivePackaging = () => {
   return (
     <MainCard sx={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
       <Paper elevation={5}>
@@ -178,4 +178,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default LivePackaging;
