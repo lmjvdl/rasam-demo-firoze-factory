@@ -1,46 +1,19 @@
-"use client";
+import * as React from 'react';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import { useRouter } from 'next/router';
 
-import * as React from "react";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import Box from "@mui/material/Box";
-import ReportDropdown from "@/components/ReportDropdown/ReportDropdown";
-import ExampleUsage from "@/app/(AppbarAndDrawer)/chartExample/ExampleUsageChart";
-import SampleUsage from "@/app/(AppbarAndDrawer)/tableExample/tableExample";
-import BaalMillLive from "../baalMillLive";
-
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: number;
-  value: number;
+interface SchemaOption {
+  name: string;
+  value: number
+  label: string;
 }
 
-function CustomTabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <>
-      <div
-        role="tabpanel"
-        hidden={value !== index}
-        id={`simple-tabpanel-${index}`}
-        aria-labelledby={`simple-tab-${index}`}
-        {...other}
-      >
-        {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
-      </div>
-    </>
-  );
+interface OptionTabsProps {
+  options: Array<SchemaOption>;
 }
 
-function a11yProps(index: number) {
-  return {
-    id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`,
-  };
-}
-
-export default function BasicTabs() {
+function DynamicTabs({ options }: OptionTabsProps) {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -48,41 +21,12 @@ export default function BasicTabs() {
   };
 
   return (
-    <Box sx={{ width: "100%" }}>
-      <Box sx={{ width: "100%" }}>
-        <Box
-          sx={{
-            display: "grid",
-            gap: 2,
-            p: 2,
-            borderRadius: 2,
-            gridTemplateColumns: {
-              xs: "1fr 3fr",
-              md: "3fr 1fr",
-            },
-          }}
-        >
-          <Box sx={{ width: "100%" }}>
-            <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-              <Tabs
-                value={value}
-                onChange={handleChange}
-                aria-label="basic tabs example"
-              >
-                <Tab label="بسته بندی" {...a11yProps(0)} />
-              </Tabs>
-            </Box>
-          </Box>
-          <Box sx={{ width: "100%" }}>
-            <ReportDropdown />
-          </Box>
-        </Box>
-      </Box>
-      <Box>
-          <ExampleUsage ></ExampleUsage>
-          {/* <SampleUsage ></SampleUsage> */}
-          {/* <BaalMillLive ></BaalMillLive> */}
-      </Box>
-    </Box>
+    <Tabs value={value} onChange={handleChange}>
+      {options.map((item, index) => (
+        <Tab key={index} label={item.label} href={item.name}/>
+      ))}
+    </Tabs>
   );
 }
+
+export default DynamicTabs;

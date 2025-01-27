@@ -1,17 +1,30 @@
 "use client";
 
 import MainCard from "@/components/CustomContiner/MainCard";
-import BasicTabs from "@/components/Tabs/tabs";
 import { useState, useEffect } from "react";
 import { subscribeUser, unsubscribeUser, sendNotification } from "../actions";
 import { Alert } from "@mui/material";
+import DynamicTabs from "@/components/Tabs/tabs";
+
 
 export default function Home() {
+  const testPartiotionData = [
+    {
+      name: "/packaging",
+      value: 0,
+      label: "بسته بندی",
+    },
+    {
+      name: "/strusher",
+      value: 1,
+      label: "سنگ شکن",
+    },
+  ];
   return (
     <MainCard>
       {/* <PushNotificationManager /> */}
       {/* <InstallPrompt /> */}
-      <BasicTabs></BasicTabs>
+      <DynamicTabs options={testPartiotionData}></DynamicTabs>
       {/* <HomePage></HomePage> */}
     </MainCard>
   );
