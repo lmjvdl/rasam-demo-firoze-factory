@@ -14,27 +14,29 @@ const DrawerItem = ({
   text = "داشبورد",
   link = "/dashboard",
   icon = <Done />,
+  onClick, // Add onClick here
 }: {
   text: string;
   icon: ReactNode;
   link: string;
+  onClick?: () => void;
 }) => {
-  const FactoryIcon = companyMap["Setare"];
   return (
-      <ListItem key={text} disablePadding>
-        <ListItemButton LinkComponent={Link} href={link}>
-          <ListItemIcon>{icon}</ListItemIcon>
-          <ListItemText
-            primary={text}
-            slotProps={{
-              primary: {
-                fontSize: "16px"
-              }
-            }}
-          />
-        </ListItemButton>
-      </ListItem>
+    <ListItem key={text} disablePadding>
+      <ListItemButton LinkComponent={Link} href={link} onClick={onClick}>
+        <ListItemIcon>{icon}</ListItemIcon>
+        <ListItemText
+          primary={text}
+          slotProps={{
+            primary: {
+              fontSize: "16px"
+            }
+          }}
+        />
+      </ListItemButton>
+    </ListItem>
   );
 };
+
 
 export default DrawerItem;
