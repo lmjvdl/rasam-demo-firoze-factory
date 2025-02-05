@@ -79,7 +79,7 @@ export default function Login() {
             <div>
               <ReCAPTCHA
                 sitekey="YOUR_GOOGLE_RECAPTCHA_SITE_KEY"
-                onChange={(value: string | null) => setCaptcha(value)} // Explicitly type 'value'
+                onChange={(value: string | null) => setCaptcha(value)}
               />
             </div>
             <div>

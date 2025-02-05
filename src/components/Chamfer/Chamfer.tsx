@@ -1,7 +1,7 @@
 import React from "react";
 import OnOff from "./OnOff";
 import { Paper, Stack, Typography } from "@mui/material";
-import ChamferIcon from "../Icons/Chamfer";
+// import ChamferIcon from "../Icons/Chamfer";
 const Chamfer = ({
   on = true,
   chamferName = "چمفر",
@@ -38,10 +38,11 @@ const Chamfer = ({
           flexWrap={"wrap"}
           alignItems={"center"}
         >
-          <ChamferIcon />
+          {/* <ChamferIcon />
+           */}
           <Typography fontWeight={"600"}>{chamferName}</Typography>
         </Stack>
-
+          
         <OnOff on={on} text={on ? "روشن" : "خاموش"} />
       </Stack>
       <Typography

@@ -37,6 +37,7 @@ const TabPanel: React.FC<TabPanelProps> = ({
 };
 
 const ChartTabs: React.FC<{ data: DeviceData[] }> = ({ data }) => {
+  
   const [value, setValue] = React.useState<number>(0);
   const tabs = Object.keys(data[0].allowed_data);
 

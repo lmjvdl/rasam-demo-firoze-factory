@@ -1,65 +1,144 @@
-"use client"
+"use client";
 
 import React, { useState } from "react";
-import {
-  Button,
-  Grid,
-  TextField,
-  MenuItem,
-  Typography,
-  Paper,
-} from "@mui/material";
-import { DateObject } from "react-multi-date-picker";
-import OneDayDropdown from "@/components/FiltersReportDropDown/OneDay";
+import { useForm } from "react-hook-form";
+import { Button, Grid, TextField, Paper } from "@mui/material";
+import DesignAndSize from "./designAndSize";
+import ReciverInformation from "./receiveInformation";
 
-// const validationSchema = Yup.object({
-//   lineId: Yup.string().required("خط را انتخاب کنید"),
-//   shift: Yup.string().required("شیفت را انتخاب کنید"),
-// });
+type IFormInput = {
+  tile_design: string;
+  aspect_ratio: string;
+  head_shift?: string;
+  supervisor?: string;
+  shear?: number;
+  production_planning_stops?: number;
+  stop_title?: string;
+  outer_stops?: number;
+  stop_outer_title?: string;
+  technical_stoppage_electricity?: number;
+  mechanical_technical_stop?: number;
+  technical_stoppage_facilities?: number;
+  miscellaneous_technical_stoppage?: number;
+  number_of_tiles?: number;
+};
 
 export default function InputCenter() {
-  const [date, setDate] = useState(new DateObject());
-
-  //   const formik = useFormik({
-  //     initialValues: {
-  //       lineId: "10",
-  //       shift: "1",
-  //     }
-  //   });
+  const { register, handleSubmit } = useForm();
+  const [isResponseReceived, setIsResponseReceived] = useState<boolean>(false);
 
   return (
     <>
-      <form>
-        <Grid container spacing={2} justifyContent="center">
-          <Grid item sm={6} xl={4}>
-            <TextField select fullWidth label="خط" name="lineId">
-              <MenuItem value="10">خط 6</MenuItem>
-            </TextField>
+      <ReciverInformation></ReciverInformation>
+      <Paper
+        elevation={1}
+        style={{ margin: "20px 0", padding: "25px 20px 40px 20px" }}
+      >
+        <form>
+          <Grid container columnGap={2} columns={12} rowGap={2}>
+            <DesignAndSize
+              aspect_ratio="100*200"
+              design="tia2145"
+            ></DesignAndSize>
+            <Grid item xs={12} sm={5.8} xl={2.8}>
+              <TextField fullWidth label="سرشیفت" placeholder="نام سرشیفت" />
+            </Grid>
+            <Grid item xs={12} sm={5.8} xl={2.8}>
+              <TextField
+                fullWidth
+                label="سوپروایزر"
+                placeholder="نام سوپروایزر"
+              />
+            </Grid>
+            <Grid item xs={12} sm={5.8} xl={2.8}>
+              <TextField
+                fullWidth
+                type="number"
+                label="برشی(متر مربع)"
+                placeholder="برشی(متر مربع)"
+              />
+            </Grid>
+            <Grid item xs={12} sm={5.8} xl={2.8}>
+              <TextField
+                fullWidth
+                type="number"
+                label="توقفات برنامه ریزی شده"
+                placeholder="توقفات برنامه ریزی شده(دقیقه)"
+              />
+            </Grid>
+            <Grid item xs={12} sm={5.8} xl={2.8}>
+              <TextField fullWidth label="عنوان توقف" placeholder="شرح توقف" />
+            </Grid>
+            <Grid item xs={12} sm={5.8} xl={2.8}>
+              <TextField
+                fullWidth
+                type="number"
+                label="توقفات بیرونی"
+                placeholder="توقفات بیرونی(دقیقه)"
+              />
+            </Grid>
+            <Grid item xs={12} sm={5.8} xl={2.8}>
+              <TextField
+                fullWidth
+                label="عنوان توقف بیرونی"
+                placeholder="شرح توقف بیرونی"
+              />
+            </Grid>
+            <Grid item xs={12} sm={5.8} xl={2.8}>
+              <TextField
+                fullWidth
+                type="number"
+                label="توقف فنی برق"
+                placeholder="توقف فنی برق (دقیقه)"
+              />
+            </Grid>
+            <Grid item xs={12} sm={5.8} xl={2.8}>
+              <TextField
+                fullWidth
+                type="number"
+                label="توقف فنی مکانیکی"
+                placeholder="توقف فنی مکانیکی (دقیقه)"
+              />
+            </Grid>
+            <Grid item xs={12} sm={5.8} xl={2.8}>
+              <TextField
+                fullWidth
+                type="number"
+                label="توقف فنی تاسیسات"
+                placeholder="توقف فنی تاسیسات(دقیقه)"
+              />
+            </Grid>
+            <Grid item xs={12} sm={5.8} xl={2.8}>
+              <TextField
+                fullWidth
+                type="number"
+                label="توقف فنی متفرقه"
+                placeholder="توقف فنی متفرقه (دقیقه)"
+              />
+            </Grid>
+            <Grid item xs={12} sm={5.8} xl={2.8}>
+              <TextField
+                fullWidth
+                type="number"
+                label="تعداد کاشی"
+                placeholder="تعداد کاشی"
+              />
+            </Grid>
           </Grid>
-
-          <Grid item sm={6} xl={4}>
-            <OneDayDropdown value={date} onChange={setDate} />
-          </Grid>
-
-          <Grid item sm={6} xl={4}>
-            <TextField select fullWidth label="انتخاب شیفت" name="shift">
-              <MenuItem value="1">شیفت صبح</MenuItem>
-              <MenuItem value="2">شیفت ظهر</MenuItem>
-              <MenuItem value="3">شیفت شب</MenuItem>
-            </TextField>
-          </Grid>
-
-          <Grid item sm={6} xl={4}>
-            <Button fullWidth variant="contained" type="submit">
-              دریافت اطلاعات
-            </Button>
-          </Grid>
-        </Grid>
-      </form>
-
-      <Paper elevation={3} style={{ margin: "50px 0", padding: "20px" }}>
-        <Typography variant="h6" align="center"></Typography>
+        </form>
       </Paper>
+      <Grid
+        container
+        sx={{ margin: "40px 0 40px 0" }}
+        alignContent="center"
+        justifyContent="center"
+      >
+        <Grid xs={12} sm={12} xl={4}>
+          <Button fullWidth type="submit">
+            ثبت شیفت
+          </Button>
+        </Grid>
+      </Grid>
     </>
   );
 }

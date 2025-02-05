@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  Box,
-  TextField,
-  InputAdornment,
-  FormControl,
-} from "@mui/material";
+import { Box, TextField, InputAdornment, FormControl } from "@mui/material";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import DatePicker, { DateObject } from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
@@ -27,27 +22,26 @@ function InputContainer({ openCalendar, value }: CalendarInputProps) {
   const text = valueToInputText(value);
   const placeholderInput: string = text !== "" ? text : "تاریخ";
   return (
-      <TextField
-        variant="outlined"
-        fullWidth
-        size="small"
-        placeholder={placeholderInput}
-        value={text}
-        sx={{ minWidth: 200 }}
-        onFocus={openCalendar}
-        slotProps={
-          {
-            input: {
-              readOnly: true,
-              endAdornment: (
-                <InputAdornment position="end">
-                  <CalendarTodayIcon />
-                </InputAdornment>
-              ),
-            }
-          }
-        }
-      />
+    <TextField
+      required
+      variant="outlined"
+      fullWidth
+      size="small"
+      placeholder={placeholderInput}
+      value={text}
+      sx={{ minWidth: 200 }}
+      onFocus={openCalendar}
+      slotProps={{
+        input: {
+          readOnly: true,
+          endAdornment: (
+            <InputAdornment position="end">
+              <CalendarTodayIcon />
+            </InputAdornment>
+          ),
+        },
+      }}
+    />
   );
 }
 
@@ -56,7 +50,7 @@ export default function CustomDatePickerOneDay({
   onChange,
 }: {
   value: DateObject | undefined;
-  onChange: (selectedDate: DateObject) => void;
+  onChange?: (selectedDate: DateObject) => void;
 }) {
   return (
     <FormControl fullWidth>

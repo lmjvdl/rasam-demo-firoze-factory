@@ -1,5 +1,5 @@
 import { Container } from "@mui/material";
-import ChartTabs from "./live/ChartTabs";
+import ChartTabs from "./live/page";
 
 
 const testDate = {

@@ -1,4 +1,4 @@
-import { BASE_URL } from "@/constants/url";
+import { BASE_URL } from "@/constants/baseURL";
 import axios from "axios";
 // import { cookies } from "next/headers";
 // const cookieStore = await cookies();

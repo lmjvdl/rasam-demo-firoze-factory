@@ -6,7 +6,7 @@ import CustomDatePickerOneDay from '../DatePicker/CustomDatePickerOneDay';
 
 interface OneDayDropdownProps {
   value: DateObject;
-  onChange: (selectedDate: DateObject) => void;
+  onChange?: (selectedDate: DateObject) => void;
 }
 
 const OneDayDropdown: React.FC<OneDayDropdownProps> = ({ value, onChange }) => {
