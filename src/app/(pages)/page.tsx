@@ -5,9 +5,18 @@ import MainCard from "@/components/CustomContiner/MainCard";
 // import { subscribeUser, unsubscribeUser, sendNotification } from "../actions";
 // import { Alert } from "@mui/material";
 import DynamicTabs from "@/components/Tabs/tabs";
+import useSocket from "@/hooks/Socket/useSocket";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 
 export default function Home() {
+
+  const socket = useSocket();
+  console.log(socket)
+  // const { data: session, status } = useSession();
+  // const router = useRouter();
+
   const testPartiotionData = [
     {
       name: "/packaging",

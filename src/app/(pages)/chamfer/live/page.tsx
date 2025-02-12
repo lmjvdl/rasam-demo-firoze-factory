@@ -1,12 +1,12 @@
 import Chamfer from "@/components/Chamfer/Chamfer";
 import MainCard from "@/components/CustomContiner/MainCard";
-import { Grid } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import React from "react";
 
-const page = () => {
+const LiveChamfer = () => {
   return (
     <>
-      <MainCard sx={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
+      <Container sx={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
         <Grid
           container
           spacing={2}
@@ -58,9 +58,9 @@ const page = () => {
             <Chamfer />
           </Grid>
         </Grid>
-      </MainCard>
+      </Container>
     </>
   );
 };
 
-export default page;
+export default LiveChamfer;

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Box, Button, Stack } from "@mui/material";
-import AdvanceAutoComplete from "../Autocomplete/AdvanceAutoComplete";
+import AdvanceAutoComplete from "../AutoComplete/AdvanceAutoComplete";
 
 interface SingleDropDownProps {
   options: string[];

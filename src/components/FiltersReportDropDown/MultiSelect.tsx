@@ -6,7 +6,7 @@ import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { Box } from "@mui/material";
 import { getStyles, MenuProps } from "@/hooks/UI/globalStyleDropdown";
-import AdvanceAutoComplete from "../Autocomplete/AdvanceAutoComplete";
+import AdvanceAutoComplete from "../AutoComplete/AdvanceAutoComplete";
 
 interface DeviceDropDownProps {
   options: string[];

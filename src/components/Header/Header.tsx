@@ -55,6 +55,7 @@ export default function Header({
         </Box>
 
         <Typography
+          component="span"
           sx={{
             flexGrow: 1,
             textAlign: "center",

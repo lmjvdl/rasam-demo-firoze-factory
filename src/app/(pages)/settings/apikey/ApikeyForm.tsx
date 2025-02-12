@@ -1,5 +1,5 @@
 "use client";
-import AdvanceAutoComplete from "@/components/Autocomplete/AdvanceAutoComplete";
+import AdvanceAutoComplete from "@/components/AutoComplete/AdvanceAutoComplete";
 import MainCard from "@/components/CustomContiner/MainCard";
 import { IconPlus, IconRefresh, IconSquareRoundedX } from "@tabler/icons-react";
 import { Ips } from "@/interfaces/api-keys";

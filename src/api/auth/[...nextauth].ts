@@ -1,5 +1,7 @@
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
+import { useSession } from "next-auth/react";
+
 
 // authOptions are the main settings for NextAuth that we configure here
 export const authOptions = {
