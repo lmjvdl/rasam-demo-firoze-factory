@@ -2,9 +2,8 @@
 
 import ModalForm from "@/components/AdminPanelComponent/AddingProcess/ModalForm";
 import MainCard from "@/components/CustomContiner/MainCard";
-import UserView from "./UserViewTable";
 
-export default function UserPage() {
+export default function AddUser() {
   return (
     <MainCard>
       <ModalForm
@@ -37,7 +36,6 @@ export default function UserPage() {
           }
         }}
       />
-      <UserView />
     </MainCard>
   );
 }
