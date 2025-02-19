@@ -1,9 +1,9 @@
 "use client";
 // import type { Metadata } from "next";
-import DrawerSide from "@/components/Drawer/Drawer";
 import { useState } from "react";
 import Header, { drawerWidth } from "@/components/Header/Header";
 import { Box, Stack } from "@mui/material";
+import Sidebar from "@/components/SideBar/Sidebar";
 
 export default function Layout({
   children,
@@ -11,6 +11,8 @@ export default function Layout({
   children: React.ReactNode;
 }>) {
   const [mobileOpen, setMobileOpen] = useState<boolean>(false);
+  const isAdmin = true;
+
   return (
     <Stack
       direction={"row"}
@@ -18,7 +20,7 @@ export default function Layout({
       height={"100%"}
       bgcolor={"background.default"}
     >
-      <DrawerSide mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
+      <Sidebar mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} isAdmin={isAdmin}/>
       <Stack
         width={"100%"}
         height={"calc (100% -64px) "}
@@ -29,7 +31,7 @@ export default function Layout({
           mt: "64px",
         }}
       >
-        <Header mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
+        <Header mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} isAdmin={isAdmin}/>
         <Box
           component={"main"}
           width={"100%"}

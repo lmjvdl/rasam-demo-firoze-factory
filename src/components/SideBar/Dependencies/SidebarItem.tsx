@@ -1,5 +1,3 @@
-import theme from "@/theme";
-import { companyMap } from "@/utils/icons/iconsMenu";
 import { Done } from "@mui/icons-material";
 import {
   ListItem,
@@ -10,11 +8,11 @@ import {
 import Link from "next/link";
 import React, { ReactNode } from "react";
 
-const DrawerItem = ({
+const SidebarItem = ({
   text = "داشبورد",
   link = "/dashboard",
   icon = <Done />,
-  onClick, // Add onClick here
+  onClick,
 }: {
   text: string;
   icon: ReactNode;
@@ -39,4 +37,4 @@ const DrawerItem = ({
 };
 
 
-export default DrawerItem;
+export default SidebarItem;

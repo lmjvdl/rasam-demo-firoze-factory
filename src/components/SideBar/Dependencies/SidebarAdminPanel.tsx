@@ -2,13 +2,12 @@
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import { Box, Divider, Grid2, useColorScheme } from "@mui/material";
-import { Dispatch, SetStateAction } from "react";
-import DrawerItem from "./DrawerItem";
+import { Dispatch, SetStateAction, useState } from "react";
+import DrawerItem from "./SidebarItem";
 import { iconMap, companyMap } from "@/utils/icons/iconsMenu";
 import { signOut } from "next-auth/react"; // Importing signOut from next-auth/react
-import useSocket from "@/hooks/Socket/useSocket";
 
-const DrawerSide = ({
+const SideBarUserPanel = ({
   mobileOpen,
   setMobileOpen,
 }: {
@@ -33,26 +32,13 @@ const DrawerSide = ({
   // A broken function to prevent the error from the footer record
   const fakeClickHandler = () => {};
 
-
-  const socket = useSocket(); // Get the socket instance
-
-  // Function to handle sign out and disconnect socket
-  const handleSignOut = () => {
-    if (socket) {
-      socket.disconnect(); // Disconnect the socket
-      console.log("Socket disconnected"); // Log the disconnection
-    }
-    // Sign out
-    signOut();
-  };
-
   // Define a record for footer sidebar items(Setting and logout)
   const footerItemInfoByKey: Record<
     string,
     { icon: string; to: string; onClick: () => void }
   > = {
     تنظمیات: { icon: "Settings", to: "/settings", onClick: fakeClickHandler },
-    خروج: { icon: "Logout", to: "/login", onClick: () => handleSignOut() },
+    خروج: { icon: "Logout", to: "/login", onClick: () => signOut() },
   };
 
   // Define a variable for save factory logo in above sidebar
@@ -169,4 +155,4 @@ const DrawerSide = ({
   );
 };
 
-export default DrawerSide;
+export default SideBarUserPanel;

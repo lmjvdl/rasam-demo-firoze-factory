@@ -6,17 +6,16 @@ import MainCard from "@/components/CustomContiner/MainCard";
 // import { Alert } from "@mui/material";
 import DynamicTabs from "@/components/Tabs/tabs";
 import useSocket from "@/hooks/Socket/useSocket";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import AdminPanel from "./admin/page";
+// import { useSession } from "next-auth/react";
+// import { useRouter } from "next/navigation";
 
-
-export default function Home() {
-
+export default function Home({ isAdmin }: { isAdmin: boolean }) {
   const socket = useSocket();
-  console.log(socket)
+  console.log(socket);
   // const { data: session, status } = useSession();
   // const router = useRouter();
-
+  isAdmin = true;
   const testPartiotionData = [
     {
       name: "/packaging",
@@ -33,7 +32,11 @@ export default function Home() {
     <MainCard>
       {/* <PushNotificationManager /> */}
       {/* <InstallPrompt /> */}
-      <DynamicTabs options={testPartiotionData}></DynamicTabs>
+      {isAdmin ? (
+        <AdminPanel />
+      ) : (
+        <DynamicTabs options={testPartiotionData}></DynamicTabs>
+      )}
       {/* <HomePage></HomePage> */}
     </MainCard>
   );

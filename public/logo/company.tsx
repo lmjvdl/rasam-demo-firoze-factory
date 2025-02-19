@@ -46,3 +46,4 @@ export const Setare: React.FC<logoProps> = (props) => (
     </defs>
   </svg>
 );
+

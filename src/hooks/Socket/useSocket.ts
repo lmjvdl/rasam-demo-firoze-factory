@@ -6,12 +6,13 @@ import { BASE_URL } from "@/constants/baseURL";
  * Custom React hook to manage a persistent Socket.IO connection.
  * Handles automatic reconnection attempts and notifies when connection is lost.
  */
+
 const useSocket = () => {
   const socketRef = useRef<Socket | null>(null);
   const [isConnected, setIsConnected] = useState(false);
   const [reconnectAttempts, setReconnectAttempts] = useState(0);
   const [isNetworkError, setIsNetworkError] = useState(false);
-  const [data, setData] = useState<any>(null); // Store received data
+  const [data, setData] = useState(null); // Store received data
 
   const connectSocket = useCallback(() => {
     
@@ -22,11 +23,12 @@ const useSocket = () => {
          * By using (tryAllTransports) variable,
          * the polling method is used, which causes new tunnels to be opened, 
          * and we try to establish the connection through these tunnels.
-         */
+         **/
         transports: ["websocket", "polling"],
         tryAllTransports: true,
         reconnection: false, // We handle reconnection manually
         closeOnBeforeunload: true,  // Disconnects the socket when the user leaves the page
+        
         // *********************** // We should add attribute (auth) feature // ************************ //
       });
 
@@ -38,10 +40,7 @@ const useSocket = () => {
 
       socketRef.current.on("disconnect", (reason) => {
         setIsConnected(false);
-        console.log("Disconnected from the server. Reason:", reason);
-
         if (reason === "io server disconnect") {
-          console.log("Disconnected by server, trying to reconnect...");
           attemptReconnect();
         } else if (reason === "transport close") {
           setIsNetworkError(true);
@@ -51,7 +50,6 @@ const useSocket = () => {
 
       // Listen for data from server
       socketRef.current.on("data_event", (payload) => {
-        console.log("Received data:", payload);
         setData(payload);
       });
     }
@@ -64,11 +62,8 @@ const useSocket = () => {
         clearInterval(interval);
         return;
       }
-
-      console.log(`Reconnection attempt ${attempt}...`);
       setReconnectAttempts(attempt);
       attempt++;
-
       if (!socketRef.current?.connected) {
         socketRef.current?.connect();
       }
@@ -77,7 +72,6 @@ const useSocket = () => {
 
   useEffect(() => {
     connectSocket();
-
     return () => {
       if (socketRef.current) {
         socketRef.current.disconnect();
