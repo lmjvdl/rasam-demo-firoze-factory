@@ -1,19 +1,7 @@
 import React from 'react';
 import Filters from './SelectReport/Filters';
-import { DateObject } from 'react-multi-date-picker';
+import { DynamicFiltersProps } from '@/interfaces/UI/inputs/DynamicInputs';
 
-export interface DynamicFiltersProps {
-  filters: {
-    timeRange: DateObject[];
-    oneDay: DateObject;
-    singleSelect: { placeholder: string; options: string[],value:string };
-    multiSelect: { placeholder: string; options: string[] ,value:string[] };
-    subRange: string[];
-  };
-  onChange: (filterKey: string, value: string | number | string[]) => void;
-  onSearch: () => void;
-  dropdownTypes: string[];
-}
 
 const DynamicFilters: React.FC<DynamicFiltersProps> = ({ filters, onChange, onSearch, dropdownTypes }) => {
   return (

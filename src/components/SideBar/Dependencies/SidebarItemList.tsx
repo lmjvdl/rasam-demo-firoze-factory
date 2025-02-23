@@ -2,19 +2,7 @@ import { List } from "@mui/material";
 import SidebarItem from "./SidebarItem";
 import { iconMap, iconMapForAdminPanel } from "@/utils/icons/iconsMenu";
 import { useColorScheme } from "@mui/material/styles";
-
-interface SidebarItemInfo {
-  text: string;
-  icon: string;
-  to: string;
-  onClick?: () => void;
-}
-
-interface SidebarItemListProps {
-  items: Record<string, SidebarItemInfo>;
-  isAdmin: boolean;
-  sx?: object;
-}
+import { SidebarItemListProps } from "@/interfaces/UI/sidebar/sidebar";
 
 const SidebarItemList = ({ items, sx, isAdmin }: SidebarItemListProps) => {
   const mode = useColorScheme();

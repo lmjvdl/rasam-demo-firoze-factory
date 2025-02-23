@@ -1,58 +1,62 @@
-import localFont from "next/font/local";
+"use client";
+
 import Providers from "@/Providers/Providers";
-import "./globals.css";
-
-const vazir = localFont({
-  // 300 to 700 , bold
-  src: [
-    {
-      path: "../../public/fonts/Vazir/Vazir-FD-WOL.woff",
-      weight: "500",
-    },
-    {
-      path: "../../public/fonts/Vazir/Vazir-Light-FD-WOL.woff",
-      weight: "400",
-    },
-
-    {
-      path: "../../public/fonts/Vazir/Vazir-Thin-FD-WOL.woff",
-      weight: "300",
-    },
-
-    {
-      path: "../../public/fonts/Vazir/Vazir-Medium-FD-WOL.woff",
-      weight: "600",
-    },
-    {
-      path: "../../public/fonts/Vazir/Vazir-Bold-FD-WOL.woff",
-      weight: "700",
-    },
-  ],
-  variable: "--font-vazir",
-});
+import "../styles/globals.css";
+import { vazir } from "../../public/fonts/Fonts";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
+import Header, { drawerWidth } from "@/components/Header/Header";
+import { Box, Stack } from "@mui/material";
+import Sidebar from "@/components/SideBar/Sidebar";
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
+  const [mobileOpen, setMobileOpen] = useState<boolean>(false);
+  const isAdmin = false;
+  const pathname = usePathname();
+
+  const isLoginPage = pathname === "/login";
+
   return (
     <html lang="fa" dir="rtl" className={`${vazir.variable} font-sans`}>
       <head>
         <title>RasamIoT</title>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
         <meta name="description" content="Factory data monitoring and reporting" />
-        <meta name="keywords" content="ًRasam, Factory, Menhaj, Monitoring, Reporting, IoT, Yazd" />
+        <meta name="keywords" content="Rasam, Factory, Menhaj, Monitoring, Reporting, IoT, Yazd" />
         <meta name="author" content="Rasam company" />
         <meta charSet="UTF-8" />
         <meta name="copyright" content="© همه حقوق برای شرکت رسام محفوظ است rasamiot.com" />
       </head>
-
       <body>
-        <Providers>{children}</Providers>
+        <Providers>
+          {isLoginPage ? (
+            <Box component="main" width="100%" height="100%">
+              {children}
+            </Box>
+          ) : (
+            <Stack direction={"row"} width={"100%"} height={"100%"} bgcolor={"background.default"}>
+              <Sidebar mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} isAdmin={isAdmin} />
+              <Stack
+                width={"100%"}
+                height={"calc(100% - 64px)"}
+                component="main"
+                sx={{
+                  width: { sm: `calc(100% - ${drawerWidth}px)` },
+                  flexGrow: 1,
+                  mt: "64px",
+                }}
+              >
+                <Header mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} isAdmin={isAdmin} />
+                <Box component={"main"} width={"100%"} height={"100%"} sx={{ flexGrow: 1, p: 2 }}>
+                  {children}
+                </Box>
+              </Stack>
+            </Stack>
+          )}
+        </Providers>
       </body>
     </html>
   );
 }
-
-

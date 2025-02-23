@@ -1,3 +1,4 @@
+import { OrientationHookReturn } from "@/interfaces/UI/orientation/Orientation";
 import { useMediaQuery } from "@mui/material";
 
 /** ==============================================
@@ -10,14 +11,6 @@ import { useMediaQuery } from "@mui/material";
  *
  *============================================= */
 
-interface OrientationHookReturn {
-  isLandscape: boolean | undefined;
-  isMobileLandscape: boolean | undefined;
-  isMobilePortrait: boolean | undefined;
-  isPortrait: boolean | undefined;
-  isMobile: boolean | undefined;
-  isDesktop: boolean | undefined;
-}
 
 function useOrientation(): OrientationHookReturn {
   const isLandscape = useMediaQuery("(orientation: landscape)");

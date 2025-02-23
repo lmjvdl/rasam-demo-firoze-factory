@@ -3,12 +3,6 @@
 import React from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, Typography } from '@mui/material';
 
-interface ViewDialogProps {
-  open: boolean;
-  onClose: () => void;
-  rowData: any | null;
-  titles: any | null;
-}
 
 const ViewDialog: React.FC<ViewDialogProps> = ({ open, onClose, rowData, titles }) => {
   if (!rowData) return null;

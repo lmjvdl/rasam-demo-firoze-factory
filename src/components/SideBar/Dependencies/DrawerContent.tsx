@@ -1,12 +1,7 @@
 import { Grid2, useColorScheme } from "@mui/material";
 import { companyMap } from "@/utils/icons/iconsMenu";
 import SidebarItemList from "./SidebarItemList";
-
-interface DrawerContentProps {
-  drawerItemInfoByKey: Record<string, { text: string; icon: string; to: string; }>;
-  footerItemInfoByKey: Record<string, { text: string; icon: string; to: string; onClick: () => void }>;
-  isAdmin: boolean;
-}
+import { DrawerContentProps } from "@/interfaces/UI/sidebar/sidebar";
 
 const DrawerContent = ({
   drawerItemInfoByKey,

@@ -1,13 +1,8 @@
 import * as React from "react";
 import { Box, Button, Stack } from "@mui/material";
 import AdvanceAutoComplete from "../AutoComplete/AdvanceAutoComplete";
+import { SingleDropDownProps } from "@/interfaces/UI/inputs/DynamicInputs";
 
-interface SingleDropDownProps {
-  options: string[];
-  onChange: (newValue: string) => void;
-  placeholder: string;
-  value: string;
-}
 
 export default function SingleSelect({
   placeholder,

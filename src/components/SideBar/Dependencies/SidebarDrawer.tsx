@@ -1,12 +1,7 @@
 import Drawer from "@mui/material/Drawer";
 import { Box } from "@mui/material";
+import { SidebarDrawerProps } from "@/interfaces/UI/sidebar/sidebar";
 
-interface SidebarDrawerProps {
-  open: boolean;
-  onClose: () => void;
-  children: React.ReactNode;
-  variant: "temporary" | "permanent";
-}
 
 const SidebarDrawer = ({ open, onClose, children, variant }: SidebarDrawerProps) => {
   const drawerWidth = 240;

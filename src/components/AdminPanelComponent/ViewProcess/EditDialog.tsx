@@ -17,13 +17,6 @@ import {
   ListItemText,
 } from "@mui/material";
 
-interface EditDialogProps {
-  open: boolean;
-  onClose: () => void;
-  onSave: (updatedData: any) => void;
-  rowData: any;
-  titles: any;
-}
 
 const EditDialog: React.FC<EditDialogProps> = ({
   open,

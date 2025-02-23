@@ -1,12 +1,11 @@
 import React from "react";
-import { Box, TextField, InputAdornment, FormControl } from "@mui/material";
+import { TextField, InputAdornment, FormControl } from "@mui/material";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import DatePicker, { DateObject } from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import weekends from "react-multi-date-picker/plugins/highlight_weekends";
-import persianFa from "./persianFa";
-
-const weekDays = ["ش", "ی", "د", "س", "چ", "پ", "ج"];
+import persianFa from "../../utils/formatters/persianFa";
+import { weekDays } from "@/utils/formatters/DateToText";
 
 const valueToInputText = (value?: DateObject): string => {
   if (!value) return "";

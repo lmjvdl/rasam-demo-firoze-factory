@@ -15,19 +15,6 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-interface Column {
-  id: string;
-  label: string;
-  isActionColumn?: boolean;
-}
-
-interface DataTableProps {
-  columns: Column[];
-  data: any[];
-  onView?: (row: any) => void;
-  onEdit?: (row: any) => void;
-  onDelete?: (row: any) => void;
-}
 
 const DataTable: React.FC<DataTableProps> = ({
   columns,

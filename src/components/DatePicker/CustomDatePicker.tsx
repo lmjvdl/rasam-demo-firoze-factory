@@ -1,40 +1,13 @@
 import React from "react";
-import { Box, TextField, IconButton, FormControl, InputAdornment, makeStyles } from "@mui/material";
+import { TextField, FormControl, InputAdornment } from "@mui/material";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import DatePicker, { DateObject } from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import weekends from "react-multi-date-picker/plugins/highlight_weekends";
-import persianFa from "./persianFa";
+import persianFa from "../../utils/formatters/persianFa";
+import { CalendarInputProps } from "@/interfaces/UI/inputs/DynamicInputs";
+import { valueToInputText, weekDays } from "@/utils/formatters/DateToText";
 
-const weekDays = ["ش", "ی", "د", "س", "چ", "پ", "ج"];
-
-const valueToInputText = (val?: DateObject[]): string => {
-  const value = val ? val.toString() : "";
-  if (!value) {
-    return "";
-  }
-
-  const [from, to] = value.split("~").map((date) => date.trim());
-
-  if (!from && !to) {
-    return "";
-  }
-
-  if (from && !to) {
-    return `${from} تا این لحظه`;
-  }
-
-  if (from && to) {
-    return `${from} تا ${to}`;
-  }
-
-  return "";
-};
-
-interface CalendarInputProps {
-  value?: DateObject[];
-  openCalendar?: () => void;
-}
 
 function InputContainer({ openCalendar, value }: CalendarInputProps) {
   const text: string = valueToInputText(value)

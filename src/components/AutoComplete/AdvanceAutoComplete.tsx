@@ -10,25 +10,12 @@ import {
   Stack,
   TextField,
 } from "@mui/material";
-import { Add, CheckBox, CheckBoxOutlineBlank } from "@mui/icons-material";
+import { CheckBox, CheckBoxOutlineBlank } from "@mui/icons-material";
+import { AdvanceAutoCompleteProps, CustomPaperProps } from "@/interfaces/UI/inputs/DynamicInputs";
 
 const icon = <CheckBoxOutlineBlank fontSize="small" />;
 const checkedIcon = <CheckBox fontSize="small" />;
 
-interface AdvanceAutoCompleteProps {
-  multiple?: boolean;
-  TFPlaceholder?: string;
-  TFLabel?: string;
-  limitTags?: number;
-  label?: string;
-  uniqeProperty?: string | number;
-  value: any;
-  setValue: any;
-  stateOption: any;
-  extraComponents?: ReactNode;
-  selectAllEnabled?: boolean;
-  size?: "small" | "medium";
-}
 
 const AdvanceAutoComplete = ({
   multiple = false,
@@ -147,16 +134,6 @@ AdvanceAutoCompleteProps) => {
     </>
   );
 };
-
-interface CustomPaperProps {
-  props: React.HTMLAttributes<HTMLElement>;
-  allIsSelected: boolean;
-  indeterminateActive: boolean;
-  handleSelectAllCheckBox: () => void;
-  multiple: boolean;
-  extraComponents?: ReactNode;
-  selectAllEnabled?: boolean;
-}
 
 const CustomPaperComponent: FC<CustomPaperProps> = ({
   props,

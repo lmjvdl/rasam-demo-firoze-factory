@@ -6,11 +6,7 @@ import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { Box } from "@mui/material";
 import { getStyles, MenuProps } from "@/hooks/UI/globalStyleDropdown";
-
-interface SubRangeDropDownProps {
-  options: string[];
-  onChange: (value: string) => void;
-} 
+import { SubRangeDropDownProps } from "@/interfaces/UI/inputs/DynamicInputs";
 
 export default function SubRange({ options, onChange}: SubRangeDropDownProps) {
   const theme = useTheme();

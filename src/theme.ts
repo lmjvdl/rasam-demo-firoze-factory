@@ -1,25 +1,5 @@
 "use client";
 import { faIR } from "@mui/material/locale";
-
-type tableCustomPalleteOption = {
-  header?: string;
-  oddColumn?: string;
-  evenColumn?: string;
-};
-declare module "@mui/material/styles" {
-  interface Palette {
-    table: tableCustomPalleteOption;
-  }
-
-  interface PaletteOptions {
-    table: tableCustomPalleteOption;
-  }
-  interface TypeBackground {
-    disable?: string;
-    enable?: string;
-  }
-}
-
 import { ColorSystemOptions, createTheme } from "@mui/material/styles";
 
 const lightObject: ColorSystemOptions = {

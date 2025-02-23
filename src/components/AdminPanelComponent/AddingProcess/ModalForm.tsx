@@ -18,18 +18,6 @@ import {
 } from "@mui/material";
 import { useForm, Controller } from "react-hook-form";
 
-interface ModalFormProps {
-  buttonText: string;
-  formFields: {
-    name: string;
-    label: string;
-    type: string;
-    options?: { label: string; value: string }[];
-  }[];
-  sxButton?: object;
-  onSubmit: (data: any) => Promise<{ success: boolean; error?: string }>;
-}
-
 const ModalForm: React.FC<ModalFormProps> = ({
   buttonText,
   formFields,

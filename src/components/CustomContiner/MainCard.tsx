@@ -1,10 +1,6 @@
-import { Stack, SxProps } from "@mui/material";
+import { MainCardType } from "@/interfaces/UI/mainCard/MainCard";
+import { Stack } from "@mui/material";
 import React from "react";
-
-interface MainCardType {
-  children: React.ReactNode;
-  sx?: SxProps;
-}
 
 const MainCard: React.FC<MainCardType> = ({ children, sx }) => {
   return (

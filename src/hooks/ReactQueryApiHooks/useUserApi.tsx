@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { RegisterUserParameter } from "@/interfaces/users";
+import { RegisterUserParameter } from "@/interfaces/settings/users";
 import { axiosInstance } from "@/api/api";
 
 const registerUserURL = "accounts/register/";

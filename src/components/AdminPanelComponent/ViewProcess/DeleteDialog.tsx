@@ -3,13 +3,6 @@
 import React from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, Typography } from '@mui/material';
 
-interface DeleteDialogProps {
-  open: boolean;
-  onClose: () => void;
-  onConfirm: () => void;
-  rowData: any;
-  titles: any;
-}
 
 const DeleteDialog: React.FC<DeleteDialogProps> = ({ open, onClose, onConfirm, rowData, titles }) => {
   if (!rowData) return null;
