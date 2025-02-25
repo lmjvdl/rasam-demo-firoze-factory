@@ -1,39 +1,27 @@
-"use client"
-
-import React from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+// Login.tsx
+"use client";
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import "../../styles/login/login.css";
 import { Button, Container, TextField, Typography } from "@mui/material";
 import Image from "next/image";
-import "../../styles/login/login.css";
-import { useLogin } from "./useLogin";
+import { useForm, SubmitHandler } from "react-hook-form";
+import useLogin from "@/hooks/Auth/useLogin";
+import { deleteUser } from "@/hooks/context/authStore";
 
-interface FormData {
+type FormData = {
   username: string;
   password: string;
-}
+};
 
 export default function Login() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm<FormData>({
-    defaultValues: {
-      username: "",
-      password: "",
-    },
-  });
-
-  const { login } = useLogin();
+  const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
+  const [error, setError] = useState("");
+  const loginMutation = useLogin();
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
-    try {
-      await login(data.username, data.password);
-      window.location.href = "/dashboard";
-    } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : "ورود ناموفق بود. لطفاً اطلاعات را بررسی کنید.";
-      alert(errorMessage);
-    }
+    loginMutation.mutate(data, {});
+    deleteUser()
   };
 
   return (
@@ -53,40 +41,32 @@ export default function Login() {
                 ورود به سامانه مانیتورینگ هوشمند رسام
               </Typography>
             </div>
-
-            <form onSubmit={handleSubmit(onSubmit)}>
+            {error && <p className="error-text">{error}</p>}
+            <form onSubmit={handleSubmit(onSubmit)} className="form-hook">
               <div className="form__group field">
                 <TextField
-                  id="username"
                   label="نام کاربری"
                   variant="outlined"
                   className="form__field"
-                  {...register("username", { required: "نام کاربری الزامی است" })}
+                  {...register("username", { required: "نام کاربری ضروری است" })}
                   error={!!errors.username}
-                  helperText={errors.username?.message?.toString() ?? ""}
+                  helperText={errors.username ? errors.username.message : ""}
                 />
               </div>
               <div className="form__group field">
                 <TextField
-                  id="password"
                   label="رمز عبور"
                   variant="outlined"
                   type="password"
                   className="form__field"
-                  {...register("password", { required: "رمز عبور الزامی است" })}
+                  {...register("password", { required: "رمز عبور ضروری است" })}
                   error={!!errors.password}
-                  helperText={errors.password?.message?.toString() ?? ""}
+                  helperText={errors.password ? errors.password.message : ""}
                 />
               </div>
-              <div>
-                <Button
-                  type="submit"
-                  className="login-button"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? "در حال ورود..." : "ورود"}
-                </Button>
-              </div>
+              <Button type="submit" className="login-button">
+                ورود
+              </Button>
             </form>
           </Container>
         </div>

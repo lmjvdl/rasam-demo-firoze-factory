@@ -6,38 +6,20 @@ import MainCard from "@/components/CustomContiner/MainCard";
 // import { Alert } from "@mui/material";
 import DynamicTabs from "@/components/Tabs/tabs";
 import AdminPanel from "./admin/page";
+import { SnackbarProvider } from "@/hooks/context/useSnackbar";
 // import useSocket from "@/hooks/Socket/useSocket";
-// import { useSession } from "next-auth/react";
 // import { useRouter } from "next/navigation";
 
-export default function Home({ isAdmin }: { isAdmin: boolean }) {
+export default function App({ isAdmin }: { isAdmin: boolean }) {
   // const socket = useSocket();
 
-  // const { data: session, status } = useSession();
   // const router = useRouter();
   isAdmin = false;
-  const testPartiotionData = [
-    {
-      name: "/packaging",
-      value: 0,
-      label: "بسته بندی",
-    },
-    {
-      name: "/strusher",
-      value: 1,
-      label: "سنگ شکن",
-    },
-  ];
   return (
     <MainCard>
-      {/* <PushNotificationManager /> */}
-      {/* <InstallPrompt /> */}
-      {isAdmin ? (
+      <SnackbarProvider>
         <AdminPanel />
-      ) : (
-        <DynamicTabs options={testPartiotionData}></DynamicTabs>
-      )}
-      {/* <HomePage></HomePage> */}
+      </SnackbarProvider>
     </MainCard>
   );
 }

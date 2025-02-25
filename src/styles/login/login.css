@@ -83,8 +83,7 @@ body {
 .form__group {
   position: relative;
   padding: 25px 0 0;
-  width: 50%;
-  margin: 10px 20px 0px 20px;
+  width: 100%;
 }
 
 .form-container {
@@ -100,7 +99,7 @@ body {
 
 .form__field {
   font-family: inherit;
-  width: 100%;
+  width: 20vw;
   border: 0;
   border-bottom: 2px solid #181818;
   outline: 0;
@@ -112,17 +111,31 @@ body {
 
 .login-button {
   width: 120px;
-  height: 50px;
+  height: 40px;
   font-size: 18px !important; 
   background-color: #333333;
   color: #ffffff;
-  margin-top: 25% !important;
+  margin-top: 10% !important;
   padding-bottom: 4px;
   border-radius: 12px;
   border: 1px solid;
-  transition: #5a5a5a 0.3s ease;
+  transition: #000 0.3s ease;
+  display: block;
+  margin-left: auto;
+  margin-right: auto; 
 }
 
+.form-hook {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.login-button:hover {
+  background-color: #5a5a5a;
+}
 /* -------------------- end INPUT-PART style --------------------- */
 
 /* ---------------------- RESPONSIVE style ----------------------- */
@@ -178,7 +191,11 @@ body {
   }
 
   .form__group {
-    width: 75%;
+    width: 100%;
+  }
+
+  .form__field {
+    width: 50vw;
   }
 
   .logo {
@@ -190,13 +207,11 @@ body {
 
   .field {
     width: 70%;
-    margin-left: 10%
+    margin-left: 39%
   }
 
   .login-button {
-    margin-top: 25% !important;
-    margin-right: -20% !important;
-    margin-bottom: 30% !important; 
+    margin: 25% -17% 0 0 !important;
   }
 
   .typing-text {
