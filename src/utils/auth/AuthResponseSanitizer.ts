@@ -15,6 +15,7 @@ const authResponseSchema = z
       last_login: z.string().nullable(),
       permissions: z.array(z.string()),
       profile_image: z.nullable(z.string()),
+      is_superuser: z.boolean().catch(false),
     }),
   })
   .transform((val) => ({
@@ -29,6 +30,7 @@ const authResponseSchema = z
       lastLogin: val.data.last_login,
       permissions: val.data.permissions,
       profileImage: val.data.profile_image,
+      isAdmin: val.data.is_superuser,
     },
   }));
 

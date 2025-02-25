@@ -10,6 +10,7 @@ interface AuthState {
   lastLogin: string | null;
   isLoggedIn: boolean;
   permissions: string[];
+  isAdmin: boolean;
 }
 
 const initialAuthState: AuthState = {
@@ -20,6 +21,7 @@ const initialAuthState: AuthState = {
   lastLogin: null,
   isLoggedIn: false,
   permissions: [],
+  isAdmin: false,
 };
 
 export const useAuthStore = create(
@@ -28,7 +30,7 @@ export const useAuthStore = create(
 
 export const updateUser = (authResponse: AuthResponse) => {
   useAuthStore.setState({
-    ...authResponse,
+    ...authResponse.data,
     isLoggedIn: true,
   });
 };

@@ -1,28 +1,30 @@
 "use client";
 
-import MainCard from "@/components/CustomContiner/MainCard";
-// import { useState, useEffect } from "react";
-// import { subscribeUser, unsubscribeUser, sendNotification } from "../actions";
-// import { Alert } from "@mui/material";
-import DynamicTabs from "@/components/Tabs/tabs";
-import AdminPanel from "./admin/page";
-import { SnackbarProvider } from "@/hooks/context/useSnackbar";
-// import useSocket from "@/hooks/Socket/useSocket";
-// import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useAuthStore } from "@/hooks/context/authStore";
+import LoadingScreen from "@/components/LoadingScreen/LoadingScreen";
 
-export default function App({ isAdmin }: { isAdmin: boolean }) {
-  // const socket = useSocket();
+export default function HomePage() {
+  const router = useRouter();
+  
 
-  // const router = useRouter();
-  isAdmin = false;
-  return (
-    <MainCard>
-      <SnackbarProvider>
-        <AdminPanel />
-      </SnackbarProvider>
-    </MainCard>
-  );
+  const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
+  const isAdmin = useAuthStore((state) => state.isAdmin);
+  useEffect(() => {
+    if (isLoggedIn === null) return;
+    if (isLoggedIn) {
+      router.replace(isAdmin ? "/admin" : "/dashboard");
+    } else if(!isLoggedIn) {
+      router.replace("/login");
+    }
+  }, [isLoggedIn, isAdmin, router]);
+
+  return <LoadingScreen />;
 }
+
+
+
 
 // function urlBase64ToUint8Array(base64String: string) {
 //   const padding = "=".repeat((4 - (base64String.length % 4)) % 4);

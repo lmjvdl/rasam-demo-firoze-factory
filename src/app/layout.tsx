@@ -8,12 +8,14 @@ import { useState } from "react";
 import Header, { drawerWidth } from "@/components/Header/Header";
 import { Box, Stack } from "@mui/material";
 import Sidebar from "@/components/SideBar/Sidebar";
+import { useAuthStore } from "@/hooks/context/authStore";
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   const [mobileOpen, setMobileOpen] = useState<boolean>(false);
-  const isAdmin = true;
+  const isAdmin = useAuthStore((state) => state.isAdmin);
+  // const isAdmin = true;
   const pathname = usePathname();
 
   const isLoginPage = pathname === "/login";
@@ -29,7 +31,8 @@ export default function RootLayout({
         />
         <meta
           name="keywords"
-          content="Rasam, Factory, Menhaj, Monitoring, Reporting, IoT, Yazd"
+          content="Rasam, Factory, Menhaj, Monitoring, Reporting, IoT, 
+          Yazd, رسام, منهاج, یزد, کارخانه کاشی یزد, مانیتورینگ کارخانه کاشی, اینترنت اشیا"
         />
         <meta name="author" content="Rasam company" />
         <meta charSet="UTF-8" />
@@ -40,48 +43,48 @@ export default function RootLayout({
       </head>
       <body>
         <Providers>
-            {isLoginPage ? (
-              <Box component="main" width="100%" height="100%">
-                {children}
-              </Box>
-            ) : (
+          {isLoginPage ? (
+            <Box component="main" width="100%" height="100%">
+              {children}
+            </Box>
+          ) : (
+            <Stack
+              direction={"row"}
+              width={"100%"}
+              height={"100%"}
+              bgcolor={"background.default"}
+            >
+              <Sidebar
+                mobileOpen={mobileOpen}
+                setMobileOpen={setMobileOpen}
+                isAdmin={isAdmin}
+              />
               <Stack
-                direction={"row"}
                 width={"100%"}
-                height={"100%"}
-                bgcolor={"background.default"}
+                height={"calc(100% - 64px)"}
+                component="main"
+                sx={{
+                  width: { sm: `calc(100% - ${drawerWidth}px)` },
+                  flexGrow: 1,
+                  mt: "64px",
+                }}
               >
-                <Sidebar
+                <Header
                   mobileOpen={mobileOpen}
                   setMobileOpen={setMobileOpen}
                   isAdmin={isAdmin}
                 />
-                <Stack
+                <Box
+                  component={"main"}
                   width={"100%"}
-                  height={"calc(100% - 64px)"}
-                  component="main"
-                  sx={{
-                    width: { sm: `calc(100% - ${drawerWidth}px)` },
-                    flexGrow: 1,
-                    mt: "64px",
-                  }}
+                  height={"100%"}
+                  sx={{ flexGrow: 1, p: 2 }}
                 >
-                  <Header
-                    mobileOpen={mobileOpen}
-                    setMobileOpen={setMobileOpen}
-                    isAdmin={isAdmin}
-                  />
-                  <Box
-                    component={"main"}
-                    width={"100%"}
-                    height={"100%"}
-                    sx={{ flexGrow: 1, p: 2 }}
-                  >
-                    {children}
-                  </Box>
-                </Stack>
+                  {children}
+                </Box>
               </Stack>
-            )}
+            </Stack>
+          )}
         </Providers>
       </body>
     </html>
