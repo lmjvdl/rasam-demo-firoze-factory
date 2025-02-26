@@ -10,12 +10,30 @@ export default function UserPage() {
       <ModalForm
         buttonText="افزودن کاربر جدید"
         formFields={[
-          { name: "username", label: "نام کاربری", type: "text" },
-          { name: "password", label: "رمز عبور", type: "password" },
-          { name: "firstName", label: "نام", type: "text" },
-          { name: "lastName", label: "نام خانوادگی", type: "text" },
-          { name: "phoneNumber", label: "شماره تلفن", type: "tel" },
-          { name: "email", label: "ایمیل", type: "email" },
+          {
+            name: "username", label: "نام کاربری", type: "text",
+            required: true
+          },
+          {
+            name: "password", label: "رمز عبور", type: "password",
+            required: true
+          },
+          {
+            name: "firstName", label: "نام", type: "text",
+            required: true
+          },
+          {
+            name: "lastName", label: "نام خانوادگی", type: "text",
+            required: true
+          },
+          {
+            name: "phoneNumber", label: "شماره تلفن", type: "tel",
+            required: true
+          },
+          {
+            name: "email", label: "ایمیل", type: "email",
+            required: true
+          },
           {
             name: "permission",
             label: "سطح دسترسی",
@@ -26,6 +44,7 @@ export default function UserPage() {
               { label: "ویراستار", value: "editor" },
               { label: "مهمان", value: "guest" },
             ],
+            required: true
           },
         ]}
         onSubmit={async (data) => {

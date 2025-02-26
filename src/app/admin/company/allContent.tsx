@@ -4,66 +4,66 @@ import DataTable from "@/components/AdminPanelComponent/ViewProcess/DataTable";
 import DeleteDialog from "@/components/AdminPanelComponent/ViewProcess/DeleteDialog";
 import EditDialog from "@/components/AdminPanelComponent/ViewProcess/EditDialog";
 import ViewDialog from "@/components/AdminPanelComponent/ViewProcess/ViewDialog";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import getCompanyList, { ResponseSchema } from "./useView";
+import useClientPagination from "@/hooks/UI/useClientPagination";
+import useDelete from "./useDelete";
 
 const columns = [
-  { id: "username", label: "نام کاربری", showOnTable: true },
-  { id: "first_name", label: "نام", showOnTable: true },
-  { id: "last_name", label: "نام خانوادگی", showOnTable: true },
-  { id: "password", label: "رمز عبور", showOnTable: false },
-  { id: "phone_number", label: "شماره تلفن", showOnTable: false },
-  { id: "email", label: "ایمیل", showOnTable: false },
-  { id: "permission", label: "دسترسی", showOnTable: false },
+  { id: "id", label: "شناسه", showOnTable: true },
+  { id: "name", label: "شرکت", showOnTable: true },
+  { id: "description", label: "توضیحات", showOnTable: true },
+  { id: "code", label: "کد", showOnTable: true },
+  { id: "logo", label: "لوگو", isActionColumn: false, showOnTable: false },
   { id: "actions", label: "عملیات", isActionColumn: true },
 ];
 
-const initialData = [
-  {
-    username: "ALI",
-    first_name: "علی",
-    last_name: "جعفری",
-    password: "1234",
-    phone_number: "09137328210",
-    email: "lmjvdl82@gmail.com",
-    permission: ["Admin", "Editor"],
-  },
-  {
-    username: "Hossein",
-    first_name: "علی",
-    last_name: "جعفری",
-    password: "1234",
-    phone_number: "09137328210",
-    email: "lmjvdl82@gmail.com",
-    permission: ["User"],
-  },
-  {
-    username: "Jafar",
-    first_name: "علی",
-    last_name: "جعفری",
-    password: "1234",
-    phone_number: "09137328210",
-    email: "lmjvdl82@gmail.com",
-    permission: ["Admin", "Editor"],
-  },
-  {
-    username: "Mohsen",
-    first_name: "علی",
-    last_name: "جعفری",
-    password: "1234",
-    phone_number: "09137328210",
-    email: "lmjvdl82@gmail.com",
-    permission: ["Admin", "Editor"],
-  },
-];
-
 const AllContentCompany: React.FC = () => {
-  const [data, setData] = useState(initialData);
+  const { deleteCompanyMutation } = useDelete();
+  
+  const [data, setData] = useState<ResponseSchema>({
+    data: {
+      count: 0,
+      next: null,
+      previous: null,
+      page_size: 8,
+      results: [],
+    },
+    status_code: 200,
+    success: true,
+    messages: "",
+  });
+
   const [selectedRow, setSelectedRow] = useState<any>(null);
   const [viewOpen, setViewOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
+  const [updaterTable, setUpdatedTable] = useState(false);
+  const {
+    pageNumber,
+    totalPages,
+    hasNextPage,
+    hasPerviousPage,
+    setPage,
+    next,
+    previous,
+    last,
+    first,
+  } = useClientPagination(data?.data?.count ?? 0);
 
-  const filteredColumns = columns.filter(col => col.showOnTable || col.isActionColumn);
+  const getList = getCompanyList(pageNumber, 8);
+
+  useEffect(() => {
+    getList.mutate(undefined, {
+      onSuccess: (information) => {
+        setData(information);
+      },
+    });
+  }, [pageNumber, updaterTable]);
+
+  const filteredColumns = columns.filter(
+    (col) => col.showOnTable || col.isActionColumn
+  );
 
   const handleView = (row: any) => {
     setSelectedRow(row);
@@ -73,31 +73,56 @@ const AllContentCompany: React.FC = () => {
   const handleEdit = (row: any) => {
     setSelectedRow(row);
     setEditOpen(true);
+    setUpdatedTable(true);
   };
 
   const handleDelete = (row: any) => {
     setSelectedRow(row);
     setDeleteOpen(true);
+    setUpdatedTable(true);
   };
 
-  const handleSaveEdit = (updatedRow: any) => {
-    setData(
-      data.map((row) =>
-        row.username === updatedRow.username ? updatedRow : row
-      )
-    );
+  const handleSaveEdit = (updatedRow: { id: number; name: string; description: string; code: string; logo: string; }) => {
+    setUpdatedTable(true);
+    setData((prevData) => {
+      if (prevData?.data) {
+        return {
+          ...prevData,
+          data: {
+            ...prevData.data,
+            results: prevData.data.results.map((row) =>
+              row.id === updatedRow.id ? updatedRow : row
+            ),
+          },
+        };
+      }
+      return prevData || {
+        data: {
+          count: 0,
+          next: null,
+          previous: null,
+          page_size: 8,
+          results: [],
+        },
+        status_code: 200,
+        success: true,
+        messages: "",
+      };
+    });
   };
 
   const handleConfirmDelete = () => {
-    setData(data.filter((row) => row.username !== selectedRow.username));
-    setDeleteOpen(false);
+    setUpdatedTable(true);
+    if (selectedRow?.id) {
+      deleteCompanyMutation.mutate(selectedRow.id);
+    }
   };
 
   return (
     <div>
       <DataTable
         columns={filteredColumns}
-        data={data}
+        data={data?.data?.results ?? []}
         onView={handleView}
         onEdit={handleEdit}
         onDelete={handleDelete}

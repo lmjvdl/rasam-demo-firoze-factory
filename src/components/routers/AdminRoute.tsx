@@ -19,7 +19,7 @@ export default function AdminRoute({ children }: Props) {
     } else {
       router.replace("/admin");
     }
-  }, [isLoggedIn, router]);
+  }, [isLoggedIn]);
 
   return <>{children}</>;
 }

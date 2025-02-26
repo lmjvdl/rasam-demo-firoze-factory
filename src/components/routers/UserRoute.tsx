@@ -18,7 +18,7 @@ export default function UserRoute({ children }: Props) {
     } else if (isLoggedIn) {
       router.replace("/dashboard");
     }
-  }, [isLoggedIn, router]);
+  }, [isLoggedIn]);
 
   return <>{children}</>;
 }

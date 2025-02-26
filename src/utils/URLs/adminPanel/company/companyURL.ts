@@ -15,6 +15,11 @@ class CompanyUrls extends Url {
     const reportPath = `${this.baseUrlPath}/list/`;
     return new URL(reportPath, this.origin);
   }
+
+  public deleteCompany(id: number) {
+    const reportPath = `${this.baseUrlPath}/${id}/`;
+    return new URL(reportPath, this.origin).toString();
+  }
 }
 
 const companyUrls = new CompanyUrls();
