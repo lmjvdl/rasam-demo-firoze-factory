@@ -5,6 +5,7 @@ interface ModalFormProps {
         label: string;
         type: string;
         options?: { label: string; value: string }[];
+        required: boolean;
     }[];
     sxButton?: object;
     onSubmit: (data: any) => Promise<{ success: boolean; error?: string }>;

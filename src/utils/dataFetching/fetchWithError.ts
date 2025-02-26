@@ -1,4 +1,5 @@
 import { useAuthStore } from "@/hooks/context/authStore";
+import toast from "react-hot-toast";
 
 export default async function fetchWithError(
   url: string | URL,
@@ -42,15 +43,28 @@ export async function fetchWithErrorForCreate(
   try {
     const refinedOption = addProperHeader(options);
     const response = await window.fetch(url, refinedOption);
+    const rawData = await response.json();
+
     if (response.status === 200 || response.status === 201) {
-      const rawData = await response.json();
+      toast.success(rawData.messages || "✅ عملیات موفقیت‌آمیز بود");
       return rawData;
     } else {
-      throw new Error(`درخواست به سرور با مشکل مواجه شد.`);
+      if (Array.isArray(rawData.messages)) {
+        rawData.messages.forEach((messageObj: { [key: string]: { message: string[] } }) => {
+          for (const [field, fieldMessages] of Object.entries(messageObj)) {
+            if (Array.isArray(fieldMessages.message)) {
+              fieldMessages.message.forEach((msg) => {
+                toast.error(`${field}: ${msg}`);
+              });
+            }
+          }
+        });
+      } else {
+        toast.error(rawData.messages || "❌ خطایی رخ داده است");
+      }
+      throw new Error("درخواست به سرور با مشکل مواجه شد.");
     }
   } catch (err) {
-    throw new Error("درخواست به سرور با مشکل مواجه شد.", {
-      cause: "خطای سرور",
-    });
+    throw new Error("درخواست به سرور با مشکل مواجه شد.");
   }
 }

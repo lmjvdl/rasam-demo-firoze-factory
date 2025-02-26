@@ -1,7 +1,6 @@
 "use client";
 
 import AdminRoute from "@/components/routers/AdminRoute";
-import MainCard from "@/components/CustomContiner/MainCard";
 
 interface Props {
   children: React.ReactNode;
@@ -10,9 +9,7 @@ interface Props {
 export default function AdminPage({ children }: Props) {
   return (
     <AdminRoute>
-      <MainCard sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
         {children}
-      </MainCard>
     </AdminRoute>
   );
 }

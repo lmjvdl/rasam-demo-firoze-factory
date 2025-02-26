@@ -7,10 +7,10 @@ import LoadingScreen from "@/components/LoadingScreen/LoadingScreen";
 
 export default function HomePage() {
   const router = useRouter();
-  
-
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
   const isAdmin = useAuthStore((state) => state.isAdmin);
+  console.log(useAuthStore((state) => state))
+  
   useEffect(() => {
     if (isLoggedIn === null) return;
     if (isLoggedIn) {

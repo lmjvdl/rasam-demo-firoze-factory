@@ -13,7 +13,14 @@ const authResponseSchema = z
         refresh: z.string(),
       }),
       last_login: z.string().nullable(),
-      permissions: z.array(z.string()),
+      permissions: z.array(
+        z.object({
+          id: z.number(),
+          name: z.string(),
+          codename: z.string(),
+          content_type__app_label: z.string(),
+        })
+      ),
       profile_image: z.nullable(z.string()),
       is_superuser: z.boolean().catch(false),
     }),
@@ -28,13 +35,11 @@ const authResponseSchema = z
       accessToken: val.data.tokens.access,
       refreshToken: val.data.tokens.refresh,
       lastLogin: val.data.last_login,
-      permissions: val.data.permissions,
+      permissions: val.data.permissions.map((perm) => perm.codename),
       profileImage: val.data.profile_image,
       isAdmin: val.data.is_superuser,
     },
   }));
-
-
 
 export type AuthResponse = z.infer<typeof authResponseSchema>;
 

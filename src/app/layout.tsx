@@ -9,6 +9,7 @@ import Header, { drawerWidth } from "@/components/Header/Header";
 import { Box, Stack } from "@mui/material";
 import Sidebar from "@/components/SideBar/Sidebar";
 import { useAuthStore } from "@/hooks/context/authStore";
+import { ToastProvider } from "@/components/Notification/ToastProvider";
 
 export default function RootLayout({
   children,
@@ -43,6 +44,7 @@ export default function RootLayout({
       </head>
       <body>
         <Providers>
+          <ToastProvider />
           {isLoginPage ? (
             <Box component="main" width="100%" height="100%">
               {children}

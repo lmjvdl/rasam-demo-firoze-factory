@@ -5,6 +5,7 @@ import { useAuthStore } from "@/hooks/context/authStore";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import LoadingScreen from "@/components/LoadingScreen/LoadingScreen";
+import MainCard from "@/components/CustomContiner/MainCard";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
@@ -21,8 +22,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   if (!isLoggedIn || !isAdmin) return <LoadingScreen />;
 
   return (
-    <div>
+    <MainCard>
       {children}
-    </div>
+    </MainCard>
   );
 }

@@ -5,6 +5,7 @@ import { useAuthStore } from "@/hooks/context/authStore";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import LoadingScreen from "@/components/LoadingScreen/LoadingScreen";
+import MainCard from "@/components/CustomContiner/MainCard";
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
@@ -20,8 +21,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   if (!isLoggedIn) return <LoadingScreen />;
 
   return (
-    <div>
+    <MainCard>
       {children}
-    </div>
+    </MainCard>
   );
 }

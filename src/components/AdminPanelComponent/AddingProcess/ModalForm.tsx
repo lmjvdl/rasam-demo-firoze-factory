@@ -18,6 +18,19 @@ import {
 } from "@mui/material";
 import { useForm, Controller } from "react-hook-form";
 
+interface ModalFormProps {
+  buttonText: string;
+  formFields: {
+    name: string;
+    label: string;
+    type: string;
+    options?: { label: string; value: string }[];
+    required: boolean;
+  }[];
+  sxButton?: object;
+  onSubmit: (data: any) => Promise<{ success: boolean; error?: string }>;
+}
+
 const ModalForm: React.FC<ModalFormProps> = ({
   buttonText,
   formFields,
@@ -25,7 +38,12 @@ const ModalForm: React.FC<ModalFormProps> = ({
 }) => {
   const [open, setOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const { control, handleSubmit, reset } = useForm();
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
@@ -49,7 +67,13 @@ const ModalForm: React.FC<ModalFormProps> = ({
         variant="contained"
         color="primary"
         onClick={handleOpen}
-        sx={{ width: "auto", maxWidth: "90vw", alignSelf: "flex-start", mr: "auto", mt: "30px" }}
+        sx={{
+          width: "auto",
+          maxWidth: "90vw",
+          alignSelf: "flex-start",
+          mr: "auto",
+          mt: "30px",
+        }}
       >
         {buttonText}
       </Button>
@@ -63,40 +87,82 @@ const ModalForm: React.FC<ModalFormProps> = ({
                 name={field.name}
                 control={control}
                 defaultValue={field.type === "multiselect" ? [] : ""}
+                rules={{
+                  required: field.required
+                    ? `${field.label} اجباری است`
+                    : false,
+                }}
                 render={({ field: controllerField }) =>
                   field.type === "multiselect" ? (
                     <FormControl fullWidth margin="normal">
-                      <InputLabel>{field.label}</InputLabel>
+                      <InputLabel
+                        sx={{
+                          "& .MuiInputLabel-asterisk": { color: "red" },
+                        }}
+                      >
+                        {field.label}
+                      </InputLabel>
                       <Select
                         multiple
                         value={controllerField.value}
-                        onChange={(event) => controllerField.onChange(event.target.value)}
+                        onChange={(event) =>
+                          controllerField.onChange(event.target.value)
+                        }
                         input={<OutlinedInput label={field.label} />}
                         renderValue={(selected) =>
-                          (selected as string[]).map(
-                            (val) =>
-                              field.options?.find((option) => option.value === val)?.label
-                          ).join(", ")
+                          (selected as string[])
+                            .map(
+                              (val) =>
+                                field.options?.find(
+                                  (option) => option.value === val
+                                )?.label
+                            )
+                            .join(", ")
                         }
                       >
                         {field.options?.map((option) => (
                           <MenuItem key={option.value} value={option.value}>
-                            <Checkbox checked={controllerField.value.includes(option.value)} />
+                            <Checkbox
+                              checked={controllerField.value.includes(
+                                option.value
+                              )}
+                            />
                             <ListItemText primary={option.label} />
                           </MenuItem>
                         ))}
                       </Select>
                     </FormControl>
                   ) : field.type === "select" ? (
-                    <TextField select fullWidth margin="normal" label={field.label} {...controllerField}>
-                      {field.options?.map((option) => (
-                        <MenuItem key={option.value} value={option.value}>
-                          {option.label}
-                        </MenuItem>
-                      ))}
-                    </TextField>
+                    <FormControl fullWidth margin="normal">
+                      <InputLabel required={field.required}>
+                        {field.label}
+                      </InputLabel>
+                      <Select
+                        {...controllerField}
+                        label={field.label}
+                        error={!!errors[field.name]}
+                      >
+                        {field.options?.map((option) => (
+                          <MenuItem key={option.value} value={option.value}>
+                            {option.label}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
                   ) : (
-                    <TextField fullWidth margin="normal" label={field.label} type={field.type} {...controllerField} />
+                    <TextField
+                      fullWidth
+                      margin="normal"
+                      label={field.label}
+                      type={field.type}
+                      required={field.required}
+                      error={!!errors[field.name]}
+                      helperText={errors[field.name]?.message as string}
+                      sx={{
+                        "& .MuiInputLabel-asterisk": { color: "red" },
+                      }}
+                      {...controllerField}
+                    />
                   )
                 }
               />
@@ -108,7 +174,11 @@ const ModalForm: React.FC<ModalFormProps> = ({
           <Button onClick={handleClose} color="warning" variant="outlined">
             بستن
           </Button>
-          <Button onClick={handleSubmit(submitForm)} color="primary" variant="contained">
+          <Button
+            onClick={handleSubmit(submitForm)}
+            color="primary"
+            variant="contained"
+          >
             ثبت
           </Button>
         </DialogActions>
