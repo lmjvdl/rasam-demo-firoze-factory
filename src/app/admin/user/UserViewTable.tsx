@@ -64,7 +64,9 @@ const UserView: React.FC = () => {
   const [editOpen, setEditOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
 
-  const filteredColumns = columns.filter(col => col.showOnTable || col.isActionColumn);
+  const filteredColumns = columns.filter(
+    (col) => col.showOnTable || col.isActionColumn
+  );
 
   const handleView = (row: any) => {
     setSelectedRow(row);
@@ -113,12 +115,6 @@ const UserView: React.FC = () => {
         open={editOpen}
         onClose={() => setEditOpen(false)}
         onSave={handleSaveEdit}
-        rowData={selectedRow}
-        titles={columns}
-      />
-      <ViewUserModalDialog
-        open={deleteOpen}
-        onClose={() => setDeleteOpen(false)}
         rowData={selectedRow}
         titles={columns}
       />

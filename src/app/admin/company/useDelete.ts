@@ -2,9 +2,11 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { fetchWithErrorForDelete } from "@/utils/dataFetching/fetchWithError";
 import companyUrls from "@/utils/URLs/adminPanel/company/companyURL";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
+import { useToast } from "@/hooks/UI/useToast";
 
 const useDelete = () => {
   const queryClient = useQueryClient();
+  const { showToast } = useToast();
 
   const deleteCompanyMutation = useMutation({
     mutationFn: async (id: number) => {
@@ -16,7 +18,7 @@ const useDelete = () => {
       queryClient.invalidateQueries({ queryKey: allQueryKeys.adminPanel.company.delete});
     },
     onError: () => {
-      alert("خطایی در حذف شرکت رخ داد.");
+      showToast("❌ خطایی در حذف شرکت رخ داد.", "error");
     },
   });
 

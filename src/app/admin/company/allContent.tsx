@@ -12,20 +12,56 @@ import useUpdate, { CompanyUpdateSchema } from "./useUpdate";
 import ViewUserModalDialog from "@/components/AdminPanelComponent/ViewProcess/ViewUserModal";
 
 const columns = [
-  { id: "id", label: "شناسه", showOnTable: true, canEdit: false, isAdditionalAction: false },
-  { id: "name", label: "شرکت", showOnTable: true, canEdit: true, isAdditionalAction: false },
-  { id: "description", label: "توضیحات", showOnTable: true, canEdit: true, isAdditionalAction: false },
-  { id: "code", label: "کد", showOnTable: true, canEdit: true, isAdditionalAction: false },
+  {
+    id: "id",
+    label: "شناسه",
+    showOnTable: true,
+    canEdit: false,
+    isAdditionalAction: false,
+  },
+  {
+    id: "name",
+    label: "شرکت",
+    showOnTable: true,
+    canEdit: true,
+    isAdditionalAction: false,
+  },
+  {
+    id: "description",
+    label: "توضیحات",
+    showOnTable: true,
+    canEdit: true,
+    isAdditionalAction: false,
+  },
+  {
+    id: "code",
+    label: "کد",
+    showOnTable: true,
+    canEdit: true,
+    isAdditionalAction: false,
+  },
   {
     id: "logo",
     label: "لوگو",
     isActionColumn: false,
     showOnTable: false,
     canEdit: true,
-    isAdditionalAction: false
+    isAdditionalAction: false,
   },
-  { id: "actions", label: "عملیات", isActionColumn: true, canEdit: false, isAdditionalAction: false },
-  { id: "userActions", label: "کاربران", isActionColumn: true, canEdit: false, isAdditionalAction: true },
+  {
+    id: "actions",
+    label: "عملیات",
+    isActionColumn: true,
+    canEdit: false,
+    isAdditionalAction: false,
+  },
+  {
+    id: "userActions",
+    label: "کاربران",
+    isActionColumn: true,
+    canEdit: false,
+    isAdditionalAction: true,
+  },
 ];
 
 const AllContentCompany: React.FC = () => {
@@ -50,6 +86,12 @@ const AllContentCompany: React.FC = () => {
   const [editOpen, setEditOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [updaterTable, setUpdatedTable] = useState(false);
+  const [userList, setUserList] = useState<{ id: number; user: number }[]>([]);
+  const [selectedCompanyId, setSelectedCompanyId] = useState<number | null>(
+    null
+  );
+
+  const getCompanyUsers = getCompanyList();
   const {
     pageNumber,
     totalPages,
@@ -77,6 +119,16 @@ const AllContentCompany: React.FC = () => {
   const filteredColumns = columns.filter(
     (col) => col.showOnTable || col.isActionColumn
   );
+
+  // useEffect(() => {
+  //   if (viewUsersOpen && selectedCompanyId) {
+  //     getCompanyUsers.mutate(selectedRow, {
+  //       onSuccess: (data) => {
+  //         setUserList(data?.data?.results.userId || []);
+  //       },
+  //     });
+  //   }
+  // }, [viewUsersOpen, selectedCompanyId]);
 
   const filteredComumnsForEdit = columns.filter((col) => col.canEdit);
 
@@ -140,7 +192,7 @@ const AllContentCompany: React.FC = () => {
   const handleUsersView = () => {
     console.log("Handling user view...");
     setViewUsersOpen(false);
-  }
+  };
 
   const handleConfirmDelete = () => {
     if (selectedRow?.id) {
@@ -181,13 +233,10 @@ const AllContentCompany: React.FC = () => {
       <ViewUserModalDialog
         open={viewUsersOpen}
         onClose={() => setViewUsersOpen(false)}
-        onConfirm={handleUsersView}
-        rowData={selectedRow}
-        titles={columns}
+        userList={userList}
       />
     </>
   );
 };
-
 
 export default AllContentCompany;

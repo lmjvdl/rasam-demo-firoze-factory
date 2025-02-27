@@ -34,18 +34,6 @@ export default function UserPage() {
             name: "email", label: "ایمیل", type: "email",
             required: true
           },
-          {
-            name: "permission",
-            label: "سطح دسترسی",
-            type: "multiselect",
-            options: [
-              { label: "مدیر", value: "admin" },
-              { label: "کاربر", value: "user" },
-              { label: "ویراستار", value: "editor" },
-              { label: "مهمان", value: "guest" },
-            ],
-            required: true
-          },
         ]}
         onSubmit={async (data) => {
           try {
