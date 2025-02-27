@@ -4,6 +4,7 @@ import DataTable from "@/components/AdminPanelComponent/ViewProcess/DataTable";
 import DeleteDialog from "@/components/AdminPanelComponent/ViewProcess/DeleteDialog";
 import EditDialog from "@/components/AdminPanelComponent/ViewProcess/EditDialog";
 import ViewDialog from "@/components/AdminPanelComponent/ViewProcess/ViewDialog";
+import ViewUserModalDialog from "@/components/AdminPanelComponent/ViewProcess/ViewUserModal";
 import React, { useState } from "react";
 
 const columns = [
@@ -115,10 +116,9 @@ const UserView: React.FC = () => {
         rowData={selectedRow}
         titles={columns}
       />
-      <DeleteDialog
+      <ViewUserModalDialog
         open={deleteOpen}
         onClose={() => setDeleteOpen(false)}
-        onConfirm={handleConfirmDelete}
         rowData={selectedRow}
         titles={columns}
       />

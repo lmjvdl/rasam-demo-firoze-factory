@@ -15,6 +15,7 @@ interface Column {
     id: string;
     label: string;
     isActionColumn?: boolean;
+    isAdditionalAction?: boolean;
 }
 
 interface DataTableProps {
@@ -23,6 +24,7 @@ interface DataTableProps {
     onView?: (row: any) => void;
     onEdit?: (row: any) => void;
     onDelete?: (row: any) => void;
+    onAdditionalAction?: (row: any) => void;
 }
 
 
@@ -61,4 +63,12 @@ interface ViewDialogProps {
     onClose: () => void;
     rowData: any | null;
     titles: any | null;
+}
+
+interface ViewUserDetailModal {
+    open: boolean;
+    onClose: () => void;
+    onConfirm: () => void;
+    rowData: any;
+    titles: any;
 }

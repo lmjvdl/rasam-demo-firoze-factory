@@ -19,19 +19,37 @@ url: string | URL, options: RequestInit = {}, p?: number | undefined, page_size?
 }
 
 
-function addProperHeader(options: RequestInit) {
-  const newOptions = options;
-  const newHeaders = new Headers(options.headers);
-  newHeaders.set("Content-Type", "application/json");
-  if (useAuthStore.getState().isLoggedIn) {
-    newHeaders.set(
-      "Authorization",
-      `Bearer ${useAuthStore.getState().accessToken}`
-    );
+export async function fetchWithErrorWithAlarm(
+  url: string | URL, options: RequestInit = {}, p?: number | undefined, page_size?: number | undefined) {
+    try {
+      const refinedOption = addProperHeader(options);
+      const response = await window.fetch(url, refinedOption);
+      if (!response.ok) {
+        throw new Error("");
+      }
+      const result = await response.json();
+      if (response.status === 200) {
+        toast.success(result.messages || "✅ عملیات موفقیت‌آمیز بود");
+        return result;
+      } else if(response.status !== 200) {
+        if (Array.isArray(result.messages)) {
+          result.messages.forEach((messageObj: { [key: string]: { message: string[] } }) => {
+            for (const [field, fieldMessages] of Object.entries(messageObj)) {
+              if (Array.isArray(fieldMessages.message)) {
+                fieldMessages.message.forEach((msg) => {
+                  toast.error(`${field}: ${msg}`);
+                });
+              }
+            }
+          });
+        } 
+        throw new Error("درخواست به سرور با مشکل مواجه شد.");
+      }
+    } catch (err) {
+      throw new Error("درخواست به سرور با مشکل مواجه شد.");
+    }
   }
-  newOptions.headers = newHeaders;
-  return newOptions;
-}
+  
 
 
 export async function fetchWithErrorForCreate(
@@ -100,4 +118,20 @@ export async function fetchWithErrorForDelete(
   } catch (err) {
     throw new Error("درخواست به سرور با مشکل مواجه شد.");
   }
+}
+
+
+
+function addProperHeader(options: RequestInit) {
+  const newOptions = options;
+  const newHeaders = new Headers(options.headers);
+  newHeaders.set("Content-Type", "application/json");
+  if (useAuthStore.getState().isLoggedIn) {
+    newHeaders.set(
+      "Authorization",
+      `Bearer ${useAuthStore.getState().accessToken}`
+    );
+  }
+  newOptions.headers = newHeaders;
+  return newOptions;
 }

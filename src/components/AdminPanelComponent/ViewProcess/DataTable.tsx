@@ -14,7 +14,7 @@ import {
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-
+import { IconUserExclamation } from "@tabler/icons-react";
 
 const DataTable: React.FC<DataTableProps> = ({
   columns,
@@ -22,6 +22,7 @@ const DataTable: React.FC<DataTableProps> = ({
   onView,
   onEdit,
   onDelete,
+  onAdditionalAction
 }) => {
   return (
     <TableContainer component={Paper} sx={{ marginTop: "50px" }}>
@@ -40,7 +41,7 @@ const DataTable: React.FC<DataTableProps> = ({
             <TableRow key={rowIndex}>
               {columns.map((column) => (
                 <TableCell key={column.id} style={{ textAlign: "center" }}>
-                  {column.isActionColumn ? (
+                  {!column.isAdditionalAction && column.isActionColumn ? (
                     <>
                       <IconButton onClick={() => onView?.(row)}>
                         <VisibilityIcon color="primary" />
@@ -57,6 +58,13 @@ const DataTable: React.FC<DataTableProps> = ({
                   ) : (
                     row[column.id]
                   )}
+                  {column.isAdditionalAction && column.isActionColumn ? (
+                    <>
+                      <IconButton onClick={() => onAdditionalAction?.(row)}>
+                        <IconUserExclamation />
+                      </IconButton>
+                    </>
+                  ): null}
                 </TableCell>
               ))}
             </TableRow>

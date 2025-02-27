@@ -8,19 +8,29 @@ import React, { useEffect, useState } from "react";
 import getCompanyList, { ResponseSchema } from "./useView";
 import useClientPagination from "@/hooks/UI/useClientPagination";
 import useDelete from "./useDelete";
+import useUpdate, { CompanyUpdateSchema } from "./useUpdate";
+import ViewUserModalDialog from "@/components/AdminPanelComponent/ViewProcess/ViewUserModal";
 
 const columns = [
-  { id: "id", label: "شناسه", showOnTable: true },
-  { id: "name", label: "شرکت", showOnTable: true },
-  { id: "description", label: "توضیحات", showOnTable: true },
-  { id: "code", label: "کد", showOnTable: true },
-  { id: "logo", label: "لوگو", isActionColumn: false, showOnTable: false },
-  { id: "actions", label: "عملیات", isActionColumn: true },
+  { id: "id", label: "شناسه", showOnTable: true, canEdit: false, isAdditionalAction: false },
+  { id: "name", label: "شرکت", showOnTable: true, canEdit: true, isAdditionalAction: false },
+  { id: "description", label: "توضیحات", showOnTable: true, canEdit: true, isAdditionalAction: false },
+  { id: "code", label: "کد", showOnTable: true, canEdit: true, isAdditionalAction: false },
+  {
+    id: "logo",
+    label: "لوگو",
+    isActionColumn: false,
+    showOnTable: false,
+    canEdit: true,
+    isAdditionalAction: false
+  },
+  { id: "actions", label: "عملیات", isActionColumn: true, canEdit: false, isAdditionalAction: false },
+  { id: "userActions", label: "کاربران", isActionColumn: true, canEdit: false, isAdditionalAction: true },
 ];
 
 const AllContentCompany: React.FC = () => {
   const { deleteCompanyMutation } = useDelete();
-  
+
   const [data, setData] = useState<ResponseSchema>({
     data: {
       count: 0,
@@ -36,6 +46,7 @@ const AllContentCompany: React.FC = () => {
 
   const [selectedRow, setSelectedRow] = useState<any>(null);
   const [viewOpen, setViewOpen] = useState(false);
+  const [viewUsersOpen, setViewUsersOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [updaterTable, setUpdatedTable] = useState(false);
@@ -53,6 +64,8 @@ const AllContentCompany: React.FC = () => {
 
   const getList = getCompanyList(pageNumber, 8);
 
+  const { updateCompanyMutation } = useUpdate();
+
   useEffect(() => {
     getList.mutate(undefined, {
       onSuccess: (information) => {
@@ -65,13 +78,16 @@ const AllContentCompany: React.FC = () => {
     (col) => col.showOnTable || col.isActionColumn
   );
 
+  const filteredComumnsForEdit = columns.filter((col) => col.canEdit);
+
   const handleView = (row: any) => {
     setSelectedRow(row);
     setViewOpen(true);
   };
 
   const handleEdit = (row: any) => {
-    setSelectedRow(row);
+    setSelectedRow(null);
+    setTimeout(() => setSelectedRow(row), 0);
     setEditOpen(true);
     setUpdatedTable(true);
   };
@@ -82,10 +98,18 @@ const AllContentCompany: React.FC = () => {
     setUpdatedTable(true);
   };
 
-  const handleSaveEdit = (updatedRow: { id: number; name: string; description: string; code: string; logo: string; }) => {
+  const handleSaveEdit = (updatedRow: {
+    id: number;
+    name: string;
+    description: string;
+    code: string;
+    logo: string;
+  }) => {
     setUpdatedTable(true);
     setData((prevData) => {
       if (prevData?.data) {
+        updateCompanyMutation.mutate(updatedRow);
+        setUpdatedTable(true);
         return {
           ...prevData,
           data: {
@@ -96,30 +120,37 @@ const AllContentCompany: React.FC = () => {
           },
         };
       }
-      return prevData || {
-        data: {
-          count: 0,
-          next: null,
-          previous: null,
-          page_size: 8,
-          results: [],
-        },
-        status_code: 200,
-        success: true,
-        messages: "",
-      };
+      return (
+        prevData || {
+          data: {
+            count: 0,
+            next: null,
+            previous: null,
+            page_size: 8,
+            results: [],
+          },
+          status_code: 200,
+          success: true,
+          messages: "",
+        }
+      );
     });
   };
 
+  const handleUsersView = () => {
+    console.log("Handling user view...");
+    setViewUsersOpen(false);
+  }
+
   const handleConfirmDelete = () => {
-    setUpdatedTable(true);
     if (selectedRow?.id) {
+      setUpdatedTable(true);
       deleteCompanyMutation.mutate(selectedRow.id);
     }
   };
 
   return (
-    <div>
+    <>
       <DataTable
         columns={filteredColumns}
         data={data?.data?.results ?? []}
@@ -138,7 +169,7 @@ const AllContentCompany: React.FC = () => {
         onClose={() => setEditOpen(false)}
         onSave={handleSaveEdit}
         rowData={selectedRow}
-        titles={columns}
+        titles={filteredComumnsForEdit}
       />
       <DeleteDialog
         open={deleteOpen}
@@ -147,8 +178,16 @@ const AllContentCompany: React.FC = () => {
         rowData={selectedRow}
         titles={columns}
       />
-    </div>
+      <ViewUserModalDialog
+        open={viewUsersOpen}
+        onClose={() => setViewUsersOpen(false)}
+        onConfirm={handleUsersView}
+        rowData={selectedRow}
+        titles={columns}
+      />
+    </>
   );
 };
+
 
 export default AllContentCompany;

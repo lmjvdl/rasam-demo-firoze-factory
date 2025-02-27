@@ -1,0 +1,40 @@
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { fetchWithErrorWithAlarm } from "@/utils/dataFetching/fetchWithError";
+import companyUrls from "@/utils/URLs/adminPanel/company/companyURL";
+import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
+import { useToast } from "@/hooks/UI/useToast";
+
+export type CompanyUpdateSchema = {
+  id: number;
+  name: string;
+  description: string;
+  code: string;
+  logo: string;
+};
+
+const useUpdate = () => {
+  const queryClient = useQueryClient();
+  const { showToast } = useToast();
+
+  const updateCompanyMutation = useMutation({
+    mutationFn: async ({ id, ...updatedData }: CompanyUpdateSchema) => {
+      return fetchWithErrorWithAlarm(companyUrls.editCompany(id), {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updatedData),
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: allQueryKeys.adminPanel.company.list });
+    },
+    onError: () => {
+        showToast("❌ خطایی در به‌روزرسانی شرکت رخ داد.", "error");
+      },
+  });
+
+  return {
+    updateCompanyMutation,
+  };
+};
+
+export default useUpdate;
