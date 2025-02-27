@@ -11,15 +11,15 @@ interface Props {
 export default function AdminRoute({ children }: Props) {
   const router = useRouter();
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
+  const isAdmin = useAuthStore((state) => state.isAdmin);
 
   useEffect(() => {
-    if (isLoggedIn === null) return; // Avoid action if logged-in status is unknown
-    if (!isLoggedIn) {
-      router.replace("/login");
-    } else {
+    if (isLoggedIn && isAdmin) {
       router.replace("/admin");
+    } else if(isLoggedIn && !isAdmin){
+      router.replace("/login");
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, isAdmin, router]);
 
   return <>{children}</>;
 }

@@ -16,7 +16,7 @@ export default function UnprotectedRoute({ children }: Props) {
     if (!isLoggedIn) {
       router.replace("/login");
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, router]);
 
 
   return <>{children}</>;

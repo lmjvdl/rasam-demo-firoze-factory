@@ -12,13 +12,12 @@ export default function HomePage() {
   console.log(useAuthStore((state) => state))
   
   useEffect(() => {
-    if (isLoggedIn === null) return;
     if (isLoggedIn) {
       router.replace(isAdmin ? "/admin" : "/dashboard");
     } else if(!isLoggedIn) {
       router.replace("/login");
     }
-  }, [isLoggedIn, isAdmin, router]);
+  }, [isLoggedIn, isAdmin]);
 
   return <LoadingScreen />;
 }

@@ -16,7 +16,6 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   const [mobileOpen, setMobileOpen] = useState<boolean>(false);
   const isAdmin = useAuthStore((state) => state.isAdmin);
-  // const isAdmin = true;
   const pathname = usePathname();
 
   const isLoginPage = pathname === "/login";
