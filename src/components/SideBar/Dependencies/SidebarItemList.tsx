@@ -3,9 +3,17 @@ import SidebarItem from "./SidebarItem";
 import { iconMap, iconMapForAdminPanel } from "@/utils/icons/iconsMenu";
 import { useColorScheme } from "@mui/material/styles";
 import { SidebarItemListProps } from "@/interfaces/UI/sidebar/sidebar";
+import { useState } from "react";
 
 const SidebarItemList = ({ items, sx, isAdmin }: SidebarItemListProps) => {
   const mode = useColorScheme();
+  const [selectedItem, setSelectedItem] = useState<string>(isAdmin ? "کاربر" : "داشبورد");
+
+  console.log(selectedItem)
+
+  const handleItemClick = (itemName: string) => {
+    setSelectedItem(itemName);
+  };
 
   return (
     <>
@@ -14,9 +22,13 @@ const SidebarItemList = ({ items, sx, isAdmin }: SidebarItemListProps) => {
           const IconComponent = isAdmin
             ? iconMapForAdminPanel[icon]
             : iconMap[icon];
+
+          const isSelected = selectedItem === text;
+
           return (
             <SidebarItem
               key={index}
+              selected={isSelected}
               text={text}
               link={to}
               icon={
@@ -24,7 +36,10 @@ const SidebarItemList = ({ items, sx, isAdmin }: SidebarItemListProps) => {
                   stroke={mode.colorScheme === "dark" ? "#fff" : "#292D32"}
                 />
               }
-              onClick={onClick}
+              onClick={() => {
+                handleItemClick(text);
+                onClick && onClick();
+              }}
             />
           );
         })}
