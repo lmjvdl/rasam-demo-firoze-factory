@@ -30,6 +30,11 @@ class CompanyUrls extends Url {
     const reportPath = `${this.baseUrlPath}/user_list/${compnay}/`;
     return new URL(reportPath, this.origin).toString();
   }
+
+  public editViewCompany(compnay: number) {
+    const reportPath = `${this.baseUrlPath}/user_list/${compnay}/`;
+    return new URL(reportPath, this.origin).toString();
+  }
 }
 
 const companyUrls = new CompanyUrls();

@@ -4,7 +4,6 @@ import fetchWithError from "@/utils/dataFetching/fetchWithError";
 import { errorHandler } from "@/utils/dataFetching/queryClient";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import companyUrls from "@/utils/URLs/adminPanel/company/companyURL";
-import gregorianToJalali from "@/utils/formatters/IsoDateToSolarDate";
 
 // Updated function to handle GET requests
 export default function getCompanyList(p?: number, page_size?: number) {

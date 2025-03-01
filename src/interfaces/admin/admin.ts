@@ -18,13 +18,12 @@ interface Column {
     isAdditionalAction?: boolean;
 }
 
-interface DataTableProps {
-    columns: Column[];
-    data: any[];
-    onView?: (row: any) => void;
-    onEdit?: (row: any) => void;
-    onDelete?: (row: any) => void;
-    onAdditionalAction?: (row: any) => void;
+interface Column {
+  id: string;
+  label: string;
+  render?: (row: any) => React.ReactNode;
+  isActionColumn?: boolean;
+  isAdditionalAction?: boolean;
 }
 
 
@@ -40,6 +39,9 @@ interface DataTableProps {
     onView?: (row: any) => void;
     onEdit?: (row: any) => void;
     onDelete?: (row: any) => void;
+    page: number; 
+    totalPages: number; 
+    onPageChange: (newPage: number) => void;
 }
 
 interface DeleteDialogProps {
@@ -71,4 +73,25 @@ interface ViewUserDetailModal {
     onConfirm: () => void;
     rowData: any;
     titles: any;
+}
+
+interface Company {
+    id: number;
+    name: string;
+    description: string;
+    code: string;
+    logo: string | null | undefined;
+}
+
+
+interface CompanyTableProps {
+    data: Company[];
+    columns: any[];
+    onView: (row: any) => void;
+    onEdit: (row: any) => void;
+    onDelete: (row: any) => void;
+    handleUsersView: (companyId: number) => void;
+    selectedCompanyId: number | null;
+    userList: { id: number; user: number }[];
+    viewUsersOpen: boolean;
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Dialog,
   DialogTitle,
@@ -17,36 +17,60 @@ import {
   ListItemText,
 } from "@mui/material";
 
+interface EditDialogProps {
+  open: boolean;
+  onClose: () => void;
+  onSave: (data: any) => void;
+  rowData?: { [key: string]: any };
+  titles: { id: string; label: string; required?: boolean }[];
+}
 
 const EditDialog: React.FC<EditDialogProps> = ({
   open,
   onClose,
   onSave,
-  rowData,
-  titles,
+  rowData = {},
+  titles = [],
 }) => {
-  if (!rowData) return null;
-  const [formData, setFormData] = useState(rowData);
-  // const [permissionsList, setPermissionsList] = useState<string[]>([]); // لیست کل دسترسی‌ها
-
-  // useEffect(() => {
-  //   fetch("/api/permissions")
-  //     .then((response) => response.json())
-  //     .then((data) => setPermissionsList(data))
-  //     .catch((error) => console.error("خطا در دریافت دسترسی‌ها:", error));
-  // }, []);
-
+  const [formData, setFormData] = useState<{ [key: string]: any }>(rowData || {});
+  const [errors, setErrors] = useState<{ [key: string]: boolean }>({});
   const permissionsList = ["Admin", "Editor", "Viewer", "User", "SuperAdmin"];
 
+  useEffect(() => {
+    setFormData(rowData || {});
+  }, [rowData]);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+    setErrors((prev) => ({
+      ...prev,
+      [e.target.name]: false,
+    }));
   };
 
   const handleMultiSelectChange = (name: string) => (event: any) => {
-    setFormData({ ...formData, [name]: event.target.value });
+    setFormData((prev) => ({
+      ...prev,
+      [name]: event.target.value,
+    }));
   };
 
   const handleSave = () => {
+    const newErrors: { [key: string]: boolean } = {};
+    titles.forEach((column) => {
+      if (column.required && column.id && !formData[column.id]) {
+        newErrors[column.id] = true;
+      }
+    });
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
     onSave(formData);
     onClose();
   };
@@ -55,44 +79,51 @@ const EditDialog: React.FC<EditDialogProps> = ({
     <Dialog open={open} onClose={onClose}>
       <DialogTitle>ویرایش اطلاعات</DialogTitle>
       <DialogContent>
-        {Object.keys(rowData).map((key) => (
-          <div key={key}>
-            {titles.map((column: any) => {
-              if (column.id === key) {
-                return Array.isArray(formData[key]) ? (
-                  <FormControl key={key} fullWidth margin="dense">
-                    <InputLabel>{column.label}</InputLabel>
-                    <Select
-                      multiple
-                      value={formData[key]}
-                      onChange={handleMultiSelectChange(key)}
-                      input={<OutlinedInput label={column.label} />}
-                      renderValue={(selected) => selected.join(", ")}
-                    >
-                      {permissionsList.map((option) => (
-                        <MenuItem key={option} value={option}>
-                          <Checkbox checked={formData[key].includes(option)} />
-                          <ListItemText primary={option} />
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
+        {titles.map((column) => {
+          const key = column.id;
+          if (!key) return null;
+          const value = formData?.[key] || "";
+
+          return Array.isArray(value) ? (
+            <FormControl key={key} fullWidth margin="dense">
+              <InputLabel>{column.label}</InputLabel>
+              <Select
+                multiple
+                value={value}
+                onChange={handleMultiSelectChange(key)}
+                input={<OutlinedInput label={column.label} />}
+                renderValue={(selected) => selected.join(", ")}
+              >
+                {permissionsList.map((option) => (
+                  <MenuItem key={option} value={option}>
+                    <Checkbox checked={value.includes(option)} />
+                    <ListItemText primary={option} />
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          ) : (
+            <TextField
+              key={key}
+              margin="dense"
+              label={
+                column.required ? (
+                  <>
+                    {column.label} <span style={{ color: "red" }}>*</span>
+                  </>
                 ) : (
-                  <TextField
-                    key={key}
-                    margin="dense"
-                    label={column.label}
-                    name={key}
-                    value={formData[key]}
-                    onChange={handleChange}
-                    fullWidth
-                  />
-                );
+                  column.label
+                )
               }
-              return null;
-            })}
-          </div>
-        ))}
+              name={key}
+              value={value}
+              onChange={handleChange}
+              fullWidth
+              error={!!errors[key]}
+              helperText={errors[key] ? "این فیلد الزامی است" : ""}
+            />
+          );
+        })}
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose} color="warning" variant="outlined">

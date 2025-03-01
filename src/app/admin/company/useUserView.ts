@@ -7,11 +7,11 @@ import companyUrls from "@/utils/URLs/adminPanel/company/companyURL";
 import gregorianToJalali from "@/utils/formatters/IsoDateToSolarDate";
 
 // Updated function to handle GET requests
-export default function getCompanyList(p?: number, page_size?: number) {
+export default function getCompanyUserList(p?: number, page_size?: number) {
   const queryClient = useQueryClient();
   
 
-  const getCompanyListMutation = useMutation({
+  const getCompanyUserListMutation = useMutation({
     mutationKey: allQueryKeys.adminPanel.company.userListCompany,
     retry: false,
     mutationFn: async (companyId: number) =>
@@ -29,7 +29,7 @@ export default function getCompanyList(p?: number, page_size?: number) {
       errorHandler(prettyError);
     },
   });
-  return getCompanyListMutation;
+  return getCompanyUserListMutation;
 }
 
 const responseSchema = z.object({

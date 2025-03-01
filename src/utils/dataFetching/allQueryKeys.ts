@@ -8,6 +8,7 @@ const allQueryKeys = {
         delete: ["ADMIN_PANEL", "COMPANY", "DELETE"],
         update: ["ADMIN_PANEL", "COMPANY", "UPDATE"],
         userListCompany: ["ADMIN_PANEL", "COMPANY", "VIEW_USER_LIST"],
+        editUserCompany: ["ADMIN_PANEL", "COMPANY", "EDIT_USER_COMPNAY"]
       },
     },
     userPanel: {
