@@ -4,10 +4,12 @@ import fetchWithError from "@/utils/dataFetching/fetchWithError";
 import { errorHandler } from "@/utils/dataFetching/queryClient";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import companyUrls from "@/utils/URLs/adminPanel/company/companyURL";
+import { useToast } from "@/hooks/UI/useToast";
 
 // Updated function to handle GET requests
 export default function getCompanyList(pages: number, pageSize: number, URL: string | null) {
   const queryClient = useQueryClient();
+  const { showToast } = useToast();
 
   const getCompanyListMutation = useMutation({
     mutationKey: allQueryKeys.adminPanel.company.list,
@@ -23,11 +25,8 @@ export default function getCompanyList(pages: number, pageSize: number, URL: str
         access: serverResponse.data,
       });
     },
-    onError: (err) => {
-      const prettyError = new Error("درخواست شما رد شد.");
-      console.log(err)
-      prettyError.cause = "خطا ";
-      errorHandler(prettyError);
+    onError: () => {
+      showToast("❌ خطایی رخ داد.", "error");
     },
   });
 

@@ -5,7 +5,7 @@ export const columns = (handleUsersView: (companyId: number) => void, selectedCo
   {
     id: "id",
     label: "شناسه",
-    showOnTable: true,
+    showOnTable: false,
     canEdit: false,
     isAdditionalAction: false,
   },

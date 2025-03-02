@@ -12,27 +12,14 @@ interface ModalFormProps {
 }
 
 interface Column {
-    id: string;
-    label: string;
-    isActionColumn?: boolean;
-    isAdditionalAction?: boolean;
-}
-
-interface Column {
   id: string;
   label: string;
   render?: (row: any) => React.ReactNode;
   isActionColumn?: boolean;
   isAdditionalAction?: boolean;
+  showOnTable?: boolean;
 }
 
-
-interface Column {
-    id: string;
-    label: string;
-    isActionColumn?: boolean;
-}
-  
 interface DataTableProps {
     columns: Column[];
     data: any[];
@@ -41,10 +28,8 @@ interface DataTableProps {
     onDelete?: (row: any) => void;
     count: number;
     page: number;
-    onPageChange: (event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null, page: number) => void;
-  }
-  
-  
+    onPageChange: (newPage: number) => void;
+}
 
 interface DeleteDialogProps {
     open: boolean;
@@ -98,5 +83,6 @@ interface CompanyTableProps {
     viewUsersOpen: boolean;
     count: number;
     page: number; 
-    onPageChange: (event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null, page: number) => void;
+    onPageChange: (newPage: number) => void;
 }
+

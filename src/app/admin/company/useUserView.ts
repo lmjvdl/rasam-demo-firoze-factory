@@ -4,12 +4,12 @@ import fetchWithError from "@/utils/dataFetching/fetchWithError";
 import { errorHandler } from "@/utils/dataFetching/queryClient";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import companyUrls from "@/utils/URLs/adminPanel/company/companyURL";
-import gregorianToJalali from "@/utils/formatters/IsoDateToSolarDate";
+import { useToast } from "@/hooks/UI/useToast";
 
 // Updated function to handle GET requests
 export default function getCompanyUserList(p?: number, page_size?: number) {
   const queryClient = useQueryClient();
-  
+  const { showToast } = useToast();
 
   const getCompanyUserListMutation = useMutation({
     mutationKey: allQueryKeys.adminPanel.company.userListCompany,
@@ -24,9 +24,7 @@ export default function getCompanyUserList(p?: number, page_size?: number) {
       });
     },
     onError: () => {
-      const prettyError = new Error("درخواست شما رد شد.");
-      prettyError.cause = "خطا ";
-      errorHandler(prettyError);
+      showToast("❌ خطایی رخ داد.", "error");
     },
   });
   return getCompanyUserListMutation;
@@ -42,10 +40,8 @@ const responseSchema = z.object({
       z.object({
         id: z.number(),
         user: z.number(),
-        groups: z.array(z.object({
-        })),
-        permissions: z.array(z.object({
-        })),
+        groups: z.array(z.number()),
+        permissions: z.array(z.number()),
         created_at: z.string(), 
         updated_at: z.string().nullable(),
       })

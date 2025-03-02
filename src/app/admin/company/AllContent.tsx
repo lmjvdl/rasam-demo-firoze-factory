@@ -2,30 +2,18 @@
 
 import React, { useEffect, useState } from "react";
 import getCompanyList, { ResponseSchema } from "./useView";
-import useClientPagination from "@/hooks/UI/useClientPagination";
 import useDelete from "./useDelete";
 import useUpdate from "./useUpdate";
-import getCompanyUserList from "./useUserView";
-import ViewUserModalDialog from "@/components/AdminPanelComponent/ViewProcess/ViewUserModal";
-import CompanyTable from "./companyTable";
+import CompanyTable from "./CompanyTable";
 import ViewDialog from "@/components/AdminPanelComponent/ViewProcess/ViewDialog";
 import EditDialog from "@/components/AdminPanelComponent/ViewProcess/EditDialog";
 import DeleteDialog from "@/components/AdminPanelComponent/ViewProcess/DeleteDialog";
-import { columns } from "./columnsData";
+import ViewUserModalDialog from "@/app/admin/company/ViewUserModal";
+import { PrevDataInitial } from "@/interfaces/general/general";
+import { columns } from "./ColumnsData";
 
 const AllContentCompany: React.FC = () => {
-  const [data, setData] = useState<ResponseSchema>({
-    data: {
-      count: 0,
-      next: null,
-      previous: null,
-      page_size: 8,
-      results: [],
-    },
-    status_code: 200,
-    success: true,
-    messages: "",
-  });
+  const [data, setData] = useState<ResponseSchema>(PrevDataInitial);
   const [selectedRow, setSelectedRow] = useState<any>(null);
   const [selectedCompanyId, setSelectedCompanyId] = useState<number | null>(
     null
@@ -40,31 +28,19 @@ const AllContentCompany: React.FC = () => {
   const { updateCompanyMutation } = useUpdate();
   const [ totalData, setTotalData ] = useState<number>(0)
   const [ nextPage, setNextPage ] = useState<null | string>(null)
-  const [ previousPage, setPreviousPage ] = useState<null | string>(null)
   
   const getList = getCompanyList(pageNumber, 8, nextPage);
-  const getUserList = getCompanyUserList();
-
+  
   useEffect(() => {
     getList.mutate({page: pageNumber+1, page_size: 8, url: nextPage}, {
       onSuccess: (information) => {
         setData(information);
         setTotalData(information.data.count)
         setNextPage(information.data.next)
-        setPreviousPage(information.data.previous)
       },
     });
   }, [pageNumber]);
 
-  useEffect(() => {
-    if (viewUsersOpen && selectedCompanyId) {
-      getUserList.mutate(selectedCompanyId, {
-        onSuccess: (data) => {
-          setUserList(data?.data?.results || []);
-        },
-      });
-    }
-  }, [viewUsersOpen, selectedCompanyId]);
 
   const handleSaveEdit = (updatedRow: {
     id: number;
@@ -87,30 +63,16 @@ const AllContentCompany: React.FC = () => {
         };
       }
       return (
-        prevData || {
-          data: {
-            count: 0,
-            next: null,
-            previous: null,
-            page_size: 8,
-            results: [],
-          },
-          status_code: 200,
-          success: true,
-          messages: "",
-        }
+        prevData || PrevDataInitial
       );
     });
   };
 
-  const handlePagination = (event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null, newPage: number) => {
-    if (newPage < pageNumber) {
-      getList.mutate({ page: newPage, page_size: 8, url: nextPage });
-    } else {
-      getList.mutate({ page: newPage, page_size: 8, url: previousPage });
-    }
+  const handlePagination = (newPage: number) => {
     setPageNumber(newPage);
+    getList.mutate({ page: newPage + 1, page_size: 8, url: nextPage });
   };
+
   const handleUsersView = (companyId: number) => {
     setSelectedCompanyId(companyId);
     setViewUsersOpen(true);

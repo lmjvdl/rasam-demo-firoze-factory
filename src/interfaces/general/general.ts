@@ -1,17 +1,3 @@
-interface  MainSchemaResponse{
-    data: boolean;
-    status_code: number;
-    success: boolean;
-    messages: string;
-}
-
-interface DataResponse {
-    count: number;
-    next: string;
-    previous: string;
-    page_size: number;
-}
-
 export const PrevDataInitial = {
     data: {
       count: 0,

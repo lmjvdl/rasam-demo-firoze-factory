@@ -27,7 +27,7 @@ class CompanyUrls extends Url {
   }
 
   public usersViewCompany(compnay: number) {
-    const reportPath = `${this.baseUrlPath}/user_list/${compnay}/`;
+    const reportPath = `${this.baseUrlPath}/user_list/${compnay}`;
     return new URL(reportPath, this.origin).toString();
   }
 

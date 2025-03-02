@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import {
   Table,
@@ -28,13 +26,15 @@ const DataTable: React.FC<DataTableProps> = ({
 }) => {
   const validData = Array.isArray(data) ? data : [];
 
+  const visibleColumns = columns.filter(column => column.showOnTable !== false);
+
   return (
     <Paper sx={{ marginTop: "35px", padding: "16px" }}>
       <TableContainer>
         <Table>
           <TableHead>
             <TableRow>
-              {columns.map((column) => (
+              {visibleColumns.map((column) => (
                 <TableCell key={column.id} style={{ textAlign: "center" }}>
                   {column.label}
                 </TableCell>
@@ -44,7 +44,7 @@ const DataTable: React.FC<DataTableProps> = ({
           <TableBody>
             {validData.map((row, rowIndex) => (
               <TableRow key={rowIndex}>
-                {columns.map((column) => (
+                {visibleColumns.map((column) => (
                   <TableCell key={column.id} style={{ textAlign: "center" }}>
                     {column.render ? (
                       column.render(row)
@@ -72,22 +72,24 @@ const DataTable: React.FC<DataTableProps> = ({
           </TableBody>
         </Table>
       </TableContainer>
-
-      <TablePagination
-        count={count}
-        rowsPerPage={7}
-        page={page}
-        onPageChange={onPageChange}
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          marginTop: "16px",
-        }}
-        labelRowsPerPage=""
-        rowsPerPageOptions={[]}
-      />
+      <div>
+        <TablePagination
+          count={count}
+          rowsPerPage={7} 
+          page={page}
+          onPageChange={(_, newPage) => onPageChange(newPage)}
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "16px",
+          }}
+          labelRowsPerPage=""
+          rowsPerPageOptions={[]}
+        />
+      </div>
     </Paper>
   );
 };
 
 export default DataTable;
+
