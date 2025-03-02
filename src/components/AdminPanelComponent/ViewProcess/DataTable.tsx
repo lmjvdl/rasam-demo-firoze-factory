@@ -11,7 +11,6 @@ import {
   Paper,
   IconButton,
   TablePagination,
-  Box,
 } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import EditIcon from "@mui/icons-material/Edit";
@@ -23,18 +22,14 @@ const DataTable: React.FC<DataTableProps> = ({
   onView,
   onEdit,
   onDelete,
+  count,
   page,
-  totalPages,
   onPageChange,
 }) => {
-  console.log("Table Data:", data);
-  console.log("Page:", page, "Total Pages:", totalPages);
-
   const validData = Array.isArray(data) ? data : [];
-  const currentPage = page < totalPages ? page : 0;
 
   return (
-    <Paper sx={{ marginTop: "50px", padding: "16px" }}>
+    <Paper sx={{ marginTop: "35px", padding: "16px" }}>
       <TableContainer>
         <Table>
           <TableHead>
@@ -77,16 +72,20 @@ const DataTable: React.FC<DataTableProps> = ({
           </TableBody>
         </Table>
       </TableContainer>
-      <Box sx={{ display: "flex", justifyContent: "center", marginTop: "16px" }}>
-        <TablePagination
-          component="div"
-          count={validData.length}
-          page={currentPage}
-          rowsPerPage={8}
-          rowsPerPageOptions={[8]}
-          onPageChange={(event, newPage) => onPageChange(newPage)}
-        />
-      </Box>
+
+      <TablePagination
+        count={count}
+        rowsPerPage={7}
+        page={page}
+        onPageChange={onPageChange}
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          marginTop: "16px",
+        }}
+        labelRowsPerPage=""
+        rowsPerPageOptions={[]}
+      />
     </Paper>
   );
 };

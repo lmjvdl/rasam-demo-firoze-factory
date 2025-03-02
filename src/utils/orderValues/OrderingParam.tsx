@@ -22,7 +22,6 @@ const OrderingParam = ({
   onChangeAfterSetParam?: () => void;
 }) => {
   const handleAscClick = () => {
-    console.log(params.paramName);
     if (
       params.paramName === undefined ||
       String(params?.paramName).includes("-")

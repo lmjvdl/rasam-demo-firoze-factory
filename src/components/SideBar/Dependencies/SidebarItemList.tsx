@@ -9,8 +9,6 @@ const SidebarItemList = ({ items, sx, isAdmin }: SidebarItemListProps) => {
   const mode = useColorScheme();
   const [selectedItem, setSelectedItem] = useState<string>(isAdmin ? "کاربر" : "داشبورد");
 
-  console.log(selectedItem)
-
   const handleItemClick = (itemName: string) => {
     setSelectedItem(itemName);
   };

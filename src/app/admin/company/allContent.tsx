@@ -35,28 +35,23 @@ const AllContentCompany: React.FC = () => {
   const [editOpen, setEditOpen] = useState(false);
   const [viewUsersOpen, setViewUsersOpen] = useState(false);
   const [userList, setUserList] = useState<{ id: number; user: number }[]>([]);
-
+  const [pageNumber, setPageNumber] = useState<number>(0);
   const { deleteCompanyMutation } = useDelete();
   const { updateCompanyMutation } = useUpdate();
-
-  const {
-    pageNumber,
-    totalPages,
-    hasNextPage,
-    hasPerviousPage,
-    setPage,
-    next,
-    previous,
-    last,
-    first,
-  } = useClientPagination(data?.data?.count ?? 0);
-  const getList = getCompanyList(pageNumber, 8);
+  const [ totalData, setTotalData ] = useState<number>(0)
+  const [ nextPage, setNextPage ] = useState<null | string>(null)
+  const [ previousPage, setPreviousPage ] = useState<null | string>(null)
+  
+  const getList = getCompanyList(pageNumber, 8, nextPage);
   const getUserList = getCompanyUserList();
 
   useEffect(() => {
-    getList.mutate(undefined, {
+    getList.mutate({page: pageNumber+1, page_size: 8, url: nextPage}, {
       onSuccess: (information) => {
         setData(information);
+        setTotalData(information.data.count)
+        setNextPage(information.data.next)
+        setPreviousPage(information.data.previous)
       },
     });
   }, [pageNumber]);
@@ -108,6 +103,14 @@ const AllContentCompany: React.FC = () => {
     });
   };
 
+  const handlePagination = (event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null, newPage: number) => {
+    if (newPage < pageNumber) {
+      getList.mutate({ page: newPage, page_size: 8, url: nextPage });
+    } else {
+      getList.mutate({ page: newPage, page_size: 8, url: previousPage });
+    }
+    setPageNumber(newPage);
+  };
   const handleUsersView = (companyId: number) => {
     setSelectedCompanyId(companyId);
     setViewUsersOpen(true);
@@ -156,8 +159,8 @@ const AllContentCompany: React.FC = () => {
         userList={userList}
         viewUsersOpen={viewUsersOpen}
         page={pageNumber}
-        totalPages={totalPages}
-        onPageChange={setPage}
+        count={totalData}
+        onPageChange={handlePagination}
       />
 
       <ViewDialog

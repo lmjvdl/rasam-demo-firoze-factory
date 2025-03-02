@@ -34,4 +34,3 @@ export default function gregorianToJalali(dateStr: string): string {
 }
 
 const date = "2025-02-26T11:14:08.108424+03:30";
-console.log(gregorianToJalali(date));

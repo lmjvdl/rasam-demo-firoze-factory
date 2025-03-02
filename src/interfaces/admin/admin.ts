@@ -39,10 +39,12 @@ interface DataTableProps {
     onView?: (row: any) => void;
     onEdit?: (row: any) => void;
     onDelete?: (row: any) => void;
-    page: number; 
-    totalPages: number; 
-    onPageChange: (newPage: number) => void;
-}
+    count: number;
+    page: number;
+    onPageChange: (event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null, page: number) => void;
+  }
+  
+  
 
 interface DeleteDialogProps {
     open: boolean;
@@ -78,7 +80,7 @@ interface ViewUserDetailModal {
 interface Company {
     id: number;
     name: string;
-    description: string;
+    description: string | null;
     code: string;
     logo: string | null | undefined;
 }
@@ -94,4 +96,7 @@ interface CompanyTableProps {
     selectedCompanyId: number | null;
     userList: { id: number; user: number }[];
     viewUsersOpen: boolean;
+    count: number;
+    page: number; 
+    onPageChange: (event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null, page: number) => void;
 }

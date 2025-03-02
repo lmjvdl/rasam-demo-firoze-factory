@@ -18,7 +18,6 @@ export default function AddUser() {
         ]}
         onSubmit={async (data) => {
           try {
-            console.log("📝 اطلاعات ارسال شده:", data);
             return { success: true };
           } catch (error) {
             return { success: false, error: "مشکلی پیش آمد" };

@@ -1,22 +1,7 @@
-import React from "react";
+import React, { JSX, useState } from "react";
 import { IconButton } from "@mui/material";
 import { IconUserExclamation } from "@tabler/icons-react";
 import DataTable from "@/components/AdminPanelComponent/ViewProcess/DataTable";
-
-interface CompanyTableProps {
-  data: Company[];
-  columns: any[];
-  onView: (row: any) => void;
-  onEdit: (row: any) => void;
-  onDelete: (row: any) => void;
-  handleUsersView: (companyId: number) => void;
-  selectedCompanyId: number | null;
-  userList: { id: number; user: number }[];
-  viewUsersOpen: boolean;
-  page: number;
-  totalPages: number;
-  onPageChange: (newPage: number) => void;
-}
 
 const CompanyTable: React.FC<CompanyTableProps> = ({
   data,
@@ -28,8 +13,8 @@ const CompanyTable: React.FC<CompanyTableProps> = ({
   selectedCompanyId,
   userList,
   viewUsersOpen,
+  count,
   page,
-  totalPages,
   onPageChange,
 }) => {
   const columnsWithUserActions = columns.map((col) => {
@@ -64,9 +49,9 @@ const CompanyTable: React.FC<CompanyTableProps> = ({
       onView={onView}
       onEdit={onEdit}
       onDelete={onDelete}
-      page={page}
-      totalPages={totalPages}
+      count={count}
       onPageChange={onPageChange}
+      page={page}
     />
   );
 };

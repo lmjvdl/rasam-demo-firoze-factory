@@ -6,30 +6,35 @@ import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import companyUrls from "@/utils/URLs/adminPanel/company/companyURL";
 
 // Updated function to handle GET requests
-export default function getCompanyList(p?: number, page_size?: number) {
+export default function getCompanyList(pages: number, pageSize: number, URL: string | null) {
   const queryClient = useQueryClient();
-  
 
   const getCompanyListMutation = useMutation({
     mutationKey: allQueryKeys.adminPanel.company.list,
     retry: false,
-    mutationFn: () =>
-      fetchWithError(companyUrls.listCompany, {
-        method: "GET",
-      }, p, page_size).then(sanitizer),
+    mutationFn: ({ page = pages, page_size = pageSize, url = URL }: { page?: number; page_size?: number; url: string | null; }) =>
+      fetchWithError(
+        url !== null ? url : 
+        `${companyUrls.listCompany}?p=${page}&page_size=${page_size}`,
+        { method: "GET" }
+      ).then(sanitizer),
     onSuccess: (serverResponse) => {
       queryClient.setQueryData(allQueryKeys.adminPanel.company.list, {
         access: serverResponse.data,
       });
     },
-    onError: () => {
+    onError: (err) => {
       const prettyError = new Error("درخواست شما رد شد.");
+      console.log(err)
       prettyError.cause = "خطا ";
       errorHandler(prettyError);
     },
   });
+
   return getCompanyListMutation;
 }
+
+
 
 const responseSchema = z.object({
   data: z.object({
@@ -41,8 +46,8 @@ const responseSchema = z.object({
       z.object({
         id: z.number(),
         name: z.string(),
-        description: z.string(),
-        code: z.string(), 
+        description: z.string().nullable(),
+        code: z.string(),
         logo: z.string().nullable(),
       })
     ),

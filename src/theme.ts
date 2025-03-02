@@ -195,8 +195,7 @@ const theme = createTheme(
         defaultProps: {
           size: "small"
         }
-      }
-      
+      },      
     },
   },
   faIR

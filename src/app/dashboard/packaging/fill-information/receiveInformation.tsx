@@ -17,7 +17,6 @@ export default function ReciverInformation() {
 
   const onSubmit = (data: IFormInputReceiceInformation) => {
     const formData = { ...data, date };
-    console.log(formData);
   };
 
   return (
