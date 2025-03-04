@@ -1,34 +1,29 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import getCompanyList, { ResponseSchema } from "./useView";
-import useDelete from "./useDelete";
-import useUpdate from "./useUpdate";
-import CompanyTable from "./CompanyTable";
+import getUserList, { ResponseSchema } from "./hooks/useView";
+import useDelete from "./hooks/useDelete";
 import ViewDialog from "@/components/AdminPanelComponent/ViewProcess/ViewDialog";
 import EditDialog from "@/components/AdminPanelComponent/ViewProcess/EditDialog";
 import DeleteDialog from "@/components/AdminPanelComponent/ViewProcess/DeleteDialog";
-import ViewUserModalDialog from "@/app/admin/company/ViewUserModal";
 import { PrevDataInitial } from "@/interfaces/general/general";
 import { columns } from "./ColumnsData";
+import { UserUpdateSchema, useUpdate } from "./hooks/useUpdate";
+import UserTable from "./UserTable";
 
-const AllContentCompany: React.FC = () => {
+const AllContentUser: React.FC = () => {
   const [data, setData] = useState<ResponseSchema>(PrevDataInitial);
   const [selectedRow, setSelectedRow] = useState<any>(null);
-  const [selectedCompanyId, setSelectedCompanyId] = useState<number | null>(
-    null
-  );
   const [viewOpen, setViewOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
-  const [viewUsersOpen, setViewUsersOpen] = useState(false);
   const [pageNumber, setPageNumber] = useState<number>(0);
-  const { deleteCompanyMutation } = useDelete();
-  const { updateCompanyMutation } = useUpdate();
   const [totalData, setTotalData] = useState<number>(0);
   const [nextPage, setNextPage] = useState<null | string>(null);
 
-  const getList = getCompanyList(pageNumber, 8, nextPage);
+  const getList = getUserList(pageNumber, 8, nextPage);
+  const { deleteUserMutation } = useDelete();
+  const { updateUserMutation } = useUpdate();
 
   useEffect(() => {
     getList.mutate(
@@ -43,22 +38,21 @@ const AllContentCompany: React.FC = () => {
     );
   }, [pageNumber]);
 
-  const handleSaveEdit = (updatedRow: {
-    id: number;
-    name: string;
-    description: string;
-    code: string;
-    logo: string;
-  }) => {
+  const handleSaveEdit = (updatedRow: UserUpdateSchema) => {
     setData((prevData) => {
       if (prevData?.data) {
-        updateCompanyMutation.mutate(updatedRow);
+        const { groups, ...updatedDataWithoutGroups } = updatedRow;
+
+        updateUserMutation.mutate(updatedDataWithoutGroups);
+
         return {
           ...prevData,
           data: {
             ...prevData.data,
             results: prevData.data.results.map((row) =>
-              row.id === updatedRow.id ? updatedRow : row
+              row.id === updatedRow.id
+                ? { ...row, ...updatedDataWithoutGroups }
+                : row
             ),
           },
         };
@@ -70,11 +64,6 @@ const AllContentCompany: React.FC = () => {
   const handlePagination = (newPage: number) => {
     setPageNumber(newPage);
     getList.mutate({ page: newPage + 1, page_size: 8, url: nextPage });
-  };
-
-  const handleUsersView = (companyId: number) => {
-    setSelectedCompanyId(companyId);
-    setViewUsersOpen(true);
   };
 
   const handleView = (row: any) => {
@@ -94,7 +83,7 @@ const AllContentCompany: React.FC = () => {
 
   const handleConfirmDelete = () => {
     if (selectedRow?.id) {
-      deleteCompanyMutation.mutate(selectedRow.id);
+      deleteUserMutation.mutate(selectedRow.id);
       setDeleteOpen(false);
     }
   };
@@ -104,16 +93,12 @@ const AllContentCompany: React.FC = () => {
 
   return (
     <>
-      <CompanyTable
+      <UserTable
         data={data?.data?.results ?? []}
         columns={dynamicColumns}
         onView={handleView}
         onEdit={handleEdit}
         onDelete={handleDelete}
-        handleUsersView={handleUsersView}
-        selectedCompanyId={selectedCompanyId}
-        userList={userList}
-        viewUsersOpen={viewUsersOpen}
         page={pageNumber}
         count={totalData}
         onPageChange={handlePagination}
@@ -143,4 +128,4 @@ const AllContentCompany: React.FC = () => {
   );
 };
 
-export default AllContentCompany;
+export default AllContentUser;

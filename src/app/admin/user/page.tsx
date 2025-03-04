@@ -2,7 +2,8 @@
 
 import ModalForm from "@/components/AdminPanelComponent/AddingProcess/ModalForm";
 import MainCard from "@/components/CustomContiner/MainCard";
-import UserView from "./UserViewTable";
+import AllContentUser from "./AllContent";
+import { createNewUser } from "./hooks/useCreate";
 
 export default function UserPage() {
   return (
@@ -15,35 +16,33 @@ export default function UserPage() {
             required: true
           },
           {
-            name: "password", label: "رمز عبور", type: "password",
+            name: "email", label: "ایمیل", type: "email",
+            required: false
+          },
+          {
+            name: "phone_number", label: "شماره تلفن", type: "tel",
             required: true
           },
           {
             name: "firstName", label: "نام", type: "text",
-            required: true
+            required: false
           },
           {
             name: "lastName", label: "نام خانوادگی", type: "text",
+            required: false
+          },
+          {
+            name: "password", label: "رمز عبور", type: "password",
             required: true
           },
           {
-            name: "phoneNumber", label: "شماره تلفن", type: "tel",
-            required: true
-          },
-          {
-            name: "email", label: "ایمیل", type: "email",
-            required: true
+            name: "national_code", label: "کد ملی", type: "text",
+            required: false
           },
         ]}
-        onSubmit={async (data) => {
-          try {
-            return { success: true };
-          } catch (error) {
-            return { success: false, error: "مشکلی پیش آمد" };
-          }
-        }}
+        onSubmit={createNewUser}
       />
-      <UserView />
+      <AllContentUser />
     </MainCard>
   );
 }

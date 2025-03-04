@@ -14,7 +14,7 @@ import {
   CircularProgress,
 } from "@mui/material";
 import { useMutation } from "@tanstack/react-query";
-import getCompanyUserList from "@/app/admin/company/useUserView";
+import getCompanyUserList from "@/app/admin/company/hooks/useUserView";
 
 interface ViewUserModalDialogProps {
   open: boolean;

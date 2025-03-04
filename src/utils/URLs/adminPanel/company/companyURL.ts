@@ -7,33 +7,33 @@ class CompanyUrls extends Url {
   }
 
   public get createCompany() {
-    const reportPath = `${this.baseUrlPath}/create/`;
-    return new URL(reportPath, this.origin);
+    const basePath = `${this.baseUrlPath}/create/`;
+    return new URL(basePath, this.origin);
   }
 
   public get listCompany() {
-    const reportPath = `${this.baseUrlPath}/list/`;
-    return new URL(reportPath, this.origin);
+    const basePath = `${this.baseUrlPath}/list/`;
+    return new URL(basePath, this.origin);
   }
 
   public deleteCompany(id: number) {
-    const reportPath = `${this.baseUrlPath}/${id}/`;
-    return new URL(reportPath, this.origin).toString();
+    const basePath = `${this.baseUrlPath}/${id}/`;
+    return new URL(basePath, this.origin).toString();
   }
 
   public editCompany(id: number) {
-    const reportPath = `${this.baseUrlPath}/${id}/`;
-    return new URL(reportPath, this.origin).toString();
+    const basePath = `${this.baseUrlPath}/${id}/`;
+    return new URL(basePath, this.origin).toString();
   }
 
   public usersViewCompany(compnay: number) {
-    const reportPath = `${this.baseUrlPath}/user_list/${compnay}`;
-    return new URL(reportPath, this.origin).toString();
+    const basePath = `${this.baseUrlPath}/user_list/${compnay}`;
+    return new URL(basePath, this.origin).toString();
   }
 
   public editViewCompany(compnay: number) {
-    const reportPath = `${this.baseUrlPath}/user_list/${compnay}/`;
-    return new URL(reportPath, this.origin).toString();
+    const basePath = `${this.baseUrlPath}/user_list/${compnay}/`;
+    return new URL(basePath, this.origin).toString();
   }
 }
 

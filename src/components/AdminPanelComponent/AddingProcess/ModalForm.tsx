@@ -157,7 +157,11 @@ const ModalForm: React.FC<ModalFormProps> = ({
                       type={field.type}
                       required={field.required}
                       error={!!errors[field.name]}
-                      helperText={errors[field.name]?.message as string}
+                      helperText={
+                        errors[field.name]?.message
+                          ? (errors[field.name]?.message as string)
+                          : ""
+                      }
                       sx={{
                         "& .MuiInputLabel-asterisk": { color: "red" },
                       }}

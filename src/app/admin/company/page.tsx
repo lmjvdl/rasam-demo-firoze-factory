@@ -3,7 +3,7 @@
 import ModalForm from "@/components/AdminPanelComponent/AddingProcess/ModalForm";
 import MainCard from "@/components/CustomContiner/MainCard";
 import AllContentCompany from "./AllContent";
-import { createNewCompany } from "./useCreate";
+import { createNewCompany } from "./hooks/useCreate";
 
 export default function CompanyPage() {
   return (

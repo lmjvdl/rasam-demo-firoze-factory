@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import getCompanyList, { ResponseSchema } from "./useView";
-import useDelete from "./useDelete";
-import useUpdate from "./useUpdate";
+import getCompanyList, { ResponseSchema } from "./hooks/useView";
+import useDelete from "./hooks/useDelete";
+import useUpdate from "./hooks/useUpdate";
 import CompanyTable from "./CompanyTable";
 import ViewDialog from "@/components/AdminPanelComponent/ViewProcess/ViewDialog";
 import EditDialog from "@/components/AdminPanelComponent/ViewProcess/EditDialog";
@@ -24,12 +24,12 @@ const AllContentCompany: React.FC = () => {
   const [viewUsersOpen, setViewUsersOpen] = useState(false);
   const [userList, setUserList] = useState<{ id: number; user: number }[]>([]);
   const [pageNumber, setPageNumber] = useState<number>(0);
-  const { deleteCompanyMutation } = useDelete();
-  const { updateCompanyMutation } = useUpdate();
   const [ totalData, setTotalData ] = useState<number>(0)
   const [ nextPage, setNextPage ] = useState<null | string>(null)
   
   const getList = getCompanyList(pageNumber, 8, nextPage);
+  const { deleteCompanyMutation } = useDelete();
+  const { updateCompanyMutation } = useUpdate();
   
   useEffect(() => {
     getList.mutate({page: pageNumber+1, page_size: 8, url: nextPage}, {

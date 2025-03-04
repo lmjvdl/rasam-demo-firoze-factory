@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useState, useEffect } from "react";
 import {
   Dialog,
@@ -15,6 +13,7 @@ import {
   OutlinedInput,
   Checkbox,
   ListItemText,
+  SelectChangeEvent,
 } from "@mui/material";
 
 interface EditDialogProps {
@@ -32,7 +31,9 @@ const EditDialog: React.FC<EditDialogProps> = ({
   rowData = {},
   titles = [],
 }) => {
-  const [formData, setFormData] = useState<{ [key: string]: any }>(rowData || {});
+  const [formData, setFormData] = useState<{ [key: string]: any }>(
+    rowData || {}
+  );
   const [errors, setErrors] = useState<{ [key: string]: boolean }>({});
   const permissionsList = ["Admin", "Editor", "Viewer", "User", "SuperAdmin"];
 
@@ -40,14 +41,19 @@ const EditDialog: React.FC<EditDialogProps> = ({
     setFormData(rowData || {});
   }, [rowData]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // برای تغییرات در Select
+  const handleSelectChange = (event: SelectChangeEvent<boolean>) => {
     setFormData((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value,
+      [event.target.name]: event.target.value === "true",
     }));
-    setErrors((prev) => ({
+  };
+
+  // برای تغییرات در TextField
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData((prev) => ({
       ...prev,
-      [e.target.name]: false,
+      [event.target.name]: event.target.value,
     }));
   };
 
@@ -84,6 +90,22 @@ const EditDialog: React.FC<EditDialogProps> = ({
           if (!key) return null;
           const value = formData?.[key] || "";
 
+          if (key === "is_active") {
+            return (
+              <FormControl key={key} fullWidth margin="dense">
+                <InputLabel>{column.label}</InputLabel>
+                <Select
+                  value={value !== undefined ? value.toString() : ""}
+                  onChange={handleSelectChange} // استفاده از handleSelectChange
+                  input={<OutlinedInput label={column.label} />}
+                >
+                  <MenuItem value="true">فعال</MenuItem>
+                  <MenuItem value="false">غیرفعال</MenuItem>
+                </Select>
+              </FormControl>
+            );
+          }
+
           return Array.isArray(value) ? (
             <FormControl key={key} fullWidth margin="dense">
               <InputLabel>{column.label}</InputLabel>
@@ -117,7 +139,7 @@ const EditDialog: React.FC<EditDialogProps> = ({
               }
               name={key}
               value={value}
-              onChange={handleChange}
+              onChange={handleInputChange} // استفاده از handleInputChange
               fullWidth
               error={!!errors[key]}
               helperText={errors[key] ? "این فیلد الزامی است" : ""}
