@@ -27,6 +27,6 @@ class DeviceDataUrls extends Url {
   }
 }
 
-const userUrls = new DeviceDataUrls();
+const deviceDataUrls = new DeviceDataUrls();
 
-export default userUrls;
+export default deviceDataUrls;

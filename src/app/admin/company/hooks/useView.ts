@@ -1,12 +1,10 @@
 import { z } from "zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import fetchWithError from "@/utils/dataFetching/fetchWithError";
-import { errorHandler } from "@/utils/dataFetching/queryClient";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import companyUrls from "@/utils/URLs/adminPanel/company/companyUrl";
 import { useToast } from "@/hooks/UI/useToast";
 
-// Updated function to handle GET requests
 export default function getCompanyList(pages: number, pageSize: number, URL: string | null) {
   const queryClient = useQueryClient();
   const { showToast } = useToast();
@@ -33,8 +31,6 @@ export default function getCompanyList(pages: number, pageSize: number, URL: str
   return getCompanyListMutation;
 }
 
-
-
 const responseSchema = z.object({
   data: z.object({
     count: z.number(),
@@ -58,7 +54,6 @@ const responseSchema = z.object({
 
 export type ResponseSchema = z.infer<typeof responseSchema>;
 
-// Validate the response data and handle notifications
 function sanitizer(pollutedData: unknown) {
   try {
     const refinedData = responseSchema.parse(pollutedData);

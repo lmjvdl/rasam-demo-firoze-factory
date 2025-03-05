@@ -3,7 +3,7 @@ import { Tabs, Tab, Box, Grid } from "@mui/material";
 import MajorChart from "@/components/Chart/ChartConfig/MajorChart";
 import React from "react";
 import MainCard from "@/components/CustomContiner/MainCard";
-import { DeviceData, TabPanelProps } from "@/interfaces/powerSupply/live";
+import { DataType, TabPanelProps } from "@/interfaces/powerSupply/live";
 
 
 const TabPanel: React.FC<TabPanelProps> = ({
@@ -25,7 +25,7 @@ const TabPanel: React.FC<TabPanelProps> = ({
   );
 };
 
-const ChartTabs: React.FC<{ data: DeviceData[] }> = ({ data }) => {
+const ChartTabs: React.FC<{ data: DataType[] }> = ({ data }) => {
   
   const [value, setValue] = React.useState<number>(0);
   const tabs = Object.keys(data[0].allowed_data);
@@ -48,7 +48,7 @@ const ChartTabs: React.FC<{ data: DeviceData[] }> = ({ data }) => {
       {tabs.map((tab, index) => (
         <TabPanel key={tab} value={value} index={index}>
           <Grid container spacing={4}>
-            {data.map((device: DeviceData) => (
+            {data.map((device: DataType) => (
               <Grid key={device.device_id} item xs={12} sm={6} md={4}>
                 <Box>
                   <Box

@@ -1,32 +1,32 @@
 import Url from "@/utils/dataFetching/urls";
 
-class DeviceDataUrls extends Url {
+class DataTypeUrls extends Url {
   public constructor() {
     super();
     this.baseUrlPath += "/devices/data_type";
   }
 
-  public get createDeviceData() {
+  public get createDataType() {
     const basePath = `${this.baseUrlPath}/create/`;
     return new URL(basePath, this.origin);
   }
 
-  public get listDeviceData() {
+  public get listDataType() {
     const basePath = `${this.baseUrlPath}/list/`;
     return new URL(basePath, this.origin);
   }
 
-  public deleteDeviceData(id: number) {
+  public deleteDataType(id: number) {
     const basePath = `${this.baseUrlPath}/${id}/`;
     return new URL(basePath, this.origin).toString();
   }
 
-  public editDeviceData(id: number) {
+  public editDataType(id: number) {
     const basePath = `${this.baseUrlPath}/${id}/`;
     return new URL(basePath, this.origin).toString();
   }
 }
 
-const userUrls = new DeviceDataUrls();
+const userUrls = new DataTypeUrls();
 
 export default userUrls;

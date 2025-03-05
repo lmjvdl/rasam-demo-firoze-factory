@@ -20,7 +20,6 @@ const useUpdate = () => {
     mutationFn: async ({ id, ...updatedData }: CompanyUpdateSchema) => {
       return fetchWithErrorWithAlarm(companyUrls.editCompany(id), {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedData),
       });
     },
@@ -28,8 +27,8 @@ const useUpdate = () => {
       queryClient.invalidateQueries({ queryKey: allQueryKeys.adminPanel.company.update });
     },
     onError: () => {
-        showToast("❌ خطایی در به‌روزرسانی شرکت رخ داد.", "error");
-      },
+      showToast("❌ خطایی در به‌روزرسانی شرکت رخ داد.", "error");
+    },
   });
 
   return {

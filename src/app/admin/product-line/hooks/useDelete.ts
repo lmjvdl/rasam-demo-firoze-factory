@@ -1,34 +1,30 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { fetchWithErrorForDelete } from "@/utils/dataFetching/fetchWithError";
+import productLineUrls from "@/utils/URLs/adminPanel/productLine/productLineUrl";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import { useToast } from "@/hooks/UI/useToast";
-import userUrls from "@/utils/URLs/adminPanel/user/userUrl";
 
-const useDelete = () => {
+const useDeleteProductLine = () => {
   const queryClient = useQueryClient();
   const { showToast } = useToast();
 
-  const deleteUserMutation = useMutation({
+  const deleteProductLineMutation = useMutation({
     mutationFn: async (id: number) => {
-      return fetchWithErrorForDelete(userUrls.deleteUser(id), {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ is_active: false }),
+      return fetchWithErrorForDelete(productLineUrls.deleteProductLine(id), {
+        method: "DELETE",
       });
     },
     onSuccess: (_, id) => {
-      queryClient.invalidateQueries({ queryKey: allQueryKeys.adminPanel.company.delete });
+      queryClient.invalidateQueries({ queryKey: allQueryKeys.adminPanel.productLine.delete });
     },
     onError: () => {
-      showToast("❌ خطایی در غیرفعال‌سازی کاربر رخ داد.", "error");
+      showToast("❌ خطایی در حذف خط محصول رخ داد.", "error");
     },
   });
 
   return {
-    deleteUserMutation,
+    deleteProductLineMutation,
   };
 };
 
-export default useDelete;
+export default useDeleteProductLine;

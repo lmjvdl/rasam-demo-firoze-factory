@@ -31,9 +31,6 @@ export const createNewUser = async (data: unknown) => {
   try {
     const response = await fetchWithErrorForCreate(`${userUrls.createUser}`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
       body: JSON.stringify(processedData),
     });
 

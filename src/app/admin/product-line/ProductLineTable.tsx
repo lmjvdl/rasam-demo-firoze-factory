@@ -1,8 +1,8 @@
 import React from "react";
 import DataTable from "@/components/AdminPanelComponent/ViewProcess/DataTable";
-import { UserTableProps } from "@/interfaces/admin/user";
+import { ProductLineTableProps } from "@/interfaces/admin/productLine";
 
-const ProductLineTable: React.FC<UserTableProps> = ({
+const ProductLineTable: React.FC<ProductLineTableProps> = ({
   data,
   columns,
   onView,
@@ -12,18 +12,10 @@ const ProductLineTable: React.FC<UserTableProps> = ({
   page,
   onPageChange,
 }) => {
-  const columnsWithUserActions = columns.map((col) => {
-    if (col.id === "userActions") {
-      return {
-        ...col
-      };
-    }
-    return col;
-  });
 
   return (
     <DataTable
-      columns={columnsWithUserActions}
+      columns={columns}
       data={data}
       onView={onView}
       onEdit={onEdit}

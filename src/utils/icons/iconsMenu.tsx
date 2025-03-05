@@ -8,7 +8,7 @@ import {
     Chamfer,
     PowerSupply
   } from "../../../public/logo/itemMenu";
-  import { Company, Devices, Group, Permission, ProductLine, ProductLinePart, UploadImage, User } from "../../../public/logo/ItemMenuAdmin";
+  import { Company, Devices, Group, Permission, ProductLine, ProductLinePart, UploadImage, User, DataType, DeviceType } from "../../../public/logo/ItemMenuAdmin";
   // **************************** Importing the (LOGOS) of all existing factories ****************************
   import { Setare } from "../../../public/logo/company";
   // ************************************* Importing (FOOTER ITEM) FIXED *************************************
@@ -49,7 +49,9 @@ import {
     Group: Group,
     Logout: Logout,
     Permission: Permission,
-    User: User
+    User: User,
+    DeviceType: DeviceType,
+    DataType: DataType
     // Add other mappings as necessary
   };
   // *******************************************************************************

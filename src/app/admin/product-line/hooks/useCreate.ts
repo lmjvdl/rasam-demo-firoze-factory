@@ -1,22 +1,16 @@
 import { fetchWithErrorForCreate } from "@/utils/dataFetching/fetchWithError";
-import userUrls from "@/utils/URLs/adminPanel/user/userUrl";
+import productLineUrls from "@/utils/URLs/adminPanel/productLine/productLineUrl";
 import { z } from "zod";
 
-const userSchema = z.object({
-  username: z.string().min(1, "نام کاربری الزامی است").max(50),
-  email: z.string().email("ایمیل نامعتبر است").max(254).optional(),
-  phone_number: z.string().min(1, "شماره موبایل الزامی است").max(11),
-  first_name: z.string().max(150).optional(),
-  last_name: z.string().max(150).optional(),
-  password: z.string().min(1, "رمز عبور الزامی است").max(128),
-  national_code: z.string().max(10).nullable().optional(),
-  is_manager: z.boolean().default(false),
-  is_superuser: z.boolean().default(false),
-  is_admin: z.boolean().default(false),
+const productLineSchema = z.object({
+  company: z.number().int("شرکت باید یک عدد صحیح باشد").min(1, "شرکت الزامی است"),
+  name: z.string().min(1, "نام خط تولید الزامی است").max(30),
+  code: z.string().min(1, "کد خط تولید الزامی است").max(15),
+  icon: z.number().int("آیکن باید یک عدد صحیح باشد").nullable().optional(),
 });
 
-export const createNewUser = async (data: unknown) => {
-  const validationResult = userSchema.safeParse(data);
+export const createNewProductLine = async (data: unknown) => {
+  const validationResult = productLineSchema.safeParse(data);
 
   if (!validationResult.success) {
     return { success: false, error: validationResult.error.format() };
@@ -24,16 +18,11 @@ export const createNewUser = async (data: unknown) => {
 
   const processedData = {
     ...validationResult.data,
-    national_code:
-      validationResult.data.national_code === "" ? null : validationResult.data.national_code,
   };
 
   try {
-    const response = await fetchWithErrorForCreate(`${userUrls.createUser}`, {
+    const response = await fetchWithErrorForCreate(`${productLineUrls.createProductLine}`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
       body: JSON.stringify(processedData),
     });
 
