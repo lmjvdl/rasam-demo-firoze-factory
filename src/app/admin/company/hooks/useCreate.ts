@@ -1,5 +1,5 @@
 import { fetchWithErrorForCreate } from "@/utils/dataFetching/fetchWithError";
-import companyUrls from "@/utils/URLs/adminPanel/company/companyURL";
+import companyUrls from "@/utils/URLs/adminPanel/company/companyUrl";
 import { z } from "zod";
 
 const companySchema = z.object({

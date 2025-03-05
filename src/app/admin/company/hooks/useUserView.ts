@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import fetchWithError from "@/utils/dataFetching/fetchWithError";
 import { errorHandler } from "@/utils/dataFetching/queryClient";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
-import companyUrls from "@/utils/URLs/adminPanel/company/companyURL";
+import companyUrls from "@/utils/URLs/adminPanel/company/companyUrl";
 import { useToast } from "@/hooks/UI/useToast";
 
 // Updated function to handle GET requests
