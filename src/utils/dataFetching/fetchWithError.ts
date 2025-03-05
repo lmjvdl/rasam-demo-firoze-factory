@@ -121,6 +121,38 @@ export async function fetchWithErrorForDelete(
 }
 
 
+export async function uploadFileWithError(
+  url: string | URL,
+  file: File,
+  fieldName: string = "file"
+) {
+  const formData = new FormData();
+  formData.append(fieldName, file);
+
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      body: formData,
+      headers: {
+        Authorization: `Bearer ${useAuthStore.getState().accessToken}`,
+      },
+    });
+
+    const rawData = await response.json();
+
+    if (response.status === 200 || response.status === 201) {
+      toast.success(rawData.messages || "✅ فایل با موفقیت آپلود شد");
+      return rawData;
+    } else {
+      toast.error(rawData.messages || "❌ خطا در آپلود فایل رخ داده است");
+      throw new Error("درخواست آپلود با مشکل مواجه شد.");
+    }
+  } catch (error) {
+    throw new Error("مشکلی در آپلود فایل پیش آمد.");
+  }
+}
+
+
 
 function addProperHeader(options: RequestInit) {
   const newOptions = options;
@@ -135,3 +167,5 @@ function addProperHeader(options: RequestInit) {
   newOptions.headers = newHeaders;
   return newOptions;
 }
+
+
