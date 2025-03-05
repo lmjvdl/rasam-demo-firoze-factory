@@ -2,47 +2,27 @@
 
 import ModalForm from "@/components/AdminPanelComponent/AddingProcess/ModalForm";
 import MainCard from "@/components/CustomContiner/MainCard";
-import AllContentUser from "./AllContent";
-import { createNewUser } from "./hooks/useCreate";
+import { createNewGroup } from "./hooks/useCreate";
 
-export default function UserPage() {
+export default function GroupPage() {
   return (
     <MainCard>
       <ModalForm
-        buttonText="افزودن کاربر جدید"
+        buttonText="افزودن Group جدید"
         formFields={[
           {
-            name: "username", label: "نام کاربری", type: "text",
-            required: true
+            name: "name", label: "Name", type: "text", required: true
           },
           {
-            name: "email", label: "ایمیل", type: "email",
-            required: false
+            name: "permissions", label: "Permissions", type: "number", required: true
           },
           {
-            name: "phone_number", label: "شماره تلفن", type: "tel",
-            required: true
-          },
-          {
-            name: "firstName", label: "نام", type: "text",
-            required: false
-          },
-          {
-            name: "lastName", label: "نام خانوادگی", type: "text",
-            required: false
-          },
-          {
-            name: "password", label: "رمز عبور", type: "password",
-            required: true
-          },
-          {
-            name: "national_code", label: "کد ملی", type: "text",
-            required: false
+            name: "users", label: "Users", type: "text", required: false
           },
         ]}
-        onSubmit={createNewUser}
+        onSubmit={createNewGroup}
       />
-      <AllContentUser />
+      <AllContentGroup />
     </MainCard>
   );
 }

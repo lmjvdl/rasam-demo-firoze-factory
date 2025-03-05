@@ -7,7 +7,7 @@ const deviceDataSchema = z.object({
   data_type: z.array(z.number()).nonempty("نوع داده الزامی است"),
 });
 
-export const createNewDataType = async (data: unknown) => {
+export const createNewDeviceData = async (data: unknown) => {
   const validationResult = deviceDataSchema.safeParse(data);
 
   if (!validationResult.success) {
@@ -15,7 +15,7 @@ export const createNewDataType = async (data: unknown) => {
   }
 
   try {
-    const response = await fetchWithErrorForCreate(`${deviceDataUrls.createDataType}`, {
+    const response = await fetchWithErrorForCreate(`${deviceDataUrls.createDeviceData}`, {
       method: "POST",
       body: JSON.stringify(validationResult.data),
     });

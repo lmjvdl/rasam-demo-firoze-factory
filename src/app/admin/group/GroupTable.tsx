@@ -1,8 +1,8 @@
 import React from "react";
 import DataTable from "@/components/AdminPanelComponent/ViewProcess/DataTable";
-import { UserTableProps } from "@/interfaces/admin/user";
+import { GroupTableProps } from "@/interfaces/admin/group";
 
-const UserTable: React.FC<UserTableProps> = ({
+const GroupTable: React.FC<GroupTableProps> = ({
   data,
   columns,
   onView,
@@ -12,18 +12,10 @@ const UserTable: React.FC<UserTableProps> = ({
   page,
   onPageChange,
 }) => {
-  const columnsWithUserActions = columns.map((col) => {
-    if (col.id === "userActions") {
-      return {
-        ...col
-      };
-    }
-    return col;
-  });
 
   return (
     <DataTable
-      columns={columnsWithUserActions}
+      columns={columns}
       data={data}
       onView={onView}
       onEdit={onEdit}
@@ -35,4 +27,4 @@ const UserTable: React.FC<UserTableProps> = ({
   );
 };
 
-export default UserTable;
+export default GroupTable;

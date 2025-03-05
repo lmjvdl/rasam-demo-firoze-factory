@@ -2,47 +2,27 @@
 
 import ModalForm from "@/components/AdminPanelComponent/AddingProcess/ModalForm";
 import MainCard from "@/components/CustomContiner/MainCard";
-import AllContentUser from "./AllContent";
-import { createNewUser } from "./hooks/useCreate";
+import { createNewDevice } from "./hooks/useCreate";
 
-export default function UserPage() {
+export default function DevicePage() {
   return (
     <MainCard>
       <ModalForm
-        buttonText="افزودن کاربر جدید"
+        buttonText="افزودن Device جدید"
         formFields={[
           {
-            name: "username", label: "نام کاربری", type: "text",
-            required: true
+            name: "product_line_part", label: "Product line part", type: "number", required: true
           },
           {
-            name: "email", label: "ایمیل", type: "email",
-            required: false
+            name: "name", label: "Name", type: "text", required: true
           },
           {
-            name: "phone_number", label: "شماره تلفن", type: "tel",
-            required: true
-          },
-          {
-            name: "firstName", label: "نام", type: "text",
-            required: false
-          },
-          {
-            name: "lastName", label: "نام خانوادگی", type: "text",
-            required: false
-          },
-          {
-            name: "password", label: "رمز عبور", type: "password",
-            required: true
-          },
-          {
-            name: "national_code", label: "کد ملی", type: "text",
-            required: false
+            name: "code", label: "Code", type: "text", required: true
           },
         ]}
-        onSubmit={createNewUser}
+        onSubmit={createNewDevice}
       />
-      <AllContentUser />
+      <AllContentDevice />
     </MainCard>
   );
 }
