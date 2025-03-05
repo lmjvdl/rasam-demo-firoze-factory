@@ -1,11 +1,11 @@
-export interface Device {
+export interface DeviceData {
     id: number; // ReadOnly
-    product_line_part: number;
-    name: string;
-    code: string;
+    device: number;
+    data_type: number[];
 }
-export interface DeviceTableProps {
-    data: Device[];
+  
+export interface DeviceDataTableProps {
+    data: DeviceData[];
     columns: any[];
     onView: (row: any) => void;
     onEdit: (row: any) => void;

@@ -1,5 +1,9 @@
 export interface ProductLinePart {
-
+    id: number; // ReadOnly
+    product_line: number;
+    name: string;
+    code: string;
+    icon?: number | null;
 }
 
 export interface ProductLinePartTableProps {

@@ -1,7 +1,10 @@
-export interface Group {
-
+interface Group {
+    id: number; // ReadOnly
+    name: string;
+    permissions?: number[]; // uniqueItems: true
+    users?: string[] | null; // nullable
 }
-
+  
 export interface GroupTableProps {
     data: Group[];
     columns: any[];
