@@ -11,7 +11,7 @@ export const Rasam: React.FC<logoProps> = (props) => (
     viewBox="0 0 512 512"
     width="125"
     height="125"
-    fill={props.fill}
+    fill="currentColor"
   >
     <g>
       <path
