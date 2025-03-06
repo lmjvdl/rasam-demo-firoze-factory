@@ -10,7 +10,7 @@ import {
   } from "../../../public/logo/itemMenu";
   import { Company, Devices, Group, Permission, ProductLine, ProductLinePart, UploadImage, User, DataType, DeviceType } from "../../../public/logo/ItemMenuAdmin";
   // **************************** Importing the (LOGOS) of all existing factories ****************************
-  import { Setare } from "../../../public/logo/company";
+  import { Rasam, Setare } from "../../../public/logo/company";
   // ************************************* Importing (FOOTER ITEM) FIXED *************************************
   import { IconSettings, IconLogout } from "@tabler/icons-react";
   
@@ -69,5 +69,8 @@ import {
   
   export const companyMap: Record<string, React.FC<logoProps>> = {
     Setare: Setare,
+    Rasam: Rasam
   };
+
+
   

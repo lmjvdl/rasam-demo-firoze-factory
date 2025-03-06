@@ -9,7 +9,7 @@ const DrawerContent = ({
   isAdmin
 }: DrawerContentProps) => {
   const mode = useColorScheme();
-  const FactoryIcon = companyMap["Setare"];
+  const FactoryIcon = isAdmin ? companyMap["Rasam"] : companyMap["Setare"];
 
   return (
     <>
