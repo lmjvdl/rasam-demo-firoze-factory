@@ -3,12 +3,13 @@
 import ModalForm from "@/components/AdminPanelComponent/AddingProcess/ModalForm";
 import MainCard from "@/components/CustomContiner/MainCard";
 import { createNewGroup } from "./hooks/useCreate";
+import AllContentGroup from "./AllContent";
 
 export default function GroupPage() {
   return (
     <MainCard>
       <ModalForm
-        buttonText="افزودن Group جدید"
+        buttonText="افزودن گروه جدید"
         formFields={[
           {
             name: "name", label: "Name", type: "text", required: true

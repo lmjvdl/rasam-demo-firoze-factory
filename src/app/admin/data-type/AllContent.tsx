@@ -1,17 +1,18 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import getUserList, { ResponseSchema } from "./hooks/useView";
+import getDataTypeList, { ResponseSchema } from "./hooks/useView";
 import useDelete from "./hooks/useDelete";
 import ViewDialog from "@/components/AdminPanelComponent/ViewProcess/ViewDialog";
 import EditDialog from "@/components/AdminPanelComponent/ViewProcess/EditDialog";
 import DeleteDialog from "@/components/AdminPanelComponent/ViewProcess/DeleteDialog";
 import { PrevDataInitial } from "@/interfaces/general/general";
 import { columns } from "./ColumnsData";
-import { UserUpdateSchema, useUpdate } from "./hooks/useUpdate";
-import UserTable from "./DataTypeTable";
+import { DatatypeUpdateSchema } from "./hooks/useUpdate";
+import DataTypeTable from "./DataTypeTable";
+import useUpdate from "./hooks/useUpdate";
 
-const AllContentUser: React.FC = () => {
+const AllContentDataType: React.FC = () => {
   const [data, setData] = useState<ResponseSchema>(PrevDataInitial);
   const [selectedRow, setSelectedRow] = useState<any>(null);
   const [viewOpen, setViewOpen] = useState(false);
@@ -21,9 +22,10 @@ const AllContentUser: React.FC = () => {
   const [totalData, setTotalData] = useState<number>(0);
   const [nextPage, setNextPage] = useState<null | string>(null);
 
-  const getList = getUserList(pageNumber, 8, nextPage);
-  const { deleteUserMutation } = useDelete();
-  const { updateUserMutation } = useUpdate();
+  const getList = getDataTypeList(pageNumber, 8, nextPage);
+  const { deleteDataTypeMutation } = useDelete();
+  const { updateDataTypeMutation } = useUpdate();
+
 
   useEffect(() => {
     getList.mutate(
@@ -38,12 +40,11 @@ const AllContentUser: React.FC = () => {
     );
   }, [pageNumber]);
 
-  const handleSaveEdit = (updatedRow: UserUpdateSchema) => {
+  const handleSaveEdit = (updatedRow: DatatypeUpdateSchema) => {
     setData((prevData) => {
       if (prevData?.data) {
-        const { groups, ...updatedDataWithoutGroups } = updatedRow;
 
-        updateUserMutation.mutate(updatedDataWithoutGroups);
+        updateDataTypeMutation.mutate(updatedRow);
 
         return {
           ...prevData,
@@ -51,7 +52,7 @@ const AllContentUser: React.FC = () => {
             ...prevData.data,
             results: prevData.data.results.map((row) =>
               row.id === updatedRow.id
-                ? { ...row, ...updatedDataWithoutGroups }
+                ? { ...row, ...updatedRow }
                 : row
             ),
           },
@@ -83,17 +84,17 @@ const AllContentUser: React.FC = () => {
 
   const handleConfirmDelete = () => {
     if (selectedRow?.id) {
-      deleteUserMutation.mutate(selectedRow.id);
+      deleteDataTypeMutation.mutate(selectedRow.id);
       setDeleteOpen(false);
     }
   };
 
   const dynamicColumns = columns();
-  const filteredComumnsForEdit = dynamicColumns.filter((col) => col.canEdit);
+  const filteredColumnsForEdit = dynamicColumns.filter((col) => col.canEdit);
 
   return (
     <>
-      <UserTable
+      <DataTypeTable
         data={data?.data?.results ?? []}
         columns={dynamicColumns}
         onView={handleView}
@@ -115,7 +116,7 @@ const AllContentUser: React.FC = () => {
         onClose={() => setEditOpen(false)}
         onSave={handleSaveEdit}
         rowData={selectedRow}
-        titles={filteredComumnsForEdit}
+        titles={filteredColumnsForEdit}
       />
       <DeleteDialog
         open={deleteOpen}
@@ -128,4 +129,4 @@ const AllContentUser: React.FC = () => {
   );
 };
 
-export default AllContentUser;
+export default AllContentDataType;

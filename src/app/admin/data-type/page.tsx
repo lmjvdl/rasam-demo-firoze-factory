@@ -3,12 +3,13 @@
 import ModalForm from "@/components/AdminPanelComponent/AddingProcess/ModalForm";
 import MainCard from "@/components/CustomContiner/MainCard";
 import { createNewDataType } from "./hooks/useCreate";
+import AllContentDataType from "./AllContent";
 
 export default function DataTypePage() {
   return (
     <MainCard>
       <ModalForm
-        buttonText="افزودن DataType جدید"
+        buttonText="افزودن نوع اطلاعات جدید"
         formFields={[
           {
             name: "name", label: "Name", type: "text", required: true

@@ -12,18 +12,10 @@ const UserTable: React.FC<UserTableProps> = ({
   page,
   onPageChange,
 }) => {
-  const columnsWithUserActions = columns.map((col) => {
-    if (col.id === "userActions") {
-      return {
-        ...col
-      };
-    }
-    return col;
-  });
 
   return (
     <DataTable
-      columns={columnsWithUserActions}
+      columns={columns}
       data={data}
       onView={onView}
       onEdit={onEdit}

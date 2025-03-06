@@ -31,14 +31,6 @@ export const columns = () => [
         isAdditionalAction: false,
     },
     {
-        id: "profile_image",
-        label: "عکس پروفایل",
-        showOnTable: false,
-        required: false,
-        canEdit: true,
-        isAdditionalAction: false,
-    },
-    {
         id: "phone_number",
         label: "شماره موبایل",
         showOnTable: true,

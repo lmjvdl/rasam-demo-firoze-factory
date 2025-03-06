@@ -11,11 +11,11 @@ export type DatatypeUpdateSchema = {
   description?: string;
 };
 
-const useUpdateDatatype = () => {
+const useUpdate = () => {
   const queryClient = useQueryClient();
   const { showToast } = useToast();
 
-  const updateDatatypeMutation = useMutation({
+  const updateDataTypeMutation = useMutation({
     mutationFn: async ({ id, ...updatedData }: DatatypeUpdateSchema) => {
       return fetchWithErrorWithAlarm(dataTypeUrls.editDataType(id), {
         method: "PUT",
@@ -31,8 +31,8 @@ const useUpdateDatatype = () => {
   });
 
   return {
-    updateDatatypeMutation,
+    updateDataTypeMutation,
   };
 };
 
-export default useUpdateDatatype;
+export default useUpdate;

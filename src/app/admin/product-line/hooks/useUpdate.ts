@@ -1,44 +1,39 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { fetchWithErrorWithAlarm } from "@/utils/dataFetching/fetchWithError";
-import userUrls from "@/utils/URLs/adminPanel/user/userUrl";
+import productLineUrls from "@/utils/URLs/adminPanel/productLine/productLineUrl";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import { useToast } from "@/hooks/UI/useToast";
 
-export type UserUpdateSchema = {
-    id: number;
-    phone_number: string;
-    email: string;
-    password?: string;
-    first_name: string;
-    last_name: string;
-    is_active: boolean;
-    groups?: { id: number; name: string; permissions: number[] }[];
-  };
-  
+export type ProductLineUpdateSchema = {
+  id: number;
+  company: number;
+  name: string;
+  code: string;
+  icon?: number;
+};
 
-const useUpdate = () => {
+const useUpdateProductLine = () => {
   const queryClient = useQueryClient();
   const { showToast } = useToast();
 
-  const updateUserMutation = useMutation({
-    mutationFn: async ({ id, ...updatedData }: UserUpdateSchema) => {
-      return fetchWithErrorWithAlarm(userUrls.editUser(id), {
+  const updateProductLineMutation = useMutation({
+    mutationFn: async ({ id, ...updatedData }: ProductLineUpdateSchema) => {
+      return fetchWithErrorWithAlarm(productLineUrls.editProductLine(id), {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedData),
       });
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: allQueryKeys.adminPanel.user.update });
+      queryClient.invalidateQueries({ queryKey: allQueryKeys.adminPanel.productLine.update });
     },
     onError: () => {
-      showToast("❌ خطایی در به‌روزرسانی کاربر رخ داد.", "error");
+      showToast("❌ خطایی در به‌روزرسانی خط تولید رخ داد.", "error");
     },
   });
 
   return {
-    updateUserMutation,
+    updateProductLineMutation,
   };
 };
 
-export { useUpdate };
+export default useUpdateProductLine;

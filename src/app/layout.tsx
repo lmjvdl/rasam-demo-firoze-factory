@@ -4,7 +4,7 @@ import Providers from "@/Providers/Providers";
 import "../styles/globals.css";
 import { vazir } from "../../public/fonts/Fonts";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import React, { useState } from "react";
 import Header, { drawerWidth } from "@/components/Header/Header";
 import { Box, Stack } from "@mui/material";
 import Sidebar from "@/components/SideBar/Sidebar";
@@ -42,51 +42,53 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <Providers>
-          <ToastProvider />
-          {isLoginPage ? (
-            <Box component="main" width="100%" height="100%">
-              {children}
-            </Box>
-          ) : (
-            <Stack
-              direction={"row"}
-              width={"100%"}
-              height={"100%"}
-              bgcolor={"background.default"}
-            >
-              <Sidebar
-                mobileOpen={mobileOpen}
-                setMobileOpen={setMobileOpen}
-                isAdmin={isAdmin}
-              />
+        <React.StrictMode>
+          <Providers>
+            <ToastProvider />
+            {isLoginPage ? (
+              <Box component="main" width="100%" height="100%">
+                {children}
+              </Box>
+            ) : (
               <Stack
+                direction={"row"}
                 width={"100%"}
-                height={"calc(100% - 64px)"}
-                component="main"
-                sx={{
-                  width: { sm: `calc(100% - ${drawerWidth}px)` },
-                  flexGrow: 1,
-                  mt: "64px",
-                }}
+                height={"100%"}
+                bgcolor={"background.default"}
               >
-                <Header
+                <Sidebar
                   mobileOpen={mobileOpen}
                   setMobileOpen={setMobileOpen}
                   isAdmin={isAdmin}
                 />
-                <Box
-                  component={"main"}
+                <Stack
                   width={"100%"}
-                  height={"100%"}
-                  sx={{ flexGrow: 1, p: 2 }}
+                  height={"calc(100% - 64px)"}
+                  component="main"
+                  sx={{
+                    width: { sm: `calc(100% - ${drawerWidth}px)` },
+                    flexGrow: 1,
+                    mt: "64px",
+                  }}
                 >
-                  {children}
-                </Box>
+                  <Header
+                    mobileOpen={mobileOpen}
+                    setMobileOpen={setMobileOpen}
+                    isAdmin={isAdmin}
+                  />
+                  <Box
+                    component={"main"}
+                    width={"100%"}
+                    height={"100%"}
+                    sx={{ flexGrow: 1, p: 2 }}
+                  >
+                    {children}
+                  </Box>
+                </Stack>
               </Stack>
-            </Stack>
-          )}
-        </Providers>
+            )}
+          </Providers>
+        </React.StrictMode>
       </body>
     </html>
   );

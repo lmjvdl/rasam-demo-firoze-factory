@@ -23,14 +23,6 @@ export const columns = () => [
         isAdditionalAction: false,
     },
     {
-        id: "users",
-        label: "کاربران",
-        required: false,
-        showOnTable: true,
-        canEdit: false,
-        isAdditionalAction: false,
-    },
-    {
         id: "actions",
         label: "عملیات",
         isActionColumn: true,

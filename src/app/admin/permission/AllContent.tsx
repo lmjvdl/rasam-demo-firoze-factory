@@ -1,29 +1,21 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import getUserList, { ResponseSchema } from "./hooks/useView";
-import useDelete from "./hooks/useDelete";
+import getPermissionList, { ResponseSchema } from "./hooks/useView";
 import ViewDialog from "@/components/AdminPanelComponent/ViewProcess/ViewDialog";
-import EditDialog from "@/components/AdminPanelComponent/ViewProcess/EditDialog";
-import DeleteDialog from "@/components/AdminPanelComponent/ViewProcess/DeleteDialog";
 import { PrevDataInitial } from "@/interfaces/general/general";
 import { columns } from "./ColumnsData";
-import { UserUpdateSchema, useUpdate } from "./hooks/useUpdate";
-import UserTable from "./PermissionTable";
+import PermissionTable from "./PermissionTable";
 
-const AllContentUser: React.FC = () => {
+const AllContentPermission: React.FC = () => {
   const [data, setData] = useState<ResponseSchema>(PrevDataInitial);
   const [selectedRow, setSelectedRow] = useState<any>(null);
   const [viewOpen, setViewOpen] = useState(false);
-  const [deleteOpen, setDeleteOpen] = useState(false);
-  const [editOpen, setEditOpen] = useState(false);
   const [pageNumber, setPageNumber] = useState<number>(0);
   const [totalData, setTotalData] = useState<number>(0);
   const [nextPage, setNextPage] = useState<null | string>(null);
 
-  const getList = getUserList(pageNumber, 8, nextPage);
-  const { deleteUserMutation } = useDelete();
-  const { updateUserMutation } = useUpdate();
+  const getList = getPermissionList(pageNumber, 8, nextPage);
 
   useEffect(() => {
     getList.mutate(
@@ -38,28 +30,6 @@ const AllContentUser: React.FC = () => {
     );
   }, [pageNumber]);
 
-  const handleSaveEdit = (updatedRow: UserUpdateSchema) => {
-    setData((prevData) => {
-      if (prevData?.data) {
-        const { groups, ...updatedDataWithoutGroups } = updatedRow;
-
-        updateUserMutation.mutate(updatedDataWithoutGroups);
-
-        return {
-          ...prevData,
-          data: {
-            ...prevData.data,
-            results: prevData.data.results.map((row) =>
-              row.id === updatedRow.id
-                ? { ...row, ...updatedDataWithoutGroups }
-                : row
-            ),
-          },
-        };
-      }
-      return prevData || PrevDataInitial;
-    });
-  };
 
   const handlePagination = (newPage: number) => {
     setPageNumber(newPage);
@@ -71,34 +41,14 @@ const AllContentUser: React.FC = () => {
     setViewOpen(true);
   };
 
-  const handleEdit = (row: any) => {
-    setSelectedRow(row);
-    setEditOpen(true);
-  };
-
-  const handleDelete = (row: any) => {
-    setSelectedRow(row);
-    setDeleteOpen(true);
-  };
-
-  const handleConfirmDelete = () => {
-    if (selectedRow?.id) {
-      deleteUserMutation.mutate(selectedRow.id);
-      setDeleteOpen(false);
-    }
-  };
-
   const dynamicColumns = columns();
-  const filteredComumnsForEdit = dynamicColumns.filter((col) => col.canEdit);
 
   return (
     <>
-      <UserTable
+      <PermissionTable
         data={data?.data?.results ?? []}
         columns={dynamicColumns}
         onView={handleView}
-        onEdit={handleEdit}
-        onDelete={handleDelete}
         page={pageNumber}
         count={totalData}
         onPageChange={handlePagination}
@@ -110,22 +60,8 @@ const AllContentUser: React.FC = () => {
         rowData={selectedRow}
         titles={dynamicColumns}
       />
-      <EditDialog
-        open={editOpen}
-        onClose={() => setEditOpen(false)}
-        onSave={handleSaveEdit}
-        rowData={selectedRow}
-        titles={filteredComumnsForEdit}
-      />
-      <DeleteDialog
-        open={deleteOpen}
-        onClose={() => setDeleteOpen(false)}
-        onConfirm={handleConfirmDelete}
-        rowData={selectedRow}
-        titles={dynamicColumns}
-      />
     </>
   );
 };
 
-export default AllContentUser;
+export default AllContentPermission;

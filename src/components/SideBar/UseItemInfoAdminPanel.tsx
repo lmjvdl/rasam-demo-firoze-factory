@@ -12,6 +12,7 @@ export const UseItemInfoAdminPanel = () => {
       "دستگاه ها": { text: "دستگاه ها", icon: "Devices", to: "/admin/devices" },
       "اطلاعات دستگاه ها": {text: "اطلاعات دستگاه ها", icon: "DeviceType", to: "/admin/device-data"},
       "نوع اطلاعات": {text: "نوع اطلاعات", icon: "DataType", to: "admin/data-type"},
+      "دسترسی": {text: "دسترسی", icon: "Permission", to: "admin/permission"},
       "آپلود عکس": { text: "آپلود عکس", icon: "UploadImage", to: "/admin/upload-image" },
     }),
     []

@@ -43,13 +43,12 @@ const responseSchema = z.object({
       results: z.array(
         z.object({
           id: z.number(),
+          first_name: z.string(),
+          last_name: z.string(),
           username: z.string(),
-          profile_image: z.nullable(z.string()),
           phone_number: z.string(),
           email: z.string(),
-          first_name: z.string(),
           national_code: z.nullable(z.string()),
-          last_name: z.string(),
           groups: z.array(
             z.object({
               id: z.number(),

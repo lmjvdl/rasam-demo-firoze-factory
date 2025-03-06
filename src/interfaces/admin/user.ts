@@ -1,7 +1,6 @@
 export interface User {
     id: number;
     username: string;
-    profile_image: string | null;
     phone_number: string;
     email: string;
     first_name: string;

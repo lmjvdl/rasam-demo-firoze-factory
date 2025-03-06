@@ -39,9 +39,9 @@ const responseSchema = z.object({
     page_size: z.number(),
     results: z.array(
       z.object({
-        id: z.number().nullable(),
+        id: z.number(),
         name: z.string(),
-        permissions: z.array(z.number()).nullable(),
+        permissions: z.array(z.number()),
       })
     ),
   }),

@@ -24,6 +24,8 @@ const AllContentUser: React.FC = () => {
   const getList = getUserList(pageNumber, 8, nextPage);
   const { deleteUserMutation } = useDelete();
   const { updateUserMutation } = useUpdate();
+  const dynamicColumns = columns();
+  const filteredColumnsForEdit = dynamicColumns.filter((col) => col.canEdit);
 
   useEffect(() => {
     getList.mutate(
@@ -88,8 +90,18 @@ const AllContentUser: React.FC = () => {
     }
   };
 
-  const dynamicColumns = columns();
-  const filteredComumnsForEdit = dynamicColumns.filter((col) => col.canEdit);
+  // Handling the boolean value change (is_active)
+  const handleBooleanValueChange = (value: boolean) => {
+    setSelectedRow((prevSelectedRow: UserUpdateSchema | null) => {
+      if (prevSelectedRow) {
+        return {
+          ...prevSelectedRow,
+          is_active: value,
+        };
+      }
+      return prevSelectedRow;
+    });
+  };
 
   return (
     <>
@@ -109,14 +121,24 @@ const AllContentUser: React.FC = () => {
         onClose={() => setViewOpen(false)}
         rowData={selectedRow}
         titles={dynamicColumns}
+        booleanAttributeName="is_active"
+        booleanValue={selectedRow?.is_active}
+        falseLabel="غیر فعال"
+        trueLabel="فعال"
       />
       <EditDialog
         open={editOpen}
         onClose={() => setEditOpen(false)}
         onSave={handleSaveEdit}
         rowData={selectedRow}
-        titles={filteredComumnsForEdit}
+        titles={filteredColumnsForEdit}
+        booleanAttributeName="is_active"
+        booleanValue={selectedRow?.is_active}
+        falseLabel="غیر فعال"
+        trueLabel="فعال"
+        onBooleanValueChange={handleBooleanValueChange}
       />
+
       <DeleteDialog
         open={deleteOpen}
         onClose={() => setDeleteOpen(false)}

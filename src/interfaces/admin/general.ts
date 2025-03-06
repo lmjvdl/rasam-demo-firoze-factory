@@ -42,16 +42,34 @@ interface DeleteDialogProps {
 interface EditDialogProps {
     open: boolean;
     onClose: () => void;
-    onSave: (updatedData: any) => void;
-    rowData: any;
-    titles: any;
-}
+    onSave: (data: any) => void;
+    rowData?: { [key: string]: any };
+    titles: Array<{
+      id: string;
+      label: string;
+      required?: boolean;
+      showOnTable?: boolean;
+      canEdit?: boolean;
+      isAdditionalAction?: boolean;
+    }>;
+    booleanAttributeName?: string;
+    trueLabel?: string;
+    falseLabel?: string;
+    booleanValue?: boolean;
+    onBooleanValueChange?: (value: boolean) => void;
+    totalArrayItem?: { value: any; label: string }[];
+    selectedArrayItem?: any[];
+  }
 
 interface ViewDialogProps {
     open: boolean;
     onClose: () => void;
     rowData: any | null;
     titles: any | null;
+    booleanValue?: boolean;
+    booleanAttributeName?: string;
+    trueLabel?: string;
+    falseLabel?: string;
 }
 
 interface ViewUserDetailModal {

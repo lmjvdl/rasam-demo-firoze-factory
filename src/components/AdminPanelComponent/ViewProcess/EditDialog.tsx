@@ -16,51 +16,50 @@ import {
   SelectChangeEvent,
 } from "@mui/material";
 
-interface EditDialogProps {
-  open: boolean;
-  onClose: () => void;
-  onSave: (data: any) => void;
-  rowData?: { [key: string]: any };
-  titles: { id: string; label: string; required?: boolean }[];
-}
-
 const EditDialog: React.FC<EditDialogProps> = ({
   open,
   onClose,
   onSave,
   rowData = {},
   titles = [],
+  booleanAttributeName = "is_active",
+  trueLabel = "True",
+  falseLabel = "False",
+  booleanValue,
+  onBooleanValueChange,
+  totalArrayItem = [],
+  selectedArrayItem = [],
 }) => {
   const [formData, setFormData] = useState<{ [key: string]: any }>(
     rowData || {}
   );
   const [errors, setErrors] = useState<{ [key: string]: boolean }>({});
-  const permissionsList = ["Admin", "Editor", "Viewer", "User", "SuperAdmin"];
 
   useEffect(() => {
     setFormData(rowData || {});
   }, [rowData]);
 
-  // برای تغییرات در Select
-  const handleSelectChange = (event: SelectChangeEvent<boolean>) => {
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
     setFormData((prev) => ({
       ...prev,
-      [event.target.name]: event.target.value === "true",
+      [name]: value,
     }));
   };
 
-  // برای تغییرات در TextField
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleSelectChange = (event: SelectChangeEvent<string>) => {
+    const newValue = event.target.value === "true";
+    setFormData((prev) => ({
+      ...prev,
+      [booleanAttributeName]: newValue,
+    }));
+    onBooleanValueChange?.(newValue);
+  };
+
+  const handleMultiSelectChange = (event: SelectChangeEvent<string[]>) => {
     setFormData((prev) => ({
       ...prev,
       [event.target.name]: event.target.value,
-    }));
-  };
-
-  const handleMultiSelectChange = (name: string) => (event: any) => {
-    setFormData((prev) => ({
-      ...prev,
-      [name]: event.target.value,
     }));
   };
 
@@ -90,41 +89,45 @@ const EditDialog: React.FC<EditDialogProps> = ({
           if (!key) return null;
           const value = formData?.[key] || "";
 
-          if (key === "is_active") {
+          if (key === booleanAttributeName) {
             return (
-              <FormControl key={key} fullWidth margin="dense">
+              <FormControl key={booleanAttributeName} fullWidth margin="dense">
                 <InputLabel>{column.label}</InputLabel>
                 <Select
-                  value={value !== undefined ? value.toString() : ""}
-                  onChange={handleSelectChange} // استفاده از handleSelectChange
+                  value={booleanValue === true ? "true" : "false"}
+                  onChange={(e) => handleSelectChange(e)}
                   input={<OutlinedInput label={column.label} />}
                 >
-                  <MenuItem value="true">فعال</MenuItem>
-                  <MenuItem value="false">غیرفعال</MenuItem>
+                  <MenuItem value="true">{trueLabel}</MenuItem>
+                  <MenuItem value="false">{falseLabel}</MenuItem>
                 </Select>
               </FormControl>
             );
           }
 
-          return Array.isArray(value) ? (
-            <FormControl key={key} fullWidth margin="dense">
-              <InputLabel>{column.label}</InputLabel>
-              <Select
-                multiple
-                value={value}
-                onChange={handleMultiSelectChange(key)}
-                input={<OutlinedInput label={column.label} />}
-                renderValue={(selected) => selected.join(", ")}
-              >
-                {permissionsList.map((option) => (
-                  <MenuItem key={option} value={option}>
-                    <Checkbox checked={value.includes(option)} />
-                    <ListItemText primary={option} />
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          ) : (
+          if (totalArrayItem && Array.isArray(value)) {
+            return (
+              <FormControl key={key} fullWidth margin="dense">
+                <InputLabel>{column.label}</InputLabel>
+                <Select
+                  multiple
+                  value={value}
+                  onChange={handleMultiSelectChange}
+                  input={<OutlinedInput label={column.label} />}
+                  renderValue={(selected) => selected.join(", ")}
+                >
+                  {totalArrayItem.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      <Checkbox checked={value.includes(option.value)} />
+                      <ListItemText primary={option.label} />
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            );
+          }
+
+          return (
             <TextField
               key={key}
               margin="dense"
@@ -139,10 +142,10 @@ const EditDialog: React.FC<EditDialogProps> = ({
               }
               name={key}
               value={value}
-              onChange={handleInputChange} // استفاده از handleInputChange
+              onChange={handleInputChange}
               fullWidth
               error={!!errors[key]}
-              helperText={errors[key] ? "این فیلد الزامی است" : ""}
+              helperText={errors[key] ? "This field is required" : ""}
             />
           );
         })}

@@ -3,8 +3,15 @@
 import React from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, Typography } from '@mui/material';
 
-
-const ViewDialog: React.FC<ViewDialogProps> = ({ open, onClose, rowData, titles }) => {
+const ViewDialog: React.FC<ViewDialogProps> = ({ 
+  open, 
+  onClose, 
+  rowData, 
+  titles,  
+  booleanAttributeName, 
+  falseLabel, 
+  trueLabel 
+}) => {
   if (!rowData) return null;
 
   return (
@@ -15,10 +22,16 @@ const ViewDialog: React.FC<ViewDialogProps> = ({ open, onClose, rowData, titles 
           <div key={key}>
             {titles.map((column: any) => {
               if (column.id === key) {
+                let valueToShow = rowData[key];
+
+                if (booleanAttributeName && key === booleanAttributeName) {
+                  valueToShow = rowData[key] ? trueLabel : falseLabel;
+                }
+
                 return (
                   <Typography key={key} variant="body1" gutterBottom>
                     <strong>{column.label}:</strong>{" "}
-                    {Array.isArray(rowData[key]) ? rowData[key].join(", ") : rowData[key]}
+                    {Array.isArray(valueToShow) ? valueToShow.join(", ") : valueToShow}
                   </Typography>
                 );
               }
@@ -33,6 +46,5 @@ const ViewDialog: React.FC<ViewDialogProps> = ({ open, onClose, rowData, titles 
     </Dialog>
   );
 };
-
 
 export default ViewDialog;

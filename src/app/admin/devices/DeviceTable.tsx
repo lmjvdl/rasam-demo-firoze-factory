@@ -1,8 +1,8 @@
 import React from "react";
 import DataTable from "@/components/AdminPanelComponent/ViewProcess/DataTable";
-import { GroupTableProps } from "@/interfaces/admin/group";
+import { DeviceTableProps } from "@/interfaces/admin/device";
 
-const GroupTable: React.FC<GroupTableProps> = ({
+const DeviceTable: React.FC<DeviceTableProps> = ({
   data,
   columns,
   onView,
@@ -27,4 +27,4 @@ const GroupTable: React.FC<GroupTableProps> = ({
   );
 };
 
-export default GroupTable;
+export default DeviceTable;
