@@ -9,8 +9,12 @@ const productLinePartSchema = z.object({
   icon: z.number().int("آیکن باید یک عدد صحیح باشد").nullable().optional(),
 });
 
-export const createNewProductLinePart = async (data: unknown) => {
-  const validationResult = productLinePartSchema.safeParse(data);
+export const createNewProductLinePart = async (data: any) => {
+  const dataWithProductLineAsNumber = {
+    ...data,
+    product_line: Number(data.product_line),
+  };
+  const validationResult = productLinePartSchema.safeParse(dataWithProductLineAsNumber);
 
   if (!validationResult.success) {
     return { success: false, error: validationResult.error.format() };

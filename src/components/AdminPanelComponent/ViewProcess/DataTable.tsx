@@ -6,9 +6,9 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Paper,
   IconButton,
   TablePagination,
+  Box,
 } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import EditIcon from "@mui/icons-material/Edit";
@@ -32,8 +32,8 @@ const DataTable: React.FC<DataTableProps> = ({
   );
 
   return (
-    <Paper sx={{ marginTop: "35px", padding: "16px" }}>
-      <TableContainer>
+    <Box sx={{ marginTop: "35px", padding: "16px" }}>
+      <TableContainer sx={{ borderRadius: "10px", overflow: "hidden" }}>
         <Table>
           <TableHead>
             <TableRow>
@@ -49,7 +49,13 @@ const DataTable: React.FC<DataTableProps> = ({
               <TableRow key={rowIndex}>
                 {visibleColumns.map((column) => (
                   <TableCell key={column.id} style={{ textAlign: "center" }}>
-                    {column.render ? (
+                    {column.isImage ? (
+                      <img
+                        src={row[column.id]}
+                        alt="Image"
+                        style={{ maxWidth: "100px", maxHeight: "100px" }}
+                      />
+                    ) : column.render ? (
                       column.render(row)
                     ) : !column.isAdditionalAction && column.isActionColumn ? (
                       <>
@@ -90,7 +96,7 @@ const DataTable: React.FC<DataTableProps> = ({
           rowsPerPageOptions={[]}
         />
       </div>
-    </Paper>
+    </Box>
   );
 };
 

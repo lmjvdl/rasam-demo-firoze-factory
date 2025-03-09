@@ -7,8 +7,13 @@ const deviceDataSchema = z.object({
   data_type: z.array(z.number()).nonempty("نوع داده الزامی است"),
 });
 
-export const createNewDeviceData = async (data: unknown) => {
-  const validationResult = deviceDataSchema.safeParse(data);
+export const createNewDeviceData = async (data: any) => {
+  const DeviceDataAsNumber = {
+    ...data,
+    device: Number(data.product_line),
+    data_type: data.data_type.map((item: string) => Number(item))
+  };
+  const validationResult = deviceDataSchema.safeParse(DeviceDataAsNumber);
 
   if (!validationResult.success) {
     return { success: false, error: validationResult.error.format() };

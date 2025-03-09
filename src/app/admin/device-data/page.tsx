@@ -12,10 +12,10 @@ export default function DeviceDataPage() {
         buttonText="افزودن اطلاعات دستگاه جدید"
         formFields={[
           {
-            name: "device", label: "Device", type: "number", required: true
+            name: "device", label: "دستگاه", type: "number", required: true
           },
           {
-            name: "data_type", label: "Data Type", type: "number", required: true
+            name: "data_type", label: "نوع داده", type: "number", required: true
           },
         ]}
         onSubmit={createNewDeviceData}

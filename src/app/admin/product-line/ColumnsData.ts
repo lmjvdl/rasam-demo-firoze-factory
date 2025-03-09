@@ -1,5 +1,13 @@
 export const columns = () => [
     {
+        id: "icon",
+        label: "آیکون",
+        required: false,
+        showOnTable: true,
+        canEdit: true,
+        isAdditionalAction: false,
+    },
+    {
         id: "id",
         label: "شناسه",
         showOnTable: false,
@@ -26,14 +34,6 @@ export const columns = () => [
         id: "code",
         label: "کد",
         required: true,
-        showOnTable: true,
-        canEdit: true,
-        isAdditionalAction: false,
-    },
-    {
-        id: "icon",
-        label: "آیکون",
-        required: false,
         showOnTable: true,
         canEdit: true,
         isAdditionalAction: false,

@@ -1,5 +1,22 @@
 export const columns = () => [
     {
+        id: "icon",
+        label: "آیکون",
+        required: false,
+        showOnTable: true,
+        canEdit: true,
+        isAdditionalAction: false,
+        isImage: true
+    },
+    {
+        id: "name",
+        label: "نام",
+        required: true,
+        showOnTable: true,
+        canEdit: true,
+        isAdditionalAction: false,
+    },
+    {
         id: "id",
         label: "شناسه",
         showOnTable: false,
@@ -15,25 +32,9 @@ export const columns = () => [
         isAdditionalAction: false,
     },
     {
-        id: "name",
-        label: "نام",
-        required: true,
-        showOnTable: true,
-        canEdit: true,
-        isAdditionalAction: false,
-    },
-    {
         id: "code",
         label: "کد",
         required: true,
-        showOnTable: true,
-        canEdit: true,
-        isAdditionalAction: false,
-    },
-    {
-        id: "icon",
-        label: "آیکون",
-        required: false,
         showOnTable: true,
         canEdit: true,
         isAdditionalAction: false,

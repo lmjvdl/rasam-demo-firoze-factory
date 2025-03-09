@@ -31,7 +31,17 @@ const ViewDialog: React.FC<ViewDialogProps> = ({
                 return (
                   <Typography key={key} variant="body1" gutterBottom>
                     <strong>{column.label}:</strong>{" "}
-                    {Array.isArray(valueToShow) ? valueToShow.join(", ") : valueToShow}
+                    {column.id === "logo" || column.id === "icon" ? (
+                      <img 
+                        src={valueToShow} 
+                        alt={column.label} 
+                        style={{ maxWidth: "100px", maxHeight: "100px" }}
+                      />
+                    ) : Array.isArray(valueToShow) ? (
+                      valueToShow.join(", ")
+                    ) : (
+                      valueToShow
+                    )}
                   </Typography>
                 );
               }

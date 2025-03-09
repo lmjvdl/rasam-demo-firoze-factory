@@ -5,7 +5,7 @@ import { z } from "zod";
 const groupSchema = z.object({
   name: z.string().min(1, "نام گروه الزامی است").max(150),
   permissions: z.array(z.number().int("مجوزها باید به صورت اعداد صحیح باشند")),
-  users: z.array(z.string()).nullable().optional(),
+  users: z.array(z.string()).optional(),
 });
 
 export const createNewGroup = async (data: unknown) => {
@@ -15,14 +15,10 @@ export const createNewGroup = async (data: unknown) => {
     return { success: false, error: validationResult.error.format() };
   }
 
-  const processedData = {
-    ...validationResult.data,
-  };
-
   try {
     const response = await fetchWithErrorForCreate(`${groupUrls.createGroup}`, {
       method: "POST",
-      body: JSON.stringify(processedData),
+      body: JSON.stringify(validationResult),
     });
 
     if (response.status_code === 201 && response.success) {

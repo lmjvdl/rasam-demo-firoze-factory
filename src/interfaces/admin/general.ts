@@ -1,15 +1,16 @@
 interface ModalFormProps {
     buttonText: string;
     formFields: {
-        name: string;
-        label: string;
-        type: string;
-        options?: { label: string; value: string }[];
-        required: boolean;
+      name: string;
+      label: string;
+      type: string;
+      options?: { label: string; value: number }[];
+      required: boolean;
     }[];
-    sxButton?: object;
     onSubmit: (data: any) => Promise<{ success: boolean; error?: string }>;
-}
+    icons?: { id: number; url: string }[];
+    loadingIcons?: boolean;
+  }
 
 interface Column {
   id: string;
@@ -18,6 +19,7 @@ interface Column {
   isActionColumn?: boolean;
   isAdditionalAction?: boolean;
   showOnTable?: boolean;
+  isImage?: boolean;
 }
 
 interface DataTableProps {

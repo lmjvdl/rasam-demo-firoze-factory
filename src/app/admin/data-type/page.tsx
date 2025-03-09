@@ -12,13 +12,13 @@ export default function DataTypePage() {
         buttonText="افزودن نوع اطلاعات جدید"
         formFields={[
           {
-            name: "name", label: "Name", type: "text", required: true
+            name: "name", label: "نام", type: "text", required: true
           },
           {
             name: "json_field", label: "Json field", type: "text", required: true
           },
           {
-            name: "description", label: "Description", type: "text", required: false
+            name: "description", label: "توضیحات", type: "text", required: false
           },
         ]}
         onSubmit={createNewDataType}

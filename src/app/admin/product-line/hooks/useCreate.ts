@@ -9,15 +9,21 @@ const productLineSchema = z.object({
   icon: z.number().int("آیکن باید یک عدد صحیح باشد").nullable().optional(),
 });
 
-export const createNewProductLine = async (data: unknown) => {
-  const validationResult = productLineSchema.safeParse(data);
+export const createNewProductLine = async (data: any) => {
+  const dataWithCompanyAsNumber = {
+    ...data,
+    company: Number(data.company),
+  };
 
+  const validationResult = productLineSchema.safeParse(dataWithCompanyAsNumber);
+  
   if (!validationResult.success) {
     return { success: false, error: validationResult.error.format() };
   }
 
   const processedData = {
     ...validationResult.data,
+    icon: validationResult.data.icon !== undefined ? validationResult.data.icon : null,
   };
 
   try {
@@ -35,3 +41,4 @@ export const createNewProductLine = async (data: unknown) => {
     throw new Error("درخواست به سرور با مشکل مواجه شد.");
   }
 };
+

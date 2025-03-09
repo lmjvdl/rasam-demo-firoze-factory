@@ -15,11 +15,11 @@ const AllContentPermission: React.FC = () => {
   const [totalData, setTotalData] = useState<number>(0);
   const [nextPage, setNextPage] = useState<null | string>(null);
 
-  const getList = getPermissionList(pageNumber, 8, nextPage);
+  const getList = getPermissionList(pageNumber, 12, nextPage);
 
   useEffect(() => {
     getList.mutate(
-      { page: pageNumber + 1, page_size: 8, url: nextPage },
+      { page: pageNumber + 1, page_size: 12, url: nextPage },
       {
         onSuccess: (information) => {
           setData(information);
@@ -33,7 +33,7 @@ const AllContentPermission: React.FC = () => {
 
   const handlePagination = (newPage: number) => {
     setPageNumber(newPage);
-    getList.mutate({ page: newPage + 1, page_size: 8, url: nextPage });
+    getList.mutate({ page: newPage + 1, page_size: 12, url: nextPage });
   };
 
   const handleView = (row: any) => {

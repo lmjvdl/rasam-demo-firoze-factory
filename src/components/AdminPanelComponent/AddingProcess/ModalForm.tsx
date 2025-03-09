@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Button,
   Dialog,
@@ -15,26 +15,16 @@ import {
   OutlinedInput,
   Checkbox,
   ListItemText,
+  CircularProgress,
 } from "@mui/material";
 import { useForm, Controller } from "react-hook-form";
-
-interface ModalFormProps {
-  buttonText: string;
-  formFields: {
-    name: string;
-    label: string;
-    type: string;
-    options?: { label: string; value: string }[];
-    required: boolean;
-  }[];
-  sxButton?: object;
-  onSubmit: (data: any) => Promise<{ success: boolean; error?: string }>;
-}
 
 const ModalForm: React.FC<ModalFormProps> = ({
   buttonText,
   formFields,
   onSubmit,
+  icons,
+  loadingIcons,
 }) => {
   const [open, setOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -110,7 +100,7 @@ const ModalForm: React.FC<ModalFormProps> = ({
                         }
                         input={<OutlinedInput label={field.label} />}
                         renderValue={(selected) =>
-                          (selected as string[])
+                          (selected as number[])
                             .map(
                               (val) =>
                                 field.options?.find(
@@ -124,7 +114,7 @@ const ModalForm: React.FC<ModalFormProps> = ({
                           <MenuItem key={option.value} value={option.value}>
                             <Checkbox
                               checked={controllerField.value.includes(
-                                option.value
+                                option.value.toString()
                               )}
                             />
                             <ListItemText primary={option.label} />
@@ -149,6 +139,47 @@ const ModalForm: React.FC<ModalFormProps> = ({
                         ))}
                       </Select>
                     </FormControl>
+                  ) : field.type === "icon" ? (
+                    <FormControl fullWidth margin="normal">
+                      <InputLabel>{field.label}</InputLabel>
+                      {loadingIcons ? (
+                        <CircularProgress size={24} />
+                      ) : (
+                        <Select
+                          {...controllerField}
+                          value={controllerField.value || ""}
+                          label={field.label}
+                          renderValue={(selected) => {
+                            const selectedIcon = icons?.find(
+                              (icon) => icon.id === selected
+                            );
+                            return selectedIcon ? (
+                              <img
+                                src={selectedIcon.url}
+                                alt="Selected Icon"
+                                style={{ width: 24, height: 24 }}
+                              />
+                            ) : (
+                              ""
+                            );
+                          }}
+                        >
+                          {icons?.map((icon) => (
+                            <MenuItem key={icon.id} value={icon.id}>
+                              <img
+                                src={icon.url}
+                                alt={`Icon ${icon.id}`}
+                                style={{
+                                  width: 24,
+                                  height: 24,
+                                  marginRight: 8,
+                                }}
+                              />
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      )}
+                    </FormControl>
                   ) : (
                     <TextField
                       fullWidth
@@ -166,7 +197,7 @@ const ModalForm: React.FC<ModalFormProps> = ({
                         "& .MuiInputLabel-asterisk": { color: "red" },
                       }}
                       {...controllerField}
-                    /> 
+                    />
                   )
                 }
               />
