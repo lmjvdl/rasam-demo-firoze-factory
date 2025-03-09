@@ -66,19 +66,20 @@ const EditDialog: React.FC<EditDialogProps> = ({
   const handleSave = () => {
     const newErrors: { [key: string]: boolean } = {};
     titles.forEach((column) => {
-      if (column.required && column.id && !formData[column.id]) {
+      if (column.required && column.id && (formData[column.id] === undefined || formData[column.id] === null || formData[column.id] === "")) {
         newErrors[column.id] = true;
       }
     });
-
+  
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
-
+  
     onSave(formData);
     onClose();
   };
+  
 
   return (
     <Dialog open={open} onClose={onClose}>
@@ -94,7 +95,7 @@ const EditDialog: React.FC<EditDialogProps> = ({
               <FormControl key={booleanAttributeName} fullWidth margin="dense">
                 <InputLabel>{column.label}</InputLabel>
                 <Select
-                  value={booleanValue === true ? "true" : "false"}
+                  value={booleanValue ? "true" : "false"}
                   onChange={(e) => handleSelectChange(e)}
                   input={<OutlinedInput label={column.label} />}
                 >

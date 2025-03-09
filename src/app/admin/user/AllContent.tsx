@@ -44,9 +44,10 @@ const AllContentUser: React.FC = () => {
     setData((prevData) => {
       if (prevData?.data) {
         const { groups, ...updatedDataWithoutGroups } = updatedRow;
-
+        
+        updatedDataWithoutGroups.is_active = Boolean(updatedDataWithoutGroups.is_active);
         updateUserMutation.mutate(updatedDataWithoutGroups);
-
+  
         return {
           ...prevData,
           data: {
@@ -62,6 +63,7 @@ const AllContentUser: React.FC = () => {
       return prevData || PrevDataInitial;
     });
   };
+  
 
   const handlePagination = (newPage: number) => {
     setPageNumber(newPage);
@@ -92,6 +94,7 @@ const AllContentUser: React.FC = () => {
 
   // Handling the boolean value change (is_active)
   const handleBooleanValueChange = (value: boolean) => {
+    console.log(value)
     setSelectedRow((prevSelectedRow: UserUpdateSchema | null) => {
       if (prevSelectedRow) {
         return {

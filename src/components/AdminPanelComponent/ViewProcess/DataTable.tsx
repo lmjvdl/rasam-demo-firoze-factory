@@ -13,6 +13,7 @@ import {
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { truncateText } from "@/utils/formatters/truncateText";
 
 const DataTable: React.FC<DataTableProps> = ({
   columns,
@@ -26,7 +27,9 @@ const DataTable: React.FC<DataTableProps> = ({
 }) => {
   const validData = Array.isArray(data) ? data : [];
 
-  const visibleColumns = columns.filter(column => column.showOnTable !== false);
+  const visibleColumns = columns.filter(
+    (column) => column.showOnTable !== false
+  );
 
   return (
     <Paper sx={{ marginTop: "35px", padding: "16px" }}>
@@ -61,9 +64,9 @@ const DataTable: React.FC<DataTableProps> = ({
                         </IconButton>
                       </>
                     ) : Array.isArray(row[column.id]) ? (
-                      row[column.id].join(", ")
+                      truncateText(row[column.id].join(", "))
                     ) : (
-                      row[column.id]
+                      truncateText(row[column.id])
                     )}
                   </TableCell>
                 ))}
@@ -75,7 +78,7 @@ const DataTable: React.FC<DataTableProps> = ({
       <div>
         <TablePagination
           count={count}
-          rowsPerPage={7} 
+          rowsPerPage={7}
           page={page}
           onPageChange={(_, newPage) => onPageChange(newPage)}
           sx={{
@@ -92,4 +95,3 @@ const DataTable: React.FC<DataTableProps> = ({
 };
 
 export default DataTable;
-
