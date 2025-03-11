@@ -5,26 +5,26 @@ import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import { useToast } from "@/hooks/UI/useToast";
 import permissionUrls from "@/utils/URLs/adminPanel/permission/permission";
 
-export default function getPermissionList(pages: number, pageSize: number, URL: string | null) {
+export default function getPermissionList() {
   const queryClient = useQueryClient();
   const { showToast } = useToast();
 
   const getPermissionListMutation = useMutation({
     mutationKey: allQueryKeys.adminPanel.permission.list,
     retry: false,
-    mutationFn: ({ page = pages, page_size = pageSize, url = URL }: { page?: number; page_size?: number; url: string | null; }) =>
+    mutationFn: ({ page, page_size, url }: { page?: number; page_size?: number; url: string | null; }) =>
       fetchWithError(
         url !== null ? url : 
         `${permissionUrls.listPermission}?p=${page}&page_size=${page_size}`,
         { method: "GET" }
       ).then(sanitizer),
-    onSuccess: (serverResponse) => {
+      onSuccess: (serverResponse) => {
       queryClient.setQueryData(allQueryKeys.adminPanel.permission.list, {
         access: serverResponse.data,
       });
     },
     onError: () => {
-      showToast("❌ خطایی رخ داد.", "error");
+      showToast("خطایی رخ داد.", "error");
     },
   });
 
@@ -36,12 +36,10 @@ const responseSchema = z.object({
     count: z.number(),
     next: z.nullable(z.string()), 
     previous: z.nullable(z.string()),
-    page_size: z.number(),
     results: z.array(
       z.object({
         id: z.number(),
         name: z.string(),
-        codename: z.string(),
         translate: z.string(),
       })
     ),

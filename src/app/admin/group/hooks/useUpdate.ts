@@ -25,7 +25,7 @@ const useUpdateGroup = () => {
       queryClient.invalidateQueries({ queryKey: allQueryKeys.adminPanel.group.update });
     },
     onError: () => {
-      showToast("❌ خطایی در به‌روزرسانی گروه رخ داد.", "error");
+      showToast("خطایی در به‌روزرسانی گروه رخ داد.", "error");
     },
   });
 

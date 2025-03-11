@@ -1,16 +1,18 @@
 interface ModalFormProps {
-    buttonText: string;
-    formFields: {
-      name: string;
-      label: string;
-      type: string;
-      options?: { label: string; value: number }[];
-      required: boolean;
-    }[];
-    onSubmit: (data: any) => Promise<{ success: boolean; error?: string }>;
-    icons?: { id: number; url: string }[];
-    loadingIcons?: boolean;
-  }
+  buttonText: string;
+  formFields: {
+    name: string;
+    label: string;
+    type: string;
+    accept?: string;
+    options?: { label: string; value: number }[];
+    required: boolean;
+  }[];
+  onSubmit: (data: any) => Promise<{ success: boolean; error?: string }>;
+  icons?: { id: number; url: string }[];
+  loadingIcons?: boolean;
+}
+
 
 interface Column {
   id: string;

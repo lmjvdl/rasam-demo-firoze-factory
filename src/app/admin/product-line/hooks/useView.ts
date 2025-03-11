@@ -24,7 +24,7 @@ export default function getProductLineList(pages: number, pageSize: number, URL:
       });
     },
     onError: () => {
-      showToast("❌ خطایی رخ داد.", "error");
+      showToast("خطایی رخ داد.", "error");
     },
   });
 
@@ -36,7 +36,6 @@ const responseSchema = z.object({
     count: z.number(),
     next: z.nullable(z.string()), 
     previous: z.nullable(z.string()),
-    page_size: z.number(),
     results: z.array(
       z.object({
         id: z.number(),

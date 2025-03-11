@@ -26,7 +26,7 @@ const useUpdate = () => {
       queryClient.invalidateQueries({ queryKey: allQueryKeys.adminPanel.dataType.update });
     },
     onError: () => {
-      showToast("❌ خطایی در به‌روزرسانی نوع داده رخ داد.", "error");
+      showToast("خطایی در به‌روزرسانی نوع داده رخ داد.", "error");
     },
   });
 

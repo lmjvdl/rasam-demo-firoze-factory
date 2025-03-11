@@ -3,24 +3,27 @@ import groupUrls from "@/utils/URLs/adminPanel/group/groupUrl";
 import { z } from "zod";
 
 const groupSchema = z.object({
-  name: z.string().min(1, "نام گروه الزامی است").max(150),
+  name: z.string(),
   permissions: z.array(z.number().int("مجوزها باید به صورت اعداد صحیح باشند")),
-  users: z.array(z.string()).optional(),
+  users: z.array(z.number()).optional(),
 });
 
 export const createNewGroup = async (data: unknown) => {
   const validationResult = groupSchema.safeParse(data);
-
   if (!validationResult.success) {
-    return { success: false, error: validationResult.error.format() };
+    return { success: false, error: validationResult.error.errors?.join(", ") };
   }
+  
+  const processedData = {
+    ...validationResult.data,
+  };
 
   try {
     const response = await fetchWithErrorForCreate(`${groupUrls.createGroup}`, {
       method: "POST",
-      body: JSON.stringify(validationResult),
+      body: JSON.stringify(processedData),
     });
-
+    
     if (response.status_code === 201 && response.success) {
       return { success: true, data: response.data };
     } else {

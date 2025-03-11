@@ -18,7 +18,7 @@ const useDeleteDeviceData = () => {
       queryClient.invalidateQueries({ queryKey: allQueryKeys.adminPanel.deviceData.delete });
     },
     onError: () => {
-      showToast("❌ خطایی در حذف داده دستگاه رخ داد.", "error");
+      showToast("خطایی در حذف داده دستگاه رخ داد.", "error");
     },
   });
 

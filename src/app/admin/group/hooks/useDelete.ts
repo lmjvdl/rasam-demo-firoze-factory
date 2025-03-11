@@ -18,7 +18,7 @@ const useDeleteGroup = () => {
       queryClient.invalidateQueries({ queryKey: allQueryKeys.adminPanel.group.delete }); // تغییر کلید query به کلید مربوط به group
     },
     onError: () => {
-      showToast("❌ خطایی در حذف گروه رخ داد.", "error");
+      showToast("خطایی در حذف گروه رخ داد.", "error");
     },
   });
 

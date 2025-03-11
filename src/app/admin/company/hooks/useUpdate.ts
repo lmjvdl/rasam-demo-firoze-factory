@@ -27,7 +27,7 @@ const useUpdate = () => {
       queryClient.invalidateQueries({ queryKey: allQueryKeys.adminPanel.company.update });
     },
     onError: () => {
-      showToast("❌ خطایی در به‌روزرسانی شرکت رخ داد.", "error");
+      showToast("خطایی در به‌روزرسانی شرکت رخ داد.", "error");
     },
   });
 

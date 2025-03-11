@@ -18,7 +18,7 @@ const useDeleteDataType = () => {
       queryClient.invalidateQueries({ queryKey: allQueryKeys.adminPanel.dataType.delete }); // تغییر کلید query به کلید مربوط به data type
     },
     onError: () => {
-      showToast("❌ خطایی در حذف نوع داده رخ داد.", "error");
+      showToast("خطایی در حذف نوع داده رخ داد.", "error");
     },
   });
 

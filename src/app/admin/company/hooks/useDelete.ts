@@ -18,7 +18,7 @@ const useDelete = () => {
       queryClient.invalidateQueries({ queryKey: allQueryKeys.adminPanel.company.delete});
     },
     onError: () => {
-      showToast("❌ خطایی در حذف شرکت رخ داد.", "error");
+      showToast("خطایی در حذف شرکت رخ داد.", "error");
     },
   });
 

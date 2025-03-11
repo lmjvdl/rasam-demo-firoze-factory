@@ -7,7 +7,7 @@ class GroupUrls extends Url {
   }
 
   public get createGroup() {
-    const basePath = `${this.baseUrlPath}/`;
+    const basePath = `${this.baseUrlPath}/create/`;
     return new URL(basePath, this.origin);
   }
 

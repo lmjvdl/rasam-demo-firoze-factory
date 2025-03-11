@@ -17,8 +17,9 @@ export const createNewDataType = async (data: unknown) => {
 
   const processedData = {
     ...validationResult.data,
+    description: validationResult.data.description === "" ? null : validationResult.data.description
   };
-
+  
   try {
     const response = await fetchWithErrorForCreate(`${dataTypeUrls.createDataType}`, {
       method: "POST",

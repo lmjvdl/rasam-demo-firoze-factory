@@ -43,7 +43,7 @@ export async function fetchWithErrorWithAlarm(
       const response = await window.fetch(url, refinedOption);
       const result = await response.json();
       if (response.status === 200) {
-        toast.success(result.messages || "✅ عملیات موفقیت‌آمیز بود");
+        toast.success(result.messages || "عملیات موفقیت‌آمیز بود");
         return result;
       } else if(response.status !== 200 || !response.ok) {
         if (Array.isArray(result.messages)) {
@@ -72,7 +72,7 @@ export async function fetchWithErrorForCreate(
     const rawData = await response.json();
 
     if (response.status === 200 || response.status === 201) {
-      toast.success(rawData.messages || "✅ عملیات موفقیت‌آمیز بود");
+      toast.success(rawData.messages || "عملیات موفقیت‌آمیز بود");
       return rawData;
     } else {
       if (Array.isArray(rawData.messages)) {
@@ -86,7 +86,7 @@ export async function fetchWithErrorForCreate(
           }
         });
       } else {
-        toast.error(rawData.messages || "❌ خطایی رخ داده است");
+        toast.error(rawData.messages || "خطایی رخ داده است");
       }
       throw new Error("درخواست به سرور با مشکل مواجه شد.");
     }
@@ -132,10 +132,10 @@ export async function uploadFileWithError(
     const rawData = await response.json();
 
     if (response.status === 200 || response.status === 201) {
-      toast.success(rawData.messages || "✅ فایل با موفقیت آپلود شد");
+      toast.success(rawData.messages || "فایل با موفقیت آپلود شد");
       return rawData;
     } else {
-      toast.error(rawData.messages || "❌ خطا در آپلود فایل رخ داده است");
+      toast.error(rawData.messages || "خطا در آپلود فایل رخ داده است");
       throw new Error("درخواست آپلود با مشکل مواجه شد.");
     }
   } catch (error) {

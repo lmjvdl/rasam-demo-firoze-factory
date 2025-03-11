@@ -27,7 +27,7 @@ const useUpdateProductLine = () => {
       queryClient.invalidateQueries({ queryKey: allQueryKeys.adminPanel.productLine.update });
     },
     onError: () => {
-      showToast("❌ خطایی در به‌روزرسانی خط تولید رخ داد.", "error");
+      showToast("خطایی در به‌روزرسانی خط تولید رخ داد.", "error");
     },
   });
 

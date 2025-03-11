@@ -9,7 +9,6 @@ const responseSchema = z.object({
     count: z.number(),
     next: z.nullable(z.string()),
     previous: z.nullable(z.string()),
-    page_size: z.number(),
     results: z.array(
       z.object({
         id: z.number(),

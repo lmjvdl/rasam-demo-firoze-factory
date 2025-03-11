@@ -11,15 +11,15 @@ const AllContentPermission: React.FC = () => {
   const [data, setData] = useState<ResponseSchema>(PrevDataInitial);
   const [selectedRow, setSelectedRow] = useState<any>(null);
   const [viewOpen, setViewOpen] = useState(false);
-  const [pageNumber, setPageNumber] = useState<number>(0);
+  const [pageNumber, setPageNumber] = useState<number>(1);
   const [totalData, setTotalData] = useState<number>(0);
   const [nextPage, setNextPage] = useState<null | string>(null);
 
-  const getList = getPermissionList(pageNumber, 12, nextPage);
+  const getList = getPermissionList();
 
   useEffect(() => {
     getList.mutate(
-      { page: pageNumber + 1, page_size: 12, url: nextPage },
+      { page: pageNumber, page_size: 12, url: nextPage },
       {
         onSuccess: (information) => {
           setData(information);

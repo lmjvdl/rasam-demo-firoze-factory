@@ -1,13 +1,12 @@
 import { useState } from "react";
-import { DialogTitle, DialogContent, DialogActions, Button, TextField } from "@mui/material";
+import { DialogContent, DialogActions, Button } from "@mui/material";
 import { uploadIcon } from "@/app/admin/upload-image/hooks/useCreate";
 
 interface AddIconDialogProps {
   onClose: () => void;
-  onUploadSuccess: () => void;
 }
 
-const AddIconDialog = ({ onClose, onUploadSuccess }: AddIconDialogProps) => {
+const AddIconDialog = ({ onClose }: AddIconDialogProps) => {
   const [file, setFile] = useState<File | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -26,7 +25,6 @@ const AddIconDialog = ({ onClose, onUploadSuccess }: AddIconDialogProps) => {
 
     try {
       await uploadIcon(file);
-      onUploadSuccess();
       onClose();
     } catch (error) {
       setError("خطایی در آپلود فایل رخ داده است.");
@@ -35,7 +33,6 @@ const AddIconDialog = ({ onClose, onUploadSuccess }: AddIconDialogProps) => {
 
   return (
     <>
-      <DialogTitle>افزودن آیکون</DialogTitle>
       <DialogContent>
         <input type="file" accept="image/*" onChange={handleFileChange} />
         {error && <p style={{ color: "red" }}>{error}</p>}

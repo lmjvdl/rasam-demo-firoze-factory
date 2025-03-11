@@ -2,10 +2,6 @@ import { z } from "zod";
 
 export const permissionInitialData = {
     data: {
-      count: 0,
-      next: null,
-      previous: null,
-      page_size: 0,
       results: [],
     },
     status_code: 200,
@@ -16,15 +12,10 @@ export const permissionInitialData = {
 
   export const arrayOfPermission = z.object({
     data: z.object({
-      count: z.number(),
-      next: z.string().nullable(),
-      previous: z.string().nullable(),
-      page_size: z.number(),
       results: z.array(
         z.object({
           id: z.number(),
           name: z.string(),
-          codename: z.string(),
           translate: z.string(),
         })
       ),

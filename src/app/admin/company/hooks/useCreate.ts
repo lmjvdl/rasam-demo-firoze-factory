@@ -25,9 +25,6 @@ export const createNewCompany = async (data: unknown) => {
   try {
     const response = await fetchWithErrorForCreate(`${companyUrls.createCompany}`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
       body: JSON.stringify(processedData),
     });
 

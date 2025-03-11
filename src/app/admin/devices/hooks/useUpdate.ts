@@ -26,7 +26,7 @@ const useUpdateDevice = () => {
       queryClient.invalidateQueries({ queryKey: allQueryKeys.adminPanel.devices.update });
     },
     onError: () => {
-      showToast("❌ خطایی در به‌روزرسانی دستگاه رخ داد.", "error");
+      showToast("خطایی در به‌روزرسانی دستگاه رخ داد.", "error");
     },
   });
 

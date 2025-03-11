@@ -18,7 +18,7 @@ const useDeleteProductLinePart = () => {
       queryClient.invalidateQueries({ queryKey: allQueryKeys.adminPanel.productLinePart.delete });
     },
     onError: () => {
-      showToast("❌ خطایی در حذف بخش خط محصول رخ داد.", "error");
+      showToast("خطایی در حذف بخش خط محصول رخ داد.", "error");
     },
   });
 

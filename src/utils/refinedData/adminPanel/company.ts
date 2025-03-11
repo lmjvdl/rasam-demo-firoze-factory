@@ -19,7 +19,6 @@ export const companyInitialData = {
       count: z.number(),
       next: z.string().nullable(),
       previous: z.string().nullable(),
-      page_size: z.number(),
       results: z.array(
         z.object({
           id: z.number(),

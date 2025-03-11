@@ -22,7 +22,7 @@ const useDelete = () => {
       queryClient.invalidateQueries({ queryKey: allQueryKeys.adminPanel.company.delete });
     },
     onError: () => {
-      showToast("❌ خطایی در غیرفعال‌سازی کاربر رخ داد.", "error");
+      showToast("خطایی در غیرفعال‌سازی کاربر رخ داد.", "error");
     },
   });
 

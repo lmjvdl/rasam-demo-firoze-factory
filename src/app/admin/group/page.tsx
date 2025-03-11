@@ -32,7 +32,7 @@ export default function GroupPage() {
             name: "users",
             label: "کاربران",
             type: "multiselect",
-            required: true,
+            required: false,
             options: getUserList.data.map((user) => ({
               label: user.username,
               value: user.id,

@@ -7,7 +7,6 @@ export interface ImageUpload {
 export interface ImageUploadTableProps {
     data: ImageUpload[];
     columns: any[];
-    onDelete: (row: any) => void;
     count: number;
     page: number; 
     onPageChange: (newPage: number) => void;
