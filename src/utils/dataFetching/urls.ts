@@ -1,6 +1,5 @@
 export const isProduction = process.env.NODE_ENV === "development";
-// const local = "https://dev.rasamiot.com/";
-const local = "http://192.168.3.74:8000/";
+const local = "https://dev.rasamiot.com/";
 
 export default class Url {
   protected readonly origin: string;

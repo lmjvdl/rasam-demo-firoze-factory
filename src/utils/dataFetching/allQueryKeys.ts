@@ -28,6 +28,7 @@ const allQueryKeys = {
       list: ["ADMIN_PANEL", "DEVICES", "VIEW"],
       delete: ["ADMIN_PANEL", "DEVICES", "DELETE"],
       update: ["ADMIN_PANEL", "DEVICES", "UPDATE"],
+      product_line_part_list: ["ADMIN_PANEL", "DEVICES", "VIEW", "PRODUCT_LINE_PART_LIST"]
     },
     group: {
       list: ["ADMIN_PANEL", "GROUP", "VIEW"],
@@ -49,6 +50,7 @@ const allQueryKeys = {
       list: ["ADMIN_PANEL", "PRODUCT_LINE_PART", "VIEW"],
       delete: ["ADMIN_PANEL", "PRODUCT_LINE_PART", "DELETE"],
       update: ["ADMIN_PANEL", "PRODUCT_LINE_PART", "UPDATE"],
+      product_line_list: ["ADMIN_PANEL", "PRODUCT_LINE_PART", "VIEW", "PRODUCT_LINE_LIST"],
     },
     icons: {
       list: ["ADMIN_PANEL", "ICONS", "VIEW"],

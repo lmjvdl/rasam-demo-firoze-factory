@@ -114,7 +114,7 @@ const ModalForm: React.FC<ModalFormProps> = ({
                           <MenuItem key={option.value} value={option.value}>
                             <Checkbox
                               checked={controllerField.value.includes(
-                                option.value.toString()
+                                option.value
                               )}
                             />
                             <ListItemText primary={option.label} />

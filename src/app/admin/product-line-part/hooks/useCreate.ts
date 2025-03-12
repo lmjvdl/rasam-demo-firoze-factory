@@ -20,10 +20,15 @@ export const createNewProductLinePart = async (data: any) => {
     return { success: false, error: validationResult.error.format() };
   }
 
+  const processedData = {
+    ...validationResult.data,
+    icon: validationResult.data.icon !== undefined ? validationResult.data.icon : null,
+  };
+
   try {
     const response = await fetchWithErrorForCreate(`${productLinePartUrls.createProductLinePart}`, {
       method: "POST",
-      body: JSON.stringify(validationResult),
+      body: JSON.stringify(processedData),
     });
 
     if (response.status_code === 201 && response.success) {
