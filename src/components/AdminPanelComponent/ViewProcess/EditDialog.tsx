@@ -27,8 +27,7 @@ const EditDialog: React.FC<EditDialogProps> = ({
   falseLabel = "False",
   booleanValue,
   onBooleanValueChange,
-  totalArrayItem = [],
-  selectedArrayItem = [],
+  extraOptions = {},
 }) => {
   const [formData, setFormData] = useState<{ [key: string]: any }>(
     rowData || {}
@@ -56,30 +55,38 @@ const EditDialog: React.FC<EditDialogProps> = ({
     onBooleanValueChange?.(newValue);
   };
 
-  const handleMultiSelectChange = (event: SelectChangeEvent<string[]>) => {
+  const handleMultiSelectChange = (
+    event: SelectChangeEvent<string[]>,
+    key: string
+  ) => {
     setFormData((prev) => ({
       ...prev,
-      [event.target.name]: event.target.value,
+      [key]: event.target.value,
     }));
   };
 
   const handleSave = () => {
     const newErrors: { [key: string]: boolean } = {};
     titles.forEach((column) => {
-      if (column.required && column.id && (formData[column.id] === undefined || formData[column.id] === null || formData[column.id] === "")) {
+      if (
+        column.required &&
+        column.id &&
+        (formData[column.id] === undefined ||
+          formData[column.id] === null ||
+          formData[column.id] === "")
+      ) {
         newErrors[column.id] = true;
       }
     });
-  
+
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
-  
+
     onSave(formData);
     onClose();
   };
-  
 
   return (
     <Dialog open={open} onClose={onClose}>
@@ -106,20 +113,37 @@ const EditDialog: React.FC<EditDialogProps> = ({
             );
           }
 
-          if (totalArrayItem && Array.isArray(value)) {
+          if (column.isMultiSelect && column.optionsKey) {
+            const allOptions = extraOptions[column.optionsKey] || [];
+            const selectedValues = formData?.[key] || [];
+            console.log("EditDialog extraOptions:", extraOptions);
+            console.log("EditDialog column.optionsKey:", column.optionsKey);
+            console.log(
+              "EditDialog allOptions:",
+              extraOptions?.[column.optionsKey]
+            );
             return (
               <FormControl key={key} fullWidth margin="dense">
                 <InputLabel>{column.label}</InputLabel>
                 <Select
                   multiple
-                  value={value}
-                  onChange={handleMultiSelectChange}
+                  value={selectedValues}
+                  onChange={(e) => handleMultiSelectChange(e, key)}
                   input={<OutlinedInput label={column.label} />}
-                  renderValue={(selected) => selected.join(", ")}
+                  renderValue={(selected) =>
+                    selected
+                      .map(
+                        (val: any) =>
+                          allOptions.find((opt) => opt.id === val)?.label || val
+                      )
+                      .join(", ")
+                  }
                 >
-                  {totalArrayItem.map((option) => (
-                    <MenuItem key={option.value} value={option.value}>
-                      <Checkbox checked={value.includes(option.value)} />
+                  {allOptions.map((option) => (
+                    <MenuItem key={option.id} value={option.id}>
+                      {selectedValues.includes(option.id) && (
+                        <Checkbox checked />
+                      )}
                       <ListItemText primary={option.label} />
                     </MenuItem>
                   ))}

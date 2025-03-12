@@ -13,7 +13,6 @@ interface ModalFormProps {
   loadingIcons?: boolean;
 }
 
-
 interface Column {
   id: string;
   label: string;
@@ -22,6 +21,8 @@ interface Column {
   isAdditionalAction?: boolean;
   showOnTable?: boolean;
   isImage?: boolean;
+  isMultiSelect?: boolean; 
+  optionsKey?: string; 
 }
 
 interface DataTableProps {
@@ -44,26 +45,29 @@ interface DeleteDialogProps {
 }
 
 interface EditDialogProps {
-    open: boolean;
-    onClose: () => void;
-    onSave: (data: any) => void;
-    rowData?: { [key: string]: any };
-    titles: Array<{
-      id: string;
-      label: string;
-      required?: boolean;
-      showOnTable?: boolean;
-      canEdit?: boolean;
-      isAdditionalAction?: boolean;
-    }>;
-    booleanAttributeName?: string;
-    trueLabel?: string;
-    falseLabel?: string;
-    booleanValue?: boolean;
-    onBooleanValueChange?: (value: boolean) => void;
-    totalArrayItem?: { value: any; label: string }[];
-    selectedArrayItem?: any[];
-  }
+  open: boolean;
+  onClose: () => void;
+  onSave: (data: any) => void;
+  rowData?: { [key: string]: any };
+  titles: Array<{
+    id: string;
+    label: string;
+    required?: boolean;
+    showOnTable?: boolean;
+    canEdit?: boolean;
+    isAdditionalAction?: boolean;
+    isMultiSelect?: boolean; 
+    optionsKey?: string;
+  }>;
+  booleanAttributeName?: string;
+  trueLabel?: string;
+  falseLabel?: string;
+  booleanValue?: boolean;
+  onBooleanValueChange?: (value: boolean) => void;
+  extraOptions?: { [key: string]: {
+    id: any; value: any; label: string 
+}[] };
+}
 
 interface ViewDialogProps {
     open: boolean;
@@ -83,3 +87,4 @@ interface ViewUserDetailModal {
     rowData: any;
     titles: any;
 }
+

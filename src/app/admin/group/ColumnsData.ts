@@ -18,6 +18,8 @@ export const columns = () => [
         id: "permissions",
         label: "دسترسی‌ها",
         required: false,
+        isMultiSelect: true,
+        optionsKey: "permissionList",
         showOnTable: true,
         canEdit: true,
         isAdditionalAction: false,

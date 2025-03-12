@@ -11,6 +11,7 @@ import { columns } from "./ColumnsData";
 import { GroupUpdateSchema } from "./hooks/useUpdate";
 import GroupTable from "./GroupTable";
 import useUpdate from "./hooks/useUpdate";
+import usePermissionQuery from "./hooks/usePermissionList";
 
 const AllContentGroup: React.FC = () => {
   const [data, setData] = useState<ResponseSchema>(PrevDataInitial);
@@ -25,6 +26,14 @@ const AllContentGroup: React.FC = () => {
   const getList = getGroupList(pageNumber, 8, nextPage);
   const { deleteGroupMutation } = useDelete();
   const { updateGroupMutation } = useUpdate();
+  const permissionList = usePermissionQuery().data
+  ? usePermissionQuery().data.map((permission) => ({
+      id: permission.id,
+      value: permission.id, 
+      label: permission.translate, 
+    }))
+  : [];
+
 
   useEffect(() => {
     getList.mutate(
@@ -88,6 +97,7 @@ const AllContentGroup: React.FC = () => {
   const dynamicColumns = columns();
   const filteredColumnsForEdit = dynamicColumns.filter((col) => col.canEdit);
 
+
   return (
     <>
       <GroupTable
@@ -113,6 +123,7 @@ const AllContentGroup: React.FC = () => {
         onSave={handleSaveEdit}
         rowData={selectedRow}
         titles={filteredColumnsForEdit}
+        extraOptions={{ permissionList }}
       />
       <DeleteDialog
         open={deleteOpen}
