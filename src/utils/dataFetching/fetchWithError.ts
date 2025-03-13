@@ -47,6 +47,7 @@ export async function fetchWithErrorWithAlarm(
         return result;
       } else if(response.status !== 200 || !response.ok) {
         if (Array.isArray(result.messages)) {
+          console.log("من میام اینجا")
           result.messages.forEach((messageObj: { [key: string]: { message: string[] } }) => {
             for (const [field, fieldMessages] of Object.entries(messageObj)) {
               if (Array.isArray(fieldMessages.message)) {

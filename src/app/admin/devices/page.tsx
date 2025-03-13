@@ -5,11 +5,13 @@ import MainCard from "@/components/customContiner/MainCard";
 import { createNewDevice } from "./hooks/useCreate";
 import AllContentDevice from "./AllContent";
 import useProductLinePartQuery from "./hooks/useProducLinePartList";
+import useDataTypeQuery from "./hooks/useDataTypeList";
 
 export default function DevicePage() {
 
   const getListProductLinePart = useProductLinePartQuery();
-
+  const getListDataType = useDataTypeQuery();
+  
   return (
     <MainCard>
       <ModalForm
@@ -23,6 +25,16 @@ export default function DevicePage() {
             options: getListProductLinePart.data.map((product_line_part) => ({
               label: product_line_part.name,
               value: product_line_part.id,
+            })),
+          },
+          {
+            name: "data_type",
+            label: "نوع داده",
+            type: "multiselect",
+            required: true,
+            options: getListDataType.data.map((data_type) => ({
+              label: data_type.name,
+              value: data_type.id,
             })),
           },
           {

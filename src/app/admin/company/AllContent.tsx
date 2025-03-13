@@ -109,19 +109,13 @@ const AllContentCompany: React.FC = () => {
     }
   };
 
-  const dynamicColumns = columns(
-    handleUsersView,
-    selectedCompanyId,
-    viewUsersOpen,
-    userList
-  );
-  const filteredComumnsForEdit = dynamicColumns.filter((col) => col.canEdit);
+  const filteredComumnsForEdit = columns().filter((col) => col.canEdit);
 
   return (
     <>
       <CompanyTable
         data={data?.data?.results ?? []}
-        columns={dynamicColumns}
+        columns={columns()}
         onView={handleView}
         onEdit={handleEdit}
         onDelete={handleDelete}
@@ -138,7 +132,7 @@ const AllContentCompany: React.FC = () => {
         open={viewOpen}
         onClose={() => setViewOpen(false)}
         rowData={selectedRow}
-        titles={dynamicColumns}
+        titles={columns()}
       />
       <EditDialog
         open={editOpen}
@@ -153,7 +147,7 @@ const AllContentCompany: React.FC = () => {
         onClose={() => setDeleteOpen(false)}
         onConfirm={handleConfirmDelete}
         rowData={selectedRow}
-        titles={dynamicColumns}
+        titles={columns()}
       />
       <ViewUserModalDialog
         open={viewUsersOpen}

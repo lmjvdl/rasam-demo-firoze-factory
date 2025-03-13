@@ -15,6 +15,14 @@ export const columns = () => [
         isAdditionalAction: false,
     },
     {
+        id: "data_type",
+        label: "نوع داده",
+        required: true,
+        showOnTable: true,
+        canEdit: true,
+        isAdditionalAction: false,
+    },
+    {
         id: "name",
         label: "نام",
         required: true,

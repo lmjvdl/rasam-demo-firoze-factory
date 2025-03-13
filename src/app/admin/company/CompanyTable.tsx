@@ -1,7 +1,6 @@
-import React, { JSX, useState } from "react";
-import { IconButton } from "@mui/material";
-import { IconUserExclamation } from "@tabler/icons-react";
+import React from "react";
 import DataTable from "@/components/adminPanelComponent/viewProcess/DataTable";
+import UserActions from "./user/page";
 
 const CompanyTable: React.FC<CompanyTableProps> = ({
   data,
@@ -9,10 +8,6 @@ const CompanyTable: React.FC<CompanyTableProps> = ({
   onView,
   onEdit,
   onDelete,
-  handleUsersView,
-  selectedCompanyId,
-  userList,
-  viewUsersOpen,
   count,
   page,
   onPageChange,
@@ -21,22 +16,7 @@ const CompanyTable: React.FC<CompanyTableProps> = ({
     if (col.id === "userActions") {
       return {
         ...col,
-        render: (row: any) => (
-          <>
-            <IconButton onClick={() => handleUsersView(row.id)}>
-              <IconUserExclamation />
-            </IconButton>
-            {selectedCompanyId === row.id && viewUsersOpen && (
-              <div>
-                <ul>
-                  {userList.map((user) => (
-                    <li key={user.id}>{user.user}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </>
-        ),
+        render: (row: any) => <UserActions companyId={row.id} />
       };
     }
     return col;

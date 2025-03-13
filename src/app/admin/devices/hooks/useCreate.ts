@@ -4,6 +4,7 @@ import { z } from "zod";
 
 const deviceSchema = z.object({
   product_line_part: z.number().int("قسمت خط تولید باید یک عدد صحیح باشد").min(1, "قسمت خط تولید الزامی است"),
+  data_type: z.array(z.number()),
   name: z.string().min(1, "نام دستگاه الزامی است").max(30),
   code: z.string().min(1, "کد دستگاه الزامی است").max(15),
 });

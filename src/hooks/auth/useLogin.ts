@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import fetchWithError from "@/utils/dataFetching/fetchWithError";
+import { fetchWithErrorWithAlarm } from "@/utils/dataFetching/fetchWithError";
 import { deleteUser, updateUser } from "../context/authStore";
 import { errorHandler } from "@/utils/dataFetching/queryClient";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
@@ -16,7 +16,7 @@ export default function useLogin() {
     retry: false,
     retryDelay: 0,
     mutationFn: (entry: { username: string; password: string }) =>
-      fetchWithError(authUrls.login, {
+      fetchWithErrorWithAlarm(authUrls.login, {
         method: "POST",
         body: JSON.stringify(entry),
       }).then(AuthResponseSanitizer),

@@ -28,7 +28,8 @@ const allQueryKeys = {
       list: ["ADMIN_PANEL", "DEVICES", "VIEW"],
       delete: ["ADMIN_PANEL", "DEVICES", "DELETE"],
       update: ["ADMIN_PANEL", "DEVICES", "UPDATE"],
-      product_line_part_list: ["ADMIN_PANEL", "DEVICES", "VIEW", "PRODUCT_LINE_PART_LIST"]
+      product_line_part_list: ["ADMIN_PANEL", "DEVICES", "VIEW", "PRODUCT_LINE_PART_LIST"],
+      data_type_list: ["ADMIN_PANEL", "DEVICES", "VIEW", "DATA_TYPE_LIST"]
     },
     group: {
       list: ["ADMIN_PANEL", "GROUP", "VIEW"],

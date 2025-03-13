@@ -1,7 +1,6 @@
-import { IconButton } from "@mui/material";
-import { IconUserExclamation } from "@tabler/icons-react";
+import UserActions from "./user/page";
 
-export const columns = (handleUsersView: (companyId: number) => void, selectedCompanyId: number | null, viewUsersOpen: boolean, userList: { id: number; user: number }[]) => [
+export const columns = () => [
   {
     id: "id",
     label: "شناسه",
@@ -39,7 +38,7 @@ export const columns = (handleUsersView: (companyId: number) => void, selectedCo
     showOnTable: false,
     canEdit: true,
     isAdditionalAction: false,
-    isIconSelect: true, 
+    isIconSelect: true,
     optionsKey: "iconList",
   },
   {
@@ -55,21 +54,6 @@ export const columns = (handleUsersView: (companyId: number) => void, selectedCo
     isActionColumn: false,
     canEdit: false,
     showOnTable: true,
-    render: (row: any) => (
-      <>
-        <IconButton onClick={() => handleUsersView(row.id)}>
-          <IconUserExclamation />
-        </IconButton>
-        {selectedCompanyId === row.id && viewUsersOpen && (
-          <div>
-            <ul>
-              {userList.map((user) => (
-                <li key={user.id}>{user.user}</li>
-              ))}
-            </ul>
-          </div>
-        )}
-      </>
-    ),
+    render: (row: any) => <UserActions companyId={row.id} />
   },
 ];

@@ -40,6 +40,7 @@ const responseSchema = z.object({
       z.object({
         id: z.number(),
         product_line_part: z.number(),
+        data_type: z.array(z.number()),
         name: z.string(),
         code: z.string(),
       })
