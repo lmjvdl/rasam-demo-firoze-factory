@@ -2,8 +2,8 @@ import { z } from "zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import fetchWithError from "@/utils/dataFetching/fetchWithError";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
-import { useToast } from "@/hooks/UI/useToast";
-import userUrls from "@/utils/URLs/adminPanel/user/userUrl";
+import { useToast } from "@/hooks/ui/useToast";
+import userUrls from "@/utils/url/adminPanel/user/userUrl";
 
 // Updated function to handle GET requests
 export default function getUerList(pages: number, pageSize: number, URL: string | null) {

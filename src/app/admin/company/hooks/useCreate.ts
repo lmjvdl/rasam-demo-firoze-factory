@@ -1,12 +1,12 @@
 import { fetchWithErrorForCreate } from "@/utils/dataFetching/fetchWithError";
-import companyUrls from "@/utils/URLs/adminPanel/company/companyUrl";
+import companyUrls from "@/utils/url/adminPanel/company/companyUrl";
 import { z } from "zod";
 
 const companySchema = z.object({
   name: z.string().min(1, "نام شرکت الزامی است"),
   description: z.string().optional(),
   code: z.string().min(1, "کد شرکت الزامی است"),
-  logo: z.string().nullable(),
+  logo: z.number().nullable(),
 });
 
 export const createNewCompany = async (data: unknown) => {
@@ -18,7 +18,6 @@ export const createNewCompany = async (data: unknown) => {
 
   const processedData = {
     ...validationResult.data,
-    logo: validationResult.data.logo === "" ? null : validationResult.data.logo,
     description: validationResult.data.description === "" ? null : validationResult.data.description
   };
 

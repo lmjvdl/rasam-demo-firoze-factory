@@ -1,5 +1,5 @@
 import BaalMillCard from "@/components/baalMillLive/BaalMillCard";
-import MainCard from "@/components/CustomContiner/MainCard";
+import MainCard from "@/components/customContiner/MainCard";
 import { Grid, Paper, Typography } from "@mui/material";
 
 export default function BaalMillLive() {

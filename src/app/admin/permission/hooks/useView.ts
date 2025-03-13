@@ -2,8 +2,8 @@ import { z } from "zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import fetchWithError from "@/utils/dataFetching/fetchWithError";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
-import { useToast } from "@/hooks/UI/useToast";
-import permissionUrls from "@/utils/URLs/adminPanel/permission/permission";
+import { useToast } from "@/hooks/ui/useToast";
+import permissionUrls from "@/utils/url/adminPanel/permission/permission";
 
 export default function getPermissionList() {
   const queryClient = useQueryClient();

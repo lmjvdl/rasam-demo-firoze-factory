@@ -3,14 +3,15 @@
 import React, { useEffect, useState } from "react";
 import getProductLineList, { ResponseSchema } from "./hooks/useView";
 import useDelete from "./hooks/useDelete";
-import ViewDialog from "@/components/AdminPanelComponent/ViewProcess/ViewDialog";
-import EditDialog from "@/components/AdminPanelComponent/ViewProcess/EditDialog";
-import DeleteDialog from "@/components/AdminPanelComponent/ViewProcess/DeleteDialog";
+import ViewDialog from "@/components/adminPanelComponent/viewProcess/ViewDialog";
+import EditDialog from "@/components/adminPanelComponent/viewProcess/EditDialog";
+import DeleteDialog from "@/components/adminPanelComponent/viewProcess/DeleteDialog";
 import { PrevDataInitial } from "@/interfaces/general/general";
 import { columns } from "./ColumnsData";
 import { ProductLineUpdateSchema } from "./hooks/useUpdate";
 import ProductLineTable from "./ProductLineTable";
 import useUpdate from "./hooks/useUpdate";
+import useIcons from "@/hooks/reactQueryApiHooks/useIcon";
 
 const AllContentProductLine: React.FC = () => {
   const [data, setData] = useState<ResponseSchema>(PrevDataInitial);
@@ -25,6 +26,14 @@ const AllContentProductLine: React.FC = () => {
   const getList = getProductLineList(pageNumber, 8, nextPage);
   const { deleteProductLineMutation } = useDelete();
   const { updateProductLineMutation } = useUpdate();
+  const iconList = useIcons().icons
+  ? useIcons().icons.map((icon) => ({
+    id: icon.id,
+    value: icon.id, 
+    label: icon.url, 
+  }))
+: [];
+
 
   useEffect(() => {
     getList.mutate(
@@ -113,6 +122,7 @@ const AllContentProductLine: React.FC = () => {
         onSave={handleSaveEdit}
         rowData={selectedRow}
         titles={filteredColumnsForEdit}
+        extraOptions={{ iconList }}
       />
       <DeleteDialog
         open={deleteOpen}

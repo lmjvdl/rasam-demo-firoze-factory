@@ -56,7 +56,8 @@ interface EditDialogProps {
     showOnTable?: boolean;
     canEdit?: boolean;
     isAdditionalAction?: boolean;
-    isMultiSelect?: boolean; 
+    isMultiSelect?: boolean;
+    isIconSelect?: boolean; 
     optionsKey?: string;
   }>;
   booleanAttributeName?: string;

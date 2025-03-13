@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import { ReactNode, SyntheticEvent, useState } from "react";
 import CreateUser from "./user/CreateUser";
 import ApiKey from "./apikey/ApiKey";
-import MainCard from "@/components/CustomContiner/MainCard";
+import MainCard from "@/components/customContiner/MainCard";
 import { TabPanelProps } from "@/interfaces/powerSupply/live";
 
 

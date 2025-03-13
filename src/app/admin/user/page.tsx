@@ -1,7 +1,7 @@
 "use client";
 
-import ModalForm from "@/components/AdminPanelComponent/AddingProcess/ModalForm";
-import MainCard from "@/components/CustomContiner/MainCard";
+import ModalForm from "@/components/adminPanelComponent/addingProcess/ModalForm";
+import MainCard from "@/components/customContiner/MainCard";
 import AllContentUser from "./AllContent";
 import { createNewUser } from "./hooks/useCreate";
 

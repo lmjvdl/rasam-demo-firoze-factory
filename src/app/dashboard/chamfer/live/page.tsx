@@ -1,5 +1,5 @@
-import Chamfer from "@/components/Chamfer/Chamfer";
-import MainCard from "@/components/CustomContiner/MainCard";
+import Chamfer from "@/components/chamfer/Chamfer";
+import MainCard from "@/components/customContiner/MainCard";
 import { Container, Grid } from "@mui/material";
 import React from "react";
 

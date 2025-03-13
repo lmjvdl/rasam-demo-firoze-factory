@@ -3,9 +3,9 @@
 import React, { useEffect, useState } from "react";
 import getGroupList, { ResponseSchema } from "./hooks/useView";
 import useDelete from "./hooks/useDelete";
-import ViewDialog from "@/components/AdminPanelComponent/ViewProcess/ViewDialog";
-import EditDialog from "@/components/AdminPanelComponent/ViewProcess/EditDialog";
-import DeleteDialog from "@/components/AdminPanelComponent/ViewProcess/DeleteDialog";
+import ViewDialog from "@/components/adminPanelComponent/viewProcess/ViewDialog";
+import EditDialog from "@/components/adminPanelComponent/viewProcess/EditDialog";
+import DeleteDialog from "@/components/adminPanelComponent/viewProcess/DeleteDialog";
 import { PrevDataInitial } from "@/interfaces/general/general";
 import { columns } from "./ColumnsData";
 import { GroupUpdateSchema } from "./hooks/useUpdate";

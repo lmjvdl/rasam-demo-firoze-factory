@@ -1,0 +1,30 @@
+import React from "react";
+import DataTable from "@/components/adminPanelComponent/viewProcess/DataTable";
+import { ProductLinePartTableProps } from "@/interfaces/admin/productLinePart";
+
+const ProductLinePartTable: React.FC<ProductLinePartTableProps> = ({
+  data,
+  columns,
+  onView,
+  onEdit,
+  onDelete,
+  count,
+  page,
+  onPageChange,
+}) => {
+
+  return (
+    <DataTable
+      columns={columns}
+      data={data}
+      onView={onView}
+      onEdit={onEdit}
+      onDelete={onDelete}
+      count={count}
+      onPageChange={onPageChange}
+      page={page}
+    />
+  );
+};
+
+export default ProductLinePartTable;

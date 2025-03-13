@@ -39,6 +39,8 @@ export const columns = (handleUsersView: (companyId: number) => void, selectedCo
     showOnTable: false,
     canEdit: true,
     isAdditionalAction: false,
+    isIconSelect: true, 
+    optionsKey: "iconList",
   },
   {
     id: "actions",

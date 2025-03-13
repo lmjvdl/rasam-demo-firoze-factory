@@ -1,15 +1,15 @@
 "use client";
 
-import Providers from "@/Providers/Providers";
+import Providers from "@/providers/Providers";
 import "../styles/globals.css";
 import { vazir } from "../../public/fonts/Fonts";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
-import Header, { drawerWidth } from "@/components/Header/Header";
+import Header, { drawerWidth } from "@/components/header/Header";
 import { Box, Stack } from "@mui/material";
-import Sidebar from "@/components/SideBar/Sidebar";
+import Sidebar from "@/components/sidebar/Sidebar";
 import { useAuthStore } from "@/hooks/context/authStore";
-import { ToastProvider } from "@/components/Notification/ToastProvider";
+import { ToastProvider } from "@/components/notification/ToastProvider";
 
 export default function RootLayout({
   children,

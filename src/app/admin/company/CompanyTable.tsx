@@ -1,7 +1,7 @@
 import React, { JSX, useState } from "react";
 import { IconButton } from "@mui/material";
 import { IconUserExclamation } from "@tabler/icons-react";
-import DataTable from "@/components/AdminPanelComponent/ViewProcess/DataTable";
+import DataTable from "@/components/adminPanelComponent/viewProcess/DataTable";
 
 const CompanyTable: React.FC<CompanyTableProps> = ({
   data,

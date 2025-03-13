@@ -2,8 +2,8 @@ import { z } from "zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import fetchWithError from "@/utils/dataFetching/fetchWithError";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
-import deviceUrls from "@/utils/URLs/adminPanel/device/deviceUrl";
-import { useToast } from "@/hooks/UI/useToast";
+import deviceUrls from "@/utils/url/adminPanel/device/deviceUrl";
+import { useToast } from "@/hooks/ui/useToast";
 
 export default function getDeviceList(pages: number, pageSize: number, URL: string | null) {
   const queryClient = useQueryClient();

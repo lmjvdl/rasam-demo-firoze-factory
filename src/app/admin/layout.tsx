@@ -4,8 +4,8 @@
 import { useAuthStore } from "@/hooks/context/authStore";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
-import LoadingScreen from "@/components/LoadingScreen/LoadingScreen";
-import MainCard from "@/components/CustomContiner/MainCard";
+import LoadingScreen from "@/components/loadingScreen/LoadingScreen";
+import MainCard from "@/components/customContiner/MainCard";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();

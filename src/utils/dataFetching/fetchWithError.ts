@@ -114,12 +114,8 @@ export async function fetchWithErrorForDelete(
 
 export async function uploadFileWithError(
   url: string | URL,
-  file: File,
-  fieldName: string = "file"
+  formData: FormData
 ) {
-  const formData = new FormData();
-  formData.append(fieldName, file);
-
   try {
     const response = await fetch(url, {
       method: "POST",
@@ -142,6 +138,7 @@ export async function uploadFileWithError(
     throw new Error("مشکلی در آپلود فایل پیش آمد.");
   }
 }
+
 
 
 

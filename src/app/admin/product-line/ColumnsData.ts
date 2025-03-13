@@ -6,6 +6,8 @@ export const columns = () => [
         showOnTable: true,
         canEdit: true,
         isAdditionalAction: false,
+        isIconSelect: true, 
+        optionsKey: "iconList",
     },
     {
         id: "id",

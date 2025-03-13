@@ -1,4 +1,4 @@
-import DynamicTabs from "@/components/Tabs/tabs";
+import DynamicTabs from "@/components/tabs/Tabs";
 
 const Packaging = () => {
   const testPartiotionData = [

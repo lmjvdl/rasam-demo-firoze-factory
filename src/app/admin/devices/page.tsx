@@ -1,7 +1,7 @@
 "use client";
 
-import ModalForm from "@/components/AdminPanelComponent/AddingProcess/ModalForm";
-import MainCard from "@/components/CustomContiner/MainCard";
+import ModalForm from "@/components/adminPanelComponent/addingProcess/ModalForm";
+import MainCard from "@/components/customContiner/MainCard";
 import { createNewDevice } from "./hooks/useCreate";
 import AllContentDevice from "./AllContent";
 import useProductLinePartQuery from "./hooks/useProducLinePartList";

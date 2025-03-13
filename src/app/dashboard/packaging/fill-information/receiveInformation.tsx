@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import OneDayDropdown from "@/components/FiltersReportDropDown/OneDay";
+import OneDayDropdown from "@/components/filtersReportDropDown/OneDay";
 import { Button, Grid, MenuItem, Paper, TextField } from "@mui/material";
 import { DateObject } from "react-multi-date-picker";
 import { IFormInputReceiceInformation } from "@/interfaces/packaging/fillInformation";

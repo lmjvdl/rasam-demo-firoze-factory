@@ -1,10 +1,10 @@
 "use client";
 
-import ModalForm from "@/components/AdminPanelComponent/AddingProcess/ModalForm";
-import MainCard from "@/components/CustomContiner/MainCard";
+import ModalForm from "@/components/adminPanelComponent/addingProcess/ModalForm";
+import MainCard from "@/components/customContiner/MainCard";
 import { createNewProductLine } from "./hooks/useCreate";
 import AllContentProductLine from "./AllContent";
-import useIcons from "@/hooks/ReactQueryApiHooks/useIcon";
+import useIcons from "@/hooks/reactQueryApiHooks/useIcon";
 import useCompanyQuery from "./hooks/useCompanyList";
 
 export default function ProductLinePage() {

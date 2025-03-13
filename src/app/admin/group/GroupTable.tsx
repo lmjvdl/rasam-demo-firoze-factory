@@ -1,5 +1,5 @@
 import React from "react";
-import DataTable from "@/components/AdminPanelComponent/ViewProcess/DataTable";
+import DataTable from "@/components/adminPanelComponent/viewProcess/DataTable";
 import { GroupTableProps } from "@/interfaces/admin/group";
 
 const GroupTable: React.FC<GroupTableProps> = ({

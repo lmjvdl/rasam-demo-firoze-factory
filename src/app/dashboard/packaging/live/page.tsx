@@ -1,5 +1,5 @@
-import { PackagingLiveCard } from "@/components/packagingLive/packagingLiveCard";
-import MainCard from "@/components/CustomContiner/MainCard";
+import { PackagingLiveCard } from "@/components/packagingLive/PackagingLiveCard";
+import MainCard from "@/components/customContiner/MainCard";
 import { Box, Grid, Paper, Typography } from "@mui/material";
 import React from "react";
 import {

@@ -1,8 +1,8 @@
 "use client";
 import { Tabs, Tab, Box, Grid } from "@mui/material";
-import MajorChart from "@/components/Chart/ChartConfig/MajorChart";
+import MajorChart from "@/components/chart/chartConfig/MajorChart";
 import React from "react";
-import MainCard from "@/components/CustomContiner/MainCard";
+import MainCard from "@/components/customContiner/MainCard";
 import { DataType, TabPanelProps } from "@/interfaces/powerSupply/live";
 
 

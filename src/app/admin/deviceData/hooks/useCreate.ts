@@ -1,0 +1,36 @@
+import { fetchWithErrorForCreate } from "@/utils/dataFetching/fetchWithError";
+import deviceDataUrls from "@/utils/url/adminPanel/deviceData/deviceDataUrl";
+import { z } from "zod";
+
+const deviceDataSchema = z.object({
+  device: z.number().min(1, "شناسه دستگاه الزامی است"),
+  data_type: z.array(z.number()).nonempty("نوع داده الزامی است"),
+});
+
+export const createNewDeviceData = async (data: any) => {
+  const DeviceDataAsNumber = {
+    ...data,
+    device: Number(data.product_line),
+    data_type: data.data_type.map((item: string) => Number(item))
+  };
+  const validationResult = deviceDataSchema.safeParse(DeviceDataAsNumber);
+
+  if (!validationResult.success) {
+    return { success: false, error: validationResult.error.format() };
+  }
+
+  try {
+    const response = await fetchWithErrorForCreate(`${deviceDataUrls.createDeviceData}`, {
+      method: "POST",
+      body: JSON.stringify(validationResult.data),
+    });
+
+    if (response.status_code === 201 && response.success) {
+      return { success: true, data: response.data };
+    } else {
+      return { success: false, error: response.messages || "خطایی رخ داده است" };
+    }
+  } catch (error) {
+    throw new Error("درخواست به سرور با مشکل مواجه شد.");
+  }
+};

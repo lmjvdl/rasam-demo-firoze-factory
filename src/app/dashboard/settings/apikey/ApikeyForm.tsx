@@ -1,8 +1,8 @@
 "use client";
-import AdvanceAutoComplete from "@/components/AutoComplete/AdvanceAutoComplete";
-import MainCard from "@/components/CustomContiner/MainCard";
+import AdvanceAutoComplete from "@/components/autoComplete/AdvanceAutoComplete";
+import MainCard from "@/components/customContiner/MainCard";
 import { IconPlus, IconRefresh, IconSquareRoundedX } from "@tabler/icons-react";
-import { Ips } from "@/interfaces/settings/api-keys";
+import { Ips } from "@/interfaces/settings/apiKeys";
 import { Add } from "@mui/icons-material";
 import {
   Box,

@@ -1,4 +1,4 @@
-import AdvanceAutoComplete from "@/components/AutoComplete/AdvanceAutoComplete";
+import AdvanceAutoComplete from "@/components/autoComplete/AdvanceAutoComplete";
 import MyDatePicker from "@/components/DatePicker/MyDatePicker";
 import { registerUserForm } from "@/interfaces/settings/users";
 import { CheckBox, CheckBoxOutlineBlank } from "@mui/icons-material";

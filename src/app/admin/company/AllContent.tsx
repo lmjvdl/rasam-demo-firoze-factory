@@ -5,12 +5,13 @@ import getCompanyList, { ResponseSchema } from "./hooks/useView";
 import useDelete from "./hooks/useDelete";
 import useUpdate from "./hooks/useUpdate";
 import CompanyTable from "./CompanyTable";
-import ViewDialog from "@/components/AdminPanelComponent/ViewProcess/ViewDialog";
-import EditDialog from "@/components/AdminPanelComponent/ViewProcess/EditDialog";
-import DeleteDialog from "@/components/AdminPanelComponent/ViewProcess/DeleteDialog";
+import ViewDialog from "@/components/adminPanelComponent/viewProcess/ViewDialog";
+import EditDialog from "@/components/adminPanelComponent/viewProcess/EditDialog";
+import DeleteDialog from "@/components/adminPanelComponent/viewProcess/DeleteDialog";
 import ViewUserModalDialog from "@/app/admin/company/ViewUserModal";
 import { PrevDataInitial } from "@/interfaces/general/general";
 import { columns } from "./ColumnsData";
+import useIcons from "@/hooks/reactQueryApiHooks/useIcon";
 
 const AllContentCompany: React.FC = () => {
   const [data, setData] = useState<ResponseSchema>(PrevDataInitial);
@@ -30,7 +31,15 @@ const AllContentCompany: React.FC = () => {
   const getList = getCompanyList(pageNumber, 8, nextPage);
   const { deleteCompanyMutation } = useDelete();
   const { updateCompanyMutation } = useUpdate();
-  
+  const iconList = useIcons().icons
+  ? useIcons().icons.map((icon) => ({
+    id: icon.id,
+    value: icon.id, 
+    label: icon.url, 
+  }))
+: [];
+
+
   useEffect(() => {
     getList.mutate({page: pageNumber+1, page_size: 8, url: nextPage}, {
       onSuccess: (information) => {
@@ -137,6 +146,7 @@ const AllContentCompany: React.FC = () => {
         onSave={handleSaveEdit}
         rowData={selectedRow}
         titles={filteredComumnsForEdit}
+        extraOptions={{ iconList }}
       />
       <DeleteDialog
         open={deleteOpen}

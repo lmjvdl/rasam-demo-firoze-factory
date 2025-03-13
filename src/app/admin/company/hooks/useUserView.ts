@@ -3,8 +3,8 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import fetchWithError from "@/utils/dataFetching/fetchWithError";
 import { errorHandler } from "@/utils/dataFetching/queryClient";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
-import companyUrls from "@/utils/URLs/adminPanel/company/companyUrl";
-import { useToast } from "@/hooks/UI/useToast";
+import companyUrls from "@/utils/url/adminPanel/company/companyUrl";
+import { useToast } from "@/hooks/ui/useToast";
 
 // Updated function to handle GET requests
 export default function getCompanyUserList(p?: number, page_size?: number) {

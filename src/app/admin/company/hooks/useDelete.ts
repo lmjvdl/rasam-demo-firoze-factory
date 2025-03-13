@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { fetchWithErrorForDelete } from "@/utils/dataFetching/fetchWithError";
-import companyUrls from "@/utils/URLs/adminPanel/company/companyUrl";
+import companyUrls from "@/utils/url/adminPanel/company/companyUrl";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
-import { useToast } from "@/hooks/UI/useToast";
+import { useToast } from "@/hooks/ui/useToast";
 
 const useDelete = () => {
   const queryClient = useQueryClient();

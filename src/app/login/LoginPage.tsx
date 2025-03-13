@@ -6,7 +6,7 @@ import "../../styles/login/login.css";
 import { Button, Container, TextField, Typography } from "@mui/material";
 import Image from "next/image";
 import { useForm, SubmitHandler } from "react-hook-form";
-import useLogin from "@/hooks/Auth/useLogin";
+import useLogin from "@/hooks/auth/useLogin";
 import { deleteUser } from "@/hooks/context/authStore";
 
 type FormData = {

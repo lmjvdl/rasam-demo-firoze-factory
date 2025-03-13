@@ -1,5 +1,5 @@
 import { fetchWithErrorForCreate } from "@/utils/dataFetching/fetchWithError";
-import userUrls from "@/utils/URLs/adminPanel/user/userUrl";
+import userUrls from "@/utils/url/adminPanel/user/userUrl";
 import { z } from "zod";
 
 const userSchema = z.object({

@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuthStore } from "@/hooks/context/authStore";
-import LoadingScreen from "@/components/LoadingScreen/LoadingScreen";
+import LoadingScreen from "@/components/loadingScreen/LoadingScreen";
 
 export default function HomePage() {
   const router = useRouter();

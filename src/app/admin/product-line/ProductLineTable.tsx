@@ -1,5 +1,5 @@
 import React from "react";
-import DataTable from "@/components/AdminPanelComponent/ViewProcess/DataTable";
+import DataTable from "@/components/adminPanelComponent/viewProcess/DataTable";
 import { ProductLineTableProps } from "@/interfaces/admin/productLine";
 
 const ProductLineTable: React.FC<ProductLineTableProps> = ({

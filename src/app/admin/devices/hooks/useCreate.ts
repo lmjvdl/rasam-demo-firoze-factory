@@ -1,5 +1,5 @@
 import { fetchWithErrorForCreate } from "@/utils/dataFetching/fetchWithError";
-import deviceUrls from "@/utils/URLs/adminPanel/device/deviceUrl";
+import deviceUrls from "@/utils/url/adminPanel/device/deviceUrl";
 import { z } from "zod";
 
 const deviceSchema = z.object({

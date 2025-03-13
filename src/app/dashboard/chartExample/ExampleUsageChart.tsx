@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import DynamicChart from "../../../components/Chart/DynamicChart";
-import DynamicFilters from "../../../components/Chart/DynamicFilters";
+import DynamicChart from "../../../components/chart/DynamicChart";
+import DynamicFilters from "../../../components/chart/DynamicFilters";
 import { DateObject } from "react-multi-date-picker";
 import { Box } from "@mui/material";
 

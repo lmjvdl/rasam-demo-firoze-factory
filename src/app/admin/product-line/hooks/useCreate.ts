@@ -1,5 +1,5 @@
 import { fetchWithErrorForCreate } from "@/utils/dataFetching/fetchWithError";
-import productLineUrls from "@/utils/URLs/adminPanel/productLine/productLineUrl";
+import productLineUrls from "@/utils/url/adminPanel/productLine/productLineUrl";
 import { z } from "zod";
 
 const productLineSchema = z.object({

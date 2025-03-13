@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { AuthResponse } from "@/utils/auth/AuthResponseSanitizer";
+import { AuthResponse } from "@/utils/auth/authResponseSanitizer";
 
 interface AuthState {
   id: number;

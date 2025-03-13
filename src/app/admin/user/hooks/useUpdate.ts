@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { fetchWithErrorWithAlarm } from "@/utils/dataFetching/fetchWithError";
-import userUrls from "@/utils/URLs/adminPanel/user/userUrl";
+import userUrls from "@/utils/url/adminPanel/user/userUrl";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 
 export type UserUpdateSchema = {

@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { fetchWithErrorWithAlarm } from "@/utils/dataFetching/fetchWithError";
-import groupUrls from "@/utils/URLs/adminPanel/group/groupUrl";
+import groupUrls from "@/utils/url/adminPanel/group/groupUrl";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
-import { useToast } from "@/hooks/UI/useToast";
+import { useToast } from "@/hooks/ui/useToast";
 
 export type GroupUpdateSchema = {
   id: number;
