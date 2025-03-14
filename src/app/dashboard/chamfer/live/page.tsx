@@ -1,66 +1,28 @@
+"use client"
+
+import React from "react";
 import Chamfer from "@/components/chamfer/Chamfer";
 import MainCard from "@/components/customContiner/MainCard";
-import { Container, Grid } from "@mui/material";
-import React from "react";
+import { Grid } from "@mui/material";
+// import useWebSocket from "@/hooks/socket/useSocket";
 
-const LiveChamfer = () => {
+const ChamferLive = () => {
+  // const { data, loading, error } = useWebSocket("1");
+
   return (
-    <>
-      <Container sx={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
-        <Grid
-          container
-          spacing={2}
-          sx={{ width: { xs: "90%", md: "95%" }, margin: "20px" }}
-        >
-          <Grid
-            item
-            xs={12}
-            sm={6}
-            md={3}
-            sx={{ marginBottom: { xs: 2, md: 0 } }}
-          >
-            <Chamfer />
-          </Grid>
-          <Grid
-            item
-            xs={12}
-            sm={6}
-            md={3}
-            sx={{ marginBottom: { xs: 2, md: 0 } }}
-          >
-            <Chamfer on={false} />
-          </Grid>
-          <Grid
-            item
-            xs={12}
-            sm={6}
-            md={3}
-            sx={{ marginBottom: { xs: 2, md: 0 } }}
-          >
-            <Chamfer />
-          </Grid>
-          <Grid
-            item
-            xs={12}
-            sm={6}
-            md={3}
-            sx={{ marginBottom: { xs: 2, md: 0 } }}
-          >
-            <Chamfer />
-          </Grid>
-          <Grid
-            item
-            xs={12}
-            sm={6}
-            md={3}
-            sx={{ marginBottom: { xs: 2, md: 0 } }}
-          >
-            <Chamfer />
-          </Grid>
-        </Grid>
-      </Container>
-    </>
+    <MainCard>
+      <Grid
+        container
+        spacing={2}
+        sx={{ width: { xs: "90%", md: "95%" }, margin: "20px" }}>
+          <Chamfer />
+          <Chamfer on={false} />
+          <Chamfer />
+          <Chamfer />
+          <Chamfer />
+      </Grid>
+    </MainCard>
   );
 };
 
-export default LiveChamfer;
+export default ChamferLive;

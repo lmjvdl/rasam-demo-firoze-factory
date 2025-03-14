@@ -38,6 +38,7 @@
     "react-hook-form": "^7.54.2",
     "react-hot-toast": "^2.5.2",
     "react-multi-date-picker": "^4.5.2",
+    "reconnecting-websocket": "^4.4.0",
     "sass": "^1.83.1",
     "socket.io": "^4.8.1",
     "socket.io-client": "^4.8.1",

@@ -1,93 +1,48 @@
-import { useEffect, useRef, useState, useCallback } from "react";
-import { io, Socket } from "socket.io-client";
-import { BASE_URL } from "@/constants/baseURL";
+// hooks/useWebSocket.ts
+import { useState, useEffect, useRef } from 'react';
+import ReconnectingWebSocket from 'reconnecting-websocket';
 
-/**
- * Custom React hook to manage a persistent Socket.IO connection.
- * Handles automatic reconnection attempts and notifies when connection is lost.
- */
-
-const useSocket = () => {
-  const socketRef = useRef<Socket | null>(null);
-  const [isConnected, setIsConnected] = useState(false);
-  const [reconnectAttempts, setReconnectAttempts] = useState(0);
-  const [isNetworkError, setIsNetworkError] = useState(false);
-  const [data, setData] = useState(null); // Store received data
-
-  const connectSocket = useCallback(() => {
-    
-    if (!socketRef.current) {
-      socketRef.current = io(BASE_URL, {
-        /**
-         * Priority is given to the websocket, and if the web socket connection is interrupted, 
-         * By using (tryAllTransports) variable,
-         * the polling method is used, which causes new tunnels to be opened, 
-         * and we try to establish the connection through these tunnels.
-         **/
-        transports: ["websocket", "polling"],
-        tryAllTransports: true,
-        reconnection: false, // We handle reconnection manually
-        closeOnBeforeunload: true,  // Disconnects the socket when the user leaves the page
-        
-        // *********************** // We should add attribute (auth) feature // ************************ //
-      });
-
-      socketRef.current.on("connect", () => {
-        setIsConnected(true);
-        setReconnectAttempts(0);
-        setIsNetworkError(false);
-      });
-
-      socketRef.current.on("disconnect", (reason) => {
-        setIsConnected(false);
-        if (reason === "io server disconnect") {
-          attemptReconnect();
-        } else if (reason === "transport close") {
-          setIsNetworkError(true);
-          attemptReconnect();
-        }
-      });
-
-      // Listen for data from server
-      socketRef.current.on("data_event", (payload) => {
-        setData(payload);
-      });
-    }
-  }, []);
-
-  const attemptReconnect = useCallback(() => {
-    let attempt = 1;
-    const interval = setInterval(() => {
-      if (attempt > 6) {
-        clearInterval(interval);
-        return;
-      }
-      setReconnectAttempts(attempt);
-      attempt++;
-      if (!socketRef.current?.connected) {
-        socketRef.current?.connect();
-      }
-    }, 10000); // 10 seconds interval
-  }, []);
+const useWebSocket = (id: string) => {
+  const [data, setData] = useState<unknown>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+  const wsRef = useRef<ReconnectingWebSocket | null>(null);
 
   useEffect(() => {
-    connectSocket();
+    const wsUrl = `ws://172.25.10.63:8080/ws/admin/${id}/`;
+
+    const ws = new ReconnectingWebSocket(wsUrl);
+
+    ws.onopen = () => {
+      console.log('WebSocket connection established');
+    };
+
+    ws.onmessage = (event) => {
+      const message = JSON.parse(event.data);
+      setData(message);
+      setLoading(false);
+    };
+
+    ws.onerror = (err) => {
+      console.error('WebSocket Error: ', err);
+      setError('Error connecting to WebSocket');
+      setLoading(false);
+    };
+
+    ws.onclose = () => {
+      console.log('WebSocket connection closed');
+    };
+
+    wsRef.current = ws;
+
     return () => {
-      if (socketRef.current) {
-        socketRef.current.disconnect();
-        socketRef.current = null;
+      if (wsRef.current) {
+        wsRef.current.close();
       }
     };
-  }, [connectSocket]);
+  }, [id]);
 
-  return {
-    socket: socketRef.current,
-    isConnected,
-    isNetworkError,
-    reconnectAttempts,
-    reconnect: connectSocket,
-    data, // Expose received data
-  };
+  return { data, loading, error };
 };
 
-export default useSocket;
+export default useWebSocket;
