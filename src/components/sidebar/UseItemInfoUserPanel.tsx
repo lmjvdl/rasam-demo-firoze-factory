@@ -8,19 +8,19 @@ export const UseItemInfoUserPanel = () => {
       "بسته بندی": {
         text: "بسته بندی",
         icon: "Packaging",
-        to: "/packaging/live",
+        to: "/dashboard/packaging",
       },
       "تهیه بدنه": {
         text: "تهیه بدنه",
         icon: "BodyPrep",
-        to: "/preparing-body/live",
+        to: "/dashboard/preparingBody",
       },
       "تابلو برق": {
         text: "تابلو برق",
         icon: "PowerSupply",
-        to: "/power-supply/live",
+        to: "/dashboard/powerSupply",
       },
-      چمفر: { text: "چمفر", icon: "Chamfer", to: "/chamfer/live" },
+      چمفر: { text: "چمفر", icon: "Chamfer", to: "/chamfer" },
     }),
     []
   );

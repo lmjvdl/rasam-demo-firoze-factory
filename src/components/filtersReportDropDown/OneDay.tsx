@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import CustomDatePickerOneDay from '../catePicker/CustomDatePickerOneDay';
+import CustomDatePickerOneDay from '../datePicker/CustomDatePickerOneDay';
 import { OneDayDropdownProps } from '@/interfaces/ui/inputs/DynamicInputs';
 
 const OneDayDropdown: React.FC<OneDayDropdownProps> = ({ value, onChange }) => {
