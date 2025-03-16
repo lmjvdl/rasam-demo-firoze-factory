@@ -1,28 +1,28 @@
-import { Card, CardContent, Button, Typography, Box, Divider} from '@mui/material';
+import { BaalMillProps } from '@/interfaces/preparingBody/live';
+import { Card, CardContent, Button, Typography, Box, Divider } from '@mui/material';
 
-
-export default function BaalMillCard({ mill }: BaalMillProps) {
+export default function BaalMillCard({ container }: BaalMillProps) {
   return (
     <Card 
-        sx={{ boxShadow: 3 }}
-        style={{ backgroundColor: 
-          mill.status === 'on' ? '#ffff' 
-          : '#f0f0f0' }}>
+      sx={{ boxShadow: 3 }}
+      style={{ backgroundColor: 
+        container?.online === true ? '#ffff' 
+        : '#f0f0f0' }}>
       <CardContent>
-          <Box display="flex" alignItems="center" sx={{ justifyContent: 'space-between' }}>
-            <Typography variant="h6">{mill.name}</Typography>
-            <Button disableElevation variant="outlined" color={mill.status === 'on' ? 'success' : 'inherit'} sx={{ mr: 1 }}>
-            {mill.status === 'on' ? 'روشن' : 'خاموش'}
-            </Button>
-          </Box>
-          <div style={{ marginTop: '10px', display: "flex", flexDirection: "column", gap:"20px", marginBlockStart: "20px" }}>
+        <Box display="flex" alignItems="center" sx={{ justifyContent: 'space-between' }}>
+          <Typography variant="h6">{container?.device}</Typography>
+          <Button disableElevation variant="outlined" color={container?.online === true ? 'success' : 'inherit'} sx={{ mr: 1 }}>
+            {container?.online === true ? 'روشن' : 'خاموش'}
+          </Button>
+        </Box>
+        <div style={{ marginTop: '10px', display: "flex", flexDirection: "column", gap:"20px", marginBlockStart: "20px" }}>
           <Divider />
-            <Typography>جریان دستگاه: {mill.current} A</Typography>
-            <Typography>فرکانس دستگاه: {mill.frequency} HZ</Typography>
-            <Typography>ولتاژ DC دستگاه: {mill.dcVoltage} V</Typography>
-            <Typography>ولتاژ AC دستگاه: {mill.acVoltage} V</Typography>
-            <Typography>دمای دستگاه: {mill.temperature} C</Typography>
-          </div>
+          <Typography>جریان دستگاه: {container?.data.current} A</Typography>
+          <Typography>فرکانس دستگاه: {container?.data.frequency} HZ</Typography>
+          <Typography>ولتاژ DC دستگاه: {container?.data.dcVoltage} V</Typography>
+          <Typography>ولتاژ AC دستگاه: {container?.data.acVoltage} V</Typography>
+          <Typography>دمای دستگاه: {container?.data.temperature} C</Typography>
+        </div>
       </CardContent>
     </Card>
   );

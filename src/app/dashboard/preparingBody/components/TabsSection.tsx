@@ -4,6 +4,7 @@ import { Tabs, Tab, Box } from "@mui/material";
 import { Dispatch, SetStateAction } from "react";
 import BallMills from "../BallMills";
 import FanSpray from "../FanSpray";
+import ReportsDropdown from "./ReportsDropdown";
 
 export default function TabsSection({
   selectedTab,
@@ -17,11 +18,11 @@ export default function TabsSection({
       <Tabs
         value={selectedTab}
         onChange={(_, newValue) => setSelectedTab(newValue)}
-        sx={{ marginBottom: "30px" }}
-      >
+        sx={{ marginBottom: "30px" }}>
         <Tab label="بالمیل‌ها" />
         <Tab label="فن اسپری" />
       </Tabs>
+      <ReportsDropdown selectedTab={selectedTab} />
 
       <Box className="mt-4">
         {selectedTab === 0 && <BallMills />}

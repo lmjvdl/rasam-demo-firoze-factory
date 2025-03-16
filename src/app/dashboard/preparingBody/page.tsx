@@ -71,21 +71,17 @@
 //   );
 // }
 
-
 "use client";
 
 import { useState } from "react";
 import TabsSection from "./components/TabsSection";
-import ReportsDropdown from "./components/ReportsDropdown";
-import { Box } from "@mui/material";
 
 export default function PreparingBodyPage() {
   const [selectedTab, setSelectedTab] = useState<0 | 1>(0);
 
   return (
-    <Box display="flex" alignItems="flex-start">
+    <>
       <TabsSection selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
-      <ReportsDropdown selectedTab={selectedTab} />
-    </Box>
+    </>
   );
 }
