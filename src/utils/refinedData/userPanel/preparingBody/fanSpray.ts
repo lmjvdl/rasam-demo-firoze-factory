@@ -1,7 +1,7 @@
-import { BaalMillLiveSchema } from "@/interfaces/preparingBody/live";
+import { FanSprayLiveSchema } from "@/interfaces/preparingBody/live";
 import { z } from "zod";
 
-export const ballMillInitialDataQuery = {
+export const fanSprayInitialDataQuery = {
   online: false,
   device: "",
   time: "0", 
@@ -11,7 +11,7 @@ export const ballMillInitialDataQuery = {
   },
 } as const;
 
-export const arrayOfBaalMill = z.object({
+export const arrayOfFanSpray = z.object({
   data: z.array(
     z.object({
       device: z.string(),
@@ -28,8 +28,8 @@ export const arrayOfBaalMill = z.object({
   messages: z.string(),
 });
 
-export function baalMillSanitizer(rawData: unknown): BaalMillLiveSchema[] {
-  const serverSchema = arrayOfBaalMill.safeParse(rawData);
+export function fanSpraySanitizer(rawData: unknown): FanSprayLiveSchema[] {
+  const serverSchema = arrayOfFanSpray.safeParse(rawData);
 
   if (serverSchema.success) {
     return serverSchema.data.data.map((item) => ({
@@ -43,5 +43,5 @@ export function baalMillSanitizer(rawData: unknown): BaalMillLiveSchema[] {
     }));
   }
 
-  return [ballMillInitialDataQuery];
+  return [fanSprayInitialDataQuery];
 }

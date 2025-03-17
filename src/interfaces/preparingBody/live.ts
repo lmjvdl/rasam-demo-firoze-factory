@@ -11,3 +11,17 @@ export interface BaalMillLiveSchema {
       temperature?: number;
     };
 }
+
+export interface FanSprayLiveSchema {
+  online: boolean;
+  device: string;
+  time: string;
+  product_line_part: number;
+  data: {
+    current?: number;
+    frequency?: number;
+    dcVoltage?: number;
+    acVoltage?: number;
+    temperature?: number;
+  };
+}

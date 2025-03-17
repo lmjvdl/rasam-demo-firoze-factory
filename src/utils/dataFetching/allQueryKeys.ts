@@ -1,5 +1,3 @@
-import { report } from "process";
-
 const allQueryKeys = {
   login: ["AUTH", "LOGIN"],
   refreshToken: ["AUTH", "REFRESH TOKEN"],
@@ -72,7 +70,7 @@ const allQueryKeys = {
       },
       fanSpray: {
         live: {
-
+          liveData: ["USER_PANEL", "FAN_SPRAY", "LIVE"]
         },
         report: {
 

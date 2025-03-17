@@ -1,4 +1,3 @@
-import LoadingScreen from "@/components/loadingScreen/LoadingScreen";
 import { useState, useEffect, useRef } from "react";
 import toast from "react-hot-toast";
 import ReconnectingWebSocket from "reconnecting-websocket";
@@ -8,7 +7,7 @@ const useWebSocket = <T,>(id: number) => {
   const wsRef = useRef<ReconnectingWebSocket | null>(null);
 
   useEffect(() => {
-    const wsUrl = `ws://192.168.229.28:8080/ws/admin/${id}/`;
+    const wsUrl = `ws://172.20.10.6:8080/ws/admin/${id}/`;
     const ws = new ReconnectingWebSocket(wsUrl);
 
     ws.onmessage = (event) => {
