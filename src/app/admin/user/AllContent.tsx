@@ -94,7 +94,6 @@ const AllContentUser: React.FC = () => {
 
   // Handling the boolean value change (is_active)
   const handleBooleanValueChange = (value: boolean) => {
-    console.log(value)
     setSelectedRow((prevSelectedRow: UserUpdateSchema | null) => {
       if (prevSelectedRow) {
         return {

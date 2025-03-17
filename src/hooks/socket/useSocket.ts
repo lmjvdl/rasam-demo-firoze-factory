@@ -7,17 +7,15 @@ const useWebSocket = <T,>(id: number) => {
   const wsRef = useRef<ReconnectingWebSocket | null>(null);
 
   useEffect(() => {
-    const wsUrl = `ws://172.20.10.6:8080/ws/admin/${id}/`;
+    const wsUrl = `ws://192.168.229.28:8080/ws/admin/${id}/`;
     const ws = new ReconnectingWebSocket(wsUrl);
-
     ws.onmessage = (event) => {
       const newData = JSON.parse(event.data);
-
       setDevices((prevDevices) =>
         prevDevices.map((device: any) =>
           device.device === newData.device ? { ...device, ...newData } : device
-        )
-      );
+    )
+  );
     };
 
     ws.onerror = () => toast.error("خطا در ارتباط با سرور!");

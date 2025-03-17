@@ -1,12 +1,12 @@
 import BaalMillCard from "@/components/baalMillLive/BaalMillCard";
 import useWebSocket from "@/hooks/socket/useSocket";
-import { BaalMillLiveSchema } from "@/interfaces/preparingBody/live";
+import { FanSprayLiveSchema } from "@/interfaces/preparingBody/live";
 import { Container, Grid } from "@mui/material";
 import useFanSprayQuery from "./useFanSpray";
 
 export default function FanSpray() {
   const initialDataByQuery = useFanSprayQuery(5);
-  const { devices } = useWebSocket<BaalMillLiveSchema>(4);
+  const { devices } = useWebSocket<FanSprayLiveSchema>(4);
 
   const mergedDevices = initialDataByQuery?.data.map((device) => {
     const liveDevice = devices.find((d) => d.device === device.device);
