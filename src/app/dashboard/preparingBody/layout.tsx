@@ -6,5 +6,4 @@ export default function PreparingBodyLayout({ children }: { children: React.Reac
         {children}
       </MainCard>
     );
-  }
-  
+}

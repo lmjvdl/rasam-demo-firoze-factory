@@ -1,5 +1,4 @@
-export interface BaalMillProps {
-  container?: { // Make `container` optional
+export interface BaalMillLiveSchema {
     online: boolean;
     device: string;
     time: string;
@@ -11,5 +10,4 @@ export interface BaalMillProps {
       acVoltage?: number;
       temperature?: number;
     };
-  };
 }

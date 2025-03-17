@@ -1,13 +1,17 @@
-import { BaalMillProps } from '@/interfaces/preparingBody/live';
-import { Card, CardContent, Button, Typography, Box, Divider } from '@mui/material';
+import { BaalMillLiveSchema } from '@/interfaces/preparingBody/live';
+import { Card, CardContent, Button, Typography, Box, Divider, useTheme } from '@mui/material';
 
-export default function BaalMillCard({ container }: BaalMillProps) {
+export default function BaalMillCard(container: BaalMillLiveSchema) {
+  const theme = useTheme();
+
   return (
     <Card 
       sx={{ boxShadow: 3 }}
-      style={{ backgroundColor: 
-        container?.online === true ? '#ffff' 
-        : '#f0f0f0' }}>
+      style={{ 
+        backgroundColor: container?.online === true 
+          ? theme.palette.background.default
+          : theme.palette.background.disable
+      }}>
       <CardContent>
         <Box display="flex" alignItems="center" sx={{ justifyContent: 'space-between' }}>
           <Typography variant="h6">{container?.device}</Typography>

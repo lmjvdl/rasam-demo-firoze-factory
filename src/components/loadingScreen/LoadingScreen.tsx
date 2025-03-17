@@ -10,12 +10,11 @@ export default function LoadingScreen() {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        height: "100vh",
-        bgcolor: "background.default",
+        minHeight: "100%",
       }}
     >
-      <CircularProgress size={80} thickness={4.5} />
-      <Typography variant="h6" sx={{ mt: 2, color: "text.secondary" }}>
+      <CircularProgress size={150} thickness={2.5} />
+      <Typography variant="h4" sx={{ mt: 2, color: "text.secondary" }}>
         لطفاً منتظر بمانید...
       </Typography>
     </Box>

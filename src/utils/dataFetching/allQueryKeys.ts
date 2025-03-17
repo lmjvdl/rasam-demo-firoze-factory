@@ -1,3 +1,5 @@
+import { report } from "process";
+
 const allQueryKeys = {
   login: ["AUTH", "LOGIN"],
   refreshToken: ["AUTH", "REFRESH TOKEN"],
@@ -59,7 +61,24 @@ const allQueryKeys = {
     }
   },
   userPanel: {
+    preparingBody: {
+      baalMill: {
+        live: {
+          liveData: ["USER_PANEL", "BAAL_MILL", "LIVE"]
+        },
+        report: {
 
+        }
+      },
+      fanSpray: {
+        live: {
+
+        },
+        report: {
+
+        }
+      }
+    }
   }
 } as const;
 
