@@ -6,8 +6,14 @@ const allQueryKeys = {
       list: ["ADMIN_PANEL", "COMPANY", "VIEW"],
       delete: ["ADMIN_PANEL", "COMPANY", "DELETE"],
       update: ["ADMIN_PANEL", "COMPANY", "UPDATE"],
-      userListCompany: ["ADMIN_PANEL", "COMPANY", "VIEW_USER_LIST"],
-      editUserCompany: ["ADMIN_PANEL", "COMPANY", "EDIT_USER_COMPNAY"]
+    },
+    userCompany: {
+      list: ["ADMIN_PANEL", "USER_COMPANY", "VIEW"],
+      delete: ["ADMIN_PANEL", "USER_COMPANY", "DELETE"],
+      update: ["ADMIN_PANEL", "USER_COMPANY", "UPDATE"],
+      permission_list: ["ADMIN_PANEL", "USER_COMPANY", "VIEW", "PERMISSION_LIST"],
+      user_list: ["ADMIN_PANEL", "USER_COMPANY", "VIEW", "USER_LIST"],
+      group_list: ["ADMIN_PANEL", "USER_COMPANY", "VIEW", "GROUP_LIST"],
     },
     user: {
       list: ["ADMIN_PANEL", "USER", "VIEW"],

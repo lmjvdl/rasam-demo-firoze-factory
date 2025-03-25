@@ -116,7 +116,7 @@ const theme = createTheme(
           root: ({ theme }) => {
             return {
               "&:hover:not(.Mui-focused) .MuiOutlinedInput-notchedOutline": {
-                borderColor: theme.palette.grey[400],
+                borderColor: theme.palette.primary.main,
               },
             };
           },

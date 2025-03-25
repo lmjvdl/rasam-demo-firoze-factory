@@ -4,14 +4,40 @@ import { iconMap, iconMapForAdminPanel } from "@/utils/icons/IconsMenu";
 import { useColorScheme } from "@mui/material/styles";
 import { SidebarItemListProps } from "@/interfaces/ui/sidebar/sidebar";
 import { useState } from "react";
+import { usePathname } from 'next/navigation';
+import { useEffect } from 'react';
 
 const SidebarItemList = ({ items, sx, isAdmin }: SidebarItemListProps) => {
   const mode = useColorScheme();
-  const [selectedItem, setSelectedItem] = useState<string>(isAdmin ? "کاربر" : "داشبورد");
+  const pathname = usePathname();
+  const [selectedItem, setSelectedItem] = useState<string>("");
 
-  const handleItemClick = (itemName: string) => {
-    setSelectedItem(itemName);
-  };
+  useEffect(() => {
+    const userPanelPaths = Object.entries(items).map(([text, { to }]) => ({
+      text,
+      to,
+      isExact: to === '/dashboard'
+    }));
+
+    const findSelectedItem = () => {
+      if (!isAdmin) {
+        const exactMatch = userPanelPaths.find(item => pathname === item.to);
+        if (exactMatch) return exactMatch.text;
+        
+        const partialMatch = userPanelPaths
+          .filter(item => !item.isExact)
+          .find(item => pathname.startsWith(item.to));
+        
+        return partialMatch?.text || "داشبورد";
+      }
+      return Object.entries(items).find(([_, { to }]) => 
+        pathname.startsWith(to)
+      )?.[0] || "کاربر";
+    };
+
+    setSelectedItem(findSelectedItem());
+  }, [pathname, items, isAdmin]);
+
 
   return (
     <>
@@ -23,6 +49,10 @@ const SidebarItemList = ({ items, sx, isAdmin }: SidebarItemListProps) => {
 
           const isSelected = selectedItem === text;
 
+          function handleItemClick(text: string) {
+            throw new Error("Function not implemented.");
+          }
+
           return (
             <SidebarItem
               key={index}
@@ -31,12 +61,18 @@ const SidebarItemList = ({ items, sx, isAdmin }: SidebarItemListProps) => {
               link={to}
               icon={
                 <IconComponent
-                  stroke={mode.colorScheme === "dark" ? "#fff" : "#292D32"}
+                  stroke={
+                    isSelected 
+                      ? "#fff" 
+                      : mode.colorScheme === "dark" 
+                        ? "#fff" 
+                        : "#292D32"
+                  }
                 />
               }
               onClick={() => {
                 handleItemClick(text);
-                onClick && onClick();
+                onClick?.();
               }}
             />
           );

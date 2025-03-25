@@ -4,7 +4,7 @@ import { z } from "zod";
 
 const userSchema = z.object({
   username: z.string().min(1, "نام کاربری الزامی است").max(50),
-  email: z.string().email("ایمیل نامعتبر است").max(254).optional(),
+  email: z.string().max(254),
   phone_number: z.string().min(1, "شماره موبایل الزامی است").max(11),
   first_name: z.string().max(150).optional(),
   last_name: z.string().max(150).optional(),
@@ -25,7 +25,7 @@ export const createNewUser = async (data: unknown) => {
   const processedData = {
     ...validationResult.data,
     national_code:
-      validationResult.data.national_code === "" ? null : validationResult.data.national_code,
+      validationResult.data.national_code === "" ? '' : validationResult.data.national_code,
   };
 
   try {

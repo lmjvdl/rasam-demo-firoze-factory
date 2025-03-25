@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useAuthStore } from "@/hooks/context/authStore";
 import LoadingScreen from "@/components/loadingScreen/LoadingScreen";
 
+
 export default function HomePage() {
   const router = useRouter();
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
@@ -20,8 +21,6 @@ export default function HomePage() {
 
   return <LoadingScreen />;
 }
-
-
 
 
 // function urlBase64ToUint8Array(base64String: string) {

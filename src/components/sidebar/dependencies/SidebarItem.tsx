@@ -25,8 +25,6 @@ const SidebarItem = ({
 }) => {
   return (
     <ListItem key={text} disablePadding sx={sx}>
-      {" "}
-      {}
       <ListItemButton
         LinkComponent={Link}
         href={link.startsWith("/") ? link : `/${link}`}
@@ -34,19 +32,27 @@ const SidebarItem = ({
         sx={{
           marginX: "3px",
           borderRadius: "8px",
-          backgroundColor: selected ? "var(--mui-palette-primary-main)" : "transparent",
+          backgroundColor: selected 
+            ? "var(--mui-palette-primary-main)" 
+            : "transparent",
+          color: selected 
+            ? "#fff" 
+            : "inherit",
           "&:hover": {
-            backgroundColor: "rgba(0, 0, 0, 0.2)",
+            backgroundColor: selected
+              ? "var(--mui-palette-primary-dark)"
+              : "rgba(0, 0, 0, 0.2)",
           },
         }}
       >
-        <ListItemIcon>{icon}</ListItemIcon>
+        <ListItemIcon sx={{ color: selected ? "#fff" : "inherit" }}>
+          {icon}
+        </ListItemIcon>
         <ListItemText
           primary={text}
-          slotProps={{
-            primary: {
-              fontSize: "16px",
-            },
+          primaryTypographyProps={{
+            fontSize: "16px",
+            fontWeight: selected ? "bold" : "normal",
           }}
         />
       </ListItemButton>
