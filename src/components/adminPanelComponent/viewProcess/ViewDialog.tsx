@@ -10,7 +10,8 @@ const ViewDialog: React.FC<ViewDialogProps> = ({
   titles,  
   booleanAttributeName, 
   falseLabel, 
-  trueLabel 
+  trueLabel, 
+  arrayAttributes = {} // پراپ جدید برای آرایه‌ها
 }) => {
   if (!rowData) return null;
 
@@ -24,6 +25,7 @@ const ViewDialog: React.FC<ViewDialogProps> = ({
               if (column.id === key) {
                 let valueToShow = rowData[key];
 
+                // اگر نام ویژگی بولی باشد، مقدار آن را به trueLabel یا falseLabel تغییر می‌دهیم
                 if (booleanAttributeName && key === booleanAttributeName) {
                   valueToShow = rowData[key] ? trueLabel : falseLabel;
                 }
@@ -33,12 +35,18 @@ const ViewDialog: React.FC<ViewDialogProps> = ({
                     <strong>{column.label}:</strong>{" "}
                     {column.id === "logo" || column.id === "icon" ? (
                       <img 
-                      src={valueToShow} 
-                      alt={column.label} 
-                      style={{ maxWidth: "100px", maxHeight: "100px" }}
+                        src={valueToShow} 
+                        alt={column.label} 
+                        style={{ maxWidth: "100px", maxHeight: "100px" }}
                       />
                     ) : Array.isArray(valueToShow) ? (
-                      valueToShow.join(", ")
+                      <div>
+                        {valueToShow
+                          .map((item: any) => (
+                            arrayAttributes[key] ? item[arrayAttributes[key]] : item
+                          ))
+                          .join(", ")}
+                      </div>
                     ) : (
                       valueToShow
                     )}

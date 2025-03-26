@@ -23,6 +23,8 @@ export const columns = () => [
         showOnTable: true,
         canEdit: true,
         isAdditionalAction: false,
+        optionsKey: "companyList",
+        isSingleSelect: true,
     },
     {
         id: "name",

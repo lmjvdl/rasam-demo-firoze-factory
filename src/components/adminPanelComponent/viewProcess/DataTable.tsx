@@ -24,6 +24,7 @@ const DataTable: React.FC<DataTableProps> = ({
   count,
   page,
   onPageChange,
+  arrayColumns = {},
 }) => {
   const validData = Array.isArray(data) ? data : [];
 
@@ -47,35 +48,49 @@ const DataTable: React.FC<DataTableProps> = ({
           <TableBody>
             {validData.map((row, rowIndex) => (
               <TableRow key={rowIndex}>
-                {visibleColumns.map((column) => (
-                  <TableCell key={column.id} style={{ textAlign: "center" }}>
-                    {column.isImage ? (
-                      <img
-                        src={row[column.id]}
-                        alt="Image"
-                        style={{ maxWidth: "100px", maxHeight: "100px" }}
-                      />
-                    ) : column.render ? (
-                      column.render(row)
-                    ) : !column.isAdditionalAction && column.isActionColumn ? (
-                      <>
-                        <IconButton onClick={() => onView?.(row)}>
-                          <VisibilityIcon color="primary" />
-                        </IconButton>
-                        <IconButton onClick={() => onEdit?.(row)}>
-                          <EditIcon />
-                        </IconButton>
-                        <IconButton onClick={() => onDelete?.(row)}>
-                          <DeleteIcon color="warning" />
-                        </IconButton>
-                      </>
-                    ) : Array.isArray(row[column.id]) ? (
-                      truncateText(row[column.id].join(", "))
-                    ) : (
-                      truncateText(row[column.id])
-                    )}
-                  </TableCell>
-                ))}
+                {visibleColumns.map((column) => {
+                  const isArray = Array.isArray(row[column.id]);
+                  const isArrayColumn = arrayColumns[column.id];
+
+                  return (
+                    <TableCell key={column.id} style={{ textAlign: "center" }}>
+                      {column.isImage ? (
+                        <img
+                          src={row[column.id]}
+                          alt="Image"
+                          style={{ width: "25px", height: "25px" }}
+                        />
+                      ) : column.render ? (
+                        column.render(row)
+                      ) : !column.isAdditionalAction && column.isActionColumn ? (
+                        <>
+                          <IconButton onClick={() => onView?.(row)}>
+                            <VisibilityIcon color="primary" />
+                          </IconButton>
+                          <IconButton onClick={() => onEdit?.(row)}>
+                            <EditIcon />
+                          </IconButton>
+                          <IconButton onClick={() => onDelete?.(row)}>
+                            <DeleteIcon color="warning" />
+                          </IconButton>
+                        </>
+                      ) : isArray && isArrayColumn ? (
+                        <div>
+                          {row[column.id].map((item: any, index: number) => (
+                            <span key={index}>
+                              {item[isArrayColumn] || item}
+                              {index < row[column.id].length - 1 ? ", " : ""}
+                            </span>
+                          ))}
+                        </div>
+                      ) : isArray ? (
+                        truncateText(row[column.id].join(", "))
+                      ) : (
+                        truncateText(row[column.id])
+                      )}
+                    </TableCell>
+                  );
+                })}
               </TableRow>
             ))}
           </TableBody>

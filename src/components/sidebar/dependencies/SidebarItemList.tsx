@@ -13,28 +13,29 @@ const SidebarItemList = ({ items, sx, isAdmin }: SidebarItemListProps) => {
   const [selectedItem, setSelectedItem] = useState<string>("");
 
   useEffect(() => {
-    const userPanelPaths = Object.entries(items).map(([text, { to }]) => ({
-      text,
-      to,
-      isExact: to === '/dashboard'
-    }));
-
     const findSelectedItem = () => {
-      if (!isAdmin) {
-        const exactMatch = userPanelPaths.find(item => pathname === item.to);
-        if (exactMatch) return exactMatch.text;
-        
-        const partialMatch = userPanelPaths
-          .filter(item => !item.isExact)
-          .find(item => pathname.startsWith(item.to));
-        
-        return partialMatch?.text || "داشبورد";
-      }
-      return Object.entries(items).find(([_, { to }]) => 
-        pathname.startsWith(to)
-      )?.[0] || "کاربر";
+      // Convert items to array and sort by path length (longest first)
+      // This ensures nested routes (like '/admin/functionParameter') are checked 
+      // before their parent routes ('/admin/function')
+      const sortedItems = Object.entries(items)
+        .map(([text, { to }]) => ({ text, to, length: to.length }))
+        .sort((a, b) => b.length - a.length);
+
+      // Find the first item where:
+      // 1. Current path starts with the item's path (for nested routes)
+      // 2. Exact match with the item's path
+      // 3. Match with trailing slash (common in some routing scenarios)
+      const matchedItem = sortedItems.find(item => 
+        pathname.startsWith(item.to) || 
+        pathname === item.to ||
+        pathname === `${item.to}/`
+      );
+
+      // Fallback to default item if no match found
+      return matchedItem?.text || (isAdmin ? "کاربر" : "داشبورد");
     };
 
+    // Update selected item whenever pathname changes
     setSelectedItem(findSelectedItem());
   }, [pathname, items, isAdmin]);
 
@@ -42,17 +43,15 @@ const SidebarItemList = ({ items, sx, isAdmin }: SidebarItemListProps) => {
   return (
     <>
       <List sx={sx}>
-        {Object.entries(items).map(([text, { icon, to, onClick }], index) => {
+        {Object.entries(items).map(([text, { icon, to }], index) => {
+          // Select appropriate icon set based on admin/user mode
           const IconComponent = isAdmin
             ? iconMapForAdminPanel[icon]
             : iconMap[icon];
 
+          // Determine if current item is selected
           const isSelected = selectedItem === text;
-
-          function handleItemClick(text: string) {
-            throw new Error("Function not implemented.");
-          }
-
+          
           return (
             <SidebarItem
               key={index}
@@ -63,17 +62,13 @@ const SidebarItemList = ({ items, sx, isAdmin }: SidebarItemListProps) => {
                 <IconComponent
                   stroke={
                     isSelected 
-                      ? "#fff" 
+                      ? "#fff"
                       : mode.colorScheme === "dark" 
                         ? "#fff" 
                         : "#292D32"
                   }
                 />
               }
-              onClick={() => {
-                handleItemClick(text);
-                onClick?.();
-              }}
             />
           );
         })}

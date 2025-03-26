@@ -12,6 +12,7 @@ import { ProductLinePartUpdateSchema } from "./hooks/useUpdate";
 import ProductLinePartTable from "./ProductLinePartTable";
 import useUpdate from "./hooks/useUpdate";
 import useIcons from "@/hooks/reactQueryApiHooks/useIcon";
+import useProductLineQuery from "./hooks/useProductLineList";
 
 const AllContentProductLinePart: React.FC = () => {
   const [data, setData] = useState<ResponseSchema>(PrevDataInitial);
@@ -31,6 +32,13 @@ const AllContentProductLinePart: React.FC = () => {
     id: icon.id,
     value: icon.id, 
     label: icon.url, 
+  }))
+: [];
+const productLineList = useProductLineQuery().data
+? useProductLineQuery().data.map((productLine) => ({
+    id: productLine.id,
+    value: productLine.id, 
+    label: productLine.name, 
   }))
 : [];
 
@@ -121,7 +129,7 @@ const AllContentProductLinePart: React.FC = () => {
         onSave={handleSaveEdit}
         rowData={selectedRow}
         titles={filteredColumnsForEdit}
-        extraOptions={{ iconList }}
+        extraOptions={{ iconList, productLineList }}
       />
       <DeleteDialog
         open={deleteOpen}

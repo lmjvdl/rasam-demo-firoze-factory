@@ -20,7 +20,8 @@ const AllContentImageUpload: React.FC = () => {
       onSuccess: (information) => {
         const transformedData = information.data.results.map(item => ({
           ...item,
-          uploaded_at: gregorianToJalali(item.uploaded_at)
+          uploaded_at: gregorianToJalali(item.uploaded_at),
+          theme: item.theme === "dark" ? "تیره" : item.theme === "light" ? "روشن" : "",
         }));
 
         setData({

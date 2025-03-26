@@ -21,7 +21,6 @@ const Sidebar = ({
   const handleDrawerClose = () => setMobileOpen(false);
 
 
-// در فایل Sidebar.tsx
 useEffect(() => {
   if (isAdmin === false) {
     router.push("/login");

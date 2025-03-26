@@ -19,7 +19,7 @@ const DrawerContent = ({
         direction="column"
         alignItems="center"
         justifyContent="start"
-        sx={{ marginBlock: "15px" }}
+        sx={{ marginBlock: "px" }}
       >
         <FactoryIcon fill={mode.colorScheme === "dark" ? "#fff" : "#292D32"} />
       </Grid2>

@@ -22,9 +22,9 @@ export default function ProductLinePartPage() {
             label: "خط تولید",
             type: "select",
             required: true,
-            options: getListProductLine.data.map((product_line) => ({
-              label: product_line.name,
-              value: product_line.id,
+            options: getListProductLine.data.map((productLine) => ({
+              label: productLine.name,
+              value: productLine.id,
             })),
           },
           {

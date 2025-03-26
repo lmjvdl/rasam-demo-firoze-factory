@@ -23,19 +23,22 @@ interface Column {
   showOnTable?: boolean;
   isImage?: boolean;
   isMultiSelect?: boolean; 
+  isSingleSelect?: boolean;
   optionsKey?: string; 
 }
 
 interface DataTableProps {
-    columns: Column[];
-    data: any[];
-    onView?: (row: any) => void;
-    onEdit?: (row: any) => void;
-    onDelete?: (row: any) => void;
-    count: number;
-    page: number;
-    onPageChange: (newPage: number) => void;
+  columns: Column[];
+  data: any[];
+  onView?: (row: any) => void;
+  onEdit?: (row: any) => void;
+  onDelete?: (row: any) => void;
+  count: number;
+  page: number;
+  onPageChange: (newPage: number) => void;
+  arrayColumns?: { [key: string]: string }; 
 }
+
 
 interface DeleteDialogProps {
     open: boolean;
@@ -60,6 +63,7 @@ interface EditDialogProps {
     isMultiSelect?: boolean;
     isIconSelect?: boolean; 
     optionsKey?: string;
+    isSingleSelect?: boolean;
   }>;
   booleanAttributeName?: string;
   trueLabel?: string;
@@ -72,14 +76,15 @@ interface EditDialogProps {
 }
 
 interface ViewDialogProps {
-    open: boolean;
-    onClose: () => void;
-    rowData: any | null;
-    titles: any | null;
-    booleanValue?: boolean;
-    booleanAttributeName?: string;
-    trueLabel?: string;
-    falseLabel?: string;
+  open: boolean;
+  onClose: () => void;
+  rowData: any | null;
+  titles: any | null;
+  booleanValue?: boolean;
+  booleanAttributeName?: string;
+  trueLabel?: string;
+  falseLabel?: string;
+  arrayAttributes?: { [key: string]: string };
 }
 
 interface ViewUserDetailModal {

@@ -62,7 +62,32 @@ const allQueryKeys = {
     icons: {
       list: ["ADMIN_PANEL", "ICONS", "VIEW"],
       create: ["ADMIN_PANEL", "ICONS", "CREATE"],
-    }
+    },
+    alarm: {
+      list: ["ADMIN_PANEL", "ALARM", "VIEW"],
+      delete: ["ADMIN_PANEL", "ALARM", "DELETE"],
+      update: ["ADMIN_PANEL", "ALARM", "UPDATE"],
+      function_list: ["ADMIN_PANEL", "ALARM", "VIEW", "FUNCTION_LIST"],
+      data_type_list: ["ADMIN_PANEL", "ALARM", "VIEW", "DATA_TYPE_LIST"],
+      device_list: ["ADMIN_PANEL", "ALARM", "VIEW", "DEVICE_LIST"],
+    },
+    alarmDetail: {
+      list: ["ADMIN_PANEL", "ALARM_DETAIL", "VIEW"],
+      delete: ["ADMIN_PANEL", "ALARM_DETAIL", "DELETE"],
+      update: ["ADMIN_PANEL", "ALARM_DETAIL", "UPDATE"],
+      parameter_list: ["ADMIN_PANEL", "ALARM_DETAIL", "VIEW", "PARAMETER_LIST"],
+      alarm_list: ["ADMIN_PANEL", "ALARM_DETAIL", "VIEW", "ALARM_LIST"],
+    },
+    function: {
+      list: ["ADMIN_PANEL", "FUNCTION", "VIEW"],
+      delete: ["ADMIN_PANEL", "FUNCTION", "DELETE"],
+      update: ["ADMIN_PANEL", "FUNCTION", "UPDATE"],
+    },
+    functionParameter: {
+      list: ["ADMIN_PANEL", "FUNCTION_PARAMETER", "VIEW"],
+      delete: ["ADMIN_PANEL", "FUNCTION_PARAMETER", "DELETE"],
+      update: ["ADMIN_PANEL", "FUNCTION_PARAMETER", "UPDATE"],
+    },
   },
   userPanel: {
     preparingBody: {

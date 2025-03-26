@@ -31,6 +31,8 @@ export const columns = () => [
         showOnTable: true,
         canEdit: true,
         isAdditionalAction: false,
+        optionsKey: "productLineList",
+        isSingleSelect: true,
     },
     {
         id: "code",
