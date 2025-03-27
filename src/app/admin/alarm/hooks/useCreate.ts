@@ -2,17 +2,12 @@ import { fetchWithErrorForCreate } from "@/utils/dataFetching/fetchWithError";
 import alarmUrls from "@/utils/url/adminPanel/alarm/alarmUrl";
 import { z } from "zod";
 
-const alarmDetailSchema = z.object({
-  parameter: z.number().int("پارامتر باید یک عدد صحیح باشد").min(-2147483648).max(2147483647),
-  value: z.number().int("مقدار باید یک عدد صحیح باشد").min(-2147483648).max(2147483647),
-});
-
 const alarmSchema = z.object({
-  name: z.string().min(1, "نام هشدار الزامی است").max(100),
-  function: z.number().int("عملکرد باید یک عدد صحیح باشد").min(1, "عملکرد الزامی است"),
-  description: z.string().min(1, "توضیحات الزامی است"),
-  device: z.number().int("دستگاه باید یک عدد صحیح باشد").min(1, "دستگاه الزامی است"),
-  type: z.number().int("نوع باید یک عدد صحیح باشد").min(1, "نوع الزامی است"),
+  name: z.string(),
+  function: z.number(),
+  description: z.string(),
+  device: z.number(),
+  type: z.number(),
 });
 
 export const createNewAlarm = async (data: unknown) => {

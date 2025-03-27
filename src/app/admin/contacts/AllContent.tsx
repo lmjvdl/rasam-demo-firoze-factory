@@ -1,20 +1,18 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import getDeviceList, { ResponseSchema } from "./hooks/useView";
+import getContactsList, { ResponseSchema } from "./hooks/useView";
 import useDelete from "./hooks/useDelete";
-import ViewDialog from "@/components/adminPanelComponent/viewProcess/ViewDialog";
-import EditDialog from "@/components/adminPanelComponent/viewProcess/EditDialog";
-import DeleteDialog from "@/components/adminPanelComponent/viewProcess/DeleteDialog";
+import ViewDialog from "@/components/AdminPanelComponent/ViewProcess/ViewDialog";
+import EditDialog from "@/components/AdminPanelComponent/ViewProcess/EditDialog";
+import DeleteDialog from "@/components/AdminPanelComponent/ViewProcess/DeleteDialog";
 import { PrevDataInitial } from "@/interfaces/general/general";
 import { columns } from "./ColumnsData";
-import { DeviceUpdateSchema } from "./hooks/useUpdate";
-import DeviceTable from "./DeviceTable";
+import { ContactsUpdateSchema } from "./hooks/useUpdate";
+import ContactsTable from "./ContactsTable";
 import useUpdate from "./hooks/useUpdate";
-import useDataTypeQuery from "./hooks/useDataTypeList";
-import useProductLinePartQuery from "./hooks/useProducLinePartList";
 
-const AllContentDevice: React.FC = () => {
+const AllContentContacts: React.FC = () => {
   const [data, setData] = useState<ResponseSchema>(PrevDataInitial);
   const [selectedRow, setSelectedRow] = useState<any>(null);
   const [viewOpen, setViewOpen] = useState(false);
@@ -24,23 +22,9 @@ const AllContentDevice: React.FC = () => {
   const [totalData, setTotalData] = useState<number>(0);
   const [nextPage, setNextPage] = useState<null | string>(null);
 
-  const getList = getDeviceList(pageNumber, 8, nextPage);
-  const { deleteDeviceMutation } = useDelete();
-  const { updateDeviceMutation } = useUpdate();
-  const dataTypeList = useDataTypeQuery().data
-    ? useDataTypeQuery().data.map((dataType) => ({
-        id: dataType.id,
-        value: dataType.id,
-        label: dataType.name,
-      }))
-    : [];
-  const productLinePartList = useProductLinePartQuery().data
-    ? useProductLinePartQuery().data.map((productLine) => ({
-        id: productLine.id,
-        value: productLine.id,
-        label: productLine.name,
-      }))
-    : [];
+  const getList = getContactsList(pageNumber, 8, nextPage);
+  const { deleteContactsMutation } = useDelete();
+  const { updateContactsMutation } = useUpdate();
 
   useEffect(() => {
     getList.mutate(
@@ -55,10 +39,10 @@ const AllContentDevice: React.FC = () => {
     );
   }, [pageNumber]);
 
-  const handleSaveEdit = (updatedRow: DeviceUpdateSchema) => {
+  const handleSaveEdit = (updatedRow: ContactsUpdateSchema) => {
     setData((prevData) => {
       if (prevData?.data) {
-        updateDeviceMutation.mutate(updatedRow);
+        updateContactsMutation.mutate(updatedRow);
 
         return {
           ...prevData,
@@ -96,7 +80,7 @@ const AllContentDevice: React.FC = () => {
 
   const handleConfirmDelete = () => {
     if (selectedRow?.id) {
-      deleteDeviceMutation.mutate(selectedRow.id);
+      deleteContactsMutation.mutate(selectedRow.id);
       setDeleteOpen(false);
     }
   };
@@ -106,7 +90,7 @@ const AllContentDevice: React.FC = () => {
 
   return (
     <>
-      <DeviceTable
+      <ContactsTable
         data={data?.data?.results ?? []}
         columns={dynamicColumns}
         onView={handleView}
@@ -129,7 +113,6 @@ const AllContentDevice: React.FC = () => {
         onSave={handleSaveEdit}
         rowData={selectedRow}
         titles={filteredColumnsForEdit}
-        extraOptions={{ dataTypeList, productLinePartList }}
       />
       <DeleteDialog
         open={deleteOpen}
@@ -142,4 +125,4 @@ const AllContentDevice: React.FC = () => {
   );
 };
 
-export default AllContentDevice;
+export default AllContentContacts;

@@ -10,6 +10,8 @@ export type DeviceUpdateSchema = {
   data_type: number[];
   name: string;
   code: string;
+  value: number;
+  on_off_identifier: number;
 };
 
 const useUpdateDevice = () => {

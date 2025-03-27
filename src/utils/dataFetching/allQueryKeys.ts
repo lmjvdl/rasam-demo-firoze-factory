@@ -88,6 +88,11 @@ const allQueryKeys = {
       delete: ["ADMIN_PANEL", "FUNCTION_PARAMETER", "DELETE"],
       update: ["ADMIN_PANEL", "FUNCTION_PARAMETER", "UPDATE"],
     },
+    contacts: {
+      list: ["ADMIN_PANEL", "CONTACTS", "VIEW"],
+      delete: ["ADMIN_PANEL", "CONTACTS", "DELETE"],
+      update: ["ADMIN_PANEL", "CONTACTS", "UPDATE"],
+    }
   },
   userPanel: {
     preparingBody: {

@@ -13,6 +13,8 @@ export const columns = () => [
         showOnTable: true,
         canEdit: true,
         isAdditionalAction: false,
+        optionsKey: "productLinePartList",
+        isSingleSelect: true,
     },
     {
         id: "data_type",
@@ -21,6 +23,8 @@ export const columns = () => [
         showOnTable: true,
         canEdit: true,
         isAdditionalAction: false,
+        optionsKey: "dataTypeList",
+        isMultiSelect: true,
     },
     {
         id: "name",
@@ -33,6 +37,24 @@ export const columns = () => [
     {
         id: "code",
         label: "کد",
+        required: true,
+        showOnTable: false,
+        canEdit: true,
+        isAdditionalAction: false,
+    },
+    {
+        id: "on_off_identifier",
+        label: "مشخص کننده خاموشی",
+        required: true,
+        showOnTable: true,
+        canEdit: true,
+        isAdditionalAction: false,
+        optionsKey: "dataTypeList",
+        isSingleSelect: true,
+    },
+    {
+        id: "value",
+        label: "مقدار مشخص کننده خاموشی",
         required: true,
         showOnTable: true,
         canEdit: true,

@@ -20,10 +20,11 @@ const lightObject: ColorSystemOptions = {
     table: {
       oddColumn: "#fff",
       evenColumn: "#F2F2F2",
-      header: "#0C9782",
+      header: "#0FBDA2",
     },
     text: {
-      primary: "#333333"
+      primary: "#333333",
+      secondary: "#A7C4C2"
     }
   },
 };
@@ -174,9 +175,10 @@ const theme = createTheme(
       },
       MuiTableContainer: {
         styleOverrides: {
-          root: {
+          root: ({ theme }) => ({
             boxShadow: "none",
-          },
+            border: `1px solid ${theme.palette.text.secondary}`
+          }),
         },
       },
       MuiTableHead: {

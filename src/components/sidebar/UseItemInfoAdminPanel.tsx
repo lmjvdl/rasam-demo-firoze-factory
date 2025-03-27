@@ -13,7 +13,7 @@ export const UseItemInfoAdminPanel = () => {
         to: "/admin/productLine",
       },
       "خط تولید جزئی": {
-        text: "خط تولید جزیی",
+        text: "خط تولید جزئی",
         icon: "ProductLinePart",
         to: "/admin/productLinePart",
       },

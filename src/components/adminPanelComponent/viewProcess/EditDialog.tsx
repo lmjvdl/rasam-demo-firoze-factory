@@ -29,7 +29,9 @@ const EditDialog: React.FC<EditDialogProps> = ({
   onBooleanValueChange,
   extraOptions = {},
 }) => {
-  const [formData, setFormData] = useState<{ [key: string]: any }>(rowData || {});
+  const [formData, setFormData] = useState<{ [key: string]: any }>(
+    rowData || {}
+  );
   const [errors, setErrors] = useState<{ [key: string]: boolean }>({});
 
   useEffect(() => {
@@ -53,14 +55,20 @@ const EditDialog: React.FC<EditDialogProps> = ({
     onBooleanValueChange?.(newValue);
   };
 
-  const handleMultiSelectChange = (event: SelectChangeEvent<string[]>, key: string) => {
+  const handleMultiSelectChange = (
+    event: SelectChangeEvent<string[]>,
+    key: string
+  ) => {
     setFormData((prev) => ({
       ...prev,
       [key]: event.target.value,
     }));
   };
 
-  const handleSingleSelectChange = (event: SelectChangeEvent<string>, key: string) => {
+  const handleSingleSelectChange = (
+    event: SelectChangeEvent<string>,
+    key: string
+  ) => {
     setFormData((prev) => ({
       ...prev,
       [key]: event.target.value,
@@ -115,11 +123,46 @@ const EditDialog: React.FC<EditDialogProps> = ({
             );
           }
 
+          if (column.isSingleSelect && column.optionsKey) {
+            const allOptions = extraOptions[column.optionsKey] || [];
+            return (
+              <FormControl
+                key={key}
+                fullWidth
+                margin="dense"
+                required={column.required}
+              >
+                <InputLabel>{column.label}</InputLabel>
+                <Select
+                  value={value}
+                  onChange={(e) => handleSingleSelectChange(e, key)}
+                  input={<OutlinedInput label={column.label} />}
+                >
+                  {allOptions.map((option) => (
+                    <MenuItem key={option.id} value={option.id}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </Select>
+                {errors[key] && (
+                  <span style={{ color: "red", fontSize: "0.75rem" }}>
+                    این فیلد اجباری است.
+                  </span>
+                )}
+              </FormControl>
+            );
+          }
+
           if (column.isMultiSelect && column.optionsKey) {
             const allOptions = extraOptions[column.optionsKey] || [];
             const selectedValues = formData?.[key] || [];
             return (
-              <FormControl key={key} fullWidth margin="dense">
+              <FormControl
+                key={key}
+                fullWidth
+                margin="dense"
+                required={column.required}
+              >
                 <InputLabel>{column.label}</InputLabel>
                 <Select
                   multiple
@@ -137,31 +180,18 @@ const EditDialog: React.FC<EditDialogProps> = ({
                 >
                   {allOptions.map((option) => (
                     <MenuItem key={option.id} value={option.id}>
-                      {selectedValues.includes(option.id) && <Checkbox checked />}
+                      {selectedValues.includes(option.id) && (
+                        <Checkbox checked />
+                      )}
                       <ListItemText primary={option.label} />
                     </MenuItem>
                   ))}
                 </Select>
-              </FormControl>
-            );
-          }
-
-          if (column.isSingleSelect && column.optionsKey) {
-            const allOptions = extraOptions[column.optionsKey] || [];
-            return (
-              <FormControl key={key} fullWidth margin="dense">
-                <InputLabel>{column.label}</InputLabel>
-                <Select
-                  value={value}
-                  onChange={(e) => handleSingleSelectChange(e, key)}
-                  input={<OutlinedInput label={column.label} />}
-                >
-                  {allOptions.map((option) => (
-                    <MenuItem key={option.id} value={option.id}>
-                      {option.label}
-                    </MenuItem>
-                  ))}
-                </Select>
+                {errors[key] && (
+                  <span style={{ color: "red", fontSize: "0.75rem" }}>
+                    این فیلد اجباری است.
+                  </span>
+                )}
               </FormControl>
             );
           }

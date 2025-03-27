@@ -2,49 +2,46 @@ import { z } from "zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import fetchWithError from "@/utils/dataFetching/fetchWithError";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
-import deviceUrls from "@/utils/url/adminPanel/device/deviceUrl";
-import { useToast } from "@/hooks/ui/useToast";
+import contactsUrls from "@/utils/URLs/adminPanel/contacts/contactsUrl";
+import { useToast } from "@/hooks/UI/useToast";
 
-export default function getDeviceList(pages: number, pageSize: number, URL: string | null) {
+export default function getContactsList(pages: number, pageSize: number, URL: string | null) {
   const queryClient = useQueryClient();
   const { showToast } = useToast();
 
-  const getDeviceListMutation = useMutation({
-    mutationKey: allQueryKeys.adminPanel.devices.list,
+  const getContactsListMutation = useMutation({
+    mutationKey: allQueryKeys.adminPanel.contacts.list,
     retry: false,
-    mutationFn: ({ page = pages, page_size = pageSize, url = URL }: { page?: number; page_size?: number; url: string | null; }) =>
+    mutationFn: ({ page = pages, page_size = pageSize, url = URL }: { page?: number; page_size?: number; url: string | null }) =>
       fetchWithError(
         url !== null ? url : 
-        `${deviceUrls.listDevice}?p=${page}&page_size=${page_size}`,
+        `${contactsUrls.listContacts}?p=${page}&page_size=${page_size}`,
         { method: "GET" }
       ).then(sanitizer),
     onSuccess: (serverResponse) => {
-      queryClient.setQueryData(allQueryKeys.adminPanel.devices.list, {
+      queryClient.setQueryData(allQueryKeys.adminPanel.contacts.list, {
         access: serverResponse.data,
       });
     },
     onError: () => {
-      showToast("خطایی رخ داد.", "error");
+      showToast("❌ خطایی رخ داد.", "error");
     },
   });
 
-  return getDeviceListMutation;
+  return getContactsListMutation;
 }
 
 const responseSchema = z.object({
   data: z.object({
     count: z.number(),
-    next: z.nullable(z.string()), 
+    next: z.nullable(z.string()),
     previous: z.nullable(z.string()),
     results: z.array(
       z.object({
         id: z.number(),
-        product_line_part: z.number(),
-        data_type: z.array(z.number()),
-        name: z.string(),
-        code: z.string(),
-        value: z.number(),
-        on_off_identifier: z.number(),
+        year: z.number().min(-2147483648).max(2147483647),
+        month: z.number().min(-2147483648).max(2147483647),
+        time: z.string(),
       })
     ),
   }),

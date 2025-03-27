@@ -4,7 +4,7 @@ import { z } from "zod";
 
 const alarmDetailSchema = z.object({
   parameter: z.number().int(),
-  value: z.number().int().min(-2147483648).max(2147483647),
+  value: z.number().int(),
   alarm: z.number().int(),
 });
 
