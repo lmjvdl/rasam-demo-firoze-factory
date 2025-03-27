@@ -25,7 +25,7 @@ import {
   AlarmDetail,
 } from "../../../public/logo/ItemMenuAdmin";
 // **************************** Importing the (LOGOS) of all existing factories ****************************
-import { Rasam, Setare } from "../../../public/logo/company";
+import { RasamDark, RasamLight, Setare } from "../../../public/logo/company";
 // ************************************* Importing (FOOTER ITEM) FIXED *************************************
 import { IconSettings, IconLogout } from "@tabler/icons-react";
 
@@ -86,5 +86,6 @@ export const FooterIcons = () => {
 
 export const companyMap: Record<string, React.FC<logoProps>> = {
   Setare: Setare,
-  Rasam: Rasam,
+  RasamLight: RasamLight,
+  RasamDark: RasamDark
 };

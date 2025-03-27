@@ -60,15 +60,15 @@ const ModalForm: React.FC<ModalFormProps> = ({
 
   return (
     <>
-      <Button
+      <Button          
         variant="contained"
         color="primary"
         onClick={handleOpen}
         sx={{
           width: "auto",
           maxWidth: "90vw",
+          ml: "17px",
           alignSelf: "flex-start",
-          mr: "auto",
           mt: "30px",
         }}
       >

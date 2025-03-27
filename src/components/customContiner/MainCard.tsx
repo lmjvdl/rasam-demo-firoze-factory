@@ -1,5 +1,5 @@
 import { MainCardType } from "@/interfaces/ui/mainCard/MainCard";
-import { Stack } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import React from "react";
 
 const MainCard: React.FC<MainCardType> = ({ children, sx }) => {
@@ -8,13 +8,16 @@ const MainCard: React.FC<MainCardType> = ({ children, sx }) => {
       sx={{
         borderRadius: "10px",
         bgcolor: "background.defaultChannel",
-        flexGrow: 1,
-        p: 2,
-        minHeight: "100%",
-        ...sx, // Allow additional styles to be passed via sx prop
+        flexGrow: 2,
+        height: "100%",
+        overflow: "auto",
+        direction: "rtl",
+        ...sx,
       }}
     >
-      {children}
+      <Box sx={{ direction: "ltr" }}>
+        {children}
+      </Box>
     </Stack>
   );
 };

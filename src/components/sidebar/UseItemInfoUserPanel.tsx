@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { signOut } from "next-auth/react";
+import { deleteUser } from "@/hooks/context/authStore";
 
 export const UseItemInfoUserPanel = () => {
   const drawerItemInfoForUserPanel = useMemo(
@@ -37,7 +37,7 @@ export const UseItemInfoUserPanel = () => {
         text: "خروج",
         icon: "Logout",
         to: "/login",
-        onClick: () => signOut(),
+        onClick: () => deleteUser(),
       },
     }),
     []

@@ -1,4 +1,3 @@
-// app/admin/layout.tsx
 "use client";
 
 import { useAuthStore } from "@/hooks/context/authStore";
@@ -25,7 +24,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   if (!isLoggedIn || !isAdmin) return <LoadingScreen />;
 
   return (
-    <MainCard>
+    <MainCard sx={{px: "20px"}}>
       {children}
     </MainCard>
   );

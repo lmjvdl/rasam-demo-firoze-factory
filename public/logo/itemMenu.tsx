@@ -11,8 +11,8 @@ export const BodyPrep: React.FC<IconProps> = (props) => (
     xmlns="http://www.w3.org/2000/svg"
     x="0px"
     y="0px"
-    width="35px"
-    height="35px"
+    width="24px"
+    height="24px"
     viewBox="0 0 256 256"
     enableBackground="new 0 0 256 256"
   >
@@ -49,8 +49,8 @@ export const Chamfer: React.FC<IconProps> = (props) => (
   <svg
     version="1.0"
     xmlns="http://www.w3.org/2000/svg"
-    width="35px"
-    height="35px"
+    width="24px"
+    height="24px"
     viewBox="0 0 2048.000000 2048.000000"
     preserveAspectRatio="xMidYMid meet"
   >
@@ -217,8 +217,8 @@ c51 -53 41 -71 -51 -93 -37 -9 -71 -14 -75 -12 -16 9 -3 88 27 171 6 17 42 -8
 
 export const Dashboard: React.FC<IconProps> = (props) => (
   <svg
-    width="33"
-    height="33"
+    width="24"
+    height="24"
     viewBox="0 0 24 25"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
@@ -264,8 +264,8 @@ export const Packaging: React.FC<IconProps> = (props) => (
   <svg
     version="1.0"
     xmlns="http://www.w3.org/2000/svg"
-    width="38px"
-    height="38px"
+    width="24px"
+    height="24px"
     viewBox="0 0 174 174"
     preserveAspectRatio="xMidYMid meet"
   >
@@ -353,8 +353,8 @@ m-128 -107 c3 -8 0 -22 -8 -33 -13 -17 -14 -17 -20 0 -8 20 0 47 14 47 5 0 11
 
 export const Settings: React.FC<IconProps> = (props) => (
   <svg
-    width="33"
-    height="33"
+    width="22"
+    height="22"
     viewBox="0 0 24 25"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
@@ -362,7 +362,7 @@ export const Settings: React.FC<IconProps> = (props) => (
     <path
       d="M14.2024 22.6385C14.2024 22.638 14.2023 22.6375 14.202 22.637L13.3107 21.0374C12.7388 20.0108 11.262 20.0108 10.6901 21.0374L9.79839 22.6377C9.59948 22.9944 9.27213 23.2546 8.88823 23.3613C8.50433 23.468 8.09527 23.4124 7.75089 23.2068L5.15139 21.652C4.80688 21.4458 4.5555 21.1063 4.45254 20.708C4.34959 20.3097 4.40349 19.8853 4.60239 19.5282L5.56187 17.8062C6.11894 16.8063 5.39607 15.5761 4.25153 15.5761H2.40039C2.00257 15.5761 1.62104 15.4123 1.33973 15.1207C1.05843 14.8291 0.900391 14.4337 0.900391 14.0213V10.9119C0.900391 10.4995 1.05843 10.1041 1.33973 9.81249C1.62104 9.52092 2.00257 9.35712 2.40039 9.35712H4.25153C5.39607 9.35712 6.11894 8.12687 5.56187 7.12704L4.60239 5.40497C4.50367 5.22809 4.43956 5.03277 4.41372 4.83019C4.38789 4.62761 4.40083 4.42173 4.45182 4.22434C4.50281 4.02695 4.59084 3.84191 4.71088 3.67981C4.83092 3.51771 4.98061 3.38173 5.15139 3.27964L7.74939 1.72489C8.09391 1.51873 8.50333 1.46286 8.88759 1.56958C9.27185 1.67629 9.59947 1.93685 9.79839 2.29393L10.6904 3.89549C11.2622 4.92218 12.739 4.9224 13.3111 3.89587L14.2039 2.29393C14.4028 1.93727 14.7302 1.67702 15.1141 1.57032C15.498 1.46363 15.907 1.51922 16.2514 1.72489L18.8509 3.27964C19.195 3.48581 19.4461 3.82511 19.549 4.22301C19.652 4.62092 19.5983 5.04491 19.3999 5.40186L18.4387 7.1271C17.8817 8.12693 18.6046 9.35712 19.7491 9.35712H21.6004C21.9982 9.35712 22.3797 9.52092 22.6611 9.81249C22.9424 10.1041 23.1004 10.4995 23.1004 10.9119V14.0213C23.1004 14.4337 22.9424 14.8291 22.6611 15.1207C22.3797 15.4123 21.9982 15.5761 21.6004 15.5761H19.7488C18.6043 15.5761 17.8815 16.8061 18.4383 17.8059L19.3984 19.5298C19.5973 19.8869 19.6512 20.3112 19.5482 20.7095C19.4453 21.1078 19.1939 21.4474 18.8494 21.6536L16.2514 23.2083C15.9069 23.4145 15.4975 23.4703 15.1132 23.3636C14.7292 23.257 14.4017 22.9967 14.2028 22.64C14.2025 22.6395 14.2024 22.639 14.2024 22.6385V22.6385Z"
       stroke={props.stroke}
-      strokeWidth="1"
+      strokeWidth="1.2"
       strokeLinejoin="round"
     />
     <circle cx="12" cy="12.5" r="3.9" stroke={props.stroke} strokeWidth="1" />
@@ -373,8 +373,8 @@ export const Settings: React.FC<IconProps> = (props) => (
 
 export const Logout: React.FC<IconProps> = (props) => (
   <svg
-    width="36"
-    height="36"
+    width="24"
+    height="24"
     viewBox="0 0 24 25"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
@@ -408,7 +408,7 @@ export const Logout: React.FC<IconProps> = (props) => (
 export const PowerSupply: React.FC<IconProps> = (props) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="33"
+    width="24"
     height="33"
     version="1.1"
     fill={props.stroke}

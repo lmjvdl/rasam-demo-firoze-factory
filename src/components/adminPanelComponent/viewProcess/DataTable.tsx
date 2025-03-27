@@ -95,22 +95,22 @@ const DataTable: React.FC<DataTableProps> = ({
             ))}
           </TableBody>
         </Table>
+        <Box component="div" sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+          <TablePagination
+            component="div"
+            count={count}
+            rowsPerPage={7}
+            page={page}
+            onPageChange={(_, newPage) => onPageChange(newPage)}
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+            }}
+            labelRowsPerPage=""
+            rowsPerPageOptions={[]}
+          />
+        </Box>
       </TableContainer>
-      <div>
-        <TablePagination
-          count={count}
-          rowsPerPage={7}
-          page={page}
-          onPageChange={(_, newPage) => onPageChange(newPage)}
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            marginTop: "16px",
-          }}
-          labelRowsPerPage=""
-          rowsPerPageOptions={[]}
-        />
-      </div>
     </Box>
   );
 };

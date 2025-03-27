@@ -11,7 +11,7 @@ import Sidebar from "@/components/sidebar/Sidebar";
 import { useAuthStore } from "@/hooks/context/authStore";
 import { ToastProvider } from "@/components/notification/ToastProvider";
 // import ErrorPage from "@/components/errorHandler/errorPage";
-import { ErrorBoundary } from "react-error-boundary";
+// import { ErrorBoundary } from "react-error-boundary";
 
 export default function RootLayout({
   children,
@@ -56,8 +56,9 @@ export default function RootLayout({
                 <Stack
                   direction={"row"}
                   width={"100%"}
-                  height={"100%"}
+                  height={"100vh"}
                   bgcolor={"background.default"}
+                  overflow="hidden"
                 >
                   <Sidebar
                     mobileOpen={mobileOpen}
@@ -72,6 +73,7 @@ export default function RootLayout({
                       width: { sm: `calc(100% - ${drawerWidth}px)` },
                       flexGrow: 1,
                       mt: "64px",
+                      overflow: "hidden"
                     }}
                   >
                     <Header
@@ -83,7 +85,7 @@ export default function RootLayout({
                       component={"main"}
                       width={"100%"}
                       height={"100%"}
-                      sx={{ flexGrow: 1, p: 2 }}
+                      sx={{ flexGrow: 1, p: 2, }}
                     >
                       {children}
                     </Box>

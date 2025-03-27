@@ -8,41 +8,52 @@ const lightObject: ColorSystemOptions = {
       main: "#0FBDA2",
     },
     secondary: {
-      main: "#E7F8F6",
+      main: "#E7F8F9",        
     },
     background: {
       default: "#F7F7F7",
-      defaultChannel: "#FFFFFF", //lighter
+      defaultChannel: "#FFFFFF",
       disable: "#EDEDED",
+      enable: "#B8E1DC",  
+      paperChannel: "#FFFFFF"       
     },
     table: {
       oddColumn: "#fff",
       evenColumn: "#F2F2F2",
       header: "#0C9782",
     },
+    text: {
+      primary: "#333333"
+    }
   },
 };
 const darkObject: ColorSystemOptions = {
   palette: {
     primary: {
       main: "#0FBDA2",
+      
     },
     secondary: {
-      main: "#6A6A6A",
+      main: "#F7F7F7",
     },
 
     background: {
       default: "#2E2E2E",
-      defaultChannel: "#333333", //lighter
+      defaultChannel: "#333333",
       disable: "#3A3A3A",
-      enable: "#4C4C4C",
+      enable: "#0B8E7A",
       paper: "#333333",
-    },
+      paperChannel: "#9AA0A8"  
+    }, 
     table: {
       header: "#0FBDA2",
       oddColumn: "#4C4C4C",
       evenColumn: "#646464",
     },
+    text: {
+      primary: "#fff",
+      secondary: "#2E2E2E"
+    }
   },
 };
 
@@ -104,8 +115,9 @@ const theme = createTheme(
           root: ({ theme }) => {
             return {
               "& fieldset": {
-                borderWidth: "2px",
-                borderColor: theme.palette.divider,
+                borderWidth: "1px",
+                borderColor: theme.palette.background,
+                color: theme.palette.background,
               },
             };
           },
@@ -118,17 +130,32 @@ const theme = createTheme(
               "&:hover:not(.Mui-focused) .MuiOutlinedInput-notchedOutline": {
                 borderColor: theme.palette.primary.main,
               },
+              '& .MuiOutlinedInput-input:-webkit-autofill': {
+                WebkitBoxShadow: `0 0 0 100px ${theme.palette.background.default} inset`,
+                WebkitTextFillColor: theme.palette.text,
+                caretColor: theme.palette.text.primary,
+                borderRadius: theme.shape.borderRadius,
+              },
             };
           },
         },
       },
       MuiInputBase: {
         styleOverrides: {
-          root: {
+          root: ({ theme }) => ({
+            '& input:-webkit-autofill': {
+              WebkitBoxShadow: `0 0 0 100px ${theme.palette.background.default} inset`,
+              WebkitTextFillColor: theme.palette.text.primary,
+              caretColor: theme.palette.text.primary,
+              borderRadius: theme.shape.borderRadius,
+            },
+            '& input:-webkit-autofill:focus': {
+              WebkitBoxShadow: `0 0 0 100px ${theme.palette.background.default} inset`,
+            },
             "& .Mui-active ": {
               borderWidth: "2px",
             },
-          },
+          }),
         },
       },
       MuiTableRow: {
@@ -138,7 +165,6 @@ const theme = createTheme(
               "&:nth-of-type(odd)": {
                 backgroundColor: theme.palette.action.hover,
               },
-              // hide last border
               "&:last-child td, &:last-child th": {
                 border: 0,
               },
@@ -194,7 +220,15 @@ const theme = createTheme(
       MuiInputLabel: {
         defaultProps: {
           size: "small"
-        }
+        },
+        styleOverrides: {
+          root: ({ theme }) => ({
+            color: theme.palette.text.primary,
+            '&.Mui-focused': {
+              color: theme.palette.background,
+            },
+          }),
+        },
       },      
     },
   },
