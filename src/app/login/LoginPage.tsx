@@ -1,15 +1,13 @@
 // Login.tsx
 "use client";
 import React, { useState } from "react";
-import { useRouter } from "next/navigation";
 import "../../styles/login/login.css";
-import { Button, Container, TextField, Typography } from "@mui/material";
+import { Box, Button, Container, TextField, Typography } from "@mui/material";
 import Image from "next/image";
 import { useForm, SubmitHandler } from "react-hook-form";
 import useLogin from "@/hooks/auth/useLogin";
 import { deleteUser } from "@/hooks/context/authStore";
 import Providers from "@/providers/Providers";
-import { ToastProvider } from "@/components/notification/ToastProvider";
 
 type FormData = {
   username: string;
@@ -32,10 +30,9 @@ export default function LoginForm() {
 
   return (
     <Providers>
-      <ToastProvider />
       <div className="login-page">
         <div className="login-card-wrap">
-          <div className="login-card">
+          <Box className="login-card" sx={{backgroundColor: "var(--mui-palette-background-paperChannel)"}}>
             <Container className="form-container">
               <Image
                 className="logo"
@@ -45,7 +42,7 @@ export default function LoginForm() {
                 height={1000}
               />
               <div className="text-container">
-                <Typography className="typing-text">
+                <Typography className="typing-text" sx={{color: "var(--mui-palette-text-primary)"}}>
                   ورود به سامانه مانیتورینگ هوشمند رسام
                 </Typography>
               </div>
@@ -81,7 +78,7 @@ export default function LoginForm() {
                 </Button>
               </form>
             </Container>
-          </div>
+          </Box>
         </div>
       </div>
     </Providers>

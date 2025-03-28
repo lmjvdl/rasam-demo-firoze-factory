@@ -13,7 +13,7 @@ export const ProductLinePart: React.FC<IconProps> = (props) => (
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
-    strokeWidth="2"
+    strokeWidth="1.5"
     strokeLinecap="round"
     strokeLinejoin="round"
     className="icon icon-tabler icons-tabler-outline icon-tabler-route-square-2"
@@ -35,7 +35,7 @@ export const ProductLine: React.FC<IconProps> = (props) => (
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
-    strokeWidth="2"
+    strokeWidth="1.5"
     strokeLinecap="round"
     strokeLinejoin="round"
     className="icon icon-tabler icons-tabler-outline icon-tabler-rollercoaster"
@@ -61,7 +61,7 @@ export const Devices: React.FC<IconProps> = (props) => (
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
-    strokeWidth="2"
+    strokeWidth="1.5"
     strokeLinecap="round"
     strokeLinejoin="round"
     className="icon icon-tabler icons-tabler-outline icon-tabler-devices"
@@ -83,7 +83,7 @@ export const UploadImage: React.FC<IconProps> = (props) => (
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
-    strokeWidth="2"
+    strokeWidth="1.5"
     strokeLinecap="round"
     strokeLinejoin="round"
     className="icon icon-tabler icons-tabler-outline icon-tabler-photo-circle-plus"
@@ -108,7 +108,7 @@ export const Company: React.FC<IconProps> = (props) => (
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
-    strokeWidth="2"
+    strokeWidth="1.5"
     strokeLinecap="round"
     strokeLinejoin="round"
     className="icon icon-tabler icons-tabler-outline icon-tabler-building-community"
@@ -132,7 +132,7 @@ export const Group: React.FC<IconProps> = (props) => (
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
-    strokeWidth="2"
+    strokeWidth="1.5"
     strokeLinecap="round"
     strokeLinejoin="round"
     className="icon icon-tabler icons-tabler-outline icon-tabler-users-group"
@@ -157,7 +157,7 @@ export const Permission: React.FC<IconProps> = (props) => (
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
-    strokeWidth="2"
+    strokeWidth="1.5"
     strokeLinecap="round"
     strokeLinejoin="round"
     className="icon icon-tabler icons-tabler-outline icon-tabler-file-like"
@@ -180,7 +180,7 @@ export const User: React.FC<IconProps> = (props) => (
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
-    strokeWidth="2"
+    strokeWidth="1.5"
     strokeLinecap="round"
     strokeLinejoin="round"
     className="icon icon-tabler icons-tabler-outline icon-tabler-user"
@@ -201,7 +201,7 @@ export const DataType: React.FC<IconProps> = (props) => (
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
-    strokeWidth="2"
+    strokeWidth="1.5"
     strokeLinecap="round"
     strokeLinejoin="round"
     className="icon icon-tabler icons-tabler-outline icon-tabler-database-cog"
@@ -231,7 +231,7 @@ export const DeviceType: React.FC<IconProps> = (props) => (
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
-    strokeWidth="2"
+    strokeWidth="1.5"
     strokeLinecap="round"
     strokeLinejoin="round"
     className="icon icon-tabler icons-tabler-outline icon-tabler-device-desktop-code"
@@ -242,5 +242,95 @@ export const DeviceType: React.FC<IconProps> = (props) => (
     <path d="M9 16v4" />
     <path d="M20 21l2 -2l-2 -2" />
     <path d="M17 17l-2 2l2 2" />
+  </svg>
+);
+
+// ***************************************************************************************************************************//
+
+export const Function: React.FC<IconProps> = (props) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="icon icon-tabler icons-tabler-outline icon-tabler-math-function"
+  >
+    <path stroke={props.stroke} fill="none" />
+    <path d="M3 19a2 2 0 0 0 2 2c2 0 2 -4 3 -9s1 -9 3 -9a2 2 0 0 1 2 2" />
+    <path d="M5 12h6" />
+    <path d="M15 12l6 6" />
+    <path d="M15 18l6 -6" />
+  </svg>
+);
+
+// ***************************************************************************************************************************//
+
+export const FunctionParameter: React.FC<IconProps> = (props) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="icon icon-tabler icons-tabler-outline icon-tabler-indent-decrease"
+  >
+    <path stroke={props.stroke} fill="none" />
+    <path d="M20 6l-7 0" />
+    <path d="M20 12l-9 0" />
+    <path d="M20 18l-7 0" />
+    <path d="M8 8l-4 4l4 4" />
+  </svg>
+);
+
+// ***************************************************************************************************************************//
+
+export const Alarm: React.FC<IconProps> = (props) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="icon icon-tabler icons-tabler-outline icon-tabler-bell"
+  >
+    <path stroke={props.stroke} fill="none" />
+    <path d="M10 5a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" />
+    <path d="M9 17v1a3 3 0 0 0 6 0v-1" />
+  </svg>
+);
+
+// ***************************************************************************************************************************//
+
+export const AlarmDetail: React.FC<IconProps> = (props) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="icon icon-tabler icons-tabler-outline icon-tabler-alarm-average"
+  >
+    <path stroke={props.stroke} fill="none" />
+    <path d="M5 13a7 7 0 1 0 14 0a7 7 0 0 0 -14 0" />
+    <path d="M7 4l-2.75 2" />
+    <path d="M17 4l2.75 2" />
+    <path d="M8 13h1l2 3l2 -6l2 3h1" />
   </svg>
 );

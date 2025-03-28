@@ -10,7 +10,6 @@ import useCompanyQuery from "./hooks/useCompanyList";
 export default function ProductLinePage() {
   const { icons, loading } = useIcons();
   
-  // Use effect to store company list data after fetching  
   const getListCompany = useCompanyQuery();
 
   return (

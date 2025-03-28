@@ -12,8 +12,8 @@ export const UseItemInfoAdminPanel = () => {
         icon: "ProductLine",
         to: "/admin/productLine",
       },
-      "خط تولید جزیی": {
-        text: "خط تولید جزیی",
+      "خط تولید جزئی": {
+        text: "خط تولید جزئی",
         icon: "ProductLinePart",
         to: "/admin/productLinePart",
       },
@@ -21,14 +21,34 @@ export const UseItemInfoAdminPanel = () => {
       "نوع اطلاعات": {
         text: "نوع اطلاعات",
         icon: "DataType",
-        to: "admin/dataType",
+        to: "/admin/dataType",
       },
-      دسترسی: { text: "دسترسی", icon: "Permission", to: "admin/permission" },
+      دسترسی: { text: "دسترسی", icon: "Permission", to: "/admin/permission" },
       "آپلود عکس": {
         text: "آپلود عکس",
         icon: "UploadImage",
         to: "/admin/uploadImage",
       },
+      هشدار: {
+        text: "هشدار",
+        icon: "Alarm",
+        to: "/admin/alarm",
+      },
+      "جزئیات هشدار": {
+        text: "جزئیات هشدار",
+        icon: "AlarmDetail",
+        to: "/admin/alarmDetail"
+      },
+      تابع‌: {
+        text: "تابع",
+        icon: "Function",
+        to: "/admin/function"
+      },
+      "پارامتر تابع": {
+        text: "پارامتر تابع",
+        icon: "FunctionParameter",
+        to: "/admin/functionParameter"
+      }
     }),
     []
   );

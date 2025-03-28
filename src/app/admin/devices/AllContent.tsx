@@ -11,6 +11,8 @@ import { columns } from "./ColumnsData";
 import { DeviceUpdateSchema } from "./hooks/useUpdate";
 import DeviceTable from "./DeviceTable";
 import useUpdate from "./hooks/useUpdate";
+import useDataTypeQuery from "./hooks/useDataTypeList";
+import useProductLinePartQuery from "./hooks/useProducLinePartList";
 
 const AllContentDevice: React.FC = () => {
   const [data, setData] = useState<ResponseSchema>(PrevDataInitial);
@@ -25,6 +27,20 @@ const AllContentDevice: React.FC = () => {
   const getList = getDeviceList(pageNumber, 8, nextPage);
   const { deleteDeviceMutation } = useDelete();
   const { updateDeviceMutation } = useUpdate();
+  const dataTypeList = useDataTypeQuery().data
+    ? useDataTypeQuery().data.map((dataType) => ({
+        id: dataType.id,
+        value: dataType.id,
+        label: dataType.name,
+      }))
+    : [];
+  const productLinePartList = useProductLinePartQuery().data
+    ? useProductLinePartQuery().data.map((productLine) => ({
+        id: productLine.id,
+        value: productLine.id,
+        label: productLine.name,
+      }))
+    : [];
 
   useEffect(() => {
     getList.mutate(
@@ -113,6 +129,7 @@ const AllContentDevice: React.FC = () => {
         onSave={handleSaveEdit}
         rowData={selectedRow}
         titles={filteredColumnsForEdit}
+        extraOptions={{ dataTypeList, productLinePartList }}
       />
       <DeleteDialog
         open={deleteOpen}

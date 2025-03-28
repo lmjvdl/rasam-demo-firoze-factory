@@ -43,6 +43,8 @@ const responseSchema = z.object({
         data_type: z.array(z.number()),
         name: z.string(),
         code: z.string(),
+        value: z.number(),
+        on_off_identifier: z.number(),
       })
     ),
   }),

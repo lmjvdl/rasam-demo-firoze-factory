@@ -2,7 +2,7 @@ import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import RtlProvider from "./RtlProvider";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ReactNode } from "react";
-import theme from "@/theme";
+import theme from "@/styles/theme";
 
 const MaterialProvider = ({
   children,

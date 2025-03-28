@@ -1,4 +1,6 @@
-import UserActions from "./user/page";
+import { IconButton } from "@mui/material";
+import Link from "next/link";
+import { IconUserExclamation } from "@tabler/icons-react";
 
 export const columns = () => [
   {
@@ -54,6 +56,15 @@ export const columns = () => [
     isActionColumn: false,
     canEdit: false,
     showOnTable: true,
-    render: (row: any) => <UserActions companyId={row.id} />
-  },
+    render: (row: any) => (
+      <Link href={`/admin/company/${row.id}/user`} passHref>
+        <IconButton 
+          aria-label="مشاهده کاربران شرکت"
+          sx={{ color: "primary.main" }}
+        >
+          <IconUserExclamation stroke={2} />
+        </IconButton>
+      </Link>
+    )
+  }
 ];

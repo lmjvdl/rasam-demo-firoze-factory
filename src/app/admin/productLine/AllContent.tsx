@@ -12,6 +12,7 @@ import { ProductLineUpdateSchema } from "./hooks/useUpdate";
 import ProductLineTable from "./ProductLineTable";
 import useUpdate from "./hooks/useUpdate";
 import useIcons from "@/hooks/reactQueryApiHooks/useIcon";
+import useCompanyQuery from "./hooks/useCompanyList";
 
 const AllContentProductLine: React.FC = () => {
   const [data, setData] = useState<ResponseSchema>(PrevDataInitial);
@@ -33,7 +34,13 @@ const AllContentProductLine: React.FC = () => {
     label: icon.url, 
   }))
 : [];
-
+const companyList = useCompanyQuery().data
+? useCompanyQuery().data.map((company) => ({
+    id: company.id,
+    value: company.id, 
+    label: company.name, 
+  }))
+: [];
 
   useEffect(() => {
     getList.mutate(
@@ -122,7 +129,7 @@ const AllContentProductLine: React.FC = () => {
         onSave={handleSaveEdit}
         rowData={selectedRow}
         titles={filteredColumnsForEdit}
-        extraOptions={{ iconList }}
+        extraOptions={{ iconList, companyList }}
       />
       <DeleteDialog
         open={deleteOpen}

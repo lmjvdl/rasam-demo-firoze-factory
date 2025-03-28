@@ -24,11 +24,11 @@ export default function UserPage() {
             required: true
           },
           {
-            name: "firstName", label: "نام", type: "text",
+            name: "first_name", label: "نام", type: "text",
             required: false
           },
           {
-            name: "lastName", label: "نام خانوادگی", type: "text",
+            name: "last_name", label: "نام خانوادگی", type: "text",
             required: false
           },
           {

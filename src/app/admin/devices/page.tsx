@@ -18,8 +18,14 @@ export default function DevicePage() {
         buttonText="افزودن دستگاه جدید"
         formFields={[
           {
+            name: "name", label: "نام", type: "text", required: true
+          },
+          {
+            name: "code", label: "کد", type: "text", required: true
+          },
+          {
             name: "product_line_part",
-            label: "خط تولید جزیی",
+            label: "خط تولید جزئی",
             type: "select",
             required: true,
             options: getListProductLinePart.data.map((product_line_part) => ({
@@ -38,10 +44,17 @@ export default function DevicePage() {
             })),
           },
           {
-            name: "name", label: "نام", type: "text", required: true
+            name: "on_off_identifier",
+            label: "مشخص کننده خاموشی",
+            type: "select",
+            required: true,
+            options: getListDataType.data.map((data_type) => ({
+              label: data_type.name,
+              value: data_type.id,
+            })),
           },
           {
-            name: "code", label: "کد", type: "text", required: true
+            name: "value", label: "مقدار مشخص کننده خاموشی", type: "number", required: true
           },
         ]}
         onSubmit={createNewDevice}

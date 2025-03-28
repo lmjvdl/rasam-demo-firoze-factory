@@ -21,11 +21,19 @@ const Sidebar = ({
   const handleDrawerClose = () => setMobileOpen(false);
 
 
-  useEffect(() => {
-    if (isAdmin === false) {
-      router.push("/login");
+useEffect(() => {
+  if (isAdmin === false) {
+    router.push("/login");
+  } else if (isAdmin === true) {
+    if (window.location.pathname === "/admin") {
+      router.push("/admin/user");
     }
-  }, [isAdmin, router]);
+  } else {
+    if (window.location.pathname === "/") {
+      router.push("/dashboard");
+    }
+  }
+}, [isAdmin, router]);
 
   const { drawerItemInfoForUserPanel, footerItemInfoForUserPanel } = UseItemInfoUserPanel();
   const { drawerItemInfoForAdminPanel, footerItemInfoForAdminPanel } = UseItemInfoAdminPanel();

@@ -6,6 +6,7 @@ import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import authUrls from "@/utils/auth/authUrls";
 import AuthResponseSanitizer from "@/utils/auth/authResponseSanitizer";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 export default function useLogin() {
   const router = useRouter();
@@ -29,6 +30,7 @@ export default function useLogin() {
     },
     onError: () => {
       const prettyError = new Error("نام کاربری یا رمز عبور شما نامعتبر است.");
+      toast.error("نام کاربری یا رمز عبور شما نامعتبر است.")
       prettyError.cause = "خطای احراز هویت";
       errorHandler(prettyError);
       deleteUser();

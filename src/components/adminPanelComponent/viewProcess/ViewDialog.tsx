@@ -10,7 +10,8 @@ const ViewDialog: React.FC<ViewDialogProps> = ({
   titles,  
   booleanAttributeName, 
   falseLabel, 
-  trueLabel 
+  trueLabel, 
+  arrayAttributes = {}
 }) => {
   if (!rowData) return null;
 
@@ -29,20 +30,28 @@ const ViewDialog: React.FC<ViewDialogProps> = ({
                 }
 
                 return (
-                  <Typography key={key} variant="body1" gutterBottom>
-                    <strong>{column.label}:</strong>{" "}
-                    {column.id === "logo" || column.id === "icon" ? (
-                      <img 
-                      src={valueToShow} 
-                      alt={column.label} 
-                      style={{ maxWidth: "100px", maxHeight: "100px" }}
-                      />
-                    ) : Array.isArray(valueToShow) ? (
-                      valueToShow.join(", ")
-                    ) : (
-                      valueToShow
-                    )}
-                  </Typography>
+                  <div key={key}>
+                    <Typography variant="body1" gutterBottom component="div">
+                      <strong>{column.label}:</strong>{" "}
+                      {column.id === "logo" || column.id === "icon" ? (
+                        <img 
+                          src={valueToShow} 
+                          alt={column.label} 
+                          style={{ maxWidth: "100px", maxHeight: "100px" }}
+                        />
+                      ) : Array.isArray(valueToShow) ? (
+                        <span>
+                          {valueToShow
+                            .map((item: any) => (
+                              arrayAttributes[key] ? item[arrayAttributes[key]] : item
+                            ))
+                            .join(", ")}
+                        </span>
+                      ) : (
+                        valueToShow
+                      )}
+                    </Typography>
+                  </div>
                 );
               }
               return null;

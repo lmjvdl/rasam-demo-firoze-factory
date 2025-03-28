@@ -65,6 +65,16 @@ const EditDialog: React.FC<EditDialogProps> = ({
     }));
   };
 
+  const handleSingleSelectChange = (
+    event: SelectChangeEvent<string>,
+    key: string
+  ) => {
+    setFormData((prev) => ({
+      ...prev,
+      [key]: event.target.value,
+    }));
+  };
+
   const handleSave = () => {
     const newErrors: { [key: string]: boolean } = {};
     titles.forEach((column) => {
@@ -113,11 +123,46 @@ const EditDialog: React.FC<EditDialogProps> = ({
             );
           }
 
+          if (column.isSingleSelect && column.optionsKey) {
+            const allOptions = extraOptions[column.optionsKey] || [];
+            return (
+              <FormControl
+                key={key}
+                fullWidth
+                margin="dense"
+                required={column.required}
+              >
+                <InputLabel>{column.label}</InputLabel>
+                <Select
+                  value={value}
+                  onChange={(e) => handleSingleSelectChange(e, key)}
+                  input={<OutlinedInput label={column.label} />}
+                >
+                  {allOptions.map((option) => (
+                    <MenuItem key={option.id} value={option.id}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </Select>
+                {errors[key] && (
+                  <span style={{ color: "red", fontSize: "0.75rem" }}>
+                    این فیلد اجباری است.
+                  </span>
+                )}
+              </FormControl>
+            );
+          }
+
           if (column.isMultiSelect && column.optionsKey) {
             const allOptions = extraOptions[column.optionsKey] || [];
             const selectedValues = formData?.[key] || [];
             return (
-              <FormControl key={key} fullWidth margin="dense">
+              <FormControl
+                key={key}
+                fullWidth
+                margin="dense"
+                required={column.required}
+              >
                 <InputLabel>{column.label}</InputLabel>
                 <Select
                   multiple
@@ -142,44 +187,14 @@ const EditDialog: React.FC<EditDialogProps> = ({
                     </MenuItem>
                   ))}
                 </Select>
+                {errors[key] && (
+                  <span style={{ color: "red", fontSize: "0.75rem" }}>
+                    این فیلد اجباری است.
+                  </span>
+                )}
               </FormControl>
             );
           }
-
-          if (column.isIconSelect && column.optionsKey) {
-            const allIcons = extraOptions[column.optionsKey] || [];
-            const selectedIcon = formData?.[key] || "";
-          
-            return (
-              <FormControl key={key} fullWidth margin="dense">
-                <InputLabel>{column.label}</InputLabel>
-                <Select
-                  value={selectedIcon}
-                  onChange={(e) => setFormData((prev) => ({ ...prev, [key]: Number(e.target.value) }))}
-                  input={<OutlinedInput label={column.label} />}
-                  renderValue={(selected) => {
-                    const selectedItem = allIcons.find((icon) => icon.id === selected);
-                    return (
-                      <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                        {selectedItem && <img src={selectedItem.label} alt="icon" style={{ width: "24px", height: "24px" }} />}
-  
-                      </div>
-                    );
-                  }}
-                >
-                  {allIcons.map((icon) => (
-                    <MenuItem key={icon.id} value={icon.id}>
-                      <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                        <img src={icon.label} alt="icon" style={{ width: "24px", height: "24px" }} />
-                        
-                      </div>
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            );
-          }
-          
 
           return (
             <TextField
@@ -199,7 +214,7 @@ const EditDialog: React.FC<EditDialogProps> = ({
               onChange={handleInputChange}
               fullWidth
               error={!!errors[key]}
-              helperText={errors[key] ? "This field is required" : ""}
+              helperText={errors[key] ? "این فیلد اجباری است." : ""}
             />
           );
         })}

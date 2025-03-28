@@ -15,7 +15,6 @@ interface CompanyTableProps {
     onDelete: (row: any) => void;
     handleUsersView: (companyId: number) => void;
     selectedCompanyId: number | null;
-    userList: { id: number; user: number }[];
     viewUsersOpen: boolean;
     count: number;
     page: number; 

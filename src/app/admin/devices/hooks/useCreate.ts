@@ -3,10 +3,12 @@ import deviceUrls from "@/utils/url/adminPanel/device/deviceUrl";
 import { z } from "zod";
 
 const deviceSchema = z.object({
-  product_line_part: z.number().int("قسمت خط تولید باید یک عدد صحیح باشد").min(1, "قسمت خط تولید الزامی است"),
+  product_line_part: z.number(),
   data_type: z.array(z.number()),
-  name: z.string().min(1, "نام دستگاه الزامی است").max(30),
-  code: z.string().min(1, "کد دستگاه الزامی است").max(15),
+  name: z.string(),
+  code: z.string(),
+  on_off_identifier: z.number(),
+  value: z.string(),
 });
 
 export const createNewDevice = async (data: unknown) => {
@@ -18,6 +20,7 @@ export const createNewDevice = async (data: unknown) => {
 
   const processedData = {
     ...validationResult.data,
+    value: Number(validationResult.data.value)
   };
 
   try {

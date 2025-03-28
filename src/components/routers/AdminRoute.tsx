@@ -15,7 +15,7 @@ export default function AdminRoute({ children }: Props) {
 
   useEffect(() => {
     if (isLoggedIn && isAdmin) {
-      router.replace("/admin");
+      router.replace("/admin/user");
     } else if(isLoggedIn && !isAdmin){
       router.replace("/login");
     }

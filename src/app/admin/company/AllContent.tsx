@@ -8,7 +8,6 @@ import CompanyTable from "./CompanyTable";
 import ViewDialog from "@/components/adminPanelComponent/viewProcess/ViewDialog";
 import EditDialog from "@/components/adminPanelComponent/viewProcess/EditDialog";
 import DeleteDialog from "@/components/adminPanelComponent/viewProcess/DeleteDialog";
-import ViewUserModalDialog from "@/app/admin/company/ViewUserModal";
 import { PrevDataInitial } from "@/interfaces/general/general";
 import { columns } from "./ColumnsData";
 import useIcons from "@/hooks/reactQueryApiHooks/useIcon";
@@ -23,7 +22,6 @@ const AllContentCompany: React.FC = () => {
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
   const [viewUsersOpen, setViewUsersOpen] = useState(false);
-  const [userList, setUserList] = useState<{ id: number; user: number }[]>([]);
   const [pageNumber, setPageNumber] = useState<number>(0);
   const [ totalData, setTotalData ] = useState<number>(0)
   const [ nextPage, setNextPage ] = useState<null | string>(null)
@@ -121,7 +119,6 @@ const AllContentCompany: React.FC = () => {
         onDelete={handleDelete}
         handleUsersView={handleUsersView}
         selectedCompanyId={selectedCompanyId}
-        userList={userList}
         viewUsersOpen={viewUsersOpen}
         page={pageNumber}
         count={totalData}
@@ -148,11 +145,6 @@ const AllContentCompany: React.FC = () => {
         onConfirm={handleConfirmDelete}
         rowData={selectedRow}
         titles={columns()}
-      />
-      <ViewUserModalDialog
-        open={viewUsersOpen}
-        onClose={() => setViewUsersOpen(false)}
-        companyId={selectedCompanyId}
       />
     </>
   );

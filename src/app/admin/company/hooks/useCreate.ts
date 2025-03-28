@@ -3,9 +3,9 @@ import companyUrls from "@/utils/url/adminPanel/company/companyUrl";
 import { z } from "zod";
 
 const companySchema = z.object({
-  name: z.string().min(1, "نام شرکت الزامی است"),
+  name: z.string(),
   description: z.string().optional(),
-  code: z.string().min(1, "کد شرکت الزامی است"),
+  code: z.string(),
   logo: z.number().nullable(),
 });
 

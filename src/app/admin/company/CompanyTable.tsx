@@ -1,6 +1,10 @@
 import React from "react";
 import DataTable from "@/components/adminPanelComponent/viewProcess/DataTable";
-import UserActions from "./user/page";
+import Link from "next/link";
+import { IconButton } from "@mui/material";
+import { IconUserExclamation } from "@tabler/icons-react";
+
+
 
 const CompanyTable: React.FC<CompanyTableProps> = ({
   data,
@@ -16,7 +20,16 @@ const CompanyTable: React.FC<CompanyTableProps> = ({
     if (col.id === "userActions") {
       return {
         ...col,
-        render: (row: any) => <UserActions companyId={row.id} />
+        render: (row: any) => (
+          <Link href={`/admin/company/${row.id}/user`} passHref>
+            <IconButton 
+              aria-label="مشاهده کاربران شرکت"
+              sx={{ color: "primary.main" }}
+            >
+              <IconUserExclamation stroke={2} />
+            </IconButton>
+          </Link>
+        )
       };
     }
     return col;

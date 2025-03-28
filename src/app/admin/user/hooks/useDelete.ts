@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { fetchWithErrorForDelete } from "@/utils/dataFetching/fetchWithError";
+import userUrls from "@/utils/url/adminPanel/user/userUrl";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import { useToast } from "@/hooks/ui/useToast";
-import userUrls from "@/utils/url/adminPanel/user/userUrl";
 
 const useDelete = () => {
   const queryClient = useQueryClient();
@@ -11,18 +11,14 @@ const useDelete = () => {
   const deleteUserMutation = useMutation({
     mutationFn: async (id: number) => {
       return fetchWithErrorForDelete(userUrls.deleteUser(id), {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ is_active: false }),
+        method: "DELETE",
       });
     },
     onSuccess: (_, id) => {
-      queryClient.invalidateQueries({ queryKey: allQueryKeys.adminPanel.company.delete });
+      queryClient.invalidateQueries({ queryKey: allQueryKeys.adminPanel.user.delete});
     },
     onError: () => {
-      showToast("خطایی در غیرفعال‌سازی کاربر رخ داد.", "error");
+      showToast("خطایی در حذف کاربر رخ داد.", "error");
     },
   });
 
