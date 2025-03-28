@@ -3,14 +3,14 @@
 import React, { useEffect, useState } from "react";
 import getContactsList, { ResponseSchema } from "./hooks/useView";
 import useDelete from "./hooks/useDelete";
-import ViewDialog from "@/components/AdminPanelComponent/ViewProcess/ViewDialog";
-import EditDialog from "@/components/AdminPanelComponent/ViewProcess/EditDialog";
-import DeleteDialog from "@/components/AdminPanelComponent/ViewProcess/DeleteDialog";
 import { PrevDataInitial } from "@/interfaces/general/general";
 import { columns } from "./ColumnsData";
 import { ContactsUpdateSchema } from "./hooks/useUpdate";
 import ContactsTable from "./ContactsTable";
 import useUpdate from "./hooks/useUpdate";
+import ViewDialog from "@/components/adminPanelComponent/viewProcess/ViewDialog";
+import EditDialog from "@/components/adminPanelComponent/viewProcess/EditDialog";
+import DeleteDialog from "@/components/adminPanelComponent/viewProcess/DeleteDialog";
 
 const AllContentContacts: React.FC = () => {
   const [data, setData] = useState<ResponseSchema>(PrevDataInitial);

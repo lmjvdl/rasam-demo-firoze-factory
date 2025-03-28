@@ -14,8 +14,10 @@ const useDelete = () => {
         method: "DELETE",
       });
     },
-    onSuccess: (_, id) => {
-      queryClient.invalidateQueries({ queryKey: allQueryKeys.adminPanel.userCompany.delete});
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: allQueryKeys.adminPanel.userCompany.delete,
+      });
     },
     onError: () => {
       showToast("خطایی در حذف کاربر در شرکت رخ داد.", "error");

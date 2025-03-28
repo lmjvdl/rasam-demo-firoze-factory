@@ -25,7 +25,9 @@ export const createNewUser = async (data: unknown) => {
   const processedData = {
     ...validationResult.data,
     national_code:
-      validationResult.data.national_code === "" ? '' : validationResult.data.national_code,
+      validationResult.data.national_code === ""
+        ? ""
+        : validationResult.data.national_code,
   };
 
   try {
@@ -37,9 +39,12 @@ export const createNewUser = async (data: unknown) => {
     if (response.status_code === 201 && response.success) {
       return { success: true, data: response.data };
     } else {
-      return { success: false, error: response.messages || "خطایی رخ داده است" };
+      return {
+        success: false,
+        error: response.messages || "خطایی رخ داده است",
+      };
     }
-  } catch (error) {
+  } catch {
     throw new Error("درخواست به سرور با مشکل مواجه شد.");
   }
 };

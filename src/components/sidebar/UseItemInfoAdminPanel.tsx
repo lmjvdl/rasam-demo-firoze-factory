@@ -5,6 +5,7 @@ export const UseItemInfoAdminPanel = () => {
   const drawerItemInfoForAdminPanel = useMemo(
     () => ({
       کاربر: { text: "کاربر", icon: "User", to: "/admin/user" },
+      مخاطبین: {text: "مخاطبین", icon: "Contacts", to: "/admin/contacts"},
       گروه: { text: "گروه", icon: "Group", to: "/admin/group" },
       شرکت: { text: "شرکت", icon: "Company", to: "/admin/company" },
       "خط تولید": {

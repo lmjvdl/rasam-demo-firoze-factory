@@ -14,8 +14,10 @@ const useDeleteAlarm = () => {
         method: "DELETE",
       });
     },
-    onSuccess: (_, id) => {
-      queryClient.invalidateQueries({ queryKey: allQueryKeys.adminPanel.alarm.delete })
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: allQueryKeys.adminPanel.alarm.delete,
+      });
     },
     onError: () => {
       showToast("خطایی در حذف آلارم رخ داد.", "error");

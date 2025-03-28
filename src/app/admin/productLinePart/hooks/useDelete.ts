@@ -10,12 +10,17 @@ const useDeleteProductLinePart = () => {
 
   const deleteProductLinePartMutation = useMutation({
     mutationFn: async (id: number) => {
-      return fetchWithErrorForDelete(productLinePartUrls.deleteProductLinePart(id), {
-        method: "DELETE",
-      });
+      return fetchWithErrorForDelete(
+        productLinePartUrls.deleteProductLinePart(id),
+        {
+          method: "DELETE",
+        }
+      );
     },
-    onSuccess: (_, id) => {
-      queryClient.invalidateQueries({ queryKey: allQueryKeys.adminPanel.productLinePart.delete });
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: allQueryKeys.adminPanel.productLinePart.delete,
+      });
     },
     onError: () => {
       showToast("خطایی در حذف بخش خط محصول رخ داد.", "error");

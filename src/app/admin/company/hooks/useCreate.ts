@@ -18,21 +18,30 @@ export const createNewCompany = async (data: unknown) => {
 
   const processedData = {
     ...validationResult.data,
-    description: validationResult.data.description === "" ? null : validationResult.data.description
+    description:
+      validationResult.data.description === ""
+        ? null
+        : validationResult.data.description,
   };
 
   try {
-    const response = await fetchWithErrorForCreate(`${companyUrls.createCompany}`, {
-      method: "POST",
-      body: JSON.stringify(processedData),
-    });
+    const response = await fetchWithErrorForCreate(
+      `${companyUrls.createCompany}`,
+      {
+        method: "POST",
+        body: JSON.stringify(processedData),
+      }
+    );
 
     if (response.status_code === 201 && response.success) {
       return { success: true, data: response.data };
     } else {
-      return { success: false, error: response.messages || "خطایی رخ داده است" };
+      return {
+        success: false,
+        error: response.messages || "خطایی رخ داده است",
+      };
     }
-  } catch (error) {
+  } catch {
     throw new Error("درخواست به سرور با مشکل مواجه شد.");
   }
 };

@@ -1,9 +1,10 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { z } from "zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import fetchWithError from "@/utils/dataFetching/fetchWithError";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
-import contactsUrls from "@/utils/URLs/adminPanel/contacts/contactsUrl";
-import { useToast } from "@/hooks/UI/useToast";
+import { useToast } from "@/hooks/ui/useToast";
+import contactsUrls from "@/utils/url/adminPanel/contacts/contactUrls";
 
 export default function getContactsList(pages: number, pageSize: number, URL: string | null) {
   const queryClient = useQueryClient();
@@ -24,7 +25,7 @@ export default function getContactsList(pages: number, pageSize: number, URL: st
       });
     },
     onError: () => {
-      showToast("❌ خطایی رخ داد.", "error");
+      showToast("خطایی رخ داد.", "error");
     },
   });
 
@@ -39,9 +40,8 @@ const responseSchema = z.object({
     results: z.array(
       z.object({
         id: z.number(),
-        year: z.number().min(-2147483648).max(2147483647),
-        month: z.number().min(-2147483648).max(2147483647),
-        time: z.string(),
+        name: z.string(),
+        phone_number: z.string(),
       })
     ),
   }),
@@ -64,3 +64,4 @@ function sanitizer(pollutedData: unknown) {
     throw new Error(errorMessage, { cause: "خطای سرور" });
   }
 }
+

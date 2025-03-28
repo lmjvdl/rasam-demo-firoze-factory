@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { DialogContent, DialogActions, Button, TextField, MenuItem } from "@mui/material";
+import {
+  DialogContent,
+  DialogActions,
+  Button,
+  TextField,
+  MenuItem,
+} from "@mui/material";
 import { uploadIcon } from "@/app/admin/uploadImage/hooks/useCreate";
 
 interface AddIconDialogProps {
@@ -32,7 +38,7 @@ const AddIconDialog = ({ onClose }: AddIconDialogProps) => {
     try {
       await uploadIcon(file, name, theme);
       onClose();
-    } catch (error) {
+    } catch {
       setError("خطایی در آپلود فایل رخ داده است.");
     }
   };
@@ -53,8 +59,7 @@ const AddIconDialog = ({ onClose }: AddIconDialogProps) => {
           value={theme}
           onChange={(e) => setTheme(e.target.value as "light" | "dark")}
           fullWidth
-          margin="dense"
-        >
+          margin="dense">
           <MenuItem value="light">روشن</MenuItem>
           <MenuItem value="dark">تیره</MenuItem>
         </TextField>

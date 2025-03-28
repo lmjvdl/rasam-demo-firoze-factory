@@ -11,7 +11,7 @@ url: string | URL, options: RequestInit = {}, p?: number | undefined, page_size?
     }
     const result = await response.json();
     return result;
-  } catch (err) {
+  } catch {
     throw new Error("درخواست به سرور با مشکل مواجه شد.", {
       cause: "خطای سرور",
     });
@@ -28,7 +28,7 @@ export async function fetchWithErrorWithoutPagination(
       }
       const result = await response.json();
       return result;
-    } catch (err) {
+    } catch {
       throw new Error("درخواست به سرور با مشکل مواجه شد.", {
         cause: "خطای سرور",
       });
@@ -106,7 +106,7 @@ export async function fetchWithErrorForDelete(
     } else {
       toast.error("خطایی رخ داده است")
     }
-  } catch (err) {
+  } catch {
     throw new Error("درخواست به سرور با مشکل مواجه شد.");
   }
 }
@@ -134,7 +134,7 @@ export async function uploadFileWithError(
       toast.error(rawData.messages || "خطا در آپلود فایل رخ داده است");
       throw new Error("درخواست آپلود با مشکل مواجه شد.");
     }
-  } catch (error) {
+  } catch {
     throw new Error("مشکلی در آپلود فایل پیش آمد.");
   }
 }

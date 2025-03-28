@@ -1,38 +1,37 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { fetchWithErrorWithAlarm } from "@/utils/dataFetching/fetchWithError";
-import contactUrls from "@/utils/URLs/adminPanel/contact/contactUrl";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import { useToast } from "@/hooks/ui/useToast";
+import contactsUrls from "@/utils/url/adminPanel/contacts/contactUrls";
 
-export type ContactUpdateSchema = {
+export type ContactsUpdateSchema = {
   id: number;
-  year: number;
-  month: number;
-  time: string;
+  name: string;
+  phone_number: string;
 };
 
-const useUpdateContact = () => {
+const useUpdateContacts = () => {
   const queryClient = useQueryClient();
   const { showToast } = useToast();
 
-  const updateContactMutation = useMutation({
-    mutationFn: async ({ id, ...updatedData }: ContactUpdateSchema) => {
-      return fetchWithErrorWithAlarm(contactUrls.editContact(id), {
+  const updateContactsMutation = useMutation({
+    mutationFn: async ({ id, ...updatedData }: ContactsUpdateSchema) => {
+      return fetchWithErrorWithAlarm(contactsUrls.editContacts(id), {
         method: "PUT",
         body: JSON.stringify(updatedData),
       });
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: allQueryKeys.adminPanel.contact.update });
+      queryClient.invalidateQueries({ queryKey: allQueryKeys.adminPanel.contacts.update });
     },
     onError: () => {
-      showToast("❌ خطایی در به‌روزرسانی تنظیمات شرکت رخ داد.", "error");
+      showToast("خطایی در به‌روزرسانی مخاطب رخ داد.", "error");
     },
   });
 
   return {
-    updateContactMutation,
+    updateContactsMutation,
   };
 };
 
-export default useUpdateContact;
+export default useUpdateContacts;

@@ -14,8 +14,10 @@ const useDeleteDevice = () => {
         method: "DELETE",
       });
     },
-    onSuccess: (_, id) => {
-      queryClient.invalidateQueries({ queryKey: allQueryKeys.adminPanel.devices.delete })
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: allQueryKeys.adminPanel.devices.delete,
+      });
     },
     onError: () => {
       showToast("خطایی در حذف دستگاه رخ داد.", "error");

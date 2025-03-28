@@ -18,8 +18,10 @@ const useDelete = () => {
         body: JSON.stringify({ is_active: false }),
       });
     },
-    onSuccess: (_, id) => {
-      queryClient.invalidateQueries({ queryKey: allQueryKeys.adminPanel.company.delete });
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: allQueryKeys.adminPanel.company.delete,
+      });
     },
     onError: () => {
       showToast("خطایی در غیرفعال‌سازی کاربر رخ داد.", "error");

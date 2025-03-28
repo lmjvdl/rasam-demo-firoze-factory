@@ -14,8 +14,10 @@ const useDeleteFunction = () => {
         method: "DELETE",
       });
     },
-    onSuccess: (_, id) => {
-      queryClient.invalidateQueries({ queryKey: allQueryKeys.adminPanel.function.delete })
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: allQueryKeys.adminPanel.function.delete,
+      });
     },
     onError: () => {
       showToast("خطایی در حذف فانکشن رخ داد.", "error");

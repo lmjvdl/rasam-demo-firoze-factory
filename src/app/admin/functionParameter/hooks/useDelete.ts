@@ -10,12 +10,17 @@ const useDeleteFunctionParameter = () => {
 
   const deleteFunctionParameterMutation = useMutation({
     mutationFn: async (id: number) => {
-      return fetchWithErrorForDelete(functionParameterUrls.deleteFunctionParameter(id), {
-        method: "DELETE",
-      });
+      return fetchWithErrorForDelete(
+        functionParameterUrls.deleteFunctionParameter(id),
+        {
+          method: "DELETE",
+        }
+      );
     },
-    onSuccess: (_, id) => {
-      queryClient.invalidateQueries({ queryKey: allQueryKeys.adminPanel.functionParameter.delete })
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: allQueryKeys.adminPanel.functionParameter.delete,
+      });
     },
     onError: () => {
       showToast("خطایی در حذف پارامتر فانکشن رخ داد.", "error");

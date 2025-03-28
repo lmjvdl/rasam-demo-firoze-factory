@@ -14,8 +14,10 @@ const useDeleteProductLine = () => {
         method: "DELETE",
       });
     },
-    onSuccess: (_, id) => {
-      queryClient.invalidateQueries({ queryKey: allQueryKeys.adminPanel.productLine.delete });
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: allQueryKeys.adminPanel.productLine.delete,
+      });
     },
     onError: () => {
       showToast("خطایی در حذف خط محصول رخ داد.", "error");
