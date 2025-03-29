@@ -128,7 +128,6 @@ const AllContentAlarm: React.FC = () => {
     }
   };
 
-  console.log(selectedRow)
 
   const dynamicColumns = columns();
   const filteredColumnsForEdit = dynamicColumns.filter((col) => col.canEdit);

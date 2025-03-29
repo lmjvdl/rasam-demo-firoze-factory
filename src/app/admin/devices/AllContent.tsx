@@ -96,10 +96,27 @@ const AllContentDevice: React.FC = () => {
 
   const handleConfirmDelete = () => {
     if (selectedRow?.id) {
-      deleteDeviceMutation.mutate(selectedRow.id);
-      setDeleteOpen(false);
+      deleteDeviceMutation.mutate(selectedRow.id, {
+        onSuccess: () => {
+          setData(prevData => {
+            if (prevData?.data) {
+              return {
+                ...prevData,
+                data: {
+                  ...prevData.data,
+                  results: prevData.data.results.filter(row => row.id !== selectedRow.id),
+                  count: prevData.data.count - 1
+                }
+              };
+            }
+            return prevData;
+          });
+          setDeleteOpen(false);
+        }
+      });
     }
   };
+
 
   const dynamicColumns = columns();
   const filteredColumnsForEdit = dynamicColumns.filter((col) => col.canEdit);

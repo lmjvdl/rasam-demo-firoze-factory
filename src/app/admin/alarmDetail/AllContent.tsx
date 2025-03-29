@@ -97,8 +97,24 @@ const AllContentAlarmDetail: React.FC = () => {
 
   const handleConfirmDelete = () => {
     if (selectedRow?.id) {
-      deleteAlarmDetailMutation.mutate(selectedRow.id);
-      setDeleteOpen(false);
+      deleteAlarmDetailMutation.mutate(selectedRow.id, {
+        onSuccess: () => {
+          setData(prevData => {
+            if (prevData?.data) {
+              return {
+                ...prevData,
+                data: {
+                  ...prevData.data,
+                  results: prevData.data.results.filter(row => row.id !== selectedRow.id),
+                  count: prevData.data.count - 1
+                }
+              };
+            }
+            return prevData;
+          });
+          setDeleteOpen(false);
+        }
+      });
     }
   };
 

@@ -16,7 +16,7 @@ const useDeleteAlarm = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: allQueryKeys.adminPanel.alarm.list,
+        queryKey: allQueryKeys.adminPanel.alarm.delete,
       });
     },
     onError: () => {

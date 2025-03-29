@@ -80,8 +80,24 @@ const AllContentContacts: React.FC = () => {
 
   const handleConfirmDelete = () => {
     if (selectedRow?.id) {
-      deleteContactsMutation.mutate(selectedRow.id);
-      setDeleteOpen(false);
+      deleteContactsMutation.mutate(selectedRow.id, {
+        onSuccess: () => {
+          setData(prevData => {
+            if (prevData?.data) {
+              return {
+                ...prevData,
+                data: {
+                  ...prevData.data,
+                  results: prevData.data.results.filter(row => row.id !== selectedRow.id),
+                  count: prevData.data.count - 1
+                }
+              };
+            }
+            return prevData;
+          });
+          setDeleteOpen(false);
+        }
+      });
     }
   };
 
