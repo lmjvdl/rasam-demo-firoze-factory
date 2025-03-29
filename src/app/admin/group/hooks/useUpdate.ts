@@ -3,11 +3,12 @@ import { fetchWithErrorWithAlarm } from "@/utils/dataFetching/fetchWithError";
 import groupUrls from "@/utils/url/adminPanel/group/groupUrl";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import { useToast } from "@/hooks/ui/useToast";
+import { extractIds } from "@/utils/formatters/extractId";
 
 export type GroupUpdateSchema = {
   id: number;
   name: string;
-  permissions: number[];
+  permissions: { id: number; name: string }[];
 };
 
 const useUpdateGroup = () => {
@@ -15,10 +16,10 @@ const useUpdateGroup = () => {
   const { showToast } = useToast();
 
   const updateGroupMutation = useMutation({
-    mutationFn: async ({ id, ...updatedData }: GroupUpdateSchema) => {
+    mutationFn: async ({ id, permissions, ...updatedData }: GroupUpdateSchema) => {
       return fetchWithErrorWithAlarm(groupUrls.editGroup(id), {
         method: "PUT",
-        body: JSON.stringify(updatedData),
+        body: JSON.stringify({...updatedData, permissions: extractIds(permissions)}), // تغییر این خط
       });
     },
     onSuccess: () => {

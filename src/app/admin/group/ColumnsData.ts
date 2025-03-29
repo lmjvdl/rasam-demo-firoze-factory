@@ -1,3 +1,6 @@
+import { Group } from "@/interfaces/admin/group";
+import { truncateText } from "@/utils/formatters/truncateText";
+
 export const columns = () => [
     {
         id: "id",
@@ -23,6 +26,9 @@ export const columns = () => [
         showOnTable: true,
         canEdit: true,
         isAdditionalAction: false,
+        render: (row: Group) =>
+            row?.permissions?.length
+                ? truncateText(row.permissions.map((p) => p.name).join(", ")) : "نامشخص"
     },
     {
         id: "actions",
@@ -32,3 +38,4 @@ export const columns = () => [
         isAdditionalAction: false,
     },
 ];
+

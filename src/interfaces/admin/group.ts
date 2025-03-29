@@ -1,8 +1,7 @@
-interface Group {
+export interface Group {
     id: number; // ReadOnly
     name: string;
-    permissions?: number[]; // uniqueItems: true
-    users?: string[] | null; // nullable
+    permissions?: { id: number; name: string }[] | [];// uniqueItems: true
 }
   
 export interface GroupTableProps {

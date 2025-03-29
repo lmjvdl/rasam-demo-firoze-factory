@@ -59,7 +59,6 @@ const AllContentAlarm: React.FC = () => {
             setData(information);
             setTotalData(information.data.count);
             setNextPage(information.data.next);
-            console.log(information);
           },
         }
       );

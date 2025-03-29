@@ -133,6 +133,9 @@ const AllContentGroup: React.FC = () => {
         onClose={() => setViewOpen(false)}
         rowData={selectedRow}
         titles={dynamicColumns}
+        arrayAttributes={{
+          permissions: 'name', 
+        }}
       />
       <EditDialog
         open={editOpen}
@@ -141,6 +144,7 @@ const AllContentGroup: React.FC = () => {
         rowData={selectedRow}
         titles={filteredColumnsForEdit}
         extraOptions={{ permissionList }}
+        arrayAttributes={['permissions']}
       />
       <DeleteDialog
         open={deleteOpen}

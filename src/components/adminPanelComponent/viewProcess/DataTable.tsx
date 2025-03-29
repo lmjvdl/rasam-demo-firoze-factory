@@ -75,7 +75,7 @@ const DataTable: React.FC<DataTableProps> = ({
                       ) : isArray && isArrayColumn ? (
                         value.map((item: any, index: number) => (
                           <span key={index}>
-                            {item[isArrayColumn] || item}
+                            {truncateText(item[isArrayColumn] || item)}
                             {index < value.length - 1 ? ", " : ""}
                           </span>
                         ))

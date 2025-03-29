@@ -40,7 +40,10 @@ const responseSchema = z.object({
       z.object({
         id: z.number(),
         name: z.string(),
-        permissions: z.array(z.number()),
+        permissions: z.array(z.object({
+          id: z.number(),
+          name: z.string(),
+        })),
       })
     ),
   }),
@@ -54,7 +57,13 @@ export type ResponseSchema = z.infer<typeof responseSchema>;
 function sanitizer(pollutedData: unknown) {
   try {
     const refinedData = responseSchema.parse(pollutedData);
-    return refinedData;
+
+    const transformedResults = refinedData.data.results.map((item) => ({
+      ...item,
+      function: item.permissions ? item.permissions : { id: 0, name: "نامشخص" },
+    }));
+
+    return { ...refinedData, data: { ...refinedData.data, results: transformedResults } };
   } catch (err) {
     const errorMessage =
       err instanceof Error && err.message
@@ -63,3 +72,4 @@ function sanitizer(pollutedData: unknown) {
     throw new Error(errorMessage, { cause: "خطای سرور" });
   }
 }
+

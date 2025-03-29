@@ -15,6 +15,7 @@ import {
   ListItemText,
   SelectChangeEvent,
 } from "@mui/material";
+import { transformArrayAttributes } from "@/utils/formatters/extractId";
 
 
 const EditDialog: React.FC<EditDialogProps> = ({
@@ -29,20 +30,27 @@ const EditDialog: React.FC<EditDialogProps> = ({
   booleanValue,
   onBooleanValueChange,
   extraOptions = {},
+  arrayAttributes = [],
 }) => {
   const [formData, setFormData] = useState<{ [key: string]: any }>(rowData || {});
   const [errors, setErrors] = useState<{ [key: string]: boolean }>({});
 
+
   useEffect(() => {
     if (rowData) {
-      setFormData({
-        ...rowData,
-        function: typeof rowData.function === "object" ? rowData.function.id : rowData.function,
-        device: typeof rowData.device === "object" ? rowData.device.id : rowData.device,
-        type: typeof rowData.type === "object" ? rowData.type.id : rowData.type,
-      });
+      const transformedData = transformArrayAttributes(
+        {
+          ...rowData,
+          function: typeof rowData.function === "object" ? rowData.function.id : rowData.function,
+          device: typeof rowData.device === "object" ? rowData.device.id : rowData.device,
+          type: typeof rowData.type === "object" ? rowData.type.id : rowData.type,
+        },
+        arrayAttributes
+      );
+      
+      setFormData(transformedData);
     }
-  }, [rowData]);
+  }, [rowData, arrayAttributes]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -71,7 +79,7 @@ const EditDialog: React.FC<EditDialogProps> = ({
   const handleSingleSelectChange = (event: SelectChangeEvent<string>, key: string) => {
     setFormData((prev) => ({
       ...prev,
-      [key]: Number(event.target.value), // Ensure it's a numeric value
+      [key]: Number(event.target.value),
     }));
   };
 
@@ -83,7 +91,8 @@ const EditDialog: React.FC<EditDialogProps> = ({
         column.id &&
         (formData[column.id] === undefined ||
           formData[column.id] === null ||
-          formData[column.id] === "")
+          formData[column.id] === "" ||
+          (Array.isArray(formData[column.id]) && formData[column.id].length === 0))
       ) {
         newErrors[column.id] = true;
       }
@@ -134,7 +143,7 @@ const EditDialog: React.FC<EditDialogProps> = ({
               >
                 <InputLabel>{column.label}</InputLabel>
                 <Select
-                  value={typeof value === "object" ? value.id : value} // Ensure it's a number
+                  value={typeof value === "object" ? value.id : value}
                   onChange={(e) => handleSingleSelectChange(e, key)}
                   input={<OutlinedInput label={column.label} />}
                 >

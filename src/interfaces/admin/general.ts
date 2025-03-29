@@ -46,6 +46,7 @@ interface DeleteDialogProps {
     onConfirm: () => void;
     rowData: any;
     titles: any;
+    arrayAttributes?: { [key: string]: string };
 }
 
 interface EditDialogProps {
@@ -73,6 +74,7 @@ interface EditDialogProps {
   extraOptions?: { [key: string]: {
     id: any; value: any; label: string 
 }[] };
+  arrayAttributes?: string[];
 }
 
 interface ViewDialogProps {
