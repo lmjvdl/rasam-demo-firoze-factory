@@ -28,7 +28,7 @@ export const createNewContact = async (data: unknown) => {
       return { 
         success: true, 
         data: response.data,
-        messages: response.messages 
+        messages: response.messages,
       };
     }
     return {

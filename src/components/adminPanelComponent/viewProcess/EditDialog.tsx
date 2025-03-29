@@ -16,6 +16,7 @@ import {
   SelectChangeEvent,
 } from "@mui/material";
 
+
 const EditDialog: React.FC<EditDialogProps> = ({
   open,
   onClose,
@@ -29,13 +30,18 @@ const EditDialog: React.FC<EditDialogProps> = ({
   onBooleanValueChange,
   extraOptions = {},
 }) => {
-  const [formData, setFormData] = useState<{ [key: string]: any }>(
-    rowData || {}
-  );
+  const [formData, setFormData] = useState<{ [key: string]: any }>(rowData || {});
   const [errors, setErrors] = useState<{ [key: string]: boolean }>({});
 
   useEffect(() => {
-    setFormData(rowData || {});
+    if (rowData) {
+      setFormData({
+        ...rowData,
+        function: typeof rowData.function === "object" ? rowData.function.id : rowData.function,
+        device: typeof rowData.device === "object" ? rowData.device.id : rowData.device,
+        type: typeof rowData.type === "object" ? rowData.type.id : rowData.type,
+      });
+    }
   }, [rowData]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -55,23 +61,17 @@ const EditDialog: React.FC<EditDialogProps> = ({
     onBooleanValueChange?.(newValue);
   };
 
-  const handleMultiSelectChange = (
-    event: SelectChangeEvent<string[]>,
-    key: string
-  ) => {
+  const handleMultiSelectChange = (event: SelectChangeEvent<string[]>, key: string) => {
     setFormData((prev) => ({
       ...prev,
       [key]: event.target.value,
     }));
   };
 
-  const handleSingleSelectChange = (
-    event: SelectChangeEvent<string>,
-    key: string
-  ) => {
+  const handleSingleSelectChange = (event: SelectChangeEvent<string>, key: string) => {
     setFormData((prev) => ({
       ...prev,
-      [key]: event.target.value,
+      [key]: Number(event.target.value), // Ensure it's a numeric value
     }));
   };
 
@@ -134,7 +134,7 @@ const EditDialog: React.FC<EditDialogProps> = ({
               >
                 <InputLabel>{column.label}</InputLabel>
                 <Select
-                  value={value}
+                  value={typeof value === "object" ? value.id : value} // Ensure it's a number
                   onChange={(e) => handleSingleSelectChange(e, key)}
                   input={<OutlinedInput label={column.label} />}
                 >

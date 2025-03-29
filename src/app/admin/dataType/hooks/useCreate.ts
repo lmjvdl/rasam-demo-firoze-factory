@@ -3,9 +3,9 @@ import dataTypeUrls from "@/utils/url/adminPanel/dataType/dataTypeUrl";
 import { z } from "zod";
 
 const dataTypeSchema = z.object({
-  name: z.string().min(1, "نام نوع داده الزامی است").max(30),
-  json_field: z.string().min(1, "فیلد JSON الزامی است").max(30),
-  description: z.string().max(255).nullable().optional(),
+  name: z.string(),
+  json_field: z.string(),
+  description: z.string().nullable().optional(),
 });
 
 export const createNewDataType = async (data: unknown) => {

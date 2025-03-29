@@ -3,12 +3,9 @@ import productLinePartUrls from "@/utils/url/adminPanel/productLinePart/productL
 import { z } from "zod";
 
 const productLinePartSchema = z.object({
-  product_line: z
-    .number()
-    .int("خط تولید باید یک عدد صحیح باشد")
-    .min(1, "خط تولید الزامی است"),
-  name: z.string().min(1, "نام بخش خط تولید الزامی است").max(30),
-  code: z.string().min(1, "کد بخش خط تولید الزامی است").max(15),
+  product_line: z.number(),
+  name: z.string(),
+  code: z.string(),
   icon: z.number().nullable().optional(),
 });
 

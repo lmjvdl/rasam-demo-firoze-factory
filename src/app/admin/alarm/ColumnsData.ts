@@ -1,3 +1,5 @@
+import { Alarm } from "@/interfaces/admin/alarm";
+
 export const columns = () => [
     {
         id: "id",
@@ -23,6 +25,7 @@ export const columns = () => [
         isSingleSelect: true,
         canEdit: true,
         isAdditionalAction: false,
+        render: (row: Alarm) => row?.function?.name || "نامشخص",
     },
     {
         id: "device",
@@ -33,6 +36,7 @@ export const columns = () => [
         isSingleSelect: true,
         canEdit: true,
         isAdditionalAction: false,
+        render: (row: Alarm) => row?.device?.name || "نامشخص",
     },
     {
         id: "type",
@@ -43,6 +47,7 @@ export const columns = () => [
         isSingleSelect: true,
         canEdit: true,
         isAdditionalAction: false,
+        render: (row: Alarm) => row?.type?.name || "نامشخص",
     },
     {
         id: "description",

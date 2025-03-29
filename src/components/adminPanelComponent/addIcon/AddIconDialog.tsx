@@ -10,9 +10,10 @@ import { uploadIcon } from "@/app/admin/uploadImage/hooks/useCreate";
 
 interface AddIconDialogProps {
   onClose: () => void;
+  onSuccess?: () => void;
 }
 
-const AddIconDialog = ({ onClose }: AddIconDialogProps) => {
+const AddIconDialog = ({ onClose, onSuccess }: AddIconDialogProps) => {
   const [file, setFile] = useState<File | null>(null);
   const [name, setName] = useState<string>("");
   const [theme, setTheme] = useState<"light" | "dark">("light");
@@ -38,6 +39,7 @@ const AddIconDialog = ({ onClose }: AddIconDialogProps) => {
     try {
       await uploadIcon(file, name, theme);
       onClose();
+      if (onSuccess) onSuccess();
     } catch {
       setError("خطایی در آپلود فایل رخ داده است.");
     }

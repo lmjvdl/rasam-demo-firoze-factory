@@ -3,8 +3,8 @@ import functionUrls from "@/utils/url/adminPanel/function/functionUrl";
 import { z } from "zod";
 
 const functionSchema = z.object({
-  name: z.string().min(1).max(50),
-  description: z.string().min(1),
+  name: z.string(),
+  description: z.string(),
 });
 
 export const createNewFunction = async (data: unknown) => {

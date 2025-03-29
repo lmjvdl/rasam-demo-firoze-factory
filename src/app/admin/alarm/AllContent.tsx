@@ -28,40 +28,43 @@ const AllContentAlarm: React.FC = () => {
   const getList = getAlarmList(pageNumber, 8, nextPage);
   const { deleteAlarmMutation } = useDelete();
   const { updateAlarmMutation } = useUpdate();
-  const functionList = useFunctionQuery().data
-  ? useFunctionQuery().data.map((func) => ({
-      id: func.id,
-      value: func.id, 
-      label: func.name, 
-    }))
-  : [];
-  const deviceList = useDeviceQuery().data
-  ? useDeviceQuery().data.map((device) => ({
-      id: device.id,
-      value: device.id, 
-      label: device.name, 
-    }))
-  : [];
-  const dataTypeList = useDataTypeQuery().data
-  ? useDataTypeQuery().data.map((dataType) => ({
-      id: dataType.id,
-      value: dataType.id, 
-      label: dataType.name, 
-    }))
-  : [];
 
-  useEffect(() => {
-    getList.mutate(
-      { page: pageNumber + 1, page_size: 8, url: nextPage },
-      {
-        onSuccess: (information) => {
-          setData(information);
-          setTotalData(information.data.count);
-          setNextPage(information.data.next);
-        },
-      }
-    );
-  }, [pageNumber]);
+  const functionList = useFunctionQuery().data
+    ? useFunctionQuery().data.map((func) => ({
+        id: func.id,
+        value: func.id,
+        label: func.name,
+      }))
+    : [];
+  const deviceList = useDeviceQuery().data
+    ? useDeviceQuery().data.map((device) => ({
+        id: device.id,
+        value: device.id,
+        label: device.name,
+      }))
+    : [];
+  const dataTypeList = useDataTypeQuery().data
+    ? useDataTypeQuery().data.map((dataType) => ({
+        id: dataType.id,
+        value: dataType.id,
+        label: dataType.name,
+      }))
+    : [];
+
+    useEffect(() => {
+      getList.mutate(
+        { page: pageNumber + 1, page_size: 8, url: nextPage },
+        {
+          onSuccess: (information) => {
+            setData(information);
+            setTotalData(information.data.count);
+            setNextPage(information.data.next);
+            console.log(information);
+          },
+        }
+      );
+    }, [pageNumber]);
+    
 
   const handleSaveEdit = (updatedRow: AlarmUpdateSchema) => {
     setData((prevData) => {
@@ -104,10 +107,28 @@ const AllContentAlarm: React.FC = () => {
 
   const handleConfirmDelete = () => {
     if (selectedRow?.id) {
-      deleteAlarmMutation.mutate(selectedRow.id);
-      setDeleteOpen(false);
+      deleteAlarmMutation.mutate(selectedRow.id, {
+        onSuccess: () => {
+          setData(prevData => {
+            if (prevData?.data) {
+              return {
+                ...prevData,
+                data: {
+                  ...prevData.data,
+                  results: prevData.data.results.filter(row => row.id !== selectedRow.id),
+                  count: prevData.data.count - 1
+                }
+              };
+            }
+            return prevData;
+          });
+          setDeleteOpen(false);
+        }
+      });
     }
   };
+
+  console.log(selectedRow)
 
   const dynamicColumns = columns();
   const filteredColumnsForEdit = dynamicColumns.filter((col) => col.canEdit);

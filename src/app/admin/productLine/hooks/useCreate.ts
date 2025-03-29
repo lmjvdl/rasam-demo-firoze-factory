@@ -3,13 +3,10 @@ import productLineUrls from "@/utils/url/adminPanel/productLine/productLineUrl";
 import { z } from "zod";
 
 const productLineSchema = z.object({
-  company: z
-    .number()
-    .int("شرکت باید یک عدد صحیح باشد")
-    .min(1, "شرکت الزامی است"),
-  name: z.string().min(1, "نام خط تولید الزامی است").max(30),
-  code: z.string().min(1, "کد خط تولید الزامی است").max(15),
-  icon: z.number().int("آیکن باید یک عدد صحیح باشد").nullable().optional(),
+  company: z.number(),
+  name: z.string(),
+  code: z.string(),
+  icon: z.number().nullable().optional(),
 });
 
 export const createNewProductLine = async (data: any) => {

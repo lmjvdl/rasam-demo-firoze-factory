@@ -39,13 +39,22 @@ const responseSchema = z.object({
     results: z.array(
       z.object({
         description: z.string(),
-        device: z.number(),
-        function: z.number(),
+        device: z.object({
+          id: z.number(),
+          name: z.string(),
+        }),
+        function: z.object({
+          id: z.number(),
+          name: z.string(),
+        }),
         id: z.number(),
         name: z.string(),
-        type: z.number(),
+        type: z.object({
+          id: z.number(),
+          name: z.string(),
+        }),
       })
-    ),
+    ),    
   }),
   status_code: z.number(),
   success: z.boolean(),
@@ -57,7 +66,15 @@ export type ResponseSchema = z.infer<typeof responseSchema>;
 function sanitizer(pollutedData: unknown) {
   try {
     const refinedData = responseSchema.parse(pollutedData);
-    return refinedData;
+
+    const transformedResults = refinedData.data.results.map((item) => ({
+      ...item,
+      function: item.function ? item.function : { id: 0, name: "نامشخص" },
+      device: item.device ? item.device : { id: 0, name: "نامشخص" },
+      type: item.type ? item.type : { id: 0, name: "نامشخص" },
+    }));
+
+    return { ...refinedData, data: { ...refinedData.data, results: transformedResults } };
   } catch (err) {
     const errorMessage =
       err instanceof Error && err.message
@@ -66,3 +83,5 @@ function sanitizer(pollutedData: unknown) {
     throw new Error(errorMessage, { cause: "خطای سرور" });
   }
 }
+
+

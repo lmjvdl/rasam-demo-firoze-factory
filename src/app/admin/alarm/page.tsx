@@ -7,12 +7,22 @@ import AllContentAlarm from "./AllContent";
 import useFunctionQuery from "./hooks/useFunctionList";
 import useDataTypeQuery from "./hooks/useDataTypeList";
 import useDeviceQuery from "./hooks/useDeviceList";
-
+import { useState } from "react";
 
 export default function AlarmPage() {
-  const getFunctionList  = useFunctionQuery();
-  const getDataTypeList  = useDataTypeQuery();
-  const getDeviceList    = useDeviceQuery();
+  const [refreshKey, setRefreshKey] = useState(0);
+  const getFunctionList = useFunctionQuery();
+  const getDataTypeList = useDataTypeQuery();
+  const getDeviceList = useDeviceQuery();
+
+  const handleCreateAlarm = async (data: any) => {
+    const response = await createNewAlarm(data);
+    if (response.success) {
+      setRefreshKey(prev => prev + 1);
+      return { success: true };
+    }
+    return response;
+  };
 
   return (
     <MainCard>
@@ -26,45 +36,45 @@ export default function AlarmPage() {
             required: true,
           },
           {
-            name: "description",
-            label: "توضیحات",
-            type: "text",
-            required: false,
-          },
-          {
             name: "function",
             label: "تابع",
             type: "select",
-            required: false,
-            options: getFunctionList.data.map((func) => ({
+            required: true,
+            options: getFunctionList.data?.map((func) => ({
               label: func.name,
               value: func.id,
-            })),
+            })) || [],
           },
           {
             name: "device",
             label: "دستگاه",
             type: "select",
-            required: false,
-            options: getDeviceList.data.map((device) => ({
+            required: true,
+            options: getDeviceList.data?.map((device) => ({
               label: device.name,
               value: device.id,
-            })),
+            })) || [],
           },
           {
             name: "type",
             label: "نوع",
             type: "select",
-            required: false,
-            options: getDataTypeList.data.map((dataType) => ({
+            required: true,
+            options: getDataTypeList.data?.map((dataType) => ({
               label: dataType.name,
               value: dataType.id,
-            })),
+            })) || [],
+          },
+          {
+            name: "description",
+            label: "توضیحات",
+            type: "text",
+            required: false,
           },
         ]}
-        onSubmit={createNewAlarm}
+        onSubmit={handleCreateAlarm}
       />
-      <AllContentAlarm />
+      <AllContentAlarm key={refreshKey} />
     </MainCard>
   );
 }

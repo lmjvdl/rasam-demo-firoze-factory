@@ -10,7 +10,6 @@ const DeleteDialog: React.FC<DeleteDialogProps> = ({ open, onClose, onConfirm, r
     return Object.keys(rowData).map((key) => (
       titles.map((column: any) => {
         if (column.id === key) {
-          // Check if the value is a boolean and convert it to 'فعال' or 'غیرفعال'
           const value = typeof rowData[key] === 'boolean' ? (rowData[key] ? 'فعال' : 'غیرفعال') : rowData[key];
 
           return (

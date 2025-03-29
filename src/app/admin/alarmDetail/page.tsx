@@ -6,10 +6,22 @@ import { createNewAlarmDetail } from "./hooks/useCreate";
 import AllContentAlarmDetail from "./AllContent";
 import useAlarmQuery from "./hooks/useAlarmList";
 import useParameterQuery from "./hooks/useParameterList";
+import { useState } from "react";
 
 export default function AlarmDetailPage() {
+  const [refreshKey, setRefreshKey] = useState(0);
   const getAlarmList = useAlarmQuery();
   const getParameterList = useParameterQuery();
+
+  const handleCreateAlarmDetail = async (data: any) => {
+    const response = await createNewAlarmDetail(data);
+    if (response.success) {
+      setRefreshKey(prev => prev + 1);
+      return { success: true };
+    }
+    return response;
+  };
+
   return (
     <MainCard>
       <ModalForm
@@ -19,21 +31,21 @@ export default function AlarmDetailPage() {
             name: "alarm",
             label: "هشدار",
             type: "select",
-            required: false,
-            options: getAlarmList.data.map((alarm) => ({
+            required: true,
+            options: getAlarmList.data?.map((alarm) => ({
               label: alarm.name,
               value: alarm.id,
-            })),
+            })) || [],
           },
           {
             name: "parameter",
             label: "پارامتر",
             type: "select",
             required: true,
-            options: getParameterList.data.map((parameter) => ({
+            options: getParameterList.data?.map((parameter) => ({
               label: parameter.name,
               value: parameter.id,
-            })),
+            })) || [],
           },
           {
             name: "value",
@@ -42,9 +54,9 @@ export default function AlarmDetailPage() {
             required: true,
           },
         ]}
-        onSubmit={createNewAlarmDetail}
+        onSubmit={handleCreateAlarmDetail}
       />
-      <AllContentAlarmDetail />
+      <AllContentAlarmDetail key={refreshKey} />
     </MainCard>
   );
 }

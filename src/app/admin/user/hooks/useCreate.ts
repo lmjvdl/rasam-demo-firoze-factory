@@ -3,13 +3,13 @@ import userUrls from "@/utils/url/adminPanel/user/userUrl";
 import { z } from "zod";
 
 const userSchema = z.object({
-  username: z.string().min(1, "نام کاربری الزامی است").max(50),
-  email: z.string().max(254),
-  phone_number: z.string().min(1, "شماره موبایل الزامی است").max(11),
-  first_name: z.string().max(150).optional(),
-  last_name: z.string().max(150).optional(),
-  password: z.string().min(1, "رمز عبور الزامی است").max(128),
-  national_code: z.string().max(10).nullable().optional(),
+  username: z.string(),
+  email: z.string(),
+  phone_number: z.string(),
+  first_name: z.string(),
+  last_name: z.string(),
+  password: z.string(),
+  national_code: z.string(),
   is_manager: z.boolean().default(false),
   is_superuser: z.boolean().default(false),
   is_admin: z.boolean().default(false),
@@ -23,11 +23,7 @@ export const createNewUser = async (data: unknown) => {
   }
 
   const processedData = {
-    ...validationResult.data,
-    national_code:
-      validationResult.data.national_code === ""
-        ? ""
-        : validationResult.data.national_code,
+    ...validationResult.data
   };
 
   try {

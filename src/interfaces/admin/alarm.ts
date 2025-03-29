@@ -1,12 +1,11 @@
-interface Alarm {
-    id: number; // ReadOnly
+export interface Alarm {
+    id: number;
     name: string;
-    function: number;
+    function: { id: number; name: string } | null;
     description: string;
-    device: number;
-    type: number;
-}
-  
+    device: { id: number; name: string } | null;
+    type: { id: number; name: string } | null;
+  }
   
 export interface AlarmTableProps {
     data: Alarm[];

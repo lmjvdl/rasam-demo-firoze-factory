@@ -1,17 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { AuthResponse } from "@/utils/auth/authResponseSanitizer";
-
-interface AuthState {
-  id: number;
-  username: string;
-  accessToken: string;
-  refreshToken: string;
-  lastLogin: string | null;
-  isLoggedIn: boolean;
-  permissions: string[];
-  isAdmin: boolean;
-}
+import { AuthState } from "@/interfaces/general/general";
 
 const initialAuthState: AuthState = {
   id: 0,

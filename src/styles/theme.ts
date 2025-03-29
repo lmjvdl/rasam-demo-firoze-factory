@@ -53,7 +53,7 @@ const darkObject: ColorSystemOptions = {
     },
     text: {
       primary: "#fff",
-      secondary: "#2E2E2E"
+      secondary: "#F7F7F7"
     }
   },
 };
@@ -171,14 +171,6 @@ const theme = createTheme(
               },
             };
           },
-        },
-      },
-      MuiTableContainer: {
-        styleOverrides: {
-          root: ({ theme }) => ({
-            boxShadow: "none",
-            border: `1px solid ${theme.palette.text.secondary}`
-          }),
         },
       },
       MuiTableHead: {

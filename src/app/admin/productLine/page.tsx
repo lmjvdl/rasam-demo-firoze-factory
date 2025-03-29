@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import ModalForm from "@/components/adminPanelComponent/addingProcess/ModalForm";
 import MainCard from "@/components/customContiner/MainCard";
 import { createNewProductLine } from "./hooks/useCreate";
@@ -8,9 +9,18 @@ import useIcons from "@/hooks/reactQueryApiHooks/useIcon";
 import useCompanyQuery from "./hooks/useCompanyList";
 
 export default function ProductLinePage() {
+  const [refreshKey, setRefreshKey] = useState(0);
   const { icons, loading } = useIcons();
-  
   const getListCompany = useCompanyQuery();
+
+  const handleCreateProductLine = async (data: any) => {
+    const response = await createNewProductLine(data);
+    if (response.success) {
+      setRefreshKey(prev => prev + 1);
+      return { success: true };
+    }
+    return response;
+  };
 
   return (
     <MainCard>
@@ -22,10 +32,10 @@ export default function ProductLinePage() {
             label: "شرکت",
             type: "select",
             required: true,
-            options: getListCompany.data.map((company) => ({
+            options: getListCompany.data?.map((company) => ({
               label: company.name,
               value: company.id,
-            })),
+            })) || [],
           },
           {
             name: "name",
@@ -46,11 +56,11 @@ export default function ProductLinePage() {
             required: false,
           },
         ]}
-        onSubmit={createNewProductLine}
+        onSubmit={handleCreateProductLine}
         icons={icons}
         loadingIcons={loading}
       />
-      <AllContentProductLine />
+      <AllContentProductLine key={refreshKey} />
     </MainCard>
   );
 }

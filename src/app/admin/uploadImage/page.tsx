@@ -8,7 +8,15 @@ import { Button, Dialog, DialogContent, DialogTitle } from "@mui/material";
 
 const IconsPage = () => {
   const [open, setOpen] = useState(false);
+  const [refreshKey, setRefreshKey] = useState(0);
+  
   const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const handleSuccess = () => {
+    setRefreshKey(prev => prev + 1);
+    handleClose();
+  };
 
   return (
     <MainCard>
@@ -19,20 +27,25 @@ const IconsPage = () => {
         sx={{
           width: "auto",
           maxWidth: "90vw",
+          ml: "17px",
           alignSelf: "flex-start",
-          mr: "auto",
           mt: "30px",
         }}
       >
         افزودن تصویر جدید
       </Button>
-      <Dialog open={open} onClose={() => setOpen(false)}>
+      
+      <Dialog open={open} onClose={handleClose}>
         <DialogTitle>افزودن تصویر جدید</DialogTitle>
         <DialogContent>
-          <AddIconDialog onClose={() => setOpen(false)} />
+          <AddIconDialog 
+            onClose={handleClose}
+            onSuccess={handleSuccess}
+          />
         </DialogContent>
       </Dialog>
-      <AllContentImageUpload />
+      
+      <AllContentImageUpload key={refreshKey} />
     </MainCard>
   );
 };

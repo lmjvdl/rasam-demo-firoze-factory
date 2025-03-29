@@ -27,10 +27,7 @@ const DataTable: React.FC<DataTableProps> = ({
   arrayColumns = {},
 }) => {
   const validData = Array.isArray(data) ? data : [];
-
-  const visibleColumns = columns.filter(
-    (column) => column.showOnTable !== false
-  );
+  const visibleColumns = columns.filter((column) => column.showOnTable !== false);
 
   return (
     <Box sx={{ marginTop: "35px", padding: "16px" }}>
@@ -39,7 +36,7 @@ const DataTable: React.FC<DataTableProps> = ({
           <TableHead>
             <TableRow>
               {visibleColumns.map((column) => (
-                <TableCell key={column.id} style={{ textAlign: "center" }}>
+                <TableCell key={column.id} align="center">
                   {column.label}
                 </TableCell>
               ))}
@@ -49,20 +46,21 @@ const DataTable: React.FC<DataTableProps> = ({
             {validData.map((row, rowIndex) => (
               <TableRow key={rowIndex}>
                 {visibleColumns.map((column) => {
-                  const isArray = Array.isArray(row[column.id]);
+                  const value = row[column.id];
+                  const isArray = Array.isArray(value);
                   const isArrayColumn = arrayColumns[column.id];
 
                   return (
-                    <TableCell key={column.id} style={{ textAlign: "center" }}>
+                    <TableCell key={column.id} align="center">
                       {column.isImage ? (
                         <img
-                          src={row[column.id]}
+                          src={value}
                           alt="Image"
                           style={{ width: "25px", height: "25px" }}
                         />
                       ) : column.render ? (
                         column.render(row)
-                      ) : !column.isAdditionalAction && column.isActionColumn ? (
+                      ) : column.isActionColumn ? (
                         <>
                           <IconButton onClick={() => onView?.(row)}>
                             <VisibilityIcon color="primary" />
@@ -75,18 +73,16 @@ const DataTable: React.FC<DataTableProps> = ({
                           </IconButton>
                         </>
                       ) : isArray && isArrayColumn ? (
-                        <div>
-                          {row[column.id].map((item: any, index: number) => (
-                            <span key={index}>
-                              {item[isArrayColumn] || item}
-                              {index < row[column.id].length - 1 ? ", " : ""}
-                            </span>
-                          ))}
-                        </div>
+                        value.map((item: any, index: number) => (
+                          <span key={index}>
+                            {item[isArrayColumn] || item}
+                            {index < value.length - 1 ? ", " : ""}
+                          </span>
+                        ))
                       ) : isArray ? (
-                        truncateText(row[column.id].join(", "))
+                        truncateText(value.join(", "))
                       ) : (
-                        truncateText(row[column.id])
+                        truncateText(value)
                       )}
                     </TableCell>
                   );
@@ -95,22 +91,19 @@ const DataTable: React.FC<DataTableProps> = ({
             ))}
           </TableBody>
         </Table>
-        <Box component="div" sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
-          <TablePagination
-            component="div"
-            count={count}
-            rowsPerPage={7}
-            page={page}
-            onPageChange={(_, newPage) => onPageChange(newPage)}
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-            }}
-            labelRowsPerPage=""
-            rowsPerPageOptions={[]}
-          />
-        </Box>
       </TableContainer>
+      <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+        <TablePagination
+          component="div"
+          count={count}
+          rowsPerPage={7}
+          page={page}
+          onPageChange={(_, newPage) => onPageChange(newPage)}
+          sx={{ display: "flex", justifyContent: "center" }}
+          labelRowsPerPage=""
+          rowsPerPageOptions={[]}
+        />
+      </Box>
     </Box>
   );
 };

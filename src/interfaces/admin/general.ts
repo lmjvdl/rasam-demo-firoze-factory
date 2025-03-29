@@ -87,11 +87,4 @@ interface ViewDialogProps {
   arrayAttributes?: { [key: string]: string };
 }
 
-interface ViewUserDetailModal {
-    open: boolean;
-    onClose: () => void;
-    onConfirm: () => void;
-    rowData: any;
-    titles: any;
-}
 

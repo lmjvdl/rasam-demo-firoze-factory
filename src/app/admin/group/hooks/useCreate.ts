@@ -4,7 +4,7 @@ import { z } from "zod";
 
 const groupSchema = z.object({
   name: z.string(),
-  permissions: z.array(z.number().int("مجوزها باید به صورت اعداد صحیح باشند")),
+  permissions: z.array(z.number()),
   users: z.array(z.number()).optional(),
 });
 

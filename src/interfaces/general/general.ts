@@ -10,3 +10,15 @@ export const PrevDataInitial = {
     success: true,
     messages: "",
 }
+
+
+export interface AuthState {
+  id: number;
+  username: string;
+  accessToken: string;
+  refreshToken: string;
+  lastLogin: string | null;
+  isLoggedIn: boolean;
+  permissions: string[];
+  isAdmin: boolean;
+}
