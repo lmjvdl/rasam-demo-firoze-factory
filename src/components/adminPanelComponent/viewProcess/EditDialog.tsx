@@ -15,8 +15,6 @@ import {
   ListItemText,
   SelectChangeEvent,
 } from "@mui/material";
-import { transformArrayAttributes } from "@/utils/formatters/extractId";
-
 
 const EditDialog: React.FC<EditDialogProps> = ({
   open,
@@ -30,27 +28,29 @@ const EditDialog: React.FC<EditDialogProps> = ({
   booleanValue,
   onBooleanValueChange,
   extraOptions = {},
-  arrayAttributes = [],
 }) => {
-  const [formData, setFormData] = useState<{ [key: string]: any }>(rowData || {});
+  const [formData, setFormData] = useState<{ [key: string]: any }>(
+    rowData || {}
+  );
   const [errors, setErrors] = useState<{ [key: string]: boolean }>({});
 
+  const getObjectId = (value: any) => {
+    if (value && typeof value === "object" && value.id !== undefined) {
+      return value.id;
+    }
+    return value;
+  };
+
+  const getArrayObjectIds = (value: any) => {
+    if (Array.isArray(value)) {
+      return value.map((item) => item?.id || item);
+    }
+    return value || [];
+  };
 
   useEffect(() => {
-    if (rowData) {
-      const transformedData = transformArrayAttributes(
-        {
-          ...rowData,
-          function: typeof rowData.function === "object" ? rowData.function.id : rowData.function,
-          device: typeof rowData.device === "object" ? rowData.device.id : rowData.device,
-          type: typeof rowData.type === "object" ? rowData.type.id : rowData.type,
-        },
-        arrayAttributes
-      );
-      
-      setFormData(transformedData);
-    }
-  }, [rowData, arrayAttributes]);
+    setFormData(rowData || {});
+  }, [rowData]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -69,17 +69,34 @@ const EditDialog: React.FC<EditDialogProps> = ({
     onBooleanValueChange?.(newValue);
   };
 
-  const handleMultiSelectChange = (event: SelectChangeEvent<string[]>, key: string) => {
+  const handleMultiSelectChange = (
+    event: SelectChangeEvent<string[]>,
+    key: string
+  ) => {
+    const selectedIds = event.target.value;
+    const allOptions = extraOptions?.[titles.find(t => t.id === key)?.optionsKey || ''] || [];
+    
     setFormData((prev) => ({
       ...prev,
-      [key]: event.target.value,
+      [key]: allOptions
+        .filter(opt => selectedIds.includes(String(opt.id)))
+        .map(opt => ({ id: opt.id, name: opt.label })),
     }));
   };
 
-  const handleSingleSelectChange = (event: SelectChangeEvent<string>, key: string) => {
+  const handleSingleSelectChange = (
+    event: SelectChangeEvent<string>,
+    key: string
+  ) => {
+    const selectedId = event.target.value;
+    const allOptions = extraOptions?.[titles.find(t => t.id === key)?.optionsKey || ''] || [];
+    const selectedOption = allOptions.find(opt => opt.id == selectedId);
+    
     setFormData((prev) => ({
       ...prev,
-      [key]: Number(event.target.value),
+      [key]: selectedOption 
+        ? { id: selectedOption.id, name: selectedOption.label } 
+        : null,
     }));
   };
 
@@ -91,8 +108,7 @@ const EditDialog: React.FC<EditDialogProps> = ({
         column.id &&
         (formData[column.id] === undefined ||
           formData[column.id] === null ||
-          formData[column.id] === "" ||
-          (Array.isArray(formData[column.id]) && formData[column.id].length === 0))
+          formData[column.id] === "")
       ) {
         newErrors[column.id] = true;
       }
@@ -132,18 +148,51 @@ const EditDialog: React.FC<EditDialogProps> = ({
             );
           }
 
-          if (column.isSingleSelect && column.optionsKey) {
-            const allOptions = extraOptions[column.optionsKey] || [];
+
+          if (column.isIconSelect && column.optionsKey) {
+            const allIcons = extraOptions[column.optionsKey] || [];
+            const selectedIcon = formData?.[key] || "";
+          
             return (
-              <FormControl
-                key={key}
-                fullWidth
-                margin="dense"
-                required={column.required}
-              >
+              <FormControl key={key} fullWidth margin="dense">
                 <InputLabel>{column.label}</InputLabel>
                 <Select
-                  value={typeof value === "object" ? value.id : value}
+                  value={selectedIcon}
+                  onChange={(e) => setFormData((prev) => ({ ...prev, [key]: Number(e.target.value) }))}
+                  input={<OutlinedInput label={column.label} />}
+                  renderValue={(selected) => {
+                    const selectedItem = allIcons.find((icon) => icon.id === selected);
+                    return (
+                      <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                        {selectedItem && <img src={selectedItem.label} alt="icon" style={{ width: "24px", height: "24px" }} />}
+  
+                      </div>
+                    );
+                  }}
+                >
+                  {allIcons.map((icon) => (
+                    <MenuItem key={icon.id} value={icon.id}>
+                      <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                        <img src={icon.label} alt="icon" style={{ width: "24px", height: "24px" }} />
+                        
+                      </div>
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            );
+          }
+
+          if (column.isSingleSelect && column.optionsKey) {
+            const allOptions = extraOptions[column.optionsKey] || [];
+            const currentValue = formData?.[key];
+            const selectedId = getObjectId(currentValue);
+            
+            return (
+              <FormControl key={key} fullWidth margin="dense" required={column.required}>
+                <InputLabel>{column.label}</InputLabel>
+                <Select
+                  value={selectedId ? String(selectedId) : ''}
                   onChange={(e) => handleSingleSelectChange(e, key)}
                   input={<OutlinedInput label={column.label} />}
                 >
@@ -161,37 +210,32 @@ const EditDialog: React.FC<EditDialogProps> = ({
               </FormControl>
             );
           }
-
+          
           if (column.isMultiSelect && column.optionsKey) {
             const allOptions = extraOptions[column.optionsKey] || [];
-            const selectedValues = formData?.[key] || [];
+            const currentValue = formData?.[key];
+            const selectedIds = getArrayObjectIds(currentValue).map(String);
+            
             return (
-              <FormControl
-                key={key}
-                fullWidth
-                margin="dense"
-                required={column.required}
-              >
+              <FormControl key={key} fullWidth margin="dense" required={column.required}>
                 <InputLabel>{column.label}</InputLabel>
                 <Select
                   multiple
-                  value={selectedValues}
+                  value={selectedIds}
                   onChange={(e) => handleMultiSelectChange(e, key)}
                   input={<OutlinedInput label={column.label} />}
                   renderValue={(selected) =>
                     selected
                       .map(
                         (val: any) =>
-                          allOptions.find((opt) => opt.id === val)?.label || val
+                          allOptions.find((opt) => opt.id == val)?.label || val
                       )
                       .join(", ")
                   }
                 >
                   {allOptions.map((option) => (
-                    <MenuItem key={option.id} value={option.id}>
-                      {selectedValues.includes(option.id) && (
-                        <Checkbox checked />
-                      )}
+                    <MenuItem key={option.id} value={String(option.id)}>
+                      <Checkbox checked={selectedIds.includes(String(option.id))} />
                       <ListItemText primary={option.label} />
                     </MenuItem>
                   ))}

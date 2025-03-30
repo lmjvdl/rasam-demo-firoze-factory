@@ -60,7 +60,7 @@ function sanitizer(pollutedData: unknown) {
 
     const transformedResults = refinedData.data.results.map((item) => ({
       ...item,
-      function: item.permissions ? item.permissions : { id: 0, name: "نامشخص" },
+      permissions: item.permissions ? item.permissions : { id: 0, name: "نامشخص" },
     }));
 
     return { ...refinedData, data: { ...refinedData.data, results: transformedResults } };

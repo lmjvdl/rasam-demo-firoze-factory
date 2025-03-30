@@ -23,7 +23,6 @@ const FunctionTable: React.FC<FunctionTableProps> = ({
       count={count}
       onPageChange={onPageChange}
       page={page}
-      arrayColumns={{ parameters: "name" }}
     />
   );
 };

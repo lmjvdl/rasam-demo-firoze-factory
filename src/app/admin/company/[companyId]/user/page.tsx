@@ -13,12 +13,12 @@ import useGroupQuery from "./hooks/useGroupList";
 export default function UserCompanyPage({ params }: PageProps) {
   const [refreshKey, setRefreshKey] = useState(0);
   const { companyId } = use(params);
-  
-  if (!companyId) return null;
-
   const getUsersList = useUserQuery();
   const getPermissionsList = usePermissionQuery();
   const getGroupsList = useGroupQuery();
+  
+  
+  if (!companyId) return null;
 
   const handleCreateUserCompany = async (data: any) => {
     const response = await createNewUserCompany(data);

@@ -9,7 +9,7 @@ export type CompanyUpdateSchema = {
   name: string;
   description: string;
   code: string;
-  logo: string;
+  logo?: string;
 };
 
 const useUpdate = () => {
@@ -17,10 +17,10 @@ const useUpdate = () => {
   const { showToast } = useToast();
 
   const updateCompanyMutation = useMutation({
-    mutationFn: async ({ id, ...updatedData }: CompanyUpdateSchema) => {
+    mutationFn: async ({ id, logo, ...updatedData }: CompanyUpdateSchema) => {
       return fetchWithErrorWithAlarm(companyUrls.editCompany(id), {
         method: "PUT",
-        body: JSON.stringify(updatedData),
+        body: JSON.stringify({...updatedData, logo: Number(logo)}),
       });
     },
     onSuccess: () => {

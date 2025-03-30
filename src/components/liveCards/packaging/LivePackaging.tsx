@@ -1,4 +1,3 @@
-import { PackagingLiveCard } from "@/components/packagingLive/PackagingLiveCard";
 import MainCard from "@/components/customContiner/MainCard";
 import { Box, Grid, Paper, Typography } from "@mui/material";
 import React from "react";
@@ -8,6 +7,7 @@ import {
   IconBrandAppleNews,
   IconAspectRatio,
 } from "@tabler/icons-react";
+import { PackagingLiveCard } from "./PackagingLiveCard";
 
 const LivePackaging = () => {
   return (

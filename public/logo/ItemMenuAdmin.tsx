@@ -16,7 +16,8 @@ export const ProductLinePart: React.FC<IconProps> = (props) => (
     strokeWidth="1.5"
     strokeLinecap="round"
     strokeLinejoin="round"
-    className="icon icon-tabler icons-tabler-outline icon-tabler-route-square-2">
+    className="icon icon-tabler icons-tabler-outline icon-tabler-route-square-2"
+  >
     <path stroke={props.stroke} fill="none" />
     <path d="M14 5a2 2 0 0 0 -2 2v10a2 2 0 0 1 -2 2" />
     <path d="M3 17h4v4h-4z" />
@@ -37,7 +38,8 @@ export const ProductLine: React.FC<IconProps> = (props) => (
     strokeWidth="1.5"
     strokeLinecap="round"
     strokeLinejoin="round"
-    className="icon icon-tabler icons-tabler-outline icon-tabler-rollercoaster">
+    className="icon icon-tabler icons-tabler-outline icon-tabler-rollercoaster"
+  >
     <path stroke={props.stroke} fill="none" />
     <path d="M3 21a5.55 5.55 0 0 0 5.265 -3.795l.735 -2.205a8.775 8.775 0 0 1 8.325 -6h3.675" />
     <path d="M20 9v12" />
@@ -62,7 +64,8 @@ export const Devices: React.FC<IconProps> = (props) => (
     strokeWidth="1.5"
     strokeLinecap="round"
     strokeLinejoin="round"
-    className="icon icon-tabler icons-tabler-outline icon-tabler-devices">
+    className="icon icon-tabler icons-tabler-outline icon-tabler-devices"
+  >
     <path stroke={props.stroke} fill="none" />
     <path d="M13 9a1 1 0 0 1 1 -1h6a1 1 0 0 1 1 1v10a1 1 0 0 1 -1 1h-6a1 1 0 0 1 -1 -1v-10z" />
     <path d="M18 8v-3a1 1 0 0 0 -1 -1h-13a1 1 0 0 0 -1 1v12a1 1 0 0 0 1 1h9" />
@@ -83,7 +86,8 @@ export const UploadImage: React.FC<IconProps> = (props) => (
     strokeWidth="1.5"
     strokeLinecap="round"
     strokeLinejoin="round"
-    className="icon icon-tabler icons-tabler-outline icon-tabler-photo-circle-plus">
+    className="icon icon-tabler icons-tabler-outline icon-tabler-photo-circle-plus"
+  >
     <path stroke={props.stroke} fill="none" />
     <path d="M15 8h.01" />
     <path d="M20.964 12.806a9 9 0 0 0 -8.964 -9.806a9 9 0 0 0 -9 9a9 9 0 0 0 9.397 8.991" />
@@ -107,7 +111,8 @@ export const Company: React.FC<IconProps> = (props) => (
     strokeWidth="1.5"
     strokeLinecap="round"
     strokeLinejoin="round"
-    className="icon icon-tabler icons-tabler-outline icon-tabler-building-community">
+    className="icon icon-tabler icons-tabler-outline icon-tabler-building-community"
+  >
     <path stroke={props.stroke} fill="none" />
     <path d="M8 9l5 5v7h-5v-4m0 4h-5v-7l5 -5m1 1v-6a1 1 0 0 1 1 -1h10a1 1 0 0 1 1 1v17h-8" />
     <path d="M13 7l0 .01" />
@@ -130,7 +135,8 @@ export const Group: React.FC<IconProps> = (props) => (
     strokeWidth="1.5"
     strokeLinecap="round"
     strokeLinejoin="round"
-    className="icon icon-tabler icons-tabler-outline icon-tabler-users-group">
+    className="icon icon-tabler icons-tabler-outline icon-tabler-users-group"
+  >
     <path stroke={props.stroke} fill="none" />
     <path d="M10 13a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
     <path d="M8 21v-1a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v1" />
@@ -154,7 +160,8 @@ export const Permission: React.FC<IconProps> = (props) => (
     strokeWidth="1.5"
     strokeLinecap="round"
     strokeLinejoin="round"
-    className="icon icon-tabler icons-tabler-outline icon-tabler-file-like">
+    className="icon icon-tabler icons-tabler-outline icon-tabler-file-like"
+  >
     <path stroke={props.stroke} fill="none" />
     <path d="M3 16m0 1a1 1 0 0 1 1 -1h1a1 1 0 0 1 1 1v3a1 1 0 0 1 -1 1h-1a1 1 0 0 1 -1 -1z" />
     <path d="M6 20a1 1 0 0 0 1 1h3.756a1 1 0 0 0 .958 -.713l1.2 -3c.09 -.303 .133 -.63 -.056 -.884c-.188 -.254 -.542 -.403 -.858 -.403h-2v-2.467a1.1 1.1 0 0 0 -2.015 -.61l-1.985 3.077v4z" />
@@ -176,7 +183,8 @@ export const User: React.FC<IconProps> = (props) => (
     strokeWidth="1.5"
     strokeLinecap="round"
     strokeLinejoin="round"
-    className="icon icon-tabler icons-tabler-outline icon-tabler-user">
+    className="icon icon-tabler icons-tabler-outline icon-tabler-user"
+  >
     <path stroke={props.stroke} fill="none" />
     <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
     <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
@@ -196,7 +204,8 @@ export const DataType: React.FC<IconProps> = (props) => (
     strokeWidth="1.5"
     strokeLinecap="round"
     strokeLinejoin="round"
-    className="icon icon-tabler icons-tabler-outline icon-tabler-database-cog">
+    className="icon icon-tabler icons-tabler-outline icon-tabler-database-cog"
+  >
     <path stroke={props.stroke} fill="none" />
     <path d="M4 6c0 1.657 3.582 3 8 3s8 -1.343 8 -3s-3.582 -3 -8 -3s-8 1.343 -8 3" />
     <path d="M4 6v6c0 1.657 3.582 3 8 3c.21 0 .42 -.003 .626 -.01" />
@@ -225,7 +234,8 @@ export const DeviceType: React.FC<IconProps> = (props) => (
     strokeWidth="1.5"
     strokeLinecap="round"
     strokeLinejoin="round"
-    className="icon icon-tabler icons-tabler-outline icon-tabler-device-desktop-code">
+    className="icon icon-tabler icons-tabler-outline icon-tabler-device-desktop-code"
+  >
     <path stroke={props.stroke} fill="none" />
     <path d="M12.5 16h-8.5a1 1 0 0 1 -1 -1v-10a1 1 0 0 1 1 -1h16a1 1 0 0 1 1 1v8" />
     <path d="M7 20h4" />
@@ -248,7 +258,8 @@ export const Function: React.FC<IconProps> = (props) => (
     strokeWidth="1.5"
     strokeLinecap="round"
     strokeLinejoin="round"
-    className="icon icon-tabler icons-tabler-outline icon-tabler-math-function">
+    className="icon icon-tabler icons-tabler-outline icon-tabler-math-function"
+  >
     <path stroke={props.stroke} fill="none" />
     <path d="M3 19a2 2 0 0 0 2 2c2 0 2 -4 3 -9s1 -9 3 -9a2 2 0 0 1 2 2" />
     <path d="M5 12h6" />
@@ -270,7 +281,8 @@ export const FunctionParameter: React.FC<IconProps> = (props) => (
     strokeWidth="1.5"
     strokeLinecap="round"
     strokeLinejoin="round"
-    className="icon icon-tabler icons-tabler-outline icon-tabler-indent-decrease">
+    className="icon icon-tabler icons-tabler-outline icon-tabler-indent-decrease"
+  >
     <path stroke={props.stroke} fill="none" />
     <path d="M20 6l-7 0" />
     <path d="M20 12l-9 0" />
@@ -292,7 +304,8 @@ export const Alarm: React.FC<IconProps> = (props) => (
     strokeWidth="1.5"
     strokeLinecap="round"
     strokeLinejoin="round"
-    className="icon icon-tabler icons-tabler-outline icon-tabler-bell">
+    className="icon icon-tabler icons-tabler-outline icon-tabler-bell"
+  >
     <path stroke={props.stroke} fill="none" />
     <path d="M10 5a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" />
     <path d="M9 17v1a3 3 0 0 0 6 0v-1" />
@@ -312,7 +325,8 @@ export const AlarmDetail: React.FC<IconProps> = (props) => (
     strokeWidth="1.5"
     strokeLinecap="round"
     strokeLinejoin="round"
-    className="icon icon-tabler icons-tabler-outline icon-tabler-alarm-average">
+    className="icon icon-tabler icons-tabler-outline icon-tabler-alarm-average"
+  >
     <path stroke={props.stroke} fill="none" />
     <path d="M5 13a7 7 0 1 0 14 0a7 7 0 0 0 -14 0" />
     <path d="M7 4l-2.75 2" />
@@ -334,7 +348,8 @@ export const Contacts: React.FC<IconProps> = (props) => (
     strokeWidth="1.5"
     strokeLinecap="round"
     strokeLinejoin="round"
-    className="icon icon-tabler icons-tabler-outline icon-tabler-address-book">
+    className="icon icon-tabler icons-tabler-outline icon-tabler-address-book"
+  >
     <path stroke={props.stroke} fill="none" />
     <path d="M20 6v12a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2z" />
     <path d="M10 16h6" />
@@ -342,5 +357,39 @@ export const Contacts: React.FC<IconProps> = (props) => (
     <path d="M4 8h3" />
     <path d="M4 12h3" />
     <path d="M4 16h3" />
+  </svg>
+);
+// ***************************************************************************************************************************//
+
+export const Operation: React.FC<IconProps> = (props) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="icon icon-tabler icons-tabler-outline icon-tabler-adjustments-cog"
+  >
+    <path stroke={props.stroke} fill="none" />
+    <path d="M4 10a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+    <path d="M6 4v4" />
+    <path d="M6 12v8" />
+    <path d="M13.199 14.399a2 2 0 1 0 -1.199 3.601" />
+    <path d="M12 4v10" />
+    <path d="M12 18v2" />
+    <path d="M16 7a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+    <path d="M18 4v1" />
+    <path d="M18 9v2.5" />
+    <path d="M19.001 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+    <path d="M19.001 15.5v1.5" />
+    <path d="M19.001 21v1.5" />
+    <path d="M22.032 17.25l-1.299 .75" />
+    <path d="M17.27 20l-1.3 .75" />
+    <path d="M15.97 17.25l1.3 .75" />
+    <path d="M20.733 20l1.3 .75" />
   </svg>
 );

@@ -1,14 +1,7 @@
-interface FunctionParameter {
-    id: number; // ReadOnly
-    name: string;
-    function: number;
-}
-  
 interface Function {
     id: number; // ReadOnly
     name: string;
     description: string;
-    parameters: FunctionParameter[];
 }
   
 export interface FunctionTableProps {

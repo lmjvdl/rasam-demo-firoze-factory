@@ -22,7 +22,7 @@ class FunctionUrls extends Url {
   }
 
   public editFunction(id: number) {
-    const basePath = `${this.baseUrlPath}/${id}/`;
+    const basePath = `${this.baseUrlPath}/${id}`;
     return new URL(basePath, this.origin).toString();
   }
 }

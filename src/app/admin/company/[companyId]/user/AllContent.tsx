@@ -138,6 +138,10 @@ export default function AllContentUserCompany({ companyId }: UserCompanyPageProp
         onClose={() => setViewOpen(false)}
         rowData={selectedRow}
         titles={dynamicColumns}
+        arrayAttributes={{
+          permissions: 'name', 
+        }}
+        
       />
       <EditDialog
         open={editOpen}
@@ -146,6 +150,7 @@ export default function AllContentUserCompany({ companyId }: UserCompanyPageProp
         rowData={selectedRow}
         titles={filteredColumnsForEdit}
         extraOptions={{ permissionList, groupList }}
+        arrayObjectAttributes={['permissions', "groups"]}
       />
       <DeleteDialog
         open={deleteOpen}

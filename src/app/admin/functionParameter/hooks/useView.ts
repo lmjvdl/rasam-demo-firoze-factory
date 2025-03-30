@@ -39,8 +39,11 @@ const responseSchema = z.object({
     results: z.array(
       z.object({
         id: z.number(),
-        name: z.string().min(1).max(50),
-        function: z.number(),
+        name: z.string(),
+        function: z.object({
+          id: z.number(),
+          name: z.string(),
+        }),
       })
     ),
   }),

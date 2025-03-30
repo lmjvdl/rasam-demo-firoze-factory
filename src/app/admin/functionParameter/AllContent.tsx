@@ -27,12 +27,12 @@ const AllContentFunctionParameter: React.FC = () => {
   const { deleteFunctionParameterMutation } = useDelete();
   const { updateFunctionParameterMutation } = useUpdate();
   const functionList = useFunctionQuery().data
-  ? useFunctionQuery().data.map((func) => ({
-      id: func.id,
-      value: func.id, 
-      label: func.name, 
-    }))
-  : [];
+    ? useFunctionQuery().data.map((func) => ({
+        id: func.id,
+        value: func.id,
+        label: func.name,
+      }))
+    : [];
 
   useEffect(() => {
     getList.mutate(
@@ -90,25 +90,26 @@ const AllContentFunctionParameter: React.FC = () => {
     if (selectedRow?.id) {
       deleteFunctionParameterMutation.mutate(selectedRow.id, {
         onSuccess: () => {
-          setData(prevData => {
+          setData((prevData) => {
             if (prevData?.data) {
               return {
                 ...prevData,
                 data: {
                   ...prevData.data,
-                  results: prevData.data.results.filter(row => row.id !== selectedRow.id),
-                  count: prevData.data.count - 1
-                }
+                  results: prevData.data.results.filter(
+                    (row) => row.id !== selectedRow.id
+                  ),
+                  count: prevData.data.count - 1,
+                },
               };
             }
             return prevData;
           });
           setDeleteOpen(false);
-        }
+        },
       });
     }
   };
-
 
   const dynamicColumns = columns();
   const filteredColumnsForEdit = dynamicColumns.filter((col) => col.canEdit);
@@ -131,6 +132,7 @@ const AllContentFunctionParameter: React.FC = () => {
         onClose={() => setViewOpen(false)}
         rowData={selectedRow}
         titles={dynamicColumns}
+        objectAttributes={["function"]}
       />
       <EditDialog
         open={editOpen}
@@ -139,6 +141,7 @@ const AllContentFunctionParameter: React.FC = () => {
         rowData={selectedRow}
         titles={filteredColumnsForEdit}
         extraOptions={{ functionList }}
+        objectAttributes={["function"]}
       />
       <DeleteDialog
         open={deleteOpen}

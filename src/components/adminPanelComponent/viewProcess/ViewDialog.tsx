@@ -1,87 +1,75 @@
-'use client';
-
 import React from 'react';
-import { Dialog, DialogTitle, DialogContent, DialogActions, Button, Typography } from '@mui/material';
+import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material';
+
+interface ViewDialogProps {
+  open: boolean;
+  onClose: () => void;
+  rowData: any;
+  titles: Array<{
+    id: string;
+    label: string;
+    required?: boolean;
+    showOnTable?: boolean;
+    canEdit?: boolean;
+    isAdditionalAction?: boolean;
+    isMultiSelect?: boolean;
+    isIconSelect?: boolean; 
+    optionsKey?: string;
+    isSingleSelect?: boolean;
+    isActionColumn?: boolean;
+  }>;
+  booleanAttributeName?: string;
+  falseLabel?: string;
+  trueLabel?: string;
+  arrayAttributes?: Record<string, string>;
+  objectAttributes?: string[]; // ویژگی‌های آبجکت که مقدار name آن‌ها باید نمایش داده شود
+}
 
 const ViewDialog: React.FC<ViewDialogProps> = ({ 
   open, 
   onClose, 
   rowData, 
-  titles,  
+  titles, 
   booleanAttributeName, 
-  falseLabel = 'خیر',
-  trueLabel = 'بله', 
-  arrayAttributes = {}
+  falseLabel = "خیر", 
+  trueLabel = "بله", 
+  arrayAttributes = {},
+  objectAttributes = []
 }) => {
-  if (!rowData) return null;
+  if (!rowData || typeof rowData !== 'object') return null;
 
-  const renderArrayValue = (array: any[], attributeKey: string) => {
-    if (!array || array.length === 0) return 'هیچ موردی وجود ندارد';
+  const renderValue = (key: string, value: any) => {
+    if (objectAttributes.includes(key) && value && typeof value === 'object') {
+      return value.name || JSON.stringify(value);
+    }
     
-    return array
-      .map(item => {
-        if (attributeKey && typeof item === 'object' && item !== null) {
-          return item[attributeKey] || 'نامشخص';
-        }
-        if (typeof item === 'object' && item !== null && 'name' in item) {
-          return item.name;
-        }
-        if (typeof item === 'object' && item !== null && 'id' in item) {
-          return `#${item.id}`;
-        }
-        return item;
-      })
-      .join(', ');
+    if (booleanAttributeName === key) {
+      return value ? trueLabel : falseLabel;
+    }
+    
+    if (Array.isArray(value)) {
+      const attributeKey = arrayAttributes[key] || "name";
+      return value.map(item => (item && typeof item === 'object' ? item[attributeKey] || 'نامشخص' : item)).join(', ');
+    }
+
+    return value;
   };
 
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth>
-      <DialogTitle sx={{ textAlign: 'center' }}>مشاهده اطلاعات</DialogTitle>
-      <DialogContent dividers>
-        {titles?.filter((column: any) => column.showOnTable !== false).map((column: any) => {
-          const key = column.id;
-          if (!key || !rowData.hasOwnProperty(key)) return null;
-
-          let valueToShow = rowData[key];
-
-          // نمایش مقدار boolean
-          if (booleanAttributeName && key === booleanAttributeName) {
-            valueToShow = valueToShow ? trueLabel : falseLabel;
-          }
-
-          return (
-            <Typography 
-              key={key} 
-              variant="body1" 
-              gutterBottom
-              sx={{ display: 'flex', alignItems: 'flex-start' }}
-            >
-              <strong style={{ minWidth: '150px', display: 'inline-block' }}>
-                {column.label}:
-              </strong>
-              <span style={{ flex: 1 }}>
-                {column.isImage ? (
-                  <img 
-                    src={valueToShow} 
-                    alt={column.label} 
-                    style={{ maxWidth: "100px", maxHeight: "100px" }}
-                  />
-                ) : Array.isArray(valueToShow) ? (
-                  renderArrayValue(valueToShow, arrayAttributes[key])
-                ) : (
-                  valueToShow || '--'
-                )}
-              </span>
-            </Typography>
-          );
-        })}
+    <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm">
+      <DialogTitle>نمایش جزئیات</DialogTitle>
+      <DialogContent>
+        {titles?.filter(column => column.showOnTable !== false && column.id !== "actions").map(column => (
+          <div key={column.id} style={{ marginBottom: 10 }}>
+            <strong>{column.label}:</strong> {renderValue(column.id, rowData[column.id]) || 'ندارد'}
+          </div>
+        ))}
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose} color="warning" variant="outlined">
-          بستن
-        </Button>
+        <Button onClick={onClose} color="primary">بستن</Button>
       </DialogActions>
     </Dialog>
   );
 };
+
 export default ViewDialog;

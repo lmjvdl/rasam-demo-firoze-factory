@@ -1,7 +1,7 @@
 "use client"
 
 import React from "react";
-import Chamfer from "@/components/chamfer/Chamfer";
+import Chamfer from "@/components/liveCards/chamfer/ChamferCard";
 import MainCard from "@/components/customContiner/MainCard";
 import { Grid } from "@mui/material";
 // import useWebSocket from "@/hooks/socket/useSocket";

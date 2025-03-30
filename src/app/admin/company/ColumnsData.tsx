@@ -4,6 +4,16 @@ import { IconUserExclamation } from "@tabler/icons-react";
 
 export const columns = () => [
   {
+    id: "logo",
+    label: "لوگو",
+    isActionColumn: false,
+    showOnTable: true,
+    canEdit: true,
+    isAdditionalAction: false,
+    isIconSelect: true,
+    optionsKey: "iconList",
+  },
+  {
     id: "id",
     label: "شناسه",
     showOnTable: false,
@@ -32,16 +42,6 @@ export const columns = () => [
     required: true,
     canEdit: true,
     isAdditionalAction: false,
-  },
-  {
-    id: "logo",
-    label: "لوگو",
-    isActionColumn: false,
-    showOnTable: false,
-    canEdit: true,
-    isAdditionalAction: false,
-    isIconSelect: true,
-    optionsKey: "iconList",
   },
   {
     id: "actions",

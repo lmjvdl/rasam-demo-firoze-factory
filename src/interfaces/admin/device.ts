@@ -3,6 +3,7 @@ export interface Device {
     product_line_part: number;
     name: string;
     code: string;
+    data_type: { id: number; name: string }[] | [];
 }
 export interface DeviceTableProps {
     data: Device[];

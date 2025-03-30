@@ -144,7 +144,7 @@ const AllContentGroup: React.FC = () => {
         rowData={selectedRow}
         titles={filteredColumnsForEdit}
         extraOptions={{ permissionList }}
-        arrayAttributes={['permissions']}
+        arrayObjectAttributes={['permissions']} 
       />
       <DeleteDialog
         open={deleteOpen}

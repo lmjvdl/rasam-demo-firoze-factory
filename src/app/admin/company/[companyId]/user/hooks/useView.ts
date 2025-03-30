@@ -39,8 +39,14 @@ const responseSchema = z.object({
         id: z.number(),
         user: z.string(),
         company: z.string(),
-        groups: z.array(z.number()),
-        permissions: z.array(z.number()),
+        groups: z.array(z.object({
+          id: z.number(),
+          name: z.string(),
+        })),
+        permissions: z.array(z.object({
+          id: z.number(),
+          name: z.string(),
+        })),
       })
     ),
   }),

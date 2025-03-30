@@ -1,3 +1,6 @@
+import { UserCompany } from "@/interfaces/admin/userCompany";
+import { truncateText } from "@/utils/formatters/truncateText";
+
 export const columns = () => [
   {
     id: "id",
@@ -30,6 +33,9 @@ export const columns = () => [
     optionsKey: "groupList",
     canEdit: true,
     isAdditionalAction: false,
+    render: (row: UserCompany) =>
+      row?.groups?.length
+          ? truncateText(row.groups.map((g) => g.name).join(", ")) : "نامشخص"
   },
   {
     id: "permissions",
@@ -40,6 +46,9 @@ export const columns = () => [
     isMultiSelect: true,
     canEdit: true,
     isAdditionalAction: false,
+    render: (row: UserCompany) =>
+      row?.permissions?.length
+          ? truncateText(row.permissions.map((p) => p.name).join(", ")) : "نامشخص"
   },
   {
     id: "actions",

@@ -7,7 +7,7 @@ import functionParameterUrls from "@/utils/url/adminPanel/functionParameter/func
 export type FunctionParameterUpdateSchema = {
   id: number;
   name: string;
-  function: number;
+  function: { id: number; name: string };
 };
 
 const useUpdateFunctionParameter = () => {

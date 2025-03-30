@@ -19,6 +19,7 @@ export const UseItemInfoAdminPanel = () => {
         to: "/admin/productLinePart",
       },
       "دستگاه ها": { text: "دستگاه ها", icon: "Devices", to: "/admin/devices" },
+      "عملگر": { text: "عملگر", icon: "Operation", to: "/admin/operation" },
       "نوع اطلاعات": {
         text: "نوع اطلاعات",
         icon: "DataType",

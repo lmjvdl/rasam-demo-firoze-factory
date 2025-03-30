@@ -19,7 +19,7 @@ const useUpdateGroup = () => {
     mutationFn: async ({ id, permissions, ...updatedData }: GroupUpdateSchema) => {
       return fetchWithErrorWithAlarm(groupUrls.editGroup(id), {
         method: "PUT",
-        body: JSON.stringify({...updatedData, permissions: extractIds(permissions)}), // تغییر این خط
+        body: JSON.stringify({...updatedData, permissions: extractIds(permissions)}),
       });
     },
     onSuccess: () => {

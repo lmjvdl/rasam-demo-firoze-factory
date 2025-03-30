@@ -7,7 +7,7 @@ import { useToast } from "@/hooks/ui/useToast";
 export type DeviceUpdateSchema = {
   id: number;
   product_line_part: number;
-  data_type: number[];
+  data_type: { id: number; name: string }[];
   name: string;
   code: string;
   value: number;

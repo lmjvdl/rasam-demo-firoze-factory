@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import getCompanyList, { ResponseSchema } from "./hooks/useView";
 import useDelete from "./hooks/useDelete";
-import useUpdate from "./hooks/useUpdate";
+import useUpdate, { CompanyUpdateSchema } from "./hooks/useUpdate";
 import CompanyTable from "./CompanyTable";
 import ViewDialog from "@/components/adminPanelComponent/viewProcess/ViewDialog";
 import EditDialog from "@/components/adminPanelComponent/viewProcess/EditDialog";
@@ -49,29 +49,22 @@ const AllContentCompany: React.FC = () => {
   }, [pageNumber]);
 
 
-  const handleSaveEdit = (updatedRow: {
-    id: number;
-    name: string;
-    description: string;
-    code: string;
-    logo: string;
-  }) => {
+  const handleSaveEdit = (updatedRow: CompanyUpdateSchema) => {
     setData((prevData) => {
       if (prevData?.data) {
         updateCompanyMutation.mutate(updatedRow);
+
         return {
           ...prevData,
           data: {
             ...prevData.data,
             results: prevData.data.results.map((row) =>
-              row.id === updatedRow.id ? updatedRow : row
+              row.id === updatedRow.id ? { ...row, ...updatedRow } : row
             ),
           },
         };
       }
-      return (
-        prevData || PrevDataInitial
-      );
+      return prevData || PrevDataInitial;
     });
   };
 

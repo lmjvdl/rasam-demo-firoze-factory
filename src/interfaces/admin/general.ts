@@ -41,12 +41,13 @@ interface DataTableProps {
 
 
 interface DeleteDialogProps {
-    open: boolean;
-    onClose: () => void;
-    onConfirm: () => void;
-    rowData: any;
-    titles: any;
-    arrayAttributes?: { [key: string]: string };
+  open: boolean;
+  onClose: () => void;
+  onConfirm: () => void;
+  rowData: any;
+  titles: any;
+  arrayAttributes?: { [key: string]: string };
+  objectAttributes?: string[];
 }
 
 interface EditDialogProps {
@@ -72,21 +73,35 @@ interface EditDialogProps {
   booleanValue?: boolean;
   onBooleanValueChange?: (value: boolean) => void;
   extraOptions?: { [key: string]: {
-    id: any; value: any; label: string 
-}[] };
-  arrayAttributes?: string[];
+    id: any;
+    label: string;
+    value?: any;
+    name?: string;
+  }[] };
+  objectAttributes?: string[];
+  arrayObjectAttributes?: string[];
 }
 
 interface ViewDialogProps {
   open: boolean;
   onClose: () => void;
-  rowData: any | null;
-  titles: any | null;
-  booleanValue?: boolean;
+  rowData: any;
+  titles: Array<{
+    id: string;
+    label: string;
+    required?: boolean;
+    showOnTable?: boolean;
+    canEdit?: boolean;
+    isAdditionalAction?: boolean;
+    isMultiSelect?: boolean;
+    isIconSelect?: boolean; 
+    optionsKey?: string;
+    isSingleSelect?: boolean;
+  }>;
   booleanAttributeName?: string;
-  trueLabel?: string;
   falseLabel?: string;
-  arrayAttributes?: { [key: string]: string };
+  trueLabel?: string;
+  arrayAttributes?: Record<string, string>;
+  objectAttributes?: string[];
 }
-
 

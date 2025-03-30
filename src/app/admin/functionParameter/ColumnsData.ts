@@ -1,3 +1,5 @@
+import { FunctionParameter } from "@/interfaces/admin/functionParameter";
+
 export const columns = () => [
     {
         id: "id",
@@ -20,8 +22,10 @@ export const columns = () => [
         required: true,
         showOnTable: true,
         optionsKey: "functionList",
+        isSingleSelect: true,
         canEdit: true,
         isAdditionalAction: false,
+        render: (row: FunctionParameter) => row?.function?.name || "نامشخص",
     },
     {
         id: "actions",

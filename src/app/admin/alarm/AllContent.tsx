@@ -157,6 +157,7 @@ const AllContentAlarm: React.FC = () => {
         rowData={selectedRow}
         titles={filteredColumnsForEdit}
         extraOptions={{ functionList, deviceList, dataTypeList }}
+        objectAttributes={['function', 'device', 'type']}
       />
       <DeleteDialog
         open={deleteOpen}

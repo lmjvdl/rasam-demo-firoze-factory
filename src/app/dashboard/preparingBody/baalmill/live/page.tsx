@@ -1,4 +1,4 @@
-import BaalMillCard from "@/components/baalMillLive/BaalMillCard";
+import BaalMillCard from "@/components/liveCards/baalMill/BaalMillCard";
 import useWebSocket from "@/hooks/socket/useSocket";
 import { BaalMillLiveSchema } from "@/interfaces/preparingBody/live";
 import { Container, Grid } from "@mui/material";

@@ -1,7 +1,7 @@
-interface FunctionParameter {
+export interface FunctionParameter {
     id: number; 
     name: string;
-    function: number;
+    function: { id: number; name: string } | null;
 }
   
 export interface FunctionParameterTableProps {

@@ -1,9 +1,9 @@
-interface UserCompany {
+export interface UserCompany {
     id: number;
     user: string;
     company: string;
-    groups: number[];
-    permissions: number[];
+    groups: { id: number; name: string }[] | [];
+    permissions: { id: number; name: string }[] | [];
 }
 
 

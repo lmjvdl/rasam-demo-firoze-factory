@@ -3,13 +3,15 @@
 import React from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, Typography } from '@mui/material';
 
+
 const DeleteDialog: React.FC<DeleteDialogProps> = ({ 
   open, 
   onClose, 
   onConfirm, 
   rowData, 
   titles,
-  arrayAttributes = {}
+  arrayAttributes = {},
+  objectAttributes = []
 }) => {
   if (!rowData) return null;
 
@@ -32,8 +34,21 @@ const DeleteDialog: React.FC<DeleteDialogProps> = ({
       .join(', ');
   };
 
+  const renderValue = (key: string, value: any) => {
+    if (objectAttributes.includes(key) && value && typeof value === 'object') {
+      return value.name || JSON.stringify(value);
+    }
+    
+    if (Array.isArray(value)) {
+      const attributeKey = arrayAttributes[key] || "name";
+      return value.map(item => (item && typeof item === 'object' ? item[attributeKey] || 'نامشخص' : item)).join(', ');
+    }
+
+    return value;
+  };
+
   const renderRowData = () => {
-    return titles?.filter((column: any) => column.showOnTable !== false).map((column: any) => {
+    return titles?.filter((column: any) => column.showOnTable !== false && !column.isActionColumn).map((column: any) => {
       const key = column.id;
       if (!key || !rowData.hasOwnProperty(key)) return null;
 
@@ -57,7 +72,7 @@ const DeleteDialog: React.FC<DeleteDialogProps> = ({
           <strong style={{ minWidth: '120px', display: 'inline-block' }}>
             {column.label}:
           </strong>
-          <span>{value || '--'}</span>
+          <span>{renderValue(key, value) || '--'}</span>
         </Typography>
       );
     });
