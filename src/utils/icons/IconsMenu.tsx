@@ -7,7 +7,7 @@ import {
   Logout,
   Chamfer,
   PowerSupply,
-} from "../../../public/logo/itemMenu";
+} from "../../../public/assets/logo/itemMenu";
 import {
   Company,
   Devices,
@@ -25,9 +25,9 @@ import {
   AlarmDetail,
   Contacts,
   Operation
-} from "../../../public/logo/ItemMenuAdmin";
+} from "../../../public/assets/logo/ItemMenuAdmin";
 // **************************** Importing the (LOGOS) of all existing factories ****************************
-import { RasamDark, RasamLight, Setare } from "../../../public/logo/company";
+import { RasamDark, RasamLight, Setare } from "../../../public/assets/logo/company";
 // ************************************* Importing (FOOTER ITEM) FIXED *************************************
 import { IconSettings, IconLogout } from "@tabler/icons-react";
 
