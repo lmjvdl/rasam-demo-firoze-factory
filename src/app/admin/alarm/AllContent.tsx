@@ -149,6 +149,7 @@ const AllContentAlarm: React.FC = () => {
         onClose={() => setViewOpen(false)}
         rowData={selectedRow}
         titles={dynamicColumns}
+        objectAttributes={['function_info', 'device_info', 'type_info']}
       />
       <EditDialog
         open={editOpen}
@@ -157,7 +158,7 @@ const AllContentAlarm: React.FC = () => {
         rowData={selectedRow}
         titles={filteredColumnsForEdit}
         extraOptions={{ functionList, deviceList, dataTypeList }}
-        objectAttributes={['function', 'device', 'type']}
+        objectAttributes={['function_info', 'device_info', 'type_info']}
       />
       <DeleteDialog
         open={deleteOpen}

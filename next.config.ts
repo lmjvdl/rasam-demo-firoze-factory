@@ -32,23 +32,6 @@ const nextConfig: NextConfig = {
           },
         ],
       },
-      {
-        source: '/sw.js',  // Apply headers to the service worker file
-        headers: [
-          {
-            key: 'Content-Type',  // Set the content type to JavaScript with UTF-8 encoding
-            value: 'application/javascript; charset=utf-8',
-          },
-          {
-            key: 'Cache-Control',  // Prevent caching of the service worker script
-            value: 'no-cache, no-store, must-revalidate',
-          },
-          {
-            key: 'Content-Security-Policy',  // Define the content security policy for the service worker
-            value: "default-src 'self'; script-src 'self'",
-          },
-        ],
-      },
     ]
   },
 };

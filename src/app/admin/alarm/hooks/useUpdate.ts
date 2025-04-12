@@ -12,6 +12,9 @@ export type AlarmUpdateSchema = {
   description: string;
   id: number;
   name: string;
+  message_type: string;
+  message: string;
+  receiver_info: string;
 }
 
 

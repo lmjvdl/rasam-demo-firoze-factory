@@ -5,7 +5,7 @@ interface ModalFormProps {
     label: string;
     type: string;
     accept?: string;
-    options?: { label: string; value: number }[];
+    options?: { label: string; value: number | string }[];
     required: boolean;
   }[];
   onSubmit: (data: any) => Promise<{ success: boolean; error?: string }>;
@@ -97,6 +97,7 @@ interface ViewDialogProps {
     isIconSelect?: boolean; 
     optionsKey?: string;
     isSingleSelect?: boolean;
+    isActionColumn?: boolean;
   }>;
   booleanAttributeName?: string;
   falseLabel?: string;

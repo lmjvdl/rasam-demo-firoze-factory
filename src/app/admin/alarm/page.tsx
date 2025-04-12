@@ -8,17 +8,19 @@ import useFunctionQuery from "./hooks/useFunctionList";
 import useDataTypeQuery from "./hooks/useDataTypeList";
 import useDeviceQuery from "./hooks/useDeviceList";
 import { useState } from "react";
+import useContactsQuery from "./hooks/useContactsList";
 
 export default function AlarmPage() {
   const [refreshKey, setRefreshKey] = useState(0);
   const getFunctionList = useFunctionQuery();
   const getDataTypeList = useDataTypeQuery();
   const getDeviceList = useDeviceQuery();
+  const getContactsList = useContactsQuery();
 
   const handleCreateAlarm = async (data: any) => {
     const response = await createNewAlarm(data);
     if (response.success) {
-      setRefreshKey(prev => prev + 1);
+      setRefreshKey((prev) => prev + 1);
       return { success: true };
     }
     return response;
@@ -40,17 +42,19 @@ export default function AlarmPage() {
             label: "تابع",
             type: "select",
             required: true,
-            options: getFunctionList.data?.map((func) => ({
-              label: func.name,
-              value: func.id,
-            })) || [],
-          },
+            options:
+              getFunctionList.data?.map((func) => ({
+                label: func.name,
+                value: func.id,
+              })) || [],
+            },
           {
             name: "device",
             label: "دستگاه",
             type: "select",
             required: true,
-            options: getDeviceList.data?.map((device) => ({
+            options:
+            getDeviceList.data?.map((device) => ({
               label: device.name,
               value: device.id,
             })) || [],
@@ -60,16 +64,44 @@ export default function AlarmPage() {
             label: "نوع",
             type: "select",
             required: true,
-            options: getDataTypeList.data?.map((dataType) => ({
-              label: dataType.name,
-              value: dataType.id,
-            })) || [],
+            options:
+              getDataTypeList.data?.map((dataType) => ({
+                label: dataType.name,
+                value: dataType.id,
+              })) || [],
+          },
+          {
+            name: "receiver",
+            label: "دریافت کننده",
+            type: "select",
+            required: true,
+            options:
+            getContactsList.data?.map((contact) => ({
+                label: contact.name,
+                value: contact.id,
+              })) || [],
+          },
+          {
+            name: "message_type",
+            label: "نوع پیغام",
+            type: "select",
+            required: true,
+            options: [
+              { label: "sms", value: "sms" },
+              { label: "email", value: "email" },
+            ],
+          },
+          {
+            name: "message",
+            label: "متن پیغام",
+            type: "text",
+            required: true,
           },
           {
             name: "description",
             label: "توضیحات",
             type: "text",
-            required: false,
+            required: true,
           },
         ]}
         onSubmit={handleCreateAlarm}

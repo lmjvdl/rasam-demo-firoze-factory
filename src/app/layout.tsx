@@ -45,7 +45,7 @@ export default function RootLayout({
       </head>
       <body>
         {/* <ErrorBoundary FallbackComponent={ErrorPage}> */}
-          <React.StrictMode>
+          {/* <React.StrictMode> */}
             <Providers>
               <ToastProvider />
               {isLoginPage ? (
@@ -93,7 +93,7 @@ export default function RootLayout({
                 </Stack>
               )}
             </Providers>
-          </React.StrictMode>
+          {/* </React.StrictMode> */}
         {/* </ErrorBoundary> */}
       </body>
     </html>
