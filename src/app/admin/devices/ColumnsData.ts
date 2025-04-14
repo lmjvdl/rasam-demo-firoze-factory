@@ -8,7 +8,7 @@ export const columns = () => [
     },
     {
         id: "product_line_part",
-        label: "بخش خط تولید",
+        label: "خط تولید جزئی",
         required: true,
         showOnTable: true,
         canEdit: true,

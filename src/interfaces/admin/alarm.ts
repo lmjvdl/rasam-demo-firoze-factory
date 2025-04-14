@@ -5,6 +5,9 @@ export interface Alarm {
     description: string;
     device_info: { id: number; name: string } | null;
     type_info: { id: number; name: string } | null;
+    message: string;
+    receiver_info: { id: number; name: string } | null;
+    message_type: string;
   }
   
 export interface AlarmTableProps {

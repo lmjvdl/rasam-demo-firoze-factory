@@ -12,6 +12,7 @@ export const columns = () => [
         required: true,
         showOnTable: true,
         canEdit: true,
+        optionsKey: "parameterList",
         isAdditionalAction: false,
     },
     {

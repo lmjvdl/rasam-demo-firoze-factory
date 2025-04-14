@@ -6,15 +6,15 @@ import alarmUrls from "@/utils/url/adminPanel/alarm/alarmUrl";
 import { extractId } from "@/utils/formatters/extractId";
 
 export type AlarmUpdateSchema = {
-  function: { id: number; name: string };
-  device: { id: number; name: string };
-  type: { id: number; name: string };
+  function_info: { id: number; name: string };
+  device_info: { id: number; name: string };
+  type_info: { id: number; name: string };
   description: string;
   id: number;
   name: string;
   message_type: string;
   message: string;
-  receiver_info: string;
+  receiver_info: { id: number; name: string };
 }
 
 
@@ -23,14 +23,15 @@ const useUpdateAlarm = () => {
   const { showToast } = useToast();
 
   const updateAlarmMutation = useMutation<unknown, Error, AlarmUpdateSchema>({
-    mutationFn: async ({ id, function: func, device, type, ...updatedData }) => {
+    mutationFn: async ({ id, function_info, device_info, type_info, receiver_info, ...updatedData }) => {
       return fetchWithErrorWithAlarm(alarmUrls.editAlarm(id), {
         method: "PUT",
         body: JSON.stringify({
           ...updatedData,
-          function: extractId(func),
-          device: extractId(device),
-          type: extractId(type),
+          function: extractId(function_info),
+          device: extractId(device_info),
+          type: extractId(type_info),
+          receiver_info: receiver_info ? extractId(receiver_info) : null,
         }),
       });
     },

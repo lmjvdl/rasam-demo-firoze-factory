@@ -42,7 +42,10 @@ const responseSchema = z.object({
         name: z.string(),
         description: z.string(),
         message_type: z.string(),
-        receiver_info: z.string(),
+        receiver_info: z.object({
+          id: z.number(),
+          name: z.string(),
+        }).nullable(),
         message: z.string(),
         device_info: z.object({
           id: z.number(),
@@ -76,7 +79,7 @@ function sanitizer(pollutedData: unknown) {
       function: item.function_info ? item.function_info : { id: 0, name: "نامشخص" },
       device: item.device_info ? item.device_info : { id: 0, name: "نامشخص" },
       type: item.type_info ? item.type_info : { id: 0, name: "نامشخص" },
-      receiver_info: item.receiver_info === null ? "اطلاعات ندارد" : item.receiver_info,
+      receiver_info: item.receiver_info ? item.receiver_info : { id: 0, name: "نامشخص" },
     }));
 
     return { ...refinedData, data: { ...refinedData.data, results: transformedResults } };

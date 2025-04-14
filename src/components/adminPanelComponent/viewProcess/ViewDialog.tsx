@@ -44,7 +44,7 @@ const ViewDialog: React.FC<ViewDialogProps> = ({
     <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm">
       <DialogTitle>نمایش جزئیات</DialogTitle>
       <DialogContent>
-        {titles?.filter(column => column.showOnTable !== false && !column.isActionColumn).map(column => (
+        {titles?.filter(column => !column.isActionColumn).map(column => (
           <div key={column.id} style={{ marginBottom: 10 }}>
             <strong>{column.label}:</strong> {renderValue(column.id, rowData[column.id])}
           </div>
