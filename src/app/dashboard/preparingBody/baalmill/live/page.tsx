@@ -5,19 +5,17 @@ import { Container, Grid } from "@mui/material";
 import useBaalMillQuery from "./useBaalMill";
 
 export default function BallMills() {
-  const initialDataByQuery = useBaalMillQuery(4);
-  const { devices } = useWebSocket<BaalMillLiveSchema>(4);
+  const { data: initialData, isLoading, isError } = useBaalMillQuery(4);
+  const { devices } = useWebSocket<BaalMillLiveSchema>(4, initialData || []);
 
-  const mergedDevices = initialDataByQuery?.data.map((device) => {
-    const liveDevice = devices.find((d) => d.device === device.device);
-    return liveDevice ? { ...device, ...liveDevice } : device;
-  });
+  if (isLoading) return <div>Loading...</div>;
+  if (isError) return <div>Error loading data</div>;
 
   return (
     <Container sx={{ minWidth: "100%", overflowY: "auto" }}>
       <Grid container spacing={3} marginBlock={3}>
-        {mergedDevices?.map((device) => (
-          <Grid item xs={12} sm={6} md={2.5} key={device.device}>
+        {devices?.map((device) => (
+          <Grid item xs={12} sm={6} md={2.5} key={`device-${device.device}-${device.time}`}>
             <BaalMillCard {...device} />
           </Grid>
         ))}

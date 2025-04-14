@@ -2,22 +2,24 @@ import { FanSprayLiveSchema } from "@/interfaces/preparingBody/live";
 import { z } from "zod";
 
 export const fanSprayInitialDataQuery = {
-  online: false,
-  device: "",
-  time: "0", 
+  online: "off",
+  device: 0,
+  time: 0, 
   product_line_part: 0,
+  device_code: "",
   data: {
-    current: 0
+    current: 0,
   },
 } as const;
 
 export const arrayOfFanSpray = z.object({
   data: z.array(
     z.object({
-      device: z.string(),
+      device: z.number(),
+      device_code: z.string(),
       product_line_part: z.number(),
       time: z.number(),
-      online: z.boolean().nullable(),
+      online: z.string(),
       data: z.object({
         current: z.number(),
       }),
@@ -33,9 +35,10 @@ export function fanSpraySanitizer(rawData: unknown): FanSprayLiveSchema[] {
 
   if (serverSchema.success) {
     return serverSchema.data.data.map((item) => ({
-      online: item.online === true,
+      online: item.online,
       device: item.device,
-      time: String(item.time),
+      device_code: item.device_code,
+      time: item.time,
       product_line_part: item.product_line_part,
       data: {
         current: item.data.current,
