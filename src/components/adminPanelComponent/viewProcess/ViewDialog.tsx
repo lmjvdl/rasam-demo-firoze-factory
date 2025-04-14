@@ -1,30 +1,6 @@
 import React from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material';
 
-interface ViewDialogProps {
-  open: boolean;
-  onClose: () => void;
-  rowData: any;
-  titles: Array<{
-    id: string;
-    label: string;
-    required?: boolean;
-    showOnTable?: boolean;
-    canEdit?: boolean;
-    isAdditionalAction?: boolean;
-    isMultiSelect?: boolean;
-    isIconSelect?: boolean; 
-    optionsKey?: string;
-    isSingleSelect?: boolean;
-    isActionColumn?: boolean;
-  }>;
-  booleanAttributeName?: string;
-  falseLabel?: string;
-  trueLabel?: string;
-  arrayAttributes?: Record<string, string>;
-  objectAttributes?: string[]; // ویژگی‌های آبجکت که مقدار name آن‌ها باید نمایش داده شود
-}
-
 const ViewDialog: React.FC<ViewDialogProps> = ({ 
   open, 
   onClose, 
@@ -39,29 +15,38 @@ const ViewDialog: React.FC<ViewDialogProps> = ({
   if (!rowData || typeof rowData !== 'object') return null;
 
   const renderValue = (key: string, value: any) => {
+    // Handle object attributes (e.g., function_info, device_info, type_info)
     if (objectAttributes.includes(key) && value && typeof value === 'object') {
-      return value.name || JSON.stringify(value);
+      return value.name || value.id || 'نامشخص';
     }
     
+    // Handle boolean values
     if (booleanAttributeName === key) {
       return value ? trueLabel : falseLabel;
     }
     
+    // Handle arrays (if any)
     if (Array.isArray(value)) {
       const attributeKey = arrayAttributes[key] || "name";
-      return value.map(item => (item && typeof item === 'object' ? item[attributeKey] || 'نامشخص' : item)).join(', ');
+      return value.map(item => {
+        if (item && typeof item === 'object') {
+          return item[attributeKey] || 'نامشخص';
+        }
+        return item;
+      }).join(', ');
     }
 
-    return value;
+    // Handle strings, numbers, etc.
+    return value !== null && value !== undefined ? String(value) : 'ندارد';
   };
 
   return (
     <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm">
       <DialogTitle>نمایش جزئیات</DialogTitle>
       <DialogContent>
-        {titles?.filter(column => column.showOnTable !== false && column.id !== "actions").map(column => (
+        {titles?.filter(column => !column.isActionColumn).map(column => (
           <div key={column.id} style={{ marginBottom: 10 }}>
-            <strong>{column.label}:</strong> {renderValue(column.id, rowData[column.id]) || 'ندارد'}
+            <strong>{column.label}:</strong> {renderValue(column.id, rowData[column.id])}
           </div>
         ))}
       </DialogContent>

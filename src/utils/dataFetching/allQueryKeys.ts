@@ -70,6 +70,7 @@ const allQueryKeys = {
       function_list: ["ADMIN_PANEL", "ALARM", "VIEW", "FUNCTION_LIST"],
       data_type_list: ["ADMIN_PANEL", "ALARM", "VIEW", "DATA_TYPE_LIST"],
       device_list: ["ADMIN_PANEL", "ALARM", "VIEW", "DEVICE_LIST"],
+      contacts_list: ["ADMIN_PANEL", "ALARM", "VIEW", "CONTACTS_LIST"],
     },
     alarmDetail: {
       list: ["ADMIN_PANEL", "ALARM_DETAIL", "VIEW"],

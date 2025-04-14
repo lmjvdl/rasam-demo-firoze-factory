@@ -1,6 +1,6 @@
 import { fetchWithErrorForCreate } from "@/utils/dataFetching/fetchWithError";
 import alarmUrls from "@/utils/url/adminPanel/alarm/alarmUrl";
-import { z } from "zod";
+import { string, z } from "zod";
 
 const alarmSchema = z.object({
   name: z.string(),
@@ -8,6 +8,9 @@ const alarmSchema = z.object({
   description: z.string(),
   device: z.number(),
   type: z.number(),
+  message: z.string(),
+  receiver: z.number(),
+  message_type: z.string(),
 });
 
 export const createNewAlarm = async (data: unknown) => {

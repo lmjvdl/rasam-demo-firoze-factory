@@ -3,7 +3,6 @@
 import React from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, Typography } from '@mui/material';
 
-
 const DeleteDialog: React.FC<DeleteDialogProps> = ({ 
   open, 
   onClose, 
@@ -15,35 +14,29 @@ const DeleteDialog: React.FC<DeleteDialogProps> = ({
 }) => {
   if (!rowData) return null;
 
+  const renderObjectValue = (obj: any) => {
+    if (!obj) return '--';
+    if (typeof obj === 'string' || typeof obj === 'number') return obj;
+    if (obj.name) return obj.name;
+    if (obj.id) return `#${obj.id}`;
+    if (obj.label) return obj.label;
+    if (obj.value) return obj.value;
+    return JSON.stringify(obj);
+  };
+
   const renderArrayValue = (array: any[], attributeKey: string) => {
     if (!array || array.length === 0) return 'هیچ موردی وجود ندارد';
     
     return array
-      .map(item => {
-        if (attributeKey && typeof item === 'object' && item !== null) {
-          return item[attributeKey] || 'نامشخص';
-        }
-        if (typeof item === 'object' && item !== null && 'name' in item) {
-          return item.name;
-        }
-        if (typeof item === 'object' && item !== null && 'id' in item) {
-          return `#${item.id}`;
-        }
-        return item;
-      })
+      .map(item => renderObjectValue(item))
       .join(', ');
   };
 
   const renderValue = (key: string, value: any) => {
-    if (objectAttributes.includes(key) && value && typeof value === 'object') {
-      return value.name || JSON.stringify(value);
-    }
-    
-    if (Array.isArray(value)) {
-      const attributeKey = arrayAttributes[key] || "name";
-      return value.map(item => (item && typeof item === 'object' ? item[attributeKey] || 'نامشخص' : item)).join(', ');
-    }
-
+    if (value === null || value === undefined) return '--';
+    if (typeof value === 'boolean') return value ? 'فعال' : 'غیرفعال';
+    if (Array.isArray(value)) return renderArrayValue(value, arrayAttributes[key]);
+    if (typeof value === 'object') return renderObjectValue(value);
     return value;
   };
 
@@ -51,15 +44,6 @@ const DeleteDialog: React.FC<DeleteDialogProps> = ({
     return titles?.filter((column: any) => column.showOnTable !== false && !column.isActionColumn).map((column: any) => {
       const key = column.id;
       if (!key || !rowData.hasOwnProperty(key)) return null;
-
-      let value = rowData[key];
-
-      if (typeof value === 'boolean') {
-        value = value ? 'فعال' : 'غیرفعال';
-      }
-      else if (Array.isArray(value)) {
-        value = renderArrayValue(value, arrayAttributes[key]);
-      }
 
       return (
         <Typography 
@@ -72,7 +56,7 @@ const DeleteDialog: React.FC<DeleteDialogProps> = ({
           <strong style={{ minWidth: '120px', display: 'inline-block' }}>
             {column.label}:
           </strong>
-          <span>{renderValue(key, value) || '--'}</span>
+          <span>{renderValue(key, rowData[key])}</span>
         </Typography>
       );
     });

@@ -28,7 +28,7 @@ export default function ProductLinePartPage() {
         buttonText="افزودن خط تولید جزئی جدید"
         formFields={[
           {
-            name: "product_line",
+            name: "product_line_info",
             label: "خط تولید",
             type: "select",
             required: true,

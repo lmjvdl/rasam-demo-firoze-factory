@@ -3,7 +3,7 @@ import productLineUrls from "@/utils/url/adminPanel/productLine/productLineUrl";
 import { z } from "zod";
 
 const productLineSchema = z.object({
-  company: z.number(),
+  company_info: z.number(),
   name: z.string(),
   code: z.string(),
   icon: z.number().nullable().optional(),
@@ -12,7 +12,7 @@ const productLineSchema = z.object({
 export const createNewProductLine = async (data: any) => {
   const dataWithCompanyAsNumber = {
     ...data,
-    company: Number(data.company),
+    company_info: Number(data.company_info),
   };
 
   const validationResult = productLineSchema.safeParse(dataWithCompanyAsNumber);

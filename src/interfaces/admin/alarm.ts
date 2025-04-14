@@ -1,10 +1,13 @@
 export interface Alarm {
     id: number;
     name: string;
-    function: { id: number; name: string } | null;
+    function_info: { id: number; name: string } | null;
     description: string;
-    device: { id: number; name: string } | null;
-    type: { id: number; name: string } | null;
+    device_info: { id: number; name: string } | null;
+    type_info: { id: number; name: string } | null;
+    message: string;
+    receiver_info: { id: number; name: string } | null;
+    message_type: string;
   }
   
 export interface AlarmTableProps {

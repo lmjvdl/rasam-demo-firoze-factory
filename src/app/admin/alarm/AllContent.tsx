@@ -14,6 +14,7 @@ import DeleteDialog from "@/components/adminPanelComponent/viewProcess/DeleteDia
 import useFunctionQuery from "./hooks/useFunctionList";
 import useDeviceQuery from "./hooks/useDeviceList";
 import useDataTypeQuery from "./hooks/useDataTypeList";
+import useContactsQuery from "./hooks/useContactsList";
 
 const AllContentAlarm: React.FC = () => {
   const [data, setData] = useState<ResponseSchema>(PrevDataInitial);
@@ -50,20 +51,26 @@ const AllContentAlarm: React.FC = () => {
         label: dataType.name,
       }))
     : [];
+    const contactsList = useContactsQuery().data
+    ? useContactsQuery().data.map((contact) => ({
+        id: contact.id,
+        value: contact.id, 
+        label: contact.name, 
+      }))
+    : [];
 
-    useEffect(() => {
-      getList.mutate(
-        { page: pageNumber + 1, page_size: 8, url: nextPage },
-        {
-          onSuccess: (information) => {
-            setData(information);
-            setTotalData(information.data.count);
-            setNextPage(information.data.next);
-          },
-        }
-      );
-    }, [pageNumber]);
-    
+  useEffect(() => {
+    getList.mutate(
+      { page: pageNumber + 1, page_size: 8, url: nextPage },
+      {
+        onSuccess: (information) => {
+          setData(information);
+          setTotalData(information.data.count);
+          setNextPage(information.data.next);
+        },
+      }
+    );
+  }, [pageNumber]);
 
   const handleSaveEdit = (updatedRow: AlarmUpdateSchema) => {
     setData((prevData) => {
@@ -127,7 +134,6 @@ const AllContentAlarm: React.FC = () => {
     }
   };
 
-
   const dynamicColumns = columns();
   const filteredColumnsForEdit = dynamicColumns.filter((col) => col.canEdit);
 
@@ -149,6 +155,7 @@ const AllContentAlarm: React.FC = () => {
         onClose={() => setViewOpen(false)}
         rowData={selectedRow}
         titles={dynamicColumns}
+        objectAttributes={["function_info", "device_info", "type_info", "receiver_info"]}
       />
       <EditDialog
         open={editOpen}
@@ -156,8 +163,8 @@ const AllContentAlarm: React.FC = () => {
         onSave={handleSaveEdit}
         rowData={selectedRow}
         titles={filteredColumnsForEdit}
-        extraOptions={{ functionList, deviceList, dataTypeList }}
-        objectAttributes={['function', 'device', 'type']}
+        extraOptions={{ functionList, deviceList, dataTypeList, contactsList }}
+        objectAttributes={["function_info", "device_info", "type_info", "receiver_info"]}
       />
       <DeleteDialog
         open={deleteOpen}

@@ -38,21 +38,28 @@ const responseSchema = z.object({
     previous: z.nullable(z.string()),
     results: z.array(
       z.object({
-        description: z.string(),
-        device: z.object({
-          id: z.number(),
-          name: z.string(),
-        }),
-        function: z.object({
-          id: z.number(),
-          name: z.string(),
-        }),
         id: z.number(),
         name: z.string(),
-        type: z.object({
+        description: z.string(),
+        message_type: z.string(),
+        receiver_info: z.object({
+          id: z.number(),
+          name: z.string(),
+        }).nullable(),
+        message: z.string(),
+        device_info: z.object({
           id: z.number(),
           name: z.string(),
         }),
+        function_info: z.object({
+          id: z.number(),
+          name: z.string(),
+        }),
+        type_info: z.object({
+          id: z.number(),
+          name: z.string(),
+        }),
+
       })
     ),    
   }),
@@ -69,9 +76,10 @@ function sanitizer(pollutedData: unknown) {
 
     const transformedResults = refinedData.data.results.map((item) => ({
       ...item,
-      function: item.function ? item.function : { id: 0, name: "نامشخص" },
-      device: item.device ? item.device : { id: 0, name: "نامشخص" },
-      type: item.type ? item.type : { id: 0, name: "نامشخص" },
+      function: item.function_info ? item.function_info : { id: 0, name: "نامشخص" },
+      device: item.device_info ? item.device_info : { id: 0, name: "نامشخص" },
+      type: item.type_info ? item.type_info : { id: 0, name: "نامشخص" },
+      receiver_info: item.receiver_info ? item.receiver_info : { id: 0, name: "نامشخص" },
     }));
 
     return { ...refinedData, data: { ...refinedData.data, results: transformedResults } };

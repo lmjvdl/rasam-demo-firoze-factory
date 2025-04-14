@@ -3,7 +3,7 @@ import productLinePartUrls from "@/utils/url/adminPanel/productLinePart/productL
 import { z } from "zod";
 
 const productLinePartSchema = z.object({
-  product_line: z.number(),
+  product_line_info: z.number(),
   name: z.string(),
   code: z.string(),
   icon: z.number().nullable().optional(),
@@ -12,7 +12,7 @@ const productLinePartSchema = z.object({
 export const createNewProductLinePart = async (data: any) => {
   const dataWithProductLineAsNumber = {
     ...data,
-    product_line: Number(data.product_line),
+    product_line_info: Number(data.product_line_info),
   };
   const validationResult = productLinePartSchema.safeParse(
     dataWithProductLineAsNumber
