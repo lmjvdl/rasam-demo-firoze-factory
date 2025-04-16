@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import ReconnectingWebSocket from "reconnecting-websocket";
 import toast from "react-hot-toast";
+import WsUrl from "@/utils/dataFetching/wsUrl";
 
 const useWebSocket = <T extends { device: number }>(id: number, initialDevices: T[] = []) => {
   const [devices, setDevices] = useState<T[]>([]);
@@ -10,7 +11,9 @@ const useWebSocket = <T extends { device: number }>(id: number, initialDevices: 
   }, [initialDevices]);
 
   useEffect(() => {
-    const wsUrl = `ws://192.168.210.28:8000/ws/admin/${id}/`;
+    const wsUrlInstance = WsUrl.getInstance();
+    const wsUrl = `${wsUrlInstance.origin}${id}/`;
+    
     const ws = new ReconnectingWebSocket(wsUrl);
 
     ws.onmessage = (event) => {

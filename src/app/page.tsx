@@ -10,7 +10,7 @@ export default function HomePage() {
   const router = useRouter();
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
   const isAdmin = useAuthStore((state) => state.isAdmin);
-  
+ 
   useEffect(() => {
     if (isLoggedIn) {
       router.replace(isAdmin ? "/admin/user" : "/dashboard");
