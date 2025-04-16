@@ -3,13 +3,13 @@ import useWebSocket from "@/hooks/socket/useSocket";
 import { FanSprayLiveSchema } from "@/interfaces/preparingBody/live";
 import { Container, Grid } from "@mui/material";
 import useFanSprayQuery from "./useFanSpray";
+import LoadingScreen from "@/components/loadingScreen/LoadingScreen";
 
 export default function BallMills() {
-  const { data: initialData, isLoading, isError } = useFanSprayQuery(4);
+  const { data: initialData, isLoading } = useFanSprayQuery(4);
   const { devices } = useWebSocket<FanSprayLiveSchema>(4, initialData || []);
 
-  if (isLoading) return <div>Loading...</div>;
-  if (isError) return <div>Error loading data</div>;
+  if (isLoading) return <LoadingScreen />;
 
   return (
     <Container sx={{ minWidth: "100%", overflowY: "auto" }}>

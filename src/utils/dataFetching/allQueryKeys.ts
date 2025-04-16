@@ -121,6 +121,16 @@ const allQueryKeys = {
         report: {
 
         }
+      },
+    },
+    chamfer: {
+      chamfer: {
+        live: {
+          liveData: ["USER_PANEL", "CHAMFER", "LIVE"]
+        },
+        report: {
+
+        }
       }
     }
   }

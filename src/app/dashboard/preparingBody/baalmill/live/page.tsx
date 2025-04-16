@@ -3,13 +3,13 @@ import useWebSocket from "@/hooks/socket/useSocket";
 import { BaalMillLiveSchema } from "@/interfaces/preparingBody/live";
 import { Container, Grid } from "@mui/material";
 import useBaalMillQuery from "./useBaalMill";
+import LoadingScreen from "@/components/loadingScreen/LoadingScreen";
 
 export default function BallMills() {
-  const { data: initialData, isLoading, isError } = useBaalMillQuery(4);
+  const { data: initialData, isLoading } = useBaalMillQuery(4);
   const { devices } = useWebSocket<BaalMillLiveSchema>(4, initialData || []);
 
-  if (isLoading) return <div>Loading...</div>;
-  if (isError) return <div>Error loading data</div>;
+  if (isLoading) return <LoadingScreen />;
 
   return (
     <Container sx={{ minWidth: "100%", overflowY: "auto" }}>

@@ -20,7 +20,7 @@ export const UseItemInfoUserPanel = () => {
         icon: "PowerSupply",
         to: "/dashboard/powerSupply",
       },
-      چمفر: { text: "چمفر", icon: "Chamfer", to: "/chamfer" },
+      چمفر: { text: "چمفر", icon: "Chamfer", to: "/dashboard/chamfer" },
     }),
     []
   );

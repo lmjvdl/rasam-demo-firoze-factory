@@ -24,15 +24,20 @@ const lightObject: ColorSystemOptions = {
     },
     text: {
       primary: "#333333",
-      secondary: "#A7C4C2"
-    }
+      secondary: "#A7C4C2",
+    },
+    success: {
+      main: "#FFFFFF",
+    },
+    error: {
+      main: "#EDEDED"
+    }                                                     
   },
 };
 const darkObject: ColorSystemOptions = {
   palette: {
     primary: {
       main: "#0FBDA2",
-      
     },
     secondary: {
       main: "#F7F7F7",
@@ -54,6 +59,12 @@ const darkObject: ColorSystemOptions = {
     text: {
       primary: "#fff",
       secondary: "#F7F7F7"
+    },
+    success: {
+      main: "#4C4C4C"
+    },
+    error: {
+      main: "#3A3A3A"
     }
   },
 };

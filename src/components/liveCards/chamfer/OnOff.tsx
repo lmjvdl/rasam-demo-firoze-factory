@@ -1,17 +1,21 @@
+import { recognizeState } from "@/utils/formatters/statesLiveCard";
 import { Button, Typography } from "@mui/material";
 
-const OnOff = ({ text = "خاموش", on }: { text?: string; on?: boolean }) => {
+const OnOff = ({ on }: { on: string }) => {
+  const state = on === "on" ? "on" : on === "off" ? "off" : "unknown";
   return (
     <Button
       component={Typography}
+      color={
+        state === "on" ? "primary" : state === "off" ? "error" : "secondary"
+      }
       disableFocusRipple
       disableTouchRipple
       disableRipple
       disableElevation
       variant="outlined"
-      disabled={!on}
     >
-      {text}
+      {recognizeState(on)}
     </Button>
   );
 };
