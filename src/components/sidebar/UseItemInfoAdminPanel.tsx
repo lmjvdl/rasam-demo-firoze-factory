@@ -50,7 +50,12 @@ export const UseItemInfoAdminPanel = () => {
         text: "پارامتر تابع",
         icon: "FunctionParameter",
         to: "/admin/functionParameter"
-      }
+      },
+      "تاریخچه پیامک ها": {
+        text: "تاریخچه پیامک ها",
+        icon: "SmsLog",
+        to: "/admin/smsLog"
+      },
     }),
     []
   );

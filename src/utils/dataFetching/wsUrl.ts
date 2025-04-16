@@ -1,5 +1,5 @@
 export const isProduction = process.env.NODE_ENV === "development";
-const local = "ws://dev.rasamiot.com/ws/admin/";
+const local = "wss://dev.rasamiot.com/ws/admin/";
 
 export default class WsUrl {
     private static instance: WsUrl;
@@ -9,7 +9,7 @@ export default class WsUrl {
     protected constructor() {
       this.origin = isProduction
         ? local
-        : `ws://${new URL(window.location.href).host}`;
+        : `wss://${new URL(window.location.href).host}`;
     }
   
     public static getInstance(): WsUrl {

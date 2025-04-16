@@ -24,7 +24,8 @@ import {
   Alarm,
   AlarmDetail,
   Contacts,
-  Operation
+  Operation,
+  SmsLog
 } from "../../../public/assets/logo/ItemMenuAdmin";
 // **************************** Importing the (LOGOS) of all existing factories ****************************
 import { RasamDark, RasamLight, Setare } from "../../../public/assets/logo/company";
@@ -73,6 +74,7 @@ export const iconMapForAdminPanel: Record<string, React.FC<IconProps>> = {
   AlarmDetail: AlarmDetail,
   Contacts: Contacts,
   Operation: Operation,
+  SmsLog: SmsLog
   // Add other mappings as necessary
 };
 // *******************************************************************************

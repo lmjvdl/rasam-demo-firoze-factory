@@ -93,7 +93,16 @@ const allQueryKeys = {
       list: ["ADMIN_PANEL", "CONTACTS", "VIEW"],
       delete: ["ADMIN_PANEL", "CONTACTS", "DELETE"],
       update: ["ADMIN_PANEL", "CONTACTS", "UPDATE"],
+    },
+    operation: {
+      list: ["ADMIN_PANEL", "OPERATION", "VIEW"],
+      delete: ["ADMIN_PANEL", "OPERATION", "DELETE"],
+      update: ["ADMIN_PANEL", "OPERATION", "UPDATE"],
+    },
+    smsLog: {
+      list: ["ADMIN_PANEL", "SMS_LOG", "VIEW"]
     }
+
   },
   userPanel: {
     preparingBody: {
