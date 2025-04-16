@@ -1,7 +1,7 @@
 export interface FunctionParameter {
     id: number; 
     name: string;
-    function: { id: number; name: string } | null;
+    function_info: { id: number; name: string } | null;
 }
   
 export interface FunctionParameterTableProps {

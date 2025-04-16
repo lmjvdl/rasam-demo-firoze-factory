@@ -132,7 +132,7 @@ const AllContentFunctionParameter: React.FC = () => {
         onClose={() => setViewOpen(false)}
         rowData={selectedRow}
         titles={dynamicColumns}
-        objectAttributes={["function"]}
+        objectAttributes={["function_info"]}
       />
       <EditDialog
         open={editOpen}

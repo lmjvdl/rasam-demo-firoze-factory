@@ -40,7 +40,7 @@ const responseSchema = z.object({
       z.object({
         id: z.number(),
         name: z.string(),
-        function: z.object({
+        function_info: z.object({
           id: z.number(),
           name: z.string(),
         }),

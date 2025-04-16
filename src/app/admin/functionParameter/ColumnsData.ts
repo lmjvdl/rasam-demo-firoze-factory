@@ -17,7 +17,7 @@ export const columns = () => [
         isAdditionalAction: false,
     },
     {
-        id: "function",
+        id: "function_info",
         label: "تابع",
         required: true,
         showOnTable: true,
@@ -25,7 +25,7 @@ export const columns = () => [
         isSingleSelect: true,
         canEdit: true,
         isAdditionalAction: false,
-        render: (row: FunctionParameter) => row?.function?.name || "نامشخص",
+        render: (row: FunctionParameter) => row?.function_info?.name || "نامشخص",
     },
     {
         id: "actions",
