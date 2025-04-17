@@ -139,6 +139,7 @@ const AllContentAlarmDetail: React.FC = () => {
         onClose={() => setViewOpen(false)}
         rowData={selectedRow}
         titles={dynamicColumns}
+        objectAttributes={["alarm_info", "parameter_info"]}
       />
       <EditDialog
         open={editOpen}
@@ -147,6 +148,7 @@ const AllContentAlarmDetail: React.FC = () => {
         rowData={selectedRow}
         titles={filteredColumnsForEdit}
         extraOptions={{ alarmList, parameterList }}
+        objectAttributes={["alarm", "parameter"]}
       />
       <DeleteDialog
         open={deleteOpen}

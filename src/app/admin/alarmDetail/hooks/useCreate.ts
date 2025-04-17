@@ -3,20 +3,21 @@ import alarmDetailUrls from "@/utils/url/adminPanel/alarmDetail/alarmDetailUrl";
 import { z } from "zod";
 
 const alarmDetailSchema = z.object({
-  parameter: z.number().int(),
-  value: z.number().int(),
-  alarm: z.number().int(),
+  parameter: z.number(),
+  value: z.string(),
+  alarm: z.number(),
 });
 
 export const createNewAlarmDetail = async (data: unknown) => {
   const validationResult = alarmDetailSchema.safeParse(data);
-
+  
   if (!validationResult.success) {
     return { success: false, error: validationResult.error.format() };
   }
 
   const processedData = {
     ...validationResult.data,
+    value: Number(validationResult.data.value)
   };
 
   try {

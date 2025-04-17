@@ -30,7 +30,7 @@ export const UseItemInfoUserPanel = () => {
       تنظیمات: {
         text: "تنظیمات",
         icon: "Settings",
-        to: "/settings",
+        to: "/dashboard/settings",
         onClick: () => {},
       },
       خروج: {

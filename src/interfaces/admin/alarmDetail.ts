@@ -1,7 +1,7 @@
-interface AlarmDetail {
+export interface AlarmDetail {
     id: number;
-    alarm: number;
-    parameter: number;
+    alarm_info: { id: number; name: string } | null;
+    parameter_info: { id: number; name: string } | null;
     value: number;
 }
   

@@ -6,9 +6,9 @@ import alarmDetailUrls from "@/utils/url/adminPanel/alarmDetail/alarmDetailUrl";
 
 export type AlarmDetailUpdateSchema = {
   id: number;
-  parameter: number;
+  parameter: { id: number; name: string };
   value: number;
-  alarm: number;
+  alarm: { id: number; name: string };
 };
 
 const useUpdateAlarmDetail = () => {

@@ -39,9 +39,15 @@ const responseSchema = z.object({
     results: z.array(
       z.object({
         id: z.number(),
-        parameter: z.number(),
+        parameter_info: z.object({
+          id: z.number(),
+          name: z.string(),
+        }),
         value: z.number(),
-        alarm: z.number(),
+        alarm_info: z.object({
+          id: z.number(),
+          name: z.string(),
+        }),
       })
     ),
   }),

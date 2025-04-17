@@ -1,3 +1,6 @@
+import { AlarmDetail } from "@/interfaces/admin/alarmDetail";
+
+
 export const columns = () => [
     {
         id: "id",
@@ -7,13 +10,26 @@ export const columns = () => [
         isAdditionalAction: false,
     },
     {
-        id: "parameter",
+        id: "parameter_info",
         label: "پارامتر",
         required: true,
         showOnTable: true,
         canEdit: true,
+        isSingleSelect: true,
         optionsKey: "parameterList",
         isAdditionalAction: false,
+        render: (row: AlarmDetail) => row?.parameter_info?.name || "نامشخص",
+    },
+    {
+        id: "alarm_info",
+        label: "هشدار",
+        required: true,
+        showOnTable: true,
+        canEdit: true,
+        isSingleSelect: true,
+        optionsKey: "alarmList",
+        isAdditionalAction: false,
+        render: (row: AlarmDetail) => row?.alarm_info?.name || "نامشخص",
     },
     {
         id: "value",
