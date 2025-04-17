@@ -8,8 +8,8 @@ interface TabsSectionProps {
   selectedTab: number;
   setSelectedTab: Dispatch<SetStateAction<number>>;
   tabLabels: string[];
-  reportOptions: { [key: number]: string[] };
-  onReportChange: (report: string) => void;
+  reportOptions?: { [key: number]: string[] };
+  onReportChange?: (report: string) => void;
   children: React.ReactNode;
 }
 
@@ -23,40 +23,42 @@ export default function TabsSection({
 }: TabsSectionProps) {
   return (
     <Box width="100%">
-      <Box sx={{ 
-        display: "flex", 
-        justifyContent: "space-between", 
-        alignItems: "center", 
-        mb: 4,
-        padding: '16px 16px 0 16px',
-        gap: 2 
-      }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          mb: 4,
+          padding: "16px 16px 0 16px",
+          gap: 2,
+        }}
+      >
         <Tabs
           value={selectedTab}
           onChange={(_, newValue) => setSelectedTab(newValue)}
-          sx={{ 
+          sx={{
             flexGrow: 1,
-            minHeight: '48px', 
-            '& .MuiTabs-flexContainer': {
-              gap: 1
+            minHeight: "48px",
+            "& .MuiTabs-flexContainer": {
+              gap: 1,
             },
           }}
         >
           {tabLabels.map((label, index) => (
-            <Tab sx={{color: "text.primary"}} key={index} label={label} />
+            <Tab sx={{ color: "text.primary" }} key={index} label={label} />
           ))}
         </Tabs>
-        <ReportsDropdown
-          selectedTab={String(selectedTab)}
-          reportOptions={reportOptions[selectedTab]}
-          label="انتخاب گزارش"
-          onReportChange={onReportChange}
-        />
+        {reportOptions && reportOptions[selectedTab] && (
+          <ReportsDropdown
+            selectedTab={String(selectedTab)}
+            reportOptions={reportOptions[selectedTab]}
+            label="انتخاب گزارش"
+            onReportChange={onReportChange || ((report: string) => {})}
+          />
+        )}
       </Box>
 
-      <Box className="mt-4">
-        {children}
-      </Box>
+      <Box className="mt-4">{children}</Box>
     </Box>
   );
 }

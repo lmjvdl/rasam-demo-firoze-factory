@@ -1,5 +1,5 @@
 import React from "react";
-import OnOff from "./OnOff";
+import OnOff from "../OnOff";
 import { Grid, Paper, Stack, Typography } from "@mui/material";
 
 const Chamfer = ({
@@ -28,6 +28,7 @@ const Chamfer = ({
         <Stack
           flexDirection={"row"}
           width={"100%"}
+          marginX={"10px"}
           height={"fit-content"}
           alignItems={"center"}
           justifyContent={"space-between"}

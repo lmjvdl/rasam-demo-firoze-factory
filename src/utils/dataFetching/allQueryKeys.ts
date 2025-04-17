@@ -132,8 +132,18 @@ const allQueryKeys = {
 
         }
       }
+    },
+    powerSupply: {
+      powerSupply: {
+        live: {
+          liveData: ["USER_PANEL", "POWER_SUPPLY", "LIVE"]
+        },
+        report: {
+
+        }
+      }
     }
-  }
+  },
 } as const;
 
 export default allQueryKeys;

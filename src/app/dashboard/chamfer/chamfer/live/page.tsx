@@ -8,8 +8,8 @@ import useChamferQuery from "./useChamfer";
 import LoadingScreen from "@/components/loadingScreen/LoadingScreen";
 
 export default function Chamfer() {
-  const { data: initialData, isLoading } = useChamferQuery(5);
-  const { devices } = useWebSocket<ChamferLiveSchema>(5, initialData || []);
+  const { data: initialData, isLoading } = useChamferQuery(9);
+  const { devices } = useWebSocket<ChamferLiveSchema>(9, initialData || []);
 
   if (isLoading) return <LoadingScreen />;
 

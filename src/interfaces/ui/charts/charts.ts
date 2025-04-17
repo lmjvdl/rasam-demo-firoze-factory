@@ -1,61 +1,77 @@
-interface Dataset {
-    label?: string;
-    data: number[];
-    backgroundColor?: string[];
-    borderColor?: string[];
-    borderWidth?: number;
-    fill?: boolean;
-}
-  
-  interface Options {
-    responsive?: boolean;
-    plugins?: {
-      legend?: {
-        display?: boolean;
-      };
-      title?: {
-        display?: boolean;
-        text?: string;
-      };
-    };
-    scales?: {
-      x?: {
-        border?: {
-          display?: boolean;
-        };
-        grid?: {
-          display?: boolean;
-          drawOnChartArea?: boolean;
-          drawTicks?: boolean;
-        };
-      };
-      y?: {
-        border?: {
-          display?: boolean;
-        };
-        grid?: {
-          display?: boolean;
-          drawOnChartArea?: boolean;
-          drawTicks?: boolean;
-        };
-      };
-    };
-}
-  
-export  interface ChartProps {
-    data: {
-      labels?: string[];
-      datasets: Dataset[];
-    };
-    chartTitle: string;
-    options?: Options;
-    type: "bar" | "line";
-    width?: string;
+// src/interfaces/ui/charts/charts.ts
+import { ChartData, ChartType } from "chart.js";
+
+export interface Dataset {
+  label: string;
+  data: number[];
+  backgroundColor?: string;
+  borderColor?: string;
+  borderWidth?: number;
+  tension?: number;
+  fill?: boolean;
+  pointRadius?: number;
 }
 
-export interface DynamicChartProps {
+export interface ChartOptions {
+  responsive?: boolean;
+  maintainAspectRatio?: boolean;
+  animation?: {
+    duration?: number;
+  };
+  plugins?: {
+    legend?: {
+      display?: boolean;
+      position?: 'top' | 'left' | 'right' | 'bottom' | 'center';
+      labels?: {
+        usePointStyle?: boolean;
+      };
+    };
+    tooltip?: {
+      callbacks?: {
+        label?: (context: any) => string;
+      };
+    };
+    title?: {
+      display?: boolean;
+      text?: string;
+      font?: {
+        size?: number;
+      };
+    };
+  };
+  scales?: {
+    x?: {
+      display?: boolean;
+      border?: {
+        display?: boolean;
+      };
+      grid?: {
+        display?: boolean;
+        drawOnChartArea?: boolean;
+        drawTicks?: boolean;
+      };
+    };
+    y?: {
+      display?: boolean;
+      beginAtZero?: boolean;
+      border?: {
+        display?: boolean;
+      };
+      grid?: {
+        display?: boolean;
+        drawOnChartArea?: boolean;
+        drawTicks?: boolean;
+      };
+    };
+  };
+}
+
+
+export interface ChartProps {
+  data: ChartData<ChartType>;
+  options?: ChartOptions;
+  type: ChartType;
   chartTitle: string;
-  data: any;
-  options?: any;
-  type?: "bar" | "line";
+  width?: string;
+  height?: string;
 }

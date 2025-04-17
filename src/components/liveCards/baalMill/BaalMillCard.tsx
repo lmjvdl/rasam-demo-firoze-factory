@@ -8,11 +8,11 @@ import {
   Divider,
   useTheme,
 } from "@mui/material";
+import OnOff from "../OnOff";
 
 export default function BaalMillCard(container: BaalMillLiveSchema) {
   const theme = useTheme();
 
-  // مقدار پیش‌فرض برای container و data
   const safeContainer = container || {};
   const safeData = safeContainer.data || {
     current: 0,
@@ -37,13 +37,7 @@ export default function BaalMillCard(container: BaalMillLiveSchema) {
           alignItems="center"
           sx={{ justifyContent: "space-between" }}>
           <Typography variant="h6">{safeContainer.device_code}</Typography>
-          <Button
-            disableElevation
-            variant="outlined"
-            color={safeContainer.online === "on" ? "success" : "inherit"}
-            sx={{ mr: 1 }}>
-            {safeContainer.online === "on" ? "روشن" : "خاموش"}
-          </Button>
+          <OnOff on={safeContainer.online} />
         </Box>
         <div
           style={{

@@ -5,9 +5,9 @@ import { Container, Grid } from "@mui/material";
 import useFanSprayQuery from "./useFanSpray";
 import LoadingScreen from "@/components/loadingScreen/LoadingScreen";
 
-export default function BallMills() {
-  const { data: initialData, isLoading } = useFanSprayQuery(4);
-  const { devices } = useWebSocket<FanSprayLiveSchema>(4, initialData || []);
+export default function FanSpary() {
+  const { data: initialData, isLoading } = useFanSprayQuery(5);
+  const { devices } = useWebSocket<FanSprayLiveSchema>(5, initialData || []);
 
   if (isLoading) return <LoadingScreen />;
 

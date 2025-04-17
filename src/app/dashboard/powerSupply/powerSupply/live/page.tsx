@@ -1,120 +1,39 @@
 "use client";
-import { Tabs, Tab, Box, Grid } from "@mui/material";
-import MajorChart from "@/components/chart/chartConfig/MajorChart";
-import React from "react";
-import MainCard from "@/components/customContiner/MainCard";
-import { DataType, TabPanelProps } from "@/interfaces/powerSupply/live";
 
+import { Container, Grid } from "@mui/material";
+import LoadingScreen from "@/components/loadingScreen/LoadingScreen";
+import usePowerSupplyQuery from "./usePowerSupply";
+import ChartContainer from "./chartContainer";
+import useWebSocket from "@/hooks/socket/useSocket";
 
-const TabPanel: React.FC<TabPanelProps> = ({
-  children,
-  value,
-  index,
-  ...other
-}) => {
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`tabpanel-${index}`}
-      aria-labelledby={`tab-${index}`}
-      {...other}
-    >
-      {value === index && <Box p={3}>{children}</Box>}
-    </div>
-  );
-};
+interface Props {
+  productLinePartId: number;
+}
 
-const ChartTabs: React.FC<{ data: DataType[] }> = ({ data }) => {
-  
-  const [value, setValue] = React.useState<number>(0);
-  const tabs = Object.keys(data[0].allowed_data);
+export default function PowerSupply({ productLinePartId }: Props) {
+  const { data: initialData, isLoading } =
+    usePowerSupplyQuery(productLinePartId);
+  const { devices } = useWebSocket(productLinePartId, initialData || []);
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-  };
+  if (isLoading) return <LoadingScreen />;
 
   return (
-    <MainCard sx={{ gap: 0, flexDirection: "column" }}>
-      <Tabs value={value} onChange={handleChange} aria-label="chart tabs">
-        {tabs.map((tab, index) => (
-          <Tab
-            key={tab}
-            label={data[0].allowed_data[tab]}
-            id={`tab-${index}`}
-          />
-        ))}
-      </Tabs>
-      {tabs.map((tab, index) => (
-        <TabPanel key={tab} value={value} index={index}>
-          <Grid container spacing={4}>
-            {data.map((device: DataType) => (
-              <Grid key={device.device_id} item xs={12} sm={6} md={4}>
-                <Box>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      marginBlock: "20px"
-                    }}
-                  >
-                    <h4>{device.device_name_fa}</h4>
-                    <Box
-                      sx={{
-                        backgroundColor: "#0B8E7A",
-                        paddingBlock: "2px",
-                        paddingInline: "10px",
-                        borderRadius: "10px",
-                      }}
-                    >
-                      {device.data.map((d) => d[tab])}
-                    </Box>
-                  </Box>
-                  <MajorChart
-                    type="line"
-                    chartTitle={device.device_name_fa}
-                    data={{
-                      datasets: [
-                        {
-                          label: device.allowed_data[tab],
-                          data: device.data.map((d) => d[tab]),
-                          backgroundColor: ["#0B8E7A"],
-                          borderColor: ["#0B8E7A"],
-                          borderWidth: 1,
-                          fill: true,
-                        },
-                      ],
-                    }}
-                    options={{
-                      responsive: true,
-                      plugins: {
-                        legend: {
-                          display: false,
-                        },
-                      },
-                      scales: {
-                        x: {
-                          grid: {
-                            display: false,
-                          },
-                        },
-                        y: {
-                          grid: {
-                            display: false,
-                          },
-                        },
-                      },
-                    }}
-                  />
-                </Box>
-              </Grid>
-            ))}
-          </Grid>
-        </TabPanel>
-      ))}
-    </MainCard>
-  );
-};
+    <Container sx={{ minWidth: "100%", overflowY: "auto" }}>
+      <Grid container spacing={4}>
+        {devices.map((device) => {
+          const formattedDevice = {
+            device_code: `Device ${device.device_code}`,
+            time: device.time,
+            data: device.data,
+          };
 
-export default ChartTabs;
+          return (
+            <Grid item xs={12} key={`device-${device.device}`}>
+              <ChartContainer device={formattedDevice} />
+            </Grid>
+          );
+        })}
+      </Grid>
+    </Container>
+  );
+}
