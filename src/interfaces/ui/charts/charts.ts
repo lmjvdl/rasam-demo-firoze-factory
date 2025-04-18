@@ -1,6 +1,3 @@
-// src/interfaces/ui/charts/charts.ts
-import { ChartData, ChartType } from "chart.js";
-
 export interface Dataset {
   label: string;
   data: number[];
@@ -9,7 +6,14 @@ export interface Dataset {
   borderWidth?: number;
   tension?: number;
   fill?: boolean;
-  pointRadius?: number;
+  pointRadius?: number; 
+  pointHoverRadius?: number;
+  borderRadius?: number;
+}
+
+export interface ChartData {
+  labels: string[];
+  datasets: Dataset[];
 }
 
 export interface ChartOptions {
@@ -67,11 +71,11 @@ export interface ChartOptions {
 }
 
 
-export interface ChartProps {
-  data: ChartData<ChartType>;
-  options?: ChartOptions;
-  type: ChartType;
-  chartTitle: string;
-  width?: string;
-  height?: string;
-}
+// export interface ChartProps {
+//   data: ChartData<ChartType>;
+//   options?: ChartOptions;
+//   type: ChartType;
+//   chartTitle: string;
+//   width?: string;
+//   height?: string;
+// }
