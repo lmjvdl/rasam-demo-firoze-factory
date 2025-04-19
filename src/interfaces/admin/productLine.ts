@@ -1,9 +1,9 @@
-interface ProductLine {
+export interface ProductLine {
     id: number; // ReadOnly
-    company: number;
+    company: { id: number; name: string } | null;
     name: string;
     code: string;
-    icon?: number | null;
+    icon: string;
 }
 
 export interface ProductLineTableProps {

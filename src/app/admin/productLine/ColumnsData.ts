@@ -1,8 +1,11 @@
+import { ProductLine } from "@/interfaces/admin/productLine";
+
 export const columns = () => [
     {
         id: "icon",
         label: "آیکون",
         required: false,
+        isImage: true,
         showOnTable: true,
         canEdit: true,
         isAdditionalAction: false,
@@ -25,6 +28,7 @@ export const columns = () => [
         isAdditionalAction: false,
         optionsKey: "companyList",
         isSingleSelect: true,
+        render: (row: ProductLine) => row?.company?.name || "نامشخص",
     },
     {
         id: "name",

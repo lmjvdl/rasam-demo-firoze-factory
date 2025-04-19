@@ -139,6 +139,7 @@ const companyList = useCompanyQuery().data
         onClose={() => setViewOpen(false)}
         rowData={selectedRow}
         titles={dynamicColumns}
+        objectAttributes={["icon", "company"]}
       />
       <EditDialog
         open={editOpen}
@@ -147,6 +148,7 @@ const companyList = useCompanyQuery().data
         rowData={selectedRow}
         titles={filteredColumnsForEdit}
         extraOptions={{ iconList, companyList }}
+        objectAttributes={["icon", "company"]}
       />
       <DeleteDialog
         open={deleteOpen}
