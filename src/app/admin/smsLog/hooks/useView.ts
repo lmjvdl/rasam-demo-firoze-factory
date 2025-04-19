@@ -4,6 +4,7 @@ import fetchWithError from "@/utils/dataFetching/fetchWithError";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import { useToast } from "@/hooks/ui/useToast";
 import smsLogUrls from "@/utils/url/adminPanel/smsLog/smsLog";
+import gregorianToJalali from "@/utils/formatters/isoDateToSolarDate";
 
 export default function getSmsLogList() {
   const queryClient = useQueryClient();
@@ -57,7 +58,13 @@ export type ResponseSchema = z.infer<typeof responseSchema>;
 function sanitizer(pollutedData: unknown) {
   try {
     const refinedData = responseSchema.parse(pollutedData);
-    return refinedData;
+
+    const transformedResults = refinedData.data.results.map((item) => ({
+      ...item,
+      created_at: item.created_at ? gregorianToJalali(item.created_at) : "",
+    }));
+
+    return { ...refinedData, data: { ...refinedData.data, results: transformedResults } };
   } catch (err) {
     const errorMessage =
       err instanceof Error && err.message

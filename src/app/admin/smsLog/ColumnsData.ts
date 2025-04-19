@@ -18,7 +18,7 @@ export const columns = () => [
         id: "message",
         label: "پیغام",
         required: true,
-        showOnTable: false,
+        showOnTable: true,
         canEdit: true,
         isAdditionalAction: false,
     },

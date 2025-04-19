@@ -79,7 +79,7 @@ export function getChartJsData(
   data: { labels: string[]; datasets: Dataset[] };
   options: ChartOptions;
 } {
-  const MAX_DATA_POINTS = 100;
+  const MAX_DATA_POINTS = 1000;
   const now = new Date();
   const timeLabel = `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
 

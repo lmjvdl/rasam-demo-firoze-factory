@@ -60,7 +60,7 @@ const darkObject: ColorSystemOptions = {
 const theme = createTheme(
   {
     cssVariables: {
-      colorSchemeSelector: "class", // or 'data'
+      colorSchemeSelector: "class",
     },
 
     direction: "rtl",

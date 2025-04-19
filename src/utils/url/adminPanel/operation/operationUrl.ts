@@ -3,7 +3,7 @@ import Url from "@/utils/dataFetching/urls";
 class OperationUrls extends Url {
   public constructor() {
     super();
-    this.baseUrlPath += "devices/aggregate";
+    this.baseUrlPath += "/devices/aggregate";
   }
   public get createOperation() {
     const basePath = `${this.baseUrlPath}/create/`;
