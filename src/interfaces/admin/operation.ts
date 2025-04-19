@@ -1,11 +1,12 @@
-export interface Group {
+export interface Operation {
     id: number; // ReadOnly
-    name: string;
-    devices?: { id: number; name: string }[] | [];// uniqueItems: true
+    device_info: { id: number; name: string } | null;
+    devices_info: { id: number; name: string }[] | [];
+    operation: string;
 }
   
-export interface OpaTableProps {
-    data: Group[];
+export interface OperationTableProps {
+    data: Operation[];
     columns: any[];
     onView: (row: any) => void;
     onEdit: (row: any) => void;

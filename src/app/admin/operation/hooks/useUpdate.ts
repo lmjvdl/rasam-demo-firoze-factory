@@ -1,29 +1,30 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { fetchWithErrorWithAlarm } from "@/utils/dataFetching/fetchWithError";
-import groupUrls from "@/utils/url/adminPanel/group/groupUrl";
+import operationUrls from "@/utils/url/adminPanel/operation/operationUrl";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import { useToast } from "@/hooks/ui/useToast";
-import { extractIds } from "@/utils/formatters/extractId";
+import { extractId, extractIds } from "@/utils/formatters/extractId";
 
-export type GroupUpdateSchema = {
+export type OperationUpdateSchema = {
   id: number;
-  name: string;
-  permissions: { id: number; name: string }[];
+  device: { id: number; name: string };
+  devices: { id: number; name: string }[];
+  operation: string;
 };
 
-const useUpdateGroup = () => {
+const useUpdateOperation = () => {
   const queryClient = useQueryClient();
   const { showToast } = useToast();
 
-  const updateGroupMutation = useMutation({
-    mutationFn: async ({ id, permissions, ...updatedData }: GroupUpdateSchema) => {
-      return fetchWithErrorWithAlarm(groupUrls.editGroup(id), {
+  const updateOperationMutation = useMutation({
+    mutationFn: async ({ id, devices, device,...updatedData }: OperationUpdateSchema) => {
+      return fetchWithErrorWithAlarm(operationUrls.editOperation(id), {
         method: "PUT",
-        body: JSON.stringify({...updatedData, permissions: extractIds(permissions)}),
+        body: JSON.stringify({...updatedData, devices: extractIds(devices), device: extractId(device)}),
       });
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: allQueryKeys.adminPanel.group.update });
+      queryClient.invalidateQueries({ queryKey: allQueryKeys.adminPanel.operation.update });
     },
     onError: () => {
       showToast("خطایی در به‌روزرسانی گروه رخ داد.", "error");
@@ -31,8 +32,8 @@ const useUpdateGroup = () => {
   });
 
   return {
-    updateGroupMutation,
+    updateOperationMutation,
   };
 };
 
-export default useUpdateGroup;
+export default useUpdateOperation;

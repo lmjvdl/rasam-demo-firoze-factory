@@ -1,10 +1,11 @@
 import { fetchWithErrorForCreate } from "@/utils/dataFetching/fetchWithError";
-import operationUrls from "@/utils/url/adminPanel/operation/operation";
+import operationUrls from "@/utils/url/adminPanel/operation/operationUrl";
 import { z } from "zod";
 
 const operationSchema = z.object({
-  name: z.string(),
   devices: z.array(z.number()),
+  device: z.number(),
+  operation: z.string()
 });
 
 export const createNewOperation = async (data: unknown) => {

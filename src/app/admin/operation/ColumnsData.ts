@@ -1,4 +1,4 @@
-import { Group } from "@/interfaces/admin/group";
+import { Operation } from "@/interfaces/admin/operation";
 import { truncateText } from "@/utils/formatters/truncateText";
 
 export const columns = () => [
@@ -10,25 +10,28 @@ export const columns = () => [
         isAdditionalAction: false,
     },
     {
-        id: "name",
-        label: "نام",
+        id: "device_info",
+        label: "دستگاه",
         required: true,
+        isSingleSelect: true,
         showOnTable: true,
         canEdit: true,
         isAdditionalAction: false,
+        optionsKey: "deviceList",
+        render: (row: Operation) => row?.device_info?.name || "نامشخص",
     },
     {
-        id: "permissions",
-        label: "دسترسی‌ها",
+        id: "devices_info",
+        label: "دستگاه ها",
         required: false,
         isMultiSelect: true,
-        optionsKey: "permissionList",
         showOnTable: true,
         canEdit: true,
         isAdditionalAction: false,
-        render: (row: Group) =>
-            row?.permissions?.length
-                ? truncateText(row.permissions.map((p) => p.name).join(", ")) : "نامشخص"
+        optionsKey: "deviceList",
+        render: (row: Operation) =>
+            row?.devices_info?.length
+                ? truncateText(row.devices_info.map((device) => device.name).join(", ")) : "نامشخص"
     },
     {
         id: "actions",

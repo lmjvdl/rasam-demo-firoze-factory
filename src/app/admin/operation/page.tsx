@@ -5,7 +5,6 @@ import ModalForm from "@/components/adminPanelComponent/addingProcess/ModalForm"
 import MainCard from "@/components/customContiner/MainCard";
 import AllContentOperation from "./AllContent";
 import useDeviceQuery from "./hooks/useDeviceList";
-import useUserQuery from "./hooks/useUserList";
 import { createNewOperation } from "./hooks/useCreate";
 
 export default function OperationPage() {
@@ -27,7 +26,14 @@ export default function OperationPage() {
         buttonText="افزودن عملیات جدید"
         formFields={[
           {
-            name: "name", label: "نام", type: "text", required: true
+            name: "device",
+            label: "دستگاه",
+            type: "select",
+            required: true,
+            options: getDeviceList.data?.map((device) => ({
+              label: device.name,
+              value: device.id,
+            })),
           },
           {
             name: "devices",
@@ -38,6 +44,16 @@ export default function OperationPage() {
               label: device.name,
               value: device.id,
             })) || [],
+          },
+          {
+            name: "operation",
+            label: "عملگر",
+            type: "select",
+            required: true,
+            options: [
+              { label: "مجموع", value: "sum" },
+              { label: "میانگین", value: "avg" },
+            ],
           },
         ]}
         onSubmit={handleCreateOperation}

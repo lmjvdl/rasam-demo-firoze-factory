@@ -2,24 +2,24 @@ import { z } from "zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import fetchWithError from "@/utils/dataFetching/fetchWithError";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
-import groupUrls from "@/utils/url/adminPanel/group/groupUrl";
+import operationUrls from "@/utils/url/adminPanel/operation/operationUrl";
 import { useToast } from "@/hooks/ui/useToast";
 
-export default function getGroupList(pages: number, pageSize: number, URL: string | null) {
+export default function getOperationList(pages: number, pageSize: number, URL: string | null) {
   const queryClient = useQueryClient();
   const { showToast } = useToast();
 
-  const getGroupListMutation = useMutation({
-    mutationKey: allQueryKeys.adminPanel.group.list,
+  const getOperationListMutation = useMutation({
+    mutationKey: allQueryKeys.adminPanel.operation.list,
     retry: false,
     mutationFn: ({ page = pages, page_size = pageSize, url = URL }: { page?: number; page_size?: number; url: string | null; }) =>
       fetchWithError(
         url !== null ? url : 
-        `${groupUrls.listGroup}?p=${page}&page_size=${page_size}`,
+        `${operationUrls.listOperation}?p=${page}&page_size=${page_size}`,
         { method: "GET" }
       ).then(sanitizer),
     onSuccess: (serverResponse) => {
-      queryClient.setQueryData(allQueryKeys.adminPanel.group.list, {
+      queryClient.setQueryData(allQueryKeys.adminPanel.operation.list, {
         access: serverResponse.data,
       });
     },
@@ -28,7 +28,7 @@ export default function getGroupList(pages: number, pageSize: number, URL: strin
     },
   });
 
-  return getGroupListMutation;
+  return getOperationListMutation;
 }
 
 const responseSchema = z.object({
@@ -39,11 +39,15 @@ const responseSchema = z.object({
     results: z.array(
       z.object({
         id: z.number(),
-        name: z.string(),
-        permissions: z.array(z.object({
+        device_info: z.object({
+          id: z.number(),
+          name: z.string(),
+        }),
+        devices_info: z.array(z.object({
           id: z.number(),
           name: z.string(),
         })),
+        operation: z.string(),
       })
     ),
   }),
@@ -60,7 +64,7 @@ function sanitizer(pollutedData: unknown) {
 
     const transformedResults = refinedData.data.results.map((item) => ({
       ...item,
-      permissions: item.permissions ? item.permissions : { id: 0, name: "نامشخص" },
+      devices: item.devices_info ? item.devices_info : { id: 0, name: "نامشخص" },
     }));
 
     return { ...refinedData, data: { ...refinedData.data, results: transformedResults } };

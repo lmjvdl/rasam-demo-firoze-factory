@@ -1,19 +1,19 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import getGroupList, { ResponseSchema } from "./hooks/useView";
 import useDelete from "./hooks/useDelete";
+import getOperationList, { ResponseSchema } from "./hooks/useView";
 import ViewDialog from "@/components/adminPanelComponent/viewProcess/ViewDialog";
 import EditDialog from "@/components/adminPanelComponent/viewProcess/EditDialog";
 import DeleteDialog from "@/components/adminPanelComponent/viewProcess/DeleteDialog";
 import { PrevDataInitial } from "@/interfaces/general/general";
 import { columns } from "./ColumnsData";
-import { GroupUpdateSchema } from "./hooks/useUpdate";
-import GroupTable from "./GroupTable";
+import { OperationUpdateSchema } from "./hooks/useUpdate";
+import OperationTable from "./OperationTable";
 import useUpdate from "./hooks/useUpdate";
-import usePermissionQuery from "./hooks/usePermissionList";
+import useDeviceQuery from "./hooks/useDeviceList";
 
-const AllContentGroup: React.FC = () => {
+const AllContentOperation: React.FC = () => {
   const [data, setData] = useState<ResponseSchema>(PrevDataInitial);
   const [selectedRow, setSelectedRow] = useState<any>(null);
   const [viewOpen, setViewOpen] = useState(false);
@@ -23,17 +23,16 @@ const AllContentGroup: React.FC = () => {
   const [totalData, setTotalData] = useState<number>(0);
   const [nextPage, setNextPage] = useState<null | string>(null);
 
-  const getList = getGroupList(pageNumber, 8, nextPage);
-  const { deleteGroupMutation } = useDelete();
-  const { updateGroupMutation } = useUpdate();
-  const permissionList = usePermissionQuery().data
-  ? usePermissionQuery().data.map((permission) => ({
-      id: permission.id,
-      value: permission.id, 
-      label: permission.translate, 
-    }))
-  : [];
-
+  const getList = getOperationList(pageNumber, 8, nextPage);
+  const { deleteOperationMutation } = useDelete();
+  const { updateOperationMutation } = useUpdate();
+  const deviceList = useDeviceQuery().data
+    ? useDeviceQuery().data.map((device) => ({
+        id: device.id,
+        value: device.id,
+        label: device.name,
+      }))
+    : [];
 
   useEffect(() => {
     getList.mutate(
@@ -48,10 +47,10 @@ const AllContentGroup: React.FC = () => {
     );
   }, [pageNumber]);
 
-  const handleSaveEdit = (updatedRow: GroupUpdateSchema) => {
+  const handleSaveEdit = (updatedRow: OperationUpdateSchema) => {
     setData((prevData) => {
       if (prevData?.data) {
-        updateGroupMutation.mutate(updatedRow);
+        updateOperationMutation.mutate(updatedRow);
 
         return {
           ...prevData,
@@ -89,35 +88,35 @@ const AllContentGroup: React.FC = () => {
 
   const handleConfirmDelete = () => {
     if (selectedRow?.id) {
-      deleteGroupMutation.mutate(selectedRow.id, {
+      deleteOperationMutation.mutate(selectedRow.id, {
         onSuccess: () => {
-          setData(prevData => {
+          setData((prevData) => {
             if (prevData?.data) {
               return {
                 ...prevData,
                 data: {
                   ...prevData.data,
-                  results: prevData.data.results.filter(row => row.id !== selectedRow.id),
-                  count: prevData.data.count - 1
-                }
+                  results: prevData.data.results.filter(
+                    (row) => row.id !== selectedRow.id
+                  ),
+                  count: prevData.data.count - 1,
+                },
               };
             }
             return prevData;
           });
           setDeleteOpen(false);
-        }
+        },
       });
     }
   };
 
-
   const dynamicColumns = columns();
   const filteredColumnsForEdit = dynamicColumns.filter((col) => col.canEdit);
 
-
   return (
     <>
-      <GroupTable
+      <OperationTable
         data={data?.data?.results ?? []}
         columns={dynamicColumns}
         onView={handleView}
@@ -134,8 +133,9 @@ const AllContentGroup: React.FC = () => {
         rowData={selectedRow}
         titles={dynamicColumns}
         arrayAttributes={{
-          permissions: 'name', 
+          devices_info: "name",
         }}
+        objectAttributes={["device_info"]}
       />
       <EditDialog
         open={editOpen}
@@ -143,8 +143,9 @@ const AllContentGroup: React.FC = () => {
         onSave={handleSaveEdit}
         rowData={selectedRow}
         titles={filteredColumnsForEdit}
-        extraOptions={{ permissionList }}
-        arrayObjectAttributes={['permissions']} 
+        extraOptions={{ deviceList }}
+        arrayObjectAttributes={["devices"]}
+        objectAttributes={["device"]}
       />
       <DeleteDialog
         open={deleteOpen}
@@ -157,4 +158,4 @@ const AllContentGroup: React.FC = () => {
   );
 };
 
-export default AllContentGroup;
+export default AllContentOperation;
