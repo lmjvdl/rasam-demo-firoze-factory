@@ -14,7 +14,7 @@ export default function PowerSupply({ productLinePartId }: Props) {
   const { data: initialData, isLoading } =
     usePowerSupplyQuery(productLinePartId);
   const { devices } = useWebSocket(productLinePartId, initialData || []);
-
+  console.log(productLinePartId)
   if (isLoading) return <LoadingScreen />;
 
   return (

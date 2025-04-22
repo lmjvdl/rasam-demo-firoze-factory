@@ -38,7 +38,7 @@ export default function ChartContainer({ device }: DeviceProps) {
     });
 
     setChartDataHistory(newChartDataHistory);
-  }, [chartDataHistory, device.data, device.time, theme.palette.primary.main]);
+  }, [device.data, device.time, theme.palette.primary.main]);
 
   return (
     <Box sx={{ p: 2 }}>
