@@ -1,8 +1,8 @@
+// SingleSelect.tsx
 import * as React from "react";
-import { Box, Button, Stack } from "@mui/material";
+import { Box } from "@mui/material";
 import AdvanceAutoComplete from "../autoComplete/AdvanceAutoComplete";
 import { SingleDropDownProps } from "@/interfaces/ui/inputs/DynamicInputs";
-
 
 export default function SingleSelect({
   placeholder,
@@ -10,11 +10,16 @@ export default function SingleSelect({
   onChange,
   value,
 }: SingleDropDownProps) {
+  const handleChange = (newValue: string | string[]) => {
+    // Ensure we only pass string
+    onChange(typeof newValue === 'string' ? newValue : newValue[0] || '');
+  };
+
   return (
     <Box sx={{ minWidth: 200 }}>
       <AdvanceAutoComplete
         TFPlaceholder={placeholder}
-        setValue={onChange}
+        setValue={handleChange}
         stateOption={options}
         value={value || ""}
       />

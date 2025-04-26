@@ -141,6 +141,55 @@ export async function uploadFileWithError(
 }
 
 
+export async function fetchWithErrorForDownload(
+  url: string | URL,
+  params: Record<string, any> = {},
+  fileName?: string
+): Promise<void> {
+  try {
+    const finalUrl = new URL(url.toString());
+    Object.entries(params).forEach(([key, value]) => {
+      if (Array.isArray(value)) {
+        value.forEach(item => finalUrl.searchParams.append(key, item));
+      } else if (value !== undefined && value !== null) {
+        finalUrl.searchParams.append(key, value);
+      }
+    });
+
+    const options: RequestInit = {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${useAuthStore.getState().accessToken}`,
+      },
+    };
+
+    const response = await fetch(finalUrl.toString(), options);
+
+    if (!response.ok) {
+      throw new Error('خطا در دریافت فایل');
+    }
+
+    const blob = await response.blob();
+    
+    const contentDisposition = response.headers.get('content-disposition');
+    const finalFileName = fileName || 
+      contentDisposition?.split('filename=')[1]?.replace(/"/g, '') || 
+      'download.file';
+
+    const downloadUrl = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = downloadUrl;
+    a.download = finalFileName;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(downloadUrl);
+
+  } catch {
+    toast.error('خطا در دانلود فایل');
+  }
+}
+
 
 
 function addProperHeader(options: RequestInit) {

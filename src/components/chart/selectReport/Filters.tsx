@@ -6,7 +6,7 @@ import { DateObject } from "react-multi-date-picker";
 import SingleSelect from "../../filtersReportDropDown/SingleSelect";
 import MultiSelect from "../../filtersReportDropDown/MultiSelect";
 import SubRange from "../../filtersReportDropDown/SubRange";
-import { DynamicFiltersProps } from "../DynamicFilters";
+import { DynamicFiltersProps } from "@/interfaces/ui/inputs/DynamicInputs";
 
 const Filters: React.FC<DynamicFiltersProps> = ({
   filters,
@@ -43,11 +43,8 @@ const Filters: React.FC<DynamicFiltersProps> = ({
           value={filters.singleSelect.value}
           placeholder={filters.singleSelect.placeholder}
           options={filters.singleSelect.options}
-          onChange={(newValue: any) =>
-            onChange("singleSelect", {
-              ...filters.singleSelect,
-              value: newValue,
-            })
+          onChange={(newValue: string) =>
+            onChange("singleSelect.value", newValue)
           }
         />
       )}
@@ -57,11 +54,8 @@ const Filters: React.FC<DynamicFiltersProps> = ({
           placeholder={filters.multiSelect.placeholder}
           options={filters.multiSelect.options}
           value={filters.multiSelect.value}
-          onChange={(newValue: any) =>
-            onChange("multiSelect", {
-              ...filters.multiSelect,
-              value: newValue,
-            })
+          onChange={(newValue: string[]) =>
+            onChange("multiSelect.value", newValue)
           }
         />
       )}
