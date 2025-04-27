@@ -8,7 +8,7 @@ import ExcleReport from "./excleReport/page";
 
 export default function SettingsPage() {
   const [selectedTab, setSelectedTab] = useState(0);
-  const tabLabels = ["دانلود گزارش کلی به صورت JSON", "دانلود گزارش کلی به صورت excle"];
+  const tabLabels = ["دانلود گزارش کلی به صورت JSON", "دانلود گزارش کلی به صورت excel"];
 
 
   const handleReportChange = (report: string) => {

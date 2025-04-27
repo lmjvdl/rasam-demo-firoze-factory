@@ -9,13 +9,14 @@ import { CalendarInputProps } from "@/interfaces/ui/inputs/DynamicInputs";
 import { valueToInputText, weekDays } from "@/utils/formatters/dateToText";
 
 
-function InputContainer({ openCalendar, value }: CalendarInputProps) {
+function InputContainer({ openCalendar, value, disabled }: CalendarInputProps) {
   const text: string = valueToInputText(value)
   const placeholderInput: string = text !== "" ? text : "بازه زمانی";
   return (
       <TextField
         variant="outlined"
         fullWidth
+        disabled= {disabled}
         size="small"
         placeholder={placeholderInput}
         value={text}
@@ -39,15 +40,17 @@ function InputContainer({ openCalendar, value }: CalendarInputProps) {
 export default function CustomDatePicker({
   value = [],
   onChange,
+  disabled
 }: {
   value: DateObject[];
   onChange: (selectedDates: DateObject[]) => void;
+  disabled?: boolean;
 }) {
 
   return (
     <FormControl fullWidth>
       <DatePicker
-        render={<InputContainer value={value}/>}
+        render={<InputContainer value={value} disabled={disabled}/>}
         range
         locale={persianFa}
         weekDays={weekDays}

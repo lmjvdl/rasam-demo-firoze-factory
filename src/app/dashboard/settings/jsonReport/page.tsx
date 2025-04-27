@@ -7,7 +7,7 @@ import { getFormFields } from "./fields";
 export default function JsonReport() {
   const { downloadReport, isLoading, error } = useJsonReport();
 
-  const handleSearch = async (filters: any) => {
+  const handleOperation = async (filters: any) => {
     try {
       await downloadReport(filters);
       return { success: true };
@@ -21,14 +21,11 @@ export default function JsonReport() {
 
   return (
     <Container sx={{ minWidth: "100%", overflowY: "auto", py: 3 }}>
-      <Typography variant="h4" gutterBottom>
-        گزارش JSON دستگاه‌ها
-      </Typography>
-
       <Form
         formFields={getFormFields()}
-        onSubmit={handleSearch}
-        fixedValues={{}} buttonText={"دانلود گزارش"} />
+        onSubmit={handleOperation}
+        fixedValues={{}} 
+        buttonText={"دانلود گزارش"} />
 
       {isLoading && (
         <Box display="flex" justifyContent="center" mt={3}>

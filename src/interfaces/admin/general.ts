@@ -7,6 +7,7 @@ interface ModalFormProps {
     accept?: string;
     options?: { label: string; value: number | string }[];
     required: boolean;
+    placeholder?: string;
   }[];
   onSubmit: (data: any) => Promise<{ success: boolean; error?: string }>;
   icons?: { id: number; url: string }[];

@@ -162,7 +162,7 @@ export async function fetchWithErrorForDownload(
         'Authorization': `Bearer ${useAuthStore.getState().accessToken}`,
       },
     };
-
+    console.log(finalUrl.toString())
     const response = await fetch(finalUrl.toString(), options);
 
     if (!response.ok) {

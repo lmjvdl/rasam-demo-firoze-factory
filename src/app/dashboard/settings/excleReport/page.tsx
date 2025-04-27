@@ -1,10 +1,45 @@
-import { Container } from "@mui/material";
+import { Container, Typography, CircularProgress, Alert, Box } from "@mui/material";
+import Form from "@/components/form/form";
+import { getFormFields } from "./fields";
+import useExcelReport from "./useExcleRepoer";
 
-export default function ExcleReport() {
+
+export default function ExcelReport() {
+  const { downloadReport, isLoading, error } = useExcelReport();
+
+  const handleOperation = async (filters: any) => {
+    try {
+      await downloadReport(filters);
+      return { success: true };
+    } catch (err) {
+      return { 
+        success: false, 
+        error: err instanceof Error ? err.message : "خطایی رخ داده است" 
+      };
+    }
+  };
 
   return (
-    <Container sx={{ minWidth: "100%", overflowY: "auto" }}>
-        excle report
+    <Container sx={{ minWidth: "100%", overflowY: "auto", py: 3 }}>
+      <Form
+        formFields={getFormFields()}
+        onSubmit={handleOperation}
+        fixedValues={{}} 
+        buttonText={"دانلود گزارش"} />
+
+      {isLoading && (
+        <Box display="flex" justifyContent="center" mt={3}>
+          <CircularProgress />
+        </Box>
+      )}
+
+      {error && (
+        <Alert severity="error" sx={{ mt: 2 }}>
+          {error}
+        </Alert>
+      )}
     </Container>
   );
 }
+
+
