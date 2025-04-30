@@ -7,6 +7,7 @@ const DrawerContent = ({
   drawerItemInfoByKey,
   footerItemInfoByKey,
   isAdmin,
+  isCollapsed = false,
 }: DrawerContentProps) => {
   const mode = useColorScheme();
   const FactoryIcon = isAdmin
@@ -21,14 +22,31 @@ const DrawerContent = ({
         container
         spacing={0}
         direction="column"
-        alignItems="center"
-        justifyContent="start"
-        sx={{ marginBlock: "px", pt: 2 }}
+        sx={{
+          pt: 2,
+          display: { xs: "none", sm: isCollapsed ? "none" : "flex" },
+          justifyContent: "center",
+          alignItems: "center",
+        }}
       >
         <FactoryIcon fill={mode.colorScheme === "dark" ? "#fff" : "#292D32"} />
       </Grid2>
-      <Box sx={{ flex: 1, overflowY: "auto" }}>
-        <SidebarItemList items={drawerItemInfoByKey} isAdmin={isAdmin} />
+      <Box
+        sx={{
+          flex: 1,
+          overflowY: "auto",
+          direction: "rtl",
+          
+          "& > *": {
+            direction: "ltr",
+          },
+        }}
+      >
+        <SidebarItemList 
+          items={drawerItemInfoByKey} 
+          isAdmin={isAdmin} 
+          isCollapsed={isCollapsed} 
+        />
       </Box>
       <Box
         sx={{
@@ -40,7 +58,11 @@ const DrawerContent = ({
           background: "background.defaultChannel",
         }}
       >
-        <SidebarItemList items={footerItemInfoByKey} isAdmin={isAdmin} />
+        <SidebarItemList 
+          items={footerItemInfoByKey} 
+          isAdmin={isAdmin} 
+          isCollapsed={isCollapsed} 
+        />
       </Box>
     </Box>
   );

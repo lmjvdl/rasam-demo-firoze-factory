@@ -27,6 +27,8 @@ const SidebarItem = ({
   selected?: boolean;
 }) => {
   const mode = useColorScheme(); 
+  const isFooterItem = link === "/login";
+  
   return (
     <ListItem key={text} disablePadding sx={sx}>
       <ListItemButton
@@ -34,21 +36,24 @@ const SidebarItem = ({
         href={link.startsWith("/") ? link : `/${link}`}
         onClick={onClick}
         sx={{
-          marginX: selected ? "8px" : "0px",
           borderRadius: "8px",
           backgroundColor: selected
-            ? "var(--mui-palette-background-enable)"
+            ? isFooterItem 
+              ? "var(--mui-palette-error-main)"
+              : "var(--mui-palette-background-enable)"
             : "transparent",
           color: selected ? "#fff" : "inherit",
           "&:hover": {
             backgroundColor: selected
-              ? "var(--mui-palette-primary-dark)"
+              ? isFooterItem
+                ? "var(--mui-palette-error-dark)"
+                : "var(--mui-palette-primary-dark)"
               : "rgba(0, 0, 0, 0.2)",
           },
           paddingLeft: "8px",
           paddingRight: "8px",
           position: "relative",
-          "&::after": selected
+          "&::after": selected && !isFooterItem
             ? {
                 content: '""',
                 position: "absolute",
@@ -70,17 +75,19 @@ const SidebarItem = ({
         >
           {icon}
         </ListItemIcon>
-        <ListItemText
-          primary={text}
-          primaryTypographyProps={{
-            fontSize: "14px",
-            fontWeight: selected ? "bold" : "normal",
-            color: selected && (mode.colorScheme === "light") ? "#333333" : "inherit"
-          }}
-          sx={{
-            marginRight: "0",
-          }}
-        />
+        {text && (
+          <ListItemText
+            primary={text}
+            primaryTypographyProps={{
+              fontSize: "14px",
+              fontWeight: selected ? "bold" : "normal",
+              color: selected && (mode.colorScheme === "light") ? "#333333" : "inherit"
+            }}
+            sx={{
+              marginRight: "0",
+            }}
+          />
+        )}
       </ListItemButton>
     </ListItem>
   );

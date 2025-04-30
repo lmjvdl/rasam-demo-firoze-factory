@@ -1,11 +1,12 @@
 "use client";
-import { Box } from "@mui/material";
-import { Dispatch, SetStateAction, useEffect } from "react";
+import { Box, IconButton, styled, useMediaQuery, useTheme } from "@mui/material";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import SidebarDrawer from "./dependencies/SidebarDrawer";
 import DrawerContent from "./dependencies/DrawerContent";
 import { UseItemInfoUserPanel } from "./UseItemInfoUserPanel";
 import { UseItemInfoAdminPanel } from "./UseItemInfoAdminPanel";
 import { useRouter } from "next/navigation";
+import { IconChevronRight, IconChevronLeft } from "@tabler/icons-react";
 
 const Sidebar = ({
   mobileOpen,
@@ -17,23 +18,40 @@ const Sidebar = ({
   isAdmin: boolean;
 }) => {
   const router = useRouter();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const drawerWidth = 240;
-  const handleDrawerClose = () => setMobileOpen(false);
-
-
-useEffect(() => {
-  if (isAdmin === false) {
-    router.push("/login");
-  } else if (isAdmin === true) {
-    if (window.location.pathname === "/admin") {
-      router.push("/admin/user");
+  const collapsedWidth = 47;
+  const [desktopOpen, setDesktopOpen] = useState(true);
+  
+  const handleDrawerClose = () => {
+    setMobileOpen(false);
+    if (isMobile) {
+      setDesktopOpen(true); 
     }
-  } else {
-    if (window.location.pathname === "/") {
-      router.push("/dashboard");
+  };
+
+  const handleToggleDrawer = () => {
+    if (isMobile) {
+      setMobileOpen(!mobileOpen);
+    } else {
+      setDesktopOpen(!desktopOpen);
     }
-  }
-}, [isAdmin, router]);
+  };
+
+  useEffect(() => {
+    if (isAdmin === false) {
+      router.push("/login");
+    } else if (isAdmin === true) {
+      if (window.location.pathname === "/admin") {
+        router.push("/admin/user");
+      }
+    } else {
+      if (window.location.pathname === "/") {
+        router.push("/dashboard");
+      }
+    }
+  }, [isAdmin, router]);
 
   const { drawerItemInfoForUserPanel, footerItemInfoForUserPanel } = UseItemInfoUserPanel();
   const { drawerItemInfoForAdminPanel, footerItemInfoForAdminPanel } = UseItemInfoAdminPanel();
@@ -41,28 +59,74 @@ useEffect(() => {
   const drawerItemInfo = isAdmin ? drawerItemInfoForAdminPanel : drawerItemInfoForUserPanel;
   const footerItemInfo = isAdmin ? footerItemInfoForAdminPanel : footerItemInfoForUserPanel;
 
+  const ToggleButton = styled(IconButton)(({ theme }) => ({
+    position: "fixed",
+    left: desktopOpen ? drawerWidth - 20 : isMobile ? '50%' : 0,
+    bottom: "365px",
+    zIndex: theme.zIndex.drawer + 1,
+    backgroundColor: theme.palette.background.paper,
+    border: `1px solid ${theme.palette.divider}`,
+    width: 40,
+    height: 40,
+    borderRadius: "50%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    transform: isMobile && !mobileOpen ? 'translateX(-50%)' : 'none',
+    transition: theme.transitions.create(["left", "transform"], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    "&:hover": {
+      backgroundColor: theme.palette.action.hover,
+    },
+  }));
+
   return (
     <Box
       component="nav"
-      sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+      sx={{ 
+        width: { 
+          sm: desktopOpen ? drawerWidth : collapsedWidth 
+        }, 
+        flexShrink: { sm: 0 },
+        transition: theme.transitions.create("width", {
+          easing: theme.transitions.easing.sharp,
+          duration: theme.transitions.duration.leavingScreen,
+        }),
+      }}
       aria-label="mailbox folders"
     >
+      {(!isMobile || mobileOpen) && (
+        <ToggleButton onClick={handleToggleDrawer}>
+          {desktopOpen ? <IconChevronRight size={20} /> : <IconChevronLeft size={20} />}
+        </ToggleButton>
+      )}
+      
       <SidebarDrawer
         open={mobileOpen}
         onClose={handleDrawerClose}
         variant="temporary"
+        drawerWidth={drawerWidth}
       >
         <DrawerContent
           drawerItemInfoByKey={drawerItemInfo}
           footerItemInfoByKey={footerItemInfo}
           isAdmin={isAdmin}
+          isCollapsed={false}
         />
       </SidebarDrawer>
-      <SidebarDrawer open={true} onClose={() => {}} variant="permanent">
+      <SidebarDrawer 
+        open={true} 
+        onClose={() => {}} 
+        variant="permanent"
+        drawerWidth={desktopOpen ? drawerWidth : collapsedWidth}
+      >
         <DrawerContent
           drawerItemInfoByKey={drawerItemInfo}
           footerItemInfoByKey={footerItemInfo}
           isAdmin={isAdmin}
+          isCollapsed={!desktopOpen}
         />
       </SidebarDrawer>
     </Box>
