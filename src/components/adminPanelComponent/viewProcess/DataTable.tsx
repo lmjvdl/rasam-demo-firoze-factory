@@ -49,14 +49,13 @@ const DataTable: React.FC<DataTableProps> = ({
                   const value = row[column.id];
                   const isArray = Array.isArray(value);
                   const isArrayColumn = arrayColumns[column.id];
-
                   return (
                     <TableCell key={column.id} align="center">
                       {column.isImage ? (
                         <img
-                          src={value}
-                          alt="Image"
-                          style={{ width: "25px", height: "25px" }}
+                        src={value}
+                        alt="Image"
+                        style={{ width: "25px", height: "25px" }}
                         />
                       ) : column.render ? (
                         column.render(row)
