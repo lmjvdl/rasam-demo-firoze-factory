@@ -1,6 +1,6 @@
 "use client";
 import { Box, IconButton, styled, useMediaQuery, useTheme } from "@mui/material";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect } from "react";
 import SidebarDrawer from "./dependencies/SidebarDrawer";
 import DrawerContent from "./dependencies/DrawerContent";
 import { UseItemInfoUserPanel } from "./UseItemInfoUserPanel";

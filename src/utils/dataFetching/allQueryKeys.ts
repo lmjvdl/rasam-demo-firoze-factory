@@ -101,7 +101,27 @@ const allQueryKeys = {
     },
     smsLog: {
       list: ["ADMIN_PANEL", "SMS_LOG", "VIEW"]
-    }
+    },
+    report: {
+      list: ["ADMIN_PANEL", "REPORT", "VIEW"],
+      delete: ["ADMIN_PANEL", "REPORT", "DELETE"],
+      update: ["ADMIN_PANEL", "REPORT", "UPDATE"],
+    },
+    interval: {
+      list: ["ADMIN_PANEL", "INTERVAL", "VIEW"],
+      delete: ["ADMIN_PANEL", "INTERVAL", "DELETE"],
+      update: ["ADMIN_PANEL", "INTERVAL", "UPDATE"],
+    },
+    inputItem: {
+      list: ["ADMIN_PANEL", "INPUT_ITEM", "VIEW"],
+      delete: ["ADMIN_PANEL", "INPUT_ITEM", "DELETE"],
+      update: ["ADMIN_PANEL", "INPUT_ITEM", "UPDATE"],
+    },
+    outputItem: {
+      list: ["ADMIN_PANEL", "OUTPUT_ITEM", "VIEW"],
+      delete: ["ADMIN_PANEL", "OUTPUT_ITEM", "DELETE"],
+      update: ["ADMIN_PANEL", "OUTPUT_ITEM", "UPDATE"],
+    },
 
   },
   userPanel: {

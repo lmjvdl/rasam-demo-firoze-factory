@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { initialData } from "./initialData/initialData";
 
-  export const arrayOfParameter = z.object({
+  export const arrayOfFunction = z.object({
     data: z.object({
       results: z.array(
         z.object({
@@ -16,8 +16,8 @@ import { initialData } from "./initialData/initialData";
   });
   
 
-export function parameterSanitizer(rawData: unknown) {
-  const serverSchema = arrayOfParameter.safeParse(rawData);
+export function intervalSanitizer(rawData: unknown) {
+  const serverSchema = arrayOfFunction.safeParse(rawData);
 
   return serverSchema.success ? serverSchema.data.data.results : initialData.data.results;
 }

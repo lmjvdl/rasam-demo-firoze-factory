@@ -5,9 +5,19 @@ export const UseItemInfoAdminPanel = () => {
   const drawerItemInfoForAdminPanel = useMemo(
     () => ({
       کاربر: { text: "کاربر", icon: "User", to: "/admin/user" },
-      مخاطبین: {text: "مخاطبین", icon: "Contacts", to: "/admin/contacts"},
-      گروه: { text: "گروه", icon: "Group", to: "/admin/group" },
       شرکت: { text: "شرکت", icon: "Company", to: "/admin/company" },
+      گروه: { text: "گروه", icon: "Group", to: "/admin/group" },
+      "نوع اطلاعات": {
+        text: "نوع اطلاعات",
+        icon: "DataType",
+        to: "/admin/dataType",
+      },
+      "آپلود عکس": {
+        text: "آپلود عکس",
+        icon: "UploadImage",
+        to: "/admin/uploadImage",
+      },
+      "دستگاه ها": { text: "دستگاه ها", icon: "Devices", to: "/admin/devices" },
       "خط تولید": {
         text: "خط تولید",
         icon: "ProductLine",
@@ -17,19 +27,6 @@ export const UseItemInfoAdminPanel = () => {
         text: "خط تولید جزئی",
         icon: "ProductLinePart",
         to: "/admin/productLinePart",
-      },
-      "دستگاه ها": { text: "دستگاه ها", icon: "Devices", to: "/admin/devices" },
-      "عملگر": { text: "عملگر", icon: "Operation", to: "/admin/operation" },
-      "نوع اطلاعات": {
-        text: "نوع اطلاعات",
-        icon: "DataType",
-        to: "/admin/dataType",
-      },
-      دسترسی: { text: "دسترسی", icon: "Permission", to: "/admin/permission" },
-      "آپلود عکس": {
-        text: "آپلود عکس",
-        icon: "UploadImage",
-        to: "/admin/uploadImage",
       },
       هشدار: {
         text: "هشدار",
@@ -51,11 +48,18 @@ export const UseItemInfoAdminPanel = () => {
         icon: "FunctionParameter",
         to: "/admin/functionParameter"
       },
+      مخاطبین: {text: "مخاطبین", icon: "Contacts", to: "/admin/contacts"},
+      "عملگر": { text: "عملگر", icon: "Operation", to: "/admin/operation" },
+      دسترسی: { text: "دسترسی", icon: "Permission", to: "/admin/permission" },
       "تاریخچه پیامک ها": {
         text: "تاریخچه پیامک ها",
         icon: "SmsLog",
         to: "/admin/smsLog"
       },
+      گزارش: { text: "گزارش", icon: "Report", to: "/admin/report" },
+      زیربازه: { text: "زیربازه", icon: "Interval", to: "/admin/interval" },
+      "ورودی گزارشات": { text: "ورودی گزارشات", icon: "InputItem", to: "/admin/inputItem" },
+      "خروجی گزارشات": { text: "خروجی گزارشات", icon: "OutputItem", to: "/admin/outputItem" },
     }),
     []
   );

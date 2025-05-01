@@ -25,10 +25,18 @@ import {
   AlarmDetail,
   Contacts,
   Operation,
-  SmsLog
+  SmsLog,
+  Interval,
+  Report,
+  InputItem,
+  OutputItem,
 } from "../../../public/assets/logo/ItemMenuAdmin";
 // **************************** Importing the (LOGOS) of all existing factories ****************************
-import { RasamDark, RasamLight, Setare } from "../../../public/assets/logo/company";
+import {
+  RasamDark,
+  RasamLight,
+  Setare,
+} from "../../../public/assets/logo/company";
 // ************************************* Importing (FOOTER ITEM) FIXED *************************************
 import { IconSettings, IconLogout } from "@tabler/icons-react";
 
@@ -74,7 +82,11 @@ export const iconMapForAdminPanel: Record<string, React.FC<IconProps>> = {
   AlarmDetail: AlarmDetail,
   Contacts: Contacts,
   Operation: Operation,
-  SmsLog: SmsLog
+  SmsLog: SmsLog,
+  Report: Report,
+  Interval: Interval,
+  InputItem: InputItem,
+  OutputItem: OutputItem,
   // Add other mappings as necessary
 };
 // *******************************************************************************
@@ -93,5 +105,5 @@ export const FooterIcons = () => {
 export const companyMap: Record<string, React.FC<logoProps>> = {
   Setare: Setare,
   RasamLight: RasamLight,
-  RasamDark: RasamDark
+  RasamDark: RasamDark,
 };

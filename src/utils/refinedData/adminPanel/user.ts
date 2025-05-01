@@ -1,17 +1,5 @@
 import { z } from "zod";
-
-export const userInitialData = {
-    data: {
-      count: 0,
-      next: null,
-      previous: null,
-      results: [],
-    },
-    status_code: 200,
-    success: true,
-    messages: "",
-  } as const;
-  
+import { initialData } from "./initialData/initialData";
 
   export const arrayOfUser = z.object({
     data: z.object({
@@ -33,7 +21,6 @@ export const userInitialData = {
 
 export function userSanitizer(rawData: unknown) {
   const serverSchema = arrayOfUser.safeParse(rawData);
-
-  return serverSchema.success ? serverSchema.data.data.results : userInitialData.data.results;
+  return serverSchema.success ? serverSchema.data.data.results : initialData.data.results;
 }
 

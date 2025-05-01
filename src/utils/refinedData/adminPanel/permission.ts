@@ -1,14 +1,5 @@
 import { z } from "zod";
-
-export const permissionInitialData = {
-    data: {
-      results: [],
-    },
-    status_code: 200,
-    success: true,
-    messages: "",
-  } as const;
-  
+import { initialData } from "./initialData/initialData";
 
   export const arrayOfPermission = z.object({
     data: z.object({
@@ -29,6 +20,6 @@ export const permissionInitialData = {
 export function permissionSanitizer(rawData: unknown) {
   const serverSchema = arrayOfPermission.safeParse(rawData);
 
-  return serverSchema.success ? serverSchema.data.data.results : permissionInitialData.data.results;
+  return serverSchema.success ? serverSchema.data.data.results : initialData.data.results;
 }
 

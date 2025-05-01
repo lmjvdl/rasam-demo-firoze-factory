@@ -1,14 +1,5 @@
 import { z } from "zod";
-
-export const groupInitialData = {
-    data: {
-      results: [],
-    },
-    status_code: 200,
-    success: true,
-    messages: "",
-  } as const;
-  
+import { initialData } from "./initialData/initialData";
 
   export const arrayOfGroup = z.object({
     data: z.object({
@@ -28,6 +19,6 @@ export const groupInitialData = {
 export function groupSanitizer(rawData: unknown) {
   const serverSchema = arrayOfGroup.safeParse(rawData);
 
-  return serverSchema.success ? serverSchema.data.data.results : groupInitialData.data.results;
+  return serverSchema.success ? serverSchema.data.data.results : initialData.data.results;
 }
 

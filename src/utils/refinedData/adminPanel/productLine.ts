@@ -1,18 +1,5 @@
 import { z } from "zod";
-
-export const productLineInitialData = {
-    data: {
-      count: 0,
-      next: null,
-      previous: null,
-      page_size: 0,
-      results: [],
-    },
-    status_code: 200,
-    success: true,
-    messages: "",
-  } as const;
-  
+import { initialData } from "./initialData/initialData";
 
   export const arrayOfProductLine = z.object({
     data: z.object({
@@ -35,6 +22,6 @@ export const productLineInitialData = {
 export function productLineSanitizer(rawData: unknown) {
   const serverSchema = arrayOfProductLine.safeParse(rawData);
 
-  return serverSchema.success ? serverSchema.data.data.results : productLineInitialData.data.results;
+  return serverSchema.success ? serverSchema.data.data.results : initialData.data.results;
 }
 
