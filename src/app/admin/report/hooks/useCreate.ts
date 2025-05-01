@@ -1,15 +1,18 @@
 import { fetchWithErrorForCreate } from "@/utils/dataFetching/fetchWithError";
-import dataTypeUrls from "@/utils/url/adminPanel/dataType/dataTypeUrl";
+import reportUrls from "@/utils/url/adminPanel/report/reportUrl";
 import { z } from "zod";
 
-const dataTypeSchema = z.object({
+const reportSchema = z.object({
   name: z.string(),
-  json_field: z.string(),
-  description: z.string().nullable().optional(),
+  input_items: z.number().array(),
+  ouput_item: z.number(),
+  intervals: z.number().array(),
+  api_func: z.string(),
+  product_line_part: z.number()
 });
 
-export const createNewDataType = async (data: unknown) => {
-  const validationResult = dataTypeSchema.safeParse(data);
+export const createNewReport = async (data: unknown) => {
+  const validationResult = reportSchema.safeParse(data);
 
   if (!validationResult.success) {
     return { success: false, error: validationResult.error.format() };
@@ -17,15 +20,11 @@ export const createNewDataType = async (data: unknown) => {
 
   const processedData = {
     ...validationResult.data,
-    description:
-      validationResult.data.description === ""
-        ? null
-        : validationResult.data.description,
   };
 
   try {
     const response = await fetchWithErrorForCreate(
-      `${dataTypeUrls.createDataType}`,
+      `${reportUrls.createReport}`,
       {
         method: "POST",
         body: JSON.stringify(processedData),

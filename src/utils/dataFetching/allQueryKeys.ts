@@ -106,6 +106,10 @@ const allQueryKeys = {
       list: ["ADMIN_PANEL", "REPORT", "VIEW"],
       delete: ["ADMIN_PANEL", "REPORT", "DELETE"],
       update: ["ADMIN_PANEL", "REPORT", "UPDATE"],
+      input_items_list: ["ADMIN_PANEL", "REPORT", "VIEW", "INPUT_ITEMS_LIST"],
+      output_items_list: ["ADMIN_PANEL", "REPORT", "VIEW", "OUTPUT_ITEM_LIST"],
+      intervals_list: ["ADMIN_PANEL", "REPORT", "VIEW", "INTERVALS"],
+      product_line_part_list: ["ADMIN_PANEL", "REPORT", "VIEW", "PRODUCT_LINE_PART_LIST"],
     },
     interval: {
       list: ["ADMIN_PANEL", "INTERVAL", "VIEW"],

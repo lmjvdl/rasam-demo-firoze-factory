@@ -1,32 +1,32 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { fetchWithErrorForDelete } from "@/utils/dataFetching/fetchWithError";
-import dataTypeUrls from "@/utils/url/adminPanel/dataType/dataTypeUrl";
+import reportUrls from "@/utils/url/adminPanel/report/reportUrl";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import { useToast } from "@/hooks/ui/useToast";
 
-const useDeleteDataType = () => {
+const useDeleteReport = () => {
   const queryClient = useQueryClient();
   const { showToast } = useToast();
 
-  const deleteDataTypeMutation = useMutation({
+  const deleteReportMutation = useMutation({
     mutationFn: async (id: number) => {
-      return fetchWithErrorForDelete(dataTypeUrls.deleteDataType(id), {
+      return fetchWithErrorForDelete(reportUrls.deleteReport(id), {
         method: "DELETE",
       });
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: allQueryKeys.adminPanel.dataType.delete,
-      }); // تغییر کلید query به کلید مربوط به data type
+        queryKey: allQueryKeys.adminPanel.report.delete,
+      }); 
     },
     onError: () => {
-      showToast("خطایی در حذف نوع داده رخ داد.", "error");
+      showToast("خطایی در حذف گزارش رخ داد.", "error");
     },
   });
 
   return {
-    deleteDataTypeMutation,
+    deleteReportMutation,
   };
 };
 
-export default useDeleteDataType;
+export default useDeleteReport;

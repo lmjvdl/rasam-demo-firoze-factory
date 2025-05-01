@@ -3,23 +3,32 @@ import { fetchWithErrorWithAlarm } from "@/utils/dataFetching/fetchWithError";
 import dataTypeUrls from "@/utils/url/adminPanel/dataType/dataTypeUrl";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import { useToast } from "@/hooks/ui/useToast";
+import { extractId, extractIds } from "@/utils/formatters/extractId";
 
-export type DatatypeUpdateSchema = {
+export type ReportUpdateSchema = {
   id: number;
   name: string;
-  json_field: string;
-  description?: string;
+  input_items: { id: number; name: string }[];
+  ouput_item: { id: number; name: string };
+  intervals: { id: number; name: string }[];
+  api_func: string;
+  product_line_part: { id: number; name: string };
 };
 
 const useUpdate = () => {
   const queryClient = useQueryClient();
   const { showToast } = useToast();
 
-  const updateDataTypeMutation = useMutation({
-    mutationFn: async ({ id, ...updatedData }: DatatypeUpdateSchema) => {
+  const updateReportMutation = useMutation({
+    mutationFn: async ({ id, input_items, ouput_item, intervals, product_line_part,...updatedData }: ReportUpdateSchema) => {
       return fetchWithErrorWithAlarm(dataTypeUrls.editDataType(id), {
         method: "PUT",
-        body: JSON.stringify(updatedData),
+        body: JSON.stringify({...updatedData, 
+          input_items: extractIds(input_items),
+          output_item: extractId(ouput_item),
+          intervals: extractIds(intervals),
+          product_line_part: extractId(product_line_part)
+        }),
       });
     },
     onSuccess: () => {
@@ -31,7 +40,7 @@ const useUpdate = () => {
   });
 
   return {
-    updateDataTypeMutation,
+    updateReportMutation,
   };
 };
 

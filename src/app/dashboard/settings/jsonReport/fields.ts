@@ -1,4 +1,4 @@
-import useDeviceQuery from "@/app/admin/alarm/hooks/useDeviceList";
+import useDeviceQuery from "@/app/admin/operation/hooks/useDeviceList";
 
 export const getFormFields = () => {
     const getDeviceList = useDeviceQuery();

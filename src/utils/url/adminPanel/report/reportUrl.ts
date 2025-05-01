@@ -1,31 +1,32 @@
 import Url from "@/utils/dataFetching/urls";
 
-class OperationUrls extends Url {
+class ReportUrls extends Url {
   public constructor() {
     super();
-    this.baseUrlPath += "/devices/aggregate";
+    this.baseUrlPath += "/reports/report";
   }
-  public get createOperation() {
+
+  public get createReport() {
     const basePath = `${this.baseUrlPath}/create/`;
     return new URL(basePath, this.origin);
   }
 
-  public get listOperation() {
+  public get listReport() {
     const basePath = `${this.baseUrlPath}/list/`;
     return new URL(basePath, this.origin);
   }
 
-  public deleteOperation(id: number) {
-    const basePath = `${this.baseUrlPath}/${id}/`;
+  public deleteReport(id: number) {
+    const basePath = `${this.baseUrlPath}/${id}`;
     return new URL(basePath, this.origin).toString();
   }
 
-  public editOperation(id: number) {
-    const basePath = `${this.baseUrlPath}/${id}/`;
+  public editReport(id: number) {
+    const basePath = `${this.baseUrlPath}/${id}`;
     return new URL(basePath, this.origin).toString();
   }
 }
 
-const operationUrls = new OperationUrls();
+const reportUrls = new ReportUrls();
 
-export default operationUrls;
+export default reportUrls;

@@ -1,31 +1,32 @@
 import Url from "@/utils/dataFetching/urls";
 
-class OperationUrls extends Url {
+class IntervalUrls extends Url {
   public constructor() {
     super();
-    this.baseUrlPath += "/devices/aggregate";
+    this.baseUrlPath += "/reports/interval";
   }
-  public get createOperation() {
+
+  public get createInterval() {
     const basePath = `${this.baseUrlPath}/create/`;
     return new URL(basePath, this.origin);
   }
 
-  public get listOperation() {
+  public get listInterval() {
     const basePath = `${this.baseUrlPath}/list/`;
     return new URL(basePath, this.origin);
   }
 
-  public deleteOperation(id: number) {
-    const basePath = `${this.baseUrlPath}/${id}/`;
+  public deleteInterval(id: number) {
+    const basePath = `${this.baseUrlPath}/${id}`;
     return new URL(basePath, this.origin).toString();
   }
 
-  public editOperation(id: number) {
-    const basePath = `${this.baseUrlPath}/${id}/`;
+  public editInterval(id: number) {
+    const basePath = `${this.baseUrlPath}/${id}`;
     return new URL(basePath, this.origin).toString();
   }
 }
 
-const operationUrls = new OperationUrls();
+const intervalUrls = new IntervalUrls();
 
-export default operationUrls;
+export default intervalUrls;
