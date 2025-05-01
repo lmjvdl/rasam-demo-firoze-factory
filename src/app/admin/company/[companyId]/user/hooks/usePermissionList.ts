@@ -2,14 +2,15 @@ import { useQuery } from "@tanstack/react-query";
 import allQueryKeys from "../../../../../../utils/dataFetching/allQueryKeys";
 import fetchWithError from "../../../../../../utils/dataFetching/fetchWithError";
 import permissionUrls from "../../../../../../utils/url/adminPanel/permission/permission";
-import { permissionInitialData, permissionSanitizer } from "../../../../../../utils/refinedData/adminPanel/permission";
+import { initialData } from "@/utils/refinedData/adminPanel/initialData/initialData";
+import { listSanitizer } from "@/utils/refinedData/adminPanel/listSanitizer";
 
 
 export default function usePermissionQuery() {
   return useQuery({
     queryKey: allQueryKeys.adminPanel.userCompany.permission_list,
-    initialData: permissionInitialData,
-    select: permissionSanitizer,
+    initialData: initialData,
+    select: listSanitizer,
     queryFn: ({ signal }) => fetchWithError(permissionUrls.listPermission, { signal }),   
     retry: false,
     refetchIntervalInBackground: true,
