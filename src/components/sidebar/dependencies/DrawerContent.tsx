@@ -35,6 +35,7 @@ const DrawerContent = ({
         sx={{
           flex: 1,
           overflowY: "auto",
+          overflowX: "hidden",
           direction: "rtl",
           
           "& > *": {

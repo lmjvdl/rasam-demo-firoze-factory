@@ -1,4 +1,3 @@
-"use client";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import { Dispatch, SetStateAction } from "react";
@@ -6,28 +5,43 @@ import SwitchThemeButton from "./SwitchThemeButton";
 import WelcomeAdminPanel from "./WelcomeAdminPanel";
 import WelcomeUserPanel from "./WelcomeUserPanel";
 import ControlMobileHeader from "./ControlMobileHeader";
-
-export const drawerWidth = 240;
+import { Box, useMediaQuery, useTheme } from "@mui/material";
 
 export default function Header({
   mobileOpen,
   setMobileOpen,
   factoryName,
   isAdmin,
+  drawerWidth,
+  collapsedWidth,
+  desktopOpen,
 }: {
   mobileOpen: boolean;
   setMobileOpen: Dispatch<SetStateAction<boolean>>;
   factoryName?: string;
   isAdmin: boolean;
+  drawerWidth: number;
+  collapsedWidth: number;
+  desktopOpen: boolean;
 }) {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
+  const currentDrawerWidth = isMobile ? 0 : desktopOpen ? drawerWidth : collapsedWidth;
+  const appBarWidth = `calc(100% - ${currentDrawerWidth}px)`;
+
   return (
     <AppBar
       position="fixed"
       sx={{
-        width: { sm: `calc(100% - ${drawerWidth}px)` },
-        ml: { sm: `${drawerWidth}px` },
+        width: isMobile ? "100%" : appBarWidth,
+        ml: isMobile ? 0 : `${currentDrawerWidth}px`,
         boxShadow: 0,
-        bgcolor: "background.defaultChannel",
+        bgcolor: "background.paper",
+        borderRadius: "7px",
+        margin: "7px",
+        transition: "all 0.3s ease-in-out",
+        zIndex: (theme) => theme.zIndex.drawer + 1,
       }}
       enableColorOnDark
     >
@@ -38,9 +52,12 @@ export default function Header({
           alignItems: "center",
         }}
       >
-        <ControlMobileHeader mobileOpen={mobileOpen} setMobileOpen={setMobileOpen}/>
+        <ControlMobileHeader
+          mobileOpen={mobileOpen}
+          setMobileOpen={setMobileOpen}
+        />
         {!isAdmin ? (
-          <WelcomeUserPanel factoryName={factoryName}/>
+          <WelcomeUserPanel factoryName={factoryName} />
         ) : (
           <WelcomeAdminPanel />
         )}

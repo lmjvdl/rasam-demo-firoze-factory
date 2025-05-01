@@ -12,17 +12,22 @@ const Sidebar = ({
   mobileOpen,
   setMobileOpen,
   isAdmin,
+  drawerWidth,
+  collapsedWidth,
+  desktopOpen,
+  setDesktopOpen,
 }: {
   mobileOpen: boolean;
   setMobileOpen: Dispatch<SetStateAction<boolean>>;
   isAdmin: boolean;
+  drawerWidth: number;
+  collapsedWidth: number;
+  desktopOpen: boolean;
+  setDesktopOpen: Dispatch<SetStateAction<boolean>>;
 }) => {
   const router = useRouter();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const drawerWidth = 240;
-  const collapsedWidth = 47;
-  const [desktopOpen, setDesktopOpen] = useState(true);
   
   const handleDrawerClose = () => {
     setMobileOpen(false);
@@ -61,7 +66,7 @@ const Sidebar = ({
 
   const ToggleButton = styled(IconButton)(({ theme }) => ({
     position: "fixed",
-    left: desktopOpen ? drawerWidth - 20 : isMobile ? '50%' : 0,
+    left: desktopOpen ? `calc(${drawerWidth}px - 20px)` : isMobile ? '70%' : '20px',
     bottom: "365px",
     zIndex: theme.zIndex.drawer + 1,
     backgroundColor: theme.palette.background.paper,
@@ -94,6 +99,7 @@ const Sidebar = ({
           easing: theme.transitions.easing.sharp,
           duration: theme.transitions.duration.leavingScreen,
         }),
+        zIndex: 1000
       }}
       aria-label="mailbox folders"
     >

@@ -5,7 +5,7 @@ import "../styles/globals.css";
 import { vazir } from "../../public/fonts/Fonts";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
-import Header, { drawerWidth } from "@/components/header/Header";
+import Header from "@/components/header/Header";
 import { Box, Stack } from "@mui/material";
 import Sidebar from "@/components/sidebar/Sidebar";
 import { useAuthStore } from "@/hooks/context/authStore";
@@ -19,9 +19,10 @@ export default function RootLayout({
   const [mobileOpen, setMobileOpen] = useState<boolean>(false);
   const isAdmin = useAuthStore((state) => state.isAdmin);
   const pathname = usePathname();
-
   const isLoginPage = pathname === "/login";
-
+  const drawerWidth = 240;
+  const collapsedWidth = 47;
+  const [desktopOpen, setDesktopOpen] = useState(true);
   return (
     <html lang="fa" dir="rtl" className={`${vazir.variable} font-sans`}>
       <head>
@@ -45,55 +46,73 @@ export default function RootLayout({
       </head>
       <body>
         {/* <ErrorBoundary FallbackComponent={ErrorPage}> */}
-          {/* <React.StrictMode> */}
-            <Providers>
-              <ToastProvider />
-              {isLoginPage ? (
-                <Box component="main" width="100%" height="100%">
+        {/* <React.StrictMode> */}
+        <Providers>
+          <ToastProvider />
+          {isLoginPage ? (
+            <Box component="main" width="100%" height="100%">
+              {children}
+            </Box>
+          ) : (
+            <Stack
+              direction={"row"}
+              width={"100%"}
+              height={"100vh"}
+              bgcolor={"background.default"}
+              overflow="hidden"
+            >
+              <Sidebar
+                desktopOpen={desktopOpen}
+                setDesktopOpen={setDesktopOpen}
+                mobileOpen={mobileOpen}
+                setMobileOpen={setMobileOpen}
+                isAdmin={isAdmin}
+                drawerWidth={drawerWidth}
+                collapsedWidth={collapsedWidth}
+              />
+              <Stack
+                width={"100%"}
+                height={"calc(100% - 64px)"}
+                component="main"
+                sx={{
+                  width: { sm: `calc(100% - ${drawerWidth}px)` },
+                  flexGrow: 1,
+                  mt: "64px",
+                  overflow: "hidden",
+                }}
+              >
+                <Sidebar
+                  mobileOpen={mobileOpen}
+                  setMobileOpen={setMobileOpen}
+                  isAdmin={isAdmin}
+                  drawerWidth={drawerWidth}
+                  collapsedWidth={collapsedWidth}
+                  desktopOpen={desktopOpen}
+                  setDesktopOpen={setDesktopOpen}
+                />
+
+                <Header
+                  mobileOpen={mobileOpen}
+                  setMobileOpen={setMobileOpen}
+                  isAdmin={isAdmin}
+                  drawerWidth={drawerWidth}
+                  collapsedWidth={collapsedWidth}
+                  desktopOpen={desktopOpen}
+                />
+
+                <Box
+                  component={"main"}
+                  width={"100%"}
+                  height={"100%"}
+                  sx={{ flexGrow: 1, p: 2 }}
+                >
                   {children}
                 </Box>
-              ) : (
-                <Stack
-                  direction={"row"}
-                  width={"100%"}
-                  height={"100vh"}
-                  bgcolor={"background.default"}
-                  overflow="hidden"
-                >
-                  <Sidebar
-                    mobileOpen={mobileOpen}
-                    setMobileOpen={setMobileOpen}
-                    isAdmin={isAdmin}
-                  />
-                  <Stack
-                    width={"100%"}
-                    height={"calc(100% - 64px)"}
-                    component="main"
-                    sx={{
-                      width: { sm: `calc(100% - ${drawerWidth}px)` },
-                      flexGrow: 1,
-                      mt: "64px",
-                      overflow: "hidden"
-                    }}
-                  >
-                    <Header
-                      mobileOpen={mobileOpen}
-                      setMobileOpen={setMobileOpen}
-                      isAdmin={isAdmin}
-                    />
-                    <Box
-                      component={"main"}
-                      width={"100%"}
-                      height={"100%"}
-                      sx={{ flexGrow: 1, p: 2, }}
-                    >
-                      {children}
-                    </Box>
-                  </Stack>
-                </Stack>
-              )}
-            </Providers>
-          {/* </React.StrictMode> */}
+              </Stack>
+            </Stack>
+          )}
+        </Providers>
+        {/* </React.StrictMode> */}
         {/* </ErrorBoundary> */}
       </body>
     </html>
