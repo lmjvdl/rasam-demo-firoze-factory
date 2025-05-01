@@ -23,8 +23,8 @@ const useJsonReport = () => {
         `${downloadFileUrls.jsonDownload}`,
         {
           devices: params.devices.join(", "),
-          start_time: unixToIso(params.start_time.unix),
-          end_time: unixToIso(params.end_time.unix),
+          start_date: unixToIso(params.start_time.unix),
+          end_date: unixToIso(params.end_time.unix),
         },
         `گزارش JSON از ${gregorianToJalali(unixToIso(params.start_time.unix))} تا ${gregorianToJalali(unixToIso(params.end_time.unix))}`
       );

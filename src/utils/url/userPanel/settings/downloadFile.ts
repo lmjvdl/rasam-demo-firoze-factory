@@ -7,7 +7,7 @@ class DownloadFileUrls extends Url {
   }
 
   public get jsonDownload() {
-    const basePath = `${this.baseUrlPath}/json/`;
+    const basePath = `${this.baseUrlPath}/json`;
     return new URL(basePath, this.origin);
   }
 
