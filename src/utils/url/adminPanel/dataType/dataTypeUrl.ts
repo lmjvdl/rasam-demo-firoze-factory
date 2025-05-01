@@ -27,6 +27,6 @@ class DataTypeUrls extends Url {
   }
 }
 
-const userUrls = new DataTypeUrls();
+const dataTypeUrls = new DataTypeUrls();
 
-export default userUrls;
+export default dataTypeUrls;

@@ -11,8 +11,10 @@ import useUpdate from "./hooks/useUpdate";
 import ViewDialog from "@/components/adminPanelComponent/viewProcess/ViewDialog";
 import EditDialog from "@/components/adminPanelComponent/viewProcess/EditDialog";
 import DeleteDialog from "@/components/adminPanelComponent/viewProcess/DeleteDialog";
-import useAlarmQuery from "./hooks/useAlarmList";
-import useParameterQuery from "./hooks/useParameterList";
+import useDataQuery from "@/hooks/adminDataQuery/useDataQuery";
+import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
+import alarmUrls from "@/utils/url/adminPanel/alarm/alarmUrl";
+import functionParameterUrls from "@/utils/url/adminPanel/functionParameter/functionParameterUrl";
 
 const AllContentAlarmDetail: React.FC = () => {
   const [data, setData] = useState<ResponseSchema>(PrevDataInitial);
@@ -24,20 +26,33 @@ const AllContentAlarmDetail: React.FC = () => {
   const [totalData, setTotalData] = useState<number>(0);
   const [nextPage, setNextPage] = useState<null | string>(null);
 
-  const alarmList = useAlarmQuery().data
-  ? useAlarmQuery().data.map((alarm) => ({
-      id: alarm.id,
-      value: alarm.id, 
-      label: alarm.name, 
-    }))
-  : [];
-  const parameterList = useParameterQuery().data
-  ? useParameterQuery().data.map((parameter) => ({
-      id: parameter.id,
-      value: parameter.id, 
-      label: parameter.name, 
-    }))
-  : [];
+  const alarmList = useDataQuery(
+    allQueryKeys.adminPanel.alarmDetail.alarm_list,
+    alarmUrls.listAlarm
+  ).data
+    ? useDataQuery(
+        allQueryKeys.adminPanel.alarmDetail.alarm_list,
+        alarmUrls.listAlarm
+      ).data.map((alarm) => ({
+        id: alarm.id,
+        value: alarm.id,
+        label: alarm.name,
+      }))
+    : [];
+
+  const parameterList = useDataQuery(
+    allQueryKeys.adminPanel.alarmDetail.parameter_list,
+    functionParameterUrls.listFunctionParameter
+  ).data
+    ? useDataQuery(
+        allQueryKeys.adminPanel.alarmDetail.parameter_list,
+        functionParameterUrls.listFunctionParameter
+      ).data.map((parameter) => ({
+        id: parameter.id,
+        value: parameter.id,
+        label: parameter.name,
+      }))
+    : [];
 
   const getList = getAlarmDetailList(pageNumber, 8, nextPage);
   const { deleteAlarmDetailMutation } = useDelete();
@@ -99,21 +114,23 @@ const AllContentAlarmDetail: React.FC = () => {
     if (selectedRow?.id) {
       deleteAlarmDetailMutation.mutate(selectedRow.id, {
         onSuccess: () => {
-          setData(prevData => {
+          setData((prevData) => {
             if (prevData?.data) {
               return {
                 ...prevData,
                 data: {
                   ...prevData.data,
-                  results: prevData.data.results.filter(row => row.id !== selectedRow.id),
-                  count: prevData.data.count - 1
-                }
+                  results: prevData.data.results.filter(
+                    (row) => row.id !== selectedRow.id
+                  ),
+                  count: prevData.data.count - 1,
+                },
               };
             }
             return prevData;
           });
           setDeleteOpen(false);
-        }
+        },
       });
     }
   };

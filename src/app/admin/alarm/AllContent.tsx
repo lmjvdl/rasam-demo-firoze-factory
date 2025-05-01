@@ -11,10 +11,12 @@ import useUpdate from "./hooks/useUpdate";
 import ViewDialog from "@/components/adminPanelComponent/viewProcess/ViewDialog";
 import EditDialog from "@/components/adminPanelComponent/viewProcess/EditDialog";
 import DeleteDialog from "@/components/adminPanelComponent/viewProcess/DeleteDialog";
-import useFunctionQuery from "./hooks/useFunctionList";
-import useDeviceQuery from "./hooks/useDeviceList";
-import useDataTypeQuery from "./hooks/useDataTypeList";
-import useContactsQuery from "./hooks/useContactsList";
+import useDataQuery from "@/hooks/adminDataQuery/useDataQuery";
+import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
+import functionUrls from "@/utils/url/adminPanel/function/functionUrl";
+import dataTypeUrls from "@/utils/url/adminPanel/dataType/dataTypeUrl";
+import deviceUrls from "@/utils/url/adminPanel/device/deviceUrl";
+import contactsUrls from "@/utils/url/adminPanel/contacts/contactUrls";
 
 const AllContentAlarm: React.FC = () => {
   const [data, setData] = useState<ResponseSchema>(PrevDataInitial);
@@ -30,32 +32,59 @@ const AllContentAlarm: React.FC = () => {
   const { deleteAlarmMutation } = useDelete();
   const { updateAlarmMutation } = useUpdate();
 
-  const functionList = useFunctionQuery().data
-    ? useFunctionQuery().data.map((func) => ({
+  const functionList = useDataQuery(
+    allQueryKeys.adminPanel.alarm.function_list,
+    functionUrls.listFunction
+  ).data
+    ? useDataQuery(
+        allQueryKeys.adminPanel.alarm.function_list,
+        functionUrls.listFunction
+      ).data.map((func) => ({
         id: func.id,
         value: func.id,
         label: func.name,
       }))
     : [];
-  const deviceList = useDeviceQuery().data
-    ? useDeviceQuery().data.map((device) => ({
+
+  const deviceList = useDataQuery(
+    allQueryKeys.adminPanel.alarm.device_list,
+    deviceUrls.listDevice
+  ).data
+    ? useDataQuery(
+        allQueryKeys.adminPanel.alarm.device_list,
+        deviceUrls.listDevice
+      ).data.map((device) => ({
         id: device.id,
         value: device.id,
         label: device.name,
       }))
     : [];
-  const dataTypeList = useDataTypeQuery().data
-    ? useDataTypeQuery().data.map((dataType) => ({
+
+  const dataTypeList = useDataQuery(
+    allQueryKeys.adminPanel.alarm.data_type_list,
+    dataTypeUrls.listDataType
+  ).data
+    ? useDataQuery(
+        allQueryKeys.adminPanel.alarm.data_type_list,
+        dataTypeUrls.listDataType
+      ).data.map((dataType) => ({
         id: dataType.id,
         value: dataType.id,
         label: dataType.name,
       }))
     : [];
-    const contactsList = useContactsQuery().data
-    ? useContactsQuery().data.map((contact) => ({
+
+  const contactsList = useDataQuery(
+    allQueryKeys.adminPanel.alarm.contacts_list,
+    contactsUrls.listContacts
+  ).data
+    ? useDataQuery(
+        allQueryKeys.adminPanel.alarm.contacts_list,
+        contactsUrls.listContacts
+      ).data.map((contact) => ({
         id: contact.id,
-        value: contact.id, 
-        label: contact.name, 
+        value: contact.id,
+        label: contact.name,
       }))
     : [];
 
@@ -115,21 +144,23 @@ const AllContentAlarm: React.FC = () => {
     if (selectedRow?.id) {
       deleteAlarmMutation.mutate(selectedRow.id, {
         onSuccess: () => {
-          setData(prevData => {
+          setData((prevData) => {
             if (prevData?.data) {
               return {
                 ...prevData,
                 data: {
                   ...prevData.data,
-                  results: prevData.data.results.filter(row => row.id !== selectedRow.id),
-                  count: prevData.data.count - 1
-                }
+                  results: prevData.data.results.filter(
+                    (row) => row.id !== selectedRow.id
+                  ),
+                  count: prevData.data.count - 1,
+                },
               };
             }
             return prevData;
           });
           setDeleteOpen(false);
-        }
+        },
       });
     }
   };
@@ -155,7 +186,12 @@ const AllContentAlarm: React.FC = () => {
         onClose={() => setViewOpen(false)}
         rowData={selectedRow}
         titles={dynamicColumns}
-        objectAttributes={["function_info", "device_info", "type_info", "receiver_info"]}
+        objectAttributes={[
+          "function_info",
+          "device_info",
+          "type_info",
+          "receiver_info",
+        ]}
       />
       <EditDialog
         open={editOpen}
@@ -164,7 +200,12 @@ const AllContentAlarm: React.FC = () => {
         rowData={selectedRow}
         titles={filteredColumnsForEdit}
         extraOptions={{ functionList, deviceList, dataTypeList, contactsList }}
-        objectAttributes={["function_info", "device_info", "type_info", "receiver_info"]}
+        objectAttributes={[
+          "function_info",
+          "device_info",
+          "type_info",
+          "receiver_info",
+        ]}
       />
       <DeleteDialog
         open={deleteOpen}

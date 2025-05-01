@@ -17,7 +17,6 @@ export default function UserCompanyPage({ params }: PageProps) {
   const getPermissionsList = usePermissionQuery();
   const getGroupsList = useGroupQuery();
   
-  
   if (!companyId) return null;
 
   const handleCreateUserCompany = async (data: any) => {

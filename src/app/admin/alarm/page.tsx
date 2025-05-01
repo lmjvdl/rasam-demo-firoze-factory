@@ -1,21 +1,35 @@
 "use client";
 
+import { useState } from "react";
 import ModalForm from "@/components/adminPanelComponent/addingProcess/ModalForm";
 import MainCard from "@/components/customContiner/MainCard";
 import { createNewAlarm } from "./hooks/useCreate";
 import AllContentAlarm from "./AllContent";
-import useFunctionQuery from "./hooks/useFunctionList";
-import useDataTypeQuery from "./hooks/useDataTypeList";
-import useDeviceQuery from "./hooks/useDeviceList";
-import { useState } from "react";
-import useContactsQuery from "./hooks/useContactsList";
+import useDataQuery from "@/hooks/adminDataQuery/useDataQuery";
+import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
+import functionUrls from "@/utils/url/adminPanel/function/functionUrl";
+import contactsUrls from "@/utils/url/adminPanel/contacts/contactUrls";
+import dataTypeUrls from "@/utils/url/adminPanel/dataType/dataTypeUrl";
+import deviceUrls from "@/utils/url/adminPanel/device/deviceUrl";
 
 export default function AlarmPage() {
   const [refreshKey, setRefreshKey] = useState(0);
-  const getFunctionList = useFunctionQuery();
-  const getDataTypeList = useDataTypeQuery();
-  const getDeviceList = useDeviceQuery();
-  const getContactsList = useContactsQuery();
+  const getFunctionList = useDataQuery(
+    allQueryKeys.adminPanel.alarm.function_list,
+    functionUrls.listFunction
+  );
+  const getDataTypeList = useDataQuery(
+    allQueryKeys.adminPanel.alarm.data_type_list,
+    dataTypeUrls.listDataType
+  );
+  const getDeviceList = useDataQuery(
+    allQueryKeys.adminPanel.alarm.device_list,
+    deviceUrls.listDevice
+  );
+  const getContactsList = useDataQuery(
+    allQueryKeys.adminPanel.alarm.contacts_list,
+    contactsUrls.listContacts
+  );
 
   const handleCreateAlarm = async (data: any) => {
     const response = await createNewAlarm(data);
@@ -47,17 +61,17 @@ export default function AlarmPage() {
                 label: func.name,
                 value: func.id,
               })) || [],
-            },
+          },
           {
             name: "device",
             label: "دستگاه",
             type: "select",
             required: true,
             options:
-            getDeviceList.data?.map((device) => ({
-              label: device.name,
-              value: device.id,
-            })) || [],
+              getDeviceList.data?.map((device) => ({
+                label: device.name,
+                value: device.id,
+              })) || [],
           },
           {
             name: "type",
@@ -76,7 +90,7 @@ export default function AlarmPage() {
             type: "select",
             required: true,
             options:
-            getContactsList.data?.map((contact) => ({
+              getContactsList.data?.map((contact) => ({
                 label: contact.name,
                 value: contact.id,
               })) || [],
