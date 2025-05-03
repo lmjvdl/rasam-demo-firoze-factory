@@ -28,7 +28,7 @@ export default function Header({
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   const currentDrawerWidth = isMobile ? 0 : desktopOpen ? drawerWidth : collapsedWidth;
-  const appBarWidth = `calc(100% - ${currentDrawerWidth}px)`;
+  const appBarWidth = `calc(100% - ${currentDrawerWidth+28}px)`;
 
   return (
     <AppBar
@@ -39,8 +39,9 @@ export default function Header({
         boxShadow: 0,
         bgcolor: "background.paper",
         borderRadius: "7px",
-        margin: "7px",
-        transition: "all 0.3s ease-in-out",
+        marginRight: "14px",
+        marginY: "7px",
+        transition: "all 0.1s ease-in-out",
         zIndex: (theme) => theme.zIndex.drawer + 1,
       }}
       enableColorOnDark
