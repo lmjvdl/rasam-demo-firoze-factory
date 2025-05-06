@@ -30,6 +30,9 @@ import {
   Report,
   InputItem,
   OutputItem,
+  LiveTypes,
+  Shift,
+  Position
 } from "../../../public/assets/logo/ItemMenuAdmin";
 // **************************** Importing the (LOGOS) of all existing factories ****************************
 import {
@@ -87,6 +90,9 @@ export const iconMapForAdminPanel: Record<string, React.FC<IconProps>> = {
   Interval: Interval,
   InputItem: InputItem,
   OutputItem: OutputItem,
+  LiveTypes: LiveTypes,
+  Shift: Shift,
+  Position: Position,
   // Add other mappings as necessary
 };
 // *******************************************************************************

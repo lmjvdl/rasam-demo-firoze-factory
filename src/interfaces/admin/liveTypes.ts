@@ -1,10 +1,10 @@
-interface OutputType {
+interface LiveType {
     id: number; // ReadOnly
     name: string;
 }
   
-export interface OutputTypeTableProps {
-    data: OutputType[];
+export interface LiveTypeTableProps {
+    data: LiveType[];
     columns: any[];
     onView: (row: any) => void;
     onEdit: (row: any) => void;

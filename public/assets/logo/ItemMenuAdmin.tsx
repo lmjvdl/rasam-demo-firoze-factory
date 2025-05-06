@@ -484,6 +484,7 @@ export const InputItem: React.FC<IconProps> = (props) => (
     <path d="M20.2 20.2l1.8 1.8" />
   </svg>
 );
+
 // ***************************************************************************************************************************//
 
 export const OutputItem: React.FC<IconProps> = (props) => (
@@ -506,5 +507,74 @@ export const OutputItem: React.FC<IconProps> = (props) => (
     <path d="M12 13v8" />
     <path d="M8 16v5" />
     <path d="M3 11c6 0 5 -5 9 -5s3 5 9 5" />
+  </svg>
+);
+
+// ***************************************************************************************************************************//
+
+export const Shift: React.FC<IconProps> = (props) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="icon icon-tabler icons-tabler-outline icon-tabler-history"
+  >
+    <path stroke={props.stroke} fill="none" />
+    <path d="M12 8l0 4l2 2" />
+    <path d="M3.05 11a9 9 0 1 1 .5 4m-.5 5v-5h5" />
+  </svg>
+);
+
+// ***************************************************************************************************************************//
+
+export const LiveTypes: React.FC<IconProps> = (props) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="icon icon-tabler icons-tabler-outline icon-tabler-sort-ascending-small-big"
+  >
+    <path stroke={props.stroke} fill="none" />
+    <path d="M4 15l3 3l3 -3" />
+    <path d="M7 6v12" />
+    <path d="M14 5.667c0 -.369 .298 -.667 .667 -.667h2.666c.369 0 .667 .298 .667 .667v2.666a.667 .667 0 0 1 -.667 .667h-2.666a.667 .667 0 0 1 -.667 -.667v-2.666z" />
+    <path d="M14 13.167c0 -.645 .522 -1.167 1.167 -1.167h4.666c.645 0 1.167 .522 1.167 1.167v4.666c0 .645 -.522 1.167 -1.167 1.167h-4.666a1.167 1.167 0 0 1 -1.167 -1.167v-4.666z" />
+  </svg>
+);
+
+// ***************************************************************************************************************************//
+
+export const Position: React.FC<IconProps> = (props) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="icon icon-tabler icons-tabler-outline icon-tabler-replace-user"
+  >
+    <path stroke={props.stroke} fill="none" />
+    <path d="M21 11v-3c0 -.53 -.211 -1.039 -.586 -1.414c-.375 -.375 -.884 -.586 -1.414 -.586h-6m0 0l3 3m-3 -3l3 -3" />
+    <path d="M3 13.013v3c0 .53 .211 1.039 .586 1.414c.375 .375 .884 .586 1.414 .586h6m0 0l-3 -3m3 3l-3 3" />
+    <path d="M16 16.502c0 .53 .211 1.039 .586 1.414c.375 .375 .884 .586 1.414 .586c.53 0 1.039 -.211 1.414 -.586c.375 -.375 .586 -.884 .586 -1.414c0 -.53 -.211 -1.039 -.586 -1.414c-.375 -.375 -.884 -.586 -1.414 -.586c-.53 0 -1.039 .211 -1.414 .586c-.375 .375 -.586 .884 -.586 1.414z" />
+    <path d="M4 4.502c0 .53 .211 1.039 .586 1.414c.375 .375 .884 .586 1.414 .586c.53 0 1.039 -.211 1.414 -.586c.375 -.375 .586 -.884 .586 -1.414c0 -.53 -.211 -1.039 -.586 -1.414c-.375 -.375 -.884 -.586 -1.414 -.586c-.53 0 -1.039 .211 -1.414 .586c-.375 .375 -.586 .884 -.586 1.414z" />
+    <path d="M21 21.499c0 -.53 -.211 -1.039 -.586 -1.414c-.375 -.375 -.884 -.586 -1.414 -.586h-2c-.53 0 -1.039 .211 -1.414 .586c-.375 .375 -.586 .884 -.586 1.414" />
+    <path d="M9 9.499c0 -.53 -.211 -1.039 -.586 -1.414c-.375 -.375 -.884 -.586 -1.414 -.586h-2c-.53 0 -1.039 .211 -1.414 .586c-.375 .375 -.586 .884 -.586 1.414" />
   </svg>
 );

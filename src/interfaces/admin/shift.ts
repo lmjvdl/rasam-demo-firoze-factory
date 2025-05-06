@@ -1,10 +1,10 @@
-interface OutputType {
+interface Shift {
     id: number; // ReadOnly
     name: string;
 }
   
-export interface OutputTypeTableProps {
-    data: OutputType[];
+export interface ShiftTableProps {
+    data: Shift[];
     columns: any[];
     onView: (row: any) => void;
     onEdit: (row: any) => void;

@@ -1,10 +1,10 @@
-interface OutputType {
+interface Position {
     id: number; // ReadOnly
     name: string;
 }
   
-export interface OutputTypeTableProps {
-    data: OutputType[];
+export interface PositionTableProps {
+    data: Position[];
     columns: any[];
     onView: (row: any) => void;
     onEdit: (row: any) => void;

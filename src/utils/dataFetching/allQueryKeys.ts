@@ -126,7 +126,21 @@ const allQueryKeys = {
       delete: ["ADMIN_PANEL", "OUTPUT_ITEM", "DELETE"],
       update: ["ADMIN_PANEL", "OUTPUT_ITEM", "UPDATE"],
     },
-
+    liveTypes: {
+      list: ["ADMIN_PANEL", "LIVE_TYPES", "VIEW"],
+      delete: ["ADMIN_PANEL", "LIVE_TYPES", "DELETE"],
+      update: ["ADMIN_PANEL", "LIVE_TYPES", "UPDATE"],
+    },
+    shift: {
+      list: ["ADMIN_PANEL", "SHIFT", "VIEW"],
+      delete: ["ADMIN_PANEL", "SHIFT", "DELETE"],
+      update: ["ADMIN_PANEL", "SHIFT", "UPDATE"],
+    },
+    position: {
+      list: ["ADMIN_PANEL", "POSITION", "VIEW"],
+      delete: ["ADMIN_PANEL", "POSITION", "DELETE"],
+      update: ["ADMIN_PANEL", "POSITION", "UPDATE"],
+    },
   },
   userPanel: {
     preparingBody: {

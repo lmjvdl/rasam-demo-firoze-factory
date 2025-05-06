@@ -60,6 +60,9 @@ export const UseItemInfoAdminPanel = () => {
       زیربازه: { text: "زیربازه", icon: "Interval", to: "/admin/interval" },
       "ورودی گزارشات": { text: "ورودی گزارشات", icon: "InputItem", to: "/admin/inputItem" },
       "خروجی گزارشات": { text: "خروجی گزارشات", icon: "OutputItem", to: "/admin/outputItem" },
+      "نوع اطلاعات لایو": { text: "نوع اطلاعات لایو", icon: "LiveTypes", to: "/admin/liveTypes" },
+      "شیفت": { text: "شیفت", icon: "Shift", to: "/admin/shift" },
+      "سمت": { text: "سمت", icon: "Position", to: "/admin/position" },
     }),
     []
   );
