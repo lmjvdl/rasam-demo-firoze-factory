@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import fetchWithError from "@/utils/dataFetching/fetchWithError";
-import dataTypeUrls from "@/utils/url/adminPanel/dataType/dataTypeUrl";
 import { initialData } from "@/utils/refinedData/adminPanel/initialData/initialData";
 import { listSanitizer } from "@/utils/refinedData/adminPanel/listSanitizer";
+import dataTypeUrls from "@/utils/url/adminPanel/dataTypeUrl";
 
 
 export default function useDataTypeQuery() {

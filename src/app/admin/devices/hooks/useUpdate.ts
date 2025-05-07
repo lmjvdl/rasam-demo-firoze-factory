@@ -3,6 +3,7 @@ import { fetchWithErrorWithAlarm } from "@/utils/dataFetching/fetchWithError";
 import deviceUrls from "@/utils/url/adminPanel/deviceUrl";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import { useToast } from "@/hooks/ui/useToast";
+import { extractId, extractIds } from "@/utils/formatters/extractId";
 
 export type DeviceUpdateSchema = {
   id: number;
@@ -11,7 +12,7 @@ export type DeviceUpdateSchema = {
   name: string;
   code: string;
   value: number;
-  on_off_identifier: number;
+  on_off_identifier: { id: number; name: string };
 };
 
 const useUpdateDevice = () => {
@@ -19,10 +20,14 @@ const useUpdateDevice = () => {
   const { showToast } = useToast();
 
   const updateDeviceMutation = useMutation({
-    mutationFn: async ({ id, ...updatedData }: DeviceUpdateSchema) => {
+    mutationFn: async ({ id, on_off_identifier, data_type, ...updatedData }: DeviceUpdateSchema) => {
       return fetchWithErrorWithAlarm(deviceUrls.editDevice(id), {
         method: "PUT",
-        body: JSON.stringify(updatedData),
+        body: JSON.stringify({
+          ...updatedData, 
+          on_off_identifier: extractId(on_off_identifier),
+          data_type: extractIds(data_type)
+        }),
       });
     },
     onSuccess: () => {
