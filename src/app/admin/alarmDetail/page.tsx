@@ -7,8 +7,8 @@ import { createNewAlarmDetail } from "./hooks/useCreate";
 import AllContentAlarmDetail from "./AllContent";
 import useDataQuery from "@/hooks/adminDataQuery/useDataQuery";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
-import alarmUrls from "@/utils/url/adminPanel/alarm/alarmUrl";
-import functionParameterUrls from "@/utils/url/adminPanel/functionParameter/functionParameterUrl";
+import alarmUrls from "@/utils/url/adminPanel/alarmUrl";
+import functionParameterUrls from "@/utils/url/adminPanel/functionParameterUrl";
 
 export default function AlarmDetailPage() {
   const [refreshKey, setRefreshKey] = useState(0);

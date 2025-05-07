@@ -1,5 +1,5 @@
 import { fetchWithErrorForCreate } from "@/utils/dataFetching/fetchWithError";
-import functionParameterUrls from "@/utils/url/adminPanel/functionParameter/functionParameterUrl";
+import functionParameterUrls from "@/utils/url/adminPanel/functionParameterUrl";
 import { z } from "zod";
 
 const functionParameterSchema = z.object({

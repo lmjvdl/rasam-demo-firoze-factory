@@ -1,5 +1,5 @@
 import { uploadFileWithError } from "@/utils/dataFetching/fetchWithError";
-import imageUploadUrls from "@/utils/url/adminPanel/imageUpload/imageUrl";
+import imageUploadUrls from "@/utils/url/adminPanel/imageUrl";
 
 export const uploadIcon = async (file: File, name: string, theme: string) => {
   const formData = new FormData();

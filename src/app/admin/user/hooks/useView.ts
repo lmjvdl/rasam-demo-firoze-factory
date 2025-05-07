@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import fetchWithError from "@/utils/dataFetching/fetchWithError";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import { useToast } from "@/hooks/ui/useToast";
-import userUrls from "@/utils/url/adminPanel/user/userUrl";
+import userUrls from "@/utils/url/adminPanel/userUrl";
 
 // Updated function to handle GET requests
 export default function getUerList(pages: number, pageSize: number, URL: string | null) {

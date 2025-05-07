@@ -7,10 +7,10 @@ import { createNewAlarm } from "./hooks/useCreate";
 import AllContentAlarm from "./AllContent";
 import useDataQuery from "@/hooks/adminDataQuery/useDataQuery";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
-import functionUrls from "@/utils/url/adminPanel/function/functionUrl";
-import contactsUrls from "@/utils/url/adminPanel/contacts/contactUrls";
-import dataTypeUrls from "@/utils/url/adminPanel/dataType/dataTypeUrl";
-import deviceUrls from "@/utils/url/adminPanel/device/deviceUrl";
+import functionUrls from "@/utils/url/adminPanel/functionUrl";
+import contactsUrls from "@/utils/url/adminPanel/contactUrl";
+import deviceUrls from "@/utils/url/adminPanel/deviceUrl";
+import dataTypeUrls from "@/utils/url/adminPanel/dataTypeUrl";
 
 export default function AlarmPage() {
   const [refreshKey, setRefreshKey] = useState(0);

@@ -2,8 +2,8 @@ import { z } from "zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import fetchWithError from "@/utils/dataFetching/fetchWithError";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
-import dataTypeUrls from "@/utils/url/adminPanel/dataType/dataTypeUrl";
 import { useToast } from "@/hooks/ui/useToast";
+import dataTypeUrls from "@/utils/url/adminPanel/dataTypeUrl";
 
 export default function getDataList(pages: number, pageSize: number, URL: string | null) {
   const queryClient = useQueryClient();

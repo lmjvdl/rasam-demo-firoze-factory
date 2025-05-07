@@ -1,5 +1,5 @@
 import { fetchWithErrorForCreate } from "@/utils/dataFetching/fetchWithError";
-import contactsUrls from "@/utils/url/adminPanel/contacts/contactUrls";
+import contactsUrls from "@/utils/url/adminPanel/contactUrl";
 import { useMutation } from "@tanstack/react-query";
 import { z } from "zod";
 

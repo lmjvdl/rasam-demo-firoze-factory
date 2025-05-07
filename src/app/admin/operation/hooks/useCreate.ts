@@ -1,5 +1,5 @@
 import { fetchWithErrorForCreate } from "@/utils/dataFetching/fetchWithError";
-import operationUrls from "@/utils/url/adminPanel/operation/operationUrl";
+import operationUrls from "@/utils/url/adminPanel/operationUrl";
 import { z } from "zod";
 
 const operationSchema = z.object({

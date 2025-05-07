@@ -13,10 +13,10 @@ import EditDialog from "@/components/adminPanelComponent/viewProcess/EditDialog"
 import DeleteDialog from "@/components/adminPanelComponent/viewProcess/DeleteDialog";
 import useDataQuery from "@/hooks/adminDataQuery/useDataQuery";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
-import functionUrls from "@/utils/url/adminPanel/function/functionUrl";
-import dataTypeUrls from "@/utils/url/adminPanel/dataType/dataTypeUrl";
-import deviceUrls from "@/utils/url/adminPanel/device/deviceUrl";
-import contactsUrls from "@/utils/url/adminPanel/contacts/contactUrls";
+import functionUrls from "@/utils/url/adminPanel/functionUrl";
+import deviceUrls from "@/utils/url/adminPanel/deviceUrl";
+import contactsUrls from "@/utils/url/adminPanel/contactUrl";
+import dataTypeUrls from "@/utils/url/adminPanel/dataTypeUrl";
 
 const AllContentAlarm: React.FC = () => {
   const [data, setData] = useState<ResponseSchema>(PrevDataInitial);

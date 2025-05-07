@@ -1,38 +1,36 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { fetchWithErrorWithAlarm } from "@/utils/dataFetching/fetchWithError";
-import dataTypeUrls from "@/utils/url/adminPanel/dataType/dataTypeUrl";
+import positionUrls from "@/utils/URLs/adminPanel/position/positionUrl";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
-import { useToast } from "@/hooks/ui/useToast";
+import { useToast } from "@/hooks/UI/useToast";
 
-export type DatatypeUpdateSchema = {
+export type PositionUpdateSchema = {
   id: number;
   name: string;
-  json_field: string;
-  description?: string;
 };
 
-const useUpdate = () => {
+const useUpdatePosition = () => {
   const queryClient = useQueryClient();
   const { showToast } = useToast();
 
-  const updateDataTypeMutation = useMutation({
-    mutationFn: async ({ id, ...updatedData }: DatatypeUpdateSchema) => {
-      return fetchWithErrorWithAlarm(dataTypeUrls.editDataType(id), {
+  const updatePositionMutation = useMutation({
+    mutationFn: async ({ id, ...updatedData }: PositionUpdateSchema) => {
+      return fetchWithErrorWithAlarm(positionUrls.editPosition(id), {
         method: "PUT",
         body: JSON.stringify(updatedData),
       });
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: allQueryKeys.adminPanel.dataType.update });
+      queryClient.invalidateQueries({ queryKey: allQueryKeys.adminPanel.position.update });
     },
     onError: () => {
-      showToast("خطایی در به‌روزرسانی نوع داده رخ داد.", "error");
+      showToast("❌ خطایی در به‌روزرسانی موقعیت رخ داد.", "error");
     },
   });
 
   return {
-    updateDataTypeMutation,
+    updatePositionMutation,
   };
 };
 
-export default useUpdate;
+export default useUpdatePosition;

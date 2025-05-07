@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { fetchWithErrorWithAlarm } from "@/utils/dataFetching/fetchWithError";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import { useToast } from "@/hooks/ui/useToast";
-import alarmUrls from "@/utils/url/adminPanel/alarm/alarmUrl";
+import alarmUrls from "@/utils/url/adminPanel/alarmUrl";
 import { extractId } from "@/utils/formatters/extractId";
 
 export type AlarmUpdateSchema = {

@@ -1,5 +1,5 @@
 import { fetchWithErrorForCreate } from "@/utils/dataFetching/fetchWithError";
-import reportUrls from "@/utils/url/adminPanel/report/reportUrl";
+import reportUrls from "@/utils/url/adminPanel/reportUrl";
 import { z } from "zod";
 
 const reportSchema = z.object({

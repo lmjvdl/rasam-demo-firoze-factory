@@ -2,8 +2,8 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { z } from "zod";
 import { useToast } from "@/hooks/ui/useToast";
 import uploadFileWithError from "@/utils/dataFetching/fetchWithError";
-import imageUploadUrls from "@/utils/url/adminPanel/imageUpload/imageUrl";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
+import imageUploadUrls from "@/utils/url/adminPanel/imageUrl";
 
 export default function getImageList(pages: number, pageSize: number, URL: string | null) {
   const { showToast } = useToast();

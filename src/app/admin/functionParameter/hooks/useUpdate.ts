@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { fetchWithErrorWithAlarm } from "@/utils/dataFetching/fetchWithError";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import { useToast } from "@/hooks/ui/useToast";
-import functionParameterUrls from "@/utils/url/adminPanel/functionParameter/functionParameterUrl";
+import functionParameterUrls from "@/utils/url/adminPanel/functionParameterUrl";
 
 export type FunctionParameterUpdateSchema = {
   id: number;

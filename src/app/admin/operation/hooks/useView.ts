@@ -2,7 +2,7 @@ import { z } from "zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import fetchWithError from "@/utils/dataFetching/fetchWithError";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
-import operationUrls from "@/utils/url/adminPanel/operation/operationUrl";
+import operationUrls from "@/utils/url/adminPanel/operationUrl";
 import { useToast } from "@/hooks/ui/useToast";
 
 export default function getOperationList(pages: number, pageSize: number, URL: string | null) {

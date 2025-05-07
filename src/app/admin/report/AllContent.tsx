@@ -12,10 +12,10 @@ import ReportTable from "./ReportTable";
 import useUpdate, { ReportUpdateSchema } from "./hooks/useUpdate";
 import useDataQuery from "@/hooks/adminDataQuery/useDataQuery";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
-import inputItemsUrls from "@/utils/url/adminPanel/inputItem/inputItemUrl";
-import outputItemUrls from "@/utils/url/adminPanel/outputItem/outputItemUrl";
-import intervalUrls from "@/utils/url/adminPanel/interval/intervalUrl";
-import productLinePartUrls from "@/utils/url/adminPanel/productLinePart/productLinePartUrl";
+import inputItemsUrls from "@/utils/url/adminPanel/inputItemUrl";
+import outputItemUrls from "@/utils/url/adminPanel/outputItemUrl";
+import intervalUrls from "@/utils/url/adminPanel/intervalUrl";
+import productLinePartUrls from "@/utils/url/adminPanel/productLinePartUrl";
 
 const AllContentReport: React.FC = () => {
   const [data, setData] = useState<ResponseSchema>(PrevDataInitial);

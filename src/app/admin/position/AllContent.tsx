@@ -1,18 +1,18 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import getDataTypeList, { ResponseSchema } from "./hooks/useView";
+import getPositionList, { ResponseSchema } from "./hooks/useView";
 import useDelete from "./hooks/useDelete";
+import { PrevDataInitial } from "@/interfaces/general/general";
+import { columns } from "./ColumnsData";
+import { PositionUpdateSchema } from "./hooks/useUpdate";
+import PositionTable from "./PositionTable";
+import useUpdate from "./hooks/useUpdate";
 import ViewDialog from "@/components/adminPanelComponent/viewProcess/ViewDialog";
 import EditDialog from "@/components/adminPanelComponent/viewProcess/EditDialog";
 import DeleteDialog from "@/components/adminPanelComponent/viewProcess/DeleteDialog";
-import { PrevDataInitial } from "@/interfaces/general/general";
-import { columns } from "./ColumnsData";
-import { DatatypeUpdateSchema } from "./hooks/useUpdate";
-import DataTypeTable from "./PositionTable";
-import useUpdate from "./hooks/useUpdate";
 
-const AllContentDataType: React.FC = () => {
+const AllContentPosition: React.FC = () => {
   const [data, setData] = useState<ResponseSchema>(PrevDataInitial);
   const [selectedRow, setSelectedRow] = useState<any>(null);
   const [viewOpen, setViewOpen] = useState(false);
@@ -22,10 +22,9 @@ const AllContentDataType: React.FC = () => {
   const [totalData, setTotalData] = useState<number>(0);
   const [nextPage, setNextPage] = useState<null | string>(null);
 
-  const getList = getDataTypeList(pageNumber, 8, nextPage);
-  const { deleteDataTypeMutation } = useDelete();
-  const { updateDataTypeMutation } = useUpdate();
-
+  const getList = getPositionList(pageNumber, 8, nextPage);
+  const { deletePositionMutation } = useDelete();
+  const { updatePositionMutation } = useUpdate();
 
   useEffect(() => {
     getList.mutate(
@@ -40,20 +39,17 @@ const AllContentDataType: React.FC = () => {
     );
   }, [pageNumber]);
 
-  const handleSaveEdit = (updatedRow: DatatypeUpdateSchema) => {
+  const handleSaveEdit = (updatedRow: PositionUpdateSchema) => {
     setData((prevData) => {
       if (prevData?.data) {
-
-        updateDataTypeMutation.mutate(updatedRow);
+        updatePositionMutation.mutate(updatedRow);
 
         return {
           ...prevData,
           data: {
             ...prevData.data,
             results: prevData.data.results.map((row) =>
-              row.id === updatedRow.id
-                ? { ...row, ...updatedRow }
-                : row
+              row.id === updatedRow.id ? { ...row, ...updatedRow } : row
             ),
           },
         };
@@ -84,34 +80,17 @@ const AllContentDataType: React.FC = () => {
 
   const handleConfirmDelete = () => {
     if (selectedRow?.id) {
-      deleteDataTypeMutation.mutate(selectedRow.id, {
-        onSuccess: () => {
-          setData(prevData => {
-            if (prevData?.data) {
-              return {
-                ...prevData,
-                data: {
-                  ...prevData.data,
-                  results: prevData.data.results.filter(row => row.id !== selectedRow.id),
-                  count: prevData.data.count - 1
-                }
-              };
-            }
-            return prevData;
-          });
-          setDeleteOpen(false);
-        }
-      });
+      deletePositionMutation.mutate(selectedRow.id);
+      setDeleteOpen(false);
     }
   };
-
 
   const dynamicColumns = columns();
   const filteredColumnsForEdit = dynamicColumns.filter((col) => col.canEdit);
 
   return (
     <>
-      <DataTypeTable
+      <PositionTable
         data={data?.data?.results ?? []}
         columns={dynamicColumns}
         onView={handleView}
@@ -146,4 +125,4 @@ const AllContentDataType: React.FC = () => {
   );
 };
 
-export default AllContentDataType;
+export default AllContentPosition;

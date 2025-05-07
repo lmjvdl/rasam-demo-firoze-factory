@@ -1,5 +1,5 @@
 import { fetchWithErrorForCreate } from "@/utils/dataFetching/fetchWithError";
-import alarmDetailUrls from "@/utils/url/adminPanel/alarmDetail/alarmDetailUrl";
+import alarmDetailUrls from "@/utils/url/adminPanel/alarmDetailUrl";
 import { z } from "zod";
 
 const alarmDetailSchema = z.object({

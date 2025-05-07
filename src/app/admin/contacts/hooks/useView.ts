@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import fetchWithError from "@/utils/dataFetching/fetchWithError";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import { useToast } from "@/hooks/ui/useToast";
-import contactsUrls from "@/utils/url/adminPanel/contacts/contactUrls";
+import contactsUrls from "@/utils/url/adminPanel/contactUrl";
 
 export default function getContactsList(pages: number, pageSize: number, URL: string | null) {
   const queryClient = useQueryClient();

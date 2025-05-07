@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import fetchWithError from "@/utils/dataFetching/fetchWithError";
-import permissionUrls from "@/utils/url/adminPanel/permission/permission";
+import permissionUrls from "@/utils/url/adminPanel/permissionUrl";
 import { initialData } from "@/utils/refinedData/adminPanel/initialData/initialData";
 import { listSanitizer } from "@/utils/refinedData/adminPanel/listSanitizer";
 

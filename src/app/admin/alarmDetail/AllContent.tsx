@@ -13,8 +13,8 @@ import EditDialog from "@/components/adminPanelComponent/viewProcess/EditDialog"
 import DeleteDialog from "@/components/adminPanelComponent/viewProcess/DeleteDialog";
 import useDataQuery from "@/hooks/adminDataQuery/useDataQuery";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
-import alarmUrls from "@/utils/url/adminPanel/alarm/alarmUrl";
-import functionParameterUrls from "@/utils/url/adminPanel/functionParameter/functionParameterUrl";
+import alarmUrls from "@/utils/url/adminPanel/alarmUrl";
+import functionParameterUrls from "@/utils/url/adminPanel/functionParameterUrl";
 
 const AllContentAlarmDetail: React.FC = () => {
   const [data, setData] = useState<ResponseSchema>(PrevDataInitial);

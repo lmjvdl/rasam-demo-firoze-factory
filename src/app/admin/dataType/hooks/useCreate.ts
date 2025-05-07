@@ -1,5 +1,5 @@
 import { fetchWithErrorForCreate } from "@/utils/dataFetching/fetchWithError";
-import dataTypeUrls from "@/utils/url/adminPanel/dataType/dataTypeUrl";
+import dataTypeUrls from "@/utils/url/adminPanel/dataTypeUrl";
 import { z } from "zod";
 
 const dataTypeSchema = z.object({

@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { fetchWithErrorForDelete } from "@/utils/dataFetching/fetchWithError";
-import alarmDetailUrls from "@/utils/url/adminPanel/alarmDetail/alarmDetailUrl";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import { useToast } from "@/hooks/ui/useToast";
+import alarmDetailUrls from "@/utils/url/adminPanel/alarmDetailUrl";
 
 const useDeleteAlarmDetail = () => {
   const queryClient = useQueryClient();

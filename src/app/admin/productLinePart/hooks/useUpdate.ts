@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { fetchWithErrorWithAlarm } from "@/utils/dataFetching/fetchWithError";
-import productLinePartUrls from "@/utils/url/adminPanel/productLinePart/productLinePartUrl";
+import productLinePartUrls from "@/utils/url/adminPanel/productLinePartUrl";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import { useToast } from "@/hooks/ui/useToast";
 

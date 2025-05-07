@@ -2,7 +2,7 @@ import { z } from "zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import fetchWithError from "@/utils/dataFetching/fetchWithError";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
-import reportUrls from "@/utils/url/adminPanel/report/reportUrl";
+import reportUrls from "@/utils/url/adminPanel/reportUrl";
 import { useToast } from "@/hooks/ui/useToast";
 
 export default function getReportList(pages: number, pageSize: number, URL: string | null) {

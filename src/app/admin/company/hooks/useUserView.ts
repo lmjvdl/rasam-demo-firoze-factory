@@ -2,7 +2,7 @@ import { z } from "zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import fetchWithError from "@/utils/dataFetching/fetchWithError";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
-import companyUrls from "@/utils/url/adminPanel/company/companyUrl";
+import companyUrls from "@/utils/url/adminPanel/companyUrl";
 import { useToast } from "@/hooks/ui/useToast";
 
 // Updated function to handle GET requests

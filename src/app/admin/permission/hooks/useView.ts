@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import fetchWithError from "@/utils/dataFetching/fetchWithError";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import { useToast } from "@/hooks/ui/useToast";
-import permissionUrls from "@/utils/url/adminPanel/permission/permission";
+import permissionUrls from "@/utils/url/adminPanel/permissionUrl";
 
 export default function getPermissionList() {
   const queryClient = useQueryClient();

@@ -2,7 +2,7 @@ import { z } from "zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import fetchWithError from "@/utils/dataFetching/fetchWithError";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
-import functionUrls from "@/utils/url/adminPanel/function/functionUrl";
+import functionUrls from "@/utils/url/adminPanel/functionUrl";
 import { useToast } from "@/hooks/ui/useToast";
 
 export default function getFunctionList(pages: number, pageSize: number, URL: string | null) {

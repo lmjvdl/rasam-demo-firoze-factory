@@ -2,7 +2,7 @@ import { z } from "zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import fetchWithError from "@/utils/dataFetching/fetchWithError";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
-import productLinePartUrls from "@/utils/url/adminPanel/productLinePart/productLinePartUrl";
+import productLinePartUrls from "@/utils/url/adminPanel/productLinePartUrl";
 import { useToast } from "@/hooks/ui/useToast";
 
 export default function getProductLinePartList(pages: number, pageSize: number, URL: string | null) {

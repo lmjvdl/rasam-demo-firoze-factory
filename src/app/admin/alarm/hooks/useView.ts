@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import fetchWithError from "@/utils/dataFetching/fetchWithError";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import { useToast } from "@/hooks/ui/useToast";
-import alarmUrls from "@/utils/url/adminPanel/alarm/alarmUrl";
+import alarmUrls from "@/utils/url/adminPanel/alarmUrl";
 
 export default function getAlarmList(pages: number, pageSize: number, URL: string | null) {
   const queryClient = useQueryClient();

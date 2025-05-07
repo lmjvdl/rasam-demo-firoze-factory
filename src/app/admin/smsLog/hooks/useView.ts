@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import fetchWithError from "@/utils/dataFetching/fetchWithError";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import { useToast } from "@/hooks/ui/useToast";
-import smsLogUrls from "@/utils/url/adminPanel/smsLog/smsLog";
+import smsLogUrls from "@/utils/url/adminPanel/smsLog";
 import gregorianToJalali from "@/utils/formatters/isoDateToSolarDate";
 
 export default function getSmsLogList() {

@@ -2,7 +2,7 @@ import { z } from "zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import fetchWithError from "@/utils/dataFetching/fetchWithError";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
-import userCompanyUrls from "@/utils/url/adminPanel/userCompany/userCompanyUrl";
+import userCompanyUrls from "@/utils/url/adminPanel/userCompanyUrl";
 import { useToast } from "@/hooks/ui/useToast";
 
 export default function getUserCompanyList(companyID: number) {

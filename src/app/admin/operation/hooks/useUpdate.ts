@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { fetchWithErrorWithAlarm } from "@/utils/dataFetching/fetchWithError";
-import operationUrls from "@/utils/url/adminPanel/operation/operationUrl";
+import operationUrls from "@/utils/url/adminPanel/operationUrl";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import { useToast } from "@/hooks/ui/useToast";
 import { extractId, extractIds } from "@/utils/formatters/extractId";

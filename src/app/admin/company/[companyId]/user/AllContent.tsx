@@ -31,14 +31,14 @@ export default function AllContentUserCompany({ companyId }: UserCompanyPageProp
   ? usePermissionQuery().data.map((permission) => ({
       id: permission.id,
       value: permission.id, 
-      label: permission.translate, 
+      label: permission.name, 
     }))
   : [];
   const groupList = usePermissionQuery().data
   ? usePermissionQuery().data.map((permission) => ({
       id: permission.id,
       value: permission.id, 
-      label: permission.translate, 
+      label: permission.name, 
     }))
   : [];
 

@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import fetchWithError from "@/utils/dataFetching/fetchWithError";
-import companyUrls from "@/utils/url/adminPanel/company/companyUrl";
+import companyUrls from "@/utils/url/adminPanel/companyUrl";
 import { initialData } from "@/utils/refinedData/adminPanel/initialData/initialData";
 import { listSanitizer } from "@/utils/refinedData/adminPanel/listSanitizer";
 
