@@ -3,7 +3,7 @@ interface LiveType {
     name: string;
 }
   
-export interface LiveTypeTableProps {
+export interface LiveTypesTableProps {
     data: LiveType[];
     columns: any[];
     onView: (row: any) => void;

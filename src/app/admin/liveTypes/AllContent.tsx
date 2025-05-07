@@ -5,7 +5,7 @@ import getLiveTypesList, { ResponseSchema } from "./hooks/useView";
 import useDelete from "./hooks/useDelete";
 import { PrevDataInitial } from "@/interfaces/general/general";
 import { columns } from "./ColumnsData";
-import { LiveTypesUpdateSchema } from "./hooks/useUpdate";
+import { LiveTypeUpdateSchema } from "./hooks/useUpdate";
 import LiveTypesTable from "./LiveTypesTable";
 import useUpdate from "./hooks/useUpdate";
 import ViewDialog from "@/components/adminPanelComponent/viewProcess/ViewDialog";
@@ -24,7 +24,7 @@ const AllContentLiveTypes: React.FC = () => {
 
   const getList = getLiveTypesList(pageNumber, 8, nextPage);
   const { deleteLiveTypesMutation } = useDelete();
-  const { updateLiveTypesMutation } = useUpdate();
+  const { updateLiveTypeMutation } = useUpdate();
 
   useEffect(() => {
     getList.mutate(
@@ -39,10 +39,10 @@ const AllContentLiveTypes: React.FC = () => {
     );
   }, [pageNumber]);
 
-  const handleSaveEdit = (updatedRow: LiveTypesUpdateSchema) => {
+  const handleSaveEdit = (updatedRow: LiveTypeUpdateSchema) => {
     setData((prevData) => {
       if (prevData?.data) {
-        updateLiveTypesMutation.mutate(updatedRow);
+        updateLiveTypeMutation.mutate(updatedRow);
 
         return {
           ...prevData,

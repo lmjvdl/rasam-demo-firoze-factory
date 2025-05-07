@@ -1,8 +1,8 @@
 import React from "react";
+import { PositionTableProps } from "@/interfaces/admin/position";
 import DataTable from "@/components/adminPanelComponent/viewProcess/DataTable";
-import { DataTypeTableProps } from "@/interfaces/admin/dataType";
 
-const DataTypeTable: React.FC<DataTypeTableProps> = ({
+const PositionTable: React.FC<PositionTableProps> = ({
   data,
   columns,
   onView,
@@ -27,4 +27,4 @@ const DataTypeTable: React.FC<DataTypeTableProps> = ({
   );
 };
 
-export default DataTypeTable;
+export default PositionTable;

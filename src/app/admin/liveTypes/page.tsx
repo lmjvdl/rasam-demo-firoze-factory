@@ -1,16 +1,16 @@
 "use client";
 
-import { useState } from "react";
 import ModalForm from "@/components/adminPanelComponent/addingProcess/ModalForm";
 import MainCard from "@/components/customContiner/MainCard";
-import { createNewDataType } from "./hooks/useCreate";
-import AllContentDataType from "./AllContent";
+import { useState } from "react";
+import { createNewLiveType } from "./hooks/useCreate";
+import AllContentLiveTypes from "./AllContent";
 
-export default function DataTypePage() {
+export default function LiveTypesPage() {
   const [refreshKey, setRefreshKey] = useState(0);
 
-  const handleCreateDataType = async (data: any) => {
-    const response = await createNewDataType(data);
+  const handleCreateLiveType = async (data: any) => {
+    const response = await createNewLiveType(data);
     if (response.success) {
       setRefreshKey(prev => prev + 1);
       return { success: true };
@@ -21,30 +21,15 @@ export default function DataTypePage() {
   return (
     <MainCard>
       <ModalForm
-        buttonText="افزودن نوع اطلاعات جدید"
+        buttonText="افزودن نوع لایو جدید"
         formFields={[
           {
-            name: "name",
-            label: "نام",
-            type: "text",
-            required: true
-          },
-          {
-            name: "json_field",
-            label: "Json field",
-            type: "text",
-            required: true
-          },
-          {
-            name: "description",
-            label: "توضیحات",
-            type: "text",
-            required: false
+            name: "name", label: "نام", type: "text", required: true
           },
         ]}
-        onSubmit={handleCreateDataType}
+        onSubmit={handleCreateLiveType}
       />
-      <AllContentDataType key={refreshKey} />
+      <AllContentLiveTypes key={refreshKey}/>
     </MainCard>
   );
 }

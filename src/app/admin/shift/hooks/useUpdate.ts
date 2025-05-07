@@ -1,38 +1,36 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { fetchWithErrorWithAlarm } from "@/utils/dataFetching/fetchWithError";
-import dataTypeUrls from "@/utils/url/adminPanel/dataType/dataTypeUrl";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
+import shiftUrls from "@/utils/url/adminPanel/shiftUrl";
 import { useToast } from "@/hooks/ui/useToast";
 
-export type DatatypeUpdateSchema = {
+export type ShiftUpdateSchema = {
   id: number;
   name: string;
-  json_field: string;
-  description?: string;
 };
 
-const useUpdate = () => {
+const useUpdateShift = () => {
   const queryClient = useQueryClient();
   const { showToast } = useToast();
 
-  const updateDataTypeMutation = useMutation({
-    mutationFn: async ({ id, ...updatedData }: DatatypeUpdateSchema) => {
-      return fetchWithErrorWithAlarm(dataTypeUrls.editDataType(id), {
+  const updateShiftMutation = useMutation({
+    mutationFn: async ({ id, ...updatedData }: ShiftUpdateSchema) => {
+      return fetchWithErrorWithAlarm(shiftUrls.editShift(id), {
         method: "PUT",
         body: JSON.stringify(updatedData),
       });
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: allQueryKeys.adminPanel.dataType.update });
+      queryClient.invalidateQueries({ queryKey: allQueryKeys.adminPanel.shift.update });
     },
     onError: () => {
-      showToast("خطایی در به‌روزرسانی نوع داده رخ داد.", "error");
+      showToast("❌ خطایی در به‌روزرسانی شیفت رخ داد.", "error");
     },
   });
 
   return {
-    updateDataTypeMutation,
+    updateShiftMutation,
   };
 };
 
-export default useUpdate;
+export default useUpdateShift;

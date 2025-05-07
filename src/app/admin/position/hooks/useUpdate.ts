@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { fetchWithErrorWithAlarm } from "@/utils/dataFetching/fetchWithError";
-import positionUrls from "@/utils/URLs/adminPanel/position/positionUrl";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
-import { useToast } from "@/hooks/UI/useToast";
+import positionUrls from "@/utils/url/adminPanel/positionUrl";
+import { useToast } from "@/hooks/ui/useToast";
 
 export type PositionUpdateSchema = {
   id: number;
@@ -24,7 +24,7 @@ const useUpdatePosition = () => {
       queryClient.invalidateQueries({ queryKey: allQueryKeys.adminPanel.position.update });
     },
     onError: () => {
-      showToast("❌ خطایی در به‌روزرسانی موقعیت رخ داد.", "error");
+      showToast("❌ خطایی در به‌روزرسانی سمت رخ داد.", "error");
     },
   });
 
