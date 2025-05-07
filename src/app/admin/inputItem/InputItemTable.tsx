@@ -1,8 +1,8 @@
 import React from "react";
+import { InputItemTableProps } from "@/interfaces/admin/inputItem";
 import DataTable from "@/components/adminPanelComponent/viewProcess/DataTable";
-import { DataTypeTableProps } from "@/interfaces/admin/dataType";
 
-const DataTypeTable: React.FC<DataTypeTableProps> = ({
+const InputItemTable: React.FC<InputItemTableProps> = ({
   data,
   columns,
   onView,
@@ -27,4 +27,4 @@ const DataTypeTable: React.FC<DataTypeTableProps> = ({
   );
 };
 
-export default DataTypeTable;
+export default InputItemTable;

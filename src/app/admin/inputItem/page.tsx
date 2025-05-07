@@ -1,16 +1,16 @@
 "use client";
 
-import { useState } from "react";
 import ModalForm from "@/components/adminPanelComponent/addingProcess/ModalForm";
 import MainCard from "@/components/customContiner/MainCard";
-import { createNewDataType } from "./hooks/useCreate";
-import AllContentDataType from "./AllContent";
+import { createNewInputItem } from "../inputItem/hooks/useCreate";
+import AllContentInputItem from "../inputItem/AllContent";
+import { useState } from "react";
 
-export default function DataTypePage() {
+export default function InputItemPage() {
   const [refreshKey, setRefreshKey] = useState(0);
 
-  const handleCreateDataType = async (data: any) => {
-    const response = await createNewDataType(data);
+  const handleCreateInputItem = async (data: any) => {
+    const response = await createNewInputItem(data);
     if (response.success) {
       setRefreshKey(prev => prev + 1);
       return { success: true };
@@ -21,30 +21,15 @@ export default function DataTypePage() {
   return (
     <MainCard>
       <ModalForm
-        buttonText="افزودن نوع اطلاعات جدید"
+        buttonText="افزودن آیتم ورودی جدید"
         formFields={[
           {
-            name: "name",
-            label: "نام",
-            type: "text",
-            required: true
-          },
-          {
-            name: "json_field",
-            label: "Json field",
-            type: "text",
-            required: true
-          },
-          {
-            name: "description",
-            label: "توضیحات",
-            type: "text",
-            required: false
+            name: "name", label: "نام", type: "text", required: true
           },
         ]}
-        onSubmit={handleCreateDataType}
+        onSubmit={handleCreateInputItem}
       />
-      <AllContentDataType key={refreshKey} />
+      <AllContentInputItem key={refreshKey}/>
     </MainCard>
   );
 }

@@ -2,31 +2,29 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { fetchWithErrorForDelete } from "@/utils/dataFetching/fetchWithError";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import { useToast } from "@/hooks/ui/useToast";
-import dataTypeUrls from "@/utils/url/adminPanel/dataTypeUrl";
+import intervalUrls from "@/utils/url/adminPanel/intervalUrl";
 
-const useDeleteDataType = () => {
+const useDeleteInterval = () => {
   const queryClient = useQueryClient();
   const { showToast } = useToast();
 
-  const deleteDataTypeMutation = useMutation({
+  const deleteIntervalMutation = useMutation({
     mutationFn: async (id: number) => {
-      return fetchWithErrorForDelete(dataTypeUrls.deleteDataType(id), {
+      return fetchWithErrorForDelete(intervalUrls.deleteInterval(id), {
         method: "DELETE",
       });
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: allQueryKeys.adminPanel.dataType.delete,
-      }); // تغییر کلید query به کلید مربوط به data type
+      queryClient.invalidateQueries({ queryKey: allQueryKeys.adminPanel.interval.delete })
     },
     onError: () => {
-      showToast("خطایی در حذف نوع داده رخ داد.", "error");
+      showToast("خطایی در حذف بازه زمانی رخ داد.", "error");
     },
   });
 
   return {
-    deleteDataTypeMutation,
+    deleteIntervalMutation,
   };
 };
 
-export default useDeleteDataType;
+export default useDeleteInterval;

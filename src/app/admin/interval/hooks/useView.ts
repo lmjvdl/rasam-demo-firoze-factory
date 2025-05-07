@@ -3,23 +3,23 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import fetchWithError from "@/utils/dataFetching/fetchWithError";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import { useToast } from "@/hooks/ui/useToast";
-import dataTypeUrls from "@/utils/url/adminPanel/dataTypeUrl";
+import intervalUrls from "@/utils/url/adminPanel/intervalUrl";
 
-export default function getDataList(pages: number, pageSize: number, URL: string | null) {
+export default function getIntervalList(pages: number, pageSize: number, URL: string | null) {
   const queryClient = useQueryClient();
   const { showToast } = useToast();
 
-  const getDataListMutation = useMutation({
-    mutationKey: allQueryKeys.adminPanel.dataType.list,
+  const getIntervalListMutation = useMutation({
+    mutationKey: allQueryKeys.adminPanel.interval.list,
     retry: false,
     mutationFn: ({ page = pages, page_size = pageSize, url = URL }: { page?: number; page_size?: number; url: string | null; }) =>
       fetchWithError(
         url !== null ? url : 
-        `${dataTypeUrls.listDataType}?p=${page}&page_size=${page_size}`,
+        `${intervalUrls.listInterval}?p=${page}&page_size=${page_size}`,
         { method: "GET" }
       ).then(sanitizer),
     onSuccess: (serverResponse) => {
-      queryClient.setQueryData(allQueryKeys.adminPanel.dataType.list, {
+      queryClient.setQueryData(allQueryKeys.adminPanel.interval.list, {
         access: serverResponse.data,
       });
     },
@@ -28,7 +28,7 @@ export default function getDataList(pages: number, pageSize: number, URL: string
     },
   });
 
-  return getDataListMutation;
+  return getIntervalListMutation;
 }
 
 const responseSchema = z.object({
@@ -40,8 +40,7 @@ const responseSchema = z.object({
       z.object({
         id: z.number(),
         name: z.string(),
-        json_field: z.string(),
-        description: z.string().nullable(),
+        duration: z.string(),
       })
     ),
   }),

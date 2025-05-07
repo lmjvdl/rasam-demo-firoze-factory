@@ -1,8 +1,8 @@
 import React from "react";
 import DataTable from "@/components/adminPanelComponent/viewProcess/DataTable";
-import { DataTypeTableProps } from "@/interfaces/admin/dataType";
+import { OutputItemTableProps } from "@/interfaces/admin/outputItem";
 
-const DataTypeTable: React.FC<DataTypeTableProps> = ({
+const OutputItemTable: React.FC<OutputItemTableProps> = ({
   data,
   columns,
   onView,
@@ -27,4 +27,4 @@ const DataTypeTable: React.FC<DataTypeTableProps> = ({
   );
 };
 
-export default DataTypeTable;
+export default OutputItemTable;

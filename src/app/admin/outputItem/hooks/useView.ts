@@ -3,23 +3,23 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import fetchWithError from "@/utils/dataFetching/fetchWithError";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import { useToast } from "@/hooks/ui/useToast";
-import dataTypeUrls from "@/utils/url/adminPanel/dataTypeUrl";
+import outputItemUrls from "@/utils/url/adminPanel/outputItemUrl";
 
-export default function getDataList(pages: number, pageSize: number, URL: string | null) {
+export default function getOutputItemList(pages: number, pageSize: number, URL: string | null) {
   const queryClient = useQueryClient();
   const { showToast } = useToast();
 
-  const getDataListMutation = useMutation({
-    mutationKey: allQueryKeys.adminPanel.dataType.list,
+  const getOutputItemListMutation = useMutation({
+    mutationKey: allQueryKeys.adminPanel.outputItem.list,
     retry: false,
     mutationFn: ({ page = pages, page_size = pageSize, url = URL }: { page?: number; page_size?: number; url: string | null; }) =>
       fetchWithError(
         url !== null ? url : 
-        `${dataTypeUrls.listDataType}?p=${page}&page_size=${page_size}`,
+        `${outputItemUrls.listOutputItem}?p=${page}&page_size=${page_size}`,
         { method: "GET" }
       ).then(sanitizer),
     onSuccess: (serverResponse) => {
-      queryClient.setQueryData(allQueryKeys.adminPanel.dataType.list, {
+      queryClient.setQueryData(allQueryKeys.adminPanel.outputItem.list, {
         access: serverResponse.data,
       });
     },
@@ -28,9 +28,10 @@ export default function getDataList(pages: number, pageSize: number, URL: string
     },
   });
 
-  return getDataListMutation;
+  return getOutputItemListMutation;
 }
 
+// به‌روز شده با ساختار جدید از Swagger
 const responseSchema = z.object({
   data: z.object({
     count: z.number(),
@@ -40,8 +41,6 @@ const responseSchema = z.object({
       z.object({
         id: z.number(),
         name: z.string(),
-        json_field: z.string(),
-        description: z.string().nullable(),
       })
     ),
   }),

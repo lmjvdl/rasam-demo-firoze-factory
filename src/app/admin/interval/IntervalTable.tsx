@@ -1,8 +1,8 @@
 import React from "react";
+import { IntervalTableProps } from "@/interfaces/admin/interval";
 import DataTable from "@/components/adminPanelComponent/viewProcess/DataTable";
-import { DataTypeTableProps } from "@/interfaces/admin/dataType";
 
-const DataTypeTable: React.FC<DataTypeTableProps> = ({
+const IntervalTable: React.FC<IntervalTableProps> = ({
   data,
   columns,
   onView,
@@ -27,4 +27,4 @@ const DataTypeTable: React.FC<DataTypeTableProps> = ({
   );
 };
 
-export default DataTypeTable;
+export default IntervalTable;

@@ -1,16 +1,16 @@
 "use client";
 
-import { useState } from "react";
 import ModalForm from "@/components/adminPanelComponent/addingProcess/ModalForm";
 import MainCard from "@/components/customContiner/MainCard";
-import { createNewDataType } from "./hooks/useCreate";
-import AllContentDataType from "./AllContent";
+import { createNewInterval } from "../interval/hooks/useCreate";
+import AllContentInterval from "../interval/AllContent";
+import { useState } from "react";
 
-export default function DataTypePage() {
+export default function IntervalPage() {
   const [refreshKey, setRefreshKey] = useState(0);
 
-  const handleCreateDataType = async (data: any) => {
-    const response = await createNewDataType(data);
+  const handleCreateInterval = async (data: any) => {
+    const response = await createNewInterval(data);
     if (response.success) {
       setRefreshKey(prev => prev + 1);
       return { success: true };
@@ -21,30 +21,18 @@ export default function DataTypePage() {
   return (
     <MainCard>
       <ModalForm
-        buttonText="افزودن نوع اطلاعات جدید"
+        buttonText="افزودن بازه زمانی جدید"
         formFields={[
           {
-            name: "name",
-            label: "نام",
-            type: "text",
-            required: true
+            name: "name", label: "نام", type: "text", required: true
           },
           {
-            name: "json_field",
-            label: "Json field",
-            type: "text",
-            required: true
-          },
-          {
-            name: "description",
-            label: "توضیحات",
-            type: "text",
-            required: false
+            name: "duration", label: "مدت زمان(به طور مثال 0 01:00:00)", type: "text", required: true
           },
         ]}
-        onSubmit={handleCreateDataType}
+        onSubmit={handleCreateInterval}
       />
-      <AllContentDataType key={refreshKey} />
+      <AllContentInterval key={refreshKey}/>
     </MainCard>
   );
 }
