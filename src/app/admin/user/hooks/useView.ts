@@ -52,11 +52,15 @@ const responseSchema = z.object({
             z.object({
               id: z.number(),
               name: z.string(),
-              permissions: z.array(z.number()),
             })
           ),
           is_active: z.boolean(),
-        })
+          product_lines: z.array(
+            z.object({
+              id: z.number(),
+              name: z.string()
+            }))
+          })
       ),
     }),
     status_code: z.number(),

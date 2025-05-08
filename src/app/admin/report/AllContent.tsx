@@ -212,6 +212,11 @@ const AllContentReport: React.FC = () => {
         onConfirm={handleConfirmDelete}
         rowData={selectedRow}
         titles={dynamicColumns}
+        arrayAttributes={{
+          input_items: "name",
+          intervals: "name",
+        }}
+        objectAttributes={["product_line_part", "output_item"]}
       />
     </>
   );

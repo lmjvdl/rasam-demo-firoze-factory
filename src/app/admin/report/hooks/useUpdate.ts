@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { fetchWithErrorWithAlarm } from "@/utils/dataFetching/fetchWithError";
-import dataTypeUrls from "@/utils/url/adminPanel/dataType/dataTypeUrl";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import { useToast } from "@/hooks/ui/useToast";
 import { extractId, extractIds } from "@/utils/formatters/extractId";
+import dataTypeUrls from "@/utils/url/adminPanel/dataTypeUrl";
 
 export type ReportUpdateSchema = {
   id: number;
@@ -23,7 +23,8 @@ const useUpdate = () => {
     mutationFn: async ({ id, input_items, ouput_item, intervals, product_line_part,...updatedData }: ReportUpdateSchema) => {
       return fetchWithErrorWithAlarm(dataTypeUrls.editDataType(id), {
         method: "PUT",
-        body: JSON.stringify({...updatedData, 
+        body: JSON.stringify({
+          ...updatedData, 
           input_items: extractIds(input_items),
           output_item: extractId(ouput_item),
           intervals: extractIds(intervals),

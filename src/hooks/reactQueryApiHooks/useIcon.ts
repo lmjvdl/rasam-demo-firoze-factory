@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchWithErrorWithoutPagination } from "@/utils/dataFetching/fetchWithError";
-import imageUploadUrls from "@/utils/url/adminPanel/imageUpload/imageUrl";
 import { z } from "zod";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
+import imageUploadUrls from "@/utils/url/adminPanel/imageUrl";
 
 const responseSchema = z.object({
   data: z.object({

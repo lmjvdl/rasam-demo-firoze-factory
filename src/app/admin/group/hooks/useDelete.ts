@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { fetchWithErrorForDelete } from "@/utils/dataFetching/fetchWithError";
-import groupUrls from "@/utils/url/adminPanel/group/groupUrl"; // تغییر URL به URL مخصوص group
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import { useToast } from "@/hooks/ui/useToast";
+import groupUrls from "@/utils/url/adminPanel/groupUrl";
 
 const useDeleteGroup = () => {
   const queryClient = useQueryClient();

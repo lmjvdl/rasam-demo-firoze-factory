@@ -10,6 +10,10 @@ import { PrevDataInitial } from "@/interfaces/general/general";
 import { columns } from "./ColumnsData";
 import { UserUpdateSchema, useUpdate } from "./hooks/useUpdate";
 import UserTable from "./UserTable";
+import useDataQuery from "@/hooks/adminDataQuery/useDataQuery";
+import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
+import productLineUrls from "@/utils/url/adminPanel/productLineUrl";
+import groupUrls from "@/utils/url/adminPanel/groupUrl";
 
 const AllContentUser: React.FC = () => {
   const [data, setData] = useState<ResponseSchema>(PrevDataInitial);
@@ -27,6 +31,34 @@ const AllContentUser: React.FC = () => {
   const dynamicColumns = columns();
   const filteredColumnsForEdit = dynamicColumns.filter((col) => col.canEdit);
 
+  const productLineList = useDataQuery(
+    allQueryKeys.adminPanel.productLine.list,
+    productLineUrls.listProductLine
+  ).data
+    ? useDataQuery(
+        allQueryKeys.adminPanel.productLine.list,
+        productLineUrls.listProductLine
+      ).data.map((product_line) => ({
+        id: product_line.id,
+        value: product_line.id,
+        label: product_line.name,
+      }))
+    : [];
+
+  const groupList = useDataQuery(
+    allQueryKeys.adminPanel.group.list,
+    groupUrls.listGroup
+  ).data
+    ? useDataQuery(
+        allQueryKeys.adminPanel.group.list,
+        groupUrls.listGroup
+      ).data.map((group) => ({
+        id: group.id,
+        value: group.id,
+        label: group.name,
+      }))
+    : [];
+
   useEffect(() => {
     getList.mutate(
       { page: pageNumber + 1, page_size: 8, url: nextPage },
@@ -43,19 +75,14 @@ const AllContentUser: React.FC = () => {
   const handleSaveEdit = (updatedRow: UserUpdateSchema) => {
     setData((prevData) => {
       if (prevData?.data) {
-        const { groups, ...updatedDataWithoutGroups } = updatedRow;
-        
-        updatedDataWithoutGroups.is_active = Boolean(updatedDataWithoutGroups.is_active);
-        updateUserMutation.mutate(updatedDataWithoutGroups);
-  
+        updateUserMutation.mutate(updatedRow);
+
         return {
           ...prevData,
           data: {
             ...prevData.data,
             results: prevData.data.results.map((row) =>
-              row.id === updatedRow.id
-                ? { ...row, ...updatedDataWithoutGroups }
-                : row
+              row.id === updatedRow.id ? { ...row, ...updatedRow } : row
             ),
           },
         };
@@ -63,8 +90,6 @@ const AllContentUser: React.FC = () => {
       return prevData || PrevDataInitial;
     });
   };
-  
-
   const handlePagination = (newPage: number) => {
     setPageNumber(newPage);
     getList.mutate({ page: newPage + 1, page_size: 8, url: nextPage });
@@ -89,25 +114,26 @@ const AllContentUser: React.FC = () => {
     if (selectedRow?.id) {
       deleteUserMutation.mutate(selectedRow.id, {
         onSuccess: () => {
-          setData(prevData => {
+          setData((prevData) => {
             if (prevData?.data) {
               return {
                 ...prevData,
                 data: {
                   ...prevData.data,
-                  results: prevData.data.results.filter(row => row.id !== selectedRow.id),
-                  count: prevData.data.count - 1
-                }
+                  results: prevData.data.results.filter(
+                    (row) => row.id !== selectedRow.id
+                  ),
+                  count: prevData.data.count - 1,
+                },
               };
             }
             return prevData;
           });
           setDeleteOpen(false);
-        }
+        },
       });
     }
   };
-
 
   // Handling the boolean value change (is_active)
   const handleBooleanValueChange = (value: boolean) => {
@@ -143,6 +169,10 @@ const AllContentUser: React.FC = () => {
         booleanAttributeName="is_active"
         falseLabel="غیر فعال"
         trueLabel="فعال"
+        arrayAttributes={{
+          product_line: "name",
+          groups: "name",
+        }}
       />
       <EditDialog
         open={editOpen}
@@ -154,7 +184,9 @@ const AllContentUser: React.FC = () => {
         booleanValue={selectedRow?.is_active}
         falseLabel="غیر فعال"
         trueLabel="فعال"
+        extraOptions={{ productLineList, groupList }}
         onBooleanValueChange={handleBooleanValueChange}
+        arrayObjectAttributes={["productLineList", "groupList"]}
       />
 
       <DeleteDialog
@@ -163,6 +195,10 @@ const AllContentUser: React.FC = () => {
         onConfirm={handleConfirmDelete}
         rowData={selectedRow}
         titles={dynamicColumns}
+        arrayAttributes={{
+          product_line: "name",
+          groups: "name",
+        }}
       />
     </>
   );

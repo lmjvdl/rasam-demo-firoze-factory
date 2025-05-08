@@ -1,3 +1,6 @@
+import { User } from "@/interfaces/admin/user";
+import { truncateText } from "@/utils/formatters/truncateText";
+
 export const columns = () => [
     {
         id: "id",
@@ -55,6 +58,32 @@ export const columns = () => [
         isActionColumn: false,
         canEdit: true,
         isAdditionalAction: false,
+    },
+    {
+        id: "groups",
+        label: "گروه ها",
+        required: true,
+        showOnTable: true,
+        optionsKey: "groupList",
+        isMultiSelect: true,
+        canEdit: true,
+        isAdditionalAction: false,
+        render: (row: User) =>
+            row?.groups?.length
+                ? truncateText(row.groups.map((group) => group.name).join(", ")) : "نامشخص"
+    },
+    {
+        id: "product_lines",
+        label: "خط تولیدها",
+        required: true,
+        showOnTable: true,
+        optionsKey: "productLineList",
+        isMultiSelect: true,
+        canEdit: true,
+        isAdditionalAction: false,
+        render: (row: User) =>
+            row?.product_lines?.length
+                ? truncateText(row.product_lines.map((product_line) => product_line.name).join(", ")) : "نامشخص"
     },
     {
         id: "actions",

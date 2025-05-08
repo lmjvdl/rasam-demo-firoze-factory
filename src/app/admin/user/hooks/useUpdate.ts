@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { fetchWithErrorWithAlarm } from "@/utils/dataFetching/fetchWithError";
 import userUrls from "@/utils/url/adminPanel/userUrl";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
+import { extractIds } from "@/utils/formatters/extractId";
 
 export type UserUpdateSchema = {
     id: number;
@@ -11,7 +12,8 @@ export type UserUpdateSchema = {
     first_name: string;
     last_name: string;
     is_active: boolean;
-    groups?: { id: number; name: string; permissions: number[] }[];
+    groups: { id: number; name: string }[];
+    product_lines: { id: number; name: string; }[];
   };
   
 
@@ -19,10 +21,14 @@ const useUpdate = () => {
   const queryClient = useQueryClient();
 
   const updateUserMutation = useMutation({
-    mutationFn: async ({ id, ...updatedData }: UserUpdateSchema) => {
+    mutationFn: async ({ id, groups, product_lines, ...updatedData }: UserUpdateSchema) => {
       return fetchWithErrorWithAlarm(userUrls.editUser(id), {
         method: "PUT",
-        body: JSON.stringify(updatedData),
+        body: JSON.stringify({
+          ...updatedData,
+          product_lines: extractIds(product_lines),
+          groups: extractIds(groups)
+        }),
       });
     },
     onSuccess: () => {

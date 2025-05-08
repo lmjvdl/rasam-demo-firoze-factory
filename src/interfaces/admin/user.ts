@@ -9,9 +9,9 @@ export interface User {
     groups: {
       id: number;
       name: string;
-      permissions: number[];
-    }[];
+    }[] | [];
     is_active: boolean;
+    product_lines: { id: number; name: string }[] | [];
   }
 
 export interface UserTableProps {

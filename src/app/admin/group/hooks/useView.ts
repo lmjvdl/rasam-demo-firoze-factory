@@ -2,8 +2,8 @@ import { z } from "zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import fetchWithError from "@/utils/dataFetching/fetchWithError";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
-import groupUrls from "@/utils/url/adminPanel/group/groupUrl";
 import { useToast } from "@/hooks/ui/useToast";
+import groupUrls from "@/utils/url/adminPanel/groupUrl";
 
 export default function getGroupList(pages: number, pageSize: number, URL: string | null) {
   const queryClient = useQueryClient();

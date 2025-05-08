@@ -1,5 +1,5 @@
 import { fetchWithErrorForCreate } from "@/utils/dataFetching/fetchWithError";
-import groupUrls from "@/utils/url/adminPanel/group/groupUrl";
+import groupUrls from "@/utils/url/adminPanel/groupUrl";
 import { z } from "zod";
 
 const groupSchema = z.object({
