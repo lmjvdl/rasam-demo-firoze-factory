@@ -11,6 +11,7 @@ export const columns = () => [
     canEdit: true,
     isAdditionalAction: false,
     isIconSelect: true,
+    isImage: true,
     optionsKey: "iconList",
   },
   {

@@ -62,8 +62,8 @@ export const columns = () => [
     {
         id: "groups",
         label: "گروه ها",
-        required: true,
-        showOnTable: true,
+        required: false,
+        showOnTable: false,
         optionsKey: "groupList",
         isMultiSelect: true,
         canEdit: true,
@@ -75,8 +75,8 @@ export const columns = () => [
     {
         id: "product_lines",
         label: "خط تولیدها",
-        required: true,
-        showOnTable: true,
+        required: false,
+        showOnTable: false,
         optionsKey: "productLineList",
         isMultiSelect: true,
         canEdit: true,

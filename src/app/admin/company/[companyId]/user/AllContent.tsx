@@ -12,10 +12,14 @@ import { UserCompanyUpdateSchema } from "./hooks/useUpdate";
 import UserCompanyTable from "./UserCompanyTable";
 import useUpdate from "./hooks/useUpdate";
 import { UserCompanyPageProps } from "@/interfaces/admin/userCompany";
-import usePermissionQuery from "./hooks/usePermissionList";
+import useDataQuery from "@/hooks/adminDataQuery/useDataQuery";
+import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
+import permissionUrls from "@/utils/url/adminPanel/permissionUrl";
+import groupUrls from "@/utils/url/adminPanel/groupUrl";
 
-
-export default function AllContentUserCompany({ companyId }: UserCompanyPageProps) {
+export default function AllContentUserCompany({
+  companyId,
+}: UserCompanyPageProps) {
   const [data, setData] = useState<ResponseSchema>(PrevDataInitial);
   const [selectedRow, setSelectedRow] = useState<any>(null);
   const [viewOpen, setViewOpen] = useState(false);
@@ -27,21 +31,34 @@ export default function AllContentUserCompany({ companyId }: UserCompanyPageProp
   const getList = getUserCompanyList(companyId);
   const { deleteUserCompanyMutation } = useDelete();
   const { updateUserCompanyMutation } = useUpdate();
-  const permissionList = usePermissionQuery().data
-  ? usePermissionQuery().data.map((permission) => ({
-      id: permission.id,
-      value: permission.id, 
-      label: permission.name, 
-    }))
-  : [];
-  const groupList = usePermissionQuery().data
-  ? usePermissionQuery().data.map((permission) => ({
-      id: permission.id,
-      value: permission.id, 
-      label: permission.name, 
-    }))
-  : [];
 
+  const permissionList = useDataQuery(
+    allQueryKeys.adminPanel.userCompany.permission_list,
+    permissionUrls.listPermission
+  ).data
+    ? useDataQuery(
+        allQueryKeys.adminPanel.userCompany.permission_list,
+        permissionUrls.listPermission
+      ).data.map((permission) => ({
+        id: permission.id,
+        value: permission.id,
+        label: permission.name,
+      }))
+    : [];
+
+  const groupList = useDataQuery(
+    allQueryKeys.adminPanel.userCompany.group_list,
+    groupUrls.listGroup
+  ).data
+    ? useDataQuery(
+        allQueryKeys.adminPanel.userCompany.group_list,
+        groupUrls.listGroup
+      ).data.map((group) => ({
+        id: group.id,
+        value: group.id,
+        label: group.name,
+      }))
+    : [];
 
   useEffect(() => {
     getList.mutate(
@@ -98,21 +115,23 @@ export default function AllContentUserCompany({ companyId }: UserCompanyPageProp
     if (selectedRow?.id) {
       deleteUserCompanyMutation.mutate(selectedRow.id, {
         onSuccess: () => {
-          setData(prevData => {
+          setData((prevData) => {
             if (prevData?.data) {
               return {
                 ...prevData,
                 data: {
                   ...prevData.data,
-                  results: prevData.data.results.filter(row => row.id !== selectedRow.id),
-                  count: prevData.data.count - 1
-                }
+                  results: prevData.data.results.filter(
+                    (row) => row.id !== selectedRow.id
+                  ),
+                  count: prevData.data.count - 1,
+                },
               };
             }
             return prevData;
           });
           setDeleteOpen(false);
-        }
+        },
       });
     }
   };
@@ -139,9 +158,9 @@ export default function AllContentUserCompany({ companyId }: UserCompanyPageProp
         rowData={selectedRow}
         titles={dynamicColumns}
         arrayAttributes={{
-          permissions: 'name', 
+          permissions: "name",
+          group: "name",
         }}
-        
       />
       <EditDialog
         open={editOpen}
@@ -150,7 +169,7 @@ export default function AllContentUserCompany({ companyId }: UserCompanyPageProp
         rowData={selectedRow}
         titles={filteredColumnsForEdit}
         extraOptions={{ permissionList, groupList }}
-        arrayObjectAttributes={['permissions', "groups"]}
+        arrayObjectAttributes={["permissions", "groups"]}
       />
       <DeleteDialog
         open={deleteOpen}
@@ -158,8 +177,11 @@ export default function AllContentUserCompany({ companyId }: UserCompanyPageProp
         onConfirm={handleConfirmDelete}
         rowData={selectedRow}
         titles={dynamicColumns}
+        arrayAttributes={{
+          permissions: "name",
+          group: "name"
+        }}
       />
     </>
   );
-};
-
+}

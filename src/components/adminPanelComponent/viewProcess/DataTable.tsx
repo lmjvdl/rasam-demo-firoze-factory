@@ -9,11 +9,13 @@ import {
   IconButton,
   TablePagination,
   Box,
+  Alert,
 } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { truncateText } from "@/utils/formatters/truncateText";
+import Url from "@/utils/dataFetching/urls";
 
 const DataTable: React.FC<DataTableProps> = ({
   columns,
@@ -27,7 +29,10 @@ const DataTable: React.FC<DataTableProps> = ({
   arrayColumns = {},
 }) => {
   const validData = Array.isArray(data) ? data : [];
-  const visibleColumns = columns.filter((column) => column.showOnTable !== false);
+  const visibleColumns = columns.filter(
+    (column) => column.showOnTable !== false
+  );
+  const urlInstance = new Url();
 
   return (
     <Box sx={{ marginTop: "35px", padding: "16px" }}>
@@ -51,12 +56,18 @@ const DataTable: React.FC<DataTableProps> = ({
                   const isArrayColumn = arrayColumns[column.id];
                   return (
                     <TableCell key={column.id} align="center">
-                      {column.isImage ? (
-                        <img
-                        src={value}
-                        alt="Image"
-                        style={{ width: "25px", height: "25px" }}
-                        />
+                      {column.isImage && value !== "" ? (
+                        <>
+                          <img
+                            src={`${urlInstance.origin}${
+                              String(value).startsWith("/")
+                                ? String(value).substring(1)
+                                : value
+                            }`}
+                            alt=""
+                            style={{ width: "25px", height: "25px" }}
+                          />
+                        </>
                       ) : column.render ? (
                         column.render(row)
                       ) : column.isActionColumn ? (
@@ -91,7 +102,7 @@ const DataTable: React.FC<DataTableProps> = ({
           </TableBody>
         </Table>
       </TableContainer>
-      <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+      <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
         <TablePagination
           component="div"
           count={count}

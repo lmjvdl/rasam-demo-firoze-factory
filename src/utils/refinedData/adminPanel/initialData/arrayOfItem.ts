@@ -4,8 +4,10 @@ export const arrayOfData = z.object({
     data: z.object({
       results: z.array(
         z.object({
-          id: z.number(),
-          name: z.string(),
+          id: z.number().optional().default(0),
+          name: z.string().optional().default(""),
+          username: z.string().optional().default(""),
+          translate: z.string().optional().default("")
         })
       ),
     }),

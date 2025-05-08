@@ -28,27 +28,27 @@ export const columns = () => [
     id: "groups",
     label: "گروه ها",
     showOnTable: true,
-    required: false,
+    required: true,
     isMultiSelect: true,
     optionsKey: "groupList",
     canEdit: true,
     isAdditionalAction: false,
     render: (row: UserCompany) =>
       row?.groups?.length
-          ? truncateText(row.groups.map((g) => g.name).join(", ")) : "نامشخص"
+          ? truncateText(row.groups.map((group) => group.name).join(", ")) : "نامشخص"
   },
   {
     id: "permissions",
     label: "دسترسی ها",
     showOnTable: true,
     optionsKey: "permissionList",
-    required: false,
+    required: true,
     isMultiSelect: true,
     canEdit: true,
     isAdditionalAction: false,
     render: (row: UserCompany) =>
       row?.permissions?.length
-          ? truncateText(row.permissions.map((p) => p.name).join(", ")) : "نامشخص"
+          ? truncateText(row.permissions.map((permission) => permission.name).join(", ")) : "نامشخص"
   },
   {
     id: "actions",

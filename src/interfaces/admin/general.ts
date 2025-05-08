@@ -99,6 +99,7 @@ interface ViewDialogProps {
     optionsKey?: string;
     isSingleSelect?: boolean;
     isActionColumn?: boolean;
+    isImage?: boolean;
   }>;
   booleanAttributeName?: string;
   falseLabel?: string;

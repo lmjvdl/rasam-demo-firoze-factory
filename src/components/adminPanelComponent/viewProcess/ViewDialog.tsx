@@ -1,57 +1,105 @@
-import React from 'react';
-import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material';
+import React from "react";
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Button,
+  Typography,
+} from "@mui/material";
+import Url from "@/utils/dataFetching/urls";
 
-const ViewDialog: React.FC<ViewDialogProps> = ({ 
-  open, 
-  onClose, 
-  rowData, 
-  titles, 
-  booleanAttributeName, 
-  falseLabel = "خیر", 
-  trueLabel = "بله", 
+const ViewDialog: React.FC<ViewDialogProps> = ({
+  open,
+  onClose,
+  rowData,
+  titles,
+  booleanAttributeName,
+  falseLabel = "خیر",
+  trueLabel = "بله",
   arrayAttributes = {},
-  objectAttributes = []
+  objectAttributes = [],
 }) => {
-  if (!rowData || typeof rowData !== 'object') return null;
+  if (!rowData || typeof rowData !== "object") return null;
+
+  const urlInstance = new Url();
 
   const renderValue = (key: string, value: any) => {
-    // Handle object attributes (e.g., function_info, device_info, type_info)
-    if (objectAttributes.includes(key) && value && typeof value === 'object') {
-      return value.name || value.id || 'نامشخص';
+    // Handle object attributes
+    if (objectAttributes.includes(key) && value && typeof value === "object") {
+      return value.name || value.id || "نامشخص";
     }
-    
+
     // Handle boolean values
     if (booleanAttributeName === key) {
       return value ? trueLabel : falseLabel;
     }
-    
-    // Handle arrays (if any)
+
+    // Handle arrays
     if (Array.isArray(value)) {
       const attributeKey = arrayAttributes[key] || "name";
-      return value.map(item => {
-        if (item && typeof item === 'object') {
-          return item[attributeKey] || 'نامشخص';
-        }
-        return item;
-      }).join(', ');
+      return value
+        .map((item) => {
+          if (item && typeof item === "object") {
+            return item[attributeKey] || "نامشخص";
+          }
+          return item;
+        })
+        .join(", ");
     }
 
     // Handle strings, numbers, etc.
-    return value !== null && value !== undefined ? String(value) : 'ندارد';
+    return value !== null && value !== undefined ? String(value) : "ندارد";
   };
 
   return (
     <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm">
       <DialogTitle>نمایش جزئیات</DialogTitle>
-      <DialogContent>
-        {titles?.filter(column => !column.isActionColumn).map(column => (
-          <div key={column.id} style={{ marginBottom: 10 }}>
-            <strong>{column.label}:</strong> {renderValue(column.id, rowData[column.id])}
-          </div>
-        ))}
+      <DialogContent dividers>
+        {titles
+          ?.filter((column) => !column.isActionColumn)
+          .map((column) => {
+            const value = rowData[column.id];
+
+            return (
+              <Typography
+                key={column.id}
+                variant="body2"
+                color="text.primary"
+                gutterBottom
+                sx={{ display: "flex" }}
+              >
+                {column.isImage && value ? (
+                  <>
+                    <img
+                      src={`${urlInstance.origin}${
+                        String(value).startsWith("/")
+                          ? String(value).substring(1)
+                          : value
+                      }`}
+                      alt=""
+                      style={{
+                        width: "36px",
+                        height: "36px",
+                      }}
+                    />
+                  </>
+                ) : (
+                  <>
+                    <strong style={{ minWidth: "120px", display: "inline-block" }}>
+                      {column.label}:
+                    </strong>
+                    <span>{renderValue(column.id, value)}</span>
+                  </>
+                )}
+              </Typography>
+            );
+          })}
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose} color="primary">بستن</Button>
+        <Button onClick={onClose} color="primary">
+          بستن
+        </Button>
       </DialogActions>
     </Dialog>
   );
