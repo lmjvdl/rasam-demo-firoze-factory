@@ -1,3 +1,6 @@
+import { Device } from "@/interfaces/admin/device";
+import { truncateText } from "@/utils/formatters/truncateText";
+
 export const columns = () => [
     {
         id: "name",
@@ -23,6 +26,7 @@ export const columns = () => [
         isAdditionalAction: false,
         optionsKey: "productLinePartList",
         isSingleSelect: true,
+        render: (row: Device) => row?.product_line_part?.name || "نامشخص",
     },
     {
         id: "data_type",
@@ -33,6 +37,9 @@ export const columns = () => [
         isAdditionalAction: false,
         optionsKey: "dataTypeList",
         isMultiSelect: true,
+        render: (row: Device) =>
+            row?.data_type?.length
+                ? truncateText(row.data_type.map((data_type) => data_type.name).join(", ")) : "نامشخص"
     },
     {
         id: "code",
@@ -51,6 +58,7 @@ export const columns = () => [
         isAdditionalAction: false,
         optionsKey: "dataTypeList",
         isSingleSelect: true,
+        render: (row: Device) => row?.on_off_identifier?.name || "نامشخص",
     },
     {
         id: "value",
