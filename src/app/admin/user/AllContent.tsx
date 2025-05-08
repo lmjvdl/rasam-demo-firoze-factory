@@ -141,7 +141,6 @@ const AllContentUser: React.FC = () => {
         rowData={selectedRow}
         titles={dynamicColumns}
         booleanAttributeName="is_active"
-        booleanValue={selectedRow?.is_active}
         falseLabel="غیر فعال"
         trueLabel="فعال"
       />

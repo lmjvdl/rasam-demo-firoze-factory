@@ -45,7 +45,7 @@ export default function UserCompanyPage({ params }: PageProps) {
             type: "select",
             required: true,
             options: getUsersList.data?.map((user) => ({
-              label: user.username,
+              label: user.name,
               value: user.id,
             })) || [],
           },
@@ -65,7 +65,7 @@ export default function UserCompanyPage({ params }: PageProps) {
             type: "multiselect",
             required: false,
             options: getPermissionsList.data?.map((permission) => ({
-              label: permission.translate,
+              label: permission.name,
               value: permission.id,
             })) || [],
           },

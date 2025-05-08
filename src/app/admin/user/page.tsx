@@ -5,14 +5,22 @@ import ModalForm from "@/components/adminPanelComponent/addingProcess/ModalForm"
 import MainCard from "@/components/customContiner/MainCard";
 import AllContentUser from "./AllContent";
 import { createNewUser } from "./hooks/useCreate";
+import productLineUrls from "@/utils/url/adminPanel/productLineUrl";
+import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
+import useDataQuery from "@/hooks/adminDataQuery/useDataQuery";
 
 export default function UserPage() {
   const [refreshKey, setRefreshKey] = useState(0);
 
+  const getProductLineList = useDataQuery(
+    allQueryKeys.adminPanel.alarm.function_list,
+    productLineUrls.listProductLine
+  );
+
   const handleCreateUser = async (data: any) => {
     const response = await createNewUser(data);
     if (response.success) {
-      setRefreshKey(prev => prev + 1);
+      setRefreshKey((prev) => prev + 1);
       return { success: true };
     }
     return response;
@@ -27,43 +35,54 @@ export default function UserPage() {
             name: "username",
             label: "نام کاربری",
             type: "text",
-            required: true
+            required: true,
           },
           {
             name: "email",
             label: "ایمیل",
             type: "email",
-            required: false
+            required: false,
           },
           {
             name: "phone_number",
             label: "شماره تلفن",
             type: "tel",
-            required: true
+            required: true,
           },
           {
             name: "first_name",
             label: "نام",
             type: "text",
-            required: false
+            required: false,
           },
           {
             name: "last_name",
             label: "نام خانوادگی",
             type: "text",
-            required: false
+            required: false,
           },
           {
             name: "password",
             label: "رمز عبور",
             type: "password",
-            required: true
+            required: true,
           },
           {
             name: "national_code",
             label: "کد ملی",
             type: "text",
-            required: true
+            required: true,
+          },
+          {
+            name: "product_line",
+            label: "خط تولیدها",
+            type: "multiselect",
+            required: false,
+            options:
+              getProductLineList.data?.map((product_line) => ({
+                label: product_line.name,
+                value: product_line.id,
+              })) || [],
           },
         ]}
         onSubmit={handleCreateUser}
