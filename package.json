@@ -21,6 +21,7 @@
     "@mui/lab": "^6.0.0-beta.24",
     "@mui/material": "^6.4.5",
     "@mui/material-nextjs": "^6.1.9",
+    "@mui/x-date-pickers": "^8.3.0",
     "@radix-ui/react-toast": "^1.2.6",
     "@svgr/webpack": "^8.1.0",
     "@tabler/icons-react": "^3.26.0",

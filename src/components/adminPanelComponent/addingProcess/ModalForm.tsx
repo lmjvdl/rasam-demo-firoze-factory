@@ -1,5 +1,3 @@
-"use client";
-
 import { useState, useEffect } from "react";
 import {
   Button,
@@ -18,6 +16,11 @@ import {
   CircularProgress,
 } from "@mui/material";
 import { useForm, Controller } from "react-hook-form";
+import OneDayDropdown from "@/components/filtersReportDropDown/OneDay";
+import { LocalizationProvider, TimePicker } from "@mui/x-date-pickers";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import faIR from 'date-fns/locale/fa-IR';
+import { Locale } from "date-fns/locale";
 
 const ModalForm: React.FC<ModalFormProps> = ({
   buttonText,
@@ -35,6 +38,8 @@ const ModalForm: React.FC<ModalFormProps> = ({
     reset,
     formState: { errors },
   } = useForm();
+
+  const faIRLocale = faIR as unknown as Locale;
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
@@ -60,7 +65,7 @@ const ModalForm: React.FC<ModalFormProps> = ({
 
   return (
     <>
-      <Button          
+      <Button
         variant="contained"
         color="primary"
         onClick={handleOpen}
@@ -83,14 +88,66 @@ const ModalForm: React.FC<ModalFormProps> = ({
                 key={field.name}
                 name={field.name}
                 control={control}
-                defaultValue={field.type === "multiselect" ? [] : ""}
+                defaultValue={
+                  field.type === "multiselect"
+                    ? []
+                    : field.type === "time"
+                    ? null
+                    : ""
+                }
                 rules={{
                   required: field.required
                     ? `${field.label} اجباری است`
                     : false,
                 }}
-                render={({ field: controllerField, fieldState, formState }) => {
+                render={({ field: controllerField }) => {
                   const isFixedField = fixedValues && field.name in fixedValues;
+
+                  // Calendar using custom component
+                  if (field.type === "date") {
+                    return (
+                      <FormControl fullWidth margin="normal">
+                        <InputLabel shrink>{field.label}</InputLabel>
+                        <OneDayDropdown
+                          value={controllerField.value}
+                          placeholder={field.placeholder}
+                          disabled={isFixedField}
+                          onChange={(date) => controllerField.onChange(date)}
+                        />
+                      </FormControl>
+                    );
+                  }
+
+                  // Time using MUI TimePicker
+
+                  if (field.type === "time") {
+                    return (
+                      <FormControl fullWidth margin="normal">
+                        <LocalizationProvider
+                          dateAdapter={AdapterDateFns}
+                          adapterLocale={faIRLocale}
+                        >
+                          <TimePicker
+                            label={field.label}
+                            value={controllerField.value}
+                            onChange={(newVal) =>
+                              controllerField.onChange(newVal)
+                            }
+                            slots={{
+                              textField: (params) => (
+                                <TextField
+                                  {...params}
+                                  error={!!errors[field.name]}
+                                  helperText={errors[field.name]?.message}
+                                  disabled={isFixedField}
+                                />
+                              ),
+                            }}
+                          />
+                        </LocalizationProvider>
+                      </FormControl>
+                    );
+                  }
 
                   if (field.type === "multiselect") {
                     return (
@@ -108,11 +165,11 @@ const ModalForm: React.FC<ModalFormProps> = ({
                           }
                           input={<OutlinedInput label={field.label} />}
                           renderValue={(selected) =>
-                            (selected as number[])
+                            (selected as any[])
                               .map(
                                 (val) =>
                                   field.options?.find(
-                                    (option) => option.value === val
+                                    (opt) => opt.value === val
                                   )?.label
                               )
                               .join(", ")
@@ -143,6 +200,7 @@ const ModalForm: React.FC<ModalFormProps> = ({
                           {...controllerField}
                           label={field.label}
                           error={!!errors[field.name]}
+                          disabled={isFixedField}
                         >
                           {field.options?.map((option) => (
                             <MenuItem key={option.value} value={option.value}>
@@ -165,20 +223,6 @@ const ModalForm: React.FC<ModalFormProps> = ({
                             {...controllerField}
                             value={controllerField.value || ""}
                             label={field.label}
-                            renderValue={(selected) => {
-                              const selectedIcon = icons?.find(
-                                (icon) => icon.id === selected
-                              );
-                              return selectedIcon ? (
-                                <img
-                                  src={selectedIcon.url}
-                                  alt="Selected Icon"
-                                  style={{ width: 24, height: 24 }}
-                                />
-                              ) : (
-                                ""
-                              );
-                            }}
                           >
                             {icons?.map((icon) => (
                               <MenuItem key={icon.id} value={icon.id}>
@@ -199,6 +243,7 @@ const ModalForm: React.FC<ModalFormProps> = ({
                     );
                   }
 
+                  // default: text input
                   return (
                     <TextField
                       fullWidth
@@ -208,18 +253,14 @@ const ModalForm: React.FC<ModalFormProps> = ({
                       required={field.required}
                       error={!!errors[field.name]}
                       helperText={
-                        errors[field.name]?.message
-                          ? (errors[field.name]?.message as string)
-                          : ""
+                        errors[field.name]?.message as string | undefined
                       }
                       sx={{
                         "& .MuiInputLabel-asterisk": { color: "red" },
                       }}
                       {...controllerField}
                       disabled={isFixedField}
-                      InputProps={{
-                        readOnly: isFixedField,
-                      }}
+                      InputProps={{ readOnly: isFixedField }}
                     />
                   );
                 }}

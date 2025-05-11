@@ -12,7 +12,7 @@ export default function ShiftPage() {
   const handleCreateShift = async (data: any) => {
     const response = await createNewShift(data);
     if (response.success) {
-      setRefreshKey(prev => prev + 1);
+      setRefreshKey((prev) => prev + 1);
       return { success: true };
     }
     return response;
@@ -24,12 +24,35 @@ export default function ShiftPage() {
         buttonText="افزودن شیفت جدید"
         formFields={[
           {
-            name: "name", label: "نام", type: "text", required: true
+            name: "name",
+            label: "نام شیفت",
+            type: "text",
+            required: true,
+          },
+          {
+            name: "start_date",
+            label: "تاریخ شروع",
+            type: "date",
+            required: true,
+          },
+          {
+            name: "start_time",
+            label: "ساعت شروع",
+            type: "text",
+            required: true,
+          },
+          {
+            name: "end_time",
+            label: "ساعت پایان",
+            type: "text",
+            required: true,
           },
         ]}
+        key={refreshKey}
         onSubmit={handleCreateShift}
       />
-      <AllContentShift key={refreshKey}/>
+
+      <AllContentShift key={refreshKey} />
     </MainCard>
   );
 }
