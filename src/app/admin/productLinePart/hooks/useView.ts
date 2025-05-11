@@ -39,10 +39,13 @@ const responseSchema = z.object({
     results: z.array(
       z.object({
         id: z.number(),
-        product_line: z.number(),
+        product_line: z.object({
+          id: z.number(),
+          name: z.string(),
+        }),
         name: z.string(),
         code: z.string(),
-        icon: z.number().nullable(),
+        icon: z.string(),
       })
     ),
   }),

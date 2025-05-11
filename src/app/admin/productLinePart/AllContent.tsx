@@ -10,9 +10,11 @@ import { PrevDataInitial } from "@/interfaces/general/general";
 import { columns } from "./ColumnsData";
 import { ProductLinePartUpdateSchema } from "./hooks/useUpdate";
 import ProductLinePartTable from "./ProductLinePartTable";
-import useUpdate from "./hooks/useUpdate";
+import useUpdateProductLinePart from "./hooks/useUpdate";
 import useIcons from "@/hooks/reactQueryApiHooks/useIcon";
-import useProductLineQuery from "./hooks/useProductLineList";
+import useDataQuery from "@/hooks/adminDataQuery/useDataQuery";
+import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
+import productLineUrls from "@/utils/url/adminPanel/productLineUrl";
 
 const AllContentProductLinePart: React.FC = () => {
   const [data, setData] = useState<ResponseSchema>(PrevDataInitial);
@@ -26,21 +28,27 @@ const AllContentProductLinePart: React.FC = () => {
 
   const getList = getProductLinePartList(pageNumber, 8, nextPage);
   const { deleteProductLinePartMutation } = useDelete();
-  const { updateProductLinePartMutation } = useUpdate();
+  const { updateProductLinePartMutation } = useUpdateProductLinePart();
   const iconList = useIcons().icons
-  ? useIcons().icons.map((icon) => ({
-    id: icon.id,
-    value: icon.id, 
-    label: icon.url, 
-  }))
-: [];
-const productLineList = useProductLineQuery().data
-? useProductLineQuery().data.map((productLine) => ({
-    id: productLine.id,
-    value: productLine.id, 
-    label: productLine.name, 
-  }))
-: [];
+    ? useIcons().icons.map((icon) => ({
+        id: icon.id,
+        value: icon.id,
+        label: icon.url,
+      }))
+    : [];
+  const productLineList = useDataQuery(
+    allQueryKeys.adminPanel.productLinePart.product_line_list,
+    productLineUrls.listProductLine
+  ).data
+    ? useDataQuery(
+        allQueryKeys.adminPanel.productLinePart.product_line_list,
+        productLineUrls.listProductLine
+      ).data.map((product_line) => ({
+        id: product_line.id,
+        value: product_line.id,
+        label: product_line.name,
+      }))
+    : [];
 
   useEffect(() => {
     getList.mutate(
@@ -57,6 +65,7 @@ const productLineList = useProductLineQuery().data
 
   const handleSaveEdit = (updatedRow: ProductLinePartUpdateSchema) => {
     setData((prevData) => {
+      console.log(updatedRow)
       if (prevData?.data) {
         updateProductLinePartMutation.mutate(updatedRow);
 
@@ -98,25 +107,26 @@ const productLineList = useProductLineQuery().data
     if (selectedRow?.id) {
       deleteProductLinePartMutation.mutate(selectedRow.id, {
         onSuccess: () => {
-          setData(prevData => {
+          setData((prevData) => {
             if (prevData?.data) {
               return {
                 ...prevData,
                 data: {
                   ...prevData.data,
-                  results: prevData.data.results.filter(row => row.id !== selectedRow.id),
-                  count: prevData.data.count - 1
-                }
+                  results: prevData.data.results.filter(
+                    (row) => row.id !== selectedRow.id
+                  ),
+                  count: prevData.data.count - 1,
+                },
               };
             }
             return prevData;
           });
           setDeleteOpen(false);
-        }
+        },
       });
     }
   };
-
 
   const dynamicColumns = columns();
   const filteredColumnsForEdit = dynamicColumns.filter((col) => col.canEdit);
@@ -139,6 +149,7 @@ const productLineList = useProductLineQuery().data
         onClose={() => setViewOpen(false)}
         rowData={selectedRow}
         titles={dynamicColumns}
+        objectAttributes={["product_line"]}
       />
       <EditDialog
         open={editOpen}
@@ -147,6 +158,7 @@ const productLineList = useProductLineQuery().data
         rowData={selectedRow}
         titles={filteredColumnsForEdit}
         extraOptions={{ iconList, productLineList }}
+        objectAttributes={["product_line"]}
       />
       <DeleteDialog
         open={deleteOpen}
@@ -154,6 +166,7 @@ const productLineList = useProductLineQuery().data
         onConfirm={handleConfirmDelete}
         rowData={selectedRow}
         titles={dynamicColumns}
+        objectAttributes={["product_line"]}
       />
     </>
   );

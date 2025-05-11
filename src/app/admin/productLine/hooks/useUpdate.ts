@@ -21,7 +21,11 @@ const useUpdateProductLine = () => {
     mutationFn: async ({ id, company_info, icon, ...updatedData }: ProductLineUpdateSchema) => {
       return fetchWithErrorWithAlarm(productLineUrls.editProductLine(id), {
         method: "PUT",
-        body: JSON.stringify({...updatedData, company_info: extractId(company_info), icon:Number(icon)}),
+        body: JSON.stringify({
+          ...updatedData,
+          company_info: extractId(company_info), 
+          icon: icon === "" ? null : Number(icon)
+        }),
       });
     },
     onSuccess: () => {

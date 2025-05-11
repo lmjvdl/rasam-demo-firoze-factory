@@ -174,7 +174,6 @@ const EditDialog: React.FC<EditDialogProps> = ({
                     <MenuItem key={icon.id} value={icon.id}>
                       <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
                         <img src={icon.label} alt="icon" style={{ width: "24px", height: "24px" }} />
-                        
                       </div>
                     </MenuItem>
                   ))}

@@ -6,12 +6,17 @@ import MainCard from "@/components/customContiner/MainCard";
 import { createNewProductLinePart } from "./hooks/useCreate";
 import AllContentProductLinePart from "./AllContent";
 import useIcons from "@/hooks/reactQueryApiHooks/useIcon";
-import useProductLineQuery from "./hooks/useProductLineList";
+import useDataQuery from "@/hooks/adminDataQuery/useDataQuery";
+import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
+import productLineUrls from "@/utils/url/adminPanel/productLineUrl";
 
 export default function ProductLinePartPage() {
   const [refreshKey, setRefreshKey] = useState(0);
   const { icons, loading } = useIcons();
-  const getListProductLine = useProductLineQuery();
+  const getListProductLine = useDataQuery(
+    allQueryKeys.adminPanel.productLinePart.product_line_list,
+    productLineUrls.listProductLine
+  )
 
   const handleCreateProductLinePart = async (data: any) => {
     const response = await createNewProductLinePart(data);

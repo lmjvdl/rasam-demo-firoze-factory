@@ -1,3 +1,5 @@
+import { ProductLinePart } from "@/interfaces/admin/productLinePart";
+
 export const columns = () => [
     {
         id: "icon",
@@ -32,6 +34,7 @@ export const columns = () => [
         canEdit: true,
         isAdditionalAction: false,
         optionsKey: "productLineList",
+        render: (row: ProductLinePart) => row?.product_line?.name || "نامشخص",
         isSingleSelect: true,
     },
     {
