@@ -15,7 +15,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { truncateText } from "@/utils/formatters/truncateText";
-import Url from "@/utils/dataFetching/urls";
+import concatImagePathAndBaseUrl from "@/utils/formatters/contcatImagePathAndBaseUrl";
 
 const DataTable: React.FC<DataTableProps> = ({
   columns,
@@ -32,7 +32,6 @@ const DataTable: React.FC<DataTableProps> = ({
   const visibleColumns = columns.filter(
     (column) => column.showOnTable !== false
   );
-  const urlInstance = new Url();
 
   return (
     <Box sx={{ marginTop: "35px", padding: "16px" }}>
@@ -59,11 +58,7 @@ const DataTable: React.FC<DataTableProps> = ({
                       {column.isImage && value !== "" ? (
                         <>
                           <img
-                            src={`${urlInstance.origin}${
-                              String(value).startsWith("/")
-                                ? String(value).substring(1)
-                                : value
-                            }`}
+                            src={concatImagePathAndBaseUrl(value)}
                             alt=""
                             style={{ width: "25px", height: "25px" }}
                           />

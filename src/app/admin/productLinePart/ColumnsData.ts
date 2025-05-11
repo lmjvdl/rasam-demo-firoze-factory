@@ -6,6 +6,7 @@ export const columns = () => [
         label: "آیکون",
         required: false,
         showOnTable: true,
+        isImage: true,
         canEdit: true,
         isAdditionalAction: false,
         isIconSelect: true, 

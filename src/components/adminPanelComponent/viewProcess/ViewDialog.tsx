@@ -7,7 +7,7 @@ import {
   Button,
   Typography,
 } from "@mui/material";
-import Url from "@/utils/dataFetching/urls";
+import concatImagePathAndBaseUrl from "@/utils/formatters/contcatImagePathAndBaseUrl";
 
 const ViewDialog: React.FC<ViewDialogProps> = ({
   open,
@@ -21,8 +21,6 @@ const ViewDialog: React.FC<ViewDialogProps> = ({
   objectAttributes = [],
 }) => {
   if (!rowData || typeof rowData !== "object") return null;
-
-  const urlInstance = new Url();
 
   const renderValue = (key: string, value: any) => {
     // Handle object attributes
@@ -72,11 +70,7 @@ const ViewDialog: React.FC<ViewDialogProps> = ({
                 {column.isImage && value ? (
                   <>
                     <img
-                      src={`${urlInstance.origin}${
-                        String(value).startsWith("/")
-                          ? String(value).substring(1)
-                          : value
-                      }`}
+                      src={concatImagePathAndBaseUrl(value)}
                       alt=""
                       style={{
                         width: "36px",
@@ -86,7 +80,7 @@ const ViewDialog: React.FC<ViewDialogProps> = ({
                   </>
                 ) : (
                   <>
-                    <strong style={{ minWidth: "120px", display: "inline-block" }}>
+                    <strong style={{ minWidth: "200px", display: "inline-block" }}>
                       {column.label}:
                     </strong>
                     <span>{renderValue(column.id, value)}</span>

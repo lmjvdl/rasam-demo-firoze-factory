@@ -9,7 +9,7 @@ import {
   Button,
   Typography,
 } from "@mui/material";
-import Url from "@/utils/dataFetching/urls";
+import concatImagePathAndBaseUrl from "@/utils/formatters/contcatImagePathAndBaseUrl";
 
 const DeleteDialog: React.FC<DeleteDialogProps> = ({
   open,
@@ -20,9 +20,7 @@ const DeleteDialog: React.FC<DeleteDialogProps> = ({
   arrayAttributes = {},
   objectAttributes = [],
 }) => {
-  if (!rowData) return null;
-
-  const urlInstance = new Url();
+  if (!rowData) return null;  
 
   const renderObjectValue = (obj: any) => {
     if (!obj) return "--";
@@ -71,11 +69,7 @@ const DeleteDialog: React.FC<DeleteDialogProps> = ({
             {column.isImage && value !== "" ? (
               <>
                 <img
-                  src={`${urlInstance.origin}${
-                    String(value).startsWith("/")
-                      ? String(value).substring(1)
-                      : value
-                  }`}
+                  src={concatImagePathAndBaseUrl(value)}
                   alt=""
                   style={{
                     width: "36px",
@@ -85,7 +79,7 @@ const DeleteDialog: React.FC<DeleteDialogProps> = ({
               </>
             ) : (
               <>
-                <strong style={{ minWidth: "120px", display: "inline-block" }}>
+                <strong style={{ minWidth: "200px", display: "inline-block" }}>
                   {column.label}:
                 </strong>
                 <span>{renderValue(key, value)}</span>

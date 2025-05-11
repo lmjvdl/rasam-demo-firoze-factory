@@ -11,8 +11,10 @@ import { columns } from "./ColumnsData";
 import { DeviceUpdateSchema } from "./hooks/useUpdate";
 import DeviceTable from "./DeviceTable";
 import useUpdate from "./hooks/useUpdate";
-import useDataTypeQuery from "./hooks/useDataTypeList";
-import useProductLinePartQuery from "./hooks/useProducLinePartList";
+import useDataQuery from "@/hooks/adminDataQuery/useDataQuery";
+import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
+import dataTypeUrls from "@/utils/url/adminPanel/dataTypeUrl";
+import productLinePartUrls from "@/utils/url/adminPanel/productLinePartUrl";
 
 const AllContentDevice: React.FC = () => {
   const [data, setData] = useState<ResponseSchema>(PrevDataInitial);
@@ -27,18 +29,32 @@ const AllContentDevice: React.FC = () => {
   const getList = getDeviceList(pageNumber, 8, nextPage);
   const { deleteDeviceMutation } = useDelete();
   const { updateDeviceMutation } = useUpdate();
-  const dataTypeList = useDataTypeQuery().data
-    ? useDataTypeQuery().data.map((dataType) => ({
-        id: dataType.id,
-        value: dataType.id,
-        label: dataType.name,
+
+  const dataTypeList = useDataQuery(
+    allQueryKeys.adminPanel.devices.data_type_list,
+    dataTypeUrls.listDataType
+  ).data
+    ? useDataQuery(
+        allQueryKeys.adminPanel.devices.data_type_list,
+        dataTypeUrls.listDataType
+      ).data.map((device) => ({
+        id: device.id,
+        value: device.id,
+        label: device.name,
       }))
     : [];
-  const productLinePartList = useProductLinePartQuery().data
-    ? useProductLinePartQuery().data.map((productLine) => ({
-        id: productLine.id,
-        value: productLine.id,
-        label: productLine.name,
+
+  const productLinePartList = useDataQuery(
+    allQueryKeys.adminPanel.devices.product_line_part_list,
+    productLinePartUrls.listProductLinePart
+  ).data
+    ? useDataQuery(
+        allQueryKeys.adminPanel.devices.product_line_part_list,
+        productLinePartUrls.listProductLinePart
+      ).data.map((product_line_part) => ({
+        id: product_line_part.id,
+        value: product_line_part.id,
+        label: product_line_part.name,
       }))
     : [];
 
@@ -98,25 +114,26 @@ const AllContentDevice: React.FC = () => {
     if (selectedRow?.id) {
       deleteDeviceMutation.mutate(selectedRow.id, {
         onSuccess: () => {
-          setData(prevData => {
+          setData((prevData) => {
             if (prevData?.data) {
               return {
                 ...prevData,
                 data: {
                   ...prevData.data,
-                  results: prevData.data.results.filter(row => row.id !== selectedRow.id),
-                  count: prevData.data.count - 1
-                }
+                  results: prevData.data.results.filter(
+                    (row) => row.id !== selectedRow.id
+                  ),
+                  count: prevData.data.count - 1,
+                },
               };
             }
             return prevData;
           });
           setDeleteOpen(false);
-        }
+        },
       });
     }
   };
-
 
   const dynamicColumns = columns();
   const filteredColumnsForEdit = dynamicColumns.filter((col) => col.canEdit);
@@ -139,6 +156,8 @@ const AllContentDevice: React.FC = () => {
         onClose={() => setViewOpen(false)}
         rowData={selectedRow}
         titles={dynamicColumns}
+        arrayAttributes={{ data_type: "name" }}
+        objectAttributes={["product_line_part", "on_off_identifier"]}
       />
       <EditDialog
         open={editOpen}
@@ -146,6 +165,8 @@ const AllContentDevice: React.FC = () => {
         onSave={handleSaveEdit}
         rowData={selectedRow}
         titles={filteredColumnsForEdit}
+        arrayObjectAttributes={["data_type"]}
+        objectAttributes={["product_line_part", "on_off_identifier"]}
         extraOptions={{ dataTypeList, productLinePartList }}
       />
       <DeleteDialog
@@ -154,6 +175,8 @@ const AllContentDevice: React.FC = () => {
         onConfirm={handleConfirmDelete}
         rowData={selectedRow}
         titles={dynamicColumns}
+        arrayAttributes={{ data_type: "name" }}
+        objectAttributes={["product_line_part", "on_off_identifier"]}
       />
     </>
   );

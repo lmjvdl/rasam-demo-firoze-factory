@@ -14,7 +14,9 @@ import {
   Checkbox,
   ListItemText,
   SelectChangeEvent,
+  useTheme,
 } from "@mui/material";
+import concatImagePathAndBaseUrl from "@/utils/formatters/contcatImagePathAndBaseUrl";
 
 const EditDialog: React.FC<EditDialogProps> = ({
   open,
@@ -29,6 +31,10 @@ const EditDialog: React.FC<EditDialogProps> = ({
   onBooleanValueChange,
   extraOptions = {},
 }) => {
+
+  const theme = useTheme();
+
+
   const [formData, setFormData] = useState<{ [key: string]: any }>(
     rowData || {}
   );
@@ -74,13 +80,14 @@ const EditDialog: React.FC<EditDialogProps> = ({
     key: string
   ) => {
     const selectedIds = event.target.value;
-    const allOptions = extraOptions?.[titles.find(t => t.id === key)?.optionsKey || ''] || [];
-    
+    const allOptions =
+      extraOptions?.[titles.find((t) => t.id === key)?.optionsKey || ""] || [];
+
     setFormData((prev) => ({
       ...prev,
       [key]: allOptions
-        .filter(opt => selectedIds.includes(String(opt.id)))
-        .map(opt => ({ id: opt.id, name: opt.label })),
+        .filter((opt) => selectedIds.includes(String(opt.id)))
+        .map((opt) => ({ id: opt.id, name: opt.label })),
     }));
   };
 
@@ -89,13 +96,14 @@ const EditDialog: React.FC<EditDialogProps> = ({
     key: string
   ) => {
     const selectedId = event.target.value;
-    const allOptions = extraOptions?.[titles.find(t => t.id === key)?.optionsKey || ''] || [];
-    const selectedOption = allOptions.find(opt => opt.id == selectedId);
-    
+    const allOptions =
+      extraOptions?.[titles.find((t) => t.id === key)?.optionsKey || ""] || [];
+    const selectedOption = allOptions.find((opt) => opt.id == selectedId);
+
     setFormData((prev) => ({
       ...prev,
-      [key]: selectedOption 
-        ? { id: selectedOption.id, name: selectedOption.label } 
+      [key]: selectedOption
+        ? { id: selectedOption.id, name: selectedOption.label }
         : null,
     }));
   };
@@ -148,35 +156,72 @@ const EditDialog: React.FC<EditDialogProps> = ({
             );
           }
 
-
           if (column.isIconSelect && column.optionsKey) {
             const allIcons = extraOptions[column.optionsKey] || [];
             const selectedIcon = formData?.[key] || "";
-          
             return (
               <FormControl key={key} fullWidth margin="dense">
                 <InputLabel>{column.label}</InputLabel>
                 <Select
                   value={selectedIcon}
-                  onChange={(e) => setFormData((prev) => ({ ...prev, [key]: Number(e.target.value) }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      [key]: Number(e.target.value),
+                    }))
+                  }
                   input={<OutlinedInput label={column.label} />}
                   renderValue={(selected) => {
                     const selectedItem = allIcons.find((icon) => icon.id === selected);
+                  
                     return (
-                      <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                        {selectedItem && <img src={selectedItem.label} alt="icon" style={{ width: "24px", height: "24px" }} />}
-  
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "10px",
+                        }}
+                      >
+                        {selectedItem && (
+                          <img
+                            src={selectedItem.label}
+                            alt="icon"
+                            style={{ width: "24px", height: "24px" }}
+                          />
+                        )}
                       </div>
                     );
                   }}
+                  
                 >
-                  {allIcons.map((icon) => (
-                    <MenuItem key={icon.id} value={icon.id}>
-                      <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                        <img src={icon.label} alt="icon" style={{ width: "24px", height: "24px" }} />
-                      </div>
-                    </MenuItem>
-                  ))}
+                  {allIcons.map((icon) => {
+                    const isSelected = concatImagePathAndBaseUrl(selectedIcon) === icon.label;
+                    
+                    return (
+                      <MenuItem
+                        key={icon.id}
+                        value={icon.id}
+                        style={{
+                          backgroundColor: isSelected ? theme.palette.secondary.main : "inherit",
+                          fontWeight: isSelected ? "bold" : "normal",
+                        }}
+                      >
+                        <div
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "10px",
+                          }}
+                        >
+                          <img
+                            src={icon.label}
+                            alt="icon"
+                            style={{ width: "24px", height: "24px" }}
+                          />
+                        </div>
+                      </MenuItem>
+                    );
+                  })}
                 </Select>
               </FormControl>
             );
@@ -186,12 +231,17 @@ const EditDialog: React.FC<EditDialogProps> = ({
             const allOptions = extraOptions[column.optionsKey] || [];
             const currentValue = formData?.[key];
             const selectedId = getObjectId(currentValue);
-            
+
             return (
-              <FormControl key={key} fullWidth margin="dense" required={column.required}>
+              <FormControl
+                key={key}
+                fullWidth
+                margin="dense"
+                required={column.required}
+              >
                 <InputLabel>{column.label}</InputLabel>
                 <Select
-                  value={selectedId ? String(selectedId) : ''}
+                  value={selectedId ? String(selectedId) : ""}
                   onChange={(e) => handleSingleSelectChange(e, key)}
                   input={<OutlinedInput label={column.label} />}
                 >
@@ -209,14 +259,19 @@ const EditDialog: React.FC<EditDialogProps> = ({
               </FormControl>
             );
           }
-          
+
           if (column.isMultiSelect && column.optionsKey) {
             const allOptions = extraOptions[column.optionsKey] || [];
             const currentValue = formData?.[key];
             const selectedIds = getArrayObjectIds(currentValue).map(String);
-            
+
             return (
-              <FormControl key={key} fullWidth margin="dense" required={column.required}>
+              <FormControl
+                key={key}
+                fullWidth
+                margin="dense"
+                required={column.required}
+              >
                 <InputLabel>{column.label}</InputLabel>
                 <Select
                   multiple
@@ -234,7 +289,9 @@ const EditDialog: React.FC<EditDialogProps> = ({
                 >
                   {allOptions.map((option) => (
                     <MenuItem key={option.id} value={String(option.id)}>
-                      <Checkbox checked={selectedIds.includes(String(option.id))} />
+                      <Checkbox
+                        checked={selectedIds.includes(String(option.id))}
+                      />
                       <ListItemText primary={option.label} />
                     </MenuItem>
                   ))}

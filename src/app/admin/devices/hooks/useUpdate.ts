@@ -7,7 +7,7 @@ import { extractId, extractIds } from "@/utils/formatters/extractId";
 
 export type DeviceUpdateSchema = {
   id: number;
-  product_line_part: number;
+  product_line_part: { id: number; name: string };
   data_type: { id: number; name: string }[];
   name: string;
   code: string;
@@ -20,13 +20,14 @@ const useUpdateDevice = () => {
   const { showToast } = useToast();
 
   const updateDeviceMutation = useMutation({
-    mutationFn: async ({ id, on_off_identifier, data_type, ...updatedData }: DeviceUpdateSchema) => {
+    mutationFn: async ({ id, on_off_identifier, product_line_part, data_type, ...updatedData }: DeviceUpdateSchema) => {
       return fetchWithErrorWithAlarm(deviceUrls.editDevice(id), {
         method: "PUT",
         body: JSON.stringify({
           ...updatedData, 
           on_off_identifier: extractId(on_off_identifier),
-          data_type: extractIds(data_type)
+          data_type: extractIds(data_type),
+          product_line_part: extractId(product_line_part)
         }),
       });
     },

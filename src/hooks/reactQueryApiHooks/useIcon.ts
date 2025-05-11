@@ -3,6 +3,8 @@ import { fetchWithErrorWithoutPagination } from "@/utils/dataFetching/fetchWithE
 import { z } from "zod";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import imageUploadUrls from "@/utils/url/adminPanel/imageUrl";
+import Url from "@/utils/dataFetching/urls";
+import concatImagePathAndBaseUrl from "@/utils/formatters/contcatImagePathAndBaseUrl";
 
 const responseSchema = z.object({
   data: z.object({
@@ -58,10 +60,10 @@ export default function useIcons() {
   if (error || !data) {
     return { icons: [], loading: false };
   }
-
+  
   const icons = data.data.results.map((item: { id: number; icon: string; name: string }) => ({
     id: item.id,
-    url: item.icon,
+    url: concatImagePathAndBaseUrl(item.icon),
     name: item.name
   }));
 
