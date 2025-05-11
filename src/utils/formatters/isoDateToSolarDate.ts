@@ -33,3 +33,16 @@ export default function gregorianToJalali(dateStr: string): string {
     return `${jy}/${jm}/${jd}`;
 }
 
+export function gregorianToJalaliWithTime(dateStr: string): string {
+    const gDate = new Date(dateStr);
+    const jalaliDate = gregorianToJalali(dateStr);
+
+    const tehranTime = gDate.toLocaleTimeString('fa-IR', {
+        timeZone: 'Asia/Tehran',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false,
+    });
+
+    return `${jalaliDate} - ${tehranTime}`;
+}

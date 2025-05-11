@@ -14,4 +14,11 @@ export const columns = () => [
         canEdit: true,
         isAdditionalAction: false,
     },
+    {
+        id: "actions",
+        label: "عملیات",
+        isActionColumn: true,
+        canEdit: false,
+        isAdditionalAction: false,
+    },
 ];

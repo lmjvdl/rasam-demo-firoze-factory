@@ -5,14 +5,14 @@ import getIntervalList, { ResponseSchema } from "./hooks/useView";
 import useDelete from "./hooks/useDelete";
 import { PrevDataInitial } from "@/interfaces/general/general";
 import { columns } from "./ColumnsData";
-import { IntervalUpdateSchema } from "./hooks/useUpdate";
-import IntervalTable from "./IntervalTable";
+import { InputItemUpdateSchema } from "./hooks/useUpdate";
+import InputItemTable from "./InputItemTable";
 import useUpdate from "./hooks/useUpdate";
 import ViewDialog from "@/components/adminPanelComponent/viewProcess/ViewDialog";
 import EditDialog from "@/components/adminPanelComponent/viewProcess/EditDialog";
 import DeleteDialog from "@/components/adminPanelComponent/viewProcess/DeleteDialog";
 
-const AllContentInterval: React.FC = () => {
+const AllContentInputItems: React.FC = () => {
   const [data, setData] = useState<ResponseSchema>(PrevDataInitial);
   const [selectedRow, setSelectedRow] = useState<any>(null);
   const [viewOpen, setViewOpen] = useState(false);
@@ -23,8 +23,8 @@ const AllContentInterval: React.FC = () => {
   const [nextPage, setNextPage] = useState<null | string>(null);
 
   const getList = getIntervalList(pageNumber, 8, nextPage);
-  const { deleteIntervalMutation } = useDelete();
-  const { updateIntervalMutation } = useUpdate();
+  const { deleteInputItemMutation } = useDelete();
+  const { updateInputItemMutation } = useUpdate();
 
   useEffect(() => {
     getList.mutate(
@@ -39,10 +39,10 @@ const AllContentInterval: React.FC = () => {
     );
   }, [pageNumber]);
 
-  const handleSaveEdit = (updatedRow: IntervalUpdateSchema) => {
+  const handleSaveEdit = (updatedRow: InputItemUpdateSchema) => {
     setData((prevData) => {
       if (prevData?.data) {
-        updateIntervalMutation.mutate(updatedRow);
+        updateInputItemMutation.mutate(updatedRow);
 
         return {
           ...prevData,
@@ -80,8 +80,24 @@ const AllContentInterval: React.FC = () => {
 
   const handleConfirmDelete = () => {
     if (selectedRow?.id) {
-      deleteIntervalMutation.mutate(selectedRow.id);
-      setDeleteOpen(false);
+      deleteInputItemMutation.mutate(selectedRow.id, {
+        onSuccess: () => {
+          setData(prevData => {
+            if (prevData?.data) {
+              return {
+                ...prevData,
+                data: {
+                  ...prevData.data,
+                  results: prevData.data.results.filter(row => row.id !== selectedRow.id),
+                  count: prevData.data.count - 1
+                }
+              };
+            }
+            return prevData;
+          });
+          setDeleteOpen(false);
+        }
+      });
     }
   };
 
@@ -90,7 +106,7 @@ const AllContentInterval: React.FC = () => {
 
   return (
     <>
-      <IntervalTable
+      <InputItemTable
         data={data?.data?.results ?? []}
         columns={dynamicColumns}
         onView={handleView}
@@ -125,4 +141,4 @@ const AllContentInterval: React.FC = () => {
   );
 };
 
-export default AllContentInterval;
+export default AllContentInputItems;

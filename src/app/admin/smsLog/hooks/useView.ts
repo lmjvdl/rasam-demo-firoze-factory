@@ -3,8 +3,8 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import fetchWithError from "@/utils/dataFetching/fetchWithError";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import { useToast } from "@/hooks/ui/useToast";
-import smsLogUrls from "@/utils/url/adminPanel/smsLog";
-import gregorianToJalali from "@/utils/formatters/isoDateToSolarDate";
+import { gregorianToJalaliWithTime } from "@/utils/formatters/isoDateToSolarDate";
+import smsLogUrls from "@/utils/url/adminPanel/smsLogUrl";
 
 export default function getSmsLogList() {
   const queryClient = useQueryClient();
@@ -61,7 +61,7 @@ function sanitizer(pollutedData: unknown) {
 
     const transformedResults = refinedData.data.results.map((item) => ({
       ...item,
-      created_at: item.created_at ? gregorianToJalali(item.created_at) : "",
+      created_at: item.created_at ? gregorianToJalaliWithTime(item.created_at) : "",
     }));
 
     return { ...refinedData, data: { ...refinedData.data, results: transformedResults } };
