@@ -51,7 +51,7 @@ const DeleteDialog: React.FC<DeleteDialogProps> = ({
   const renderRowData = () => {
     return titles
       ?.filter(
-        (column: any) => column.showOnTable !== false && !column.isActionColumn
+        (column: any) => !column.isActionColumn
       )
       .map((column: any) => {
         const key = column.id;

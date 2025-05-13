@@ -79,7 +79,8 @@ const ViewDialog: React.FC<ViewDialogProps> = ({
                       }}
                     />
                   </>
-                ) : (
+                )
+                : (
                   <>
                     <strong style={{ minWidth: "200px", display: "inline-block" }}>
                       {column.label}:

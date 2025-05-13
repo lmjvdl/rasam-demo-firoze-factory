@@ -16,6 +16,7 @@ export const columns = () => [
         id: "start_date",
         label: "تاریخ شروع",
         type: "date",
+        showOnTable: false,
         required: true,
         placeholder: "تاریخ شروع",
         canEdit: true,
@@ -26,6 +27,7 @@ export const columns = () => [
         type: "date",
         required: true,
         placeholder: "تاریخ پایان",
+        showOnTable: false,
         canEdit: true
       },
       {
