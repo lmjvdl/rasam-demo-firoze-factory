@@ -34,17 +34,27 @@ export default function ShiftPage() {
             label: "تاریخ شروع",
             type: "date",
             required: true,
+            placeholder: "تاریخ شروع"
+          },
+          {
+            name: "end_date",
+            label: "تاریخ پایان",
+            type: "date",
+            required: true,
+            placeholder: "تاریخ پایان"
           },
           {
             name: "start_time",
             label: "ساعت شروع",
-            type: "text",
+            type: "time",
             required: true,
+            placeholder: "ساعت شروع"
           },
           {
             name: "end_time",
             label: "ساعت پایان",
-            type: "text",
+            placeholder: "ساعت پایان",
+            type: "time",
             required: true,
           },
         ]}

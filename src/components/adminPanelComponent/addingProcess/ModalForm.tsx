@@ -17,10 +17,8 @@ import {
 } from "@mui/material";
 import { useForm, Controller } from "react-hook-form";
 import OneDayDropdown from "@/components/filtersReportDropDown/OneDay";
-import { LocalizationProvider, TimePicker } from "@mui/x-date-pickers";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import faIR from 'date-fns/locale/fa-IR';
-import { Locale } from "date-fns/locale";
+import TimeDropdown from "@/components/filtersReportDropDown/Time";
+import RangeDropdown from "@/components/filtersReportDropDown/Range";
 
 const ModalForm: React.FC<ModalFormProps> = ({
   buttonText,
@@ -38,8 +36,6 @@ const ModalForm: React.FC<ModalFormProps> = ({
     reset,
     formState: { errors },
   } = useForm();
-
-  const faIRLocale = faIR as unknown as Locale;
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
@@ -88,26 +84,19 @@ const ModalForm: React.FC<ModalFormProps> = ({
                 key={field.name}
                 name={field.name}
                 control={control}
-                defaultValue={
-                  field.type === "multiselect"
-                    ? []
-                    : field.type === "time"
-                    ? null
-                    : ""
-                }
+                defaultValue={field.type === "multiselect" ? [] : ""}
                 rules={{
                   required: field.required
                     ? `${field.label} اجباری است`
                     : false,
                 }}
-                render={({ field: controllerField }) => {
+                render={({ field: controllerField, fieldState, formState }) => {
                   const isFixedField = fixedValues && field.name in fixedValues;
 
                   // Calendar using custom component
                   if (field.type === "date") {
                     return (
                       <FormControl fullWidth margin="normal">
-                        <InputLabel shrink>{field.label}</InputLabel>
                         <OneDayDropdown
                           value={controllerField.value}
                           placeholder={field.placeholder}
@@ -118,33 +107,28 @@ const ModalForm: React.FC<ModalFormProps> = ({
                     );
                   }
 
-                  // Time using MUI TimePicker
-
                   if (field.type === "time") {
                     return (
                       <FormControl fullWidth margin="normal">
-                        <LocalizationProvider
-                          dateAdapter={AdapterDateFns}
-                          adapterLocale={faIRLocale}
-                        >
-                          <TimePicker
-                            label={field.label}
-                            value={controllerField.value}
-                            onChange={(newVal) =>
-                              controllerField.onChange(newVal)
-                            }
-                            slots={{
-                              textField: (params) => (
-                                <TextField
-                                  {...params}
-                                  error={!!errors[field.name]}
-                                  helperText={errors[field.name]?.message}
-                                  disabled={isFixedField}
-                                />
-                              ),
-                            }}
-                          />
-                        </LocalizationProvider>
+                        <TimeDropdown
+                          value={controllerField.value}
+                          placeholder={field.placeholder}
+                          disabled={isFixedField}
+                          onChange={(time) => controllerField.onChange(time)}
+                        ></TimeDropdown>
+                      </FormControl>
+                    );
+                  }
+
+                  if (field.type === "range") {
+                    return (
+                      <FormControl fullWidth margin="normal">
+                        <RangeDropdown
+                          value={Array.isArray(controllerField.value) ? controllerField.value : []}
+                          disabled={isFixedField}
+                          placeholder={field.placeholder}
+                          onChange={(range) => controllerField.onChange(range)}
+                        />
                       </FormControl>
                     );
                   }

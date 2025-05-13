@@ -24,6 +24,7 @@ export interface RangeDropdownProps {
     value: DateObject[];
     onChange: (selectedDates: DateObject[]) => void;
     disabled?: boolean;
+    placeholder?: string;
 }
 
 export interface OneDayDropdownProps {
@@ -31,6 +32,13 @@ export interface OneDayDropdownProps {
     onChange?: (selectedDate: DateObject) => void;
     placeholder?: string;
     disabled?: boolean;
+}
+
+export interface TimeDropdownProps {
+  value: DateObject;
+  onChange?: (selectedTime: DateObject) => void;
+  placeholder?: string;
+  disabled?: boolean;
 }
 
 export interface DeviceDropDownProps {
@@ -44,6 +52,7 @@ export interface CalendarInputProps {
     value?: DateObject[];
     openCalendar?: () => void;
     disabled?: boolean;
+    placeholder?: string;
 }
 
 // In AdvanceAutoComplete.tsx

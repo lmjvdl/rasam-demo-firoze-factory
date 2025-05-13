@@ -1,15 +1,8 @@
 import React from "react";
-import {
-  TextField,
-  InputAdornment,
-  FormControl,
-} from "@mui/material";
+import { TextField, InputAdornment, FormControl } from "@mui/material";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import DatePicker, { DateObject } from "react-multi-date-picker";
-import persian from "react-date-object/calendars/persian";
-import weekends from "react-multi-date-picker/plugins/highlight_weekends";
-import persianFa from "../../utils/formatters/persianFa";
-import { weekDays } from "@/utils/formatters/dateToText";
+import TimePicker from "react-multi-date-picker/plugins/time_picker";
 
 const valueToInputText = (value?: DateObject): string => {
   if (!value) return "";
@@ -41,8 +34,8 @@ function InputContainer({
         disabled={disabled}
         size="small"
         placeholder={placeholderInput}
-        value={text}
         label={placeholder}
+        value={text}
         sx={{ minWidth: 200 }}
         onFocus={openCalendar}
         slotProps={{
@@ -54,7 +47,7 @@ function InputContainer({
               </InputAdornment>
             ),
             label: `${placeholder}`,
-            color: "primary"
+            color: "primary",
           },
         }}
       />
@@ -62,7 +55,7 @@ function InputContainer({
   );
 }
 
-export default function CustomDatePickerOneDay({
+export default function CustomTimePicker({
   value,
   onChange,
   placeholder,
@@ -80,15 +73,14 @@ export default function CustomDatePickerOneDay({
           <InputContainer
             value={value}
             placeholder={placeholder}
-            disabled={disabled}     
+            disabled={disabled}
           />
         }
-        locale={persianFa}
-        weekDays={weekDays}
-        calendar={persian}
+        disableDayPicker
+        format="HH:mm"
+        plugins={[<TimePicker hideSeconds />]}
         value={value}
         onChange={onChange}
-        plugins={[weekends()]}
         portal
         zIndex={10000}
       />
