@@ -1,16 +1,15 @@
-import { BaalMillLiveSchema } from "@/interfaces/preparingBody/live";
 import {
   Card,
   CardContent,
-  Button,
   Typography,
   Box,
   Divider,
   useTheme,
 } from "@mui/material";
-import OnOff from "../OnOff";
+import { MultiSensorProps } from "@/interfaces/lives/multiSensor";
+import OnOff from "../dependenciesLiveCards/OnOff";
 
-export default function BaalMillCard(container: BaalMillLiveSchema) {
+export default function MultiSensorLiveCard({ container }: MultiSensorProps) {
   const theme = useTheme();
 
   const safeContainer = container || {};
@@ -30,12 +29,14 @@ export default function BaalMillCard(container: BaalMillLiveSchema) {
           safeContainer.online === "on"
             ? theme.palette.background.default
             : theme.palette.background.disable,
-      }}>
+      }}
+    >
       <CardContent>
         <Box
           display="flex"
           alignItems="center"
-          sx={{ justifyContent: "space-between" }}>
+          sx={{ justifyContent: "space-between" }}
+        >
           <Typography variant="h6">{safeContainer.device_code}</Typography>
           <OnOff on={safeContainer.online} />
         </Box>
@@ -46,7 +47,8 @@ export default function BaalMillCard(container: BaalMillLiveSchema) {
             flexDirection: "column",
             gap: "20px",
             marginBlockStart: "20px",
-          }}>
+          }}
+        >
           <Divider />
           <Typography>جریان دستگاه: {safeData.current} A</Typography>
           <Typography>فرکانس دستگاه: {safeData.frequency} HZ</Typography>

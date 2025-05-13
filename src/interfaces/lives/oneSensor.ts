@@ -1,4 +1,4 @@
-export interface ChamferLiveSchema {
+export interface OneSensorLiveSchema {
     device: number;
     device_code: string;
     product_line_part: number;
@@ -7,4 +7,8 @@ export interface ChamferLiveSchema {
       current?: number;
     };
     online: string;
-  }
+}
+
+export interface OneSensorProps {
+  container: OneSensorLiveSchema;
+}

@@ -1,4 +1,5 @@
-import { ChartTypeRegistry, CoreChartOptions, ElementChartOptions, PluginChartOptions, DatasetChartOptions, ScaleChartOptions } from 'chart.js';
+import { ChartTypeRegistry } from 'chart.js';
+
 export interface DataType {
     device_id: number;
     device_name_fa: string;
@@ -12,8 +13,7 @@ export interface TabPanelProps {
     value: number;
 }
 
-
-export interface PowerSupplyLiveSchema {
+export interface ChartLiveSchema {
     online: string;
     device: number;
     time: number;
@@ -31,9 +31,6 @@ export interface PowerSupplyLiveSchema {
       ActiveEnergyDelivered: number;
     };
   }
-
-
-  // src/interfaces/ui/charts/charts.ts
 
 export interface Dataset {
   label: string;
