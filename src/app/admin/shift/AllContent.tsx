@@ -135,6 +135,8 @@ const AllContentShift: React.FC = () => {
         timeObject={{
           start_time: { type: "time", field: "start_time" },
           end_time: { type: "time", field: "end_time" },
+          start_date: { type: "date", field: "start_date" },
+          end_date: { type: "date", field: "end_date" },
         }}
       />
 

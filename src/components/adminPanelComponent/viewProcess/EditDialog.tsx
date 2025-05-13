@@ -20,7 +20,10 @@ import concatImagePathAndBaseUrl from "@/utils/formatters/contcatImagePathAndBas
 import { EditDialogProps } from "@/interfaces/admin/general";
 import TimeDropdown from "@/components/filtersReportDropDown/Time";
 import { DateObject } from "react-multi-date-picker";
-import { TimeToDateObject } from "@/utils/formatters/NormalTimeToTimestamp";
+import OneDayDropdown from "@/components/filtersReportDropDown/OneDay";
+import TimeToDateObject from "@/utils/formatters/PersianTimeToDateObject";
+import convertToPersianDate from "@/utils/formatters/gregoraianToDateObject";
+import formatUnixTimeToDateString from "@/utils/formatters/unixToDate";
 
 
 const EditDialog: React.FC<EditDialogProps> = ({
@@ -101,6 +104,14 @@ const EditDialog: React.FC<EditDialogProps> = ({
     setFormData((prev) => ({
       ...prev,
       [field]: time?.toString() || "",
+    }));
+  };
+
+  const handleDateField = (time: DateObject | undefined, field: string) => {
+    console.log(time)
+    setFormData((prev) => ({
+      ...prev,
+      [field]: time ? formatUnixTimeToDateString(time.toUnix()) : "",
     }));
   };
 
@@ -247,6 +258,7 @@ const EditDialog: React.FC<EditDialogProps> = ({
             
             if (type === "time") {
               const timeValue = TimeToDateObject(value)
+            
               return (
                 <FormControl fullWidth margin="normal" key={key}>
                   <TimeDropdown
@@ -257,9 +269,22 @@ const EditDialog: React.FC<EditDialogProps> = ({
                 </FormControl>
               );
             }
+
+            if (type === "date") {
+              const dateValue = convertToPersianDate(value)
+              
+              return (
+                <FormControl fullWidth margin="normal" key={key}>
+                  <OneDayDropdown
+                    value={dateValue}
+                    placeholder={column.label}
+                    onChange={(time) => handleDateField(time, field)}
+                  />
+                </FormControl>
+              );
+            }
           }
           
-
           if (column.isSingleSelect && column.optionsKey) {
             const allOptions = extraOptions[column.optionsKey] || [];
             const currentValue = formData?.[key];

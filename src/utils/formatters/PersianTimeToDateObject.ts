@@ -2,10 +2,11 @@ import { DateObject } from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import fa from "react-date-object/locales/persian_fa";
 
-export function TimeToDateObject(time: string): DateObject {
-  const [hourStr, minuteStr] = time.split(":");
+export default function TimeToDateObject(time: string): DateObject {
+  const [hourStr, minuteStr, secondStr] = time.split(":");
   const hour = parseInt(hourStr, 10);
   const minute = parseInt(minuteStr, 10);
+  const second = 0
 
   const now = new Date();
   const date = new DateObject({
@@ -14,5 +15,5 @@ export function TimeToDateObject(time: string): DateObject {
     locale: fa,
   });
 
-  return date.set({ hour, minute });
+  return date.set({ hour, minute, second });
 }
