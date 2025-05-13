@@ -1,9 +1,16 @@
 import { fetchWithErrorForCreate } from "@/utils/dataFetching/fetchWithError";
+import DateToTime from "@/utils/formatters/dateToTime";
+import formatUnixTimeToDateString from "@/utils/formatters/unixToDate";
 import shiftUrls from "@/utils/url/adminPanel/shiftUrl";
+import { DateObject } from "react-multi-date-picker";
 import { z } from "zod";
 
 const shiftSchema = z.object({
-  name: z.string().min(1).max(200),
+  name: z.string(),
+  start_date: z.custom<DateObject>((val) => val instanceof DateObject),
+  end_date: z.custom<DateObject>((val) => val instanceof DateObject),
+  start_time: z.custom<DateObject>((val) => val instanceof DateObject),
+  end_time: z.custom<DateObject>((val) => val instanceof DateObject),
 });
 
 export const createNewShift = async (data: unknown) => {
@@ -15,6 +22,10 @@ export const createNewShift = async (data: unknown) => {
 
   const processedData = {
     ...validationResult.data,
+    start_date: formatUnixTimeToDateString(validationResult.data.start_date.unix),
+    end_date: formatUnixTimeToDateString(validationResult.data.end_date.unix),
+    start_time: DateToTime(validationResult.data.start_time),
+    end_time: DateToTime(validationResult.data.end_time),
   };
 
   try {

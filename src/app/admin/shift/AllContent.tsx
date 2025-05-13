@@ -82,21 +82,23 @@ const AllContentShift: React.FC = () => {
     if (selectedRow?.id) {
       deleteShiftMutation.mutate(selectedRow.id, {
         onSuccess: () => {
-          setData(prevData => {
+          setData((prevData) => {
             if (prevData?.data) {
               return {
                 ...prevData,
                 data: {
                   ...prevData.data,
-                  results: prevData.data.results.filter(row => row.id !== selectedRow.id),
-                  count: prevData.data.count - 1
-                }
+                  results: prevData.data.results.filter(
+                    (row) => row.id !== selectedRow.id
+                  ),
+                  count: prevData.data.count - 1,
+                },
               };
             }
             return prevData;
           });
           setDeleteOpen(false);
-        }
+        },
       });
     }
   };
@@ -123,13 +125,19 @@ const AllContentShift: React.FC = () => {
         rowData={selectedRow}
         titles={dynamicColumns}
       />
+
       <EditDialog
         open={editOpen}
         onClose={() => setEditOpen(false)}
         onSave={handleSaveEdit}
         rowData={selectedRow}
         titles={filteredColumnsForEdit}
+        timeObject={{
+          start_time: { type: "time", field: "start_time" },
+          end_time: { type: "time", field: "end_time" },
+        }}
       />
+
       <DeleteDialog
         open={deleteOpen}
         onClose={() => setDeleteOpen(false)}

@@ -4,14 +4,50 @@ export const columns = () => [
         label: "شناسه",
         showOnTable: false,
         canEdit: false,
-        isAdditionalAction: false,
     },
     {
         id: "name",
-        label: "نام",
+        label: "نام شیفت",
+        type: "text",
         required: true,
-        showOnTable: true,
+        canEdit: true
+      },
+      {
+        id: "start_date",
+        label: "تاریخ شروع",
+        type: "date",
+        required: true,
+        placeholder: "تاریخ شروع",
         canEdit: true,
-        isAdditionalAction: false,
+      },
+      {
+        id: "end_date",
+        label: "تاریخ پایان",
+        type: "date",
+        required: true,
+        placeholder: "تاریخ پایان",
+        canEdit: true
+      },
+      {
+        id: "start_time",
+        label: "ساعت شروع",
+        type: "time",
+        required: true,
+        placeholder: "ساعت شروع",
+        canEdit: true
+      },
+      {
+        id: "end_time",
+        label: "ساعت پایان",
+        placeholder: "ساعت پایان",
+        type: "time",
+        required: true,
+        canEdit: true
+      },
+      {
+        id: "actions",
+        label: "عملیات",
+        isActionColumn: true,
+        canEdit: false,
     },
 ];

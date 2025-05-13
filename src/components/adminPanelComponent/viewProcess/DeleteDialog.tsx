@@ -10,6 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import concatImagePathAndBaseUrl from "@/utils/formatters/contcatImagePathAndBaseUrl";
+import { DeleteDialogProps } from "@/interfaces/admin/general";
 
 const DeleteDialog: React.FC<DeleteDialogProps> = ({
   open,

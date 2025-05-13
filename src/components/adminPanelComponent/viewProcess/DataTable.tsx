@@ -16,6 +16,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { truncateText } from "@/utils/formatters/truncateText";
 import concatImagePathAndBaseUrl from "@/utils/formatters/contcatImagePathAndBaseUrl";
+import { DataTableProps } from "@/interfaces/admin/general";
 
 const DataTable: React.FC<DataTableProps> = ({
   columns,

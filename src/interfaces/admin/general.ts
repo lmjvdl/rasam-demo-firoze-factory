@@ -1,4 +1,6 @@
-interface ModalFormProps {
+import { DateObject } from "react-multi-date-picker";
+
+export interface ModalFormProps {
   buttonText: string;
   formFields: {
     name: string;
@@ -15,21 +17,25 @@ interface ModalFormProps {
   fixedValues?: Record<string, any>;
 }
 
-interface Column {
+interface TitlesColumnsData {
   id: string;
   label: string;
   render?: (row: any) => React.ReactNode;
-  isActionColumn?: boolean;
-  isAdditionalAction?: boolean;
+  required?: boolean;
   showOnTable?: boolean;
-  isImage?: boolean;
-  isMultiSelect?: boolean; 
+  canEdit?: boolean;
+  isAdditionalAction?: boolean;
+  isMultiSelect?: boolean;
+  isIconSelect?: boolean; 
+  optionsKey?: string;
   isSingleSelect?: boolean;
-  optionsKey?: string; 
+  isActionColumn?: boolean;
+  isImage?: boolean;
+  placeholder?: string;
 }
 
-interface DataTableProps {
-  columns: Column[];
+export interface DataTableProps {
+  columns: TitlesColumnsData[];
   data: any[];
   onView?: (row: any) => void;
   onEdit?: (row: any) => void;
@@ -40,34 +46,22 @@ interface DataTableProps {
   arrayColumns?: { [key: string]: string }; 
 }
 
-
-interface DeleteDialogProps {
+export interface DeleteDialogProps {
   open: boolean;
   onClose: () => void;
   onConfirm: () => void;
   rowData: any;
-  titles: any;
+  titles: Array<TitlesColumnsData>;
   arrayAttributes?: { [key: string]: string };
   objectAttributes?: string[];
 }
 
-interface EditDialogProps {
+export interface EditDialogProps {
   open: boolean;
   onClose: () => void;
   onSave: (data: any) => void;
   rowData?: { [key: string]: any };
-  titles: Array<{
-    id: string;
-    label: string;
-    required?: boolean;
-    showOnTable?: boolean;
-    canEdit?: boolean;
-    isAdditionalAction?: boolean;
-    isMultiSelect?: boolean;
-    isIconSelect?: boolean; 
-    optionsKey?: string;
-    isSingleSelect?: boolean;
-  }>;
+  titles: Array<TitlesColumnsData>;
   booleanAttributeName?: string;
   trueLabel?: string;
   falseLabel?: string;
@@ -79,28 +73,21 @@ interface EditDialogProps {
     value?: any;
     name?: string;
   }[] };
+  timeObject?: {
+    [key: string]: {
+      type: 'date' | 'time'; 
+      field: string;
+    };
+  };
   objectAttributes?: string[];
   arrayObjectAttributes?: string[];
 }
 
-interface ViewDialogProps {
+export interface ViewDialogProps {
   open: boolean;
   onClose: () => void;
   rowData: any;
-  titles: Array<{
-    id: string;
-    label: string;
-    required?: boolean;
-    showOnTable?: boolean;
-    canEdit?: boolean;
-    isAdditionalAction?: boolean;
-    isMultiSelect?: boolean;
-    isIconSelect?: boolean; 
-    optionsKey?: string;
-    isSingleSelect?: boolean;
-    isActionColumn?: boolean;
-    isImage?: boolean;
-  }>;
+  titles: Array<TitlesColumnsData>;
   booleanAttributeName?: string;
   falseLabel?: string;
   trueLabel?: string;

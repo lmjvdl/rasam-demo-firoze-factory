@@ -3,7 +3,7 @@ import Url from "@/utils/dataFetching/urls";
 class ShiftUrls extends Url {
   public constructor() {
     super();
-    this.baseUrlPath += "/devices/aggregate";
+    this.baseUrlPath += "/companies/shift";
   }
   public get createShift() {
     const basePath = `${this.baseUrlPath}/create/`;

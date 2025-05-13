@@ -17,6 +17,11 @@ import {
   useTheme,
 } from "@mui/material";
 import concatImagePathAndBaseUrl from "@/utils/formatters/contcatImagePathAndBaseUrl";
+import { EditDialogProps } from "@/interfaces/admin/general";
+import TimeDropdown from "@/components/filtersReportDropDown/Time";
+import { DateObject } from "react-multi-date-picker";
+import { TimeToDateObject } from "@/utils/formatters/NormalTimeToTimestamp";
+
 
 const EditDialog: React.FC<EditDialogProps> = ({
   open,
@@ -30,6 +35,7 @@ const EditDialog: React.FC<EditDialogProps> = ({
   booleanValue,
   onBooleanValueChange,
   extraOptions = {},
+  timeObject
 }) => {
 
   const theme = useTheme();
@@ -91,6 +97,13 @@ const EditDialog: React.FC<EditDialogProps> = ({
     }));
   };
 
+  const handleTimeField = (time: DateObject | undefined, field: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      [field]: time?.toString() || "",
+    }));
+  };
+
   const handleSingleSelectChange = (
     event: SelectChangeEvent<string>,
     key: string
@@ -107,6 +120,7 @@ const EditDialog: React.FC<EditDialogProps> = ({
         : null,
     }));
   };
+
 
   const handleSave = () => {
     const newErrors: { [key: string]: boolean } = {};
@@ -226,6 +240,25 @@ const EditDialog: React.FC<EditDialogProps> = ({
               </FormControl>
             );
           }
+
+          if (timeObject?.[key]) {
+            const { type, field } = timeObject[key];
+            const value = formData?.[field] || "";
+            
+            if (type === "time") {
+              const timeValue = TimeToDateObject(value)
+              return (
+                <FormControl fullWidth margin="normal" key={key}>
+                  <TimeDropdown
+                    value={timeValue}
+                    placeholder={column.label}
+                    onChange={(time) => handleTimeField(time, field)}
+                  />
+                </FormControl>
+              );
+            }
+          }
+          
 
           if (column.isSingleSelect && column.optionsKey) {
             const allOptions = extraOptions[column.optionsKey] || [];

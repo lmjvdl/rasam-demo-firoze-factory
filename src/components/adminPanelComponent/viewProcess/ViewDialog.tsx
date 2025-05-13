@@ -8,6 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import concatImagePathAndBaseUrl from "@/utils/formatters/contcatImagePathAndBaseUrl";
+import { ViewDialogProps } from "@/interfaces/admin/general";
 
 const ViewDialog: React.FC<ViewDialogProps> = ({
   open,

@@ -1,6 +1,6 @@
 import React from "react";
 import { TextField, InputAdornment, FormControl } from "@mui/material";
-import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import DatePicker, { DateObject } from "react-multi-date-picker";
 import TimePicker from "react-multi-date-picker/plugins/time_picker";
 
@@ -43,7 +43,7 @@ function InputContainer({
             readOnly: true,
             endAdornment: (
               <InputAdornment position="end">
-                <CalendarTodayIcon />
+                <AccessTimeIcon />
               </InputAdornment>
             ),
             label: `${placeholder}`,
@@ -77,8 +77,8 @@ export default function CustomTimePicker({
           />
         }
         disableDayPicker
-        format="HH:mm"
-        plugins={[<TimePicker hideSeconds />]}
+        format="HH:mm:ss"
+        plugins={[<TimePicker />]}
         value={value}
         onChange={onChange}
         portal

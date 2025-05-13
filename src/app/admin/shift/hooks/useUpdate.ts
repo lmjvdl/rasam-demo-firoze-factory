@@ -7,6 +7,10 @@ import { useToast } from "@/hooks/ui/useToast";
 export type ShiftUpdateSchema = {
   id: number;
   name: string;
+  start_date: string;
+  end_date: string;
+  start_time: string;
+  end_time: string;
 };
 
 const useUpdateShift = () => {

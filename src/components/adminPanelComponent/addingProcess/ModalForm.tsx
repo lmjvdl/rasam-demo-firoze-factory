@@ -19,6 +19,7 @@ import { useForm, Controller } from "react-hook-form";
 import OneDayDropdown from "@/components/filtersReportDropDown/OneDay";
 import TimeDropdown from "@/components/filtersReportDropDown/Time";
 import RangeDropdown from "@/components/filtersReportDropDown/Range";
+import { ModalFormProps } from "@/interfaces/admin/general";
 
 const ModalForm: React.FC<ModalFormProps> = ({
   buttonText,
