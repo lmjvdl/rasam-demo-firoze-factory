@@ -1,10 +1,12 @@
 import Url from "@/utils/dataFetching/urls";
 
 class LiveTypesUrls extends Url {
+
   public constructor() {
     super();
-    this.baseUrlPath += "/devices/aggregate";
+    this.baseUrlPath += "/devices/live_chart";
   }
+
   public get createLiveTypes() {
     const basePath = `${this.baseUrlPath}/create/`;
     return new URL(basePath, this.origin);
@@ -16,12 +18,12 @@ class LiveTypesUrls extends Url {
   }
 
   public deleteLiveTypes(id: number) {
-    const basePath = `${this.baseUrlPath}/${id}/`;
+    const basePath = `${this.baseUrlPath}/${id}`;
     return new URL(basePath, this.origin).toString();
   }
 
   public editLiveTypes(id: number) {
-    const basePath = `${this.baseUrlPath}/${id}/`;
+    const basePath = `${this.baseUrlPath}/${id}`;
     return new URL(basePath, this.origin).toString();
   }
 }

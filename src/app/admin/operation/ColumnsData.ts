@@ -9,6 +9,15 @@ export const columns = () => [
         canEdit: false,
         isAdditionalAction: false,
     },
+    { 
+        id: "datatype_operation",
+        label: "عملیات",
+        isKeyValueObject: true,
+        canEdit: true,
+        isAdditionalAction: false,
+        showOnTable: true,
+        required: true,
+    },
     {
         id: "device_info",
         label: "دستگاه",

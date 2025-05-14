@@ -1,5 +1,3 @@
-import { DateObject } from "react-multi-date-picker";
-
 export interface ModalFormProps {
   buttonText: string;
   formFields: {
@@ -32,6 +30,7 @@ interface TitlesColumnsData {
   isActionColumn?: boolean;
   isImage?: boolean;
   placeholder?: string;
+  isKeyValueObject?: boolean;
 }
 
 export interface DataTableProps {
@@ -53,7 +52,6 @@ export interface DeleteDialogProps {
   rowData: any;
   titles: Array<TitlesColumnsData>;
   arrayAttributes?: { [key: string]: string };
-  objectAttributes?: string[];
 }
 
 export interface EditDialogProps {
@@ -81,6 +79,13 @@ export interface EditDialogProps {
   };
   objectAttributes?: string[];
   arrayObjectAttributes?: string[];
+  keyValObject?: {
+    attribue: string;
+    lockKey: boolean;
+    values: {
+      [key: string]: { options: "sum" | "avg" }[]
+    }
+  }
 }
 
 export interface ViewDialogProps {
