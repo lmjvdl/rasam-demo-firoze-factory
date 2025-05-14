@@ -26,7 +26,7 @@ const useJsonReport = () => {
           start_date: unixToIso(params.start_time.unix),
           end_date: unixToIso(params.end_time.unix),
         },
-        `گزارش JSON از ${gregorianToJalali(unixToIso(params.start_time.unix))} تا ${gregorianToJalali(unixToIso(params.end_time.unix))}`
+        `گزارش JSON از ${gregorianToJalali(unixToIso(params.start_time.unix))} تا ${gregorianToJalali(unixToIso(params.end_time.unix))}.json`
       );
     } catch {
       toast.error('خطا در دانلود فایل');

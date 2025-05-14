@@ -70,30 +70,9 @@ export default function RootLayout({
                 drawerWidth={drawerWidth}
                 collapsedWidth={collapsedWidth}
               />
-              <Stack
-                width={"100%"}
-                height={"calc(100% - 64px)"}
-                component="main"
-                sx={{
-                  width: { sm: `calc(100% - ${drawerWidth}px)` },
-                  flexGrow: 1,
-                  mt: "64px",
-                  overflow: "hidden",
-                }}
-              >
-                <Sidebar
-                  mobileOpen={mobileOpen}
-                  setMobileOpen={setMobileOpen}
-                  isAdmin={isAdmin}
-                  drawerWidth={drawerWidth}
-                  collapsedWidth={collapsedWidth}
-                  desktopOpen={desktopOpen}
-                  setDesktopOpen={setDesktopOpen}
-                />
 
+              <Stack width={"100%"} height={"100%"} component="main">
                 <Header
-                  mobileOpen={mobileOpen}
-                  setMobileOpen={setMobileOpen}
                   isAdmin={isAdmin}
                   drawerWidth={drawerWidth}
                   collapsedWidth={collapsedWidth}
@@ -103,8 +82,8 @@ export default function RootLayout({
                 <Box
                   component={"main"}
                   width={"100%"}
-                  height={"100%"}
-                  sx={{ flexGrow: 1, p: 2 }}
+                  height={"calc(100% - 64px)"}
+                  sx={{ flexGrow: 1, p: 2, mt: "64px" }}
                 >
                   {children}
                 </Box>

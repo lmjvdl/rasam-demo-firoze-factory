@@ -1,5 +1,11 @@
 "use client";
-import { Box, IconButton, styled, useMediaQuery, useTheme } from "@mui/material";
+import {
+  Box,
+  IconButton,
+  styled,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import { Dispatch, SetStateAction, useEffect } from "react";
 import SidebarDrawer from "./dependencies/SidebarDrawer";
 import DrawerContent from "./dependencies/DrawerContent";
@@ -27,12 +33,12 @@ const Sidebar = ({
 }) => {
   const router = useRouter();
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
   const handleDrawerClose = () => {
     setMobileOpen(false);
     if (isMobile) {
-      setDesktopOpen(true); 
+      setDesktopOpen(true);
     }
   };
 
@@ -58,17 +64,29 @@ const Sidebar = ({
     }
   }, [isAdmin, router]);
 
-  const { drawerItemInfoForUserPanel, footerItemInfoForUserPanel } = UseItemInfoUserPanel();
-  const { drawerItemInfoForAdminPanel, footerItemInfoForAdminPanel } = UseItemInfoAdminPanel();
+  const { drawerItemInfoForUserPanel, footerItemInfoForUserPanel } =
+    UseItemInfoUserPanel();
+  const { drawerItemInfoForAdminPanel, footerItemInfoForAdminPanel } =
+    UseItemInfoAdminPanel();
 
-  const drawerItemInfo = isAdmin ? drawerItemInfoForAdminPanel : drawerItemInfoForUserPanel;
-  const footerItemInfo = isAdmin ? footerItemInfoForAdminPanel : footerItemInfoForUserPanel;
+  const drawerItemInfo = isAdmin
+    ? drawerItemInfoForAdminPanel
+    : drawerItemInfoForUserPanel;
+  const footerItemInfo = isAdmin
+    ? footerItemInfoForAdminPanel
+    : footerItemInfoForUserPanel;
 
   const ToggleButton = styled(IconButton)(({ theme }) => ({
     position: "fixed",
-    left: desktopOpen ? `calc(${drawerWidth}px - 20px)` : isMobile ? '70%' : '20px',
-    bottom: "365px",
-    zIndex: theme.zIndex.drawer + 1,
+    left: isMobile
+      ? "30px"
+      : isMobile && mobileOpen
+      ? "300px"
+      : desktopOpen
+      ? `${drawerWidth - 20}px`
+      : "20px",
+    top: "300px",
+    zIndex: theme.zIndex.modal + 1,
     backgroundColor: theme.palette.background.paper,
     border: `1px solid ${theme.palette.divider}`,
     width: 40,
@@ -77,7 +95,7 @@ const Sidebar = ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    transform: isMobile && !mobileOpen ? 'translateX(-50%)' : 'none',
+    transform: isMobile && !mobileOpen ? "translateX(-50%)" : "none",
     transition: theme.transitions.create(["left", "transform"], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -88,54 +106,60 @@ const Sidebar = ({
   }));
 
   return (
-    <Box
-      component="nav"
-      sx={{ 
-        width: { 
-          sm: desktopOpen ? drawerWidth : collapsedWidth 
-        }, 
-        flexShrink: { sm: 0 },
-        transition: theme.transitions.create("width", {
-          easing: theme.transitions.easing.sharp,
-          duration: theme.transitions.duration.leavingScreen,
-        }),
-        zIndex: 1000
-      }}
-      aria-label="mailbox folders"
-    >
-      {(!isMobile || mobileOpen) && (
-        <ToggleButton onClick={handleToggleDrawer}>
-          {desktopOpen ? <IconChevronRight size={20} /> : <IconChevronLeft size={20} />}
-        </ToggleButton>
-      )}
-      
-      <SidebarDrawer
-        open={mobileOpen}
-        onClose={handleDrawerClose}
-        variant="temporary"
-        drawerWidth={drawerWidth}
+    <>
+      {/* Toggle button should always be rendered above everything */}
+      <ToggleButton onClick={handleToggleDrawer}>
+        {desktopOpen || mobileOpen ? (
+          <IconChevronRight size={20} />
+        ) : (
+          <IconChevronLeft size={20} />
+        )}
+      </ToggleButton>
+
+      <Box
+        component="nav"
+        sx={{
+          width: {
+            sm: desktopOpen ? drawerWidth : collapsedWidth,
+          },
+          flexShrink: { sm: 0 },
+          transition: theme.transitions.create("width", {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.leavingScreen,
+          }),
+          zIndex: 1000,
+        }}
+        aria-label="mailbox folders"
       >
-        <DrawerContent
-          drawerItemInfoByKey={drawerItemInfo}
-          footerItemInfoByKey={footerItemInfo}
-          isAdmin={isAdmin}
-          isCollapsed={false}
-        />
-      </SidebarDrawer>
-      <SidebarDrawer 
-        open={true} 
-        onClose={() => {}} 
-        variant="permanent"
-        drawerWidth={desktopOpen ? drawerWidth : collapsedWidth}
-      >
-        <DrawerContent
-          drawerItemInfoByKey={drawerItemInfo}
-          footerItemInfoByKey={footerItemInfo}
-          isAdmin={isAdmin}
-          isCollapsed={!desktopOpen}
-        />
-      </SidebarDrawer>
-    </Box>
+        <SidebarDrawer
+          open={mobileOpen}
+          onClose={handleDrawerClose}
+          variant="temporary"
+          drawerWidth={drawerWidth}
+        >
+          <DrawerContent
+            drawerItemInfoByKey={drawerItemInfo}
+            footerItemInfoByKey={footerItemInfo}
+            isAdmin={isAdmin}
+            isCollapsed={false}
+          />
+        </SidebarDrawer>
+
+        <SidebarDrawer
+          open={true}
+          onClose={() => {}}
+          variant="permanent"
+          drawerWidth={desktopOpen ? drawerWidth : collapsedWidth}
+        >
+          <DrawerContent
+            drawerItemInfoByKey={drawerItemInfo}
+            footerItemInfoByKey={footerItemInfo}
+            isAdmin={isAdmin}
+            isCollapsed={!desktopOpen}
+          />
+        </SidebarDrawer>
+      </Box>
+    </>
   );
 };
 

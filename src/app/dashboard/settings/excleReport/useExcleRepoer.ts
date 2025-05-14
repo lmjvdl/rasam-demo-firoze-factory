@@ -26,7 +26,7 @@ const useExcelReport = () => {
           start_date: unixToIso(params.start_time.unix),
           end_date: unixToIso(params.end_time.unix),
         },
-        `گزارش اکسل از ${gregorianToJalali(unixToIso(params.start_time.unix))} تا ${gregorianToJalali(unixToIso(params.end_time.unix))}`
+        `گزارش اکسل از ${gregorianToJalali(unixToIso(params.start_time.unix))} تا ${gregorianToJalali(unixToIso(params.end_time.unix))}.xlsx`
       );
     } catch {
       toast.error('خطا در دانلود فایل');

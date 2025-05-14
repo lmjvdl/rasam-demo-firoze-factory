@@ -162,7 +162,7 @@ export async function fetchWithErrorForDownload(
         'Authorization': `Bearer ${useAuthStore.getState().accessToken}`,
       },
     };
-    console.log(finalUrl.toString())
+
     const response = await fetch(finalUrl.toString(), options);
 
     if (!response.ok) {
@@ -170,8 +170,8 @@ export async function fetchWithErrorForDownload(
     }
 
     const blob = await response.blob();
-    
     const contentDisposition = response.headers.get('content-disposition');
+    console.log(contentDisposition)
     const finalFileName = fileName || 
       contentDisposition?.split('filename=')[1]?.replace(/"/g, '') || 
       'download.file';

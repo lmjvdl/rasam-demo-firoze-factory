@@ -1,23 +1,17 @@
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import { Dispatch, SetStateAction } from "react";
 import SwitchThemeButton from "./SwitchThemeButton";
 import WelcomeAdminPanel from "./WelcomeAdminPanel";
 import WelcomeUserPanel from "./WelcomeUserPanel";
-import ControlMobileHeader from "./ControlMobileHeader";
-import { Box, useMediaQuery, useTheme } from "@mui/material";
+import { useMediaQuery, useTheme } from "@mui/material";
 
 export default function Header({
-  mobileOpen,
-  setMobileOpen,
   factoryName,
   isAdmin,
   drawerWidth,
   collapsedWidth,
   desktopOpen,
 }: {
-  mobileOpen: boolean;
-  setMobileOpen: Dispatch<SetStateAction<boolean>>;
   factoryName?: string;
   isAdmin: boolean;
   drawerWidth: number;
@@ -27,22 +21,26 @@ export default function Header({
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
-  const currentDrawerWidth = isMobile ? 0 : desktopOpen ? drawerWidth : collapsedWidth;
-  const appBarWidth = `calc(100% - ${currentDrawerWidth+28}px)`;
+  const currentDrawerWidth = isMobile
+    ? 0
+    : desktopOpen
+    ? drawerWidth
+    : collapsedWidth;
+  const appBarWidth = `calc(100% - ${currentDrawerWidth + 28}px)`;
 
   return (
     <AppBar
       position="fixed"
       sx={{
-        width: isMobile ? "100%" : appBarWidth,
-        ml: isMobile ? 0 : `${currentDrawerWidth}px`,
+        width: isMobile ? "95%" : appBarWidth,
+        ml: isMobile ? 10 : `${currentDrawerWidth}px`,
         boxShadow: 0,
         bgcolor: "background.paper",
         borderRadius: "7px",
-        marginRight: "14px",
+        marginX: "14px",
         marginY: "7px",
         transition: "all 0.1s ease-in-out",
-        zIndex: (theme) => theme.zIndex.drawer + 1,
+        zIndex: (theme) => theme.zIndex.drawer - 1,
       }}
       enableColorOnDark
     >
@@ -53,10 +51,6 @@ export default function Header({
           alignItems: "center",
         }}
       >
-        <ControlMobileHeader
-          mobileOpen={mobileOpen}
-          setMobileOpen={setMobileOpen}
-        />
         {!isAdmin ? (
           <WelcomeUserPanel factoryName={factoryName} />
         ) : (

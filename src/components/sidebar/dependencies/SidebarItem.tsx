@@ -1,4 +1,3 @@
-import theme from "@/styles/theme";
 import { Done } from "@mui/icons-material";
 import {
   ListItem,
@@ -6,7 +5,6 @@ import {
   ListItemIcon,
   ListItemText,
   useColorScheme,
-  useTheme,
 } from "@mui/material";
 import Link from "next/link";
 import React, { ReactNode } from "react";

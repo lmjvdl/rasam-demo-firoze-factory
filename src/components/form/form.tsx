@@ -18,6 +18,7 @@ import {
 import { useForm, Controller } from "react-hook-form";
 import OneDayDropdown from "../filtersReportDropDown/OneDay";
 import RangeDropdown from "../filtersReportDropDown/Range";
+import { ModalFormProps } from "@/interfaces/admin/general";
 
 const Form = ({
   formFields,
@@ -163,7 +164,7 @@ const Form = ({
                         value={controllerField.value}
                         onChange={controllerField.onChange}
                         disabled={isFixedField}
-                        placeholder={`${field.placeholder} ${field.required ? "*" : ""}`}
+                        placeholder={field.placeholder}
                       />
                       {error && (
                         <FormHelperText error>{error.message}</FormHelperText>
