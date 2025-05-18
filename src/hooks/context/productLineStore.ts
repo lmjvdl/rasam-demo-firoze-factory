@@ -1,25 +1,25 @@
-// store/productLineStore.ts
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { ProductLineState } from "@/interfaces/general/general";
 
 const initialProductLineStore: ProductLineState = {
-  company_id: 0,
-  company_name: "",
-  company_logo: "",
-  product_lines: [
-    {
-      id: 0,
-      name: "",
-      icon: null,
-    },
-  ],
+  companies: [],
+  data: []
 };
+export interface ProductLineStoreState extends ProductLineState {
+  loading: boolean;
+  setLoading: (loading: boolean) => void;
+}
 
 export const useProductLineStore = create(
-  persist<ProductLineState>(() => initialProductLineStore, {
-    name: "productLine",
-  })
+  persist<ProductLineStoreState>(
+    (set) => ({
+      ...initialProductLineStore,
+      loading: true,
+      setLoading: (loading) => set({ loading }),
+    }),
+    { name: "productLine" }
+  )
 );
 
 export const updateProductLines = (productLineData: ProductLineState) => {

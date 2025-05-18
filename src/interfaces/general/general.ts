@@ -24,13 +24,18 @@ export interface AuthState {
 }
 
 
-export interface ProductLineState {
+export interface ProductLineCompany {
   company_id: number;
   company_name: string;
   company_logo: string;
-  product_lines: { 
+  product_lines: {
     id: number;
     name: string;
-    icon: string | null
-  }[]
+    icon: string | null;
+  }[];
+}
+
+export interface ProductLineState {
+  data: ProductLineCompany[];
+  companies: ProductLineCompany[];
 }

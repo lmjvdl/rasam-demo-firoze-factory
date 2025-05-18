@@ -1,5 +1,6 @@
 import { List } from "@mui/material";
 import SidebarItem from "./SidebarItem";
+import CircleIcon from '@mui/icons-material/Circle';
 import { iconMap, iconMapForAdminPanel } from "@/utils/icons/IconsMenu";
 import { useColorScheme } from "@mui/material/styles";
 import { SidebarItemListProps } from "@/interfaces/ui/sidebar/sidebar";
@@ -31,51 +32,49 @@ const SidebarItemList = ({ items, sx, isAdmin, isCollapsed = false }: SidebarIte
   }, [pathname, items, isAdmin]);
 
   return (
-    <>
-      <List sx={{ 
-        ...sx,
-        padding: isCollapsed ? "8px 4px" : "8px",
-      }}>
-        {Object.entries(items).map(([text, { icon, to }], index) => {
-          const IconComponent = isAdmin
-            ? iconMapForAdminPanel[icon]
-            : iconMap[icon];
+    <List sx={{ 
+      ...sx,
+      padding: isCollapsed ? "8px 4px" : "8px",
+    }}>
+      {Object.entries(items).map(([text, { icon, to }], index) => {
+        const IconComponent =
+          (isAdmin ? iconMapForAdminPanel[icon] : iconMap[icon]) || CircleIcon;
 
-          const isSelected = selectedItem === text;
-          
-          return (
-            <SidebarItem
-              key={index}
-              selected={isSelected}
-              text={isCollapsed ? "" : text}
-              link={to}
-              sx={isCollapsed ? { 
-                justifyContent: "center",
-                "& .MuiListItemText-root": {
-                  display: "none",
-                },
-                "& .MuiListItemIcon-root": {
-                  minWidth: "auto",
-                  marginRight: 0,
-                },
-              } : {}}
-              icon={
-                <IconComponent
-                  stroke={
-                    isSelected 
-                      ? "#fff"
-                      : mode.colorScheme === "dark" 
-                        ? "#fff" 
-                        : "#292D32"
-                  }
-                />
-              }
-            />
-          );
-        })}
-      </List>
-    </>
+        const isSelected = selectedItem === text;
+
+        return (
+          <SidebarItem
+            key={index}
+            selected={isSelected}
+            text={isCollapsed ? "" : text}
+            link={to}
+            sx={isCollapsed ? { 
+              justifyContent: "center",
+              "& .MuiListItemText-root": {
+                display: "none",
+              },
+              "& .MuiListItemIcon-root": {
+                minWidth: "auto",
+                marginRight: 0,
+              },
+            } : {}}
+            icon={
+              <IconComponent
+                stroke={
+                  isSelected 
+                    ? "#fff"
+                    : mode.colorScheme === "dark" 
+                      ? "#fff" 
+                      : "#292D32"
+                }
+              />
+            }
+          />
+        );
+      })}
+    </List>
   );
 };
+
 
 export default SidebarItemList;

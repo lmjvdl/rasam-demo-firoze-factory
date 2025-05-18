@@ -180,6 +180,9 @@ const allQueryKeys = {
 
         }
       }
+    },
+    productLines: {
+      list: ["USER_PANEL", "PRODUCT_LINE", "LIST"]
     }
   },
 } as const;

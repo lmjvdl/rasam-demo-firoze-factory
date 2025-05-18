@@ -1,29 +1,31 @@
 import { useMemo } from "react";
 import { deleteUser } from "@/hooks/context/authStore";
+import { useProductLineStore } from "@/hooks/context/productLineStore";
 
 export const UseItemInfoUserPanel = () => {
-  const drawerItemInfoForUserPanel = useMemo(
-    () => ({
+  const { companies } = useProductLineStore();
+
+  const drawerItemInfoForUserPanel = useMemo(() => {
+    const staticItems = {
       داشبورد: { text: "داشبورد", icon: "Dashboard", to: "/dashboard" },
-      "بسته بندی": {
-        text: "بسته بندی",
-        icon: "Packaging",
-        to: "/dashboard/packaging",
-      },
-      "تهیه بدنه": {
-        text: "تهیه بدنه",
-        icon: "BodyPrep",
-        to: "/dashboard/preparingBody",
-      },
-      "تابلو برق": {
-        text: "تابلو برق",
-        icon: "PowerSupply",
-        to: "/dashboard/powerSupply",
-      },
-      چمفر: { text: "چمفر", icon: "Chamfer", to: "/dashboard/chamfer" },
-    }),
-    []
-  );
+    };
+
+    const dynamicProductLines = companies.reduce((acc, company) => {
+      company.product_lines.forEach((line) => {
+        acc[line.name] = {
+          text: line.name,
+          icon: line.icon || "DefaultIcon",
+          to: `/dashboard/${line.name.replace(/\s/g, "").toLowerCase()}`,
+        };
+      });
+      return acc;
+    }, {} as Record<string, { text: string; icon: string; to: string }>);
+
+    return {
+      ...staticItems,
+      ...dynamicProductLines,
+    };
+  }, [companies]);
 
   const footerItemInfoForUserPanel = useMemo(
     () => ({

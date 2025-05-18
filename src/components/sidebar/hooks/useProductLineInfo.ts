@@ -1,48 +1,33 @@
-import { useEffect, useMemo } from "react";
-import ProductLineResponseSanitizer from "@/utils/contextDependencies/productLineResponseSanitizer";
+import { useMemo } from "react";
 import { updateProductLines, useProductLineStore } from "@/hooks/context/productLineStore";
-import { fetchWithErrorWithAlarm } from "@/utils/dataFetching/fetchWithError";
-import toast from "react-hot-toast";
+import { useAuthStore } from "@/hooks/context/authStore";
 
 const iconMap: Record<string, string> = {
-  بسته‌بندی: "Packaging",
+  "بسته‌بندی": "Packaging",
   "تهیه بدنه": "BodyPrep",
   "تابلو برق": "PowerSupply",
-  چمفر: "Chamfer",
+  "چمفر": "Chamfer",
 };
 
 export const useProductLineInfo = () => {
-  const productLineState = useProductLineStore();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const rawResponse = await fetchWithErrorWithAlarm("/api/product-line");
-        const sanitized = ProductLineResponseSanitizer(rawResponse);
-        updateProductLines(sanitized.data);
-      } catch {
-        toast.error("خطا در دریافت اطلاعات خط های تولید")
-      }
-    };
-
-    if (productLineState.product_lines.length === 0) {
-      fetchData();
-    }
-  }, []);
+  const { companies } = useProductLineStore();
+  const authResponse = useAuthStore();
 
   const drawerItemInfoForUserPanel = useMemo(() => {
     const items: Record<string, { text: string; icon: string; to: string }> = {};
 
-    productLineState.product_lines.forEach((line) => {
-      items[line.name] = {
-        text: line.name,
-        icon: iconMap[line.name] || "Dashboard",
-        to: `/dashboard/${line.name.replace(/\s+/g, "").toLowerCase()}`,
-      };
+    companies.forEach((company) => {
+      company.product_lines.forEach((line) => {
+        items[line.name] = {
+          text: line.name,
+          icon: iconMap[line.name] || "Dashboard",
+          to: `/dashboard/${line.name.replace(/\s+/g, "").toLowerCase()}`,
+        };
+      });
     });
 
     return items;
-  }, [productLineState.product_lines]);
+  }, [companies]);
 
   const footerItemInfoForUserPanel = useMemo(
     () => ({
