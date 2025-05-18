@@ -35,7 +35,7 @@ const responseSchema = z.object({
     results: z.array(
       z.object({
         id: z.number(),
-        icon: z.string(),
+        icon: z.string().nullable(),
         uploaded_at: z.string(),
         name: z.string(),
         theme: z.string()

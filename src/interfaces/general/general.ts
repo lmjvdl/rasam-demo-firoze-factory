@@ -22,3 +22,15 @@ export interface AuthState {
   permissions: string[];
   isAdmin: boolean;
 }
+
+
+export interface ProductLineState {
+  company_id: number;
+  company_name: string;
+  company_logo: string;
+  product_lines: { 
+    id: number;
+    name: string;
+    icon: string | null
+  }[]
+}

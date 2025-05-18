@@ -9,8 +9,8 @@ import {
 import { Dispatch, SetStateAction, useEffect } from "react";
 import SidebarDrawer from "./dependencies/SidebarDrawer";
 import DrawerContent from "./dependencies/DrawerContent";
-import { UseItemInfoUserPanel } from "./UseItemInfoUserPanel";
-import { UseItemInfoAdminPanel } from "./UseItemInfoAdminPanel";
+import { UseItemInfoUserPanel } from "./ItemInfoUserPanel";
+import { UseItemInfoAdminPanel } from "./temInfoAdminPanel";
 import { useRouter } from "next/navigation";
 import { IconChevronRight, IconChevronLeft } from "@tabler/icons-react";
 

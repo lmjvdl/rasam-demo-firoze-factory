@@ -7,7 +7,7 @@ import { extractId } from "@/utils/formatters/extractId";
 
 export type ProductLineUpdateSchema = {
   id: number;
-  company_info: { id: number; name: string };
+  company: { id: number; name: string };
   name: string;
   code: string;
   icon: string;
@@ -18,12 +18,12 @@ const useUpdateProductLine = () => {
   const { showToast } = useToast();
   
   const updateProductLineMutation = useMutation({
-    mutationFn: async ({ id, company_info, icon, ...updatedData }: ProductLineUpdateSchema) => {
+    mutationFn: async ({ id, company, icon, ...updatedData }: ProductLineUpdateSchema) => {
       return fetchWithErrorWithAlarm(productLineUrls.editProductLine(id), {
         method: "PUT",
         body: JSON.stringify({
           ...updatedData,
-          company_info: extractId(company_info), 
+          company_info: extractId(company), 
           icon: icon === "" ? null : Number(icon)
         }),
       });

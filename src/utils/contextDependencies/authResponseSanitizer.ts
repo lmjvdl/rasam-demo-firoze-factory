@@ -21,7 +21,6 @@ const authResponseSchema = z
           content_type__app_label: z.string(),
         })
       ),
-      profile_image: z.nullable(z.string()),
       is_superuser: z.boolean().catch(false),
     }),
   })
@@ -36,7 +35,6 @@ const authResponseSchema = z
       refreshToken: val.data.tokens.refresh,
       lastLogin: val.data.last_login,
       permissions: val.data.permissions.map((perm) => perm.codename),
-      profileImage: val.data.profile_image,
       isAdmin: val.data.is_superuser,
     },
   }));

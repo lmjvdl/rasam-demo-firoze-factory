@@ -2,6 +2,8 @@ export interface ImageUpload {
     id: number;
     icon: string;
     uploaded_at: string;
+    name: string;
+    theme: string;
 }
 
 export interface ImageUploadTableProps {
