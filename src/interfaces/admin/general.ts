@@ -13,6 +13,7 @@ export interface ModalFormProps {
   icons?: { id: number; url: string }[];
   loadingIcons?: boolean;
   fixedValues?: Record<string, any>;
+  customComponent?: React.ReactNode;
 }
 
 interface TitlesColumnsData {

@@ -1,7 +1,6 @@
 "use client"
 
 import MainCard from "@/components/customContiner/MainCard";
-import UserRoute from "@/components/routers/UserRoute";
 import { useAuthStore } from "@/hooks/context/authStore";
 import { useFetchAndSyncProductLines } from "@/hooks/user/useProductLineInfo";
 import { useEffect, useState } from "react";

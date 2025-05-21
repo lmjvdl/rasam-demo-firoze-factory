@@ -98,6 +98,7 @@ const allQueryKeys = {
       list: ["ADMIN_PANEL", "OPERATION", "VIEW"],
       delete: ["ADMIN_PANEL", "OPERATION", "DELETE"],
       update: ["ADMIN_PANEL", "OPERATION", "UPDATE"],
+      device_list: ["ADMIN_PANEL", "OPERATION", "UPDATE", "DEVICE_LIST"],
     },
     smsLog: {
       list: ["ADMIN_PANEL", "SMS_LOG", "VIEW"]
