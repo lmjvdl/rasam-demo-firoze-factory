@@ -11,6 +11,7 @@ const OperationTable: React.FC<OperationTableProps> = ({
   count,
   page,
   onPageChange,
+  dataTypeMap,
 }) => {
 
   return (
@@ -23,6 +24,7 @@ const OperationTable: React.FC<OperationTableProps> = ({
       count={count}
       onPageChange={onPageChange}
       page={page}
+      keyObjectValMap={dataTypeMap}
     />
   );
 };

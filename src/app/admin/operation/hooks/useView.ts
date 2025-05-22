@@ -31,23 +31,28 @@ export default function getOperationList(pages: number, pageSize: number, URL: s
   return getOperationListMutation;
 }
 
+
 const responseSchema = z.object({
   data: z.object({
     count: z.number(),
-    next: z.nullable(z.string()), 
+    next: z.nullable(z.string()),
     previous: z.nullable(z.string()),
+    page_size: z.number(),
     results: z.array(
       z.object({
         id: z.number(),
-        device_info: z.object({
+        datatype_operation: 
+          z.record(z.string(), z.string()).nullable(),
+        device: z.object({
           id: z.number(),
           name: z.string(),
         }),
-        devices_info: z.array(z.object({
-          id: z.number(),
-          name: z.string(),
-        })),
-        operation: z.string(),
+        devices: z.array(
+          z.object({
+            id: z.number(),
+            name: z.string(),
+          })
+        ),
       })
     ),
   }),
@@ -56,18 +61,13 @@ const responseSchema = z.object({
   messages: z.string(),
 });
 
+
 export type ResponseSchema = z.infer<typeof responseSchema>;
 
 function sanitizer(pollutedData: unknown) {
   try {
     const refinedData = responseSchema.parse(pollutedData);
-
-    const transformedResults = refinedData.data.results.map((item) => ({
-      ...item,
-      devices: item.devices_info ? item.devices_info : { id: 0, name: "نامشخص" },
-    }));
-
-    return { ...refinedData, data: { ...refinedData.data, results: transformedResults } };
+    return refinedData;
   } catch (err) {
     const errorMessage =
       err instanceof Error && err.message

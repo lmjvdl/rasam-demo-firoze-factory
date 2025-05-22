@@ -17,12 +17,12 @@ class OperationUrls extends Url {
 
 
   public get listOperation() {
-    const basePath = `${this.baseUrlPath}/list/`;
+    const basePath = `${this.baseUrlPath}/aggregate/List/`;
     return new URL(basePath, this.origin);
   }
 
   public deleteOperation(id: number) {
-    const basePath = `${this.baseUrlPath}/${id}/`;
+    const basePath = `${this.baseUrlPath}/aggregate/${id}`;
     return new URL(basePath, this.origin).toString();
   }
 

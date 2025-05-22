@@ -49,6 +49,7 @@ const DataTable: React.FC<DataTableProps> = ({
   page,
   onPageChange,
   arrayColumns = {},
+  keyObjectValMap,
 }) => {
   // Ensure valid data is always an array
   const validData = Array.isArray(data) ? data : [];
@@ -110,9 +111,14 @@ const DataTable: React.FC<DataTableProps> = ({
 
                       ) : column.isKeyValueObject && value && typeof value === "object" ? (
                         // If the value is an object (e.g., {key1: value1, key2: value2}), convert it to a readable string
-                        Object.entries(value)
-                          .map(([k, v]) => `${k}(${v})`)
-                          .join(", ")
+                        truncateText(
+                          Object.entries(value)
+                            .map(([key, value]) => {
+                              const label = keyObjectValMap?.get(Number(key)) || key;
+                              return `${label}(${value})`;
+                            })
+                            .join(", ")
+                        )
 
                       ) : isArray && isArrayColumn ? (
                         // If the value is an array and a specific key is provided in arrayColumns config,

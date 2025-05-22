@@ -38,7 +38,7 @@ const EditDialog: React.FC<EditDialogProps> = ({
   booleanValue,
   onBooleanValueChange,
   extraOptions = {},
-  timeObject
+  timeObject,
 }) => {
 
   const theme = useTheme();

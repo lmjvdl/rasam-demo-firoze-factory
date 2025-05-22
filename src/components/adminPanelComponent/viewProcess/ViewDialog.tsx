@@ -10,7 +10,7 @@ import {
 import concatImagePathAndBaseUrl from "@/utils/formatters/contcatImagePathAndBaseUrl";
 import { ViewDialogProps } from "@/interfaces/admin/general";
 
-const ViewDialog: React.FC<ViewDialogProps> = ({
+const ViewDialog: React.FC<ViewDialogProps & { keyObjectValMap?: Map<number, string> }> = ({
   open,
   onClose,
   rowData,
@@ -20,10 +20,23 @@ const ViewDialog: React.FC<ViewDialogProps> = ({
   trueLabel = "بله",
   arrayAttributes = {},
   objectAttributes = [],
+  keyObjectValMap,
 }) => {
   if (!rowData || typeof rowData !== "object") return null;
 
   const renderValue = (key: string, value: any) => {
+    const column = titles.find(col => col.id === key);
+    
+    // Handle key-value objects (like datatype_operation)
+    if (column?.isKeyValueObject && value && typeof value === "object" && keyObjectValMap) {
+      return Object.entries(value)
+        .map(([id, operation]) => {
+          const label = keyObjectValMap.get(parseInt(id)) || id;
+          return `${label}: (${operation})`;
+        })
+        .join(", ");
+    }
+
     // Handle object attributes
     if (objectAttributes.includes(key) && value && typeof value === "object") {
       return value.name || value.id || "نامشخص";
@@ -79,8 +92,7 @@ const ViewDialog: React.FC<ViewDialogProps> = ({
                       }}
                     />
                   </>
-                )
-                : (
+                ) : (
                   <>
                     <strong style={{ minWidth: "200px", display: "inline-block" }}>
                       {column.label}:

@@ -1,9 +1,10 @@
 export interface Operation {
-    id: number; // ReadOnly
-    device_info: { id: number; name: string } | null;
-    devices_info: { id: number; name: string }[] | [];
-    operation: string;
+  id: number; // ReadOnly
+  datatype_operation: Record<string, string> | null;
+  device: { id: number; name: string } | null;
+  devices: { id: number; name: string }[] | [];
 }
+
   
 export interface OperationTableProps {
     data: Operation[];
@@ -14,4 +15,5 @@ export interface OperationTableProps {
     count: number;
     page: number; 
     onPageChange: (newPage: number) => void;
+    dataTypeMap?: Map<number, string>; 
 }

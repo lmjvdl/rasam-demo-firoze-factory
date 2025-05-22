@@ -13,13 +13,14 @@ export const columns = () => [
         id: "datatype_operation",
         label: "عملیات",
         isKeyValueObject: true,
+        ListKeyObject: "dataTypeList",
         canEdit: true,
         isAdditionalAction: false,
         showOnTable: true,
         required: true,
     },
     {
-        id: "device_info",
+        id: "device",
         label: "دستگاه",
         required: true,
         isSingleSelect: true,
@@ -27,10 +28,10 @@ export const columns = () => [
         canEdit: true,
         isAdditionalAction: false,
         optionsKey: "deviceList",
-        render: (row: Operation) => row?.device_info?.name || "نامشخص",
+        render: (row: Operation) => row?.device?.name || "نامشخص",
     },
     {
-        id: "devices_info",
+        id: "devices",
         label: "دستگاه ها",
         required: false,
         isMultiSelect: true,
@@ -39,8 +40,8 @@ export const columns = () => [
         isAdditionalAction: false,
         optionsKey: "deviceList",
         render: (row: Operation) =>
-            row?.devices_info?.length
-                ? truncateText(row.devices_info.map((device) => device.name).join(", ")) : "نامشخص"
+            row?.devices?.length
+                ? truncateText(row.devices.map((device) => device.name).join(", ")) : "نامشخص"
     },
     {
         id: "actions",

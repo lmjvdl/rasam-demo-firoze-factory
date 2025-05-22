@@ -8,6 +8,7 @@ import { createFinalSubmit, createInitialSubmit } from "./hooks/useCreate";
 import useDataQuery from "@/hooks/adminDataQuery/useDataQuery";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import deviceUrls from "@/utils/url/adminPanel/deviceUrl";
+import toast from "react-hot-toast";
 
 export default function OperationPage() {
   const [refreshKey, setRefreshKey] = useState(0);
@@ -29,14 +30,16 @@ export default function OperationPage() {
           const response = await createInitialSubmit({
             device_ids
           });
-
-          if (response.success) {
+          if (response.success && response.data.length > 0) {
             return response.data;
-          } else {
-            console.error("خطا در ثبت اولیه:", response);
+          } else if(response.data.length = 0){
+            toast.error("هیچ نوع داده مشترکی یافت نشد.")
             return null;
+          } else {
+            toast.error("خطا در دریافت اطلاعات")
           }
         }}
+        
         onFinalSubmit={async (data) => {
           const payload = {
             ...data,

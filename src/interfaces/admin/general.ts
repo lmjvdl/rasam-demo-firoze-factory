@@ -16,7 +16,7 @@ export interface ModalFormProps {
   customComponent?: React.ReactNode;
 }
 
-interface TitlesColumnsData {
+export interface TitlesColumnsData {
   id: string;
   label: string;
   render?: (row: any) => React.ReactNode;
@@ -32,6 +32,7 @@ interface TitlesColumnsData {
   isImage?: boolean;
   placeholder?: string;
   isKeyValueObject?: boolean;
+  ListKeyObject?: string;
 }
 
 export interface DataTableProps {
@@ -44,6 +45,7 @@ export interface DataTableProps {
   page: number;
   onPageChange: (newPage: number) => void;
   arrayColumns?: { [key: string]: string }; 
+  keyObjectValMap?: Map<number, string>; 
 }
 
 export interface DeleteDialogProps {
