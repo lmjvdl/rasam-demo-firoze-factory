@@ -1,6 +1,6 @@
 export interface DrawerContentProps {
     drawerItemInfoByKey: Record<string, { text: string; icon: string; to: string; }>;
-    footerItemInfoByKey: Record<string, { text: string; icon: string; to: string; onClick: () => void }>;
+    footerItemInfoByKey: Record<string, { text: string; icon: string; to: string; onClick?: () => void }>;
     isAdmin: boolean;
     isCollapsed: boolean;
 }

@@ -4,8 +4,19 @@ import { IconUserExclamation } from "@tabler/icons-react";
 
 export const columns = () => [
   {
-    id: "logo",
-    label: "لوگو",
+    id: "light_logo",
+    label: "لوگو تم لایت",
+    isActionColumn: false,
+    showOnTable: true,
+    canEdit: true,
+    isAdditionalAction: false,
+    isIconSelect: true,
+    isImage: true,
+    optionsKey: "iconList",
+  },
+  {
+    id: "dark_logo",
+    label: "لوگو تم دارک",
     isActionColumn: false,
     showOnTable: true,
     canEdit: true,

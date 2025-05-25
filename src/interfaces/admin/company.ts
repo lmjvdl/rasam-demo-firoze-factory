@@ -3,7 +3,8 @@ interface Company {
     name: string;
     description: string | null;
     code: string;
-    logo: string | null | undefined;
+    light_logo: string | null | undefined;
+    dark_logo: string | null | undefined;
 }
 
 

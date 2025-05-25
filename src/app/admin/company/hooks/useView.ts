@@ -42,7 +42,8 @@ const responseSchema = z.object({
         name: z.string(),
         description: z.string().nullable(),
         code: z.string(),
-        logo: z.string(),
+        light_logo: z.string(),
+        dark_logo: z.string(),
       })
     ),
   }),

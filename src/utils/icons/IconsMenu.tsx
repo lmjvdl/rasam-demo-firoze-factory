@@ -7,6 +7,7 @@ import {
   Logout,
   Chamfer,
   PowerSupply,
+  ShiftInformation
 } from "../../../public/assets/logo/itemMenu";
 import {
   Company,
@@ -60,6 +61,7 @@ export const iconMap: Record<string, React.FC<IconProps>> = {
   BodyPrep: BodyPrep,
   PowerSupply: PowerSupply,
   Chamfer: Chamfer,
+  ShiftInformation: ShiftInformation,
   Settings: Settings,
   Logout: Logout,
   // Add other mappings as necessary

@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { updateProductLines, useProductLineStore } from "@/hooks/context/productLineStore";
+import { useProductLineStore } from "@/hooks/context/productLineStore";
 import { useAuthStore } from "@/hooks/context/authStore";
 
 const iconMap: Record<string, string> = {

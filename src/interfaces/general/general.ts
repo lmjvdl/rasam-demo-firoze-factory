@@ -19,7 +19,7 @@ export interface AuthState {
   refreshToken: string;
   lastLogin: string | null;
   isLoggedIn: boolean;
-  permissions: string[];
+  permissions: number[];
   isAdmin: boolean;
 }
 
@@ -31,7 +31,8 @@ export interface ProductLineCompany {
   product_lines: {
     id: number;
     name: string;
-    icon: string | null;
+    light_icon: string | null;
+    dark_icon: string | null;
   }[];
 }
 

@@ -125,7 +125,11 @@ const ModalForm: React.FC<ModalFormProps> = ({
                     return (
                       <FormControl fullWidth margin="normal">
                         <RangeDropdown
-                          value={Array.isArray(controllerField.value) ? controllerField.value : []}
+                          value={
+                            Array.isArray(controllerField.value)
+                              ? controllerField.value
+                              : []
+                          }
                           disabled={isFixedField}
                           placeholder={field.placeholder}
                           onChange={(range) => controllerField.onChange(range)}
@@ -199,8 +203,21 @@ const ModalForm: React.FC<ModalFormProps> = ({
 
                   if (field.type === "icon" || field.type === "logo") {
                     return (
-                      <FormControl fullWidth margin="normal">
-                        <InputLabel>{field.label}</InputLabel>
+                      <FormControl
+                        fullWidth
+                        margin="normal"
+                        error={!!errors[field.name]}
+                      >
+                        <InputLabel
+                          required={field.required}
+                          sx={{
+                            "& .MuiInputLabel-asterisk": {
+                              color: "red",
+                            },
+                          }}
+                        >
+                          {field.label}
+                        </InputLabel>
                         {loadingIcons ? (
                           <CircularProgress size={24} />
                         ) : (
@@ -208,6 +225,7 @@ const ModalForm: React.FC<ModalFormProps> = ({
                             {...controllerField}
                             value={controllerField.value || ""}
                             label={field.label}
+                            error={!!errors[field.name]}
                           >
                             {icons?.map((icon) => (
                               <MenuItem key={icon.id} value={icon.id}>
@@ -223,6 +241,17 @@ const ModalForm: React.FC<ModalFormProps> = ({
                               </MenuItem>
                             ))}
                           </Select>
+                        )}
+                        {errors[field.name] && (
+                          <p
+                            style={{
+                              color: "red",
+                              fontSize: "0.75rem",
+                              margin: "3px 14px 0",
+                            }}
+                          >
+                            {errors[field.name]?.message as string}
+                          </p>
                         )}
                       </FormControl>
                     );

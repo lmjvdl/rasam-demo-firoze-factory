@@ -44,10 +44,16 @@ export default function CompanyPage() {
             required: true 
           },
           { 
-            name: "logo", 
-            label: "لوگو", 
+            name: "light_logo", 
+            label: "لوگو تم لایت", 
             type: "icon", 
-            required: false 
+            required: true 
+          },
+          { 
+            name: "dark_logo", 
+            label: "لوگو تم دارک", 
+            type: "icon", 
+            required: true 
           },
         ]}
         onSubmit={handleCreateCompany}

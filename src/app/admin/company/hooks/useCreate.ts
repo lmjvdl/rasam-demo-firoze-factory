@@ -6,10 +6,12 @@ const companySchema = z.object({
   name: z.string(),
   description: z.string().optional(),
   code: z.string(),
-  logo: z.number().nullable(),
+  light_logo: z.number().nullable(),
+  dark_logo: z.number().nullable(),
 });
 
 export const createNewCompany = async (data: unknown) => {
+  console.log(data)
   const validationResult = companySchema.safeParse(data);
 
   if (!validationResult.success) {

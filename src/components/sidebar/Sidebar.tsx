@@ -10,9 +10,9 @@ import { Dispatch, SetStateAction, useEffect } from "react";
 import SidebarDrawer from "./dependencies/SidebarDrawer";
 import DrawerContent from "./dependencies/DrawerContent";
 import { UseItemInfoUserPanel } from "./ItemInfoUserPanel";
-import { UseItemInfoAdminPanel } from "./temInfoAdminPanel";
 import { useRouter } from "next/navigation";
 import { IconChevronRight, IconChevronLeft } from "@tabler/icons-react";
+import { UseItemInfoAdminPanel } from "./temInfoAdminPanel";
 
 const Sidebar = ({
   mobileOpen,
@@ -75,6 +75,7 @@ const Sidebar = ({
   const footerItemInfo = isAdmin
     ? footerItemInfoForAdminPanel
     : footerItemInfoForUserPanel;
+
 
   const ToggleButton = styled(IconButton)(({ theme }) => ({
     position: "fixed",

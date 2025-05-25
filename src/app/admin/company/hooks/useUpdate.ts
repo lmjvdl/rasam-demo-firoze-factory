@@ -9,7 +9,8 @@ export type CompanyUpdateSchema = {
   name: string;
   description: string;
   code: string;
-  logo: string;
+  light_logo: string;
+  dark_logo: string;
 };
 
 const useUpdate = () => {
@@ -17,12 +18,13 @@ const useUpdate = () => {
   const { showToast } = useToast();
 
   const updateCompanyMutation = useMutation({
-    mutationFn: async ({ id, logo, ...updatedData }: CompanyUpdateSchema) => {
+    mutationFn: async ({ id, light_logo, dark_logo, ...updatedData }: CompanyUpdateSchema) => {
       return fetchWithErrorWithAlarm(companyUrls.editCompany(id), {
         method: "PUT",
         body: JSON.stringify({
           ...updatedData, 
-          logo: logo === "" ? null : Number(logo)
+          light_logo: light_logo === "" ? null : Number(light_logo),
+          dark_logo: dark_logo === "" ? null : Number(dark_logo),
         }),
       });
     },

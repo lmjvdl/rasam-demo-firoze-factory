@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import TabsSection from "../../../components/dynamicSubcategory/TabsSection";
 import JsonReport from "./jsonReport/page";
 import ExcleReport from "./excleReport/page";
+import TabsSection from "@/components/dynamicSubcategory/TabsSection";
 
 
 export default function SettingsPage() {
