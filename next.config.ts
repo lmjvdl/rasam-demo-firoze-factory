@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
-
+  output: 'standalone',
   // Customize the Webpack configuration to handle SVG files
   webpack(config) {
     config.module.rules.push({

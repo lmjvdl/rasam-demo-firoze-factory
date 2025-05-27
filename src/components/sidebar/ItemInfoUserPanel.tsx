@@ -17,7 +17,6 @@ export const UseItemInfoUserPanel = () => {
     if (!requiredPermissions) return true;
     return requiredPermissions.some((id) => userPermissions.includes(id));
   };
-
   
   const drawerItemInfoForUserPanel = useMemo(() => {
     const filteredStaticItems = Object.entries(staticDrawerItems)

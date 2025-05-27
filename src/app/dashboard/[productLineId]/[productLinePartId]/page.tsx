@@ -1,32 +1,38 @@
-// app/dashboard/[productLineId]/[productLinePartId]/page.tsx
+'use client';
 
-import { useProductLineStore } from "@/hooks/context/productLineStore";
-import { useMemo } from "react";
+import { use, useEffect } from 'react';
+import { useProductLineStore } from '@/hooks/context/productLineStore';
+import { useFetchAndSyncProductLines } from '@/hooks/user/useProductLineInfo';
 
-interface PageProps {
-  params: {
+type PageProps = {
+  params: Promise<{
     productLineId: string;
     productLinePartId: string;
-  };
-}
+  }>;
+};
 
 export default function ProductLinePage({ params }: PageProps) {
-  const { productLineId, productLinePartId } = params;
+  const { productLineId, productLinePartId } = use(params);
   const { companies, loading } = useProductLineStore();
+  
+ useFetchAndSyncProductLines();
 
-  const allProductLines = useMemo(() => {
-    return companies.flatMap((company) => company.product_lines);
-  }, [companies]);
-
-  const line = allProductLines.find((l) => l.id.toString() === productLineId);
-
-  if (loading) return <p>در حال بارگذاری...</p>;
-  if (!line) return <p>خط تولید پیدا نشد</p>;
 
   return (
     <div>
-      <h1>خط تولید: {line.name}</h1>
-      <p>شناسه بخش: {productLinePartId}</p>
+      <h1>Product Line Page</h1>
+      <p><strong>Product Line ID:</strong> {productLineId}</p>
+      <p><strong>Product Line Part ID:</strong> {productLinePartId}</p>
+
+      {loading ? (
+        <p>Loading companies...</p>
+      ) : (
+        <ul>
+          {companies.map((company) => (
+            <li key={company.company_id}>{company.company_name}</li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }

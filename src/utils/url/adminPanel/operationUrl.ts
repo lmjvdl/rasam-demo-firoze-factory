@@ -27,7 +27,7 @@ class OperationUrls extends Url {
   }
 
   public editOperation(id: number) {
-    const basePath = `${this.baseUrlPath}/${id}/`;
+    const basePath = `${this.baseUrlPath}/aggregate/${id}`;
     return new URL(basePath, this.origin).toString();
   }
 }

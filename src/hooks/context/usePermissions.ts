@@ -8,11 +8,9 @@ import { useAuthStore } from "./authStore";
  *   - hasAnyPermission: Function to check if user has ANY of the required permissions (OR logic)
  */
 export const usePermissions = () => {
-  // Get permissions from auth store and ensure they're numbers
-  const permissions = useAuthStore(state => 
-    state.permissions.map(perm => Number(perm))
-  );
-
+  // Get permissions directly from auth store (already numbers)
+  const permissions = useAuthStore(state => state.permissions);
+  
   /**
    * Checks if user has the required permission(s)
    * @param {number|number[]} requiredPermissions - Single permission ID or array of IDs

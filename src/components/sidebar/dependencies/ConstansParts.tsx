@@ -15,7 +15,7 @@ export const staticDrawerItems: Record<string, DrawerItem> = {
   "تکمیل اطلاعات شیفت": {
     text: "تکمیل اطلاعات شیفت",
     icon: "ShiftInformation",
-    to: "/dashboard/staticSections/shiftInfo",
+    to: "/dashboard/staticSection/shiftInfo",
     // Must be delete 2, 3(for delete)
     requiredPermissions: [
       2, 3, 203, 204, 205, 206, 261, 262, 263, 264, 207, 208, 209, 210, 327, 328, 329,

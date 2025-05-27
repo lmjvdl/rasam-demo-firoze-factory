@@ -2,7 +2,6 @@
 
 import MainCard from "@/components/customContiner/MainCard";
 import { useAuthStore } from "@/hooks/context/authStore";
-import { useFetchAndSyncProductLines } from "@/hooks/user/useProductLineInfo";
 import { useEffect, useState } from "react";
 
 interface Props {
@@ -12,8 +11,6 @@ interface Props {
 const UserPanel = ({ children }: Props) => {
   const isLoggedIn = useAuthStore((s) => !!s.id);
   const [ready, setReady] = useState(false);
-
-  useFetchAndSyncProductLines();
 
   useEffect(() => {
     if (isLoggedIn) {
