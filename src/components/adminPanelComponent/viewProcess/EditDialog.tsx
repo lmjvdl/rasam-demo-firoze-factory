@@ -64,7 +64,9 @@ const EditDialog: React.FC<EditDialogProps> = ({
   };
 
   useEffect(() => {
-    setFormData(rowData || {});
+    if (JSON.stringify(formData) !== JSON.stringify(rowData)) {
+      setFormData(rowData || {});
+    }
   }, [rowData]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {

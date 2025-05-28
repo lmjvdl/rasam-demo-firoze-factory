@@ -11,16 +11,12 @@ import useUpdate from "./hooks/useUpdate";
 import ViewDialog from "@/components/adminPanelComponent/viewProcess/ViewDialog";
 import EditDialog from "@/components/adminPanelComponent/viewProcess/EditDialog";
 import DeleteDialog from "@/components/adminPanelComponent/viewProcess/DeleteDialog";
-import useDataQuery from "@/hooks/adminDataQuery/useDataQuery";
-import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
-import functionUrls from "@/utils/url/adminPanel/functionUrl";
-import deviceUrls from "@/utils/url/adminPanel/deviceUrl";
-import contactsUrls from "@/utils/url/adminPanel/contactUrl";
-import dataTypeUrls from "@/utils/url/adminPanel/dataTypeUrl";
+import { Alarm } from "@/interfaces/admin/alarm";
+import { useAlarmExtraOptions } from "./hooks/useAlarmExtraOptions";
 
 const AllContentAlarm: React.FC = () => {
   const [data, setData] = useState<ResponseSchema>(PrevDataInitial);
-  const [selectedRow, setSelectedRow] = useState<any>(null);
+  const [selectedRow, setSelectedRow] = useState<Alarm>();
   const [viewOpen, setViewOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
@@ -32,61 +28,7 @@ const AllContentAlarm: React.FC = () => {
   const { deleteAlarmMutation } = useDelete();
   const { updateAlarmMutation } = useUpdate();
 
-  const functionList = useDataQuery(
-    allQueryKeys.adminPanel.alarm.function_list,
-    functionUrls.listFunction
-  ).data
-    ? useDataQuery(
-        allQueryKeys.adminPanel.alarm.function_list,
-        functionUrls.listFunction
-      ).data.map((func) => ({
-        id: func.id,
-        value: func.id,
-        label: func.name,
-      }))
-    : [];
-
-  const deviceList = useDataQuery(
-    allQueryKeys.adminPanel.alarm.device_list,
-    deviceUrls.listDevice
-  ).data
-    ? useDataQuery(
-        allQueryKeys.adminPanel.alarm.device_list,
-        deviceUrls.listDevice
-      ).data.map((device) => ({
-        id: device.id,
-        value: device.id,
-        label: device.name,
-      }))
-    : [];
-
-  const dataTypeList = useDataQuery(
-    allQueryKeys.adminPanel.alarm.data_type_list,
-    dataTypeUrls.listDataType
-  ).data
-    ? useDataQuery(
-        allQueryKeys.adminPanel.alarm.data_type_list,
-        dataTypeUrls.listDataType
-      ).data.map((dataType) => ({
-        id: dataType.id,
-        value: dataType.id,
-        label: dataType.name,
-      }))
-    : [];
-
-  const contactsList = useDataQuery(
-    allQueryKeys.adminPanel.alarm.contacts_list,
-    contactsUrls.listContacts
-  ).data
-    ? useDataQuery(
-        allQueryKeys.adminPanel.alarm.contacts_list,
-        contactsUrls.listContacts
-      ).data.map((contact) => ({
-        id: contact.id,
-        value: contact.id,
-        label: contact.name,
-      }))
-    : [];
+  const { functionList, deviceList, dataTypeList, contactsList } = useAlarmExtraOptions();
 
   useEffect(() => {
     getList.mutate(
@@ -125,17 +67,17 @@ const AllContentAlarm: React.FC = () => {
     getList.mutate({ page: newPage + 1, page_size: 8, url: nextPage });
   };
 
-  const handleView = (row: any) => {
+  const handleView = (row: Alarm) => {
     setSelectedRow(row);
     setViewOpen(true);
   };
 
-  const handleEdit = (row: any) => {
+  const handleEdit = (row: Alarm) => {
     setSelectedRow(row);
     setEditOpen(true);
   };
 
-  const handleDelete = (row: any) => {
+  const handleDelete = (row: Alarm) => {
     setSelectedRow(row);
     setDeleteOpen(true);
   };

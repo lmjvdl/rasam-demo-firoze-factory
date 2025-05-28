@@ -1,6 +1,7 @@
 import { Alarm } from "@/interfaces/admin/alarm";
+import { TitlesColumnsData } from "@/interfaces/admin/general";
 
-export const columns = () => [
+export const columns = (): TitlesColumnsData[] => [
     {
         id: "id",
         label: "شناسه",

@@ -31,7 +31,7 @@ export default function AlarmPage() {
     contactsUrls.listContacts
   );
 
-  const handleCreateAlarm = async (data: any) => {
+  const handleCreateAlarm = async (data: unknown) => {
     const response = await createNewAlarm(data);
     if (response.success) {
       setRefreshKey((prev) => prev + 1);
