@@ -1,3 +1,5 @@
+"use client"
+
 import { ReportParams } from "@/interfaces/settings/downloadFile";
 import { validateDateRange } from "@/utils/checker/validateDateRange";
 import { fetchWithErrorForDownload } from "@/utils/dataFetching/fetchWithError";
