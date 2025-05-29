@@ -11,14 +11,12 @@ import useUpdate from "./hooks/useUpdate";
 import ViewDialog from "@/components/adminPanelComponent/viewProcess/ViewDialog";
 import EditDialog from "@/components/adminPanelComponent/viewProcess/EditDialog";
 import DeleteDialog from "@/components/adminPanelComponent/viewProcess/DeleteDialog";
-import useDataQuery from "@/hooks/adminDataQuery/useDataQuery";
-import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
-import alarmUrls from "@/utils/url/adminPanel/alarmUrl";
-import functionParameterUrls from "@/utils/url/adminPanel/functionParameterUrl";
+import { useAlarmDetailExtraOptions } from "./hooks/useAlarmDetailExtraOptions";
+import { AlarmDetail } from "@/interfaces/admin/alarmDetail";
 
 const AllContentAlarmDetail: React.FC = () => {
   const [data, setData] = useState<ResponseSchema>(PrevDataInitial);
-  const [selectedRow, setSelectedRow] = useState<any>(null);
+  const [selectedRow, setSelectedRow] = useState<AlarmDetail>();
   const [viewOpen, setViewOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
@@ -26,33 +24,7 @@ const AllContentAlarmDetail: React.FC = () => {
   const [totalData, setTotalData] = useState<number>(0);
   const [nextPage, setNextPage] = useState<null | string>(null);
 
-  const alarmList = useDataQuery(
-    allQueryKeys.adminPanel.alarmDetail.alarm_list,
-    alarmUrls.listAlarm
-  ).data
-    ? useDataQuery(
-        allQueryKeys.adminPanel.alarmDetail.alarm_list,
-        alarmUrls.listAlarm
-      ).data.map((alarm) => ({
-        id: alarm.id,
-        value: alarm.id,
-        label: alarm.name,
-      }))
-    : [];
-
-  const parameterList = useDataQuery(
-    allQueryKeys.adminPanel.alarmDetail.parameter_list,
-    functionParameterUrls.listFunctionParameter
-  ).data
-    ? useDataQuery(
-        allQueryKeys.adminPanel.alarmDetail.parameter_list,
-        functionParameterUrls.listFunctionParameter
-      ).data.map((parameter) => ({
-        id: parameter.id,
-        value: parameter.id,
-        label: parameter.name,
-      }))
-    : [];
+  const { alarmList, parameterList } = useAlarmDetailExtraOptions();
 
   const getList = getAlarmDetailList(pageNumber, 8, nextPage);
   const { deleteAlarmDetailMutation } = useDelete();
@@ -95,17 +67,17 @@ const AllContentAlarmDetail: React.FC = () => {
     getList.mutate({ page: newPage + 1, page_size: 8, url: nextPage });
   };
 
-  const handleView = (row: any) => {
+  const handleView = (row: AlarmDetail) => {
     setSelectedRow(row);
     setViewOpen(true);
   };
 
-  const handleEdit = (row: any) => {
+  const handleEdit = (row: AlarmDetail) => {
     setSelectedRow(row);
     setEditOpen(true);
   };
 
-  const handleDelete = (row: any) => {
+  const handleDelete = (row: AlarmDetail) => {
     setSelectedRow(row);
     setDeleteOpen(true);
   };

@@ -5,31 +5,13 @@ import ModalForm from "@/components/adminPanelComponent/addingProcess/ModalForm"
 import MainCard from "@/components/customContiner/MainCard";
 import { createNewAlarm } from "./hooks/useCreate";
 import AllContentAlarm from "./AllContent";
-import useDataQuery from "@/hooks/adminDataQuery/useDataQuery";
-import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
-import functionUrls from "@/utils/url/adminPanel/functionUrl";
-import contactsUrls from "@/utils/url/adminPanel/contactUrl";
-import deviceUrls from "@/utils/url/adminPanel/deviceUrl";
-import dataTypeUrls from "@/utils/url/adminPanel/dataTypeUrl";
+import { useAlarmExtraOptions } from "./hooks/useAlarmExtraOptions";
 
 export default function AlarmPage() {
   const [refreshKey, setRefreshKey] = useState(0);
-  const getFunctionList = useDataQuery(
-    allQueryKeys.adminPanel.alarm.function_list,
-    functionUrls.listFunction
-  );
-  const getDataTypeList = useDataQuery(
-    allQueryKeys.adminPanel.alarm.data_type_list,
-    dataTypeUrls.listDataType
-  );
-  const getDeviceList = useDataQuery(
-    allQueryKeys.adminPanel.alarm.device_list,
-    deviceUrls.listDevice
-  );
-  const getContactsList = useDataQuery(
-    allQueryKeys.adminPanel.alarm.contacts_list,
-    contactsUrls.listContacts
-  );
+
+  const { functionOptions, deviceOptions, dataTypeOptions, contactsOptions } =
+    useAlarmExtraOptions();
 
   const handleCreateAlarm = async (data: unknown) => {
     const response = await createNewAlarm(data);
@@ -56,44 +38,28 @@ export default function AlarmPage() {
             label: "تابع",
             type: "select",
             required: true,
-            options:
-              getFunctionList.data?.map((func) => ({
-                label: func.name,
-                value: func.id,
-              })) || [],
+            options: functionOptions
           },
           {
             name: "device",
             label: "دستگاه",
             type: "select",
             required: true,
-            options:
-              getDeviceList.data?.map((device) => ({
-                label: device.name,
-                value: device.id,
-              })) || [],
+            options: deviceOptions
           },
           {
             name: "type",
             label: "نوع",
             type: "select",
             required: true,
-            options:
-              getDataTypeList.data?.map((dataType) => ({
-                label: dataType.name,
-                value: dataType.id,
-              })) || [],
+            options: dataTypeOptions
           },
           {
             name: "receiver",
             label: "دریافت کننده",
             type: "select",
             required: true,
-            options:
-              getContactsList.data?.map((contact) => ({
-                label: contact.name,
-                value: contact.id,
-              })) || [],
+            options: contactsOptions
           },
           {
             name: "message_type",

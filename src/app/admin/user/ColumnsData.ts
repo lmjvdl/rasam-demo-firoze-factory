@@ -30,7 +30,7 @@ export const columns = () => [
         label: "نام کاربری",
         showOnTable: true,
         required: true,
-        canEdit: true,
+        canEdit: false,
         isAdditionalAction: false,
     },
     {

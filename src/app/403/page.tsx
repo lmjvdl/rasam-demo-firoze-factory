@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Button, CardContent, Typography, useTheme } from "@mui/material";
+import { Button, CardContent, Typography, useTheme } from "@mui/material";
 import MainCard from "@/components/customContiner/MainCard";
 import { useRouter } from "next/navigation";
 import ErrorIcon from "@mui/icons-material/ErrorOutline";

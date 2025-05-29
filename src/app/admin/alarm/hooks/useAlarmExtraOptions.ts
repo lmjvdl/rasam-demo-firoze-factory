@@ -26,6 +26,7 @@ export const useAlarmExtraOptions = () => {
     contactsUrls.listContacts
   );
 
+  // For use in other files, keep id, value, label
   const functionList = functionData.data?.map((func) => ({
     id: func.id,
     value: func.id,
@@ -50,10 +51,35 @@ export const useAlarmExtraOptions = () => {
     label: contact.name,
   })) ?? [];
 
+  // For AlarmPage select options
+  const functionOptions = functionList.map(({ label, value }) => ({
+    label,
+    value,
+  }));
+
+  const deviceOptions = deviceList.map(({ label, value }) => ({
+    label,
+    value,
+  }));
+
+  const dataTypeOptions = dataTypeList.map(({ label, value }) => ({
+    label,
+    value,
+  }));
+
+  const contactsOptions = contactsList.map(({ label, value }) => ({
+    label,
+    value,
+  }));
+
   return {
     functionList,
     deviceList,
     dataTypeList,
     contactsList,
+    functionOptions,
+    deviceOptions,
+    dataTypeOptions,
+    contactsOptions,
   };
 };
