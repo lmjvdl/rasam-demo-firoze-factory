@@ -1,4 +1,4 @@
-interface Company {
+export interface Company {
     id: number;
     name: string;
     description: string | null;
@@ -8,7 +8,7 @@ interface Company {
 }
 
 
-interface CompanyTableProps {
+export interface CompanyTableProps {
     data: Company[];
     columns: any[];
     onView: (row: any) => void;

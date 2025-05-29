@@ -12,53 +12,26 @@ import { UserCompanyUpdateSchema } from "./hooks/useUpdate";
 import UserCompanyTable from "./UserCompanyTable";
 import useUpdate from "./hooks/useUpdate";
 import { UserCompanyPageProps } from "@/interfaces/admin/userCompany";
-import useDataQuery from "@/hooks/adminDataQuery/useDataQuery";
-import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
-import permissionUrls from "@/utils/url/adminPanel/permissionUrl";
-import groupUrls from "@/utils/url/adminPanel/groupUrl";
+import { UserCompany } from "@/interfaces/admin/userCompany";
+import { useUserCompanyExtraOptions } from "./hooks/useUserCompanyExtraOptions";
 
 export default function AllContentUserCompany({
   companyId,
 }: UserCompanyPageProps) {
   const [data, setData] = useState<ResponseSchema>(PrevDataInitial);
-  const [selectedRow, setSelectedRow] = useState<any>(null);
+  const [selectedRow, setSelectedRow] = useState<UserCompany>();
   const [viewOpen, setViewOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
   const [pageNumber, setPageNumber] = useState<number>(0);
   const [totalData, setTotalData] = useState<number>(0);
   const [nextPage, setNextPage] = useState<null | string>(null);
+
+  const { permissionList, groupList } = useUserCompanyExtraOptions();
+
   const getList = getUserCompanyList(companyId);
   const { deleteUserCompanyMutation } = useDelete();
   const { updateUserCompanyMutation } = useUpdate();
-
-  const permissionList = useDataQuery(
-    allQueryKeys.adminPanel.userCompany.permission_list,
-    permissionUrls.listPermission
-  ).data
-    ? useDataQuery(
-        allQueryKeys.adminPanel.userCompany.permission_list,
-        permissionUrls.listPermission
-      ).data.map((permission) => ({
-        id: permission.id,
-        value: permission.id,
-        label: permission.name,
-      }))
-    : [];
-
-  const groupList = useDataQuery(
-    allQueryKeys.adminPanel.userCompany.group_list,
-    groupUrls.listGroup
-  ).data
-    ? useDataQuery(
-        allQueryKeys.adminPanel.userCompany.group_list,
-        groupUrls.listGroup
-      ).data.map((group) => ({
-        id: group.id,
-        value: group.id,
-        label: group.name,
-      }))
-    : [];
 
   useEffect(() => {
     getList.mutate(
@@ -96,17 +69,17 @@ export default function AllContentUserCompany({
     setPageNumber(newPage);
   };
 
-  const handleView = (row: any) => {
+  const handleView = (row: UserCompany) => {
     setSelectedRow(row);
     setViewOpen(true);
   };
 
-  const handleEdit = (row: any) => {
+  const handleEdit = (row: UserCompany) => {
     setSelectedRow(row);
     setEditOpen(true);
   };
 
-  const handleDelete = (row: any) => {
+  const handleDelete = (row: UserCompany) => {
     setSelectedRow(row);
     setDeleteOpen(true);
   };

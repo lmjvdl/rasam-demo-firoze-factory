@@ -3,8 +3,7 @@ import DataTable from "@/components/adminPanelComponent/viewProcess/DataTable";
 import Link from "next/link";
 import { IconButton } from "@mui/material";
 import { IconUserExclamation } from "@tabler/icons-react";
-
-
+import { CompanyTableProps } from "@/interfaces/admin/company";
 
 const CompanyTable: React.FC<CompanyTableProps> = ({
   data,

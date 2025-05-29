@@ -6,32 +6,16 @@ import MainCard from "@/components/customContiner/MainCard";
 import AllContentUserCompany from "./AllContent";
 import { createNewUserCompany } from "./hooks/useCreate";
 import { PageProps } from "@/interfaces/admin/userCompany";
-import useDataQuery from "@/hooks/adminDataQuery/useDataQuery";
-import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
-import permissionUrls from "@/utils/url/adminPanel/permissionUrl";
-import userUrls from "@/utils/url/adminPanel/userUrl";
-import groupUrls from "@/utils/url/adminPanel/groupUrl";
+import { useUserCompanyExtraOptions } from "./hooks/useUserCompanyExtraOptions";
 
 export default function UserCompanyPage({ params }: PageProps) {
   const [refreshKey, setRefreshKey] = useState(0);
   const { companyId } = use(params);
-  
-  const getUsersList = useDataQuery(
-    allQueryKeys.adminPanel.userCompany.user_list,
-    userUrls.listUser
-  );
-  const getPermissionsList = useDataQuery(
-    allQueryKeys.adminPanel.userCompany.permission_list,
-    permissionUrls.listPermission
-  );
-  const getGroupsList = useDataQuery(
-    allQueryKeys.adminPanel.userCompany.group_list,
-    groupUrls.listGroup
-  );
+  const { userOptions, groupOptions, permissionOptions } = useUserCompanyExtraOptions();
 
   if (!companyId) return null;
 
-  const handleCreateUserCompany = async (data: any) => {
+  const handleCreateUserCompany = async (data: unknown) => {
     const response = await createNewUserCompany(data);
     if (response.success) {
       setRefreshKey((prev) => prev + 1);
@@ -56,33 +40,21 @@ export default function UserCompanyPage({ params }: PageProps) {
             label: "کاربر",
             type: "select",
             required: true,
-            options:
-              getUsersList.data?.map((user) => ({
-                label: user.username ? user.username : "",
-                value: user.id,
-              })) || [],
+            options: userOptions,
           },
           {
             name: "groups",
             label: "گروه ها",
             type: "multiselect",
             required: false,
-            options:
-              getGroupsList.data?.map((group) => ({
-                label: group.name,
-                value: group.id,
-              })) || [],
+            options: groupOptions,
           },
           {
             name: "permissions",
             label: "دسترسی ها",
             type: "multiselect",
             required: false,
-            options:
-              getPermissionsList.data?.map((permission) => ({
-                label: permission.name,
-                value: permission.id,
-              })) || [],
+            options: permissionOptions,
           },
         ]}
         fixedValues={{ company: companyId }}
