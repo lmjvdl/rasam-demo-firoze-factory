@@ -10,7 +10,8 @@ export type ProductLineUpdateSchema = {
   company: { id: number; name: string };
   name: string;
   code: string;
-  icon: string;
+  dark_icon: string;
+  light_icon: string;
 };
 
 const useUpdateProductLine = () => {
@@ -18,13 +19,14 @@ const useUpdateProductLine = () => {
   const { showToast } = useToast();
   
   const updateProductLineMutation = useMutation({
-    mutationFn: async ({ id, company, icon, ...updatedData }: ProductLineUpdateSchema) => {
+    mutationFn: async ({ id, company, dark_icon, light_icon, ...updatedData }: ProductLineUpdateSchema) => {
       return fetchWithErrorWithAlarm(productLineUrls.editProductLine(id), {
         method: "PUT",
         body: JSON.stringify({
           ...updatedData,
           company_info: extractId(company), 
-          icon: icon === "" ? null : Number(icon)
+          light_icon: light_icon === "" ? null : Number(light_icon),
+          dark_icon: dark_icon === "" ? null : Number(dark_icon),
         }),
       });
     },

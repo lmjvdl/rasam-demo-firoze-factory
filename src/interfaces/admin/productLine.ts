@@ -3,7 +3,8 @@ export interface ProductLine {
     company: { id: number; name: string } | null;
     name: string;
     code: string;
-    icon: string;
+    dark_icon: string;
+    light_icon: string
 }
 
 export interface ProductLineTableProps {

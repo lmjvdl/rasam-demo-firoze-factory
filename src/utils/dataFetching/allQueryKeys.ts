@@ -51,7 +51,8 @@ const allQueryKeys = {
       list: ["ADMIN_PANEL", "PRODUCT_LINE", "VIEW"],
       delete: ["ADMIN_PANEL", "PRODUCT_LINE", "DELETE"],
       update: ["ADMIN_PANEL", "PRODUCT_LINE", "UPDATE"],
-      company: ["ADMIN_PANEL", "PRODUCT_LINE", "VIEW", "COMPANY"],
+      company_list: ["ADMIN_PANEL", "PRODUCT_LINE", "VIEW", "COMPANY_LIST"],
+      live_type_info_list: ["ADMIN_PANEL", "PRODUCT_LINE", "VIEW", "COMPANY_LIST"],
     },
     productLinePart: {
       list: ["ADMIN_PANEL", "PRODUCT_LINE_PART", "VIEW"],

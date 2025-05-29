@@ -2,8 +2,19 @@ import { ProductLine } from "@/interfaces/admin/productLine";
 
 export const columns = () => [
     {
-        id: "icon",
-        label: "آیکون",
+        id: "light_icon",
+        label: "آیکون تم لایت",
+        required: false,
+        isImage: true,
+        showOnTable: true,
+        canEdit: true,
+        isAdditionalAction: false,
+        isIconSelect: true, 
+        optionsKey: "iconList",
+    },
+    {
+        id: "dark_icon",
+        label: "آیکون تم دارک",
         required: false,
         isImage: true,
         showOnTable: true,
@@ -42,7 +53,7 @@ export const columns = () => [
         id: "code",
         label: "کد",
         required: true,
-        showOnTable: true,
+        showOnTable: false,
         canEdit: true,
         isAdditionalAction: false,
     },

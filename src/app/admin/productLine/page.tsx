@@ -6,14 +6,15 @@ import MainCard from "@/components/customContiner/MainCard";
 import { createNewProductLine } from "./hooks/useCreate";
 import AllContentProductLine from "./AllContent";
 import useIcons from "@/hooks/reactQueryApiHooks/useIcon";
-import useCompanyQuery from "./hooks/useCompanyList";
+import { useProductLineExtraOptions } from "./hooks/useProductLineExtraOptions";
 
 export default function ProductLinePage() {
   const [refreshKey, setRefreshKey] = useState(0);
-  const { icons, loading } = useIcons();
-  const getListCompany = useCompanyQuery();
+  const { loading, icons } = useIcons();
+  const { companyOptions } = useProductLineExtraOptions();
 
-  const handleCreateProductLine = async (data: unknown) => {
+
+  const handleCreateProductLine = async (data: any) => {
     const response = await createNewProductLine(data);
     if (response.success) {
       setRefreshKey(prev => prev + 1);
@@ -28,20 +29,17 @@ export default function ProductLinePage() {
         buttonText="افزودن خط تولید جدید"
         formFields={[
           {
-            name: "company_info",
-            label: "شرکت",
-            type: "select",
-            required: true,
-            options: getListCompany.data?.map((company) => ({
-              label: company.name,
-              value: company.id,
-            })) || [],
-          },
-          {
             name: "name",
             label: "نام",
             type: "text",
             required: true,
+          },
+          {
+            name: "company_info",
+            label: "شرکت",
+            type: "select",
+            required: true,
+            options: companyOptions,
           },
           {
             name: "code",
@@ -50,15 +48,21 @@ export default function ProductLinePage() {
             required: true,
           },
           {
-            name: "icon",
-            label: "آیکون",
+            name: "dark_icon",
+            label: "آیکون تم دارک",
+            type: "icon",
+            required: false,
+          },
+          {
+            name: "light_icon",
+            label: "آیکون تم لایت",
             type: "icon",
             required: false,
           },
         ]}
         onSubmit={handleCreateProductLine}
-        icons={icons}
         loadingIcons={loading}
+        icons={icons}
       />
       <AllContentProductLine key={refreshKey} />
     </MainCard>

@@ -11,7 +11,6 @@ const companySchema = z.object({
 });
 
 export const createNewCompany = async (data: unknown) => {
-  console.log(data)
   const validationResult = companySchema.safeParse(data);
 
   if (!validationResult.success) {

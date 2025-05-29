@@ -6,16 +6,12 @@ const productLineSchema = z.object({
   company_info: z.number(),
   name: z.string(),
   code: z.string(),
-  icon: z.number().nullable().optional(),
+  DarkIcon: z.number().nullable().optional(),
+  LightIcon: z.number().nullable().optional(),
 });
 
 export const createNewProductLine = async (data: unknown) => {
-  const dataWithCompanyAsNumber = {
-    ...data,
-    company_info: Number(data.company_info),
-  };
-
-  const validationResult = productLineSchema.safeParse(dataWithCompanyAsNumber);
+  const validationResult = productLineSchema.safeParse(data);
 
   if (!validationResult.success) {
     return { success: false, error: validationResult.error.format() };
@@ -23,10 +19,15 @@ export const createNewProductLine = async (data: unknown) => {
 
   const processedData = {
     ...validationResult.data,
-    icon:
-      validationResult.data.icon !== undefined
-        ? validationResult.data.icon
+    dark_icon:
+      validationResult.data.DarkIcon !== undefined
+        ? validationResult.data.DarkIcon
         : null,
+    LightIcon:
+      validationResult.data.LightIcon !== undefined
+        ? validationResult.data.LightIcon
+        : null,
+    company_info: Number(validationResult.data.company_info)
   };
 
   try {

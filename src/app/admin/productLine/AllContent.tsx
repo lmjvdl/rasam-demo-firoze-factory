@@ -11,12 +11,12 @@ import { columns } from "./ColumnsData";
 import { ProductLineUpdateSchema } from "./hooks/useUpdate";
 import ProductLineTable from "./ProductLineTable";
 import useUpdate from "./hooks/useUpdate";
-import useIcons from "@/hooks/reactQueryApiHooks/useIcon";
-import useCompanyQuery from "./hooks/useCompanyList";
+import { useProductLineExtraOptions } from "./hooks/useProductLineExtraOptions";
+import { ProductLine } from "@/interfaces/admin/productLine";
 
 const AllContentProductLine: React.FC = () => {
   const [data, setData] = useState<ResponseSchema>(PrevDataInitial);
-  const [selectedRow, setSelectedRow] = useState<any>(null);
+  const [selectedRow, setSelectedRow] = useState<ProductLine>();
   const [viewOpen, setViewOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
@@ -24,23 +24,11 @@ const AllContentProductLine: React.FC = () => {
   const [totalData, setTotalData] = useState<number>(0);
   const [nextPage, setNextPage] = useState<null | string>(null);
 
+  const { companyList, iconList } = useProductLineExtraOptions();
+
   const getList = getProductLineList(pageNumber, 8, nextPage);
   const { deleteProductLineMutation } = useDelete();
   const { updateProductLineMutation } = useUpdate();
-  const iconList = useIcons().icons
-  ? useIcons().icons.map((icon) => ({
-    id: icon.id,
-    value: icon.id, 
-    label: icon.url, 
-  }))
-: [];
-const companyList = useCompanyQuery().data
-? useCompanyQuery().data.map((company) => ({
-    id: company.id,
-    value: company.id, 
-    label: company.name, 
-  }))
-: [];
 
   useEffect(() => {
     getList.mutate(
@@ -79,17 +67,17 @@ const companyList = useCompanyQuery().data
     getList.mutate({ page: newPage + 1, page_size: 8, url: nextPage });
   };
 
-  const handleView = (row: any) => {
+  const handleView = (row: ProductLine) => {
     setSelectedRow(row);
     setViewOpen(true);
   };
 
-  const handleEdit = (row: any) => {
+  const handleEdit = (row: ProductLine) => {
     setSelectedRow(row);
     setEditOpen(true);
   };
 
-  const handleDelete = (row: any) => {
+  const handleDelete = (row: ProductLine) => {
     setSelectedRow(row);
     setDeleteOpen(true);
   };
@@ -98,25 +86,26 @@ const companyList = useCompanyQuery().data
     if (selectedRow?.id) {
       deleteProductLineMutation.mutate(selectedRow.id, {
         onSuccess: () => {
-          setData(prevData => {
+          setData((prevData) => {
             if (prevData?.data) {
               return {
                 ...prevData,
                 data: {
                   ...prevData.data,
-                  results: prevData.data.results.filter(row => row.id !== selectedRow.id),
-                  count: prevData.data.count - 1
-                }
+                  results: prevData.data.results.filter(
+                    (row) => row.id !== selectedRow.id
+                  ),
+                  count: prevData.data.count - 1,
+                },
               };
             }
             return prevData;
           });
           setDeleteOpen(false);
-        }
+        },
       });
     }
   };
-
 
   const dynamicColumns = columns();
   const filteredColumnsForEdit = dynamicColumns.filter((col) => col.canEdit);

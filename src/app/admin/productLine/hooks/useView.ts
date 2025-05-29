@@ -45,7 +45,8 @@ const responseSchema = z.object({
         }),
         name: z.string(),
         code: z.string(),
-        icon: z.string(),
+        dark_icon: z.string(),
+        light_icon: z.string(),
       })
     ),
   }),
