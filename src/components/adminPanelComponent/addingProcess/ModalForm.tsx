@@ -45,7 +45,7 @@ const ModalForm: React.FC<ModalFormProps> = ({
     setErrorMessage("");
   };
 
-  const submitForm = async (data: any) => {
+  const submitForm = async (data: unknown) => {
     const response = await onSubmit(data);
     if (response.success) {
       handleClose();

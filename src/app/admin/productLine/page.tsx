@@ -13,7 +13,7 @@ export default function ProductLinePage() {
   const { icons, loading } = useIcons();
   const getListCompany = useCompanyQuery();
 
-  const handleCreateProductLine = async (data: any) => {
+  const handleCreateProductLine = async (data: unknown) => {
     const response = await createNewProductLine(data);
     if (response.success) {
       setRefreshKey(prev => prev + 1);

@@ -10,7 +10,7 @@ import AllContentPosition from "../position/AllContent";
 export default function PositionPage() {
     const [refreshKey, setRefreshKey] = useState(0);
 
-  const handleCreateDataType = async (data: any) => {
+  const handleCreateDataType = async (data: unknown) => {
     const response = await createNewPosition(data);
     if (response.success) {
       setRefreshKey(prev => prev + 1);

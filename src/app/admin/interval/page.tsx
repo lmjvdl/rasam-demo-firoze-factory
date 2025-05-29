@@ -9,7 +9,7 @@ import { useState } from "react";
 export default function IntervalPage() {
   const [refreshKey, setRefreshKey] = useState(0);
 
-  const handleCreateInterval = async (data: any) => {
+  const handleCreateInterval = async (data: unknown) => {
     const response = await createNewInterval(data);
     if (response.success) {
       setRefreshKey(prev => prev + 1);

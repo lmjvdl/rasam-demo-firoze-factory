@@ -36,7 +36,7 @@ const Form = ({
     formState: { errors, isSubmitting },
   } = useForm();
 
-  const submitForm = async (data: any) => {
+  const submitForm = async (data: unknown) => {
     try {
       const response = await onSubmit(data);
       if (!response.success) {

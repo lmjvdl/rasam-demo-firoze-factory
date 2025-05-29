@@ -9,7 +9,7 @@ import AllContentLiveTypes from "./AllContent";
 export default function LiveTypesPage() {
   const [refreshKey, setRefreshKey] = useState(0);
 
-  const handleCreateLiveType = async (data: any) => {
+  const handleCreateLiveType = async (data: unknown) => {
     const response = await createNewLiveType(data);
     if (response.success) {
       setRefreshKey(prev => prev + 1);

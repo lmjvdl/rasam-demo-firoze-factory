@@ -11,7 +11,7 @@ export default function FunctionParameterPage() {
   const [refreshKey, setRefreshKey] = useState(0);
   const getFunctionList = useFunctionQuery();
 
-  const handleCreateFunctionParameter = async (data: any) => {
+  const handleCreateFunctionParameter = async (data: unknown) => {
     const response = await createNewFunctionParameter(data);
     if (response.success) {
       setRefreshKey(prev => prev + 1);

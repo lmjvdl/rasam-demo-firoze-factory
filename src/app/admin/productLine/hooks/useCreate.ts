@@ -9,7 +9,7 @@ const productLineSchema = z.object({
   icon: z.number().nullable().optional(),
 });
 
-export const createNewProductLine = async (data: any) => {
+export const createNewProductLine = async (data: unknown) => {
   const dataWithCompanyAsNumber = {
     ...data,
     company_info: Number(data.company_info),

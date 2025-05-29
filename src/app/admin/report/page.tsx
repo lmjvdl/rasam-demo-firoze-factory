@@ -35,7 +35,7 @@ export default function ReportPage() {
     productLinePartUrls.listProductLinePart
   );
 
-  const handleCreateReport = async (data: any) => {
+  const handleCreateReport = async (data: unknown) => {
     const response = await createNewReport(data);
     if (response.success) {
       setRefreshKey((prev) => prev + 1);

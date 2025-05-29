@@ -9,7 +9,7 @@ import { useState } from "react";
 export default function InputItemPage() {
   const [refreshKey, setRefreshKey] = useState(0);
 
-  const handleCreateInputItem = async (data: any) => {
+  const handleCreateInputItem = async (data: unknown) => {
     const response = await createNewInputItem(data);
     if (response.success) {
       setRefreshKey(prev => prev + 1);

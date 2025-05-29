@@ -13,7 +13,7 @@ export default function GroupPage() {
   const getPermissionList = usePermissionQuery();
   const getUserList = useUserQuery();
 
-  const handleCreateGroup = async (data: any) => {
+  const handleCreateGroup = async (data: unknown) => {
     const response = await createNewGroup(data);
     if (response.success) {
       setRefreshKey(prev => prev + 1);

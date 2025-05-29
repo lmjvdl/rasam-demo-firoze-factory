@@ -9,7 +9,7 @@ import { useState } from "react";
 export default function ShiftPage() {
   const [refreshKey, setRefreshKey] = useState(0);
 
-  const handleCreateShift = async (data: any) => {
+  const handleCreateShift = async (data: unknown) => {
     const response = await createNewShift(data);
     if (response.success) {
       setRefreshKey((prev) => prev + 1);

@@ -9,7 +9,7 @@ import AllContentDataType from "./AllContent";
 export default function DataTypePage() {
   const [refreshKey, setRefreshKey] = useState(0);
 
-  const handleCreateDataType = async (data: any) => {
+  const handleCreateDataType = async (data: unknown) => {
     const response = await createNewDataType(data);
     if (response.success) {
       setRefreshKey(prev => prev + 1);

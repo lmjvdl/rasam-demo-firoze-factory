@@ -17,7 +17,7 @@ export default function UserPage() {
     productLineUrls.listProductLine
   );
 
-  const handleCreateUser = async (data: any) => {
+  const handleCreateUser = async (data: unknown) => {
     const response = await createNewUser(data);
     if (response.success) {
       setRefreshKey((prev) => prev + 1);

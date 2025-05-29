@@ -9,7 +9,7 @@ import { useState } from "react";
 export default function ContactsPage() {
   const [refreshKey, setRefreshKey] = useState(0);
 
-  const handleCreateContact = async (data: any) => {
+  const handleCreateContact = async (data: unknown) => {
     const response = await createNewContact(data);
     if (response.success) {
       setRefreshKey(prev => prev + 1);

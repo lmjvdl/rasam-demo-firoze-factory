@@ -18,7 +18,7 @@ export default function ProductLinePartPage() {
     productLineUrls.listProductLine
   )
 
-  const handleCreateProductLinePart = async (data: any) => {
+  const handleCreateProductLinePart = async (data: unknown) => {
     const response = await createNewProductLinePart(data);
     if (response.success) {
       setRefreshKey(prev => prev + 1);

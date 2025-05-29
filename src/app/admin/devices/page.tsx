@@ -21,7 +21,7 @@ export default function DevicePage() {
     dataTypeUrls.listDataType
   );
 
-  const handleCreateDevice = async (data: any) => {
+  const handleCreateDevice = async (data: unknown) => {
     const response = await createNewDevice(data);
     if (response.success) {
       setRefreshKey((prev) => prev + 1);

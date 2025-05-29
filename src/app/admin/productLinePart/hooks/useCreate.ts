@@ -9,7 +9,7 @@ const productLinePartSchema = z.object({
   icon: z.number().nullable().optional(),
 });
 
-export const createNewProductLinePart = async (data: any) => {
+export const createNewProductLinePart = async (data: unknown) => {
   const dataWithProductLineAsNumber = {
     ...data,
     product_line_info: Number(data.product_line_info),

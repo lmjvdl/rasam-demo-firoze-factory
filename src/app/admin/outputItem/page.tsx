@@ -9,7 +9,7 @@ import { useState } from "react";
 export default function OutputItemPage() {
   const [refreshKey, setRefreshKey] = useState(0);
 
-  const handleCreateOutputItem = async (data: any) => {
+  const handleCreateOutputItem = async (data: unknown) => {
     const response = await createNewOutputItem(data);
     if (response.success) {
       setRefreshKey(prev => prev + 1);

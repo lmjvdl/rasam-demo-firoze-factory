@@ -9,7 +9,7 @@ import MainCard from "@/components/customContiner/MainCard";
 export default function FunctionPage() {
   const [refreshKey, setRefreshKey] = useState(0);
 
-  const handleCreateFunction = async (data: any) => {
+  const handleCreateFunction = async (data: unknown) => {
     const response = await createNewFunction(data);
     if (response.success) {
       setRefreshKey(prev => prev + 1);
