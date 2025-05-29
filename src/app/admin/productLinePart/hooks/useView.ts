@@ -45,7 +45,12 @@ const responseSchema = z.object({
         }),
         name: z.string(),
         code: z.string(),
-        icon: z.string(),
+        light_icon: z.string(),
+        dark_icon: z.string(),
+        live_type: z.object({
+          id: z.number(),
+          name: z.string(),
+        }).nullable(),
       })
     ),
   }),

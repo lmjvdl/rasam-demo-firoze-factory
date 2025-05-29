@@ -6,17 +6,12 @@ import MainCard from "@/components/customContiner/MainCard";
 import { createNewProductLinePart } from "./hooks/useCreate";
 import AllContentProductLinePart from "./AllContent";
 import useIcons from "@/hooks/reactQueryApiHooks/useIcon";
-import useDataQuery from "@/hooks/adminDataQuery/useDataQuery";
-import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
-import productLineUrls from "@/utils/url/adminPanel/productLineUrl";
+import { useProductLinePartExtraOptions } from "./hooks/useProductLinePartExtraOptions";
 
 export default function ProductLinePartPage() {
   const [refreshKey, setRefreshKey] = useState(0);
   const { icons, loading } = useIcons();
-  const getListProductLine = useDataQuery(
-    allQueryKeys.adminPanel.productLinePart.product_line_list,
-    productLineUrls.listProductLine
-  )
+  const { productLineOptions, liveTypeOptions } = useProductLinePartExtraOptions();
 
   const handleCreateProductLinePart = async (data: unknown) => {
     const response = await createNewProductLinePart(data);
@@ -30,40 +25,50 @@ export default function ProductLinePartPage() {
   return (
     <MainCard>
       <ModalForm
-        buttonText="افزودن خط تولید جزئی جدید"
+        buttonText="افزودن خط تولید جزیی جدید"
         formFields={[
           {
-            name: "product_line_info",
+            name: "product_line",
             label: "خط تولید",
             type: "select",
             required: true,
-            options: getListProductLine.data?.map((productLine) => ({
-              label: productLine.name,
-              value: productLine.id,
-            })) || [],
+            options: productLineOptions,
+          },
+          {
+            name: "live_type",
+            label: "نوع داده لایو",
+            type: "select",
+            required: true,
+            options: liveTypeOptions,
           },
           {
             name: "name",
             label: "نام",
             type: "text",
-            required: true
+            required: true,
           },
           {
             name: "code",
             label: "کد",
             type: "text",
-            required: true
+            required: true,
           },
           {
-            name: "icon",
-            label: "آیکون",
+            name: "LightIcon",
+            label: "آیکون تم لایت",
             type: "icon",
-            required: false
-          }
+            required: false,
+          },
+          {
+            name: "DarkIcon",
+            label: "آیکون تم دارک",
+            type: "icon",
+            required: false,
+          },
         ]}
         onSubmit={handleCreateProductLinePart}
-        icons={icons}
         loadingIcons={loading}
+        icons={icons}
       />
       <AllContentProductLinePart key={refreshKey} />
     </MainCard>

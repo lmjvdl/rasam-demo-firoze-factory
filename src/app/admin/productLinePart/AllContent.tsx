@@ -11,14 +11,12 @@ import { columns } from "./ColumnsData";
 import { ProductLinePartUpdateSchema } from "./hooks/useUpdate";
 import ProductLinePartTable from "./ProductLinePartTable";
 import useUpdateProductLinePart from "./hooks/useUpdate";
-import useIcons from "@/hooks/reactQueryApiHooks/useIcon";
-import useDataQuery from "@/hooks/adminDataQuery/useDataQuery";
-import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
-import productLineUrls from "@/utils/url/adminPanel/productLineUrl";
+import { ProductLinePart } from "@/interfaces/admin/productLinePart";
+import { useProductLinePartExtraOptions } from "./hooks/useProductLinePartExtraOptions";
 
 const AllContentProductLinePart: React.FC = () => {
   const [data, setData] = useState<ResponseSchema>(PrevDataInitial);
-  const [selectedRow, setSelectedRow] = useState<any>(null);
+  const [selectedRow, setSelectedRow] = useState<ProductLinePart>();
   const [viewOpen, setViewOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
@@ -26,29 +24,11 @@ const AllContentProductLinePart: React.FC = () => {
   const [totalData, setTotalData] = useState<number>(0);
   const [nextPage, setNextPage] = useState<null | string>(null);
 
+  const { productLineList, iconList, liveTypeList } = useProductLinePartExtraOptions();
+
   const getList = getProductLinePartList(pageNumber, 8, nextPage);
   const { deleteProductLinePartMutation } = useDelete();
   const { updateProductLinePartMutation } = useUpdateProductLinePart();
-  const iconList = useIcons().icons
-    ? useIcons().icons.map((icon) => ({
-        id: icon.id,
-        value: icon.id,
-        label: icon.url,
-      }))
-    : [];
-  const productLineList = useDataQuery(
-    allQueryKeys.adminPanel.productLinePart.product_line_list,
-    productLineUrls.listProductLine
-  ).data
-    ? useDataQuery(
-        allQueryKeys.adminPanel.productLinePart.product_line_list,
-        productLineUrls.listProductLine
-      ).data.map((product_line) => ({
-        id: product_line.id,
-        value: product_line.id,
-        label: product_line.name,
-      }))
-    : [];
 
   useEffect(() => {
     getList.mutate(
@@ -65,7 +45,6 @@ const AllContentProductLinePart: React.FC = () => {
 
   const handleSaveEdit = (updatedRow: ProductLinePartUpdateSchema) => {
     setData((prevData) => {
-      console.log(updatedRow)
       if (prevData?.data) {
         updateProductLinePartMutation.mutate(updatedRow);
 
@@ -88,17 +67,17 @@ const AllContentProductLinePart: React.FC = () => {
     getList.mutate({ page: newPage + 1, page_size: 8, url: nextPage });
   };
 
-  const handleView = (row: any) => {
+  const handleView = (row: ProductLinePart) => {
     setSelectedRow(row);
     setViewOpen(true);
   };
 
-  const handleEdit = (row: any) => {
+  const handleEdit = (row: ProductLinePart) => {
     setSelectedRow(row);
     setEditOpen(true);
   };
 
-  const handleDelete = (row: any) => {
+  const handleDelete = (row: ProductLinePart) => {
     setSelectedRow(row);
     setDeleteOpen(true);
   };
@@ -157,8 +136,8 @@ const AllContentProductLinePart: React.FC = () => {
         onSave={handleSaveEdit}
         rowData={selectedRow}
         titles={filteredColumnsForEdit}
-        extraOptions={{ iconList, productLineList }}
-        objectAttributes={["product_line"]}
+        extraOptions={{ iconList, productLineList, liveTypeList }}
+        objectAttributes={["product_line", "live_type"]}
       />
       <DeleteDialog
         open={deleteOpen}
@@ -166,7 +145,6 @@ const AllContentProductLinePart: React.FC = () => {
         onConfirm={handleConfirmDelete}
         rowData={selectedRow}
         titles={dynamicColumns}
-        objectAttributes={["product_line"]}
       />
     </>
   );

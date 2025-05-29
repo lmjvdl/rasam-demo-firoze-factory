@@ -3,7 +3,9 @@ export interface ProductLinePart {
     product_line: { id: number; name: string } | null;
     name: string;
     code: string;
-    icon: string;
+    light_icon: string;
+    dark_icon: string;
+    live_type: { id: number; name: string } | null;
 }
 
 export interface ProductLinePartTableProps {

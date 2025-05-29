@@ -59,6 +59,7 @@ const allQueryKeys = {
       delete: ["ADMIN_PANEL", "PRODUCT_LINE_PART", "DELETE"],
       update: ["ADMIN_PANEL", "PRODUCT_LINE_PART", "UPDATE"],
       product_line_list: ["ADMIN_PANEL", "PRODUCT_LINE_PART", "VIEW", "PRODUCT_LINE_LIST"],
+      live_type_list: ["ADMIN_PANEL", "PRODUCT_LINE_PART", "VIEW", "LIVE_TYPE_LIST"],
     },
     icons: {
       list: ["ADMIN_PANEL", "ICONS", "VIEW"],

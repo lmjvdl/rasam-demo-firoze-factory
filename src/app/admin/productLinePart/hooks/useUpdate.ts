@@ -10,7 +10,9 @@ export type ProductLinePartUpdateSchema = {
   product_line: { id: number; name: string };
   name: string;
   code: string;
-  icon: string;
+  light_icon: string;
+  dark_icon: string;
+  live_type: { id: number; name: string } | null;
 };
 
 const useUpdateProductLinePart = () => {
@@ -18,13 +20,15 @@ const useUpdateProductLinePart = () => {
   const { showToast } = useToast();
 
   const updateProductLinePartMutation = useMutation<unknown, Error, ProductLinePartUpdateSchema>({
-    mutationFn: async ({ id, product_line, icon, ...updatedData }) => {
+    mutationFn: async ({ id, product_line, light_icon, dark_icon, live_type, ...updatedData }) => {
       fetchWithErrorWithAlarm(productLinePartUrls.editProductLinePart(id), {
         method: "PUT",
         body: JSON.stringify({
           ...updatedData,
           product_line_info: extractId(product_line),
-          icon: icon === "" ? null : Number(icon)
+          light_icon: light_icon === "" ? null : Number(light_icon),
+          dark_icon: dark_icon === "" ? null : Number(dark_icon),
+          live_type_info: live_type !== null ? extractId(live_type) : null 
         }),
       });
     },

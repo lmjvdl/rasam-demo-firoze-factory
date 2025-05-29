@@ -3,19 +3,18 @@ import productLinePartUrls from "@/utils/url/adminPanel/productLinePartUrl";
 import { z } from "zod";
 
 const productLinePartSchema = z.object({
-  product_line_info: z.number(),
+  product_line: z.string(),
   name: z.string(),
   code: z.string(),
-  icon: z.number().nullable().optional(),
+  DarkIcon: z.number().nullable().optional(),
+  LightIcon: z.number().nullable().optional(),
+  live_type: z.string()
 });
 
 export const createNewProductLinePart = async (data: unknown) => {
-  const dataWithProductLineAsNumber = {
-    ...data,
-    product_line_info: Number(data.product_line_info),
-  };
+  console.log(data)
   const validationResult = productLinePartSchema.safeParse(
-    dataWithProductLineAsNumber
+    data
   );
 
   if (!validationResult.success) {
@@ -24,10 +23,16 @@ export const createNewProductLinePart = async (data: unknown) => {
 
   const processedData = {
     ...validationResult.data,
-    icon:
-      validationResult.data.icon !== undefined
-        ? validationResult.data.icon
+    DarkIcon:
+      validationResult.data.DarkIcon !== undefined
+        ? validationResult.data.DarkIcon
         : null,
+    LightIcon:
+      validationResult.data.LightIcon !== undefined
+        ? validationResult.data.LightIcon
+        : null,
+    live_type_info:  Number(validationResult.data.live_type),
+    product_line_info:  Number(validationResult.data.product_line)
   };
 
   try {

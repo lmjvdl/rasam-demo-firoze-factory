@@ -2,10 +2,21 @@ import { ProductLinePart } from "@/interfaces/admin/productLinePart";
 
 export const columns = () => [
     {
-        id: "icon",
-        label: "آیکون",
+        id: "light_icon",
+        label: "آیکون تم لایت",
         required: false,
-        showOnTable: true,
+        showOnTable: false,
+        isImage: true,
+        canEdit: true,
+        isAdditionalAction: false,
+        isIconSelect: true, 
+        optionsKey: "iconList",
+    },
+    {
+        id: "dark_icon",
+        label: "آیکون تم دارک",
+        required: false,
+        showOnTable: false,
         isImage: true,
         canEdit: true,
         isAdditionalAction: false,
@@ -36,6 +47,17 @@ export const columns = () => [
         isAdditionalAction: false,
         optionsKey: "productLineList",
         render: (row: ProductLinePart) => row?.product_line?.name || "نامشخص",
+        isSingleSelect: true,
+    },
+    {
+        id: "live_type",
+        label: "نوع داده لایو",
+        required: true,
+        showOnTable: true,
+        canEdit: true,
+        isAdditionalAction: false,
+        optionsKey: "liveTypeList",
+        render: (row: ProductLinePart) => row?.live_type?.name || "نامشخص",
         isSingleSelect: true,
     },
     {
