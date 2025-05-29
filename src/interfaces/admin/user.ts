@@ -10,6 +10,7 @@ export interface User {
       id: number;
       name: string;
     }[] | [];
+    position: number | null;
     product_lines: { id: number; name: string }[] | [];
   }
 

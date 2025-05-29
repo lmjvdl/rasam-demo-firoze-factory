@@ -1,5 +1,6 @@
 import { fetchWithErrorForCreate } from "@/utils/dataFetching/fetchWithError";
 import userUrls from "@/utils/url/adminPanel/userUrl";
+import { position } from "stylis";
 import { z } from "zod";
 
 const userSchema = z.object({
@@ -13,6 +14,9 @@ const userSchema = z.object({
   is_manager: z.boolean().default(false),
   is_superuser: z.boolean().default(false),
   is_admin: z.boolean().default(false),
+  groups: z.array(z.number()),
+  position: z.number(),
+  product_line: z.array(z.number()),
 });
 
 export const createNewUser = async (data: unknown) => {

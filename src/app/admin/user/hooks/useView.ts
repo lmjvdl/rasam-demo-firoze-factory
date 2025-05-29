@@ -4,6 +4,7 @@ import fetchWithError from "@/utils/dataFetching/fetchWithError";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import { useToast } from "@/hooks/ui/useToast";
 import userUrls from "@/utils/url/adminPanel/userUrl";
+import { position } from "stylis";
 
 // Updated function to handle GET requests
 export default function getUerList(pages: number, pageSize: number, URL: string | null) {
@@ -54,12 +55,13 @@ const responseSchema = z.object({
               name: z.string(),
             })
           ),
+          position: z.nullable(z.number()),
           product_lines: z.array(
             z.object({
               id: z.number(),
               name: z.string()
             }))
-          })
+          }),
       ),
     }),
     status_code: z.number(),
