@@ -1,7 +1,7 @@
 export interface Group {
     id: number; // ReadOnly
     name: string;
-    permissions?: { id: number; name: string }[] | [];// uniqueItems: true
+    permissions?: { id: number; name: string }[] | [];
 }
   
 export interface GroupTableProps {

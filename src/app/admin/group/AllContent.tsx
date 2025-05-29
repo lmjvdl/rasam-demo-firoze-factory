@@ -11,11 +11,12 @@ import { columns } from "./ColumnsData";
 import { GroupUpdateSchema } from "./hooks/useUpdate";
 import GroupTable from "./GroupTable";
 import useUpdate from "./hooks/useUpdate";
-import usePermissionQuery from "./hooks/usePermissionList";
+import { useGroupExtraOptions } from "./hooks/useGroupExtraOptions";
+import { Group } from "@/interfaces/admin/group";
 
 const AllContentGroup: React.FC = () => {
   const [data, setData] = useState<ResponseSchema>(PrevDataInitial);
-  const [selectedRow, setSelectedRow] = useState<any>(null);
+  const [selectedRow, setSelectedRow] = useState<Group>();
   const [viewOpen, setViewOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
@@ -23,17 +24,11 @@ const AllContentGroup: React.FC = () => {
   const [totalData, setTotalData] = useState<number>(0);
   const [nextPage, setNextPage] = useState<null | string>(null);
 
+  const { permissionList } = useGroupExtraOptions();
+
   const getList = getGroupList(pageNumber, 8, nextPage);
   const { deleteGroupMutation } = useDelete();
   const { updateGroupMutation } = useUpdate();
-  const permissionList = usePermissionQuery().data
-  ? usePermissionQuery().data.map((permission) => ({
-      id: permission.id,
-      value: permission.id, 
-      label: permission.translate, 
-    }))
-  : [];
-
 
   useEffect(() => {
     getList.mutate(
@@ -72,17 +67,17 @@ const AllContentGroup: React.FC = () => {
     getList.mutate({ page: newPage + 1, page_size: 8, url: nextPage });
   };
 
-  const handleView = (row: any) => {
+  const handleView = (row: Group) => {
     setSelectedRow(row);
     setViewOpen(true);
   };
 
-  const handleEdit = (row: any) => {
+  const handleEdit = (row: Group) => {
     setSelectedRow(row);
     setEditOpen(true);
   };
 
-  const handleDelete = (row: any) => {
+  const handleDelete = (row: Group) => {
     setSelectedRow(row);
     setDeleteOpen(true);
   };
@@ -91,29 +86,29 @@ const AllContentGroup: React.FC = () => {
     if (selectedRow?.id) {
       deleteGroupMutation.mutate(selectedRow.id, {
         onSuccess: () => {
-          setData(prevData => {
+          setData((prevData) => {
             if (prevData?.data) {
               return {
                 ...prevData,
                 data: {
                   ...prevData.data,
-                  results: prevData.data.results.filter(row => row.id !== selectedRow.id),
-                  count: prevData.data.count - 1
-                }
+                  results: prevData.data.results.filter(
+                    (row) => row.id !== selectedRow.id
+                  ),
+                  count: prevData.data.count - 1,
+                },
               };
             }
             return prevData;
           });
           setDeleteOpen(false);
-        }
+        },
       });
     }
   };
 
-
   const dynamicColumns = columns();
   const filteredColumnsForEdit = dynamicColumns.filter((col) => col.canEdit);
-
 
   return (
     <>
@@ -134,7 +129,7 @@ const AllContentGroup: React.FC = () => {
         rowData={selectedRow}
         titles={dynamicColumns}
         arrayAttributes={{
-          permissions: 'name', 
+          permissions: "name",
         }}
       />
       <EditDialog
@@ -144,7 +139,7 @@ const AllContentGroup: React.FC = () => {
         rowData={selectedRow}
         titles={filteredColumnsForEdit}
         extraOptions={{ permissionList }}
-        arrayObjectAttributes={['permissions']} 
+        arrayObjectAttributes={["permissions"]}
       />
       <DeleteDialog
         open={deleteOpen}

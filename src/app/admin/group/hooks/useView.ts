@@ -57,13 +57,7 @@ export type ResponseSchema = z.infer<typeof responseSchema>;
 function sanitizer(pollutedData: unknown) {
   try {
     const refinedData = responseSchema.parse(pollutedData);
-
-    const transformedResults = refinedData.data.results.map((item) => ({
-      ...item,
-      permissions: item.permissions ? item.permissions : { id: 0, name: "نامشخص" },
-    }));
-
-    return { ...refinedData, data: { ...refinedData.data, results: transformedResults } };
+    return refinedData;
   } catch (err) {
     const errorMessage =
       err instanceof Error && err.message

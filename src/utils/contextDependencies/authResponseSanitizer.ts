@@ -35,7 +35,7 @@ const authResponseSchema = z
       refreshToken: val.data.tokens.refresh,
       lastLogin: val.data.last_login,
       permissions: val.data.permissions.map((perm) => perm.id),
-      isAdmin: val.data.is_superuser,
+      is_superuser: val.data.is_superuser,
     },
   }));
 

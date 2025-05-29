@@ -21,6 +21,7 @@ export const useAuthStore = create(
 export const updateUser = (authResponse: AuthResponse) => {
   useAuthStore.setState({
     ...authResponse.data,
+    isAdmin: authResponse.data.is_superuser,
     isLoggedIn: true,
   });
 };
