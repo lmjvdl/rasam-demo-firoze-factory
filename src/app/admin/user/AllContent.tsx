@@ -23,7 +23,7 @@ const AllContentUser: React.FC = () => {
   const [totalData, setTotalData] = useState<number>(0);
   const [nextPage, setNextPage] = useState<null | string>(null);
 
-  const { productLineList, groupList } = useUserExtraOptions();
+  const { productLineList, groupList, positionList } = useUserExtraOptions();
 
   const getList = getUserList(pageNumber, 8, nextPage);
   const { deleteUserMutation } = useDelete();
@@ -137,7 +137,7 @@ const AllContentUser: React.FC = () => {
         onSave={handleSaveEdit}
         rowData={selectedRow}
         titles={filteredColumnsForEdit}
-        extraOptions={{ productLineList, groupList }}
+        extraOptions={{ productLineList, groupList, positionList }}
         arrayObjectAttributes={["product_line", "groups"]}
       />
       <DeleteDialog

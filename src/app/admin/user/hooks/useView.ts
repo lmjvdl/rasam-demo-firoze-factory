@@ -55,7 +55,10 @@ const responseSchema = z.object({
               name: z.string(),
             })
           ),
-          position: z.nullable(z.number()),
+          position: z.object({
+            id: z.number(),
+            name: z.string(),
+          }).nullable(),
           product_lines: z.array(
             z.object({
               id: z.number(),

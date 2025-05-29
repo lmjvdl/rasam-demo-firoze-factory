@@ -54,10 +54,13 @@ export const columns = () => [
         id: "position",
         label: "سمت کاری",
         isActionColumn: false,
+        isSingleSelect: true, 
+        optionsKey: "positionList",
         showOnTable: true,
         required: false,
         canEdit: true,
         isAdditionalAction: false,
+        render: (row: User) => row?.position?.name || "نامشخص",
     },
     {
         id: "groups",
