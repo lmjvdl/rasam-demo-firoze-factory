@@ -88,6 +88,7 @@ const allQueryKeys = {
       list: ["ADMIN_PANEL", "FUNCTION_PARAMETER", "VIEW"],
       delete: ["ADMIN_PANEL", "FUNCTION_PARAMETER", "DELETE"],
       update: ["ADMIN_PANEL", "FUNCTION_PARAMETER", "UPDATE"],
+      function_list: ["ADMIN_PANEL", "FUNCTION_PARAMETER", "VIEW", "FUNCTION_LIST"],
     },
     contacts: {
       list: ["ADMIN_PANEL", "CONTACTS", "VIEW"],

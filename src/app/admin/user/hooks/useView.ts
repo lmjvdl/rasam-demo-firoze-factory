@@ -54,7 +54,6 @@ const responseSchema = z.object({
               name: z.string(),
             })
           ),
-          is_active: z.boolean(),
           product_lines: z.array(
             z.object({
               id: z.number(),

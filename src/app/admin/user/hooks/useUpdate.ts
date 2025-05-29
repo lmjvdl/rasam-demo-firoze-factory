@@ -11,7 +11,6 @@ export type UserUpdateSchema = {
     password?: string;
     first_name: string;
     last_name: string;
-    is_active: boolean;
     groups: { id: number; name: string }[];
     product_lines: { id: number; name: string; }[];
   };

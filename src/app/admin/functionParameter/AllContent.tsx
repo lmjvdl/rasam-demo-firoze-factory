@@ -11,11 +11,12 @@ import useUpdate from "./hooks/useUpdate";
 import ViewDialog from "@/components/adminPanelComponent/viewProcess/ViewDialog";
 import EditDialog from "@/components/adminPanelComponent/viewProcess/EditDialog";
 import DeleteDialog from "@/components/adminPanelComponent/viewProcess/DeleteDialog";
-import useFunctionQuery from "./hooks/useFunctionList";
+import { useFunctionParameterExtraOptions } from "./hooks/useFunctionParameterExtraOptions";
+import { FunctionParameter } from "@/interfaces/admin/functionParameter";
 
 const AllContentFunctionParameter: React.FC = () => {
   const [data, setData] = useState<ResponseSchema>(PrevDataInitial);
-  const [selectedRow, setSelectedRow] = useState<any>(null);
+  const [selectedRow, setSelectedRow] = useState<FunctionParameter>();
   const [viewOpen, setViewOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
@@ -23,16 +24,11 @@ const AllContentFunctionParameter: React.FC = () => {
   const [totalData, setTotalData] = useState<number>(0);
   const [nextPage, setNextPage] = useState<null | string>(null);
 
+  const { functionList } = useFunctionParameterExtraOptions();
+
   const getList = getFunctionParameterList(pageNumber, 8, nextPage);
   const { deleteFunctionParameterMutation } = useDelete();
   const { updateFunctionParameterMutation } = useUpdate();
-  const functionList = useFunctionQuery().data
-    ? useFunctionQuery().data.map((func) => ({
-        id: func.id,
-        value: func.id,
-        label: func.name,
-      }))
-    : [];
 
   useEffect(() => {
     getList.mutate(
@@ -71,17 +67,17 @@ const AllContentFunctionParameter: React.FC = () => {
     getList.mutate({ page: newPage + 1, page_size: 8, url: nextPage });
   };
 
-  const handleView = (row: any) => {
+  const handleView = (row: FunctionParameter) => {
     setSelectedRow(row);
     setViewOpen(true);
   };
 
-  const handleEdit = (row: any) => {
+  const handleEdit = (row: FunctionParameter) => {
     setSelectedRow(row);
     setEditOpen(true);
   };
 
-  const handleDelete = (row: any) => {
+  const handleDelete = (row: FunctionParameter) => {
     setSelectedRow(row);
     setDeleteOpen(true);
   };

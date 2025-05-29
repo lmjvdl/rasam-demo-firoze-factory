@@ -51,15 +51,6 @@ export const columns = () => [
         isAdditionalAction: false,
     },
     {
-        id: "is_active",
-        label: "وضعیت",
-        required: true,
-        showOnTable: false,
-        isActionColumn: false,
-        canEdit: true,
-        isAdditionalAction: false,
-    },
-    {
         id: "groups",
         label: "گروه ها",
         required: false,

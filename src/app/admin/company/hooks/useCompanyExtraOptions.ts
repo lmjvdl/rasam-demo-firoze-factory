@@ -5,17 +5,11 @@ export const useCompanyExtraOptions = () => {
 
   const iconList = icons?.map((icon) => ({
     id: icon.id,
-    value: icon.id,
+    value: icon.url,
     label: icon.url,
   })) ?? [];
 
-  const iconOptions = iconList.map(({ label, value }) => ({
-    label,
-    value,
-  }));
-
   return {
     iconList,
-    iconOptions,
   };
 };

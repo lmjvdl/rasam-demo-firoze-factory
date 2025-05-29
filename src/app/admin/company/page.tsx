@@ -5,13 +5,11 @@ import ModalForm from "@/components/adminPanelComponent/addingProcess/ModalForm"
 import MainCard from "@/components/customContiner/MainCard";
 import AllContentCompany from "./AllContent";
 import { createNewCompany } from "./hooks/useCreate";
-import { useCompanyExtraOptions } from "./hooks/useCompanyExtraOptions";
 import useIcons from "@/hooks/reactQueryApiHooks/useIcon";
 
 export default function CompanyPage() {
   const [refreshKey, setRefreshKey] = useState(0);
-  const { iconOptions } = useCompanyExtraOptions();
-  const { loading } = useIcons();
+  const { icons, loading } = useIcons();
 
   const handleCreateCompany = async (data: unknown) => {
     const response = await createNewCompany(data);
@@ -50,18 +48,17 @@ export default function CompanyPage() {
             label: "لوگو تم لایت",
             type: "icon",
             required: true,
-            options: iconOptions,
           },
           {
             name: "dark_logo",
             label: "لوگو تم دارک",
             type: "icon",
             required: true,
-            options: iconOptions,
           },
         ]}
         onSubmit={handleCreateCompany}
         loadingIcons={loading}
+        icons={icons}
       />
       <AllContentCompany key={refreshKey} />
     </MainCard>

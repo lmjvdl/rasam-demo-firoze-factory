@@ -5,17 +5,11 @@ import ModalForm from "@/components/adminPanelComponent/addingProcess/ModalForm"
 import MainCard from "@/components/customContiner/MainCard";
 import AllContentUser from "./AllContent";
 import { createNewUser } from "./hooks/useCreate";
-import productLineUrls from "@/utils/url/adminPanel/productLineUrl";
-import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
-import useDataQuery from "@/hooks/adminDataQuery/useDataQuery";
+import { useUserExtraOptions } from "./hooks/useUserExtraOptions";
 
 export default function UserPage() {
   const [refreshKey, setRefreshKey] = useState(0);
-
-  const getProductLineList = useDataQuery(
-    allQueryKeys.adminPanel.alarm.function_list,
-    productLineUrls.listProductLine
-  );
+  const { productLineOptions, groupOptions, positionOptions } = useUserExtraOptions();
 
   const handleCreateUser = async (data: unknown) => {
     const response = await createNewUser(data);
@@ -78,11 +72,21 @@ export default function UserPage() {
             label: "خط تولیدها",
             type: "multiselect",
             required: false,
-            options:
-              getProductLineList.data?.map((product_line) => ({
-                label: product_line.name,
-                value: product_line.id,
-              })) || [],
+            options: productLineOptions,
+          },
+          {
+            name: "groups",
+            label: "گروه‌ها",
+            type: "multiselect",
+            required: false,
+            options: groupOptions,
+          },
+          {
+            name: "position",
+            label: "موقعیت",
+            type: "select",
+            required: false,
+            options: positionOptions,
           },
         ]}
         onSubmit={handleCreateUser}

@@ -10,14 +10,12 @@ import { PrevDataInitial } from "@/interfaces/general/general";
 import { columns } from "./ColumnsData";
 import { UserUpdateSchema, useUpdate } from "./hooks/useUpdate";
 import UserTable from "./UserTable";
-import useDataQuery from "@/hooks/adminDataQuery/useDataQuery";
-import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
-import productLineUrls from "@/utils/url/adminPanel/productLineUrl";
-import groupUrls from "@/utils/url/adminPanel/groupUrl";
+import { useUserExtraOptions } from "./hooks/useUserExtraOptions";
+import { User } from "@/interfaces/admin/user";
 
 const AllContentUser: React.FC = () => {
   const [data, setData] = useState<ResponseSchema>(PrevDataInitial);
-  const [selectedRow, setSelectedRow] = useState<any>(null);
+  const [selectedRow, setSelectedRow] = useState<User>();
   const [viewOpen, setViewOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
@@ -25,39 +23,13 @@ const AllContentUser: React.FC = () => {
   const [totalData, setTotalData] = useState<number>(0);
   const [nextPage, setNextPage] = useState<null | string>(null);
 
+  const { productLineList, groupList } = useUserExtraOptions();
+
   const getList = getUserList(pageNumber, 8, nextPage);
   const { deleteUserMutation } = useDelete();
   const { updateUserMutation } = useUpdate();
   const dynamicColumns = columns();
   const filteredColumnsForEdit = dynamicColumns.filter((col) => col.canEdit);
-
-  const productLineList = useDataQuery(
-    allQueryKeys.adminPanel.productLine.list,
-    productLineUrls.listProductLine
-  ).data
-    ? useDataQuery(
-        allQueryKeys.adminPanel.productLine.list,
-        productLineUrls.listProductLine
-      ).data.map((product_line) => ({
-        id: product_line.id,
-        value: product_line.id,
-        label: product_line.name,
-      }))
-    : [];
-
-  const groupList = useDataQuery(
-    allQueryKeys.adminPanel.group.list,
-    groupUrls.listGroup
-  ).data
-    ? useDataQuery(
-        allQueryKeys.adminPanel.group.list,
-        groupUrls.listGroup
-      ).data.map((group) => ({
-        id: group.id,
-        value: group.id,
-        label: group.name,
-      }))
-    : [];
 
   useEffect(() => {
     getList.mutate(
@@ -90,22 +62,23 @@ const AllContentUser: React.FC = () => {
       return prevData || PrevDataInitial;
     });
   };
+
   const handlePagination = (newPage: number) => {
     setPageNumber(newPage);
     getList.mutate({ page: newPage + 1, page_size: 8, url: nextPage });
   };
 
-  const handleView = (row: any) => {
+  const handleView = (row: User) => {
     setSelectedRow(row);
     setViewOpen(true);
   };
 
-  const handleEdit = (row: any) => {
+  const handleEdit = (row: User) => {
     setSelectedRow(row);
     setEditOpen(true);
   };
 
-  const handleDelete = (row: any) => {
+  const handleDelete = (row: User) => {
     setSelectedRow(row);
     setDeleteOpen(true);
   };
@@ -135,19 +108,6 @@ const AllContentUser: React.FC = () => {
     }
   };
 
-  // Handling the boolean value change (is_active)
-  const handleBooleanValueChange = (value: boolean) => {
-    setSelectedRow((prevSelectedRow: UserUpdateSchema | null) => {
-      if (prevSelectedRow) {
-        return {
-          ...prevSelectedRow,
-          is_active: value,
-        };
-      }
-      return prevSelectedRow;
-    });
-  };
-
   return (
     <>
       <UserTable
@@ -166,9 +126,6 @@ const AllContentUser: React.FC = () => {
         onClose={() => setViewOpen(false)}
         rowData={selectedRow}
         titles={dynamicColumns}
-        booleanAttributeName="is_active"
-        falseLabel="غیر فعال"
-        trueLabel="فعال"
         arrayAttributes={{
           product_line: "name",
           groups: "name",
@@ -180,15 +137,9 @@ const AllContentUser: React.FC = () => {
         onSave={handleSaveEdit}
         rowData={selectedRow}
         titles={filteredColumnsForEdit}
-        booleanAttributeName="is_active"
-        booleanValue={selectedRow?.is_active}
-        falseLabel="غیر فعال"
-        trueLabel="فعال"
         extraOptions={{ productLineList, groupList }}
-        onBooleanValueChange={handleBooleanValueChange}
-        arrayObjectAttributes={["productLineList", "groupList"]}
+        arrayObjectAttributes={["product_line", "groups"]}
       />
-
       <DeleteDialog
         open={deleteOpen}
         onClose={() => setDeleteOpen(false)}
