@@ -23,6 +23,15 @@ export const columns = () => [
         isAdditionalAction: false,
     },
     {
+        id: "is_shift",
+        label: "شیفت",
+        required: true,
+        showOnTable: true,
+        canEdit: true,
+        isAdditionalAction: false,
+        isSingleSelect: true,
+    },
+    {
         id: "actions",
         label: "عملیات",
         isActionColumn: true,

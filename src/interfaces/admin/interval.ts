@@ -1,7 +1,8 @@
-interface Interval {
+export interface Interval {
     id: number; // ReadOnly
     name: string;
     duration: string;
+    is_shift: boolean;
 }
   
 export interface IntervalTableProps {
@@ -13,5 +14,7 @@ export interface IntervalTableProps {
     count: number;
     page: number; 
     onPageChange: (newPage: number) => void;
+    booleanAttributeName: string;
+    trueLabel: string;
+    falseLabel: string;
 }
-  

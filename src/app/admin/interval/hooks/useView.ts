@@ -41,6 +41,7 @@ const responseSchema = z.object({
         id: z.number(),
         name: z.string(),
         duration: z.string(),
+        is_shift: z.boolean()
       })
     ),
   }),

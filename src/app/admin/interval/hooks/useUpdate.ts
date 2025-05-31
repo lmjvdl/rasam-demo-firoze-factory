@@ -8,6 +8,7 @@ export type IntervalUpdateSchema = {
   id: number;
   name: string;
   duration: string;
+  is_shift: boolean;
 };
 
 const useUpdateInterval = () => {
@@ -25,7 +26,7 @@ const useUpdateInterval = () => {
       queryClient.invalidateQueries({ queryKey: allQueryKeys.adminPanel.interval.update });
     },
     onError: () => {
-      showToast("❌ خطایی در به‌روزرسانی اینتروال رخ داد.", "error");
+      showToast("❌ خطایی در به‌روزرسانی زیربازه رخ داد.", "error");
     },
   });
 

@@ -103,18 +103,18 @@ const AllContentInputItems: React.FC = () => {
     }
   };
 
-    // Handling the boolean value change (is_active)
-    const handleBooleanValueChange = (value: boolean) => {
-      setSelectedRow((prevSelectedRow: InputItemUpdateSchema | undefined) => {
-        if (prevSelectedRow) {
-          return {
-            ...prevSelectedRow,
-            required: value,
-          };
-        }
-        return prevSelectedRow;
-      });
-    };
+  // Handling the boolean value change (is_active)
+  const handleBooleanValueChange = (value: boolean) => {
+    setSelectedRow((prevSelectedRow: InputItemUpdateSchema | undefined) => {
+      if (prevSelectedRow) {
+        return {
+          ...prevSelectedRow,
+          required: value,
+        };
+      }
+      return prevSelectedRow;
+    });
+  };
 
   const dynamicColumns = columns();
   const filteredColumnsForEdit = dynamicColumns.filter((col) => col.canEdit);
@@ -162,7 +162,6 @@ const AllContentInputItems: React.FC = () => {
         onConfirm={handleConfirmDelete}
         rowData={selectedRow}
         titles={dynamicColumns}
-        
       />
     </>
   );

@@ -11,6 +11,9 @@ const IntervalTable: React.FC<IntervalTableProps> = ({
   count,
   page,
   onPageChange,
+  booleanAttributeName,
+  falseLabel,
+  trueLabel
 }) => {
 
   return (
@@ -23,6 +26,9 @@ const IntervalTable: React.FC<IntervalTableProps> = ({
       count={count}
       onPageChange={onPageChange}
       page={page}
+      falseLabel={falseLabel}
+      trueLabel={trueLabel}
+      booleanAttributeName={booleanAttributeName}
     />
   );
 };

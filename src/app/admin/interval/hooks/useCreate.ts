@@ -5,6 +5,7 @@ import { z } from "zod";
 const intervalSchema = z.object({
   name: z.string(),
   duration: z.string(),
+  is_shift: z.string()
 });
 
 export const createNewInterval = async (data: unknown) => {
@@ -16,6 +17,7 @@ export const createNewInterval = async (data: unknown) => {
 
   const processedData = {
     ...validationResult.data,
+    is_shift: Boolean(validationResult.data.is_shift)
   };
 
   try {

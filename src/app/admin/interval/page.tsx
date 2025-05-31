@@ -29,6 +29,16 @@ export default function IntervalPage() {
           {
             name: "duration", label: "مدت زمان(به طور مثال 0 01:00:00)", type: "text", required: true
           },
+          {
+            name: "is_shift",
+            label: "شیفت",
+            type: "select",
+            options: [
+              { label: "شیفت است", value: "true" },
+              { label: "شیفت نیست", value: "false" },
+            ],
+            required: true,
+          },
         ]}
         onSubmit={handleCreateInterval}
       />

@@ -11,10 +11,11 @@ import useUpdate from "./hooks/useUpdate";
 import ViewDialog from "@/components/adminPanelComponent/viewProcess/ViewDialog";
 import EditDialog from "@/components/adminPanelComponent/viewProcess/EditDialog";
 import DeleteDialog from "@/components/adminPanelComponent/viewProcess/DeleteDialog";
+import { Interval } from "@/interfaces/admin/interval";
 
 const AllContentInterval: React.FC = () => {
   const [data, setData] = useState<ResponseSchema>(PrevDataInitial);
-  const [selectedRow, setSelectedRow] = useState<any>(null);
+  const [selectedRow, setSelectedRow] = useState<Interval>();
   const [viewOpen, setViewOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
@@ -63,17 +64,17 @@ const AllContentInterval: React.FC = () => {
     getList.mutate({ page: newPage + 1, page_size: 8, url: nextPage });
   };
 
-  const handleView = (row: any) => {
+  const handleView = (row: Interval) => {
     setSelectedRow(row);
     setViewOpen(true);
   };
 
-  const handleEdit = (row: any) => {
+  const handleEdit = (row: Interval) => {
     setSelectedRow(row);
     setEditOpen(true);
   };
 
-  const handleDelete = (row: any) => {
+  const handleDelete = (row: Interval) => {
     setSelectedRow(row);
     setDeleteOpen(true);
   };
@@ -101,6 +102,19 @@ const AllContentInterval: React.FC = () => {
     }
   };
 
+  // Handling the boolean value change (is_active)
+  const handleBooleanValueChange = (value: boolean) => {
+    setSelectedRow((prevSelectedRow: IntervalUpdateSchema | undefined) => {
+      if (prevSelectedRow) {
+        return {
+          ...prevSelectedRow,
+          is_shift: value,
+        };
+      }
+      return prevSelectedRow;
+    });
+  };
+
 
   const dynamicColumns = columns();
   const filteredColumnsForEdit = dynamicColumns.filter((col) => col.canEdit);
@@ -116,6 +130,9 @@ const AllContentInterval: React.FC = () => {
         page={pageNumber}
         count={totalData}
         onPageChange={handlePagination}
+        booleanAttributeName="is_shift"
+        falseLabel="شیفت نیست"
+        trueLabel="شیفت است"
       />
 
       <ViewDialog
@@ -123,6 +140,9 @@ const AllContentInterval: React.FC = () => {
         onClose={() => setViewOpen(false)}
         rowData={selectedRow}
         titles={dynamicColumns}
+        booleanAttributeName="is_shift"
+        falseLabel="شیفت نیست"
+        trueLabel="شیفت است"
       />
       <EditDialog
         open={editOpen}
@@ -130,6 +150,11 @@ const AllContentInterval: React.FC = () => {
         onSave={handleSaveEdit}
         rowData={selectedRow}
         titles={filteredColumnsForEdit}
+        booleanAttributeName="is_shift"
+        booleanValue={selectedRow?.is_shift}
+        falseLabel="شیفت نیست"
+        trueLabel="شیفت است"
+        onBooleanValueChange={handleBooleanValueChange}
       />
       <DeleteDialog
         open={deleteOpen}

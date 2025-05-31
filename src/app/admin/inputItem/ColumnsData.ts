@@ -22,7 +22,6 @@ export const columns = () => [
         canEdit: true,
         isAdditionalAction: false,
         isSingleSelect: true,
-        optionsKey: "requiredList",
     },
     {
         id: "actions",
