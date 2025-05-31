@@ -11,10 +11,11 @@ import useUpdate from "./hooks/useUpdate";
 import ViewDialog from "@/components/adminPanelComponent/viewProcess/ViewDialog";
 import EditDialog from "@/components/adminPanelComponent/viewProcess/EditDialog";
 import DeleteDialog from "@/components/adminPanelComponent/viewProcess/DeleteDialog";
+import { InputItem } from "@/interfaces/admin/inputItem";
 
 const AllContentInputItems: React.FC = () => {
   const [data, setData] = useState<ResponseSchema>(PrevDataInitial);
-  const [selectedRow, setSelectedRow] = useState<any>(null);
+  const [selectedRow, setSelectedRow] = useState<InputItem>();
   const [viewOpen, setViewOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
@@ -25,6 +26,7 @@ const AllContentInputItems: React.FC = () => {
   const getList = getIntervalList(pageNumber, 8, nextPage);
   const { deleteInputItemMutation } = useDelete();
   const { updateInputItemMutation } = useUpdate();
+
 
   useEffect(() => {
     getList.mutate(
@@ -63,17 +65,17 @@ const AllContentInputItems: React.FC = () => {
     getList.mutate({ page: newPage + 1, page_size: 8, url: nextPage });
   };
 
-  const handleView = (row: any) => {
+  const handleView = (row: InputItem) => {
     setSelectedRow(row);
     setViewOpen(true);
   };
 
-  const handleEdit = (row: any) => {
+  const handleEdit = (row: InputItem) => {
     setSelectedRow(row);
     setEditOpen(true);
   };
 
-  const handleDelete = (row: any) => {
+  const handleDelete = (row: InputItem) => {
     setSelectedRow(row);
     setDeleteOpen(true);
   };
@@ -101,6 +103,19 @@ const AllContentInputItems: React.FC = () => {
     }
   };
 
+    // Handling the boolean value change (is_active)
+    const handleBooleanValueChange = (value: boolean) => {
+      setSelectedRow((prevSelectedRow: InputItemUpdateSchema | undefined) => {
+        if (prevSelectedRow) {
+          return {
+            ...prevSelectedRow,
+            required: value,
+          };
+        }
+        return prevSelectedRow;
+      });
+    };
+
   const dynamicColumns = columns();
   const filteredColumnsForEdit = dynamicColumns.filter((col) => col.canEdit);
 
@@ -115,6 +130,9 @@ const AllContentInputItems: React.FC = () => {
         page={pageNumber}
         count={totalData}
         onPageChange={handlePagination}
+        booleanAttributeName="required"
+        falseLabel="غیرضروری"
+        trueLabel="ضروری"
       />
 
       <ViewDialog
@@ -122,6 +140,9 @@ const AllContentInputItems: React.FC = () => {
         onClose={() => setViewOpen(false)}
         rowData={selectedRow}
         titles={dynamicColumns}
+        booleanAttributeName="required"
+        falseLabel="ضروری نیست"
+        trueLabel="ضروری است"
       />
       <EditDialog
         open={editOpen}
@@ -129,6 +150,11 @@ const AllContentInputItems: React.FC = () => {
         onSave={handleSaveEdit}
         rowData={selectedRow}
         titles={filteredColumnsForEdit}
+        booleanAttributeName="required"
+        booleanValue={selectedRow?.required}
+        falseLabel="غیرضروری است"
+        trueLabel="ضروری است"
+        onBooleanValueChange={handleBooleanValueChange}
       />
       <DeleteDialog
         open={deleteOpen}
@@ -136,6 +162,7 @@ const AllContentInputItems: React.FC = () => {
         onConfirm={handleConfirmDelete}
         rowData={selectedRow}
         titles={dynamicColumns}
+        
       />
     </>
   );

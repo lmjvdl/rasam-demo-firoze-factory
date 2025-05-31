@@ -1,6 +1,7 @@
-interface InputItem {
+export interface InputItem {
     id: number; // ReadOnly
     name: string;
+    required: boolean;
 }
   
 export interface InputItemTableProps {
@@ -12,5 +13,8 @@ export interface InputItemTableProps {
     count: number;
     page: number; 
     onPageChange: (newPage: number) => void;
+    booleanAttributeName: string;
+    trueLabel: string;
+    falseLabel: string;
 }
   

@@ -12,7 +12,7 @@ export default function InputItemPage() {
   const handleCreateInputItem = async (data: unknown) => {
     const response = await createNewInputItem(data);
     if (response.success) {
-      setRefreshKey(prev => prev + 1);
+      setRefreshKey((prev) => prev + 1);
       return { success: true };
     }
     return response;
@@ -24,12 +24,25 @@ export default function InputItemPage() {
         buttonText="افزودن آیتم ورودی جدید"
         formFields={[
           {
-            name: "name", label: "نام", type: "text", required: true
+            name: "name",
+            label: "نام",
+            type: "text",
+            required: true,
+          },
+          {
+            name: "required",
+            label: "فیلد ضروری",
+            type: "select",
+            options: [
+              { label: "ضروری است", value: "true" },
+              { label: "ضروری نیست", value: "false" },
+            ],
+            required: true,
           },
         ]}
         onSubmit={handleCreateInputItem}
       />
-      <AllContentInputItem key={refreshKey}/>
+      <AllContentInputItem key={refreshKey} />
     </MainCard>
   );
 }

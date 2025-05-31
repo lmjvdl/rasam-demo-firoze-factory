@@ -40,7 +40,7 @@ const DeleteDialog: React.FC<DeleteDialogProps> = ({
 
   const renderValue = (key: string, value: any) => {
     if (value === null || value === undefined) return "--";
-    if (typeof value === "boolean") return value ? "فعال" : "غیرفعال";
+    if (typeof value === "boolean") return value ? "ضروری" : "غیرضروری";
     if (Array.isArray(value))
       return renderArrayValue(value, arrayAttributes[key]);
     if (typeof value === "object") return renderObjectValue(value);

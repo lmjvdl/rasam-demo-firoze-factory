@@ -3,7 +3,8 @@ import inputItemsUrls from "@/utils/url/adminPanel/inputItemUrl";
 import { z } from "zod";
 
 const inputItemSchema = z.object({
-  name: z.string().min(1).max(50),
+  name: z.string(),
+  required: z.string()
 });
 
 export const createNewInputItem = async (data: unknown) => {
@@ -15,6 +16,7 @@ export const createNewInputItem = async (data: unknown) => {
 
   const processedData = {
     ...validationResult.data,
+    required: Boolean(validationResult.data.required)
   };
 
   try {

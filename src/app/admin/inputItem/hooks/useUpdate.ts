@@ -7,6 +7,7 @@ import inputItemsUrls from "@/utils/url/adminPanel/inputItemUrl";
 export type InputItemUpdateSchema = {
   id: number;
   name: string;
+  required: boolean;
 };
 
 const useUpdateInputItem = () => {

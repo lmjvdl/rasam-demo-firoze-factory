@@ -46,6 +46,9 @@ export interface DataTableProps {
   onPageChange: (newPage: number) => void;
   arrayColumns?: { [key: string]: string }; 
   keyObjectValMap?: Map<number, string>; 
+  booleanAttributeName?: string;
+  trueLabel?: string;
+  falseLabel?: string;
 }
 
 export interface DeleteDialogProps {

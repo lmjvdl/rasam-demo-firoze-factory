@@ -11,6 +11,9 @@ const InputItemTable: React.FC<InputItemTableProps> = ({
   count,
   page,
   onPageChange,
+  booleanAttributeName,
+  falseLabel,
+  trueLabel
 }) => {
 
   return (
@@ -23,6 +26,9 @@ const InputItemTable: React.FC<InputItemTableProps> = ({
       count={count}
       onPageChange={onPageChange}
       page={page}
+      falseLabel={falseLabel}
+      trueLabel={trueLabel}
+      booleanAttributeName={booleanAttributeName}
     />
   );
 };
