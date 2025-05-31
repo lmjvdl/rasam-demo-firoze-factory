@@ -42,6 +42,14 @@ const responseSchema = z.object({
         id: z.number(),
         name: z.string(),
         phone_number: z.string(),
+        groups: z.array(z.object({
+          id: z.number(),
+          name: z.string(),
+        })),
+        user_permissions: z.array(z.object({
+          id: z.number(),
+          name: z.string(),
+        })),
       })
     ),
   }),

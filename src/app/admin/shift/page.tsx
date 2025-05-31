@@ -58,7 +58,6 @@ export default function ShiftPage() {
             required: true,
           },
         ]}
-        key={refreshKey}
         onSubmit={handleCreateShift}
       />
 

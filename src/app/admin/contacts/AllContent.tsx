@@ -11,16 +11,20 @@ import useUpdate from "./hooks/useUpdate";
 import ViewDialog from "@/components/adminPanelComponent/viewProcess/ViewDialog";
 import EditDialog from "@/components/adminPanelComponent/viewProcess/EditDialog";
 import DeleteDialog from "@/components/adminPanelComponent/viewProcess/DeleteDialog";
+import { useContactsExtraOptions } from "./hooks/useContactsExtraOptions";
+import { Contacts } from "@/interfaces/admin/contacts";
 
 const AllContentContacts: React.FC = () => {
   const [data, setData] = useState<ResponseSchema>(PrevDataInitial);
-  const [selectedRow, setSelectedRow] = useState<any>(null);
+  const [selectedRow, setSelectedRow] = useState<Contacts>();
   const [viewOpen, setViewOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
   const [pageNumber, setPageNumber] = useState<number>(0);
   const [totalData, setTotalData] = useState<number>(0);
   const [nextPage, setNextPage] = useState<null | string>(null);
+
+  const { permissionList, groupList } = useContactsExtraOptions();
 
   const getList = getContactsList(pageNumber, 8, nextPage);
   const { deleteContactsMutation } = useDelete();
@@ -63,17 +67,17 @@ const AllContentContacts: React.FC = () => {
     getList.mutate({ page: newPage + 1, page_size: 8, url: nextPage });
   };
 
-  const handleView = (row: any) => {
+  const handleView = (row: Contacts) => {
     setSelectedRow(row);
     setViewOpen(true);
   };
 
-  const handleEdit = (row: any) => {
+  const handleEdit = (row: Contacts) => {
     setSelectedRow(row);
     setEditOpen(true);
   };
 
-  const handleDelete = (row: any) => {
+  const handleDelete = (row: Contacts) => {
     setSelectedRow(row);
     setDeleteOpen(true);
   };
@@ -82,21 +86,23 @@ const AllContentContacts: React.FC = () => {
     if (selectedRow?.id) {
       deleteContactsMutation.mutate(selectedRow.id, {
         onSuccess: () => {
-          setData(prevData => {
+          setData((prevData) => {
             if (prevData?.data) {
               return {
                 ...prevData,
                 data: {
                   ...prevData.data,
-                  results: prevData.data.results.filter(row => row.id !== selectedRow.id),
-                  count: prevData.data.count - 1
-                }
+                  results: prevData.data.results.filter(
+                    (row) => row.id !== selectedRow.id
+                  ),
+                  count: prevData.data.count - 1,
+                },
               };
             }
             return prevData;
           });
           setDeleteOpen(false);
-        }
+        },
       });
     }
   };
@@ -122,6 +128,10 @@ const AllContentContacts: React.FC = () => {
         onClose={() => setViewOpen(false)}
         rowData={selectedRow}
         titles={dynamicColumns}
+        arrayAttributes={{
+          groups: "name",
+          user_permissions: "name",
+        }}
       />
       <EditDialog
         open={editOpen}
@@ -129,6 +139,8 @@ const AllContentContacts: React.FC = () => {
         onSave={handleSaveEdit}
         rowData={selectedRow}
         titles={filteredColumnsForEdit}
+        arrayObjectAttributes={["groups", "user_permissions"]}
+        extraOptions={{ permissionList, groupList }}
       />
       <DeleteDialog
         open={deleteOpen}
@@ -136,6 +148,10 @@ const AllContentContacts: React.FC = () => {
         onConfirm={handleConfirmDelete}
         rowData={selectedRow}
         titles={dynamicColumns}
+        arrayAttributes={{
+          groups: "name",
+          user_permissions: "name",
+        }}
       />
     </>
   );

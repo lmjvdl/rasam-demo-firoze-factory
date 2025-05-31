@@ -96,6 +96,8 @@ const allQueryKeys = {
       list: ["ADMIN_PANEL", "CONTACTS", "VIEW"],
       delete: ["ADMIN_PANEL", "CONTACTS", "DELETE"],
       update: ["ADMIN_PANEL", "CONTACTS", "UPDATE"],
+      permission_list: ["ADMIN_PANEL", "CONTACTS", "VIEW", "PERMISSION_LIST"],
+      group_list: ["ADMIN_PANEL", "CONTACTS", "VIEW", "GROUP_LIST"],
     },
     operation: {
       list: ["ADMIN_PANEL", "OPERATION", "VIEW"],

@@ -6,6 +6,8 @@ import { z } from "zod";
 const contactsSchema = z.object({
   name: z.string(),
   phone_number: z.string(),
+  groups: z.array(z.number()),
+  user_permissions: z.array(z.number()),
 });
 
 export const createNewContact = async (data: unknown) => {
