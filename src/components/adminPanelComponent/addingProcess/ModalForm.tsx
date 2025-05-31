@@ -90,11 +90,16 @@ const ModalForm: React.FC<ModalFormProps> = ({
                   required: field.required
                     ? `${field.label} اجباری است`
                     : false,
+                  validate:
+                    field.type === "multiselect" && field.required
+                      ? (value) =>
+                          (Array.isArray(value) && value.length > 0) ||
+                          "حداقل یک گزینه باید انتخاب شود"
+                      : undefined,
                 }}
                 render={({ field: controllerField, fieldState, formState }) => {
                   const isFixedField = fixedValues && field.name in fixedValues;
 
-                  // Calendar using custom component
                   if (field.type === "date") {
                     return (
                       <FormControl fullWidth margin="normal">
@@ -140,7 +145,11 @@ const ModalForm: React.FC<ModalFormProps> = ({
 
                   if (field.type === "multiselect") {
                     return (
-                      <FormControl fullWidth margin="normal">
+                      <FormControl
+                        fullWidth
+                        margin="normal"
+                        error={!!errors[field.name]}
+                      >
                         <InputLabel
                           sx={{ "& .MuiInputLabel-asterisk": { color: "red" } }}
                         >
@@ -163,6 +172,7 @@ const ModalForm: React.FC<ModalFormProps> = ({
                               )
                               .join(", ")
                           }
+                          error={!!errors[field.name]}
                         >
                           {field.options?.map((option) => (
                             <MenuItem key={option.value} value={option.value}>
@@ -175,14 +185,32 @@ const ModalForm: React.FC<ModalFormProps> = ({
                             </MenuItem>
                           ))}
                         </Select>
+                        {errors[field.name] && (
+                          <p
+                            style={{
+                              color: "red",
+                              fontSize: "0.75rem",
+                              margin: "3px 14px 0",
+                            }}
+                          >
+                            {errors[field.name]?.message as string}
+                          </p>
+                        )}
                       </FormControl>
                     );
                   }
 
                   if (field.type === "select") {
                     return (
-                      <FormControl fullWidth margin="normal">
-                        <InputLabel required={field.required}>
+                      <FormControl
+                        fullWidth
+                        margin="normal"
+                        error={!!errors[field.name]}
+                      >
+                        <InputLabel
+                          required={field.required}
+                          sx={{ "& .MuiInputLabel-asterisk": { color: "red" } }}
+                        >
                           {field.label}
                         </InputLabel>
                         <Select
@@ -197,6 +225,17 @@ const ModalForm: React.FC<ModalFormProps> = ({
                             </MenuItem>
                           ))}
                         </Select>
+                        {errors[field.name] && (
+                          <p
+                            style={{
+                              color: "red",
+                              fontSize: "0.75rem",
+                              margin: "3px 14px 0",
+                            }}
+                          >
+                            {errors[field.name]?.message as string}
+                          </p>
+                        )}
                       </FormControl>
                     );
                   }
@@ -257,7 +296,6 @@ const ModalForm: React.FC<ModalFormProps> = ({
                     );
                   }
 
-                  // default: text input
                   return (
                     <TextField
                       fullWidth

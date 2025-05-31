@@ -83,9 +83,9 @@ export default function UserPage() {
           },
           {
             name: "position",
-            label: "موقعیت",
+            label: "سمت کاری",
             type: "select",
-            required: false,
+            required: true,
             options: positionOptions,
           },
         ]}

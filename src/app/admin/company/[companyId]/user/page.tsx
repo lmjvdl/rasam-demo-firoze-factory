@@ -46,14 +46,14 @@ export default function UserCompanyPage({ params }: PageProps) {
             name: "groups",
             label: "گروه ها",
             type: "multiselect",
-            required: false,
+            required: true,
             options: groupOptions,
           },
           {
             name: "permissions",
             label: "دسترسی ها",
             type: "multiselect",
-            required: false,
+            required: true,
             options: permissionOptions,
           },
         ]}
