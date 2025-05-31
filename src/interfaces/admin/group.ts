@@ -7,9 +7,9 @@ export interface Group {
 export interface GroupTableProps {
     data: Group[];
     columns: any[];
-    onView: (row: any) => void;
-    onEdit: (row: any) => void;
-    onDelete: (row: any) => void;
+    onView: (row: Group) => void;
+    onEdit: (row: Group) => void;
+    onDelete: (row: Group) => void;
     count: number;
     page: number; 
     onPageChange: (newPage: number) => void;

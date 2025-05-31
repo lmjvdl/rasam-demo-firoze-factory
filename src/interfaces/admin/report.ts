@@ -12,9 +12,9 @@ export interface Report {
 export interface ReportTableProps {
     data: Report[];
     columns: any[];
-    onView: (row: any) => void;
-    onEdit: (row: any) => void;
-    onDelete: (row: any) => void;
+    onView: (row: Report) => void;
+    onEdit: (row: Report) => void;
+    onDelete: (row: Report) => void;
     count: number;
     page: number; 
     onPageChange: (newPage: number) => void;

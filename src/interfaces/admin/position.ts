@@ -1,4 +1,4 @@
-interface Position {
+export interface Position {
     id: number; // ReadOnly
     name: string;
 }
@@ -6,9 +6,9 @@ interface Position {
 export interface PositionTableProps {
     data: Position[];
     columns: any[];
-    onView: (row: any) => void;
-    onEdit: (row: any) => void;
-    onDelete: (row: any) => void;
+    onView: (row: Position) => void;
+    onEdit: (row: Position) => void;
+    onDelete: (row: Position) => void;
     count: number;
     page: number; 
     onPageChange: (newPage: number) => void;

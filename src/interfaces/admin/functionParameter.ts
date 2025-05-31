@@ -7,9 +7,9 @@ export interface FunctionParameter {
 export interface FunctionParameterTableProps {
     data: FunctionParameter[];
     columns: any[];
-    onView: (row: any) => void;
-    onEdit: (row: any) => void;
-    onDelete: (row: any) => void;
+    onView: (row: FunctionParameter) => void;
+    onEdit: (row: FunctionParameter) => void;
+    onDelete: (row: FunctionParameter) => void;
     count: number;
     page: number; 
     onPageChange: (newPage: number) => void;

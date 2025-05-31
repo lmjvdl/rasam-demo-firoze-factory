@@ -8,9 +8,9 @@ export interface AlarmDetail {
 export interface AlarmDetailTableProps {
     data: AlarmDetail[];
     columns: any[];
-    onView: (row: any) => void;
-    onEdit: (row: any) => void;
-    onDelete: (row: any) => void;
+    onView: (row: AlarmDetail) => void;
+    onEdit: (row: AlarmDetail) => void;
+    onDelete: (row: AlarmDetail) => void;
     count: number;
     page: number; 
     onPageChange: (newPage: number) => void;

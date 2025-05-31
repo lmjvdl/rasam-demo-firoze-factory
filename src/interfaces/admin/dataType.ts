@@ -9,9 +9,9 @@ export interface DataType {
 export interface DataTypeTableProps {
     data: DataType[];
     columns: any[];
-    onView: (row: any) => void;
-    onEdit: (row: any) => void;
-    onDelete: (row: any) => void;
+    onView: (row: DataType) => void;
+    onEdit: (row: DataType) => void;
+    onDelete: (row: DataType) => void;
     count: number;
     page: number; 
     onPageChange: (newPage: number) => void;

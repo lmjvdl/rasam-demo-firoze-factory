@@ -17,9 +17,9 @@ export interface User {
 export interface UserTableProps {
     data: User[];
     columns: any[];
-    onView: (row: any) => void;
-    onEdit: (row: any) => void;
-    onDelete: (row: any) => void;
+    onView: (row: User) => void;
+    onEdit: (row: User) => void;
+    onDelete: (row: User) => void;
     count: number;
     page: number; 
     onPageChange: (newPage: number) => void;

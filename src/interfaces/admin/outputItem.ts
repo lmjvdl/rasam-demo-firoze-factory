@@ -1,4 +1,4 @@
-interface OutputItem {
+export interface OutputItem {
     id: number; // ReadOnly
     name: string;
 }
@@ -6,9 +6,9 @@ interface OutputItem {
 export interface OutputItemTableProps {
     data: OutputItem[];
     columns: any[];
-    onView: (row: any) => void;
-    onEdit: (row: any) => void;
-    onDelete: (row: any) => void;
+    onView: (row: OutputItem) => void;
+    onEdit: (row: OutputItem) => void;
+    onDelete: (row: OutputItem) => void;
     count: number;
     page: number; 
     onPageChange: (newPage: number) => void;

@@ -8,9 +8,9 @@ export interface Interval {
 export interface IntervalTableProps {
     data: Interval[];
     columns: any[];
-    onView: (row: any) => void;
-    onEdit: (row: any) => void;
-    onDelete: (row: any) => void;
+    onView: (row: Interval) => void;
+    onEdit: (row: Interval) => void;
+    onDelete: (row: Interval) => void;
     count: number;
     page: number; 
     onPageChange: (newPage: number) => void;

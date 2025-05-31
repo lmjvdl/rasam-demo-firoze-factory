@@ -7,9 +7,9 @@ interface Function {
 export interface FunctionTableProps {
     data: Function[];
     columns: any[];
-    onView: (row: any) => void;
-    onEdit: (row: any) => void;
-    onDelete: (row: any) => void;
+    onView: (row: Function) => void;
+    onEdit: (row: Function) => void;
+    onDelete: (row: Function) => void;
     count: number;
     page: number; 
     onPageChange: (newPage: number) => void;

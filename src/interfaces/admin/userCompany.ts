@@ -10,9 +10,9 @@ export interface UserCompany {
 export interface UserCompanyTableProps {
     data: UserCompany[];
     columns: any[];
-    onView: (row: any) => void;
-    onEdit: (row: any) => void;
-    onDelete: (row: any) => void;
+    onView: (row: UserCompany) => void;
+    onEdit: (row: UserCompany) => void;
+    onDelete: (row: UserCompany) => void;
     count: number;
     page: number; 
     onPageChange: (newPage: number) => void;

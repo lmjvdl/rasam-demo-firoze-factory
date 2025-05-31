@@ -10,9 +10,9 @@ export interface ProductLine {
 export interface ProductLineTableProps {
     data: ProductLine[];
     columns: any[];
-    onView: (row: any) => void;
-    onEdit: (row: any) => void;
-    onDelete: (row: any) => void;
+    onView: (row: ProductLine) => void;
+    onEdit: (row: ProductLine) => void;
+    onDelete: (row: ProductLine) => void;
     count: number;
     page: number; 
     onPageChange: (newPage: number) => void;

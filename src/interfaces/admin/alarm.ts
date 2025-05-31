@@ -13,9 +13,9 @@ export interface Alarm {
 export interface AlarmTableProps {
     data: Alarm[];
     columns: any[];
-    onView: (row: any) => void;
-    onEdit: (row: any) => void;
-    onDelete: (row: any) => void;
+    onView: (row: Alarm) => void;
+    onEdit: (row: Alarm) => void;
+    onDelete: (row: Alarm) => void;
     count: number;
     page: number; 
     onPageChange: (newPage: number) => void;

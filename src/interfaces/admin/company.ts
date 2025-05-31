@@ -11,9 +11,9 @@ export interface Company {
 export interface CompanyTableProps {
     data: Company[];
     columns: any[];
-    onView: (row: any) => void;
-    onEdit: (row: any) => void;
-    onDelete: (row: any) => void;
+    onView: (row: Company) => void;
+    onEdit: (row: Company) => void;
+    onDelete: (row: Company) => void;
     handleUsersView: (companyId: number) => void;
     selectedCompanyId: number | null;
     viewUsersOpen: boolean;

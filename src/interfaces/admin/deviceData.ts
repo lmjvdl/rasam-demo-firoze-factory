@@ -7,9 +7,9 @@ export interface DeviceData {
 export interface DeviceDataTableProps {
     data: DeviceData[];
     columns: any[];
-    onView: (row: any) => void;
-    onEdit: (row: any) => void;
-    onDelete: (row: any) => void;
+    onView: (row: DeviceData) => void;
+    onEdit: (row: DeviceData) => void;
+    onDelete: (row: DeviceData) => void;
     count: number;
     page: number; 
     onPageChange: (newPage: number) => void;

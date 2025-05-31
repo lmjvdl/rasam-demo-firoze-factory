@@ -7,9 +7,9 @@ export interface InputItem {
 export interface InputItemTableProps {
     data: InputItem[];
     columns: any[];
-    onView: (row: any) => void;
-    onEdit: (row: any) => void;
-    onDelete: (row: any) => void;
+    onView: (row: InputItem) => void;
+    onEdit: (row: InputItem) => void;
+    onDelete: (row: InputItem) => void;
     count: number;
     page: number; 
     onPageChange: (newPage: number) => void;

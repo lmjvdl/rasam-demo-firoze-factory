@@ -11,9 +11,9 @@ export interface Shift {
 export interface ShiftTableProps {
     data: Shift[];
     columns: any[];
-    onView: (row: any) => void;
-    onEdit: (row: any) => void;
-    onDelete: (row: any) => void;
+    onView: (row: Shift) => void;
+    onEdit: (row: Shift) => void;
+    onDelete: (row: Shift) => void;
     count: number;
     page: number; 
     onPageChange: (newPage: number) => void;

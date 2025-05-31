@@ -9,9 +9,9 @@ export interface Operation {
 export interface OperationTableProps {
     data: Operation[];
     columns: any[];
-    onView: (row: any) => void;
-    onEdit: (row: any) => void;
-    onDelete: (row: any) => void;
+    onView: (row: Operation) => void;
+    onEdit: (row: Operation) => void;
+    onDelete: (row: Operation) => void;
     count: number;
     page: number; 
     onPageChange: (newPage: number) => void;

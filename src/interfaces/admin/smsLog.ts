@@ -1,4 +1,4 @@
-interface SmsLog {
+export interface SmsLog {
     id: number; // ReadOnly
     to: string;
     message: string;
@@ -10,7 +10,7 @@ interface SmsLog {
 export interface SmsLogTableProps {
     data: SmsLog[];
     columns: any[];
-    onView: (row: any) => void;
+    onView: (row: SmsLog) => void;
     count: number;
     page: number; 
     onPageChange: (newPage: number) => void;

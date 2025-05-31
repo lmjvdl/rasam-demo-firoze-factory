@@ -10,9 +10,9 @@ export interface Contacts {
 export interface ContactsTableProps {
     data: Contacts[];
     columns: any[];
-    onView: (row: any) => void;
-    onEdit: (row: any) => void;
-    onDelete: (row: any) => void;
+    onView: (row: Contacts) => void;
+    onEdit: (row: Contacts) => void;
+    onDelete: (row: Contacts) => void;
     count: number;
     page: number; 
     onPageChange: (newPage: number) => void;
