@@ -11,16 +11,20 @@ import useUpdate from "./hooks/useUpdate";
 import ViewDialog from "@/components/adminPanelComponent/viewProcess/ViewDialog";
 import EditDialog from "@/components/adminPanelComponent/viewProcess/EditDialog";
 import DeleteDialog from "@/components/adminPanelComponent/viewProcess/DeleteDialog";
+import { useShiftExtraOptions } from "./hooks/useShiftExtraOptions";
+import { Shift } from "@/interfaces/admin/shift";
 
 const AllContentShift: React.FC = () => {
   const [data, setData] = useState<ResponseSchema>(PrevDataInitial);
-  const [selectedRow, setSelectedRow] = useState<any>(null);
+  const [selectedRow, setSelectedRow] = useState<Shift>();
   const [viewOpen, setViewOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
   const [pageNumber, setPageNumber] = useState<number>(0);
   const [totalData, setTotalData] = useState<number>(0);
   const [nextPage, setNextPage] = useState<null | string>(null);
+
+  const { companyList } = useShiftExtraOptions();
 
   const getList = getShiftList(pageNumber, 8, nextPage);
   const { deleteShiftMutation } = useDelete();
@@ -63,17 +67,17 @@ const AllContentShift: React.FC = () => {
     getList.mutate({ page: newPage + 1, page_size: 8, url: nextPage });
   };
 
-  const handleView = (row: any) => {
+  const handleView = (row: Shift) => {
     setSelectedRow(row);
     setViewOpen(true);
   };
 
-  const handleEdit = (row: any) => {
+  const handleEdit = (row: Shift) => {
     setSelectedRow(row);
     setEditOpen(true);
   };
 
-  const handleDelete = (row: any) => {
+  const handleDelete = (row: Shift) => {
     setSelectedRow(row);
     setDeleteOpen(true);
   };
@@ -124,8 +128,8 @@ const AllContentShift: React.FC = () => {
         onClose={() => setViewOpen(false)}
         rowData={selectedRow}
         titles={dynamicColumns}
+        objectAttributes={["company"]}
       />
-
       <EditDialog
         open={editOpen}
         onClose={() => setEditOpen(false)}
@@ -138,14 +142,16 @@ const AllContentShift: React.FC = () => {
           start_date: { type: "date", field: "start_date" },
           end_date: { type: "date", field: "end_date" },
         }}
+        extraOptions={{ companyList }}
+        objectAttributes={["company"]}
       />
-
       <DeleteDialog
         open={deleteOpen}
         onClose={() => setDeleteOpen(false)}
         onConfirm={handleConfirmDelete}
         rowData={selectedRow}
         titles={dynamicColumns}
+        arrayAttributes={{ company: "name" }}
       />
     </>
   );

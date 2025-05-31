@@ -1,13 +1,15 @@
 "use client";
 
+import { useState } from "react";
 import ModalForm from "@/components/adminPanelComponent/addingProcess/ModalForm";
 import MainCard from "@/components/customContiner/MainCard";
-import { createNewShift } from "../shift/hooks/useCreate";
-import AllContentShift from "../shift/AllContent";
-import { useState } from "react";
+import { createNewShift } from "./hooks/useCreate";
+import AllContentShift from "./AllContent";
+import { useShiftExtraOptions } from "./hooks/useShiftExtraOptions";
 
 export default function ShiftPage() {
   const [refreshKey, setRefreshKey] = useState(0);
+  const { companyOptions } = useShiftExtraOptions();
 
   const handleCreateShift = async (data: unknown) => {
     const response = await createNewShift(data);
@@ -30,25 +32,32 @@ export default function ShiftPage() {
             required: true,
           },
           {
+            name: "company",
+            label: "شرکت",
+            type: "select",
+            required: true,
+            options: companyOptions,
+          },
+          {
             name: "start_date",
             label: "تاریخ شروع",
             type: "date",
             required: true,
-            placeholder: "تاریخ شروع"
+            placeholder: "تاریخ شروع",
           },
           {
             name: "end_date",
             label: "تاریخ پایان",
             type: "date",
             required: true,
-            placeholder: "تاریخ پایان"
+            placeholder: "تاریخ پایان",
           },
           {
             name: "start_time",
             label: "ساعت شروع",
             type: "time",
             required: true,
-            placeholder: "ساعت شروع"
+            placeholder: "ساعت شروع",
           },
           {
             name: "end_time",
@@ -60,7 +69,6 @@ export default function ShiftPage() {
         ]}
         onSubmit={handleCreateShift}
       />
-
       <AllContentShift key={refreshKey} />
     </MainCard>
   );

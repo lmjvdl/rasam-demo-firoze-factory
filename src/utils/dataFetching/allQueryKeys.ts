@@ -142,6 +142,7 @@ const allQueryKeys = {
       list: ["ADMIN_PANEL", "SHIFT", "VIEW"],
       delete: ["ADMIN_PANEL", "SHIFT", "DELETE"],
       update: ["ADMIN_PANEL", "SHIFT", "UPDATE"],
+      company_list: ["ADMIN_PANEL", "SHIFT", "VIEW", "COMPANY_LIST"],
     },
     position: {
       list: ["ADMIN_PANEL", "POSITION", "VIEW"],

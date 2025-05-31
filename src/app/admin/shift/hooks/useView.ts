@@ -43,7 +43,11 @@ const responseSchema = z.object({
         start_date: z.string(),
         end_date: z.string().nullable(),
         start_time: z.string().nullable(),
-        end_time: z.string().nullable()
+        end_time: z.string().nullable(),
+        company: z.object({
+          id: z.number(),
+          name: z.string(),
+        }),
       })
     ),
   }),

@@ -1,17 +1,30 @@
+import { Shift } from "@/interfaces/admin/shift";
+
 export const columns = () => [
-    {
+      {
         id: "id",
         label: "شناسه",
         showOnTable: false,
         canEdit: false,
-    },
-    {
+      },
+      {
         id: "name",
         label: "نام شیفت",
         type: "text",
         required: true,
         canEdit: true
       },
+      {
+        id: "company",
+        label: "شرکت",
+        required: true,
+        showOnTable: true,
+        canEdit: true,
+        isAdditionalAction: false,
+        optionsKey: "companyList",
+        isSingleSelect: true,
+        render: (row: Shift) => row?.company?.name || "نامشخص",
+    },
       {
         id: "start_date",
         label: "تاریخ شروع",

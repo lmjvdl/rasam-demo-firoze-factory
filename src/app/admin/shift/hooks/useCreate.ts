@@ -7,6 +7,7 @@ import { z } from "zod";
 
 const shiftSchema = z.object({
   name: z.string(),
+  company: z.number(),
   start_date: z.custom<DateObject>((val) => val instanceof DateObject),
   end_date: z.custom<DateObject>((val) => val instanceof DateObject),
   start_time: z.custom<DateObject>((val) => val instanceof DateObject),

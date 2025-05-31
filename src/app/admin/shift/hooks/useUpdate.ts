@@ -3,6 +3,7 @@ import { fetchWithErrorWithAlarm } from "@/utils/dataFetching/fetchWithError";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import shiftUrls from "@/utils/url/adminPanel/shiftUrl";
 import { useToast } from "@/hooks/ui/useToast";
+import { extractId } from "@/utils/formatters/extractId";
 
 export type ShiftUpdateSchema = {
   id: number;
@@ -11,6 +12,7 @@ export type ShiftUpdateSchema = {
   end_date: string;
   start_time: string;
   end_time: string;
+  company: { id: number; name: string };
 };
 
 const useUpdateShift = () => {
@@ -18,10 +20,13 @@ const useUpdateShift = () => {
   const { showToast } = useToast();
 
   const updateShiftMutation = useMutation({
-    mutationFn: async ({ id, ...updatedData }: ShiftUpdateSchema) => {
+    mutationFn: async ({ id, company, ...updatedData }: ShiftUpdateSchema) => {
       return fetchWithErrorWithAlarm(shiftUrls.editShift(id), {
         method: "PUT",
-        body: JSON.stringify(updatedData),
+        body: JSON.stringify({
+          ...updatedData,
+          company: extractId(company)
+        }),
       });
     },
     onSuccess: () => {
