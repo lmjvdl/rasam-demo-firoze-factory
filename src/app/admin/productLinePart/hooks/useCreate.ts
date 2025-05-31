@@ -1,22 +1,20 @@
 import { fetchWithErrorForCreate } from "@/utils/dataFetching/fetchWithError";
 import productLinePartUrls from "@/utils/url/adminPanel/productLinePartUrl";
+import toast from "react-hot-toast";
 import { z } from "zod";
 
 const productLinePartSchema = z.object({
-  product_line: z.string(),
+  product_line: z.number(),
   name: z.string(),
   code: z.string(),
-  DarkIcon: z.number().nullable().optional(),
-  LightIcon: z.number().nullable().optional(),
-  live_type: z.string()
+  DarkIcon: z.string().nullable().optional(),
+  LightIcon: z.string().nullable().optional(),
+  live_type: z.number(),
 });
 
 export const createNewProductLinePart = async (data: unknown) => {
-  console.log(data)
-  const validationResult = productLinePartSchema.safeParse(
-    data
-  );
-
+  const validationResult = productLinePartSchema.safeParse(data);
+  
   if (!validationResult.success) {
     return { success: false, error: validationResult.error.format() };
   }
@@ -25,14 +23,13 @@ export const createNewProductLinePart = async (data: unknown) => {
     ...validationResult.data,
     DarkIcon:
       validationResult.data.DarkIcon !== undefined
-        ? validationResult.data.DarkIcon
+        ? Number(validationResult.data.DarkIcon)
         : null,
     LightIcon:
       validationResult.data.LightIcon !== undefined
-        ? validationResult.data.LightIcon
+        ? Number(validationResult.data.LightIcon)
         : null,
-    live_type_info:  Number(validationResult.data.live_type),
-    product_line_info:  Number(validationResult.data.product_line)
+    product_line_info: validationResult.data.product_line 
   };
 
   try {
