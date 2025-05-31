@@ -5,7 +5,7 @@ import { z } from "zod";
 const reportSchema = z.object({
   name: z.string(),
   input_items: z.number().array(),
-  ouput_item: z.number(),
+  output_item: z.number().array(),
   intervals: z.number().array(),
   api_func: z.string(),
   product_line_part: z.number()

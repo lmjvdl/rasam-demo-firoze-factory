@@ -5,35 +5,11 @@ import MainCard from "@/components/customContiner/MainCard";
 import { createNewReport } from "./hooks/useCreate";
 import ModalForm from "@/components/adminPanelComponent/addingProcess/ModalForm";
 import AllContentReport from "./AllContent";
-import useDataQuery from "@/hooks/adminDataQuery/useDataQuery";
-import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
-import inputItemsUrls from "@/utils/url/adminPanel/inputItemUrl";
-import outputItemUrls from "@/utils/url/adminPanel/outputItemUrl";
-import intervalUrls from "@/utils/url/adminPanel/intervalUrl";
-import productLinePartUrls from "@/utils/url/adminPanel/productLinePartUrl";
+import { useReportExtraOptions } from "./hooks/useReportExtraOptions";
 
 export default function ReportPage() {
   const [refreshKey, setRefreshKey] = useState(0);
-
-  const inputItemsList = useDataQuery(
-    allQueryKeys.adminPanel.report.input_items_list,
-    inputItemsUrls.listInputItem
-  );
-
-  const outputItemList = useDataQuery(
-    allQueryKeys.adminPanel.report.output_items_list,
-    outputItemUrls.listOutputItem
-  );
-
-  const intervalsList = useDataQuery(
-    allQueryKeys.adminPanel.report.intervals_list,
-    intervalUrls.listInterval
-  );
-
-  const productLinePartList = useDataQuery(
-    allQueryKeys.adminPanel.report.product_line_part_list,
-    productLinePartUrls.listProductLinePart
-  );
+  const { inputItemsOptions, outputItemOptions, intervalsOptions, productLinePartOptions } = useReportExtraOptions();
 
   const handleCreateReport = async (data: unknown) => {
     const response = await createNewReport(data);
@@ -60,44 +36,28 @@ export default function ReportPage() {
             label: "بخش خط تولید",
             type: "select",
             required: false,
-            options:
-            productLinePartList.data?.map((product_line_part) => ({
-              label: product_line_part.name,
-              value: product_line_part.id,
-            })) || [],
+            options: productLinePartOptions,
           },
           {
             name: "input_items",
             label: "آیتم های ورودی",
             type: "multiselect",
             required: false,
-            options:
-            inputItemsList.data?.map((input) => ({
-              label: input.name,
-              value: input.id,
-            })) || [],
+            options: inputItemsOptions,
           },
           {
             name: "output_item",
             label: "آیتم خروجی",
-            type: "select",
+            type: "multiselect",
             required: false,
-            options:
-              outputItemList.data?.map((output) => ({
-                label: output.name,
-                value: output.id,
-              })) || [],
+            options: outputItemOptions,
           },
           {
             name: "intervals",
             label: "بازه‌های زمانی",
             type: "multiselect",
             required: false,
-            options:
-              intervalsList.data?.map((inrterval) => ({
-                label: inrterval.name,
-                value: inrterval.id,
-              })) || [],
+            options: intervalsOptions,
           },
           {
             name: "api_func",

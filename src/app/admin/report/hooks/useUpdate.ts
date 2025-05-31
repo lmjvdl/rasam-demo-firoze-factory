@@ -8,11 +8,11 @@ import dataTypeUrls from "@/utils/url/adminPanel/dataTypeUrl";
 export type ReportUpdateSchema = {
   id: number;
   name: string;
-  input_items: { id: number; name: string }[];
-  ouput_item: { id: number; name: string };
-  intervals: { id: number; name: string }[];
-  api_func: string;
-  product_line_part: { id: number; name: string };
+  input_items_info: { id: number; name: string }[];
+  output_item_info: { id: number; name: string }[];
+  intervals_info: { id: number; name: string }[];
+  api_func_info: string;
+  product_line_part_info: { id: number; name: string };
 };
 
 const useUpdate = () => {
@@ -20,15 +20,15 @@ const useUpdate = () => {
   const { showToast } = useToast();
 
   const updateReportMutation = useMutation({
-    mutationFn: async ({ id, input_items, ouput_item, intervals, product_line_part,...updatedData }: ReportUpdateSchema) => {
+    mutationFn: async ({ id, input_items_info, output_item_info, intervals_info, product_line_part_info,...updatedData }: ReportUpdateSchema) => {
       return fetchWithErrorWithAlarm(dataTypeUrls.editDataType(id), {
         method: "PUT",
         body: JSON.stringify({
           ...updatedData, 
-          input_items: extractIds(input_items),
-          output_item: extractId(ouput_item),
-          intervals: extractIds(intervals),
-          product_line_part: extractId(product_line_part)
+          input_items: extractIds(input_items_info),
+          output_item: extractIds(output_item_info),
+          intervals: extractIds(intervals_info),
+          product_line_part: extractId(product_line_part_info)
         }),
       });
     },

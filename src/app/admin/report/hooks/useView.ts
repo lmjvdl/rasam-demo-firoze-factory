@@ -40,20 +40,20 @@ const responseSchema = z.object({
       z.object({
         id: z.number(),
         name: z.string(),
-        input_items: z.array(z.object({
+        input_items_info: z.array(z.object({
           id: z.number(),
           name: z.string(),
         })),
-        ouput_item: z.object({
+        output_item_info: z.array(z.object({
           id: z.number(),
           name: z.string(),
-        }),
-        intervals: z.array(z.object({
+        })),
+        intervals_info: z.array(z.object({
           id: z.number(),
           name: z.string(),
         })),
         api_func: z.string(),
-        product_line_part: z.object({
+        product_line_part_info: z.object({
           id: z.number(),
           name: z.string(),
         })

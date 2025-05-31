@@ -10,16 +10,12 @@ import { PrevDataInitial } from "@/interfaces/general/general";
 import { columns } from "./ColumnsData";
 import ReportTable from "./ReportTable";
 import useUpdate, { ReportUpdateSchema } from "./hooks/useUpdate";
-import useDataQuery from "@/hooks/adminDataQuery/useDataQuery";
-import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
-import inputItemsUrls from "@/utils/url/adminPanel/inputItemUrl";
-import outputItemUrls from "@/utils/url/adminPanel/outputItemUrl";
-import intervalUrls from "@/utils/url/adminPanel/intervalUrl";
-import productLinePartUrls from "@/utils/url/adminPanel/productLinePartUrl";
+import { useReportExtraOptions } from "./hooks/useReportExtraOptions";
+import { Report } from "@/interfaces/admin/report";
 
 const AllContentReport: React.FC = () => {
   const [data, setData] = useState<ResponseSchema>(PrevDataInitial);
-  const [selectedRow, setSelectedRow] = useState<any>(null);
+  const [selectedRow, setSelectedRow] = useState<Report>();
   const [viewOpen, setViewOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
@@ -27,65 +23,11 @@ const AllContentReport: React.FC = () => {
   const [totalData, setTotalData] = useState<number>(0);
   const [nextPage, setNextPage] = useState<null | string>(null);
 
+  const { inputItemsList, outputItemList, intervalsList, productLinePartList } = useReportExtraOptions();
+
   const getList = getReportList(pageNumber, 8, nextPage);
   const { deleteReportMutation } = useDelete();
   const { updateReportMutation } = useUpdate();
-
-  const inputItemsList = useDataQuery(
-    allQueryKeys.adminPanel.report.input_items_list,
-    inputItemsUrls.listInputItem
-  ).data
-    ? useDataQuery(
-        allQueryKeys.adminPanel.report.input_items_list,
-        inputItemsUrls.listInputItem
-      ).data.map((input) => ({
-        id: input.id,
-        value: input.id,
-        label: input.name,
-      }))
-    : [];
-
-  const outputItemList = useDataQuery(
-    allQueryKeys.adminPanel.report.output_items_list,
-    outputItemUrls.listOutputItem
-  ).data
-    ? useDataQuery(
-        allQueryKeys.adminPanel.report.output_items_list,
-        outputItemUrls.listOutputItem
-      ).data.map((output) => ({
-        id: output.id,
-        value: output.id,
-        label: output.name,
-      }))
-    : [];
-
-  const intervalsList = useDataQuery(
-    allQueryKeys.adminPanel.report.intervals_list,
-    intervalUrls.listInterval
-  ).data
-    ? useDataQuery(
-        allQueryKeys.adminPanel.report.intervals_list,
-        intervalUrls.listInterval
-      ).data.map((interval) => ({
-        id: interval.id,
-        value: interval.id,
-        label: interval.name,
-      }))
-    : [];
-
-  const productLinePartList = useDataQuery(
-    allQueryKeys.adminPanel.report.product_line_part_list,
-    productLinePartUrls.listProductLinePart
-  ).data
-    ? useDataQuery(
-        allQueryKeys.adminPanel.report.product_line_part_list,
-        productLinePartUrls.listProductLinePart
-      ).data.map((productLinePart) => ({
-        id: productLinePart.id,
-        value: productLinePart.id,
-        label: productLinePart.name,
-      }))
-    : [];
 
   useEffect(() => {
     getList.mutate(
@@ -124,17 +66,17 @@ const AllContentReport: React.FC = () => {
     getList.mutate({ page: newPage + 1, page_size: 8, url: nextPage });
   };
 
-  const handleView = (row: any) => {
+  const handleView = (row: Report) => {
     setSelectedRow(row);
     setViewOpen(true);
   };
 
-  const handleEdit = (row: any) => {
+  const handleEdit = (row: Report) => {
     setSelectedRow(row);
     setEditOpen(true);
   };
 
-  const handleDelete = (row: any) => {
+  const handleDelete = (row: Report) => {
     setSelectedRow(row);
     setDeleteOpen(true);
   };
@@ -186,10 +128,11 @@ const AllContentReport: React.FC = () => {
         rowData={selectedRow}
         titles={dynamicColumns}
         arrayAttributes={{
-          input_items: "name",
-          intervals: "name",
+          input_items_info: "name",
+          intervals_info: "name",
+          output_item_info: "name"
         }}
-        objectAttributes={["product_line_part", "output_item"]}
+        objectAttributes={[ "product_line_part_info" ]}
       />
       <EditDialog
         open={editOpen}
@@ -203,8 +146,8 @@ const AllContentReport: React.FC = () => {
           intervalsList,
           productLinePartList,
         }}
-        objectAttributes={["product_line_part", "output_item"]}
-        arrayObjectAttributes={["input_items", "intervals"]}
+        objectAttributes={[ "product_line_part" ]}
+        arrayObjectAttributes={[ "input_items", "intervals", "output_item" ]}
       />
       <DeleteDialog
         open={deleteOpen}
@@ -213,10 +156,10 @@ const AllContentReport: React.FC = () => {
         rowData={selectedRow}
         titles={dynamicColumns}
         arrayAttributes={{
-          input_items: "name",
-          intervals: "name",
+          input_items_info: "name",
+          intervals_info: "name",
+          output_item_info: "name"
         }}
-        objectAttributes={["product_line_part", "output_item"]}
       />
     </>
   );
