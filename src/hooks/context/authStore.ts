@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { AuthResponse } from "@/utils/contextDependencies/authResponseSanitizer";
-import { AuthState } from "@/interfaces/general/general";
+import { AuthState } from "@/interfaces/user/general/general";
 
 const initialAuthState: AuthState = {
   id: 0,

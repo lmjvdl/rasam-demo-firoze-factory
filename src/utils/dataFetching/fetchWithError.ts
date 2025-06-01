@@ -1,5 +1,5 @@
 import { useAuthStore } from "@/hooks/context/authStore";
-import { ReportParams } from "@/interfaces/settings/downloadFile";
+import { ReportParams } from "@/interfaces/user/settings/downloadFile";
 import toast from "react-hot-toast";
 
 export default async function fetchWithError(

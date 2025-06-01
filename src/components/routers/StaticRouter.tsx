@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation'; 
 import { usePermissions } from '@/hooks/context/usePermissions';
-import { ProtectedRouteProps } from '@/interfaces/general/permissions';
+import { ProtectedRouteProps } from '@/interfaces/user/general/permissions';
 
 const ProtectedRoute = ({
   children,

@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import getImageList, { ResponseSchema } from "./hooks/useView";
-import { PrevDataInitial } from "@/interfaces/general/general";
+import { PrevDataInitial } from "@/interfaces/user/general/general";
 import { columns } from "./ColumnsData";
 import ImageUploadTable from "./ImageUploadTable";
 import gregorianToJalali from "@/utils/formatters/isoDateToSolarDate";

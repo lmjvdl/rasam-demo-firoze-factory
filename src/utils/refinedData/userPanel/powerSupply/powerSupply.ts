@@ -1,8 +1,8 @@
 // src/utils/refinedData/userPanel/power-supply/powerSupply.ts
-import { PowerSupplyLiveSchema } from "@/interfaces/powerSupply/live";
+import { ChartLiveSchema } from "@/interfaces/user/lives/chart";
 import { z } from "zod";
 
-export const powerSupplyInitialDataQuery: PowerSupplyLiveSchema = {
+export const powerSupplyInitialDataQuery: ChartLiveSchema = {
   online: "off",
   device: 0,
   time: 0,
@@ -47,7 +47,7 @@ export const arrayOfPowerSupply = z.object({
   messages: z.string(),
 });
 
-export function powerSupplySanitizer(rawData: unknown): PowerSupplyLiveSchema[] {
+export function powerSupplySanitizer(rawData: unknown): ChartLiveSchema[] {
   const serverSchema = arrayOfPowerSupply.safeParse(rawData);
 
   if (serverSchema.success) {

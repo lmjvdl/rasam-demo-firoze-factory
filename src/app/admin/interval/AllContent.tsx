@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import getIntervalList, { ResponseSchema } from "./hooks/useView";
 import useDelete from "./hooks/useDelete";
-import { PrevDataInitial } from "@/interfaces/general/general";
+import { PrevDataInitial } from "@/interfaces/user/general/general";
 import { columns } from "./ColumnsData";
 import { IntervalUpdateSchema } from "./hooks/useUpdate";
 import IntervalTable from "./IntervalTable";

@@ -6,7 +6,7 @@ import getOperationList, { ResponseSchema } from "./hooks/useView";
 import ViewDialog from "@/components/adminPanelComponent/viewProcess/ViewDialog";
 import EditDialog from "@/components/adminPanelComponent/viewProcess/EditDialog";
 import DeleteDialog from "@/components/adminPanelComponent/viewProcess/DeleteDialog";
-import { PrevDataInitial } from "@/interfaces/general/general";
+import { PrevDataInitial } from "@/interfaces/user/general/general";
 import { columns } from "./ColumnsData";
 import { OperationUpdateSchema } from "./hooks/useUpdate";
 import OperationTable from "./OperationTable";

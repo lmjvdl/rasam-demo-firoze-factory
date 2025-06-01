@@ -1,4 +1,4 @@
-import { LiveManager } from "@/interfaces/lives/manager";
+import { LiveManager } from "@/interfaces/user/lives/manager";
 import OneSensorLiveCard from "./OneSensor";
 import MultiSensorLiveCard from "./MultiSensor";
 import LoadingScreen from "../loadingScreen/LoadingScreen";

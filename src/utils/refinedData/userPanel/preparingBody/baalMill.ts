@@ -1,4 +1,4 @@
-import { BaalMillLiveSchema } from "@/interfaces/preparingBody/live";
+import { OneSensorLiveSchema } from "@/interfaces/user/lives/oneSensor";
 import { z } from "zod";
 
 export const baalMillInitialDataQuery = {
@@ -30,7 +30,7 @@ export const arrayOfBaalMill = z.object({
   messages: z.string(),
 });
 
-export function baalMillSanitizer(rawData: unknown): BaalMillLiveSchema[] {
+export function baalMillSanitizer(rawData: unknown): OneSensorLiveSchema[] {
   const serverSchema = arrayOfBaalMill.safeParse(rawData);
 
   if (serverSchema.success) {

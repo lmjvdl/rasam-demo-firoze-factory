@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Card, CardContent, Divider, Typography, useTheme } from "@mui/material";
 import OnOff from "../dependenciesLiveCards/OnOff";
-import { OneSensorProps } from "@/interfaces/lives/oneSensor";
+import { OneSensorProps } from "@/interfaces/user/lives/oneSensor";
 
 export default function OneSensorLiveCard({container}: OneSensorProps) {
   const theme = useTheme();

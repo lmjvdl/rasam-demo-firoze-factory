@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import getPermissionList, { ResponseSchema } from "./hooks/useView";
 import ViewDialog from "@/components/adminPanelComponent/viewProcess/ViewDialog";
-import { PrevDataInitial } from "@/interfaces/general/general";
+import { PrevDataInitial } from "@/interfaces/user/general/general";
 import { columns } from "./ColumnsData";
 import PermissionTable from "./PermissionTable";
 import { Permission } from "@/interfaces/admin/permission";

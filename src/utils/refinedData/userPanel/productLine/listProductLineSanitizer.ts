@@ -1,4 +1,4 @@
-import { ProductLineState } from "@/interfaces/general/general";
+import { ProductLineState } from "@/interfaces/user/general/general";
 import { productLineDataArray } from "./producLine";
 
 export function listProductLineSanitizer(rawData: unknown): ProductLineState {

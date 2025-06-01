@@ -19,7 +19,8 @@ export const productLineDataArray = z.object({
       product_lines: z.object({
         id: z.number(),
         name: z.string(),
-        icon: z.string().nullable()
+        light_icon: z.string().nullable(),
+        dark_icon: z.string().nullable(),
       }).array()
     })
   ),

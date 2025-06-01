@@ -1,4 +1,4 @@
-import { FanSprayLiveSchema } from "@/interfaces/preparingBody/live";
+import { MultiSensorLiveSchema } from "@/interfaces/user/lives/multiSensor";
 import { z } from "zod";
 
 export const fanSprayInitialDataQuery = {
@@ -30,7 +30,7 @@ export const arrayOfFanSpray = z.object({
   messages: z.string(),
 });
 
-export function fanSpraySanitizer(rawData: unknown): FanSprayLiveSchema[] {
+export function fanSpraySanitizer(rawData: unknown): MultiSensorLiveSchema[] {
   const serverSchema = arrayOfFanSpray.safeParse(rawData);
 
   if (serverSchema.success) {

@@ -6,7 +6,7 @@ import {
   Divider,
   useTheme,
 } from "@mui/material";
-import { MultiSensorProps } from "@/interfaces/lives/multiSensor";
+import { MultiSensorProps } from "@/interfaces/user/lives/multiSensor";
 import OnOff from "../dependenciesLiveCards/OnOff";
 
 export default function MultiSensorLiveCard({ container }: MultiSensorProps) {

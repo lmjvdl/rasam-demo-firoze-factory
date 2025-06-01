@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { ProductLineState } from "@/interfaces/general/general";
+import { ProductLineState } from "@/interfaces/user/general/general";
 
 const initialProductLineStore: ProductLineState = {
   companies: [],

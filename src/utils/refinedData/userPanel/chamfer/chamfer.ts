@@ -1,4 +1,4 @@
-import { ChamferLiveSchema } from "@/interfaces/chamfer/live";
+import { OneSensorLiveSchema } from "@/interfaces/user/lives/oneSensor";
 import { z } from "zod";
 
 export const chamferInitialDataQuery = {
@@ -30,7 +30,7 @@ export const arrayOfChamfer = z.object({
   messages: z.string(),
 });
 
-export function chamferSanitizer(rawData: unknown): ChamferLiveSchema[] {
+export function chamferSanitizer(rawData: unknown): OneSensorLiveSchema[] {
   const serverSchema = arrayOfChamfer.safeParse(rawData);
 
   if (serverSchema.success) {

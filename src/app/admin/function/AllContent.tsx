@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import getFunctionList, { ResponseSchema } from "./hooks/useView";
 import useDelete from "./hooks/useDelete";
-import { PrevDataInitial } from "@/interfaces/general/general";
+import { PrevDataInitial } from "@/interfaces/user/general/general";
 import { columns } from "./ColumnsData";
 import { FunctionUpdateSchema } from "./hooks/useUpdate";
 import FunctionTable from "./FunctionTable";
