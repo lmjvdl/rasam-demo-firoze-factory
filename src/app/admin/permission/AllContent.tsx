@@ -6,10 +6,11 @@ import ViewDialog from "@/components/adminPanelComponent/viewProcess/ViewDialog"
 import { PrevDataInitial } from "@/interfaces/general/general";
 import { columns } from "./ColumnsData";
 import PermissionTable from "./PermissionTable";
+import { Permission } from "@/interfaces/admin/permission";
 
 const AllContentPermission: React.FC = () => {
   const [data, setData] = useState<ResponseSchema>(PrevDataInitial);
-  const [selectedRow, setSelectedRow] = useState<any>(null);
+  const [selectedRow, setSelectedRow] = useState<Permission>();
   const [viewOpen, setViewOpen] = useState(false);
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [totalData, setTotalData] = useState<number>(0);
@@ -36,7 +37,7 @@ const AllContentPermission: React.FC = () => {
     getList.mutate({ page: newPage + 1, page_size: 12, url: nextPage });
   };
 
-  const handleView = (row: any) => {
+  const handleView = (row: Permission) => {
     setSelectedRow(row);
     setViewOpen(true);
   };

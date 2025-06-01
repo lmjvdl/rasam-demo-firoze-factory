@@ -15,10 +15,11 @@ import useDeviceQuery from "./hooks/useDeviceList";
 import useDataQuery from "@/hooks/adminDataQuery/useDataQuery";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import dataTypeUrls from "@/utils/url/adminPanel/dataTypeUrl";
+import { Operation } from "@/interfaces/admin/operation";
 
 const AllContentOperation: React.FC = () => {
   const [data, setData] = useState<ResponseSchema>(PrevDataInitial);
-  const [selectedRow, setSelectedRow] = useState<any>(null);
+  const [selectedRow, setSelectedRow] = useState<Operation>();
   const [viewOpen, setViewOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
@@ -127,17 +128,17 @@ const AllContentOperation: React.FC = () => {
     getList.mutate({ page: newPage + 1, page_size: 8, url: nextPage });
   };
 
-  const handleView = (row: any) => {
+  const handleView = (row: Operation) => {
     setSelectedRow(row);
     setViewOpen(true);
   };
 
-  const handleEdit = (row: any) => {
+  const handleEdit = (row: Operation) => {
     setSelectedRow(row);
     setEditOpen(true);
   };
 
-  const handleDelete = (row: any) => {
+  const handleDelete = (row: Operation) => {
     setSelectedRow(row);
     setDeleteOpen(true);
   };

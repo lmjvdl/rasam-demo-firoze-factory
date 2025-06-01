@@ -1,4 +1,4 @@
-interface Function {
+export interface Function {
     id: number; // ReadOnly
     name: string;
     description: string;

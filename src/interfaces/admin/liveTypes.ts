@@ -1,4 +1,4 @@
-interface LiveType {
+export interface LiveType {
     id: number; // ReadOnly
     name: string;
 }

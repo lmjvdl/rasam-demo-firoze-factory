@@ -11,10 +11,11 @@ import { columns } from "./ColumnsData";
 import { DatatypeUpdateSchema } from "./hooks/useUpdate";
 import DataTypeTable from "./DataTypeTable";
 import useUpdate from "./hooks/useUpdate";
+import { DataType } from "@/interfaces/admin/dataType";
 
 const AllContentDataType: React.FC = () => {
   const [data, setData] = useState<ResponseSchema>(PrevDataInitial);
-  const [selectedRow, setSelectedRow] = useState<any>(null);
+  const [selectedRow, setSelectedRow] = useState<DataType>();
   const [viewOpen, setViewOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
@@ -67,17 +68,17 @@ const AllContentDataType: React.FC = () => {
     getList.mutate({ page: newPage + 1, page_size: 8, url: nextPage });
   };
 
-  const handleView = (row: any) => {
+  const handleView = (row: DataType) => {
     setSelectedRow(row);
     setViewOpen(true);
   };
 
-  const handleEdit = (row: any) => {
+  const handleEdit = (row: DataType) => {
     setSelectedRow(row);
     setEditOpen(true);
   };
 
-  const handleDelete = (row: any) => {
+  const handleDelete = (row: DataType) => {
     setSelectedRow(row);
     setDeleteOpen(true);
   };

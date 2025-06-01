@@ -14,7 +14,7 @@ export default function ProductLinePage() {
   const { companyOptions } = useProductLineExtraOptions();
 
 
-  const handleCreateProductLine = async (data: any) => {
+  const handleCreateProductLine = async (data: unknown) => {
     const response = await createNewProductLine(data);
     if (response.success) {
       setRefreshKey(prev => prev + 1);

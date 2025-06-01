@@ -11,7 +11,7 @@ export default function GroupPage() {
   const [refreshKey, setRefreshKey] = useState(0);
   const { permissionOptions, userOptions } = useGroupExtraOptions();
 
-  const handleCreateGroup = async (data: any) => {
+  const handleCreateGroup = async (data: unknown) => {
     const response = await createNewGroup(data);
     if (response.success) {
       setRefreshKey(prev => prev + 1);
