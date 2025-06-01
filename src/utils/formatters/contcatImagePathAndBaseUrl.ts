@@ -1,4 +1,4 @@
-import Url from "../dataFetching/urls";
+import Url from "../url/general/urls";
 
 export default function concatImagePathAndBaseUrl(imagePath: string): string {
     const urlInstance = new Url();

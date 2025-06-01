@@ -3,7 +3,7 @@ import { fetchWithErrorWithAlarm } from "@/utils/dataFetching/fetchWithError";
 import { deleteUser, updateUser } from "../context/authStore";
 import { errorHandler } from "@/utils/dataFetching/queryClient";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
-import authUrls from "@/utils/contextDependencies/authUrls";
+import authUrls from "@/utils/url/general/authUrls";
 import AuthResponseSanitizer from "@/utils/contextDependencies/authResponseSanitizer";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";

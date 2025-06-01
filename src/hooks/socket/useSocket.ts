@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import ReconnectingWebSocket from "reconnecting-websocket";
 import toast from "react-hot-toast";
-import WsUrl from "@/utils/dataFetching/wsUrl";
+import WsUrl from "@/utils/url/general/wsUrl";
 
 const useWebSocket = <T extends { device: number }>(id: number, initialDevices: T[] = []) => {
   const [devices, setDevices] = useState<T[]>([]);

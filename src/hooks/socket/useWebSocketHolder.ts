@@ -2,7 +2,7 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
 import ReconnectingWebSocket from "reconnecting-websocket";
 import toast from "react-hot-toast";
-import WsUrl from "@/utils/dataFetching/wsUrl";
+import WsUrl from "@/utils/url/general/wsUrl";
 
 const MAX_DATA_POINTS = 100;
 

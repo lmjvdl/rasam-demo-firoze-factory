@@ -1,4 +1,4 @@
-import Url from "@/utils/dataFetching/urls";
+import Url from "@/utils/url/general/urls";
 
 class ProductLineUrls extends Url {
   public constructor() {

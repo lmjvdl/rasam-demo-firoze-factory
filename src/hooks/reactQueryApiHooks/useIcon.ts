@@ -3,7 +3,7 @@ import { fetchWithErrorWithoutPagination } from "@/utils/dataFetching/fetchWithE
 import { z } from "zod";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import imageUploadUrls from "@/utils/url/adminPanel/imageUrl";
-import Url from "@/utils/dataFetching/urls";
+import Url from "@/utils/url/general/urls";
 import concatImagePathAndBaseUrl from "@/utils/formatters/contcatImagePathAndBaseUrl";
 
 const responseSchema = z.object({

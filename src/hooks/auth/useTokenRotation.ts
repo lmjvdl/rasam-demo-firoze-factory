@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import fetchWithError from "@/utils/dataFetching/fetchWithError";
 import { errorHandler } from "@/utils/dataFetching/queryClient";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
-import authUrls from "@/utils/contextDependencies/authUrls";
+import authUrls from "@/utils/url/general/authUrls";
 import { deleteUser, renewAccessToken, useAuthStore } from "../context/authStore";
 import toast from "react-hot-toast";
 
