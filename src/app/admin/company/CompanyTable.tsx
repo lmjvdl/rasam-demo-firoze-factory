@@ -3,7 +3,7 @@ import DataTable from "@/components/adminPanelComponent/viewProcess/DataTable";
 import Link from "next/link";
 import { IconButton } from "@mui/material";
 import { IconUserExclamation } from "@tabler/icons-react";
-import { CompanyTableProps } from "@/interfaces/admin/company";
+import { Company, CompanyTableProps } from "@/interfaces/admin/company";
 
 const CompanyTable: React.FC<CompanyTableProps> = ({
   data,
@@ -19,7 +19,7 @@ const CompanyTable: React.FC<CompanyTableProps> = ({
     if (col.id === "userActions") {
       return {
         ...col,
-        render: (row: any) => (
+        render: (row: Company) => (
           <Link href={`/admin/company/${row.id}/user`} passHref>
             <IconButton 
               aria-label="مشاهده کاربران شرکت"

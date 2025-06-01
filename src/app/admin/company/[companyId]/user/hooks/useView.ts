@@ -5,15 +5,16 @@ import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import userCompanyUrls from "@/utils/url/adminPanel/userCompanyUrl";
 import { useToast } from "@/hooks/ui/useToast";
 
-export default function useUserCompanyList(companyID: number) {
+export default function useUserCompanyList(companyID: number, pages: number, pageSize: number, URL: string | null) {
   const queryClient = useQueryClient();
   const { showToast } = useToast();
   const getUserCompanyListMutation = useMutation({
     mutationKey: allQueryKeys.adminPanel.userCompany.list,
     retry: false,
-    mutationFn: ({ company_id = companyID }: { company_id?: number; }) =>
+    mutationFn: ({ company_id = companyID, page = pages, page_size = pageSize, url = URL }: { company_id?: number; page?: number; page_size?: number; url: string | null;}) =>
       fetchWithError(
-        userCompanyUrls.listUserCompany(company_id),
+        url !== null ? url : 
+        `${userCompanyUrls.listUserCompany(company_id)}?p=${page}&page_size=${page_size}`,
         { method: "GET" }
       ).then(sanitizer),
     onSuccess: (serverResponse) => {

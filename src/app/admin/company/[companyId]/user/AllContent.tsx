@@ -29,13 +29,13 @@ export default function AllContentUserCompany({
 
   const { permissionList, groupList } = useUserCompanyExtraOptions();
 
-  const getList = useUserCompanyList(companyId);
+  const getList = useUserCompanyList(companyId, pageNumber, 8, nextPage);
   const { deleteUserCompanyMutation } = useDelete();
   const { updateUserCompanyMutation } = useUpdate();
 
   useEffect(() => {
     getList.mutate(
-      { company_id: companyId },
+      { company_id: companyId, page: pageNumber + 1, page_size: 8, url: nextPage },
       {
         onSuccess: (information) => {
           setData(information);
