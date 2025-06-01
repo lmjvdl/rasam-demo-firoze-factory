@@ -1,14 +1,14 @@
 export default function gregorianToJalali(dateStr: string): string {
     const gDate = new Date(dateStr);
-    let gy = gDate.getFullYear();
-    let gm = gDate.getMonth() + 1;
-    let gd = gDate.getDate();
+    const gy = gDate.getFullYear();
+    const gm = gDate.getMonth() + 1;
+    const gd = gDate.getDate();
 
     const g_d_m = [0, 31, (gy % 4 === 0 && (gy % 100 !== 0 || gy % 400 === 0)) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
     let jy, jm, jd;
-    let gy2 = (gm > 2) ? gy + 1 : gy;
-    let days = 355666 + (gy2 * 365) + Math.floor((gy2 + 3) / 4) - Math.floor((gy2 + 99) / 100) + Math.floor((gy2 + 399) / 400);
     
+    let days = 355666 + (gy * 365) + Math.floor((gy + 3) / 4) - Math.floor((gy + 99) / 100) + Math.floor((gy + 399) / 400);
+
     for (let i = 1; i < gm; i++) {
         days += g_d_m[i];
     }
@@ -24,7 +24,7 @@ export default function gregorianToJalali(dateStr: string): string {
         days = (days - 1) % 365;
     }
 
-    let jmArray = [0, 31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29];
+    const jmArray = [0, 31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29];
     for (jm = 1; jm <= 12 && days >= jmArray[jm]; jm++) {
         days -= jmArray[jm];
     }
@@ -32,6 +32,7 @@ export default function gregorianToJalali(dateStr: string): string {
 
     return `${jy}/${jm}/${jd}`;
 }
+
 
 export function gregorianToJalaliWithTime(dateStr: string): string {
     const gDate = new Date(dateStr);
