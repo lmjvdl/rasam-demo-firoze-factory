@@ -1,4 +1,5 @@
 import { useAuthStore } from "@/hooks/context/authStore";
+import { ReportParams } from "@/interfaces/settings/downloadFile";
 import toast from "react-hot-toast";
 
 export default async function fetchWithError(
@@ -143,7 +144,7 @@ export async function uploadFileWithError(
 
 export async function fetchWithErrorForDownload(
   url: string | URL,
-  params: Record<string, any> = {},
+  params: ReportParams,
   fileName?: string
 ): Promise<void> {
   try {
@@ -166,12 +167,13 @@ export async function fetchWithErrorForDownload(
     const response = await fetch(finalUrl.toString(), options);
 
     if (!response.ok) {
+      toast.error('خطا در دریافت فایل')
       throw new Error('خطا در دریافت فایل');
     }
 
     const blob = await response.blob();
     const contentDisposition = response.headers.get('content-disposition');
-    console.log(contentDisposition)
+
     const finalFileName = fileName || 
       contentDisposition?.split('filename=')[1]?.replace(/"/g, '') || 
       'download.file';
