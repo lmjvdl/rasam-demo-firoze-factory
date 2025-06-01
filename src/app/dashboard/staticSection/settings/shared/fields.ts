@@ -1,7 +1,7 @@
-import useDeviceQuery from "@/app/admin/operation/hooks/useDeviceList";
+import { useDownloadFileExtraOptions } from "./hooks/useDeviceQuery";
 
 export const getFormFields = () => {
-    const getDeviceList = useDeviceQuery();
+  const { deviceOptions } = useDownloadFileExtraOptions();
   
     return [
       {
@@ -9,11 +9,7 @@ export const getFormFields = () => {
         label: "دستگاه ها",
         type: "multiselect",
         required: false,
-        options:
-          getDeviceList.data?.map((device) => ({
-            label: device.name,
-            value: device.id,
-          })) || [],
+        options: deviceOptions
       },
       {
         name: "start_time",

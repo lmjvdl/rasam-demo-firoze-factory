@@ -1,7 +1,7 @@
-import { Container, Typography, CircularProgress, Alert, Box } from "@mui/material";
+import { Container, CircularProgress, Alert, Box } from "@mui/material";
 import useJsonReport from "./useJsonReport";
 import Form from "@/components/form/form";
-import { getFormFields } from "./fields";
+import { getFormFields } from "../shared/fields";
 
 
 export default function JsonReport() {

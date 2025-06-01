@@ -97,7 +97,7 @@ const ModalForm: React.FC<ModalFormProps> = ({
                           "حداقل یک گزینه باید انتخاب شود"
                       : undefined,
                 }}
-                render={({ field: controllerField, fieldState, formState }) => {
+                render={({ field: controllerField }) => {
                   const isFixedField = fixedValues && field.name in fixedValues;
 
                   if (field.type === "date") {

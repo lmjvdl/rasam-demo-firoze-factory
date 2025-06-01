@@ -12,7 +12,7 @@ export interface ModalFormProps {
   onSubmit: (data: any) => Promise<{ success: boolean; error?: string }>;
   icons?: { id: number; url: string }[];
   loadingIcons?: boolean;
-  fixedValues?: Record<string, any>;
+  fixedValues?: Record<string, string>;
   customComponent?: React.ReactNode;
 }
 

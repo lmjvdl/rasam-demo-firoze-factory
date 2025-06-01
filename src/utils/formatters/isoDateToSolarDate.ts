@@ -5,7 +5,7 @@ export default function gregorianToJalali(dateStr: string): string {
     const gd = gDate.getDate();
 
     const g_d_m = [0, 31, (gy % 4 === 0 && (gy % 100 !== 0 || gy % 400 === 0)) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-    let jy, jm, jd;
+    let jy, jm;
     
     let days = 355666 + (gy * 365) + Math.floor((gy + 3) / 4) - Math.floor((gy + 99) / 100) + Math.floor((gy + 399) / 400);
 
@@ -28,7 +28,7 @@ export default function gregorianToJalali(dateStr: string): string {
     for (jm = 1; jm <= 12 && days >= jmArray[jm]; jm++) {
         days -= jmArray[jm];
     }
-    jd = days + 1;
+    const jd = days + 1;
 
     return `${jy}/${jm}/${jd}`;
 }
