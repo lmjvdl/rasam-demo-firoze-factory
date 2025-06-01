@@ -30,7 +30,7 @@ export const createNewInputItem = async (data: unknown) => {
     } else {
       return { success: false, error: response.messages || "خطایی رخ داده است" };
     }
-  } catch (error) {
+  } catch {
     throw new Error("درخواست به سرور با مشکل مواجه شد.");
   }
 };

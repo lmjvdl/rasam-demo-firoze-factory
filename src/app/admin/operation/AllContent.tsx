@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import useDelete from "./hooks/useDelete";
 import useOperationList, { ResponseSchema } from "./hooks/useView";
+import useDelete from "./hooks/useDelete";
 import ViewDialog from "@/components/adminPanelComponent/viewProcess/ViewDialog";
 import EditDialog from "@/components/adminPanelComponent/viewProcess/EditDialog";
 import DeleteDialog from "@/components/adminPanelComponent/viewProcess/DeleteDialog";
@@ -11,10 +11,7 @@ import { columns } from "./ColumnsData";
 import { OperationUpdateSchema } from "./hooks/useUpdate";
 import OperationTable from "./OperationTable";
 import useUpdate from "./hooks/useUpdate";
-import useDeviceQuery from "./hooks/useDeviceList";
-import useDataQuery from "@/hooks/adminDataQuery/useDataQuery";
-import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
-import dataTypeUrls from "@/utils/url/adminPanel/dataTypeUrl";
+import { useOperationExtraOptions } from "./hooks/useOperationExtraOptions";
 import { Operation } from "@/interfaces/admin/operation";
 
 const AllContentOperation: React.FC = () => {
@@ -27,58 +24,34 @@ const AllContentOperation: React.FC = () => {
   const [totalData, setTotalData] = useState<number>(0);
   const [nextPage, setNextPage] = useState<null | string>(null);
 
+  const { deviceList, dataTypeMap } = useOperationExtraOptions();
+
   const getList = useOperationList(pageNumber, 8, nextPage);
   const { deleteOperationMutation } = useDelete();
   const { updateOperationMutation } = useUpdate();
-
-  const deviceList = useDeviceQuery().data
-    ? useDeviceQuery().data.map((device) => ({
-        id: device.id,
-        value: device.id,
-        label: device.name,
-      }))
-    : [];
-
-  const dataTypeList = useDataQuery(
-    allQueryKeys.adminPanel.operation.data_type_list,
-    dataTypeUrls.listDataType
-  ).data
-    ? useDataQuery(
-        allQueryKeys.adminPanel.operation.data_type_list,
-        dataTypeUrls.listDataType
-      ).data.map((dataType) => ({
-        id: dataType.id,
-        value: dataType.id,
-        label: dataType.name,
-      }))
-    : [];
-
-  const dataTypeMap = new Map(
-    dataTypeList.map((item) => [item.id, item.label])
-  );
 
   useEffect(() => {
     if (getList.isSuccess && getList.data) {
       const updatedResults = getList.data.data.results.map((row: any) => {
         if (row.datatype_operation && row.isKeyValObject) {
           const mappedDatatypeOperation: Record<string, string> = {};
-
+  
           Object.entries(row.datatype_operation).forEach(([key, value]) => {
             const label = dataTypeMap.get(Number(key));
             if (label) {
               mappedDatatypeOperation[label] = value as string;
             }
           });
-
+  
           return {
             ...row,
             datatype_operation: mappedDatatypeOperation,
           };
         }
-
+  
         return row;
       });
-
+  
       setData({
         ...getList.data,
         data: {
@@ -89,7 +62,8 @@ const AllContentOperation: React.FC = () => {
       setTotalData(getList.data.data.count);
       setNextPage(getList.data.data.next);
     }
-  }, []);
+  }, [getList.isSuccess, getList.data, JSON.stringify(Array.from(dataTypeMap.entries()))]);
+  
 
   useEffect(() => {
     getList.mutate(
@@ -212,6 +186,9 @@ const AllContentOperation: React.FC = () => {
         onConfirm={handleConfirmDelete}
         rowData={selectedRow}
         titles={dynamicColumns}
+        arrayAttributes={{
+          devices: "name",
+        }}
       />
     </>
   );
