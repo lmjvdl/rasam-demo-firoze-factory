@@ -1,3 +1,5 @@
+import { TitlesColumnsData } from "./general";
+
 export interface Operation {
   id: number; // ReadOnly
   datatype_operation: Record<string, string> | null;
@@ -8,7 +10,7 @@ export interface Operation {
   
 export interface OperationTableProps {
     data: Operation[];
-    columns: any[];
+    columns: TitlesColumnsData[];
     onView: (row: Operation) => void;
     onEdit: (row: Operation) => void;
     onDelete: (row: Operation) => void;

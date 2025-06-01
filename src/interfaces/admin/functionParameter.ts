@@ -1,3 +1,5 @@
+import { TitlesColumnsData } from "./general";
+
 export interface FunctionParameter {
     id: number; 
     name: string;
@@ -6,7 +8,7 @@ export interface FunctionParameter {
   
 export interface FunctionParameterTableProps {
     data: FunctionParameter[];
-    columns: any[];
+    columns: TitlesColumnsData[];
     onView: (row: FunctionParameter) => void;
     onEdit: (row: FunctionParameter) => void;
     onDelete: (row: FunctionParameter) => void;

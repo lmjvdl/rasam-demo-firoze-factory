@@ -1,3 +1,5 @@
+import { TitlesColumnsData } from "./general";
+
 export interface SmsLog {
     id: number; // ReadOnly
     to: string;
@@ -9,7 +11,7 @@ export interface SmsLog {
   
 export interface SmsLogTableProps {
     data: SmsLog[];
-    columns: any[];
+    columns: TitlesColumnsData[];
     onView: (row: SmsLog) => void;
     count: number;
     page: number; 

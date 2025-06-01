@@ -1,3 +1,5 @@
+import { TitlesColumnsData } from "./general";
+
 export interface Contacts {
     id: number; // ReadOnly
     name: string;
@@ -9,7 +11,7 @@ export interface Contacts {
   
 export interface ContactsTableProps {
     data: Contacts[];
-    columns: any[];
+    columns: TitlesColumnsData[];
     onView: (row: Contacts) => void;
     onEdit: (row: Contacts) => void;
     onDelete: (row: Contacts) => void;

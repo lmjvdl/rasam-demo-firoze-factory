@@ -1,3 +1,5 @@
+import { TitlesColumnsData } from "./general";
+
 export interface ProductLine {
     id: number; // ReadOnly
     company: { id: number; name: string } | null;
@@ -9,7 +11,7 @@ export interface ProductLine {
 
 export interface ProductLineTableProps {
     data: ProductLine[];
-    columns: any[];
+    columns: TitlesColumnsData[];
     onView: (row: ProductLine) => void;
     onEdit: (row: ProductLine) => void;
     onDelete: (row: ProductLine) => void;

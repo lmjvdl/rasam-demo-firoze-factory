@@ -1,3 +1,5 @@
+import { TitlesColumnsData } from "./general";
+
 export interface DeviceData {
     id: number; // ReadOnly
     device: number;
@@ -6,7 +8,7 @@ export interface DeviceData {
   
 export interface DeviceDataTableProps {
     data: DeviceData[];
-    columns: any[];
+    columns: TitlesColumnsData[];
     onView: (row: DeviceData) => void;
     onEdit: (row: DeviceData) => void;
     onDelete: (row: DeviceData) => void;

@@ -1,3 +1,5 @@
+import { TitlesColumnsData } from "./general";
+
 export interface DataType {
     id: number; // ReadOnly
     name: string;
@@ -8,7 +10,7 @@ export interface DataType {
   
 export interface DataTypeTableProps {
     data: DataType[];
-    columns: any[];
+    columns: TitlesColumnsData[];
     onView: (row: DataType) => void;
     onEdit: (row: DataType) => void;
     onDelete: (row: DataType) => void;

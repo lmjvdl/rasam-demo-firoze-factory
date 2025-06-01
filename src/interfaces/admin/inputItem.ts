@@ -1,3 +1,5 @@
+import { TitlesColumnsData } from "./general";
+
 export interface InputItem {
     id: number; // ReadOnly
     name: string;
@@ -6,7 +8,7 @@ export interface InputItem {
   
 export interface InputItemTableProps {
     data: InputItem[];
-    columns: any[];
+    columns: TitlesColumnsData[];
     onView: (row: InputItem) => void;
     onEdit: (row: InputItem) => void;
     onDelete: (row: InputItem) => void;

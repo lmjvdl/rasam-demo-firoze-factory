@@ -1,3 +1,5 @@
+import { TitlesColumnsData } from "./general";
+
 export interface Report {
     id: number; // ReadOnly
     name: string;
@@ -11,7 +13,7 @@ export interface Report {
   
 export interface ReportTableProps {
     data: Report[];
-    columns: any[];
+    columns: TitlesColumnsData[];
     onView: (row: Report) => void;
     onEdit: (row: Report) => void;
     onDelete: (row: Report) => void;

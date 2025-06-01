@@ -1,3 +1,5 @@
+import { TitlesColumnsData } from "./general";
+
 export interface LiveType {
     id: number; // ReadOnly
     name: string;
@@ -5,7 +7,7 @@ export interface LiveType {
   
 export interface LiveTypesTableProps {
     data: LiveType[];
-    columns: any[];
+    columns: TitlesColumnsData[];
     onView: (row: LiveType) => void;
     onEdit: (row: LiveType) => void;
     onDelete: (row: LiveType) => void;

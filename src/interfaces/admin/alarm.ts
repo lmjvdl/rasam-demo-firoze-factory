@@ -1,3 +1,5 @@
+import { TitlesColumnsData } from "./general";
+
 export interface Alarm {
     id: number;
     name: string;
@@ -12,7 +14,7 @@ export interface Alarm {
   
 export interface AlarmTableProps {
     data: Alarm[];
-    columns: any[];
+    columns: TitlesColumnsData[];
     onView: (row: Alarm) => void;
     onEdit: (row: Alarm) => void;
     onDelete: (row: Alarm) => void;

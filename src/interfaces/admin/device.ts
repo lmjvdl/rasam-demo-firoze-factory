@@ -1,3 +1,5 @@
+import { TitlesColumnsData } from "./general";
+
 export interface Device {
     id: number; // ReadOnly
     product_line_part: { id: number; name: string } | null;
@@ -9,7 +11,7 @@ export interface Device {
 }
 export interface DeviceTableProps {
     data: Device[];
-    columns: any[];
+    columns: TitlesColumnsData[];
     onView: (row: Device) => void;
     onEdit: (row: Device) => void;
     onDelete: (row: Device) => void;

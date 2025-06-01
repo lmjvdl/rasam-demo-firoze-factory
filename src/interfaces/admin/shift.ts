@@ -1,3 +1,5 @@
+import { TitlesColumnsData } from "./general";
+
 export interface Shift {
     id: number; // ReadOnly
     name: string;
@@ -10,7 +12,7 @@ export interface Shift {
   
 export interface ShiftTableProps {
     data: Shift[];
-    columns: any[];
+    columns: TitlesColumnsData[];
     onView: (row: Shift) => void;
     onEdit: (row: Shift) => void;
     onDelete: (row: Shift) => void;

@@ -1,3 +1,5 @@
+import { TitlesColumnsData } from "./general";
+
 export interface Group {
     id: number; // ReadOnly
     name: string;
@@ -6,7 +8,7 @@ export interface Group {
   
 export interface GroupTableProps {
     data: Group[];
-    columns: any[];
+    columns: TitlesColumnsData[];
     onView: (row: Group) => void;
     onEdit: (row: Group) => void;
     onDelete: (row: Group) => void;

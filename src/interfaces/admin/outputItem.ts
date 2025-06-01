@@ -1,3 +1,5 @@
+import { TitlesColumnsData } from "./general";
+
 export interface OutputItem {
     id: number; // ReadOnly
     name: string;
@@ -5,7 +7,7 @@ export interface OutputItem {
   
 export interface OutputItemTableProps {
     data: OutputItem[];
-    columns: any[];
+    columns: TitlesColumnsData[];
     onView: (row: OutputItem) => void;
     onEdit: (row: OutputItem) => void;
     onDelete: (row: OutputItem) => void;

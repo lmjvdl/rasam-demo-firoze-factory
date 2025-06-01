@@ -1,3 +1,5 @@
+import { TitlesColumnsData } from "./general";
+
 export interface ImageUpload {
     id: number;
     icon: string;
@@ -8,7 +10,7 @@ export interface ImageUpload {
 
 export interface ImageUploadTableProps {
     data: ImageUpload[];
-    columns: any[];
+    columns: TitlesColumnsData[];
     count: number;
     page: number; 
     onPageChange: (newPage: number) => void;

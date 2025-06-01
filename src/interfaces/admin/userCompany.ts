@@ -1,3 +1,5 @@
+import { TitlesColumnsData } from "./general";
+
 export interface UserCompany {
     id: number;
     user: string;
@@ -9,7 +11,7 @@ export interface UserCompany {
 
 export interface UserCompanyTableProps {
     data: UserCompany[];
-    columns: any[];
+    columns: TitlesColumnsData[];
     onView: (row: UserCompany) => void;
     onEdit: (row: UserCompany) => void;
     onDelete: (row: UserCompany) => void;

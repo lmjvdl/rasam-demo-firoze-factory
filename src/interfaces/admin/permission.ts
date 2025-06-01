@@ -1,3 +1,5 @@
+import { TitlesColumnsData } from "./general";
+
 export interface Permission {
     id: number; // ReadOnly
     name: string;
@@ -7,7 +9,7 @@ export interface Permission {
   
 export interface PermissionTableProps {
     data: Permission[];
-    columns: any[];
+    columns: TitlesColumnsData[];
     onView: (row: Permission) => void;
     count: number;
     page: number; 

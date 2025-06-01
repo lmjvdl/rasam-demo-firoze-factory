@@ -1,3 +1,5 @@
+import { TitlesColumnsData } from "./general";
+
 export interface Interval {
     id: number; // ReadOnly
     name: string;
@@ -7,7 +9,7 @@ export interface Interval {
   
 export interface IntervalTableProps {
     data: Interval[];
-    columns: any[];
+    columns: TitlesColumnsData[];
     onView: (row: Interval) => void;
     onEdit: (row: Interval) => void;
     onDelete: (row: Interval) => void;
