@@ -1,7 +1,8 @@
 import { Contacts } from "@/interfaces/admin/contacts";
+import { TitlesColumnsData } from "@/interfaces/admin/general";
 import { truncateText } from "@/utils/formatters/truncateText";
 
-export const columns = () => [
+export const columns = (): TitlesColumnsData[] => [
     {
         id: "id",
         label: "شناسه",

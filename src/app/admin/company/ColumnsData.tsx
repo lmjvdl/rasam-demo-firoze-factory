@@ -1,8 +1,9 @@
 import { IconButton } from "@mui/material";
 import Link from "next/link";
 import { IconUserExclamation } from "@tabler/icons-react";
+import { TitlesColumnsData } from "@/interfaces/admin/general";
 
-export const columns = () => [
+export const columns = (): TitlesColumnsData[] => [
   {
     id: "light_logo",
     label: "لوگو تم لایت",

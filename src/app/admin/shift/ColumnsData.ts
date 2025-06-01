@@ -1,6 +1,7 @@
+import { TitlesColumnsData } from "@/interfaces/admin/general";
 import { Shift } from "@/interfaces/admin/shift";
 
-export const columns = () => [
+export const columns = (): TitlesColumnsData[] => [
       {
         id: "id",
         label: "شناسه",
@@ -10,7 +11,6 @@ export const columns = () => [
       {
         id: "name",
         label: "نام شیفت",
-        type: "text",
         required: true,
         canEdit: true
       },
@@ -28,7 +28,6 @@ export const columns = () => [
       {
         id: "start_date",
         label: "تاریخ شروع",
-        type: "date",
         showOnTable: false,
         required: true,
         placeholder: "تاریخ شروع",
@@ -37,7 +36,6 @@ export const columns = () => [
       {
         id: "end_date",
         label: "تاریخ پایان",
-        type: "date",
         required: true,
         placeholder: "تاریخ پایان",
         showOnTable: false,
@@ -46,7 +44,6 @@ export const columns = () => [
       {
         id: "start_time",
         label: "ساعت شروع",
-        type: "time",
         required: true,
         placeholder: "ساعت شروع",
         canEdit: true
@@ -55,7 +52,6 @@ export const columns = () => [
         id: "end_time",
         label: "ساعت پایان",
         placeholder: "ساعت پایان",
-        type: "time",
         required: true,
         canEdit: true
       },

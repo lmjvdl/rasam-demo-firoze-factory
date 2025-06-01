@@ -1,7 +1,8 @@
 import { Device } from "@/interfaces/admin/device";
+import { TitlesColumnsData } from "@/interfaces/admin/general";
 import { truncateText } from "@/utils/formatters/truncateText";
 
-export const columns = () => [
+export const columns = (): TitlesColumnsData[] => [
     {
         id: "name",
         label: "نام",

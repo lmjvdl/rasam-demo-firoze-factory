@@ -1,4 +1,6 @@
-export const columns = () => [
+import { TitlesColumnsData } from "@/interfaces/admin/general";
+
+export const columns = (): TitlesColumnsData[] => [
     {
       id: "icon",
       label: "تصویر",

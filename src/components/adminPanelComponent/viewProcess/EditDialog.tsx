@@ -110,7 +110,6 @@ const EditDialog: React.FC<EditDialogProps> = ({
   };
 
   const handleDateField = (time: DateObject | undefined, field: string) => {
-    console.log(time)
     setFormData((prev) => ({
       ...prev,
       [field]: time ? formatUnixTimeToDateString(time.toUnix()) : "",

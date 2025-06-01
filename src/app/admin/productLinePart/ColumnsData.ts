@@ -1,6 +1,7 @@
+import { TitlesColumnsData } from "@/interfaces/admin/general";
 import { ProductLinePart } from "@/interfaces/admin/productLinePart";
 
-export const columns = () => [
+export const columns = (): TitlesColumnsData[] => [
     {
         id: "light_icon",
         label: "آیکون تم لایت",

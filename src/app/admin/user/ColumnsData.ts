@@ -1,7 +1,8 @@
+import { TitlesColumnsData } from "@/interfaces/admin/general";
 import { User } from "@/interfaces/admin/user";
 import { truncateText } from "@/utils/formatters/truncateText";
 
-export const columns = () => [
+export const columns = (): TitlesColumnsData[] => [
     {
         id: "id",
         label: "شناسه",
