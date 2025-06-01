@@ -1,6 +1,6 @@
 "use client"
 
-import { ReportParams } from "@/interfaces/user/settings/downloadFile";
+import { ReportParams } from "@/interfaces/user/staticSection/settings/downloadFile";
 import { validateDateRange } from "@/utils/checker/validateDateRange";
 import { fetchWithErrorForDownload } from "@/utils/dataFetching/fetchWithError";
 import gregorianToJalali from "@/utils/formatters/isoDateToSolarDate";
