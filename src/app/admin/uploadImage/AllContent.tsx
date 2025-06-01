@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import getImageList, { ResponseSchema } from "./hooks/useView";
+import useImageList, { ResponseSchema } from "./hooks/useView";
 import { PrevDataInitial } from "@/interfaces/user/general/general";
 import { columns } from "./ColumnsData";
 import ImageUploadTable from "./ImageUploadTable";
@@ -13,7 +13,7 @@ const AllContentImageUpload: React.FC = () => {
   const [totalData, setTotalData] = useState<number>(0);
   const [nextPage, setNextPage] = useState<null | string>(null);
 
-  const getList = getImageList(pageNumber, 8, nextPage);
+  const getList = useImageList(pageNumber, 8, nextPage);
 
   useEffect(() => {
     getList.mutate({ page: pageNumber + 1, page_size: 8, url: nextPage }, {

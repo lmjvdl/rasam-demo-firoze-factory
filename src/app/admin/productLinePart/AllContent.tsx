@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import getProductLinePartList, { ResponseSchema } from "./hooks/useView";
+import useProductLinePartList, { ResponseSchema } from "./hooks/useView";
 import useDelete from "./hooks/useDelete";
 import ViewDialog from "@/components/adminPanelComponent/viewProcess/ViewDialog";
 import EditDialog from "@/components/adminPanelComponent/viewProcess/EditDialog";
@@ -26,7 +26,7 @@ const AllContentProductLinePart: React.FC = () => {
 
   const { productLineList, iconList, liveTypeList } = useProductLinePartExtraOptions();
 
-  const getList = getProductLinePartList(pageNumber, 8, nextPage);
+  const getList = useProductLinePartList(pageNumber, 8, nextPage);
   const { deleteProductLinePartMutation } = useDelete();
   const { updateProductLinePartMutation } = useUpdateProductLinePart();
 

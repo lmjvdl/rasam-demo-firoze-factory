@@ -5,7 +5,7 @@ import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import { useToast } from "@/hooks/ui/useToast";
 import permissionUrls from "@/utils/url/adminPanel/permissionUrl";
 
-export default function getPermissionList() {
+export default function usePermissionList() {
   const queryClient = useQueryClient();
   const { showToast } = useToast();
 

@@ -5,7 +5,7 @@ import uploadFileWithError from "@/utils/dataFetching/fetchWithError";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import imageUploadUrls from "@/utils/url/adminPanel/imageUrl";
 
-export default function getImageList(pages: number, pageSize: number, URL: string | null) {
+export default function useImageList(pages: number, pageSize: number, URL: string | null) {
   const { showToast } = useToast();
   const queryClient = useQueryClient();
 

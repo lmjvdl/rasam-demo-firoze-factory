@@ -2,6 +2,7 @@ import { IconButton } from "@mui/material";
 import Link from "next/link";
 import { IconUserExclamation } from "@tabler/icons-react";
 import { TitlesColumnsData } from "@/interfaces/admin/general";
+import { Company } from "@/interfaces/admin/company";
 
 export const columns = (): TitlesColumnsData[] => [
   {
@@ -69,7 +70,7 @@ export const columns = (): TitlesColumnsData[] => [
     isActionColumn: false,
     canEdit: false,
     showOnTable: true,
-    render: (row: any) => (
+    render: (row: Company) => (
       <Link href={`/admin/company/${row.id}/user`} passHref>
         <IconButton 
           aria-label="مشاهده کاربران شرکت"

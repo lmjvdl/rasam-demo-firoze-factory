@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import getCompanyList, { ResponseSchema } from "./hooks/useView";
+import useCompanyList, { ResponseSchema } from "./hooks/useView";
 import useDelete from "./hooks/useDelete";
 import useUpdate, { CompanyUpdateSchema } from "./hooks/useUpdate";
 import CompanyTable from "./CompanyTable";
@@ -27,7 +27,7 @@ const AllContentCompany: React.FC = () => {
 
   const { iconList } = useCompanyExtraOptions();
 
-  const getList = getCompanyList(pageNumber, 8, nextPage);
+  const getList = useCompanyList(pageNumber, 8, nextPage);
   const { deleteCompanyMutation } = useDelete();
   const { updateCompanyMutation } = useUpdate();
 

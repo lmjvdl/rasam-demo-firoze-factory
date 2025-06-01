@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import getOutputItemList, { ResponseSchema } from "./hooks/useView";
+import useOutputItemList, { ResponseSchema } from "./hooks/useView";
 import useDelete from "./hooks/useDelete";
 import { PrevDataInitial } from "@/interfaces/user/general/general";
 import { columns } from "./ColumnsData";
@@ -23,7 +23,7 @@ const AllContentOutputItem: React.FC = () => {
   const [totalData, setTotalData] = useState<number>(0);
   const [nextPage, setNextPage] = useState<null | string>(null);
 
-  const getList = getOutputItemList(pageNumber, 8, nextPage);
+  const getList = useOutputItemList(pageNumber, 8, nextPage);
   const { deleteOutputItemMutation } = useDelete();
   const { updateOutputItemMutation } = useUpdate();
 

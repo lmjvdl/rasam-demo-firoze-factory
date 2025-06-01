@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import getShiftList, { ResponseSchema } from "./hooks/useView";
+import useShiftsList, { ResponseSchema } from "./hooks/useView";
 import useDelete from "./hooks/useDelete";
 import { PrevDataInitial } from "@/interfaces/user/general/general";
 import { columns } from "./ColumnsData";
@@ -26,7 +26,7 @@ const AllContentShift: React.FC = () => {
 
   const { companyList } = useShiftExtraOptions();
 
-  const getList = getShiftList(pageNumber, 8, nextPage);
+  const getList = useShiftsList(pageNumber, 8, nextPage);
   const { deleteShiftMutation } = useDelete();
   const { updateShiftMutation } = useUpdate();
 

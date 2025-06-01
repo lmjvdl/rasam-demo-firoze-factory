@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import useDelete from "./hooks/useDelete";
-import getOperationList, { ResponseSchema } from "./hooks/useView";
+import useOperationList, { ResponseSchema } from "./hooks/useView";
 import ViewDialog from "@/components/adminPanelComponent/viewProcess/ViewDialog";
 import EditDialog from "@/components/adminPanelComponent/viewProcess/EditDialog";
 import DeleteDialog from "@/components/adminPanelComponent/viewProcess/DeleteDialog";
@@ -27,7 +27,7 @@ const AllContentOperation: React.FC = () => {
   const [totalData, setTotalData] = useState<number>(0);
   const [nextPage, setNextPage] = useState<null | string>(null);
 
-  const getList = getOperationList(pageNumber, 8, nextPage);
+  const getList = useOperationList(pageNumber, 8, nextPage);
   const { deleteOperationMutation } = useDelete();
   const { updateOperationMutation } = useUpdate();
 

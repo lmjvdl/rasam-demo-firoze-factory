@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import getPositionList, { ResponseSchema } from "./hooks/useView";
+import usePositionsList, { ResponseSchema } from "./hooks/useView";
 import useDelete from "./hooks/useDelete";
 import { PrevDataInitial } from "@/interfaces/user/general/general";
 import { columns } from "./ColumnsData";
@@ -23,7 +23,7 @@ const AllContentPosition: React.FC = () => {
   const [totalData, setTotalData] = useState<number>(0);
   const [nextPage, setNextPage] = useState<null | string>(null);
 
-  const getList = getPositionList(pageNumber, 8, nextPage);
+  const getList = usePositionsList(pageNumber, 8, nextPage);
   const { deletePositionMutation } = useDelete();
   const { updatePositionMutation } = useUpdate();
 

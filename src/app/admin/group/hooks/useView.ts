@@ -5,7 +5,7 @@ import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import { useToast } from "@/hooks/ui/useToast";
 import groupUrls from "@/utils/url/adminPanel/groupUrl";
 
-export default function getGroupList(pages: number, pageSize: number, URL: string | null) {
+export default function useGroupList(pages: number, pageSize: number, URL: string | null) {
   const queryClient = useQueryClient();
   const { showToast } = useToast();
 

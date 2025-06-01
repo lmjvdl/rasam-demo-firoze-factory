@@ -5,7 +5,7 @@ import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import deviceUrls from "@/utils/url/adminPanel/deviceUrl";
 import { useToast } from "@/hooks/ui/useToast";
 
-export default function getDeviceList(pages: number, pageSize: number, URL: string | null) {
+export default function useDeviceList(pages: number, pageSize: number, URL: string | null) {
   const queryClient = useQueryClient();
   const { showToast } = useToast();
 

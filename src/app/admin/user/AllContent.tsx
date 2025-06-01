@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import getUserList, { ResponseSchema } from "./hooks/useView";
+import useUserList, { ResponseSchema } from "./hooks/useView";
 import useDelete from "./hooks/useDelete";
 import ViewDialog from "@/components/adminPanelComponent/viewProcess/ViewDialog";
 import EditDialog from "@/components/adminPanelComponent/viewProcess/EditDialog";
@@ -25,7 +25,7 @@ const AllContentUser: React.FC = () => {
 
   const { productLineList, groupList, positionList } = useUserExtraOptions();
 
-  const getList = getUserList(pageNumber, 8, nextPage);
+  const getList = useUserList(pageNumber, 8, nextPage);
   const { deleteUserMutation } = useDelete();
   const { updateUserMutation } = useUpdate();
   const dynamicColumns = columns();

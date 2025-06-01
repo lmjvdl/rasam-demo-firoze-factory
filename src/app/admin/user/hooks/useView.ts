@@ -4,10 +4,8 @@ import fetchWithError from "@/utils/dataFetching/fetchWithError";
 import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import { useToast } from "@/hooks/ui/useToast";
 import userUrls from "@/utils/url/adminPanel/userUrl";
-import { position } from "stylis";
 
-// Updated function to handle GET requests
-export default function getUerList(pages: number, pageSize: number, URL: string | null) {
+export default function useUserList(pages: number, pageSize: number, URL: string | null) {
   const queryClient = useQueryClient();
   const { showToast } = useToast();
 

@@ -1,9 +1,8 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import getAlarmList, { ResponseSchema } from "./hooks/useView";
+import useAlarmList, { ResponseSchema } from "./hooks/useView";
 import useDelete from "./hooks/useDelete";
-import { PrevDataInitial } from "@/interfaces/user/general/general";
 import { columns } from "./ColumnsData";
 import { AlarmUpdateSchema } from "./hooks/useUpdate";
 import AlarmTable from "./AlarmTable";
@@ -13,6 +12,7 @@ import EditDialog from "@/components/adminPanelComponent/viewProcess/EditDialog"
 import DeleteDialog from "@/components/adminPanelComponent/viewProcess/DeleteDialog";
 import { Alarm } from "@/interfaces/admin/alarm";
 import { useAlarmExtraOptions } from "./hooks/useAlarmExtraOptions";
+import { PrevDataInitial } from "@/interfaces/user/general/general";
 
 const AllContentAlarm: React.FC = () => {
   const [data, setData] = useState<ResponseSchema>(PrevDataInitial);
@@ -24,7 +24,7 @@ const AllContentAlarm: React.FC = () => {
   const [totalData, setTotalData] = useState<number>(0);
   const [nextPage, setNextPage] = useState<null | string>(null);
 
-  const getList = getAlarmList(pageNumber, 8, nextPage);
+  const getList = useAlarmList(pageNumber, 8, nextPage);
   const { deleteAlarmMutation } = useDelete();
   const { updateAlarmMutation } = useUpdate();
 
@@ -41,7 +41,7 @@ const AllContentAlarm: React.FC = () => {
         },
       }
     );
-  }, [pageNumber]);
+  }, [pageNumber, nextPage]);
 
   const handleSaveEdit = (updatedRow: AlarmUpdateSchema) => {
     setData((prevData) => {

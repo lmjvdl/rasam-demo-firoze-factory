@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import getUserCompanyList, { ResponseSchema } from "./hooks/useView";
+import useUserCompanyList, { ResponseSchema } from "./hooks/useView";
 import useDelete from "./hooks/useDelete";
 import ViewDialog from "@/components/adminPanelComponent/viewProcess/ViewDialog";
 import EditDialog from "@/components/adminPanelComponent/viewProcess/EditDialog";
@@ -29,7 +29,7 @@ export default function AllContentUserCompany({
 
   const { permissionList, groupList } = useUserCompanyExtraOptions();
 
-  const getList = getUserCompanyList(companyId);
+  const getList = useUserCompanyList(companyId);
   const { deleteUserCompanyMutation } = useDelete();
   const { updateUserCompanyMutation } = useUpdate();
 

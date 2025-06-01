@@ -5,7 +5,7 @@ import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import reportUrls from "@/utils/url/adminPanel/reportUrl";
 import { useToast } from "@/hooks/ui/useToast";
 
-export default function getReportList(pages: number, pageSize: number, URL: string | null) {
+export default function useReportList(pages: number, pageSize: number, URL: string | null) {
   const queryClient = useQueryClient();
   const { showToast } = useToast();
 

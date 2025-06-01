@@ -5,7 +5,7 @@ import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import shiftUrls from "@/utils/url/adminPanel/shiftUrl";
 import { useToast } from "@/hooks/ui/useToast";
 
-export default function getShiftsList(pages: number, pageSize: number, URL: string | null) {
+export default function useShiftsList(pages: number, pageSize: number, URL: string | null) {
   const queryClient = useQueryClient();
   const { showToast } = useToast();
 

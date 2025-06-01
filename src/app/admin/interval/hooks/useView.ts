@@ -5,7 +5,7 @@ import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import { useToast } from "@/hooks/ui/useToast";
 import intervalUrls from "@/utils/url/adminPanel/intervalUrl";
 
-export default function getIntervalList(pages: number, pageSize: number, URL: string | null) {
+export default function useIntervalList(pages: number, pageSize: number, URL: string | null) {
   const queryClient = useQueryClient();
   const { showToast } = useToast();
 

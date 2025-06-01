@@ -5,7 +5,7 @@ import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import productLineUrls from "@/utils/url/adminPanel/productLineUrl";
 import { useToast } from "@/hooks/ui/useToast";
 
-export default function getProductLineList(pages: number, pageSize: number, URL: string | null) {
+export default function useProductLineList(pages: number, pageSize: number, URL: string | null) {
   const queryClient = useQueryClient();
   const { showToast } = useToast();
 

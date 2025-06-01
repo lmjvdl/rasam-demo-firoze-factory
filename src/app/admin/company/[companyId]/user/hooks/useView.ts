@@ -5,7 +5,7 @@ import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import userCompanyUrls from "@/utils/url/adminPanel/userCompanyUrl";
 import { useToast } from "@/hooks/ui/useToast";
 
-export default function getUserCompanyList(companyID: number) {
+export default function useUserCompanyList(companyID: number) {
   const queryClient = useQueryClient();
   const { showToast } = useToast();
   const getUserCompanyListMutation = useMutation({

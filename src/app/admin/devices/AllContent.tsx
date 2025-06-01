@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import getDeviceList, { ResponseSchema } from "./hooks/useView";
+import useDeviceList, { ResponseSchema } from "./hooks/useView";
 import useDelete from "./hooks/useDelete";
 import ViewDialog from "@/components/adminPanelComponent/viewProcess/ViewDialog";
 import EditDialog from "@/components/adminPanelComponent/viewProcess/EditDialog";
@@ -26,7 +26,7 @@ const AllContentDevice: React.FC = () => {
 
   const { dataTypeList, productLinePartList } = useDeviceExtraOptions();
 
-  const getList = getDeviceList(pageNumber, 8, nextPage);
+  const getList = useDeviceList(pageNumber, 8, nextPage);
   const { deleteDeviceMutation } = useDelete();
   const { updateDeviceMutation } = useUpdate();
 

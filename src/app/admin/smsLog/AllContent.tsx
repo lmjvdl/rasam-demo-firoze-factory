@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import getSmsLogList, { ResponseSchema } from "./hooks/useView";
+import useSmsLogList, { ResponseSchema } from "./hooks/useView";
 import ViewDialog from "@/components/adminPanelComponent/viewProcess/ViewDialog";
 import { PrevDataInitial } from "@/interfaces/user/general/general";
 import { columns } from "./ColumnsData";
@@ -16,7 +16,7 @@ const AllContentSmsLog: React.FC = () => {
   const [totalData, setTotalData] = useState<number>(0);
   const [nextPage, setNextPage] = useState<null | string>(null);
 
-  const getList = getSmsLogList();
+  const getList = useSmsLogList();
 
   useEffect(() => {
     getList.mutate(

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import getFunctionParameterList, { ResponseSchema } from "./hooks/useView";
+import useFunctionParameterList, { ResponseSchema } from "./hooks/useView";
 import useDelete from "./hooks/useDelete";
 import { PrevDataInitial } from "@/interfaces/user/general/general";
 import { columns } from "./ColumnsData";
@@ -26,7 +26,7 @@ const AllContentFunctionParameter: React.FC = () => {
 
   const { functionList } = useFunctionParameterExtraOptions();
 
-  const getList = getFunctionParameterList(pageNumber, 8, nextPage);
+  const getList = useFunctionParameterList(pageNumber, 8, nextPage);
   const { deleteFunctionParameterMutation } = useDelete();
   const { updateFunctionParameterMutation } = useUpdate();
 

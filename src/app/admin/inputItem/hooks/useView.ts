@@ -5,7 +5,7 @@ import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import { useToast } from "@/hooks/ui/useToast";
 import inputItemUrls from "@/utils/url/adminPanel/inputItemUrl";
 
-export default function getInputItemList(pages: number, pageSize: number, URL: string | null) {
+export default function useInputItemList(pages: number, pageSize: number, URL: string | null) {
   const queryClient = useQueryClient();
   const { showToast } = useToast();
 

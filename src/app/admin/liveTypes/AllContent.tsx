@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import getLiveTypesList, { ResponseSchema } from "./hooks/useView";
+import useLiveTypesList, { ResponseSchema } from "./hooks/useView";
 import useDelete from "./hooks/useDelete";
 import { PrevDataInitial } from "@/interfaces/user/general/general";
 import { columns } from "./ColumnsData";
@@ -23,7 +23,7 @@ const AllContentLiveTypes: React.FC = () => {
   const [totalData, setTotalData] = useState<number>(0);
   const [nextPage, setNextPage] = useState<null | string>(null);
 
-  const getList = getLiveTypesList(pageNumber, 8, nextPage);
+  const getList = useLiveTypesList(pageNumber, 8, nextPage);
   const { deleteLiveTypesMutation } = useDelete();
   const { updateLiveTypeMutation } = useUpdate();
 

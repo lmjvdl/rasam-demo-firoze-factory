@@ -6,7 +6,7 @@ import { useToast } from "@/hooks/ui/useToast";
 import { gregorianToJalaliWithTime } from "@/utils/formatters/isoDateToSolarDate";
 import smsLogUrls from "@/utils/url/adminPanel/smsLogUrl";
 
-export default function getSmsLogList() {
+export default function useSmsLogList() {
   const queryClient = useQueryClient();
   const { showToast } = useToast();
 

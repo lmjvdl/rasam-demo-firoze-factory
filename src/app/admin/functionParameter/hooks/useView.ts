@@ -5,7 +5,7 @@ import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import { useToast } from "@/hooks/ui/useToast";
 import functionParameterUrls from "@/utils/url/adminPanel/functionParameterUrl";
 
-export default function getFunctionParameterList(pages: number, pageSize: number, URL: string | null) {
+export default function useFunctionParameterList(pages: number, pageSize: number, URL: string | null) {
   const queryClient = useQueryClient();
   const { showToast } = useToast();
 

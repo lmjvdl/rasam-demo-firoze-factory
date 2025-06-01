@@ -5,7 +5,7 @@ import allQueryKeys from "@/utils/dataFetching/allQueryKeys";
 import { useToast } from "@/hooks/ui/useToast";
 import positionUrls from "@/utils/url/adminPanel/positionUrl";
 
-export default function getPositionsList(pages: number, pageSize: number, URL: string | null) {
+export default function usePositionsList(pages: number, pageSize: number, URL: string | null) {
   const queryClient = useQueryClient();
   const { showToast } = useToast();
 

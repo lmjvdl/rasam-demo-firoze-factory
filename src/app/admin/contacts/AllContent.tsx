@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import getContactsList, { ResponseSchema } from "./hooks/useView";
+import useContactsList, { ResponseSchema } from "./hooks/useView";
 import useDelete from "./hooks/useDelete";
 import { PrevDataInitial } from "@/interfaces/user/general/general";
 import { columns } from "./ColumnsData";
@@ -26,7 +26,7 @@ const AllContentContacts: React.FC = () => {
 
   const { permissionList, groupList } = useContactsExtraOptions();
 
-  const getList = getContactsList(pageNumber, 8, nextPage);
+  const getList = useContactsList(pageNumber, 8, nextPage);
   const { deleteContactsMutation } = useDelete();
   const { updateContactsMutation } = useUpdate();
 

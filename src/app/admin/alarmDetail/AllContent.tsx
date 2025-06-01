@@ -1,9 +1,8 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import getAlarmDetailList, { ResponseSchema } from "./hooks/useView";
+import useAlarmDetailList, { ResponseSchema } from "./hooks/useView";
 import useDelete from "./hooks/useDelete";
-import { PrevDataInitial } from "@/interfaces/user/general/general";
 import { columns } from "./ColumnsData";
 import { AlarmDetailUpdateSchema } from "./hooks/useUpdate";
 import AlarmDetailTable from "./AlarmDetailTable";
@@ -13,6 +12,7 @@ import EditDialog from "@/components/adminPanelComponent/viewProcess/EditDialog"
 import DeleteDialog from "@/components/adminPanelComponent/viewProcess/DeleteDialog";
 import { useAlarmDetailExtraOptions } from "./hooks/useAlarmDetailExtraOptions";
 import { AlarmDetail } from "@/interfaces/admin/alarmDetail";
+import { PrevDataInitial } from "@/interfaces/user/general/general";
 
 const AllContentAlarmDetail: React.FC = () => {
   const [data, setData] = useState<ResponseSchema>(PrevDataInitial);
@@ -26,7 +26,7 @@ const AllContentAlarmDetail: React.FC = () => {
 
   const { alarmList, parameterList } = useAlarmDetailExtraOptions();
 
-  const getList = getAlarmDetailList(pageNumber, 8, nextPage);
+  const getList = useAlarmDetailList(pageNumber, 8, nextPage);
   const { deleteAlarmDetailMutation } = useDelete();
   const { updateAlarmDetailMutation } = useUpdate();
 

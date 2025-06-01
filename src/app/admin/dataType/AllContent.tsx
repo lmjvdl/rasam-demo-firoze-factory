@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import getDataTypeList, { ResponseSchema } from "./hooks/useView";
+import useDataList, { ResponseSchema } from "./hooks/useView";
 import useDelete from "./hooks/useDelete";
 import ViewDialog from "@/components/adminPanelComponent/viewProcess/ViewDialog";
 import EditDialog from "@/components/adminPanelComponent/viewProcess/EditDialog";
@@ -23,7 +23,7 @@ const AllContentDataType: React.FC = () => {
   const [totalData, setTotalData] = useState<number>(0);
   const [nextPage, setNextPage] = useState<null | string>(null);
 
-  const getList = getDataTypeList(pageNumber, 8, nextPage);
+  const getList = useDataList(pageNumber, 8, nextPage);
   const { deleteDataTypeMutation } = useDelete();
   const { updateDataTypeMutation } = useUpdate();
 

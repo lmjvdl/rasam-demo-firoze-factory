@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import getReportList, { ResponseSchema } from "./hooks/useView";
+import useReportList, { ResponseSchema } from "./hooks/useView";
 import useDelete from "./hooks/useDelete";
 import ViewDialog from "@/components/adminPanelComponent/viewProcess/ViewDialog";
 import EditDialog from "@/components/adminPanelComponent/viewProcess/EditDialog";
@@ -25,7 +25,7 @@ const AllContentReport: React.FC = () => {
 
   const { inputItemsList, outputItemList, intervalsList, productLinePartList } = useReportExtraOptions();
 
-  const getList = getReportList(pageNumber, 8, nextPage);
+  const getList = useReportList(pageNumber, 8, nextPage);
   const { deleteReportMutation } = useDelete();
   const { updateReportMutation } = useUpdate();
 

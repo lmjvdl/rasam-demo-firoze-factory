@@ -22,7 +22,7 @@ export const columns = (): TitlesColumnsData[] => [
     id: "company",
     label: "شرکت",
     showOnTable: true,
-    canEdit: true,
+    canEdit: false,
     isAdditionalAction: false,
   },
   {

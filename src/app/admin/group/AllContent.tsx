@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import getGroupList, { ResponseSchema } from "./hooks/useView";
+import useGroupList, { ResponseSchema } from "./hooks/useView";
 import useDelete from "./hooks/useDelete";
 import ViewDialog from "@/components/adminPanelComponent/viewProcess/ViewDialog";
 import EditDialog from "@/components/adminPanelComponent/viewProcess/EditDialog";
@@ -26,7 +26,7 @@ const AllContentGroup: React.FC = () => {
 
   const { permissionList } = useGroupExtraOptions();
 
-  const getList = getGroupList(pageNumber, 8, nextPage);
+  const getList = useGroupList(pageNumber, 8, nextPage);
   const { deleteGroupMutation } = useDelete();
   const { updateGroupMutation } = useUpdate();
 
