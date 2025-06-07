@@ -10,7 +10,7 @@ import Link from "next/link";
 import React, { ReactNode } from "react";
 
 const SidebarItem = ({
-  text = "داشبورد",
+  text = "Layout",
   link = "/dashboard",
   icon = <Done />,
   onClick,

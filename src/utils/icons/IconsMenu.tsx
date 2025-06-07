@@ -7,39 +7,14 @@ import {
   Logout,
   Chamfer,
   PowerSupply,
-  ShiftInformation
+  ShiftInformation,
+  LayoutBodyPrep
 } from "../../../public/assets/logo/itemMenu";
-import {
-  Company,
-  Devices,
-  Group,
-  Permission,
-  ProductLine,
-  ProductLinePart,
-  UploadImage,
-  User,
-  DataType,
-  DeviceType,
-  Function,
-  FunctionParameter,
-  Alarm,
-  AlarmDetail,
-  Contacts,
-  Operation,
-  SmsLog,
-  Interval,
-  Report,
-  InputItem,
-  OutputItem,
-  LiveTypes,
-  Shift,
-  Position
-} from "../../../public/assets/logo/ItemMenuAdmin";
+
 // **************************** Importing the (LOGOS) of all existing factories ****************************
 import {
   RasamDark,
   RasamLight,
-  Setare,
 } from "../../../public/assets/logo/company";
 // ************************************* Importing (FOOTER ITEM) FIXED *************************************
 import { IconSettings, IconLogout } from "@tabler/icons-react";
@@ -64,37 +39,7 @@ export const iconMap: Record<string, React.FC<IconProps>> = {
   ShiftInformation: ShiftInformation,
   Settings: Settings,
   Logout: Logout,
-  // Add other mappings as necessary
-};
-// *******************************************************************************
-
-// *************  Map for name to icon component in main sidebar ****************
-export const iconMapForAdminPanel: Record<string, React.FC<IconProps>> = {
-  ProductLinePart: ProductLinePart,
-  ProductLine: ProductLine,
-  Devices: Devices,
-  UploadImage: UploadImage,
-  Company: Company,
-  Group: Group,
-  Logout: Logout,
-  Permission: Permission,
-  User: User,
-  DeviceType: DeviceType,
-  DataType: DataType,
-  Function: Function,
-  FunctionParameter: FunctionParameter,
-  Alarm: Alarm,
-  AlarmDetail: AlarmDetail,
-  Contacts: Contacts,
-  Operation: Operation,
-  SmsLog: SmsLog,
-  Report: Report,
-  Interval: Interval,
-  InputItem: InputItem,
-  OutputItem: OutputItem,
-  LiveTypes: LiveTypes,
-  Shift: Shift,
-  Position: Position,
+  LayoutBodyPrep: LayoutBodyPrep
   // Add other mappings as necessary
 };
 // *******************************************************************************
@@ -111,7 +56,6 @@ export const FooterIcons = () => {
 // *******************************************************************************
 
 export const companyMap: Record<string, React.FC<logoProps>> = {
-  Setare: Setare,
   RasamLight: RasamLight,
   RasamDark: RasamDark,
 };

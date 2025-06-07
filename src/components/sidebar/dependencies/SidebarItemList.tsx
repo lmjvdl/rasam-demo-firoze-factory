@@ -1,14 +1,14 @@
 import { List } from "@mui/material";
 import SidebarItem from "./SidebarItem";
 import CircleIcon from '@mui/icons-material/Circle';
-import { iconMap, iconMapForAdminPanel } from "@/utils/icons/IconsMenu";
+import { iconMap } from "@/utils/icons/IconsMenu";
 import { useColorScheme } from "@mui/material/styles";
 import { SidebarItemListProps } from "@/interfaces/ui/sidebar/sidebar";
 import { useState } from "react";
 import { usePathname } from 'next/navigation';
 import { useEffect } from 'react';
 
-const SidebarItemList = ({ items, sx, isAdmin, isCollapsed = false }: SidebarItemListProps) => {
+const SidebarItemList = ({ items, sx, isCollapsed = false }: SidebarItemListProps) => {
   const mode = useColorScheme();
   const pathname = usePathname();
   const [selectedItem, setSelectedItem] = useState<string>("");
@@ -25,11 +25,11 @@ const SidebarItemList = ({ items, sx, isAdmin, isCollapsed = false }: SidebarIte
         pathname === `${item.to}/`
       );
 
-      return matchedItem?.text || (isAdmin ? "کاربر" : "داشبورد");
+      return matchedItem?.text || ("چینش تهیه بدنه");
     };
 
     setSelectedItem(findSelectedItem());
-  }, [pathname, items, isAdmin]);
+  }, [pathname, items]);
 
   return (
     <List sx={{ 
@@ -37,8 +37,7 @@ const SidebarItemList = ({ items, sx, isAdmin, isCollapsed = false }: SidebarIte
       padding: isCollapsed ? "8px 4px" : "8px",
     }}>
       {Object.entries(items).map(([text, { icon, to }], index) => {
-        const IconComponent =
-          (isAdmin ? iconMapForAdminPanel[icon] : iconMap[icon]) || CircleIcon;
+        const IconComponent = iconMap[icon] || CircleIcon;
 
         const isSelected = selectedItem === text;
 

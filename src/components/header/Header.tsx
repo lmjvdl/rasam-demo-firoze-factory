@@ -1,19 +1,16 @@
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import SwitchThemeButton from "./SwitchThemeButton";
-import WelcomeAdminPanel from "./WelcomeAdminPanel";
 import WelcomeUserPanel from "./WelcomeUserPanel";
 import { useMediaQuery, useTheme } from "@mui/material";
 
 export default function Header({
   factoryName,
-  isAdmin,
   drawerWidth,
   collapsedWidth,
   desktopOpen,
 }: {
   factoryName?: string;
-  isAdmin: boolean;
   drawerWidth: number;
   collapsedWidth: number;
   desktopOpen: boolean;
@@ -51,11 +48,7 @@ export default function Header({
           alignItems: "center",
         }}
       >
-        {!isAdmin ? (
           <WelcomeUserPanel factoryName={factoryName} />
-        ) : (
-          <WelcomeAdminPanel />
-        )}
         <SwitchThemeButton />
       </Toolbar>
     </AppBar>

@@ -12,12 +12,10 @@ import DrawerContent from "./dependencies/DrawerContent";
 import { UseItemInfoUserPanel } from "./ItemInfoUserPanel";
 import { useRouter } from "next/navigation";
 import { IconChevronRight, IconChevronLeft } from "@tabler/icons-react";
-import { UseItemInfoAdminPanel } from "./temInfoAdminPanel";
 
 const Sidebar = ({
   mobileOpen,
   setMobileOpen,
-  isAdmin,
   drawerWidth,
   collapsedWidth,
   desktopOpen,
@@ -25,7 +23,6 @@ const Sidebar = ({
 }: {
   mobileOpen: boolean;
   setMobileOpen: Dispatch<SetStateAction<boolean>>;
-  isAdmin: boolean;
   drawerWidth: number;
   collapsedWidth: number;
   desktopOpen: boolean;
@@ -51,31 +48,16 @@ const Sidebar = ({
   };
 
   useEffect(() => {
-    if (isAdmin === false) {
-      router.push("/login");
-    } else if (isAdmin === true) {
-      if (window.location.pathname === "/admin") {
-        router.push("/admin/user");
-      }
-    } else {
-      if (window.location.pathname === "/") {
-        router.push("/dashboard");
-      }
+    if (window.location.pathname === "/") {
+      router.push("/dashboard");
     }
-  }, [isAdmin, router]);
+  }, [router]);
 
   const { drawerItemInfoForUserPanel, footerItemInfoForUserPanel } =
     UseItemInfoUserPanel();
-  const { drawerItemInfoForAdminPanel, footerItemInfoForAdminPanel } =
-    UseItemInfoAdminPanel();
 
-  const drawerItemInfo = isAdmin
-    ? drawerItemInfoForAdminPanel
-    : drawerItemInfoForUserPanel;
-  const footerItemInfo = isAdmin
-    ? footerItemInfoForAdminPanel
-    : footerItemInfoForUserPanel;
-
+  const drawerItemInfo = drawerItemInfoForUserPanel;
+  const footerItemInfo = footerItemInfoForUserPanel;
 
   const ToggleButton = styled(IconButton)(({ theme }) => ({
     position: "fixed",
@@ -141,7 +123,6 @@ const Sidebar = ({
           <DrawerContent
             drawerItemInfoByKey={drawerItemInfo}
             footerItemInfoByKey={footerItemInfo}
-            isAdmin={isAdmin}
             isCollapsed={false}
           />
         </SidebarDrawer>
@@ -155,7 +136,6 @@ const Sidebar = ({
           <DrawerContent
             drawerItemInfoByKey={drawerItemInfo}
             footerItemInfoByKey={footerItemInfo}
-            isAdmin={isAdmin}
             isCollapsed={!desktopOpen}
           />
         </SidebarDrawer>

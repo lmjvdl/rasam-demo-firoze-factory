@@ -6,15 +6,12 @@ import { DrawerContentProps } from "@/interfaces/ui/sidebar/sidebar";
 const DrawerContent = ({
   drawerItemInfoByKey,
   footerItemInfoByKey,
-  isAdmin,
   isCollapsed = false,
 }: DrawerContentProps) => {
   const mode = useColorScheme();
-  const FactoryIcon = isAdmin
-    ? mode.colorScheme === "light"
+  const FactoryIcon = mode.colorScheme === "light"
       ? companyMap["RasamLight"]
       : companyMap["RasamDark"]
-    : companyMap["Setare"];
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", height: "100vh" }}>
@@ -45,7 +42,6 @@ const DrawerContent = ({
       >
         <SidebarItemList 
           items={drawerItemInfoByKey} 
-          isAdmin={isAdmin} 
           isCollapsed={isCollapsed} 
         />
       </Box>
@@ -61,7 +57,6 @@ const DrawerContent = ({
       >
         <SidebarItemList 
           items={footerItemInfoByKey} 
-          isAdmin={isAdmin} 
           isCollapsed={isCollapsed} 
         />
       </Box>

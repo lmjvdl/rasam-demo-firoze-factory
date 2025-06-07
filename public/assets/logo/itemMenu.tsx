@@ -238,44 +238,21 @@ c51 -53 41 -71 -51 -93 -37 -9 -71 -14 -75 -12 -16 9 -3 88 27 171 6 17 42 -8
 
 export const Dashboard: React.FC<IconProps> = (props) => (
   <svg
+    xmlns="http://www.w3.org/2000/svg"
     width="24"
     height="24"
-    viewBox="0 0 24 25"
+    viewBox="0 0 24 24"
     fill="none"
-    xmlns="http://www.w3.org/2000/svg"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="icon icon-tabler icons-tabler-outline icon-tabler-home-2"
   >
-    <path
-      d="M5 10.5H7C9 10.5 10 9.5 10 7.5V5.5C10 3.5 9 2.5 7 2.5H5C3 2.5 2 3.5 2 5.5V7.5C2 9.5 3 10.5 5 10.5Z"
-      stroke={props.stroke}
-      strokeWidth="1"
-      strokeMiterlimit="10"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M17 10.5H19C21 10.5 22 9.5 22 7.5V5.5C22 3.5 21 2.5 19 2.5H17C15 2.5 14 3.5 14 5.5V7.5C14 9.5 15 10.5 17 10.5Z"
-      stroke={props.stroke}
-      strokeWidth="1"
-      strokeMiterlimit="10"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M17 22.5H19C21 22.5 22 21.5 22 19.5V17.5C22 15.5 21 14.5 19 14.5H17C15 14.5 14 15.5 14 17.5V19.5C14 21.5 15 22.5 17 22.5Z"
-      stroke={props.stroke}
-      strokeWidth="1"
-      strokeMiterlimit="10"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M5 22.5H7C9 22.5 10 21.5 10 19.5V17.5C10 15.5 9 14.5 7 14.5H5C3 14.5 2 15.5 2 17.5V19.5C2 21.5 3 22.5 5 22.5Z"
-      stroke={props.stroke}
-      strokeWidth="1"
-      strokeMiterlimit="10"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
+    <path stroke={props.stroke} fill="none" />
+    <path d="M5 12l-2 0l9 -9l9 9l-2 0" />
+    <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+    <path d="M10 12h4v4h-4z" />
   </svg>
 );
 
@@ -421,6 +398,29 @@ export const Logout: React.FC<IconProps> = (props) => (
       strokeLinecap="round"
       strokeLinejoin="round"
     />
+  </svg>
+);
+
+// ***************************************************************************************************************************//
+
+export const LayoutBodyPrep: React.FC<IconProps> = (props) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="icon icon-tabler icons-tabler-outline icon-tabler-layout-dashboard"
+  >
+    <path stroke={props.stroke} fill="none" />
+    <path d="M5 4h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1" />
+    <path d="M5 16h4a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-2a1 1 0 0 1 1 -1" />
+    <path d="M15 12h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1" />
+    <path d="M15 4h4a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-2a1 1 0 0 1 1 -1" />
   </svg>
 );
 

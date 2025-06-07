@@ -3,23 +3,16 @@
 import Providers from "@/providers/Providers";
 import "../styles/globals.css";
 import { vazir } from "../../public/fonts/Fonts";
-import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 import Header from "@/components/header/Header";
 import { Box, Stack } from "@mui/material";
 import Sidebar from "@/components/sidebar/Sidebar";
-import { useAuthStore } from "@/hooks/context/authStore";
 import { ToastProvider } from "@/components/notification/ToastProvider";
-// import ErrorPage from "@/components/errorHandler/errorPage";
-// import { ErrorBoundary } from "react-error-boundary";
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   const [mobileOpen, setMobileOpen] = useState<boolean>(false);
-  const isAdmin = useAuthStore((state) => state.isAdmin);
-  const pathname = usePathname();
-  const isLoginPage = pathname === "/login";
   const drawerWidth = 240;
   const collapsedWidth = 47;
   const [desktopOpen, setDesktopOpen] = useState(true);
@@ -45,54 +38,43 @@ export default function RootLayout({
         />
       </head>
       <body>
-        {/* <ErrorBoundary FallbackComponent={ErrorPage}> */}
-        {/* <React.StrictMode> */}
         <Providers>
           <ToastProvider />
-          {isLoginPage ? (
-            <Box component="main" width="100%" height="100%">
-              {children}
-            </Box>
-          ) : (
-            <Stack
-              direction={"row"}
-              width={"100%"}
-              height={"100vh"}
-              bgcolor={"background.default"}
-              overflow="hidden"
-            >
-              <Sidebar
-                desktopOpen={desktopOpen}
-                setDesktopOpen={setDesktopOpen}
-                mobileOpen={mobileOpen}
-                setMobileOpen={setMobileOpen}
-                isAdmin={isAdmin}
+          <Stack
+            direction={"row"}
+            width={"100%"}
+            height={"100vh"}
+            bgcolor={"background.default"}
+            overflow="hidden"
+          >
+            <Sidebar
+              desktopOpen={desktopOpen}
+              setDesktopOpen={setDesktopOpen}
+              mobileOpen={mobileOpen}
+              setMobileOpen={setMobileOpen}
+              drawerWidth={drawerWidth}
+              collapsedWidth={collapsedWidth}
+            />
+
+            <Stack width={"100%"} height={"100%"} component="main">
+              <Header
                 drawerWidth={drawerWidth}
                 collapsedWidth={collapsedWidth}
+                desktopOpen={desktopOpen}
+                factoryName="رسام"
               />
 
-              <Stack width={"100%"} height={"100%"} component="main">
-                <Header
-                  isAdmin={isAdmin}
-                  drawerWidth={drawerWidth}
-                  collapsedWidth={collapsedWidth}
-                  desktopOpen={desktopOpen}
-                />
-
-                <Box
-                  component={"main"}
-                  width={"100%"}
-                  height={"calc(100% - 64px)"}
-                  sx={{ flexGrow: 1, p: 2, mt: "64px" }}
-                >
-                  {children}
-                </Box>
-              </Stack>
+              <Box
+                component={"main"}
+                width={"100%"}
+                height={"calc(100% - 64px)"}
+                sx={{ flexGrow: 1, p: 2, mt: "64px" }}
+              >
+                {children}
+              </Box>
             </Stack>
-          )}
+          </Stack>
         </Providers>
-        {/* </React.StrictMode> */}
-        {/* </ErrorBoundary> */}
       </body>
     </html>
   );
