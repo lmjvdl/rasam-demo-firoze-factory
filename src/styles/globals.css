@@ -48,3 +48,15 @@ a {
 ::-webkit-scrollbar-thumb:hover {
   background: rgb(63, 202, 180);
 }
+
+
+[data-variable-collection-mode="mode-1"] {
+  /* mode-1 */
+  --notes: #333333;
+  --icons: #292d32;
+  --menu-notes: #b0b0b0;
+  --color-menu: #0b8e7a;
+  --color-note: #333333;
+  --dark-back: #333333;
+  --back: #232323;
+}

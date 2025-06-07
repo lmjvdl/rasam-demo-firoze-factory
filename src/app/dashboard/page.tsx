@@ -1,7 +1,6 @@
-"use client"
+"use client";
 
 import MainCard from "@/components/customContiner/MainCard";
-import { useEffect, useState } from "react";
 
 interface Props {
   children: React.ReactNode;
