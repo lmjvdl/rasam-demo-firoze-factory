@@ -9,9 +9,10 @@ import {
     VibratingScreen
 } from "../../../public/assets/icons/layoutBodyPrep/LayoutBodyPrep";
   
-// **************  Define interface for props (STROKE) to icon component in main sidebar *************
+// **************  Define interface for props (WIDTH, HEIGHT) to icon component in main sidebar *************
 interface IconProps {
-    stroke?: string;
+    width: number;
+    height: number;
 }
   
 // *************  Map for name to icon component in main sidebar ****************

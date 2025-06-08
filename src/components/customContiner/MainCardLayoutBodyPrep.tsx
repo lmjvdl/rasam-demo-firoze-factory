@@ -1,24 +1,49 @@
-// MainCardLayoutBodyPrep.tsx
 import { MainCardType } from "@/interfaces/ui/mainCard/MainCard";
 import { Box } from "@mui/material";
 import React from "react";
 
-const MainCardLayoutBodyPrep: React.FC<MainCardType> = ({ children, sx }) => {
+const MainCardLayoutBodyPrep: React.FC<MainCardType> = ({ children }) => {
+  const baseWidth = 1000;
+  const baseHeight = 1800;
+
+  const [windowSize, setWindowSize] = React.useState({
+    width: 0,
+    height: 0,
+  });
+
+  React.useEffect(() => {
+    const updateSize = () =>
+      setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+    updateSize();
+    window.addEventListener("resize", updateSize);
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
+
+  const scaleX = windowSize.width / baseWidth;
+  const scaleY = windowSize.height / baseHeight;
+  const scale = Math.max(1, Math.min(scaleX, scaleY));
+
   return (
     <Box
       sx={{
-        width: "100vw",
-        height: "100vh",
+        overflow: "auto",
+        position: "relative",
         direction: "rtl",
-        ...sx,
       }}
-    >
+      >
       <Box
         sx={{
-          width: "2000px", // ابعاد ثابت، بسته به نیاز قابل تغییر
-          height: "1500px",
-          position: "relative", // برای قراردهی absolute آیکون‌ها
+          width: `${baseWidth}px`,
+          height: `${baseHeight}px`,
+          transform: `scale(${scale})`,
+          transformOrigin: "top left",
+          display: "flex",
+          justifyContent: "space-evenly",
+          alignItems: "flex-start",
+          position: "relative",
           direction: "ltr",
+          minWidth: `${baseWidth}px`,
+          minHeight: `${baseHeight}px`,
         }}
       >
         {children}
