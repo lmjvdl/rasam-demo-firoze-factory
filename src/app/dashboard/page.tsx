@@ -1,13 +1,11 @@
 "use client";
 
-import MainCard from "@/components/customContiner/MainCard";
+import UserPanel from "@/components/customContiner/UserPanel";
 
-interface Props {
-  children: React.ReactNode;
+export default function DashboardPage() {
+  return (
+    <UserPanel>
+      <div></div>
+    </UserPanel>
+  );
 }
-
-const UserPanel = ({ children }: Props) => {
-  return <MainCard>{children}</MainCard>;
-};
-
-export default UserPanel;

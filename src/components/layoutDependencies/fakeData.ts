@@ -1,4 +1,6 @@
-export const demoData = {
+import { Device } from "@/interfaces/user/layout/layoutBodyPrep";
+
+export const demoData: { devices: Device[] } = {
   devices: [
     {
       id: "batch_ball_mill_1",
@@ -17,7 +19,7 @@ export const demoData = {
       type: "BatchBaalMill",
       status: "grey",
       lightsConfig: { orientation: "horizontal", position: "top" },
-      startTime: "01:20:47", // Example start time
+      startTime: "01:20:47",
     },
     {
       id: "batch_ball_mill_4",
@@ -42,7 +44,7 @@ export const demoData = {
       type: "SlurryPump",
       status: "grey",
       lightsConfig: { orientation: "vertical", position: "top" },
-      startTime: "00:45:30", // Example start time
+      startTime: "00:45:30",
     },
     {
       id: "slurry_pump_3",
@@ -67,7 +69,7 @@ export const demoData = {
       type: "SlurryPitRight",
       status: "grey",
       lightsConfig: { orientation: "vertical", position: "right" },
-      startTime: "02:10:15", // Example start time
+      startTime: "02:10:15",
     },
     {
       id: "slurry_pit_right_4",
@@ -98,14 +100,14 @@ export const demoData = {
       type: "SlurryPitLeft",
       status: "grey",
       lightsConfig: { orientation: "vertical", position: "left" },
-      startTime: "00:30:00", // Example start time
+      startTime: "00:30:00",
     },
     {
       id: "slurry_pit_left_4",
       type: "SlurryPitLeft",
       status: "grey",
       lightsConfig: { orientation: "vertical", position: "left" },
-      startTime: "01:00:00", // Example start time
+      startTime: "01:00:00",
     },
     {
       id: "slurry_pit_left_5",
@@ -118,7 +120,7 @@ export const demoData = {
       type: "ContinuesBallMill",
       status: "grey",
       lightsConfig: { orientation: "vertical", position: "left" },
-      startTime: "03:15:20", // Example start time
+      startTime: "03:15:20",
     },
     {
       id: "continues_ball_mill_2",
@@ -143,7 +145,7 @@ export const demoData = {
       type: "VibratingScreen",
       status: "grey",
       lightsConfig: { orientation: "vertical", position: "top" },
-      startTime: "00:50:10", // Example start time
+      startTime: "00:50:10",
     },
     {
       id: "vibrating_screen_4",
@@ -162,14 +164,13 @@ export const demoData = {
       type: "VibratingScreen",
       status: "grey",
       lightsConfig: { orientation: "vertical", position: "top" },
-      startTime: "01:40:25", // Example start time
+      startTime: "01:40:25",
     },
     {
       id: "granule_sillo_1",
       type: "GranuleSillo",
-      status: "grey",
+      status: "blue",
       lightsConfig: { orientation: "vertical", position: "left" },
-      startTime: "02:25:45", // Example start time
     },
     {
       id: "granule_sillo_2",
@@ -180,8 +181,9 @@ export const demoData = {
     {
       id: "granule_sillo_3",
       type: "GranuleSillo",
-      status: "red",
+      status: "grey",
       lightsConfig: { orientation: "vertical", position: "left" },
+      startTime: "02:25:45",
     },
     {
       id: "granule_sillo_4",
@@ -192,15 +194,15 @@ export const demoData = {
     {
       id: "granule_sillo_5",
       type: "GranuleSillo",
-      status: "grey",
+      status: "red",
       lightsConfig: { orientation: "vertical", position: "left" },
-      startTime: "00:15:55", // Example start time
     },
     {
       id: "granule_sillo_6",
       type: "GranuleSillo",
-      status: "blue",
+      status: "grey",
       lightsConfig: { orientation: "vertical", position: "left" },
+      startTime: "00:15:55",
     },
     {
       id: "granule_sillo_7",
@@ -219,7 +221,7 @@ export const demoData = {
       type: "GranuleSillo",
       status: "grey",
       lightsConfig: { orientation: "vertical", position: "right" },
-      startTime: "01:55:30", // Example start time
+      startTime: "01:55:30",
     },
     {
       id: "granule_sillo_10",
@@ -238,7 +240,7 @@ export const demoData = {
       type: "GranuleSillo",
       status: "grey",
       lightsConfig: { orientation: "vertical", position: "right" },
-      startTime: "00:35:40", // Example start time
+      startTime: "00:35:40",
     },
   ],
 };
