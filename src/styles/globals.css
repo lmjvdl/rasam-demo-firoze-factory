@@ -48,3 +48,10 @@ a {
 ::-webkit-scrollbar-thumb:hover {
   background: rgb(63, 202, 180);
 }
+
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
