@@ -2,10 +2,12 @@
 
 import MainCard from "@/components/customContiner/MainCard";
 
-export default function StaticSectionsPage({
-  children,
-}: {
+interface Props {
   children: React.ReactNode;
-}) {
-  return <MainCard>{children}</MainCard>;
 }
+
+const UserPanel = ({ children }: Props) => {
+  return <MainCard>{children}</MainCard>;
+};
+
+export default UserPanel;

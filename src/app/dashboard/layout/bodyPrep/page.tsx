@@ -6,8 +6,10 @@ import { iconMapLayout } from "@/utils/icons/LayoutIcon";
 import { Box } from "@mui/material";
 import StatusLights from "@/components/layoutDependencies/StatusIndicator";
 import { demoData } from "@/components/layoutDependencies/fakeData";
+import { Device, Position } from "@/interfaces/user/layout/layoutBodyPrep";
 
 const iconSize = 10;
+
 
 const BodyPrepLayout = () => {
   const iconComponents = {
@@ -21,7 +23,7 @@ const BodyPrepLayout = () => {
     VibratingScreen: iconMapLayout["VibratingScreen"],
   };
 
-  const renderDevice = (device: any, index: number, position: any) => {
+  const renderDevice = (device: Device, index: number, position: Position) => {
     const IconComponent = iconComponents[device.type as keyof typeof iconComponents];
     const { width, height } = getIconDimensions(device.type);
     return (
@@ -40,7 +42,7 @@ const BodyPrepLayout = () => {
     );
   };
 
-  const getIconDimensions = (type: string) => {
+  const getIconDimensions = (type: Device["type"]) => {
     switch (type) {
       case "BatchBaalMill":
         return { width: 28, height: 14 };

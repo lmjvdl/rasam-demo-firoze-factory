@@ -1,12 +1,10 @@
 import { useMemo } from "react";
-import { useColorScheme } from "@mui/material";
 import {
   staticDrawerItems,
   staticFooterItems,
 } from "./dependencies/ConstansParts";
 
 export const UseItemInfoUserPanel = () => {
-  const mode = useColorScheme();
   
   const drawerItemInfoForUserPanel = useMemo(() => {
     const filteredStaticItems = Object.entries(staticDrawerItems)
@@ -18,7 +16,7 @@ export const UseItemInfoUserPanel = () => {
     return {
       ...filteredStaticItems,
     };
-  }, [mode.colorScheme]);
+  }, []);
 
   const footerItemInfoForUserPanel = useMemo(() => {
     return Object.entries(staticFooterItems)
