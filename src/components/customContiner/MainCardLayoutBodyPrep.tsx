@@ -4,7 +4,7 @@ import React from "react";
 
 const MainCardLayoutBodyPrep: React.FC<MainCardType> = ({ children }) => {
   const baseWidth = 1000;
-  const baseHeight = 1800;
+  const baseHeight = 1700;
 
   const [windowSize, setWindowSize] = React.useState({
     width: 0,

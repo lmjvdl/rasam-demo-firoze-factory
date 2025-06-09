@@ -3,7 +3,8 @@ import {
     BatchBaalMill,
     ContinuesBallMill,
     GranuleSillo,
-    SlurryPit,
+    SlurryPitRight,
+    SlurryPitLeft,
     SlurryPump,
     SprayDryer,
     VibratingScreen
@@ -20,7 +21,8 @@ export const iconMapLayout: Record<string, React.FC<IconProps>> = {
     BatchBaalMill: BatchBaalMill,
     ContinuesBallMill: ContinuesBallMill,
     GranuleSillo: GranuleSillo,
-    SlurryPit: SlurryPit,
+    SlurryPitRight: SlurryPitRight,
+    SlurryPitLeft: SlurryPitLeft,
     SlurryPump: SlurryPump,
     SprayDryer: SprayDryer,
     VibratingScreen: VibratingScreen

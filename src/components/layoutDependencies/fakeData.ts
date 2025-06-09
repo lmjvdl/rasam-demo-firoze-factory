@@ -1,203 +1,244 @@
 export const demoData = {
-    devices: [
-      {
-        id: "batch_ball_mill_1",
-        type: "BatchBaalMill",
-        status: "green",
-        lightsConfig: { orientation: "horizontal", position: "top" },
-      },
-      {
-        id: "batch_ball_mill_2",
-        type: "BatchBaalMill",
-        status: "red",
-        lightsConfig: { orientation: "horizontal", position: "top" },
-      },
-      {
-        id: "batch_ball_mill_3",
-        type: "BatchBaalMill",
-        status: "grey",
-        lightsConfig: { orientation: "horizontal", position: "top" },
-      },
-      {
-        id: "batch_ball_mill_4",
-        type: "BatchBaalMill",
-        status: "green",
-        lightsConfig: { orientation: "horizontal", position: "top" },
-      },
-      {
-        id: "spray_dryer",
-        type: "SprayDryer",
-        status: "red",
-        lightsConfig: { orientation: "horizontal", position: "bottom" },
-      },
-      {
-        id: "slurry_pump_1",
-        type: "SlurryPump",
-        status: "green",
-        lightsConfig: { orientation: "vertical", position: "right" },
-      },
-      {
-        id: "slurry_pump_2",
-        type: "SlurryPump",
-        status: "grey",
-        lightsConfig: { orientation: "horizontal", position: "bottom" },
-      },
-      {
-        id: "slurry_pump_3",
-        type: "SlurryPump",
-        status: "red",
-        lightsConfig: { orientation: "vertical", position: "left" },
-      },
-      {
-        id: "slurry_pit_1",
-        type: "SlurryPit",
-        status: "green",
-        lightsConfig: { orientation: "horizontal", position: "top" },
-      },
-      {
-        id: "slurry_pit_2",
-        type: "SlurryPit",
-        status: "red",
-        lightsConfig: { orientation: "vertical", position: "right" },
-      },
-      {
-        id: "slurry_pit_3",
-        type: "SlurryPit",
-        status: "grey",
-        lightsConfig: { orientation: "horizontal", position: "bottom" },
-      },
-      {
-        id: "slurry_pit_4",
-        type: "SlurryPit",
-        status: "green",
-        lightsConfig: { orientation: "vertical", position: "left" },
-      },
-      {
-        id: "slurry_pit_5",
-        type: "SlurryPit",
-        status: "red",
-        lightsConfig: { orientation: "horizontal", position: "top" },
-      },
-      {
-        id: "continues_ball_mill_1",
-        type: "BaalMillContinues",
-        status: "green",
-        lightsConfig: { orientation: "vertical", position: "right" },
-      },
-      {
-        id: "continues_ball_mill_2",
-        type: "BaalMillContinues",
-        status: "grey",
-        lightsConfig: { orientation: "horizontal", position: "bottom" },
-      },
-      {
-        id: "vibrating_screen_1",
-        type: "VibratingScreen",
-        status: "red",
-        lightsConfig: { orientation: "vertical", position: "top" },
-      },
-      {
-        id: "vibrating_screen_2",
-        type: "VibratingScreen",
-        status: "green",
-        lightsConfig: { orientation: "vertical", position: "top" },
-      },
-      {
-        id: "vibrating_screen_3",
-        type: "VibratingScreen",
-        status: "grey",
-        lightsConfig: { orientation: "vertical", position: "top" },
-      },
-      {
-        id: "vibrating_screen_4",
-        type: "VibratingScreen",
-        status: "red",
-        lightsConfig: { orientation: "vertical", position: "top" },
-      },
-      {
-        id: "vibrating_screen_5",
-        type: "VibratingScreen",
-        status: "green",
-        lightsConfig: { orientation: "vertical", position: "top" },
-      },
-      {
-        id: "vibrating_screen_6",
-        type: "VibratingScreen",
-        status: "grey",
-        lightsConfig: { orientation: "vertical", position: "top" },
-      },
-      {
-        id: "granule_sillo_1",
-        type: "GranuleSillo",
-        status: "green",
-        lightsConfig: { orientation: "vertical", position: "right" },
-      },
-      {
-        id: "granule_sillo_2",
-        type: "GranuleSillo",
-        status: "red",
-        lightsConfig: { orientation: "vertical", position: "left" },
-      },
-      {
-        id: "granule_sillo_3",
-        type: "GranuleSillo",
-        status: "grey",
-        lightsConfig: { orientation: "vertical", position: "left" },
-      },
-      {
-        id: "granule_sillo_4",
-        type: "GranuleSillo",
-        status: "green",
-        lightsConfig: { orientation: "horizontal", position: "top" },
-      },
-      {
-        id: "granule_sillo_5",
-        type: "GranuleSillo",
-        status: "red",
-        lightsConfig: { orientation: "vertical", position: "right" },
-      },
-      {
-        id: "granule_sillo_6",
-        type: "GranuleSillo",
-        status: "grey",
-        lightsConfig: { orientation: "horizontal", position: "bottom" },
-      },
-      {
-        id: "granule_sillo_7",
-        type: "GranuleSillo",
-        status: "green",
-        lightsConfig: { orientation: "vertical", position: "left" },
-      },
-      {
-        id: "granule_sillo_8",
-        type: "GranuleSillo",
-        status: "red",
-        lightsConfig: { orientation: "vertical", position: "right" },
-      },
-      {
-        id: "granule_sillo_9",
-        type: "GranuleSillo",
-        status: "grey",
-        lightsConfig: { orientation: "vertical", position: "right" },
-      },
-      {
-        id: "granule_sillo_10",
-        type: "GranuleSillo",
-        status: "green",
-        lightsConfig: { orientation: "horizontal", condition: "bottom" },
-      },
-      {
-        id: "granule_sillo_11",
-        type: "GranuleSillo",
-        status: "red",
-        lightsConfig: { orientation: "vertical", position: "left" },
-      },
-      {
-        id: "granule_sillo_12",
-        type: "GranuleSillo",
-        status: "grey",
-        lightsConfig: { orientation: "horizontal", position: "top" },
-      },
-    ],
-  };
-  
+  devices: [
+    {
+      id: "batch_ball_mill_1",
+      type: "BatchBaalMill",
+      status: "blue",
+      lightsConfig: { orientation: "horizontal", position: "top" },
+    },
+    {
+      id: "batch_ball_mill_2",
+      type: "BatchBaalMill",
+      status: "red",
+      lightsConfig: { orientation: "horizontal", position: "top" },
+    },
+    {
+      id: "batch_ball_mill_3",
+      type: "BatchBaalMill",
+      status: "grey",
+      lightsConfig: { orientation: "horizontal", position: "top" },
+      startTime: "01:20:47", // Example start time
+    },
+    {
+      id: "batch_ball_mill_4",
+      type: "BatchBaalMill",
+      status: "blue",
+      lightsConfig: { orientation: "horizontal", position: "top" },
+    },
+    {
+      id: "spray_dryer",
+      type: "SprayDryer",
+      status: "red",
+      lightsConfig: { orientation: "horizontal", position: "center" },
+    },
+    {
+      id: "slurry_pump_1",
+      type: "SlurryPump",
+      status: "blue",
+      lightsConfig: { orientation: "vertical", position: "top" },
+    },
+    {
+      id: "slurry_pump_2",
+      type: "SlurryPump",
+      status: "grey",
+      lightsConfig: { orientation: "vertical", position: "top" },
+      startTime: "00:45:30", // Example start time
+    },
+    {
+      id: "slurry_pump_3",
+      type: "SlurryPump",
+      status: "red",
+      lightsConfig: { orientation: "vertical", position: "top" },
+    },
+    {
+      id: "slurry_pit_right_1",
+      type: "SlurryPitRight",
+      status: "blue",
+      lightsConfig: { orientation: "vertical", position: "right" },
+    },
+    {
+      id: "slurry_pit_right_2",
+      type: "SlurryPitRight",
+      status: "red",
+      lightsConfig: { orientation: "vertical", position: "right" },
+    },
+    {
+      id: "slurry_pit_right_3",
+      type: "SlurryPitRight",
+      status: "grey",
+      lightsConfig: { orientation: "vertical", position: "right" },
+      startTime: "02:10:15", // Example start time
+    },
+    {
+      id: "slurry_pit_right_4",
+      type: "SlurryPitRight",
+      status: "blue",
+      lightsConfig: { orientation: "vertical", position: "right" },
+    },
+    {
+      id: "slurry_pit_right_5",
+      type: "SlurryPitRight",
+      status: "red",
+      lightsConfig: { orientation: "vertical", position: "right" },
+    },
+    {
+      id: "slurry_pit_left_1",
+      type: "SlurryPitLeft",
+      status: "blue",
+      lightsConfig: { orientation: "vertical", position: "left" },
+    },
+    {
+      id: "slurry_pit_left_2",
+      type: "SlurryPitLeft",
+      status: "red",
+      lightsConfig: { orientation: "vertical", position: "left" },
+    },
+    {
+      id: "slurry_pit_left_3",
+      type: "SlurryPitLeft",
+      status: "grey",
+      lightsConfig: { orientation: "vertical", position: "left" },
+      startTime: "00:30:00", // Example start time
+    },
+    {
+      id: "slurry_pit_left_4",
+      type: "SlurryPitLeft",
+      status: "grey",
+      lightsConfig: { orientation: "vertical", position: "left" },
+      startTime: "01:00:00", // Example start time
+    },
+    {
+      id: "slurry_pit_left_5",
+      type: "SlurryPitLeft",
+      status: "blue",
+      lightsConfig: { orientation: "vertical", position: "left" },
+    },
+    {
+      id: "continues_ball_mill_1",
+      type: "ContinuesBallMill",
+      status: "grey",
+      lightsConfig: { orientation: "vertical", position: "left" },
+      startTime: "03:15:20", // Example start time
+    },
+    {
+      id: "continues_ball_mill_2",
+      type: "ContinuesBallMill",
+      status: "blue",
+      lightsConfig: { orientation: "vertical", position: "right" },
+    },
+    {
+      id: "vibrating_screen_1",
+      type: "VibratingScreen",
+      status: "red",
+      lightsConfig: { orientation: "vertical", position: "top" },
+    },
+    {
+      id: "vibrating_screen_2",
+      type: "VibratingScreen",
+      status: "blue",
+      lightsConfig: { orientation: "vertical", position: "top" },
+    },
+    {
+      id: "vibrating_screen_3",
+      type: "VibratingScreen",
+      status: "grey",
+      lightsConfig: { orientation: "vertical", position: "top" },
+      startTime: "00:50:10", // Example start time
+    },
+    {
+      id: "vibrating_screen_4",
+      type: "VibratingScreen",
+      status: "red",
+      lightsConfig: { orientation: "vertical", position: "top" },
+    },
+    {
+      id: "vibrating_screen_5",
+      type: "VibratingScreen",
+      status: "blue",
+      lightsConfig: { orientation: "vertical", position: "top" },
+    },
+    {
+      id: "vibrating_screen_6",
+      type: "VibratingScreen",
+      status: "grey",
+      lightsConfig: { orientation: "vertical", position: "top" },
+      startTime: "01:40:25", // Example start time
+    },
+    {
+      id: "granule_sillo_1",
+      type: "GranuleSillo",
+      status: "grey",
+      lightsConfig: { orientation: "vertical", position: "left" },
+      startTime: "02:25:45", // Example start time
+    },
+    {
+      id: "granule_sillo_2",
+      type: "GranuleSillo",
+      status: "red",
+      lightsConfig: { orientation: "vertical", position: "left" },
+    },
+    {
+      id: "granule_sillo_3",
+      type: "GranuleSillo",
+      status: "red",
+      lightsConfig: { orientation: "vertical", position: "left" },
+    },
+    {
+      id: "granule_sillo_4",
+      type: "GranuleSillo",
+      status: "blue",
+      lightsConfig: { orientation: "vertical", position: "left" },
+    },
+    {
+      id: "granule_sillo_5",
+      type: "GranuleSillo",
+      status: "grey",
+      lightsConfig: { orientation: "vertical", position: "left" },
+      startTime: "00:15:55", // Example start time
+    },
+    {
+      id: "granule_sillo_6",
+      type: "GranuleSillo",
+      status: "blue",
+      lightsConfig: { orientation: "vertical", position: "left" },
+    },
+    {
+      id: "granule_sillo_7",
+      type: "GranuleSillo",
+      status: "blue",
+      lightsConfig: { orientation: "vertical", position: "right" },
+    },
+    {
+      id: "granule_sillo_8",
+      type: "GranuleSillo",
+      status: "red",
+      lightsConfig: { orientation: "vertical", position: "right" },
+    },
+    {
+      id: "granule_sillo_9",
+      type: "GranuleSillo",
+      status: "grey",
+      lightsConfig: { orientation: "vertical", position: "right" },
+      startTime: "01:55:30", // Example start time
+    },
+    {
+      id: "granule_sillo_10",
+      type: "GranuleSillo",
+      status: "red",
+      lightsConfig: { orientation: "vertical", position: "right" },
+    },
+    {
+      id: "granule_sillo_11",
+      type: "GranuleSillo",
+      status: "red",
+      lightsConfig: { orientation: "vertical", position: "right" },
+    },
+    {
+      id: "granule_sillo_12",
+      type: "GranuleSillo",
+      status: "grey",
+      lightsConfig: { orientation: "vertical", position: "right" },
+      startTime: "00:35:40", // Example start time
+    },
+  ],
+};

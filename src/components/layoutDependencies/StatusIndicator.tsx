@@ -3,9 +3,12 @@ import { Box } from "@mui/material";
 
 interface StatusLightsProps {
   orientation: "horizontal" | "vertical";
-  position: "top" | "bottom" | "left" | "right" | "both";
-  status: "green" | "red" | "grey";
+  position: "top" | "bottom" | "left" | "right" | "both" | "center";
+  status: "blue" | "red" | "grey";
   iconSize: number;
+  startTime?: string; // Optional start time in "HH:mm:ss" format
+  iconWidth?: number; // Icon width for precise centering
+  iconHeight?: number; // Icon height for precise centering
 }
 
 const StatusLights: React.FC<StatusLightsProps> = ({
@@ -13,15 +16,29 @@ const StatusLights: React.FC<StatusLightsProps> = ({
   position,
   status,
   iconSize,
+  startTime,
+  iconWidth = iconSize * 20,
+  iconHeight = iconSize * 20,
 }) => {
   const [blink, setBlink] = useState(true);
   const [timer, setTimer] = useState({ hours: 0, minutes: 0, seconds: 0 });
+
+  // Parse startTime into hours, minutes, seconds
+  const parseStartTime = (time?: string) => {
+    if (!time) return { hours: 0, minutes: 0, seconds: 0 };
+    const [hours, minutes, seconds] = time.split(":").map(Number);
+    return {
+      hours: isNaN(hours) ? 0 : hours,
+      minutes: isNaN(minutes) ? 0 : minutes,
+      seconds: isNaN(seconds) ? 0 : seconds,
+    };
+  };
 
   // Blinking effect for active light
   useEffect(() => {
     const interval = setInterval(() => {
       setBlink((prev) => !prev);
-    }, 500);
+    }, 1000);
     return () => clearInterval(interval);
   }, []);
 
@@ -31,6 +48,8 @@ const StatusLights: React.FC<StatusLightsProps> = ({
       setTimer({ hours: 0, minutes: 0, seconds: 0 });
       return;
     }
+
+    setTimer(parseStartTime(startTime));
 
     const interval = setInterval(() => {
       setTimer((prev) => {
@@ -49,7 +68,7 @@ const StatusLights: React.FC<StatusLightsProps> = ({
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [status]);
+  }, [status, startTime]);
 
   const lightSize = iconSize * 2;
   const margin = iconSize * 0.5;
@@ -59,16 +78,16 @@ const StatusLights: React.FC<StatusLightsProps> = ({
     height: lightSize,
     borderRadius: "50%",
     border: `1px solid ${
-      lightStatus === "green"
-        ? "#4CAF50"
+      lightStatus === "blue"
+        ? "#2196F3"
         : lightStatus === "red"
         ? "#F44336"
         : "#9E9E9E"
     }`,
     backgroundColor:
       status === lightStatus && blink
-        ? lightStatus === "green"
-          ? "#4CAF50"
+        ? lightStatus === "blue"
+          ? "#2196F3"
           : lightStatus === "red"
           ? "#F44336"
           : "#9E9E9E"
@@ -79,31 +98,75 @@ const StatusLights: React.FC<StatusLightsProps> = ({
   const containerStyle = {
     display: "flex",
     flexDirection: orientation === "horizontal" ? "row" : "column",
-    gap: 1, // Fixed 2px gap between lights
+    gap: 1,
     position: "absolute" as const,
-    ...(position === "top" && {
-      top: -lightSize - margin,
+    zIndex: 10,
+    ...(position === "top" && orientation === "vertical" && {
+      top: -lightSize * 2 - margin * 6,
+      left: "50%",
+      transform: "translateX(-50%)",
+      right: "auto",
+      bottom: "auto",
+    }),
+    ...(position === "top" && orientation === "horizontal" && {
+      top: -lightSize - margin * 1.5,
+      left: "50%",
+      transform: "translateX(-50%)",
+      right: "auto",
+      bottom: "auto",
+    }),
+    ...(position === "bottom" && orientation === "vertical" && {
+      top: lightSize * 2 + margin * 2,
+      left: "50%",
+      transform: "translateX(-50%)",
+      right: "auto",
+      bottom: "auto",
+    }),
+    ...(position === "bottom" && orientation === "horizontal" && {
+      top: lightSize + margin * 1.5,
+      left: "50%",
+      transform: "translateX(-50%)",
+      right: "auto",
+      bottom: "auto",
+    }),
+    ...(position === "bottom" && orientation !== "vertical" && orientation !== "horizontal" && {
+      top: lightSize + margin,
       left: "50%",
       transform: "translateX(-50%)",
     }),
-    ...(position === "bottom" && {
-      bottom: -lightSize - margin,
-      left: "50%",
-      transform: "translateX(-50%)",
+    ...(position === "left" && orientation === "vertical" && {
+      left: -lightSize - margin * 2,
+      top: "50%",
+      transform: "translateY(38%)",
+      right: "auto",
+      bottom: "auto",
     }),
-    ...(position === "left" && {
+    ...(position === "left" && orientation !== "vertical" && {
       left: -lightSize - margin,
       top: "50%",
       transform: "translateY(-50%)",
     }),
-    ...(position === "right" && {
-      right: -lightSize - margin,
+    ...(position === "right" && orientation === "horizontal" && {
+      right: -lightSize - margin * 2,
       top: "50%",
       transform: "translateY(-50%)",
+      left: "auto",
+      bottom: "auto",
+    }),
+    ...(position === "right" && orientation !== "horizontal" && {
+      right: -lightSize - margin,
+      top: "50%",
+      transform: "translateY(38%)",
     }),
     ...(position === "both" && {
       top: -lightSize - margin,
       left: -lightSize - margin,
+      transform: "none",
+    }),
+    ...(position === "center" && {
+      top: iconHeight / 2,
+      left: iconWidth / 2,
+      transform: "translate(-50%, -50%)",
     }),
   };
 
@@ -112,36 +175,80 @@ const StatusLights: React.FC<StatusLightsProps> = ({
     position: "absolute" as const,
     fontSize: iconSize * 1.5,
     color: "#9E9E9E",
-    ...(position === "top" && {
-      top: -lightSize * 2 - margin * 2,
+    zIndex: 10,
+    ...(position === "top" && orientation === "vertical" && {
+      top: -lightSize * 3 - margin * 6,
+      left: "50%",
+      transform: "translateX(-50%)",
+      right: "auto",
+      bottom: "auto",
+    }),
+    ...(position === "top" && orientation === "horizontal" && {
+      top: -lightSize * 2 - margin * 2.5,
+      left: "50%",
+      transform: "translateX(-50%)",
+      right: "auto",
+      bottom: "auto",
+    }),
+    ...(position === "bottom" && orientation === "vertical" && {
+      top: lightSize * 3 + margin * 3,
+      left: "50%",
+      transform: "translateX(-50%)",
+      right: "auto",
+      bottom: "auto",
+    }),
+    ...(position === "bottom" && orientation === "horizontal" && {
+      top: lightSize * 2 + margin * 2.5,
+      left: "50%",
+      transform: "translateX(-50%)",
+      right: "auto",
+      bottom: "auto",
+    }),
+    ...(position === "bottom" && orientation !== "vertical" && orientation !== "horizontal" && {
+      top: lightSize * 2 + margin * 2,
       left: "50%",
       transform: "translateX(-50%)",
     }),
-    ...(position === "bottom" && {
-      bottom: -lightSize * 2 - margin * 2,
-      left: "50%",
-      transform: "translateX(-50%)",
+    ...(position === "left" && orientation === "vertical" && {
+      left: -lightSize * 2 - margin * 3,
+      top: "50%",
+      transform: "translateY(38%)",
+      right: "auto",
+      bottom: "auto",
     }),
-    ...(position === "left" && {
+    ...(position === "left" && orientation !== "vertical" && {
       left: -lightSize * 3 - margin * 2,
       top: "50%",
       transform: "translateY(-50%)",
     }),
-    ...(position === "right" && {
-      right: -lightSize * 3 - margin * 2,
+    ...(position === "right" && orientation === "horizontal" && {
+      right: -lightSize * 3 - margin * 3,
       top: "50%",
       transform: "translateY(-50%)",
+      left: "auto",
+      bottom: "auto",
+    }),
+    ...(position === "right" && orientation !== "horizontal" && {
+      right: -lightSize * 2 - margin,
+      top: "50%",
+      transform: "translateY(38%)",
     }),
     ...(position === "both" && {
       top: -lightSize * 2 - margin * 2,
       left: -lightSize * 2 - margin * 2,
+      transform: "none",
+    }),
+    ...(position === "center" && {
+      top: iconHeight / 2 + lightSize + margin,
+      left: iconWidth / 2,
+      transform: "translate(-50%, 0%)",
     }),
   };
 
   return (
     <Box sx={{ position: "relative" }}>
       <Box sx={containerStyle}>
-        <Box sx={getLightStyle("green")} />
+        <Box sx={getLightStyle("blue")} />
         <Box sx={getLightStyle("red")} />
         <Box sx={getLightStyle("grey")} />
       </Box>
