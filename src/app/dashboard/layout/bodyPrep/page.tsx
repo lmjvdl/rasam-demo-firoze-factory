@@ -3,16 +3,15 @@
 import React from "react";
 import MainCardLayoutBodyPrep from "@/components/customContiner/MainCardLayoutBodyPrep";
 import { iconMapLayout } from "@/utils/icons/LayoutIcon";
-import { Box } from "@mui/material";
+import { Box, Tooltip } from "@mui/material";
 import StatusLights from "@/components/layoutDependencies/StatusIndicator";
 import { demoData } from "@/components/layoutDependencies/fakeData";
 import { Device, Position } from "@/interfaces/user/layout/layoutBodyPrep";
 
 const iconSize = 10;
 
-
 const BodyPrepLayout = () => {
-  const iconComponents = {
+  const iconComponents: Record<Device["type"], React.FC<{ width: number; height: number }>> = {
     BatchBaalMill: iconMapLayout["BatchBaalMill"],
     ContinuesBallMill: iconMapLayout["ContinuesBallMill"],
     GranuleSillo: iconMapLayout["GranuleSillo"],
@@ -21,25 +20,6 @@ const BodyPrepLayout = () => {
     SlurryPump: iconMapLayout["SlurryPump"],
     SprayDryer: iconMapLayout["SprayDryer"],
     VibratingScreen: iconMapLayout["VibratingScreen"],
-  };
-
-  const renderDevice = (device: Device, index: number, position: Position) => {
-    const IconComponent = iconComponents[device.type as keyof typeof iconComponents];
-    const { width, height } = getIconDimensions(device.type);
-    return (
-      <Box key={index} sx={{ position: "absolute", ...position }}>
-        <StatusLights
-          orientation={device.lightsConfig.orientation}
-          position={device.lightsConfig.position}
-          status={device.status}
-          iconSize={iconSize}
-          startTime={device.startTime}
-          iconWidth={width * iconSize}
-          iconHeight={height * iconSize}
-        />
-        <IconComponent width={width * iconSize} height={height * iconSize} />
-      </Box>
-    );
   };
 
   const getIconDimensions = (type: Device["type"]) => {
@@ -60,9 +40,39 @@ const BodyPrepLayout = () => {
         return { width: 6, height: 10 };
       case "GranuleSillo":
         return { width: 14, height: 14 };
-      default:
-        return { width: 20, height: 20 };
     }
+  };
+
+  const renderDevice = (device: Device, index: number, position: Position) => {
+    const IconComponent = iconComponents[device.type];
+    const { width, height } = getIconDimensions(device.type);
+
+    const tooltipTitle = () => {
+      if (device.status === "blue") {
+        return `آمپر: ${device.current || "N/A"}`;
+      } else if (device.status === "red") {
+        return `مدت زمان خاموش بودن دستگاه: ${device.startTime || "00:00:00"}`;
+      } else {
+        return `مدت زمان قطع ارتباط: ${device.startTime || "00:00:00"}`;
+      }
+    };
+
+    return (
+      <Tooltip key={device.id} title={tooltipTitle()} placement="top" sx={{ zIndex: 20 }}>
+        <Box sx={{ position: "absolute", ...position }}>
+          <StatusLights
+            orientation={device.lightsConfig.orientation}
+            position={device.lightsConfig.position}
+            status={device.status}
+            iconSize={iconSize}
+            startTime={device.startTime}
+            iconWidth={width * iconSize}
+            iconHeight={height * iconSize}
+          />
+          <IconComponent width={width * iconSize} height={height * iconSize} />
+        </Box>
+      </Tooltip>
+    );
   };
 
   return (
