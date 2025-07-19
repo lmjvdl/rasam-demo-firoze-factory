@@ -14,8 +14,10 @@ export interface Device {
     orientation: "horizontal" | "vertical";
     position: "top" | "bottom" | "left" | "right" | "both" | "center";
   };
+  name?: string;
   startTime?: string; // Required for red and grey, optional for blue
   current?: string; // Required for blue, optional for red and grey
+  temprature?: string;
 }
 
 export interface StatusLightsProps {

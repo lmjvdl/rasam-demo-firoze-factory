@@ -1,12 +1,13 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import MainCardLayoutBodyPrep from "@/components/customContiner/MainCardLayoutBodyPrep";
 import { iconMapLayout } from "@/utils/icons/LayoutIcon";
 import { Box, Tooltip } from "@mui/material";
 import StatusLights from "@/components/layoutDependencies/StatusIndicator";
 import { demoData } from "@/components/layoutDependencies/fakeData";
 import { Device, Position } from "@/interfaces/user/layout/layoutBodyPrep";
+import startRandomGenerator from "@/utils/homeless/randomGenerator";
 
 const iconSize = 10;
 
@@ -43,13 +44,35 @@ const BodyPrepLayout = () => {
     }
   };
 
+  useEffect(() => {
+    const stopFunctions: (() => void)[] = [];
+
+    demoData.devices.forEach((device) => {
+      if (device.status === "blue") {
+        const stopTemp = startRandomGenerator(40, 90, "°C", (val) => {
+          device.temprature = val;
+        });
+
+        const stopCurrent = startRandomGenerator(30, 50, "A", (val) => {
+          device.current = val;
+        });
+
+        stopFunctions.push(stopTemp, stopCurrent);
+      }
+    });
+
+    return () => {
+      stopFunctions.forEach((stop) => stop());
+    };
+  }, []);
+
   const renderDevice = (device: Device, index: number, position: Position) => {
     const IconComponent = iconComponents[device.type];
     const { width, height } = getIconDimensions(device.type);
 
     const tooltipTitle = () => {
       if (device.status === "blue") {
-        return `آمپر: ${device.current || "N/A"}`;
+        return `آمپر: ${device.current || "N/A"} | دما: ${device.temprature || "N/A"}`;
       } else if (device.status === "red") {
         return `مدت زمان خاموش بودن دستگاه: ${device.startTime || "00:00:00"}`;
       } else {

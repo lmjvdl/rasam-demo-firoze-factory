@@ -4,6 +4,7 @@ export const demoData: { devices: Device[] } = {
   devices: [
     {
       id: "batch_ball_mill_1",
+      name: "بامیل 1",
       type: "BatchBaalMill",
       status: "blue",
       lightsConfig: { orientation: "horizontal", position: "top" },
@@ -11,6 +12,7 @@ export const demoData: { devices: Device[] } = {
     },
     {
       id: "batch_ball_mill_2",
+      name: "بامیل 2",
       type: "BatchBaalMill",
       status: "red",
       lightsConfig: { orientation: "horizontal", position: "top" },
@@ -18,6 +20,7 @@ export const demoData: { devices: Device[] } = {
     },
     {
       id: "batch_ball_mill_3",
+      name: "بامیل 3",
       type: "BatchBaalMill",
       status: "grey",
       lightsConfig: { orientation: "horizontal", position: "top" },
@@ -25,6 +28,7 @@ export const demoData: { devices: Device[] } = {
     },
     {
       id: "batch_ball_mill_4",
+      name: "بامیل 4",
       type: "BatchBaalMill",
       status: "blue",
       lightsConfig: { orientation: "horizontal", position: "top" },
@@ -32,6 +36,7 @@ export const demoData: { devices: Device[] } = {
     },
     {
       id: "spray_dryer",
+      name: "اسپری درایر",
       type: "SprayDryer",
       status: "red",
       lightsConfig: { orientation: "horizontal", position: "center" },
@@ -39,6 +44,7 @@ export const demoData: { devices: Device[] } = {
     },
     {
       id: "slurry_pump_1",
+      name: "پمپ 1",
       type: "SlurryPump",
       status: "blue",
       lightsConfig: { orientation: "vertical", position: "top" },
@@ -46,6 +52,7 @@ export const demoData: { devices: Device[] } = {
     },
     {
       id: "slurry_pump_2",
+      name: "پمپ 2",
       type: "SlurryPump",
       status: "grey",
       lightsConfig: { orientation: "vertical", position: "top" },
@@ -53,6 +60,7 @@ export const demoData: { devices: Device[] } = {
     },
     {
       id: "slurry_pump_3",
+      name: "پمپ 3",
       type: "SlurryPump",
       status: "red",
       lightsConfig: { orientation: "vertical", position: "top" },
@@ -60,6 +68,7 @@ export const demoData: { devices: Device[] } = {
     },
     {
       id: "slurry_pit_right_1",
+      name: "حوضچه 1",
       type: "SlurryPitRight",
       status: "blue",
       lightsConfig: { orientation: "vertical", position: "right" },
@@ -67,6 +76,7 @@ export const demoData: { devices: Device[] } = {
     },
     {
       id: "slurry_pit_right_2",
+      name: "حوضچه 2",
       type: "SlurryPitRight",
       status: "red",
       lightsConfig: { orientation: "vertical", position: "right" },
@@ -74,6 +84,7 @@ export const demoData: { devices: Device[] } = {
     },
     {
       id: "slurry_pit_right_3",
+      name: "حوضچه 3",
       type: "SlurryPitRight",
       status: "grey",
       lightsConfig: { orientation: "vertical", position: "right" },
@@ -81,6 +92,7 @@ export const demoData: { devices: Device[] } = {
     },
     {
       id: "slurry_pit_right_4",
+      name: "حوضچه 4",
       type: "SlurryPitRight",
       status: "blue",
       lightsConfig: { orientation: "vertical", position: "right" },
@@ -88,6 +100,7 @@ export const demoData: { devices: Device[] } = {
     },
     {
       id: "slurry_pit_right_5",
+      name: "حوضچه 5",
       type: "SlurryPitRight",
       status: "red",
       lightsConfig: { orientation: "vertical", position: "right" },
@@ -95,6 +108,7 @@ export const demoData: { devices: Device[] } = {
     },
     {
       id: "slurry_pit_left_1",
+      name: "حوضچه 1",
       type: "SlurryPitLeft",
       status: "blue",
       lightsConfig: { orientation: "vertical", position: "left" },
@@ -102,6 +116,7 @@ export const demoData: { devices: Device[] } = {
     },
     {
       id: "slurry_pit_left_2",
+      name: "حوضچه 2",
       type: "SlurryPitLeft",
       status: "red",
       lightsConfig: { orientation: "vertical", position: "left" },
@@ -109,6 +124,7 @@ export const demoData: { devices: Device[] } = {
     },
     {
       id: "slurry_pit_left_3",
+      name: "حوضچه 3",
       type: "SlurryPitLeft",
       status: "grey",
       lightsConfig: { orientation: "vertical", position: "left" },
@@ -116,6 +132,7 @@ export const demoData: { devices: Device[] } = {
     },
     {
       id: "slurry_pit_left_4",
+      name: "حوضچه 4",
       type: "SlurryPitLeft",
       status: "grey",
       lightsConfig: { orientation: "vertical", position: "left" },
@@ -123,6 +140,7 @@ export const demoData: { devices: Device[] } = {
     },
     {
       id: "slurry_pit_left_5",
+      name: "حوضچه 5",
       type: "SlurryPitLeft",
       status: "blue",
       lightsConfig: { orientation: "vertical", position: "left" },
@@ -130,6 +148,7 @@ export const demoData: { devices: Device[] } = {
     },
     {
       id: "continues_ball_mill_1",
+      name: "بالمیل 1",
       type: "ContinuesBallMill",
       status: "grey",
       lightsConfig: { orientation: "vertical", position: "left" },
@@ -137,6 +156,7 @@ export const demoData: { devices: Device[] } = {
     },
     {
       id: "continues_ball_mill_2",
+      name: "بالمیل 2",
       type: "ContinuesBallMill",
       status: "blue",
       lightsConfig: { orientation: "vertical", position: "right" },
@@ -144,6 +164,7 @@ export const demoData: { devices: Device[] } = {
     },
     {
       id: "vibrating_screen_1",
+      name: "صفحه 1",
       type: "VibratingScreen",
       status: "red",
       lightsConfig: { orientation: "vertical", position: "top" },
@@ -151,6 +172,7 @@ export const demoData: { devices: Device[] } = {
     },
     {
       id: "vibrating_screen_2",
+      name: "صفحه 2",
       type: "VibratingScreen",
       status: "blue",
       lightsConfig: { orientation: "vertical", position: "top" },
@@ -158,6 +180,7 @@ export const demoData: { devices: Device[] } = {
     },
     {
       id: "vibrating_screen_3",
+      name: "صفحه 3",
       type: "VibratingScreen",
       status: "grey",
       lightsConfig: { orientation: "vertical", position: "top" },
@@ -165,6 +188,7 @@ export const demoData: { devices: Device[] } = {
     },
     {
       id: "vibrating_screen_4",
+      name: "صفحه 4",
       type: "VibratingScreen",
       status: "red",
       lightsConfig: { orientation: "vertical", position: "top" },
@@ -172,6 +196,7 @@ export const demoData: { devices: Device[] } = {
     },
     {
       id: "vibrating_screen_5",
+      name: "صفحه 5",
       type: "VibratingScreen",
       status: "blue",
       lightsConfig: { orientation: "vertical", position: "top" },
@@ -179,6 +204,7 @@ export const demoData: { devices: Device[] } = {
     },
     {
       id: "vibrating_screen_6",
+      name: "صفحه 6",
       type: "VibratingScreen",
       status: "grey",
       lightsConfig: { orientation: "vertical", position: "top" },
@@ -187,12 +213,14 @@ export const demoData: { devices: Device[] } = {
     {
       id: "granule_sillo_1",
       type: "GranuleSillo",
+      name: "سیلو 1",
       status: "blue",
       lightsConfig: { orientation: "vertical", position: "left" },
       current: "47A",
     },
     {
       id: "granule_sillo_2",
+      name: "سیلو 2",
       type: "GranuleSillo",
       status: "red",
       lightsConfig: { orientation: "vertical", position: "left" },
@@ -200,6 +228,7 @@ export const demoData: { devices: Device[] } = {
     },
     {
       id: "granule_sillo_3",
+      name: "سیلو 3",
       type: "GranuleSillo",
       status: "grey",
       lightsConfig: { orientation: "vertical", position: "left" },
@@ -207,6 +236,7 @@ export const demoData: { devices: Device[] } = {
     },
     {
       id: "granule_sillo_4",
+      name: "سیلو 4",
       type: "GranuleSillo",
       status: "blue",
       lightsConfig: { orientation: "vertical", position: "left" },
@@ -214,6 +244,7 @@ export const demoData: { devices: Device[] } = {
     },
     {
       id: "granule_sillo_5",
+      name: "سیلو 5",
       type: "GranuleSillo",
       status: "red",
       lightsConfig: { orientation: "vertical", position: "left" },
@@ -221,6 +252,7 @@ export const demoData: { devices: Device[] } = {
     },
     {
       id: "granule_sillo_6",
+      name: "سیلو 6",
       type: "GranuleSillo",
       status: "grey",
       lightsConfig: { orientation: "vertical", position: "left" },
@@ -228,6 +260,7 @@ export const demoData: { devices: Device[] } = {
     },
     {
       id: "granule_sillo_7",
+      name: "سیلو 7",
       type: "GranuleSillo",
       status: "blue",
       lightsConfig: { orientation: "vertical", position: "right" },
@@ -235,6 +268,7 @@ export const demoData: { devices: Device[] } = {
     },
     {
       id: "granule_sillo_8",
+      name: "سیلو 8",
       type: "GranuleSillo",
       status: "red",
       lightsConfig: { orientation: "vertical", position: "right" },
@@ -242,6 +276,7 @@ export const demoData: { devices: Device[] } = {
     },
     {
       id: "granule_sillo_9",
+      name: "سیلو 9",
       type: "GranuleSillo",
       status: "grey",
       lightsConfig: { orientation: "vertical", position: "right" },
@@ -249,6 +284,7 @@ export const demoData: { devices: Device[] } = {
     },
     {
       id: "granule_sillo_10",
+      name: "سیلو 10",
       type: "GranuleSillo",
       status: "red",
       lightsConfig: { orientation: "vertical", position: "right" },
@@ -256,6 +292,7 @@ export const demoData: { devices: Device[] } = {
     },
     {
       id: "granule_sillo_11",
+      name: "سیلو 11",
       type: "GranuleSillo",
       status: "red",
       lightsConfig: { orientation: "vertical", position: "right" },
@@ -263,6 +300,7 @@ export const demoData: { devices: Device[] } = {
     },
     {
       id: "granule_sillo_12",
+      name: "سیلو 12",
       type: "GranuleSillo",
       status: "grey",
       lightsConfig: { orientation: "vertical", position: "right" },

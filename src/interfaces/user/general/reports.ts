@@ -4,8 +4,6 @@ export interface ReportDetail {
 }
   
 export interface ReportDetailResponse {
-    data: ReportDetail[];
-    status_code: number;
-    success: boolean;
-    messages: string;
+    data: ReportDetail[];  
+    report_id: string;
 }

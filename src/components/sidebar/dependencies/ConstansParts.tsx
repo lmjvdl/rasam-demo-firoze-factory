@@ -15,7 +15,7 @@ export const staticDrawerItems: Record<string, DrawerItem> = {
   "تهیه بدنه": {
     text: "تهیه بدنه",
     icon: "BodyPrep",
-    to: "/preparingBody",
+    to: "/bodyPrep/lives",
   },
 };
 
