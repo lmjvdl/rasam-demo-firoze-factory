@@ -7,22 +7,22 @@ const StatusLights: React.FC<StatusLightsProps> = ({
   position,
   status,
   iconSize,
-  startTime,
+  // startTime,
   iconWidth = iconSize * 20,
   iconHeight = iconSize * 20,
 }) => {
   const [blink, setBlink] = useState(true);
-  const [timer, setTimer] = useState({ hours: 0, minutes: 0, seconds: 0 });
+  // const [timer, setTimer] = useState({ hours: 0, minutes: 0, seconds: 0 });
 
-  const parseStartTime = (time?: string) => {
-    if (!time) return { hours: 0, minutes: 0, seconds: 0 };
-    const [hours, minutes, seconds] = time.split(":").map(Number);
-    return {
-      hours: isNaN(hours) ? 0 : hours,
-      minutes: isNaN(minutes) ? 0 : minutes,
-      seconds: isNaN(seconds) ? 0 : seconds,
-    };
-  };
+  // const parseStartTime = (time?: string) => {
+  //   if (!time) return { hours: 0, minutes: 0, seconds: 0 };
+  //   const [hours, minutes, seconds] = time.split(":").map(Number);
+  //   return {
+  //     hours: isNaN(hours) ? 0 : hours,
+  //     minutes: isNaN(minutes) ? 0 : minutes,
+  //     seconds: isNaN(seconds) ? 0 : seconds,
+  //   };
+  // };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -31,32 +31,32 @@ const StatusLights: React.FC<StatusLightsProps> = ({
     return () => clearInterval(interval);
   }, []);
 
-  useEffect(() => {
-    if (status !== "grey" && status !== "red") {
-      setTimer({ hours: 0, minutes: 0, seconds: 0 });
-      return;
-    }
+  // useEffect(() => {
+  //   if (status !== "grey" && status !== "red") {
+  //     setTimer({ hours: 0, minutes: 0, seconds: 0 });
+  //     return;
+  //   }
 
-    setTimer(parseStartTime(startTime));
+  //   setTimer(parseStartTime(startTime));
 
-    const interval = setInterval(() => {
-      setTimer((prev) => {
-        let { hours, minutes, seconds } = prev;
-        seconds++;
-        if (seconds >= 60) {
-          seconds = 0;
-          minutes++;
-        }
-        if (minutes >= 60) {
-          minutes = 0;
-          hours++;
-        }
-        return { hours, minutes, seconds };
-      });
-    }, 1000);
+  //   const interval = setInterval(() => {
+  //     setTimer((prev) => {
+  //       let { hours, minutes, seconds } = prev;
+  //       seconds++;
+  //       if (seconds >= 60) {
+  //         seconds = 0;
+  //         minutes++;
+  //       }
+  //       if (minutes >= 60) {
+  //         minutes = 0;
+  //         hours++;
+  //       }
+  //       return { hours, minutes, seconds };
+  //     });
+  //   }, 1000);
 
-    return () => clearInterval(interval);
-  }, [status, startTime]);
+  //   return () => clearInterval(interval);
+  // }, [status, startTime]);
 
   const lightSize = iconSize * 2;
   const margin = iconSize * 0.5;
@@ -158,9 +158,9 @@ const StatusLights: React.FC<StatusLightsProps> = ({
     }),
   };
 
-  const formattedTimer = `${timer.hours.toString().padStart(2, "0")}:${timer.minutes
-    .toString()
-    .padStart(2, "0")}:${timer.seconds.toString().padStart(2, "0")}`;
+  // const formattedTimer = `${timer.hours.toString().padStart(2, "0")}:${timer.minutes
+  //   .toString()
+  //   .padStart(2, "0")}:${timer.seconds.toString().padStart(2, "0")}`;
 
   return (
     <Box sx={{ position: "relative" }}>

@@ -1,14 +1,10 @@
 // ************************* Importing all the (MAIN MODULE) available on the site ************************
 import {
   BodyPrep,
-  Dashboard,
-  Packaging,
   Settings,
   Logout,
-  Chamfer,
-  PowerSupply,
-  ShiftInformation,
-  LayoutBodyPrep
+  LayoutBodyPrep,
+  Dashboard
 } from "../../../public/assets/logo/itemMenu";
 
 // **************************** Importing the (LOGOS) of all existing factories ****************************
@@ -32,11 +28,7 @@ interface logoProps {
 // *************  Map for name to icon component in main sidebar ****************
 export const iconMap: Record<string, React.FC<IconProps>> = {
   Dashboard: Dashboard,
-  Packaging: Packaging,
   BodyPrep: BodyPrep,
-  PowerSupply: PowerSupply,
-  Chamfer: Chamfer,
-  ShiftInformation: ShiftInformation,
   Settings: Settings,
   Logout: Logout,
   LayoutBodyPrep: LayoutBodyPrep

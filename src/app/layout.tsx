@@ -43,9 +43,9 @@ export default function RootLayout({
           <Stack
             direction={"row"}
             width={"100%"}
-            height={"100vh"}
+            height={"100%"}
             bgcolor={"background.default"}
-            overflow="hidden"
+            overflow="auto"
           >
             <Sidebar
               desktopOpen={desktopOpen}
