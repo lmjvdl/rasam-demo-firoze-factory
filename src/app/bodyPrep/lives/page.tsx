@@ -16,8 +16,7 @@ export default function BodyPrepLive({ name }: BodyPrepLiveProps) {
         <Box
           sx={{
             display: "grid",
-            gap: "20px",
-            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+            gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))",
           }}
         >
           {filteredDevices.map((device, index) => (
@@ -27,11 +26,11 @@ export default function BodyPrepLive({ name }: BodyPrepLiveProps) {
               data={{
                 container: {
                   device: index + 1,
-                  device_code: device.name || "Unknown",
+                  device_code: device.name || "unknown",
                   product_line_part: 1,
                   time: Date.now(),
                   online:
-                    device.status === "blue" ? "on" : "off",
+                    device.status === "blue" ? "on" : device.status === "grey" ? "unknown" : "off",
                   data: {
                     current: device.status === "blue"
                       ? parseFloat(device.current || "0")

@@ -42,7 +42,7 @@ export default function MultiSensorLiveCard({ container }: Props) {
             gap={1}
             sx={{
               justifyContent: "space-between",
-              width: "100%", // اینجا عرض را 100% می‌گذاریم تا همیشه کل فضای کارت را بگیرد
+              width: "100%",
             }}
           >
             <Typography variant="h6">{container.device_code}</Typography>

@@ -7,7 +7,7 @@ const OnOff = ({ on }: { on: string }) => {
     <Button
       component={Typography}
       color={
-        state === "on" ? "primary" : state === "off" ? "error" : "secondary"
+        state === "on" ? "primary" : state === "off" ? "error" : "warning"
       }
       disableFocusRipple
       disableTouchRipple
