@@ -2,18 +2,19 @@
 
 import React from "react";
 import MainCard from "@/components/customContiner/MainCard";
-import { demoData } from "@/components/layoutDependencies/fakeData";
+import { demoData } from "@/components/fakeData/layout/fakeData";
 import { BodyPrepLiveProps } from "@/interfaces/user/general/productLinePart";
 import LiveCardManager from "@/components/liveCards/LiveCardManager";
+import { Box } from "@mui/material";
 
 export default function BodyPrepLive({ name }: BodyPrepLiveProps) {
   const filteredDevices = demoData.devices.filter((device) => device.type === name);
 
   return (
     <MainCard>
-      <div>
-        <div
-          style={{
+      <Box>
+        <Box
+          sx={{
             display: "grid",
             gap: "20px",
             gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
@@ -43,8 +44,8 @@ export default function BodyPrepLive({ name }: BodyPrepLiveProps) {
               }}
             />
           ))}
-        </div>
-      </div>
+        </Box>
+      </Box>
     </MainCard>
   );
 }

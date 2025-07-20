@@ -5,7 +5,7 @@ import MainCardLayoutBodyPrep from "@/components/customContiner/MainCardLayoutBo
 import { iconMapLayout } from "@/utils/icons/LayoutIcon";
 import { Box, Tooltip } from "@mui/material";
 import StatusLights from "@/components/layoutDependencies/StatusIndicator";
-import { demoData } from "@/components/layoutDependencies/fakeData";
+import { demoData } from "@/components/fakeData/layout/fakeData";
 import { Device, Position } from "@/interfaces/user/layout/layoutBodyPrep";
 import startRandomGenerator from "@/utils/homeless/randomGenerator";
 import { useRouter } from "next/navigation";

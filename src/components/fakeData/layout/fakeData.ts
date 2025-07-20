@@ -4,7 +4,7 @@ export const demoData: { devices: Device[] } = {
   devices: [
     {
       id: "batch_ball_mill_1",
-      name: "بامیل 1",
+      name: "بالمیل 1",
       type: "BatchBaalMill",
       status: "blue",
       lightsConfig: { orientation: "horizontal", position: "top" },
@@ -12,7 +12,7 @@ export const demoData: { devices: Device[] } = {
     },
     {
       id: "batch_ball_mill_2",
-      name: "بامیل 2",
+      name: "بالمیل 2",
       type: "BatchBaalMill",
       status: "red",
       lightsConfig: { orientation: "horizontal", position: "top" },
@@ -20,7 +20,7 @@ export const demoData: { devices: Device[] } = {
     },
     {
       id: "batch_ball_mill_3",
-      name: "بامیل 3",
+      name: "بالمیل 3",
       type: "BatchBaalMill",
       status: "grey",
       lightsConfig: { orientation: "horizontal", position: "top" },
@@ -28,7 +28,7 @@ export const demoData: { devices: Device[] } = {
     },
     {
       id: "batch_ball_mill_4",
-      name: "بامیل 4",
+      name: "بالمیل 4",
       type: "BatchBaalMill",
       status: "blue",
       lightsConfig: { orientation: "horizontal", position: "top" },
