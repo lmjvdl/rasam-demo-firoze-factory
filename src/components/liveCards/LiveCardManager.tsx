@@ -1,6 +1,9 @@
-import MultiSensorLiveCard from "./MultiSensor";
+"use client";
+
+import React from "react";
 import LoadingScreen from "../loadingScreen/LoadingScreen";
 import { LiveManager } from "@/interfaces/lives/manager";
+import MultiSensorLiveCard from "./MultiSensor";
 import { MultiSensorLiveSchema } from "@/interfaces/lives/multiSensor";
 
 export default function LiveCardManager(manager: LiveManager) {
@@ -12,7 +15,7 @@ export default function LiveCardManager(manager: LiveManager) {
     case "multiSensor":
       return (
         <MultiSensorLiveCard
-          container={manager.data as unknown as MultiSensorLiveSchema}
+          container={manager.data.container as unknown as MultiSensorLiveSchema}
         />
       );
 

@@ -11,14 +11,15 @@ export interface BaseLiveSchema {
 
 export interface MultiSensorLiveSchema extends BaseLiveSchema {
     data: {
-        current?: number;
-        temperature?: number;
+      current?: number;
+      temperature?: number;
     };
 }
 
 export interface LiveManager {
-    type: "multiSensor"
+    type: "multiSensor";
     data: {
-        container: UnionDataLive | UnionDataLive[];
+      container: UnionDataLive;
     };
-}
+  }
+  

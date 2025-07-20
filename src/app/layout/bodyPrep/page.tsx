@@ -8,11 +8,17 @@ import StatusLights from "@/components/layoutDependencies/StatusIndicator";
 import { demoData } from "@/components/layoutDependencies/fakeData";
 import { Device, Position } from "@/interfaces/user/layout/layoutBodyPrep";
 import startRandomGenerator from "@/utils/homeless/randomGenerator";
+import { useRouter } from "next/navigation";
 
 const iconSize = 10;
 
 const BodyPrepLayout = () => {
-  const iconComponents: Record<Device["type"], React.FC<{ width: number; height: number }>> = {
+  const router = useRouter();
+
+  const iconComponents: Record<
+    Device["type"],
+    React.FC<{ width: number; height: number }>
+  > = {
     BatchBaalMill: iconMapLayout["BatchBaalMill"],
     ContinuesBallMill: iconMapLayout["ContinuesBallMill"],
     GranuleSillo: iconMapLayout["GranuleSillo"],
@@ -66,13 +72,19 @@ const BodyPrepLayout = () => {
     };
   }, []);
 
+  const handleIconClick = (deviceType: Device["type"]) => {
+    router.push(`/bodyPrep?device=${deviceType}`);
+  };
+
   const renderDevice = (device: Device, index: number, position: Position) => {
     const IconComponent = iconComponents[device.type];
     const { width, height } = getIconDimensions(device.type);
 
     const tooltipTitle = () => {
       if (device.status === "blue") {
-        return `آمپر: ${device.current || "N/A"} | دما: ${device.temprature || "N/A"}`;
+        return `آمپر: ${device.current || "N/A"} | دما: ${
+          device.temprature || "N/A"
+        }`;
       } else if (device.status === "red") {
         return `مدت زمان خاموش بودن دستگاه: ${device.startTime || "00:00:00"}`;
       } else {
@@ -81,8 +93,16 @@ const BodyPrepLayout = () => {
     };
 
     return (
-      <Tooltip key={device.id} title={tooltipTitle()} placement="top" sx={{ zIndex: 20 }}>
-        <Box sx={{ position: "absolute", ...position }}>
+      <Tooltip
+        key={device.id}
+        title={tooltipTitle()}
+        placement="top"
+        sx={{ zIndex: 20 }}
+      >
+        <Box
+          sx={{ position: "absolute", ...position, cursor: "pointer" }}
+          onClick={() => handleIconClick(device.type)}
+        >
           <StatusLights
             orientation={device.lightsConfig.orientation}
             position={device.lightsConfig.position}
@@ -102,25 +122,37 @@ const BodyPrepLayout = () => {
     <MainCardLayoutBodyPrep>
       {demoData.devices
         .filter((d) => d.type === "BatchBaalMill")
-        .map((device, i) => renderDevice(device, i, { top: 50, left: -100 + i * 200 }))}
+        .map((device, i) =>
+          renderDevice(device, i, { top: 50, left: -100 + i * 200 })
+        )}
       {demoData.devices
         .filter((d) => d.type === "SprayDryer")
         .map((device, i) => renderDevice(device, i, { top: 110, left: -320 }))}
       {demoData.devices
         .filter((d) => d.type === "SlurryPump")
-        .map((device, i) => renderDevice(device, i, { top: 280, left: 100 + i * 65 }))}
+        .map((device, i) =>
+          renderDevice(device, i, { top: 280, left: 100 + i * 65 })
+        )}
       {demoData.devices
         .filter((d) => d.type === "SlurryPitRight")
-        .map((device, i) => renderDevice(device, i, { top: 300 + i * 132, left: 600 }))}
+        .map((device, i) =>
+          renderDevice(device, i, { top: 300 + i * 132, left: 600 })
+        )}
       {demoData.devices
         .filter((d) => d.type === "SlurryPitLeft")
-        .map((device, i) => renderDevice(device, i, { top: 300 + i * 132, left: 700 }))}
+        .map((device, i) =>
+          renderDevice(device, i, { top: 300 + i * 132, left: 700 })
+        )}
       {demoData.devices
         .filter((d) => d.type === "ContinuesBallMill")
-        .map((device, i) => renderDevice(device, i, { top: 1150, left: 150 + i * 260 }))}
+        .map((device, i) =>
+          renderDevice(device, i, { top: 1150, left: 150 + i * 260 })
+        )}
       {demoData.devices
         .filter((d) => d.type === "VibratingScreen")
-        .map((device, i) => renderDevice(device, i, { top: 1088, left: 430 + i * 52 }))}
+        .map((device, i) =>
+          renderDevice(device, i, { top: 1088, left: 430 + i * 52 })
+        )}
       {demoData.devices
         .filter((d) => d.type === "GranuleSillo")
         .map((device, i) => {
