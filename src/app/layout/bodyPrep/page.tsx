@@ -9,11 +9,14 @@ import { demoData } from "@/components/fakeData/layout/fakeData";
 import { Device, Position } from "@/interfaces/user/layout/layoutBodyPrep";
 import startRandomGenerator from "@/utils/homeless/randomGenerator";
 import { useRouter } from "next/navigation";
+import { useLayoutLiveStore } from "@/store/layoutLiveStore";
 
 const iconSize = 10;
 
 const BodyPrepLayout = () => {
   const router = useRouter();
+
+  const { devices, setDeviceData } = useLayoutLiveStore();
 
   const iconComponents: Record<
     Device["type"],
@@ -49,6 +52,26 @@ const BodyPrepLayout = () => {
         return { width: 14, height: 14 };
     }
   };
+
+  useEffect(() => {
+    const stopFunctions: (() => void)[] = [];
+  
+    devices.forEach((device) => {
+      if (device.status === "blue") {
+        const stopTemp = startRandomGenerator(40, 90, "°C", (val) => {
+          setDeviceData(device.id, { temprature: val });
+        });
+  
+        const stopCurrent = startRandomGenerator(30, 50, "A", (val) => {
+          setDeviceData(device.id, { current: val });
+        });
+  
+        stopFunctions.push(stopTemp, stopCurrent);
+      }
+    });
+  
+    return () => stopFunctions.forEach((stop) => stop());
+  }, [devices, setDeviceData]);
 
   useEffect(() => {
     const stopFunctions: (() => void)[] = [];

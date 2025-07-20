@@ -1,5 +1,10 @@
 import { Device } from "@/interfaces/user/layout/layoutBodyPrep";
 
+function getRandomTemperature(): string {
+  const temp = Math.floor(Math.random() * (75 - 45 + 1)) + 45;
+  return `${temp}°C`;
+}
+
 export const demoData: { devices: Device[] } = {
   devices: [
     {
@@ -9,6 +14,7 @@ export const demoData: { devices: Device[] } = {
       status: "blue",
       lightsConfig: { orientation: "horizontal", position: "top" },
       current: "35A",
+      temprature: getRandomTemperature(),
     },
     {
       id: "batch_ball_mill_2",
@@ -33,6 +39,7 @@ export const demoData: { devices: Device[] } = {
       status: "blue",
       lightsConfig: { orientation: "horizontal", position: "top" },
       current: "38A",
+      temprature: getRandomTemperature(),
     },
     {
       id: "spray_dryer",
@@ -49,6 +56,7 @@ export const demoData: { devices: Device[] } = {
       status: "blue",
       lightsConfig: { orientation: "vertical", position: "top" },
       current: "40A",
+      temprature: getRandomTemperature(),
     },
     {
       id: "slurry_pump_2",
@@ -73,6 +81,7 @@ export const demoData: { devices: Device[] } = {
       status: "blue",
       lightsConfig: { orientation: "vertical", position: "right" },
       current: "42A",
+      temprature: getRandomTemperature(),
     },
     {
       id: "slurry_pit_right_2",
@@ -97,6 +106,7 @@ export const demoData: { devices: Device[] } = {
       status: "blue",
       lightsConfig: { orientation: "vertical", position: "right" },
       current: "37A",
+      temprature: getRandomTemperature(),
     },
     {
       id: "slurry_pit_right_5",
@@ -113,6 +123,7 @@ export const demoData: { devices: Device[] } = {
       status: "blue",
       lightsConfig: { orientation: "vertical", position: "left" },
       current: "39A",
+      temprature: getRandomTemperature(),
     },
     {
       id: "slurry_pit_left_2",
@@ -145,6 +156,7 @@ export const demoData: { devices: Device[] } = {
       status: "blue",
       lightsConfig: { orientation: "vertical", position: "left" },
       current: "41A",
+      temprature: getRandomTemperature(),
     },
     {
       id: "continues_ball_mill_1",
@@ -161,6 +173,7 @@ export const demoData: { devices: Device[] } = {
       status: "blue",
       lightsConfig: { orientation: "vertical", position: "right" },
       current: "45A",
+      temprature: getRandomTemperature(),
     },
     {
       id: "vibrating_screen_1",
@@ -177,6 +190,7 @@ export const demoData: { devices: Device[] } = {
       status: "blue",
       lightsConfig: { orientation: "vertical", position: "top" },
       current: "36A",
+      temprature: getRandomTemperature(),
     },
     {
       id: "vibrating_screen_3",
@@ -201,6 +215,7 @@ export const demoData: { devices: Device[] } = {
       status: "blue",
       lightsConfig: { orientation: "vertical", position: "top" },
       current: "43A",
+      temprature: getRandomTemperature(),
     },
     {
       id: "vibrating_screen_6",
@@ -217,6 +232,7 @@ export const demoData: { devices: Device[] } = {
       status: "blue",
       lightsConfig: { orientation: "vertical", position: "left" },
       current: "47A",
+      temprature: getRandomTemperature(),
     },
     {
       id: "granule_sillo_2",
@@ -241,6 +257,7 @@ export const demoData: { devices: Device[] } = {
       status: "blue",
       lightsConfig: { orientation: "vertical", position: "left" },
       current: "44A",
+      temprature: getRandomTemperature(),
     },
     {
       id: "granule_sillo_5",
@@ -265,6 +282,7 @@ export const demoData: { devices: Device[] } = {
       status: "blue",
       lightsConfig: { orientation: "vertical", position: "right" },
       current: "46A",
+      temprature: getRandomTemperature(),
     },
     {
       id: "granule_sillo_8",

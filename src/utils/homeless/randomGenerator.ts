@@ -21,27 +21,17 @@
  * // To stop the generator later:
  * stop();
  */
+
 export default function startRandomGenerator(
-    start_number: number,
-    end_number: number,
-    unit: string,
-    callback: (value: string) => void
-  ): () => void {
-    const intervalId = setInterval(() => {
-      // Generate a random number within the given range
-      const randomValue = Math.random() * (end_number - start_number) + start_number;
-      
-      // Round to one decimal place
-      const roundedValue = randomValue.toFixed(1);
-  
-      // Concatenate with unit
-      const result = `${roundedValue} ${unit}`;
-  
-      // Send result to callback
-      callback(result);
-    }, 2000);
-  
-    // Return a function to stop the generator
-    return () => clearInterval(intervalId);
-  }
-  
+  min: number,
+  max: number,
+  unit: string,
+  callback: (val: string) => void
+): () => void {
+  const interval = setInterval(() => {
+    const value = `${(Math.random() * (max - min) + min).toFixed(1)} ${unit}`;
+    callback(value);
+  }, 2000);
+
+  return () => clearInterval(interval);
+}
