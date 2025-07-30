@@ -50,7 +50,17 @@ export default function BodyPrepLivePage() {
           }));
         });
 
-        stops.push(stopCurrent, stopTemp);
+        const stopSoilSurface = startRandomGenerator(1, 10, "m", (val) => {
+          setLiveValues((prev) => ({
+            ...prev,
+            [deviceId]: {
+              ...(prev[deviceId] || {}),
+              soilSurface: parseFloat(val),
+            },
+          }));
+        });
+
+        stops.push(stopCurrent, stopTemp, stopSoilSurface);
       }
     });
 
@@ -99,6 +109,12 @@ export default function BodyPrepLivePage() {
                       temperature:
                         device.status === "blue"
                           ? liveData?.temperature ?? parseFloat(device.temprature || "0")
+                          : device.status === "red"
+                            ? 0
+                            : undefined,
+                      soilSurface:
+                        device.status === "blue"
+                          ? liveData?.soilSurface ?? parseFloat(device.soilSurface || "0")
                           : device.status === "red"
                             ? 0
                             : undefined,

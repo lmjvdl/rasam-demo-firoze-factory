@@ -4,8 +4,9 @@ export interface MultiSensorLiveSchema {
     product_line_part: number;
     time: number;
     data: {
-      current: number;
-      temperature: number;
+      current?: number;
+      temperature?: number;
+      soilSurface?: number;
     };
     online: string;
 }

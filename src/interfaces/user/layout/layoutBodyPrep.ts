@@ -18,6 +18,7 @@ export interface Device {
   startTime?: string; // Required for red and grey, optional for blue
   current?: string; // Required for blue, optional for red and grey
   temprature?: string;
+  soilSurface?: string;
 }
 
 export interface StatusLightsProps {

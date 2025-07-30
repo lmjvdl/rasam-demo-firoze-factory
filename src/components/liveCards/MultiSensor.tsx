@@ -63,6 +63,14 @@ export default function MultiSensorLiveCard({ container }: Props) {
                 ? ""
                 : `${safeData.temperature} C°`}
             </Typography>
+            {safeData.soilSurface ?
+              <Typography>
+                سطح خاک:{" "}
+                {safeData.soilSurface === undefined
+                  ? ""
+                  : `${safeData.soilSurface} m`}
+              </Typography> : null
+            }
           </Box>
         </CardContent>
       </Card>

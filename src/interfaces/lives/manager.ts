@@ -13,6 +13,7 @@ export interface MultiSensorLiveSchema extends BaseLiveSchema {
     data: {
       current?: number;
       temperature?: number;
+      soilSurface?: number;
     };
 }
 

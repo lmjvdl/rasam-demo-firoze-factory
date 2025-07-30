@@ -5,6 +5,11 @@ function getRandomTemperature(): string {
   return `${temp}C°`;
 }
 
+function getRandomSoilSurface(): string {
+  const temp = Math.floor(Math.random() * (25 - 16 + 1));
+  return `${temp}m`;
+}
+
 export const demoData: { devices: Device[] } = {
   devices: [
     {
@@ -38,7 +43,6 @@ export const demoData: { devices: Device[] } = {
       type: "BatchBaalMill",
       status: "blue",
       lightsConfig: { orientation: "horizontal", position: "top" },
-      current: "38A",
       temprature: getRandomTemperature(),
     },
     {
@@ -234,7 +238,7 @@ export const demoData: { devices: Device[] } = {
       status: "blue",
       lightsConfig: { orientation: "vertical", position: "left" },
       current: "47A",
-      temprature: getRandomTemperature(),
+      soilSurface: getRandomSoilSurface(),
     },
     {
       id: "granule_sillo_2",
@@ -243,7 +247,7 @@ export const demoData: { devices: Device[] } = {
       status: "blue",
       current: "66A",
       lightsConfig: { orientation: "vertical", position: "left" },
-      temprature: getRandomTemperature(),
+      soilSurface: getRandomSoilSurface(),
     },
     {
       id: "granule_sillo_3",
@@ -253,7 +257,7 @@ export const demoData: { devices: Device[] } = {
       current: "61A",
       lightsConfig: { orientation: "vertical", position: "left" },
       startTime: "02:25:45",
-      temprature: getRandomTemperature(),
+      soilSurface: getRandomSoilSurface(),
     },
     {
       id: "granule_sillo_4",
@@ -261,7 +265,6 @@ export const demoData: { devices: Device[] } = {
       type: "GranuleSillo",
       status: "none",
       lightsConfig: { orientation: "vertical", position: "left" },
-      current: "44A",
     },
     {
       id: "granule_sillo_5",

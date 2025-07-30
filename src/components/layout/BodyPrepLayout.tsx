@@ -84,7 +84,16 @@ const BodyPrepLayout = ({ initialDevices = demoData.devices }: BodyPrepLayoutPro
           setDeviceData(device.id, { current: val });
         });
 
-        stopFunctions.push(stopTemp, stopCurrent);
+        const stopSoilSurface = startRandomGenerator(1, 10, "m", (val) => {
+          setDevices(prevDevices =>
+            prevDevices.map(d =>
+              d.id === device.id ? { ...d, soilSurface: val } : d
+            )
+          );
+          setDeviceData(device.id, { soilSurface: val });
+        });
+
+        stopFunctions.push(stopTemp, stopCurrent, stopSoilSurface);
       }
     });
 
@@ -103,8 +112,11 @@ const BodyPrepLayout = ({ initialDevices = demoData.devices }: BodyPrepLayoutPro
 
     const tooltipTitle = () => {
       if (device.status === "blue") {
-        return `آمپر: ${device.current || "N/A"} | دما: ${device.temprature || "N/A"
-          }`;
+        if (device.current !== undefined && device.temprature !== undefined) {
+          return `آمپر: ${device.current} | دما: ${device.temprature}`;
+        } else {
+          return `آمپر: ${device.current} | سطح خاک: ${device.soilSurface}`;
+        }
       } else if (device.status === "red") {
         return `مدت زمان خاموش بودن دستگاه: ${device.startTime || "00:00:00"}`;
       } else if (device.status === "grey") {
