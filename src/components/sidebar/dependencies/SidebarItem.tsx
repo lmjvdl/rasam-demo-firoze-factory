@@ -11,7 +11,7 @@ import React, { ReactNode } from "react";
 
 const SidebarItem = ({
   text = "Layout",
-  link = "/dashboard",
+  link = "/layout/bodyPrep",
   icon = <Done />,
   onClick,
   sx,

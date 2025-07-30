@@ -6,8 +6,6 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
-  basePath: '/RasamDemo',
-  assetPrefix: '/RasamDemo/',
   // Customize the Webpack configuration to handle SVG files
   webpack(config) {
     config.module.rules.push({

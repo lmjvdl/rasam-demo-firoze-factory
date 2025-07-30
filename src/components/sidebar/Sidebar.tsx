@@ -48,8 +48,10 @@ const Sidebar = ({
   };
 
   useEffect(() => {
-    if (window.location.pathname === "/") {
-      router.push("/dashboard");
+    if (typeof window !== "undefined") {
+      if (window.location.pathname === "/") {
+        router.push("/layout/bodyPrep");
+      }
     }
   }, [router]);
 
@@ -64,10 +66,10 @@ const Sidebar = ({
     left: isMobile
       ? "30px"
       : isMobile && mobileOpen
-      ? "300px"
-      : desktopOpen
-      ? `${drawerWidth - 20}px`
-      : "20px",
+        ? "300px"
+        : desktopOpen
+          ? `${drawerWidth - 20}px`
+          : "20px",
     top: "300px",
     zIndex: theme.zIndex.modal + 1,
     backgroundColor: theme.palette.background.paper,
@@ -129,7 +131,7 @@ const Sidebar = ({
 
         <SidebarDrawer
           open={true}
-          onClose={() => {}}
+          onClose={() => { }}
           variant="permanent"
           drawerWidth={desktopOpen ? drawerWidth : collapsedWidth}
         >

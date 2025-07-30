@@ -1,40 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { Box } from "@mui/material";
-
-interface StatusLightsProps {
-  orientation: "horizontal" | "vertical";
-  position: "top" | "bottom" | "left" | "right" | "both" | "center";
-  status: "blue" | "red" | "grey";
-  iconSize: number;
-  startTime?: string; // Optional start time in "HH:mm:ss" format
-  iconWidth?: number; // Icon width for precise centering
-  iconHeight?: number; // Icon height for precise centering
-}
+import { StatusLightsProps } from "@/interfaces/user/layout/layoutBodyPrep";
 
 const StatusLights: React.FC<StatusLightsProps> = ({
   orientation,
   position,
   status,
   iconSize,
-  startTime,
+  // startTime,
   iconWidth = iconSize * 20,
   iconHeight = iconSize * 20,
 }) => {
   const [blink, setBlink] = useState(true);
-  const [timer, setTimer] = useState({ hours: 0, minutes: 0, seconds: 0 });
+  // const [timer, setTimer] = useState({ hours: 0, minutes: 0, seconds: 0 });
 
-  // Parse startTime into hours, minutes, seconds
-  const parseStartTime = (time?: string) => {
-    if (!time) return { hours: 0, minutes: 0, seconds: 0 };
-    const [hours, minutes, seconds] = time.split(":").map(Number);
-    return {
-      hours: isNaN(hours) ? 0 : hours,
-      minutes: isNaN(minutes) ? 0 : minutes,
-      seconds: isNaN(seconds) ? 0 : seconds,
-    };
-  };
+  // const parseStartTime = (time?: string) => {
+  //   if (!time) return { hours: 0, minutes: 0, seconds: 0 };
+  //   const [hours, minutes, seconds] = time.split(":").map(Number);
+  //   return {
+  //     hours: isNaN(hours) ? 0 : hours,
+  //     minutes: isNaN(minutes) ? 0 : minutes,
+  //     seconds: isNaN(seconds) ? 0 : seconds,
+  //   };
+  // };
 
-  // Blinking effect for active light
   useEffect(() => {
     const interval = setInterval(() => {
       setBlink((prev) => !prev);
@@ -42,33 +31,32 @@ const StatusLights: React.FC<StatusLightsProps> = ({
     return () => clearInterval(interval);
   }, []);
 
-  // Timer for grey (faulty) state
-  useEffect(() => {
-    if (status !== "grey") {
-      setTimer({ hours: 0, minutes: 0, seconds: 0 });
-      return;
-    }
+  // useEffect(() => {
+  //   if (status !== "grey" && status !== "red") {
+  //     setTimer({ hours: 0, minutes: 0, seconds: 0 });
+  //     return;
+  //   }
 
-    setTimer(parseStartTime(startTime));
+  //   setTimer(parseStartTime(startTime));
 
-    const interval = setInterval(() => {
-      setTimer((prev) => {
-        let { hours, minutes, seconds } = prev;
-        seconds++;
-        if (seconds >= 60) {
-          seconds = 0;
-          minutes++;
-        }
-        if (minutes >= 60) {
-          minutes = 0;
-          hours++;
-        }
-        return { hours, minutes, seconds };
-      });
-    }, 1000);
+  //   const interval = setInterval(() => {
+  //     setTimer((prev) => {
+  //       let { hours, minutes, seconds } = prev;
+  //       seconds++;
+  //       if (seconds >= 60) {
+  //         seconds = 0;
+  //         minutes++;
+  //       }
+  //       if (minutes >= 60) {
+  //         minutes = 0;
+  //         hours++;
+  //       }
+  //       return { hours, minutes, seconds };
+  //     });
+  //   }, 1000);
 
-    return () => clearInterval(interval);
-  }, [status, startTime]);
+  //   return () => clearInterval(interval);
+  // }, [status, startTime]);
 
   const lightSize = iconSize * 2;
   const margin = iconSize * 0.5;
@@ -170,80 +158,9 @@ const StatusLights: React.FC<StatusLightsProps> = ({
     }),
   };
 
-  const timerStyle = {
-    display: status === "grey" ? "block" : "none",
-    position: "absolute" as const,
-    fontSize: iconSize * 1.5,
-    color: "#9E9E9E",
-    zIndex: 10,
-    ...(position === "top" && orientation === "vertical" && {
-      top: -lightSize * 3 - margin * 6,
-      left: "50%",
-      transform: "translateX(-50%)",
-      right: "auto",
-      bottom: "auto",
-    }),
-    ...(position === "top" && orientation === "horizontal" && {
-      top: -lightSize * 2 - margin * 2.5,
-      left: "50%",
-      transform: "translateX(-50%)",
-      right: "auto",
-      bottom: "auto",
-    }),
-    ...(position === "bottom" && orientation === "vertical" && {
-      top: lightSize * 3 + margin * 3,
-      left: "50%",
-      transform: "translateX(-50%)",
-      right: "auto",
-      bottom: "auto",
-    }),
-    ...(position === "bottom" && orientation === "horizontal" && {
-      top: lightSize * 2 + margin * 2.5,
-      left: "50%",
-      transform: "translateX(-50%)",
-      right: "auto",
-      bottom: "auto",
-    }),
-    ...(position === "bottom" && orientation !== "vertical" && orientation !== "horizontal" && {
-      top: lightSize * 2 + margin * 2,
-      left: "50%",
-      transform: "translateX(-50%)",
-    }),
-    ...(position === "left" && orientation === "vertical" && {
-      left: -lightSize * 2 - margin * 3,
-      top: "50%",
-      transform: "translateY(38%)",
-      right: "auto",
-      bottom: "auto",
-    }),
-    ...(position === "left" && orientation !== "vertical" && {
-      left: -lightSize * 3 - margin * 2,
-      top: "50%",
-      transform: "translateY(-50%)",
-    }),
-    ...(position === "right" && orientation === "horizontal" && {
-      right: -lightSize * 3 - margin * 3,
-      top: "50%",
-      transform: "translateY(-50%)",
-      left: "auto",
-      bottom: "auto",
-    }),
-    ...(position === "right" && orientation !== "horizontal" && {
-      right: -lightSize * 2 - margin,
-      top: "50%",
-      transform: "translateY(38%)",
-    }),
-    ...(position === "both" && {
-      top: -lightSize * 2 - margin * 2,
-      left: -lightSize * 2 - margin * 2,
-      transform: "none",
-    }),
-    ...(position === "center" && {
-      top: iconHeight / 2 + lightSize + margin,
-      left: iconWidth / 2,
-      transform: "translate(-50%, 0%)",
-    }),
-  };
+  // const formattedTimer = `${timer.hours.toString().padStart(2, "0")}:${timer.minutes
+  //   .toString()
+  //   .padStart(2, "0")}:${timer.seconds.toString().padStart(2, "0")}`;
 
   return (
     <Box sx={{ position: "relative" }}>
@@ -251,11 +168,6 @@ const StatusLights: React.FC<StatusLightsProps> = ({
         <Box sx={getLightStyle("blue")} />
         <Box sx={getLightStyle("red")} />
         <Box sx={getLightStyle("grey")} />
-      </Box>
-      <Box sx={timerStyle}>
-        {`${timer.hours.toString().padStart(2, "0")}:${timer.minutes
-          .toString()
-          .padStart(2, "0")}:${timer.seconds.toString().padStart(2, "0")}`}
       </Box>
     </Box>
   );

@@ -7,7 +7,6 @@ import React, { useState } from "react";
 import Header from "@/components/header/Header";
 import { Box, Stack } from "@mui/material";
 import Sidebar from "@/components/sidebar/Sidebar";
-import { ToastProvider } from "@/components/notification/ToastProvider";
 
 export default function RootLayout({
   children,
@@ -39,13 +38,12 @@ export default function RootLayout({
       </head>
       <body>
         <Providers>
-          <ToastProvider />
           <Stack
             direction={"row"}
             width={"100%"}
-            height={"100vh"}
+            height={"100%"}
             bgcolor={"background.default"}
-            overflow="hidden"
+            overflow="auto"
           >
             <Sidebar
               desktopOpen={desktopOpen}
@@ -61,7 +59,7 @@ export default function RootLayout({
                 drawerWidth={drawerWidth}
                 collapsedWidth={collapsedWidth}
                 desktopOpen={desktopOpen}
-                factoryName="رسام"
+                factoryName="فیروزه"
               />
 
               <Box

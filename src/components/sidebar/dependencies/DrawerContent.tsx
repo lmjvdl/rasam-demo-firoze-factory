@@ -1,4 +1,4 @@
-import { Box, Grid2, useColorScheme } from "@mui/material";
+import { Box, Grid2, Typography, useColorScheme } from "@mui/material";
 import { companyMap } from "@/utils/icons/IconsMenu";
 import SidebarItemList from "./SidebarItemList";
 import { DrawerContentProps } from "@/interfaces/ui/sidebar/sidebar";
@@ -9,9 +9,10 @@ const DrawerContent = ({
   isCollapsed = false,
 }: DrawerContentProps) => {
   const mode = useColorScheme();
-  const FactoryIcon = mode.colorScheme === "light"
+  const FactoryIcon =
+    mode.colorScheme === "light"
       ? companyMap["RasamLight"]
-      : companyMap["RasamDark"]
+      : companyMap["RasamDark"];
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", height: "100vh" }}>
@@ -27,6 +28,13 @@ const DrawerContent = ({
         }}
       >
         <FactoryIcon fill={mode.colorScheme === "dark" ? "#fff" : "#292D32"} />
+        <Typography
+          color="text.primary"
+          gutterBottom
+          sx={{ fontWeight: 200 }}
+        >
+          شرکت رسام
+        </Typography>
       </Grid2>
       <Box
         sx={{
@@ -34,15 +42,15 @@ const DrawerContent = ({
           overflowY: "auto",
           overflowX: "hidden",
           direction: "rtl",
-          
+
           "& > *": {
             direction: "ltr",
           },
         }}
       >
-        <SidebarItemList 
-          items={drawerItemInfoByKey} 
-          isCollapsed={isCollapsed} 
+        <SidebarItemList
+          items={drawerItemInfoByKey}
+          isCollapsed={isCollapsed}
         />
       </Box>
       <Box
@@ -55,9 +63,9 @@ const DrawerContent = ({
           background: "background.defaultChannel",
         }}
       >
-        <SidebarItemList 
-          items={footerItemInfoByKey} 
-          isCollapsed={isCollapsed} 
+        <SidebarItemList
+          items={footerItemInfoByKey}
+          isCollapsed={isCollapsed}
         />
       </Box>
     </Box>
