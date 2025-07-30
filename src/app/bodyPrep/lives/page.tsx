@@ -31,7 +31,7 @@ export default function BodyPrepLive({ name }: BodyPrepLiveProps) {
           }));
         });
 
-        const stopTemp = startRandomGenerator(20, 80, "C°", (val) => {
+        const stopTemp = startRandomGenerator(20, 80, "°C", (val) => {
           setLiveValues((prev) => ({
             ...prev,
             [deviceId]: {

@@ -9,7 +9,7 @@ export interface Device {
     | "SlurryPump"
     | "SprayDryer"
     | "VibratingScreen";
-  status: "blue" | "red" | "grey";
+  status: "blue" | "red" | "grey" | "none";
   lightsConfig: {
     orientation: "horizontal" | "vertical";
     position: "top" | "bottom" | "left" | "right" | "both" | "center";
@@ -23,7 +23,7 @@ export interface Device {
 export interface StatusLightsProps {
   orientation: "horizontal" | "vertical";
   position: "top" | "bottom" | "left" | "right" | "both" | "center";
-  status: "blue" | "red" | "grey";
+  status: "blue" | "red" | "grey" | "none";
   iconSize: number;
   startTime?: string;
   iconWidth?: number;
@@ -39,4 +39,9 @@ export interface Position {
 export interface DeviceState {
   devices: Device[];
   setDeviceData: (id: string, data: Partial<Device>) => void;
+}
+
+
+export interface BodyPrepLayoutProps {
+  initialDevices?: Device[];
 }

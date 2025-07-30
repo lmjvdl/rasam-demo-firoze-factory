@@ -6,16 +6,12 @@ import { iconMapLayout } from "@/utils/icons/LayoutIcon";
 import { Box, Tooltip } from "@mui/material";
 import StatusLights from "@/components/layoutDependencies/StatusIndicator";
 import { demoData } from "@/components/fakeData/layout/fakeData";
-import { Device, Position } from "@/interfaces/user/layout/layoutBodyPrep";
+import { BodyPrepLayoutProps, Device, Position } from "@/interfaces/user/layout/layoutBodyPrep";
 import startRandomGenerator from "@/utils/homeless/randomGenerator";
 import { useRouter } from "next/navigation";
 import { useLayoutLiveStore } from "@/store/layoutLiveStore";
 
 const iconSize = 10;
-
-interface BodyPrepLayoutProps {
-  initialDevices?: Device[];
-}
 
 const BodyPrepLayout = ({ initialDevices = demoData.devices }: BodyPrepLayoutProps) => {
   const router = useRouter();
@@ -111,8 +107,10 @@ const BodyPrepLayout = ({ initialDevices = demoData.devices }: BodyPrepLayoutPro
           }`;
       } else if (device.status === "red") {
         return `مدت زمان خاموش بودن دستگاه: ${device.startTime || "00:00:00"}`;
-      } else {
+      } else if (device.status === "grey") {
         return `مدت زمان قطع ارتباط: ${device.startTime || "00:00:00"}`;
+      } else {
+        return ""
       }
     };
 
@@ -124,6 +122,7 @@ const BodyPrepLayout = ({ initialDevices = demoData.devices }: BodyPrepLayoutPro
         sx={{ zIndex: 20 }}
       >
         <Box
+          dir="ltr"
           sx={{ position: "absolute", ...position, cursor: "pointer" }}
           onClick={() => handleIconClick(device.type)}
         >

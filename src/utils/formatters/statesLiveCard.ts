@@ -4,9 +4,9 @@ export function recognizeState(state: string): string {
     } else if (state === "off") {
         return "خاموش";
     } else if (state === "unknown") {
-        return "نامشخص";
+        return "قطع ارتباط";
     } else {
-        return "قطع ارتباط"
+        return ""
     }
 }
 
