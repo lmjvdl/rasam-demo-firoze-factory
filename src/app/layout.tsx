@@ -59,7 +59,7 @@ export default function RootLayout({
                 drawerWidth={drawerWidth}
                 collapsedWidth={collapsedWidth}
                 desktopOpen={desktopOpen}
-                factoryName="رسام"
+                factoryName="فیروزه"
               />
 
               <Box

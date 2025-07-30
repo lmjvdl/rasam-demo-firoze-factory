@@ -3,14 +3,16 @@
 import React, { useEffect, useState } from "react";
 import MainCard from "@/components/customContiner/MainCard";
 import { demoData } from "@/components/fakeData/layout/fakeData";
-import { BodyPrepLiveProps } from "@/interfaces/user/general/productLinePart";
 import LiveCardManager from "@/components/liveCards/LiveCardManager";
 import { Box } from "@mui/material";
 import startRandomGenerator from "@/utils/homeless/randomGenerator";
 import { LiveValues } from "@/interfaces/lives/liveConfig";
+import { useSearchParams } from "next/navigation";
 
+export default function BodyPrepLivePage() {
+  const searchParams = useSearchParams();
+  const name = searchParams.get("device") || "GranuleSillo";
 
-export default function BodyPrepLive({ name }: BodyPrepLiveProps) {
   const filteredDevices = demoData.devices.filter((device) => device.type === name);
   const [liveValues, setLiveValues] = useState<LiveValues>({});
 
@@ -49,7 +51,6 @@ export default function BodyPrepLive({ name }: BodyPrepLiveProps) {
       stops.forEach((stop) => stop());
     };
   }, [filteredDevices]);
-
 
   return (
     <MainCard>
@@ -95,7 +96,6 @@ export default function BodyPrepLive({ name }: BodyPrepLiveProps) {
                     },
                   },
                 }}
-
               />
             );
           })}
