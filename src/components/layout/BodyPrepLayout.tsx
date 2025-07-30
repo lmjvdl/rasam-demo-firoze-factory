@@ -126,16 +126,18 @@ const BodyPrepLayout = ({ initialDevices = demoData.devices }: BodyPrepLayoutPro
           sx={{ position: "absolute", ...position, cursor: "pointer" }}
           onClick={() => handleIconClick(device.type)}
         >
-          <StatusLights
-            orientation={device.lightsConfig.orientation}
-            position={device.lightsConfig.position}
-            status={device.status}
-            iconSize={iconSize}
-            startTime={device.startTime}
-            iconWidth={width * iconSize}
-            iconHeight={height * iconSize}
-          />
-          <IconComponent width={width * iconSize} height={height * iconSize} />
+          <Box sx={{ position: "relative", display: "inline-block" }}>
+            <StatusLights
+              orientation={device.lightsConfig.orientation}
+              position={device.lightsConfig.position}
+              status={device.status}
+              iconSize={iconSize}
+              startTime={device.startTime}
+              iconWidth={width * iconSize}
+              iconHeight={height * iconSize}
+            />
+            <IconComponent width={width * iconSize} height={height * iconSize} />
+          </Box>
         </Box>
       </Tooltip>
     );
