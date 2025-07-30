@@ -15,8 +15,15 @@ export default function BodyPrepLivePage() {
 
   const filteredDevices = demoData.devices.filter((device) => device.type === name);
   const [liveValues, setLiveValues] = useState<LiveValues>({});
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isMounted) return;
+
     const stops: (() => void)[] = [];
 
     filteredDevices.forEach((device) => {
@@ -50,7 +57,9 @@ export default function BodyPrepLivePage() {
     return () => {
       stops.forEach((stop) => stop());
     };
-  }, [filteredDevices]);
+  }, [filteredDevices, isMounted]);
+
+  if (!isMounted) return null;
 
   return (
     <MainCard>

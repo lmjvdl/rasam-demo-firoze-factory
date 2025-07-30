@@ -1,34 +1,40 @@
 "use client";
 
 import MainCard from "@/components/customContiner/MainCard";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import TabsSection from "@/components/tabs/TabsSection";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import { reports } from "@/components/fakeData/live/reportBodyPrepDetailTest";
-import BodyPrepLive from "../../components/bodyPrep/BodyPrepLive";
+import BodyPrepLivePage from "../../components/bodyPrep/BodyPrepLive";
 import { tabs } from "./tabsConfig";
 
 export default function BodyPrepPage() {
-  const [selectedTab, setSelectedTab] = useState(0);
   const searchParams = useSearchParams();
+  const router = useRouter();
 
-  useEffect(() => {
+  const tabIndexFromUrl = useMemo(() => {
     const deviceParam = searchParams.get("device");
-
-    if (deviceParam) {
-      const tabIndex = tabs.findIndex((tab) => tab.name === deviceParam);
-      if (tabIndex !== -1) {
-        setSelectedTab(tabIndex);
-      }
-    }
+    const index = tabs.findIndex((tab) => tab.name === deviceParam);
+    return index !== -1 ? index : 0;
   }, [searchParams]);
 
-  const handleChange = (input: string) => {
-    console.log(input);
+  const [selectedTab, setSelectedTab] = useState(tabIndexFromUrl);
+
+  useEffect(() => {
+    setSelectedTab(tabIndexFromUrl);
+  }, [tabIndexFromUrl]);
+
+  const handleTabChange = (newIndex: number) => {
+    const newDevice = tabs[newIndex].name;
+    setSelectedTab(newIndex);
+    router.push(`/bodyPrep?device=${newDevice}`);
+  };
+
+  const handleReportChange = (input: string) => {
+    console.log("Selected report:", input);
   };
 
   const safeSelectedTab = Math.min(selectedTab, tabs.length - 1);
-
   const selectedTabName = tabs[safeSelectedTab].name;
 
   const currentReports =
@@ -41,11 +47,11 @@ export default function BodyPrepPage() {
       <TabsSection
         selectedTab={safeSelectedTab}
         reportOptions={{ [safeSelectedTab]: currentReports }}
-        setSelectedTab={setSelectedTab}
+        onTabChange={handleTabChange}
         tabLabels={tabs.map((tab) => tab.label)}
-        onReportChange={handleChange}
+        onReportChange={handleReportChange}
       >
-        <BodyPrepLive />
+        <BodyPrepLivePage />
       </TabsSection>
     </MainCard>
   );

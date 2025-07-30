@@ -1,12 +1,11 @@
 'use client';
 
 import { Box, Tabs, Tab } from "@mui/material";
-import { Dispatch, SetStateAction } from "react";
 import ReportsDropdown from "./ReportDropdown";
 
 interface TabsSectionProps {
   selectedTab: number;
-  setSelectedTab: Dispatch<SetStateAction<number>>;
+  onTabChange: (newIndex: number) => void;
   tabLabels: string[];
   reportOptions?: { [key: number]: string[] };
   onReportChange: (report: string) => void;
@@ -15,7 +14,7 @@ interface TabsSectionProps {
 
 export default function TabsSection({
   selectedTab,
-  setSelectedTab,
+  onTabChange,
   tabLabels,
   reportOptions,
   onReportChange,
@@ -35,7 +34,7 @@ export default function TabsSection({
       >
         <Tabs
           value={selectedTab}
-          onChange={(_, newValue) => setSelectedTab(newValue)}
+          onChange={(_, newValue) => onTabChange(newValue)}
           sx={{
             flexGrow: 1,
             minHeight: "48px",
