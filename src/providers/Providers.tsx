@@ -1,6 +1,5 @@
 import { ReactNode } from "react";
 import MaterialProvider from "./MaterialProvider";
-import ReactQueryProvider from "./ReactQueryProvider";
 
 const Providers = ({
   children,
@@ -8,9 +7,9 @@ const Providers = ({
   children: ReactNode;
 }>) => {
   return (
-    <ReactQueryProvider>
+    <>
       <MaterialProvider>{children}</MaterialProvider>;
-    </ReactQueryProvider>
+    </>
   );
 };
 

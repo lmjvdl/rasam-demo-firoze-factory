@@ -54,14 +54,14 @@ export default function MultiSensorLiveCard({ container }: Props) {
             <Typography>
               جریان دستگاه:{" "}
               {safeData.current === undefined
-                ? "نامشخص"
+                ? ""
                 : `${safeData.current} A`}
             </Typography>
             <Typography>
               دمای دستگاه:{" "}
               {safeData.temperature === undefined
-                ? "نامشخص"
-                : `${safeData.temperature} °C`}
+                ? ""
+                : `${safeData.temperature} C°`}
             </Typography>
           </Box>
         </CardContent>

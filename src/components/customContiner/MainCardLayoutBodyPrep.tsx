@@ -1,3 +1,5 @@
+"use client"
+
 import { MainCardType } from "@/interfaces/ui/mainCard/MainCard";
 import { Box } from "@mui/material";
 import React from "react";
@@ -12,11 +14,13 @@ const MainCardLayoutBodyPrep: React.FC<MainCardType> = ({ children }) => {
   });
 
   React.useEffect(() => {
-    const updateSize = () =>
-      setWindowSize({ width: window.innerWidth, height: window.innerHeight });
-    updateSize();
-    window.addEventListener("resize", updateSize);
-    return () => window.removeEventListener("resize", updateSize);
+    if (typeof window !== undefined) {
+      const updateSize = () =>
+        setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+      updateSize();
+      window.addEventListener("resize", updateSize);
+      return () => window.removeEventListener("resize", updateSize);
+    }
   }, []);
 
   const scaleX = windowSize.width / baseWidth;

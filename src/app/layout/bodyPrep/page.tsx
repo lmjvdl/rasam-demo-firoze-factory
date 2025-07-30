@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import MainCardLayoutBodyPrep from "@/components/customContiner/MainCardLayoutBodyPrep";
 import { iconMapLayout } from "@/utils/icons/LayoutIcon";
 import { Box, Tooltip } from "@mui/material";
@@ -13,10 +13,15 @@ import { useLayoutLiveStore } from "@/store/layoutLiveStore";
 
 const iconSize = 10;
 
-const BodyPrepLayout = () => {
-  const router = useRouter();
+interface BodyPrepLayoutProps {
+  initialDevices?: Device[];
+}
 
-  const { devices, setDeviceData } = useLayoutLiveStore();
+const BodyPrepLayout = ({ initialDevices = demoData.devices }: BodyPrepLayoutProps) => {
+  const router = useRouter();
+  const { setDeviceData } = useLayoutLiveStore();
+  const [devices, setDevices] = useState<Device[]>(initialDevices);
+  const [isMounted, setIsMounted] = useState(false);
 
   const iconComponents: Record<
     Device["type"],
@@ -54,36 +59,33 @@ const BodyPrepLayout = () => {
   };
 
   useEffect(() => {
-    const stopFunctions: (() => void)[] = [];
-  
-    devices.forEach((device) => {
-      if (device.status === "blue") {
-        const stopTemp = startRandomGenerator(40, 90, "°C", (val) => {
-          setDeviceData(device.id, { temprature: val });
-        });
-  
-        const stopCurrent = startRandomGenerator(30, 50, "A", (val) => {
-          setDeviceData(device.id, { current: val });
-        });
-  
-        stopFunctions.push(stopTemp, stopCurrent);
-      }
-    });
-  
-    return () => stopFunctions.forEach((stop) => stop());
-  }, [devices, setDeviceData]);
+    setIsMounted(true);
+    return () => setIsMounted(false);
+  }, []);
 
   useEffect(() => {
+    if (!isMounted) return;
+
     const stopFunctions: (() => void)[] = [];
 
-    demoData.devices.forEach((device) => {
+    devices.forEach((device) => {
       if (device.status === "blue") {
-        const stopTemp = startRandomGenerator(40, 90, "°C", (val) => {
-          device.temprature = val;
+        const stopTemp = startRandomGenerator(40, 90, "C°", (val) => {
+          setDevices(prevDevices =>
+            prevDevices.map(d =>
+              d.id === device.id ? { ...d, temprature: val } : d
+            )
+          );
+          setDeviceData(device.id, { temprature: val });
         });
 
         const stopCurrent = startRandomGenerator(30, 50, "A", (val) => {
-          device.current = val;
+          setDevices(prevDevices =>
+            prevDevices.map(d =>
+              d.id === device.id ? { ...d, current: val } : d
+            )
+          );
+          setDeviceData(device.id, { current: val });
         });
 
         stopFunctions.push(stopTemp, stopCurrent);
@@ -93,7 +95,7 @@ const BodyPrepLayout = () => {
     return () => {
       stopFunctions.forEach((stop) => stop());
     };
-  }, []);
+  }, [devices, isMounted, setDeviceData]);
 
   const handleIconClick = (deviceType: Device["type"]) => {
     router.push(`/bodyPrep?device=${deviceType}`);
@@ -105,9 +107,8 @@ const BodyPrepLayout = () => {
 
     const tooltipTitle = () => {
       if (device.status === "blue") {
-        return `آمپر: ${device.current || "N/A"} | دما: ${
-          device.temprature || "N/A"
-        }`;
+        return `آمپر: ${device.current || "N/A"} | دما: ${device.temprature || "N/A"
+          }`;
       } else if (device.status === "red") {
         return `مدت زمان خاموش بودن دستگاه: ${device.startTime || "00:00:00"}`;
       } else {
@@ -141,42 +142,46 @@ const BodyPrepLayout = () => {
     );
   };
 
+  if (!isMounted) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <MainCardLayoutBodyPrep>
-      {demoData.devices
+      {devices
         .filter((d) => d.type === "BatchBaalMill")
         .map((device, i) =>
           renderDevice(device, i, { top: 50, left: -100 + i * 200 })
         )}
-      {demoData.devices
+      {devices
         .filter((d) => d.type === "SprayDryer")
         .map((device, i) => renderDevice(device, i, { top: 110, left: -320 }))}
-      {demoData.devices
+      {devices
         .filter((d) => d.type === "SlurryPump")
         .map((device, i) =>
           renderDevice(device, i, { top: 280, left: 100 + i * 65 })
         )}
-      {demoData.devices
+      {devices
         .filter((d) => d.type === "SlurryPitRight")
         .map((device, i) =>
           renderDevice(device, i, { top: 300 + i * 132, left: 600 })
         )}
-      {demoData.devices
+      {devices
         .filter((d) => d.type === "SlurryPitLeft")
         .map((device, i) =>
           renderDevice(device, i, { top: 300 + i * 132, left: 700 })
         )}
-      {demoData.devices
+      {devices
         .filter((d) => d.type === "ContinuesBallMill")
         .map((device, i) =>
           renderDevice(device, i, { top: 1150, left: 150 + i * 260 })
         )}
-      {demoData.devices
+      {devices
         .filter((d) => d.type === "VibratingScreen")
         .map((device, i) =>
           renderDevice(device, i, { top: 1088, left: 430 + i * 52 })
         )}
-      {demoData.devices
+      {devices
         .filter((d) => d.type === "GranuleSillo")
         .map((device, i) => {
           const isLeftColumn = i < 6;

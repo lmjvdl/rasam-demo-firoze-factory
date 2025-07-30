@@ -1,18 +1,23 @@
-import { create } from "zustand";
-import { Device } from "@/interfaces/user/layout/layoutBodyPrep";
-import { demoData } from "@/components/fakeData/layout/fakeData";
+// store/layoutLiveStore.ts
+import { demoData } from '@/components/fakeData/layout/fakeData';
+import { DeviceState } from '@/interfaces/user/layout/layoutBodyPrep';
+import { create } from 'zustand';
+import { devtools } from 'zustand/middleware';
 
-interface LayoutLiveState {
-  devices: Device[];
-  setDeviceData: (id: string, data: Partial<Device>) => void;
-}
+export const useLayoutLiveStore = create<DeviceState>()(
+  devtools((set) => ({
+    devices: [],
+    setDeviceData: (id, data) => 
+      set(state => ({
+        devices: state.devices.map(device => 
+          device.id === id ? {...device, ...data} : device
+        )
+      }))
+  }))
+);
 
-export const useLayoutLiveStore = create<LayoutLiveState>((set) => ({
-  devices: demoData.devices,
-  setDeviceData: (id, data) =>
-    set((state) => ({
-      devices: state.devices.map((d) =>
-        d.id === id ? { ...d, ...data } : d
-      ),
-    })),
-}));
+export const initializeStore = (preloadedState: Partial<DeviceState>) => {
+  return useLayoutLiveStore.setState({
+    devices: preloadedState.devices || demoData.devices,
+  });
+};

@@ -2,7 +2,7 @@ import { Device } from "@/interfaces/user/layout/layoutBodyPrep";
 
 function getRandomTemperature(): string {
   const temp = Math.floor(Math.random() * (75 - 45 + 1)) + 45;
-  return `${temp}°C`;
+  return `${temp}C°`;
 }
 
 export const demoData: { devices: Device[] } = {

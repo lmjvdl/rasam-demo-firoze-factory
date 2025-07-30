@@ -9,7 +9,7 @@
  *
  * @param start_number - The lower bound of the random number range (inclusive).
  * @param end_number - The upper bound of the random number range (exclusive).
- * @param unit - A string unit (e.g., "A", "°C") to append to the number.
+ * @param unit - A string unit (e.g., "A", "C°") to append to the number.
  * @param callback - A function that receives the generated string every 2 seconds.
  * @returns A cleanup function that stops the interval when called.
  *

@@ -16,11 +16,11 @@ export default function BodyPrepLive({ name }: BodyPrepLiveProps) {
 
   useEffect(() => {
     const stops: (() => void)[] = [];
-  
+
     filteredDevices.forEach((device) => {
       if (device.status === "blue") {
         const deviceId = device.id;
-  
+
         const stopCurrent = startRandomGenerator(30, 50, "A", (val) => {
           setLiveValues((prev) => ({
             ...prev,
@@ -30,8 +30,8 @@ export default function BodyPrepLive({ name }: BodyPrepLiveProps) {
             },
           }));
         });
-  
-        const stopTemp = startRandomGenerator(20, 80, "°C", (val) => {
+
+        const stopTemp = startRandomGenerator(20, 80, "C°", (val) => {
           setLiveValues((prev) => ({
             ...prev,
             [deviceId]: {
@@ -40,16 +40,16 @@ export default function BodyPrepLive({ name }: BodyPrepLiveProps) {
             },
           }));
         });
-  
+
         stops.push(stopCurrent, stopTemp);
       }
     });
-  
+
     return () => {
       stops.forEach((stop) => stop());
     };
   }, [filteredDevices]);
-  
+
 
   return (
     <MainCard>
@@ -77,25 +77,25 @@ export default function BodyPrepLive({ name }: BodyPrepLiveProps) {
                       device.status === "blue"
                         ? "on"
                         : device.status === "grey"
-                        ? "unknown"
-                        : "off",
+                          ? "unknown"
+                          : "off",
                     data: {
                       current:
                         device.status === "blue"
                           ? liveData?.current ?? parseFloat(device.current || "0")
                           : device.status === "red"
-                          ? 0
-                          : undefined,
+                            ? 0
+                            : undefined,
                       temperature:
                         device.status === "blue"
                           ? liveData?.temperature ?? parseFloat(device.temprature || "0")
                           : device.status === "red"
-                          ? 0
-                          : undefined,
+                            ? 0
+                            : undefined,
                     },
                   },
                 }}
-                
+
               />
             );
           })}
