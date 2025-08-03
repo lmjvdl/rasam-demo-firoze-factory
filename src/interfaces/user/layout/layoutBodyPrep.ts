@@ -19,6 +19,15 @@ export interface Device {
   current?: string; // Required for blue, optional for red and grey
   temprature?: string;
   soilSurface?: string;
+  WeightIncomingSoil?: string;
+  OutputSoilWeight?: string;
+  BurnerTemperature?: string;
+  OutletTemperature?: string;
+  OutputGranuleWeight?: string;
+  OutputGranuleTemperature?: string;
+  OutputGranuleMoisture?: string;
+  MonopumpCurrent?: string;
+  MonopumpTemprature?: string;
   defaultParams?: Record<string, number | string>;
   extraTooltip?: string;
   paramUnits?: Record<string, string>;

@@ -1,14 +1,5 @@
 import { Device } from "@/interfaces/user/layout/layoutBodyPrep";
-
-function getRandomTemperature(): string {
-  const temp = Math.floor(Math.random() * (75 - 45 + 1)) + 45;
-  return `${temp}C°`;
-}
-
-function getRandomSoilSurface(): string {
-  const temp = Math.floor(Math.random() * (25 - 16 + 1));
-  return `${temp}m`;
-}
+import { getRandomSoilSurface, getRandomTemperature } from "@/utils/homeless/randomGenerator";
 
 export const demoData: { devices: Device[] } = {
   devices: [
@@ -18,9 +9,8 @@ export const demoData: { devices: Device[] } = {
       type: "BatchBaalMill",
       status: "blue",
       lightsConfig: { orientation: "horizontal", position: "top" },
-      current: "35A",
-      temprature: getRandomTemperature(),
-      extraTooltip: "احتماب خرابی بلبرینگ"
+      extraTooltip: "احتماب خرابی بلبرینگ",
+
     },
     {
       id: "batch_ball_mill_2",

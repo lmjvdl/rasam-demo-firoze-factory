@@ -29,46 +29,117 @@ const BodyPrepLayout = ({ initialDevices = demoData.devices }: BodyPrepLayoutPro
 
   useEffect(() => {
     if (!isMounted) return;
-
+  
     const stopFunctions: (() => void)[] = [];
-
+  
     devices.forEach((device) => {
       if (device.status === "blue") {
         const stopTemp = startRandomGenerator(40, 90, "C°", (val) => {
-          setDevices(prevDevices =>
-            prevDevices.map(d =>
-              d.id === device.id ? { ...d, temprature: val } : d
-            )
+          setDevices(prev =>
+            prev.map(d => d.id === device.id ? { ...d, temprature: val } : d)
           );
           setDeviceData(device.id, { temprature: val });
         });
-
+  
         const stopCurrent = startRandomGenerator(30, 50, "A", (val) => {
-          setDevices(prevDevices =>
-            prevDevices.map(d =>
-              d.id === device.id ? { ...d, current: val } : d
-            )
+          setDevices(prev =>
+            prev.map(d => d.id === device.id ? { ...d, current: val } : d)
           );
           setDeviceData(device.id, { current: val });
         });
-
+  
         const stopSoilSurface = startRandomGenerator(1, 10, "m", (val) => {
-          setDevices(prevDevices =>
-            prevDevices.map(d =>
-              d.id === device.id ? { ...d, soilSurface: val } : d
-            )
+          setDevices(prev =>
+            prev.map(d => d.id === device.id ? { ...d, soilSurface: val } : d)
           );
           setDeviceData(device.id, { soilSurface: val });
         });
-
-        stopFunctions.push(stopTemp, stopCurrent, stopSoilSurface);
+  
+        const stopWeightIncomingSoil = startRandomGenerator(100, 300, "kg", (val) => {
+          setDevices(prev =>
+            prev.map(d => d.id === device.id ? { ...d, WeightIncomingSoil: val } : d)
+          );
+          setDeviceData(device.id, { WeightIncomingSoil: val });
+        });
+  
+        const stopOutputSoilWeight = startRandomGenerator(80, 280, "kg", (val) => {
+          setDevices(prev =>
+            prev.map(d => d.id === device.id ? { ...d, OutputSoilWeight: val } : d)
+          );
+          setDeviceData(device.id, { OutputSoilWeight: val });
+        });
+  
+        const stopBurnerTemperature = startRandomGenerator(300, 600, "°C", (val) => {
+          setDevices(prev =>
+            prev.map(d => d.id === device.id ? { ...d, BurnerTemperature: val } : d)
+          );
+          setDeviceData(device.id, { BurnerTemperature: val });
+        });
+  
+        const stopOutletTemperature = startRandomGenerator(100, 200, "°C", (val) => {
+          setDevices(prev =>
+            prev.map(d => d.id === device.id ? { ...d, OutletTemperature: val } : d)
+          );
+          setDeviceData(device.id, { OutletTemperature: val });
+        });
+  
+        const stopOutputGranuleWeight = startRandomGenerator(50, 150, "kg", (val) => {
+          setDevices(prev =>
+            prev.map(d => d.id === device.id ? { ...d, OutputGranuleWeight: val } : d)
+          );
+          setDeviceData(device.id, { OutputGranuleWeight: val });
+        });
+  
+        const stopOutputGranuleTemperature = startRandomGenerator(100, 300, "°C", (val) => {
+          setDevices(prev =>
+            prev.map(d => d.id === device.id ? { ...d, OutputGranuleTemperature: val } : d)
+          );
+          setDeviceData(device.id, { OutputGranuleTemperature: val });
+        });
+  
+        const stopOutputGranuleMoisture = startRandomGenerator(1, 20, "%", (val) => {
+          setDevices(prev =>
+            prev.map(d => d.id === device.id ? { ...d, OutputGranuleMoisture: val } : d)
+          );
+          setDeviceData(device.id, { OutputGranuleMoisture: val });
+        });
+  
+        const stopMonopumpCurrent = startRandomGenerator(10, 30, "A", (val) => {
+          setDevices(prev =>
+            prev.map(d => d.id === device.id ? { ...d, MonopumpCurrent: val } : d)
+          );
+          setDeviceData(device.id, { MonopumpCurrent: val });
+        });
+  
+        const stopMonopumpTemprature = startRandomGenerator(40, 100, "°C", (val) => {
+          setDevices(prev =>
+            prev.map(d => d.id === device.id ? { ...d, MonopumpTemprature: val } : d)
+          );
+          setDeviceData(device.id, { MonopumpTemprature: val });
+        });
+  
+        stopFunctions.push(
+          stopTemp,
+          stopCurrent,
+          stopSoilSurface,
+          stopWeightIncomingSoil,
+          stopOutputSoilWeight,
+          stopBurnerTemperature,
+          stopOutletTemperature,
+          stopOutputGranuleWeight,
+          stopOutputGranuleTemperature,
+          stopOutputGranuleMoisture,
+          stopMonopumpCurrent,
+          stopMonopumpTemprature
+        );
       }
     });
-
+  
     return () => {
       stopFunctions.forEach((stop) => stop());
     };
   }, [devices, isMounted, setDeviceData]);
+  
 
   const handleIconClick = (deviceType: Device["type"]) => {
     router.push(`/bodyPrep?device=${deviceType}`);
