@@ -279,6 +279,7 @@ export const demoData: { devices: Device[] } = {
       name: "صفحه 3",
       type: "VibratingScreen",
       status: "grey",
+      startTime: "00:20:47",
       lightsConfig: { orientation: "vertical", position: "top" },
       defaultParams: {
         current: getRandomCurrent(),
@@ -312,6 +313,7 @@ export const demoData: { devices: Device[] } = {
       name: "صفحه 6",
       type: "VibratingScreen",
       status: "grey",
+      startTime: "10:20:47",
       lightsConfig: { orientation: "vertical", position: "top" },
       defaultParams: {
         current: getRandomCurrent(),
@@ -433,6 +435,7 @@ export const demoData: { devices: Device[] } = {
       name: "سیلو 11",
       type: "GranuleSillo",
       status: "grey",
+      startTime: "03:50:07",
       lightsConfig: { orientation: "vertical", position: "right" },
       defaultParams: {
         temperature: getRandomTemperature(),
