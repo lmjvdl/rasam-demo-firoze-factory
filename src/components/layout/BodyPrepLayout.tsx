@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import MainCardLayoutBodyPrep from "@/components/customContiner/MainCardLayoutBodyPrep";
 import { Box, Tooltip } from "@mui/material";
-import StatusLights from "@/components/layoutDependencies/StatusIndicator";
+import StatusLights from "@/components/layoutDependencies/page";
 import { demoData } from "@/components/fakeData/layout/fakeData";
 import { BodyPrepLayoutProps, Device, Position } from "@/interfaces/user/layout/layoutBodyPrep";
 import startRandomGenerator from "@/utils/homeless/randomGenerator";
