@@ -36,14 +36,3 @@ export default function startRandomGenerator(
   return () => clearInterval(interval);
 }
 
-
-
-export function getRandomTemperature(): string {
-  const temp = Math.floor(Math.random() * (75 - 45 + 1)) + 45;
-  return `${temp}C°`;
-}
-
-export function getRandomSoilSurface(): string {
-  const temp = Math.floor(Math.random() * (25 - 16 + 1));
-  return `${temp}m`;
-}

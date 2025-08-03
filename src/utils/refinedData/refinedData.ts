@@ -5,7 +5,17 @@ export const paramNameMap: Record<string, string> = {
     temperature: "دما",
     current: "جریان",
     soilSurface: "سطح خاک",
-};
+    WeightIncomingSoil: "وزن خاک ورودی",
+    OutputSoilWeight: "وزن خاک خروجی",
+    BurnerTemperature: "دمای مشعل",
+    OutletTemperature: "دمای خروجی",
+    OutputGranuleWeight: "وزن گرانول خروجی",
+    OutputGranuleTemperature: "دمای گرانول خروجی",
+    OutputGranuleMoisture: "رطوبت گرانول خروجی",
+    MonopumpCurrent: "جریان مونوپمپ",
+    MonopumpTemprature: "دمای مونوپمپ",
+  };
+  
 
 export const unitMap: Record<string, string> = {
     temperature: "C°",

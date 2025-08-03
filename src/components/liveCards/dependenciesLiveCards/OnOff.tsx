@@ -2,12 +2,15 @@ import { recognizeState } from "@/utils/formatters/statesLiveCard";
 import { Button, Typography } from "@mui/material";
 
 const OnOff = ({ on }: { on: string }) => {
-  const state = on === "on" ? "on" : on === "off" ? "off" : "unknown";
+  const state = on === "on" ? "on" : on === "off" ? "off" :
+    on === "disconnect" ?
+      "disconnect" : "unknown";
   return (
     <Button
       component={Typography}
       color={
-        state === "on" ? "primary" : state === "off" ? "error" : "warning"
+        state === "on" ? "primary" : state === "off" ? "error" :
+          state === "disconnect" ? "warning" : "inherit"
       }
       disableFocusRipple
       disableTouchRipple

@@ -51,15 +51,14 @@ export default function MultiSensorLiveCard({ container }: Props) {
 
           <Box mt={2} display="flex" flexDirection="column" gap={2}>
             <Divider />
-            <Typography>
-              جریان دستگاه:{" "}
-              {safeData.current === undefined ? "" : `${safeData.current} A`}
-            </Typography>
 
-            <Typography>
-              دمای دستگاه:{" "}
-              {safeData.temperature === undefined ? "" : `${safeData.temperature} C°`}
-            </Typography>
+            {safeData.current !== undefined && (
+              <Typography>جریان دستگاه: {`${safeData.current} A`}</Typography>
+            )}
+            
+            {safeData.temperature !== undefined && (
+              <Typography>دمای دستگاه: {`${safeData.temperature} C°`}</Typography>
+            )}
 
             {safeData.soilSurface !== undefined && (
               <Typography>سطح خاک: {`${safeData.soilSurface} m`}</Typography>

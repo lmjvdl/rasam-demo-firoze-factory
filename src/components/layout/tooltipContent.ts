@@ -4,15 +4,12 @@ import { paramNameMap } from "@/utils/refinedData/refinedData";
 export const tooltipTitle = (device: Device) => {
     if (device.status === "blue") {
         const paramEntries = Object.entries(device.defaultParams || {});
-        const paramText = paramEntries
+        return paramEntries
             .map(([key, value]) => {
                 const label = paramNameMap[key] || key;
                 return `${label}: ${value}`;
             })
-            .join(" | ");
-
-        const extraText = device.extraTooltip ? `\n ~~~ ${device.extraTooltip}` : "";
-        return `${paramText}${extraText}`;
+            .join("<br />");
     } else if (device.status === "red") {
         return `مدت زمان خاموش بودن دستگاه: ${device.startTime || "00:00:00"}`;
     } else if (device.status === "grey") {

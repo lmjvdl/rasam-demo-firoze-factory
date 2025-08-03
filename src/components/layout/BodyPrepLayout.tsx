@@ -152,7 +152,7 @@ const BodyPrepLayout = ({ initialDevices = demoData.devices }: BodyPrepLayoutPro
     return (
       <Tooltip
         key={device.id}
-        title={tooltipTitle(device)}
+        title={<span dangerouslySetInnerHTML={{ __html: tooltipTitle(device) }} />}
         placement="top"
         sx={{ zIndex: 20 }}
       >
@@ -171,6 +171,7 @@ const BodyPrepLayout = ({ initialDevices = demoData.devices }: BodyPrepLayoutPro
               iconWidth={width * ICON_SIZE}
               iconHeight={height * ICON_SIZE}
               hasExtraTooltip={!!device.extraTooltip}
+              extraTooltipContent={device.extraTooltip}
             />
             <IconComponent width={width * ICON_SIZE} height={height * ICON_SIZE} />
           </Box>

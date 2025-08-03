@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box } from "@mui/material";
+import { Box, Tooltip } from "@mui/material";
 import { StatusLightsProps } from "@/interfaces/user/layout/layoutBodyPrep";
 import { IconAlertCircle } from "@tabler/icons-react";
 
@@ -11,7 +11,8 @@ const StatusLights: React.FC<StatusLightsProps> = ({
   iconSize,
   iconWidth = iconSize * 20,
   iconHeight = iconSize * 20,
-  hasExtraTooltip
+  hasExtraTooltip,
+  extraTooltipContent
 }) => {
   const [blink, setBlink] = useState(true);
 
@@ -127,7 +128,7 @@ const StatusLights: React.FC<StatusLightsProps> = ({
 
   const warningIconStyle = {
     position: "absolute" as const,
-    ...(position === "top" && { top: -lightSize * 1.3, left: "50%", transform: "translateX(-150%)" }),
+    ...(position === "top" && { top: -lightSize * 1.3, left: "50%", transform: "translateX(-200%)" }),
     ...(position === "bottom" && { bottom: -lightSize * 1.1, left: "50%", transform: "translateX(-50%)" }),
     ...(position === "left" && { left: -lightSize * 2.7, top: "50%", transform: "translateY(-43%)" }),
     ...(position === "right" && { right: -lightSize * 1.1, top: "50%", transform: "translateY(-50%)" }),
@@ -140,11 +141,19 @@ const StatusLights: React.FC<StatusLightsProps> = ({
           <Box sx={getLightStyle(status)} />
           {hasExtraTooltip && (
             <Box sx={warningIconStyle}>
-              <IconAlertCircle
-                size={iconSize * 5}
-                color="#FFA000"
-                style={{ opacity: blink ? 1 : 0, transition: "opacity 0.5s" }}
-              />
+              <Tooltip
+                title={
+                  <span style={{ color: "#FFA000", fontWeight: "bold" }}>
+                    {extraTooltipContent}
+                  </span>
+                }
+              >
+                <IconAlertCircle
+                  size={iconSize * 5}
+                  color="#FFA000"
+                  style={{ opacity: blink ? 1 : 0, transition: "opacity 0.5s" }}
+                />
+              </Tooltip>
             </Box>
           )}
         </Box>

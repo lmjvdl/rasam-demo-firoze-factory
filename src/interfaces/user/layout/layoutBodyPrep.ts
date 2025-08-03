@@ -44,6 +44,7 @@ export interface StatusLightsProps {
   iconWidth?: number;
   iconHeight?: number;
   hasExtraTooltip?: boolean;
+  extraTooltipContent?: string;
 }
 
 // Define the Position interface for absolute positioning

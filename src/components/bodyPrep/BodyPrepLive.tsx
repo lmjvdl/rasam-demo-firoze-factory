@@ -117,8 +117,9 @@ export default function BodyPrepLivePage() {
                       device.status === "blue"
                         ? "on"
                         : device.status === "grey"
-                          ? "unknown"
-                          : "off",
+                          ? "disconnect"
+                          : device.status === "red" ?
+                            "off" : "unknown",
                     data: dataEntries,
                   },
                 }}
