@@ -20,6 +20,7 @@ export const demoData: { devices: Device[] } = {
       lightsConfig: { orientation: "horizontal", position: "top" },
       current: "35A",
       temprature: getRandomTemperature(),
+      extraTooltip: "احتماب خرابی بلبرینگ"
     },
     {
       id: "batch_ball_mill_2",
@@ -129,6 +130,7 @@ export const demoData: { devices: Device[] } = {
       lightsConfig: { orientation: "vertical", position: "left" },
       current: "39A",
       temprature: getRandomTemperature(),
+      extraTooltip: "احتماب خرابی پره"
     },
     {
       id: "slurry_pit_left_2",
@@ -237,27 +239,32 @@ export const demoData: { devices: Device[] } = {
       name: "سیلو 1",
       status: "blue",
       lightsConfig: { orientation: "vertical", position: "left" },
-      current: "47A",
-      soilSurface: getRandomSoilSurface(),
+      defaultParams: {
+        current: "22A",
+        soilSurface: getRandomSoilSurface(),
+      },
     },
     {
       id: "granule_sillo_2",
       name: "سیلو 2",
       type: "GranuleSillo",
       status: "blue",
-      current: "66A",
       lightsConfig: { orientation: "vertical", position: "left" },
-      soilSurface: getRandomSoilSurface(),
+      defaultParams: {
+        current: "69A",
+        soilSurface: getRandomSoilSurface(),
+      },
     },
     {
       id: "granule_sillo_3",
       name: "سیلو 3",
       type: "GranuleSillo",
       status: "blue",
-      current: "61A",
       lightsConfig: { orientation: "vertical", position: "left" },
-      startTime: "02:25:45",
-      soilSurface: getRandomSoilSurface(),
+      defaultParams: {
+        current: "61A",
+        soilSurface: getRandomSoilSurface(),
+      },
     },
     {
       id: "granule_sillo_4",

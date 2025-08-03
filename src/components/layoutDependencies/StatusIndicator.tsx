@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import { StatusLightsProps } from "@/interfaces/user/layout/layoutBodyPrep";
+import { IconAlertCircle } from "@tabler/icons-react";
+
 
 const StatusLights: React.FC<StatusLightsProps> = ({
   orientation,
@@ -9,6 +11,7 @@ const StatusLights: React.FC<StatusLightsProps> = ({
   iconSize,
   iconWidth = iconSize * 20,
   iconHeight = iconSize * 20,
+  hasExtraTooltip
 }) => {
   const [blink, setBlink] = useState(true);
 
@@ -28,20 +31,19 @@ const StatusLights: React.FC<StatusLightsProps> = ({
     width: lightSize,
     height: lightSize,
     borderRadius: "50%",
-    border: `1px solid ${
-      lightStatus === "blue"
-        ? "#2196F3"
-        : lightStatus === "red"
+    border: `1px solid ${lightStatus === "blue"
+      ? "#2196F3"
+      : lightStatus === "red"
         ? "#F44336"
         : "#9E9E9E"
-    }`,
+      }`,
     backgroundColor:
       status === lightStatus && blink
         ? lightStatus === "blue"
           ? "#2196F3"
           : lightStatus === "red"
-          ? "#F44336"
-          : "#9E9E9E"
+            ? "#F44336"
+            : "#9E9E9E"
         : "transparent",
     transition: "background-color 0.5s",
   });
@@ -85,10 +87,10 @@ const StatusLights: React.FC<StatusLightsProps> = ({
     ...(position === "bottom" &&
       orientation !== "vertical" &&
       orientation !== "horizontal" && {
-        top: lightSize + margin,
-        left: "50%",
-        transform: "translateX(-50%)",
-      }),
+      top: lightSize + margin,
+      left: "50%",
+      transform: "translateX(-50%)",
+    }),
     ...(position === "left" && orientation === "vertical" && {
       left: -lightSize,
       top: "100%",
@@ -123,13 +125,34 @@ const StatusLights: React.FC<StatusLightsProps> = ({
     }),
   };
 
+  const warningIconStyle = {
+    position: "absolute" as const,
+    ...(position === "top" && { top: -lightSize * 1.3, left: "50%", transform: "translateX(-150%)" }),
+    ...(position === "bottom" && { bottom: -lightSize * 1.1, left: "50%", transform: "translateX(-50%)" }),
+    ...(position === "left" && { left: -lightSize * 2.7, top: "50%", transform: "translateY(-43%)" }),
+    ...(position === "right" && { right: -lightSize * 1.1, top: "50%", transform: "translateY(-50%)" }),
+  };
+
   return (
     <Box sx={{ position: "relative" }}>
       <Box sx={containerStyle}>
-        <Box sx={getLightStyle(status)} />
+        <Box sx={{ position: "relative" }}>
+          <Box sx={getLightStyle(status)} />
+          {hasExtraTooltip && (
+            <Box sx={warningIconStyle}>
+              <IconAlertCircle
+                size={iconSize * 5}
+                color="#FFA000"
+                style={{ opacity: blink ? 1 : 0, transition: "opacity 0.5s" }}
+              />
+            </Box>
+          )}
+        </Box>
       </Box>
     </Box>
   );
+
+
 };
 
 export default StatusLights;
