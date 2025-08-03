@@ -51,27 +51,56 @@ export default function MultiSensorLiveCard({ container }: Props) {
 
           <Box mt={2} display="flex" flexDirection="column" gap={2}>
             <Divider />
-            <Typography>
-              جریان دستگاه:{" "}
-              {safeData.current === undefined
-                ? ""
-                : `${safeData.current} A`}
-            </Typography>
-            <Typography>
-              دمای دستگاه:{" "}
-              {safeData.temperature === undefined
-                ? ""
-                : `${safeData.temperature} C°`}
-            </Typography>
-            {safeData.soilSurface ?
-              <Typography>
-                سطح خاک:{" "}
-                {safeData.soilSurface === undefined
-                  ? ""
-                  : `${safeData.soilSurface} m`}
-              </Typography> : null
-            }
+
+            {safeData.current !== undefined && (
+              <Typography>جریان دستگاه: {`${safeData.current} A`}</Typography>
+            )}
+            
+            {safeData.temperature !== undefined && (
+              <Typography>دمای دستگاه: {`${safeData.temperature} C°`}</Typography>
+            )}
+
+            {safeData.soilSurface !== undefined && (
+              <Typography>سطح خاک: {`${safeData.soilSurface} m`}</Typography>
+            )}
+
+            {safeData.WeightIncomingSoil !== undefined && (
+              <Typography>وزن خاک ورودی: {`${safeData.WeightIncomingSoil} kg`}</Typography>
+            )}
+
+            {safeData.OutputSoilWeight !== undefined && (
+              <Typography>وزن خروجی خاک: {`${safeData.OutputSoilWeight} kg`}</Typography>
+            )}
+
+            {safeData.BurnerTemperature !== undefined && (
+              <Typography>دمای مشعل: {`${safeData.BurnerTemperature} °C`}</Typography>
+            )}
+
+            {safeData.OutletTemperature !== undefined && (
+              <Typography>دمای خروجی: {`${safeData.OutletTemperature} °C`}</Typography>
+            )}
+
+            {safeData.OutputGranuleWeight !== undefined && (
+              <Typography>وزن گرانول خروجی: {`${safeData.OutputGranuleWeight} kg`}</Typography>
+            )}
+
+            {safeData.OutputGranuleTemperature !== undefined && (
+              <Typography>دمای گرانول خروجی: {`${safeData.OutputGranuleTemperature} °C`}</Typography>
+            )}
+
+            {safeData.OutputGranuleMoisture !== undefined && (
+              <Typography>رطوبت گرانول خروجی: {`${safeData.OutputGranuleMoisture} %`}</Typography>
+            )}
+
+            {safeData.MonopumpCurrent !== undefined && (
+              <Typography>جریان مونوپمپ: {`${safeData.MonopumpCurrent} A`}</Typography>
+            )}
+
+            {safeData.MonopumpTemprature !== undefined && (
+              <Typography>دمای مونوپمپ: {`${safeData.MonopumpTemprature} °C`}</Typography>
+            )}
           </Box>
+
         </CardContent>
       </Card>
     </Box>

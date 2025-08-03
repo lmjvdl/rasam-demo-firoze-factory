@@ -8,10 +8,11 @@ import { Box } from "@mui/material";
 import startRandomGenerator from "@/utils/homeless/randomGenerator";
 import { LiveValues } from "@/interfaces/lives/liveConfig";
 import { useSearchParams } from "next/navigation";
+import { Device } from "@/interfaces/user/layout/layoutBodyPrep";
 
 export default function BodyPrepLivePage() {
   const searchParams = useSearchParams();
-  const name = searchParams.get("device") || "GranuleSillo";
+  const name = searchParams.get("device") || "BatchBaalMill";
 
   const filteredDevices = demoData.devices.filter((device) => device.type === name);
   const [liveValues, setLiveValues] = useState<LiveValues>({});
@@ -26,41 +27,38 @@ export default function BodyPrepLivePage() {
 
     const stops: (() => void)[] = [];
 
-    filteredDevices.forEach((device) => {
-      if (device.status === "blue") {
+    filteredDevices.forEach((device: Device) => {
+      if (device.status === "blue" && device.defaultParams) {
         const deviceId = device.id;
+        const paramKeys = Object.keys(device.defaultParams);
 
-        const stopCurrent = startRandomGenerator(30, 50, "A", (val) => {
-          setLiveValues((prev) => ({
-            ...prev,
-            [deviceId]: {
-              ...(prev[deviceId] || {}),
-              current: parseFloat(val),
-            },
-          }));
+        paramKeys.forEach((key) => {
+          const rawDefault = device.defaultParams?.[key];
+          const numericDefault =
+            typeof rawDefault === "string"
+              ? parseFloat(rawDefault.replace(/[^\d.-]/g, ""))
+              : typeof rawDefault === "number"
+                ? rawDefault
+                : 0;
+
+          const [min, max] = [numericDefault - 10, numericDefault + 10];
+          const unit =
+            typeof rawDefault === "string"
+              ? rawDefault.replace(/[\d.\-]/g, "")
+              : "";
+
+          const stop = startRandomGenerator(min, max, unit, (val) => {
+            setLiveValues((prev) => ({
+              ...prev,
+              [deviceId]: {
+                ...(prev[deviceId] || {}),
+                [key]: parseFloat(val),
+              },
+            }));
+          });
+
+          stops.push(stop);
         });
-
-        const stopTemp = startRandomGenerator(20, 80, "°C", (val) => {
-          setLiveValues((prev) => ({
-            ...prev,
-            [deviceId]: {
-              ...(prev[deviceId] || {}),
-              temperature: parseFloat(val),
-            },
-          }));
-        });
-
-        const stopSoilSurface = startRandomGenerator(1, 10, "m", (val) => {
-          setLiveValues((prev) => ({
-            ...prev,
-            [deviceId]: {
-              ...(prev[deviceId] || {}),
-              soilSurface: parseFloat(val),
-            },
-          }));
-        });
-
-        stops.push(stopCurrent, stopTemp, stopSoilSurface);
       }
     });
 
@@ -81,12 +79,34 @@ export default function BodyPrepLivePage() {
           }}
         >
           {filteredDevices.map((device, index) => {
-            const liveData = liveValues[device.id];
+            const liveData = liveValues[device.id] || {};
+            const defaultParams = device.defaultParams || {};
+
+            const dataEntries = Object.keys(defaultParams).reduce((acc, key) => {
+              const liveVal = (liveData as Record<string, number | undefined>)[key];
+              const defaultVal = defaultParams[key];
+
+              const defaultValNumber =
+                typeof defaultVal === "string"
+                  ? parseFloat(defaultVal.replace(/[^\d.]/g, "") || "0")
+                  : typeof defaultVal === "number"
+                    ? defaultVal
+                    : 0;
+
+              acc[key] =
+                device.status === "blue"
+                  ? liveVal ?? defaultValNumber
+                  : device.status === "red"
+                    ? 0
+                    : undefined;
+
+              return acc;
+            }, {} as Record<string, number | undefined>);
 
             return (
               <LiveCardManager
                 key={device.id}
-                type={"multiSensor" as const}
+                type={"multiSensor"}
                 data={{
                   container: {
                     device: index + 1,
@@ -97,28 +117,10 @@ export default function BodyPrepLivePage() {
                       device.status === "blue"
                         ? "on"
                         : device.status === "grey"
-                          ? "unknown"
-                          : "off",
-                    data: {
-                      current:
-                        device.status === "blue"
-                          ? liveData?.current ?? parseFloat(device.current || "0")
-                          : device.status === "red"
-                            ? 0
-                            : undefined,
-                      temperature:
-                        device.status === "blue"
-                          ? liveData?.temperature ?? parseFloat(device.temprature || "0")
-                          : device.status === "red"
-                            ? 0
-                            : undefined,
-                      soilSurface:
-                        device.status === "blue"
-                          ? liveData?.soilSurface ?? parseFloat(device.soilSurface || "0")
-                          : device.status === "red"
-                            ? 0
-                            : undefined,
-                    },
+                          ? "disconnect"
+                          : device.status === "red" ?
+                            "off" : "unknown",
+                    data: dataEntries,
                   },
                 }}
               />

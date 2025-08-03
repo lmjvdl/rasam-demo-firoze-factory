@@ -35,3 +35,4 @@ export default function startRandomGenerator(
 
   return () => clearInterval(interval);
 }
+

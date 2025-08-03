@@ -2,57 +2,25 @@
 
 import React, { useEffect, useState } from "react";
 import MainCardLayoutBodyPrep from "@/components/customContiner/MainCardLayoutBodyPrep";
-import { iconMapLayout } from "@/utils/icons/LayoutIcon";
 import { Box, Tooltip } from "@mui/material";
-import StatusLights from "@/components/layoutDependencies/StatusIndicator";
+import StatusLights from "@/components/layoutDependencies/page";
 import { demoData } from "@/components/fakeData/layout/fakeData";
 import { BodyPrepLayoutProps, Device, Position } from "@/interfaces/user/layout/layoutBodyPrep";
 import startRandomGenerator from "@/utils/homeless/randomGenerator";
 import { useRouter } from "next/navigation";
 import { useLayoutLiveStore } from "@/store/layoutLiveStore";
+import { iconComponents } from "@/utils/refinedData/refinedData";
+import { tooltipTitle } from "./tooltipContent";
+import { getIconDimensions } from "./iconConfigs";
+import LoadingScreen from "../loadingScreen/LoadingScreen";
 
-const iconSize = 10;
+const ICON_SIZE = 10;
 
 const BodyPrepLayout = ({ initialDevices = demoData.devices }: BodyPrepLayoutProps) => {
   const router = useRouter();
   const { setDeviceData } = useLayoutLiveStore();
   const [devices, setDevices] = useState<Device[]>(initialDevices);
   const [isMounted, setIsMounted] = useState(false);
-
-  const iconComponents: Record<
-    Device["type"],
-    React.FC<{ width: number; height: number }>
-  > = {
-    BatchBaalMill: iconMapLayout["BatchBaalMill"],
-    ContinuesBallMill: iconMapLayout["ContinuesBallMill"],
-    GranuleSillo: iconMapLayout["GranuleSillo"],
-    SlurryPitRight: iconMapLayout["SlurryPitRight"],
-    SlurryPitLeft: iconMapLayout["SlurryPitLeft"],
-    SlurryPump: iconMapLayout["SlurryPump"],
-    SprayDryer: iconMapLayout["SprayDryer"],
-    VibratingScreen: iconMapLayout["VibratingScreen"],
-  };
-
-  const getIconDimensions = (type: Device["type"]) => {
-    switch (type) {
-      case "BatchBaalMill":
-        return { width: 28, height: 14 };
-      case "SprayDryer":
-        return { width: 130, height: 110 };
-      case "SlurryPump":
-        return { width: 13, height: 10 };
-      case "SlurryPitRight":
-        return { width: 33, height: 13 };
-      case "SlurryPitLeft":
-        return { width: 33, height: 13 };
-      case "ContinuesBallMill":
-        return { width: 30, height: 48 };
-      case "VibratingScreen":
-        return { width: 6, height: 10 };
-      case "GranuleSillo":
-        return { width: 14, height: 14 };
-    }
-  };
 
   useEffect(() => {
     setIsMounted(true);
@@ -61,46 +29,117 @@ const BodyPrepLayout = ({ initialDevices = demoData.devices }: BodyPrepLayoutPro
 
   useEffect(() => {
     if (!isMounted) return;
-
+  
     const stopFunctions: (() => void)[] = [];
-
+  
     devices.forEach((device) => {
       if (device.status === "blue") {
         const stopTemp = startRandomGenerator(40, 90, "C°", (val) => {
-          setDevices(prevDevices =>
-            prevDevices.map(d =>
-              d.id === device.id ? { ...d, temprature: val } : d
-            )
+          setDevices(prev =>
+            prev.map(d => d.id === device.id ? { ...d, temprature: val } : d)
           );
           setDeviceData(device.id, { temprature: val });
         });
-
+  
         const stopCurrent = startRandomGenerator(30, 50, "A", (val) => {
-          setDevices(prevDevices =>
-            prevDevices.map(d =>
-              d.id === device.id ? { ...d, current: val } : d
-            )
+          setDevices(prev =>
+            prev.map(d => d.id === device.id ? { ...d, current: val } : d)
           );
           setDeviceData(device.id, { current: val });
         });
-
+  
         const stopSoilSurface = startRandomGenerator(1, 10, "m", (val) => {
-          setDevices(prevDevices =>
-            prevDevices.map(d =>
-              d.id === device.id ? { ...d, soilSurface: val } : d
-            )
+          setDevices(prev =>
+            prev.map(d => d.id === device.id ? { ...d, soilSurface: val } : d)
           );
           setDeviceData(device.id, { soilSurface: val });
         });
-
-        stopFunctions.push(stopTemp, stopCurrent, stopSoilSurface);
+  
+        const stopWeightIncomingSoil = startRandomGenerator(100, 300, "kg", (val) => {
+          setDevices(prev =>
+            prev.map(d => d.id === device.id ? { ...d, WeightIncomingSoil: val } : d)
+          );
+          setDeviceData(device.id, { WeightIncomingSoil: val });
+        });
+  
+        const stopOutputSoilWeight = startRandomGenerator(80, 280, "kg", (val) => {
+          setDevices(prev =>
+            prev.map(d => d.id === device.id ? { ...d, OutputSoilWeight: val } : d)
+          );
+          setDeviceData(device.id, { OutputSoilWeight: val });
+        });
+  
+        const stopBurnerTemperature = startRandomGenerator(300, 600, "°C", (val) => {
+          setDevices(prev =>
+            prev.map(d => d.id === device.id ? { ...d, BurnerTemperature: val } : d)
+          );
+          setDeviceData(device.id, { BurnerTemperature: val });
+        });
+  
+        const stopOutletTemperature = startRandomGenerator(100, 200, "°C", (val) => {
+          setDevices(prev =>
+            prev.map(d => d.id === device.id ? { ...d, OutletTemperature: val } : d)
+          );
+          setDeviceData(device.id, { OutletTemperature: val });
+        });
+  
+        const stopOutputGranuleWeight = startRandomGenerator(50, 150, "kg", (val) => {
+          setDevices(prev =>
+            prev.map(d => d.id === device.id ? { ...d, OutputGranuleWeight: val } : d)
+          );
+          setDeviceData(device.id, { OutputGranuleWeight: val });
+        });
+  
+        const stopOutputGranuleTemperature = startRandomGenerator(100, 300, "°C", (val) => {
+          setDevices(prev =>
+            prev.map(d => d.id === device.id ? { ...d, OutputGranuleTemperature: val } : d)
+          );
+          setDeviceData(device.id, { OutputGranuleTemperature: val });
+        });
+  
+        const stopOutputGranuleMoisture = startRandomGenerator(1, 20, "%", (val) => {
+          setDevices(prev =>
+            prev.map(d => d.id === device.id ? { ...d, OutputGranuleMoisture: val } : d)
+          );
+          setDeviceData(device.id, { OutputGranuleMoisture: val });
+        });
+  
+        const stopMonopumpCurrent = startRandomGenerator(10, 30, "A", (val) => {
+          setDevices(prev =>
+            prev.map(d => d.id === device.id ? { ...d, MonopumpCurrent: val } : d)
+          );
+          setDeviceData(device.id, { MonopumpCurrent: val });
+        });
+  
+        const stopMonopumpTemprature = startRandomGenerator(40, 100, "°C", (val) => {
+          setDevices(prev =>
+            prev.map(d => d.id === device.id ? { ...d, MonopumpTemprature: val } : d)
+          );
+          setDeviceData(device.id, { MonopumpTemprature: val });
+        });
+  
+        stopFunctions.push(
+          stopTemp,
+          stopCurrent,
+          stopSoilSurface,
+          stopWeightIncomingSoil,
+          stopOutputSoilWeight,
+          stopBurnerTemperature,
+          stopOutletTemperature,
+          stopOutputGranuleWeight,
+          stopOutputGranuleTemperature,
+          stopOutputGranuleMoisture,
+          stopMonopumpCurrent,
+          stopMonopumpTemprature
+        );
       }
     });
-
+  
     return () => {
       stopFunctions.forEach((stop) => stop());
     };
   }, [devices, isMounted, setDeviceData]);
+  
 
   const handleIconClick = (deviceType: Device["type"]) => {
     router.push(`/bodyPrep?device=${deviceType}`);
@@ -110,26 +149,10 @@ const BodyPrepLayout = ({ initialDevices = demoData.devices }: BodyPrepLayoutPro
     const IconComponent = iconComponents[device.type];
     const { width, height } = getIconDimensions(device.type);
 
-    const tooltipTitle = () => {
-      if (device.status === "blue") {
-        if (device.current !== undefined && device.temprature !== undefined) {
-          return `آمپر: ${device.current} | دما: ${device.temprature}`;
-        } else {
-          return `آمپر: ${device.current} | سطح خاک: ${device.soilSurface}`;
-        }
-      } else if (device.status === "red") {
-        return `مدت زمان خاموش بودن دستگاه: ${device.startTime || "00:00:00"}`;
-      } else if (device.status === "grey") {
-        return `مدت زمان قطع ارتباط: ${device.startTime || "00:00:00"}`;
-      } else {
-        return ""
-      }
-    };
-
     return (
       <Tooltip
         key={device.id}
-        title={tooltipTitle()}
+        title={<span dangerouslySetInnerHTML={{ __html: tooltipTitle(device) }} />}
         placement="top"
         sx={{ zIndex: 20 }}
       >
@@ -143,12 +166,14 @@ const BodyPrepLayout = ({ initialDevices = demoData.devices }: BodyPrepLayoutPro
               orientation={device.lightsConfig.orientation}
               position={device.lightsConfig.position}
               status={device.status}
-              iconSize={iconSize}
+              iconSize={ICON_SIZE}
               startTime={device.startTime}
-              iconWidth={width * iconSize}
-              iconHeight={height * iconSize}
+              iconWidth={width * ICON_SIZE}
+              iconHeight={height * ICON_SIZE}
+              hasExtraTooltip={!!device.extraTooltip}
+              extraTooltipContent={device.extraTooltip}
             />
-            <IconComponent width={width * iconSize} height={height * iconSize} />
+            <IconComponent width={width * ICON_SIZE} height={height * ICON_SIZE} />
           </Box>
         </Box>
       </Tooltip>
@@ -156,7 +181,7 @@ const BodyPrepLayout = ({ initialDevices = demoData.devices }: BodyPrepLayoutPro
   };
 
   if (!isMounted) {
-    return <div>Loading...</div>;
+    return <LoadingScreen />;
   }
 
   return (
