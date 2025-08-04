@@ -111,3 +111,15 @@ export interface DeviceRendererProps {
   handleIconClick: (deviceType: string) => void;
   iconSize?: number;
 }
+
+export interface StatusLightsProps {
+  orientation: "horizontal" | "vertical";
+  position: "top" | "bottom" | "left" | "right" | "both" | "center";
+  status: "blue" | "red" | "grey" | "none";
+  iconSize: number;
+  startTime?: string;
+  iconWidth?: number;
+  iconHeight?: number;
+  hasExtraTooltip?: boolean;
+  extraTooltipContent?: string;
+}
