@@ -6,7 +6,7 @@ export const paramNameMap: Record<string, string> = {
     current: "جریان",
     soilSurface: "سطح خاک",
     WeightIncomingSoil: "وزن خاک ورودی",
-    OutputSoilWeight: "وزن خاک خروجی",
+    OutputSoilWeight: "وزن آب ورودی",
     BurnerTemperature: "دمای مشعل",
     OutletTemperature: "دمای خروجی",
     OutputGranuleWeight: "وزن گرانول خروجی",

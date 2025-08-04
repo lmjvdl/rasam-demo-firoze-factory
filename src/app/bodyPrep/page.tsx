@@ -1,4 +1,3 @@
-// src/app/bodyPrep/page.tsx
 import BodyPrepPage from "@/components/bodyPrep/BodyPrepPage";
 import LoadingScreen from "@/components/loadingScreen/LoadingScreen";
 import { Suspense } from "react";
