@@ -123,3 +123,9 @@ export interface StatusLightsProps {
   hasExtraTooltip?: boolean;
   extraTooltipContent?: string;
 }
+
+
+export interface DeviceState {
+  devices: Device[];
+  setDeviceData: (id: string, data: Partial<Device>) => void;
+}
