@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import OnOff from "./dependenciesLiveCards/OnOff";
 import { MultiSensorLiveSchema } from "@/interfaces/lives/multiSensor";
+import OnOffGranuleSillos from "./dependenciesLiveCards/OnOffGranolSillos";
 
 interface Props {
   container: MultiSensorLiveSchema;
@@ -22,11 +23,18 @@ export default function MultiSensorLiveCard({ container }: Props) {
     return attr in safeData;
   }
 
+  function getSiloNumber(code: string): number | null {
+    const match = code.match(/^سیلو (\d{1,2})$/);
+    return match ? parseInt(match[1], 10) : null;
+  }
+
   function renderAttribute<K extends keyof typeof safeData>(
     label: string,
     attr: K,
     unit: string = ""
   ): React.ReactNode {
+
+
     return (
       hasAttribute(attr) && (
         <Paper
@@ -58,6 +66,7 @@ export default function MultiSensorLiveCard({ container }: Props) {
     );
   }
 
+  const siloNumber = getSiloNumber(container.device_code);
   return (
     <Box sx={{ padding: 1, boxSizing: "border-box", margin: 1 }}>
       <Card
@@ -82,7 +91,12 @@ export default function MultiSensorLiveCard({ container }: Props) {
             <Typography variant="h6" fontWeight="bold">
               {container.device_code}
             </Typography>
-            <OnOff on={container.online} />
+
+            {siloNumber && siloNumber >= 1 && siloNumber <= 12 ? (
+              <OnOffGranuleSillos on={container.online} index={siloNumber} />
+            ) : (
+              <OnOff on={container.online} />
+            )}
           </Box>
 
           <Divider sx={{ mb: 2 }} />

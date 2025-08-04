@@ -1,7 +1,7 @@
 import { recognizeState } from "@/utils/formatters/statesLiveCard";
 import { Button, Typography } from "@mui/material";
 
-const OnOff = ({ on }: { on: string }) => {
+const OnOffGranolSillos = ({ on }: { on: string }) => {
   const state = on === "on" ? "on" : on === "off" ? "off" :
     on === "disconnect" ?
       "disconnect" : "unknown";
@@ -23,4 +23,4 @@ const OnOff = ({ on }: { on: string }) => {
   );
 };
 
-export default OnOff;
+export default OnOffGranolSillos;
