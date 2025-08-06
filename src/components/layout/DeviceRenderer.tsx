@@ -7,10 +7,10 @@ import { tooltipTitle } from "./tooltipContent";
 import { getIconDimensions } from "./iconConfigs";
 
 interface DeviceRendererProps {
-  device: Device;
-  position: Position;
-  onClick: (deviceType: string) => void;
-  iconSize?: number;
+    device: Device;
+    position: Position;
+    onClick: (deviceType: string) => void;
+    iconSize?: number;
 }
 
 const ICON_SIZE = 10;
@@ -25,10 +25,45 @@ export const DeviceRenderer: React.FC<DeviceRendererProps> = ({
 
     return (
         <Tooltip
-            title={<span dangerouslySetInnerHTML={{ __html: tooltipTitle(device) }} />}
-            placement="top"
-            sx={{ zIndex: 20 }}
+            arrow
+            title={
+                <Box
+                    sx={{
+                        fontSize: 12,
+                        lineHeight: 1.7,
+                        maxWidth: 300,
+                        whiteSpace: "normal",
+                        padding: 1,
+                    }}
+                    dangerouslySetInnerHTML={{ __html: tooltipTitle(device) }}
+                />
+            }
+            placement="bottom"
+            PopperProps={{
+                modifiers: [
+                    {
+                        name: "offset",
+                        options: {
+                            offset: [width * iconSize / 20, -(height * iconSize) / 2],
+                        },
+                    },
+                    {
+                        name: "preventOverflow",
+                        options: {
+                            padding: 8,
+                        },
+                    },
+                    {
+                        name: "arrow",
+                        options: {
+                            padding: 10,
+                        },
+                    },
+                ],
+            }}
+            sx={{ zIndex: 1300 }}
         >
+
             <Box
                 dir="ltr"
                 sx={{ position: "absolute", ...position, cursor: "pointer" }}

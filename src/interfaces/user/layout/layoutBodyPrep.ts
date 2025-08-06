@@ -44,6 +44,7 @@ export interface Device {
   };
   name?: string;
   startTime?: string;
+  operatingTime?: string;
   current?: string;
   temprature?: string;
   soilSurface?: string;

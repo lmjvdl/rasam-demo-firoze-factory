@@ -10,6 +10,7 @@ export const demoData: { devices: Device[] } = {
       status: "blue",
       lightsConfig: { orientation: "horizontal", position: "top" },
       extraTooltip: "احتمال خرابی بلبرینگ",
+      operatingTime: "02:15:00",
       defaultParams: {
         current: getRandomCurrent(),
         temperature: getRandomTemperature(),
@@ -51,6 +52,7 @@ export const demoData: { devices: Device[] } = {
       type: "BatchBaalMill",
       status: "blue",
       lightsConfig: { orientation: "horizontal", position: "top" },
+      operatingTime: "05:43:00",
       defaultParams: {
         current: getRandomCurrent(),
         temperature: getRandomTemperature(),
@@ -64,6 +66,7 @@ export const demoData: { devices: Device[] } = {
       type: "SprayDryer",
       status: "blue",
       lightsConfig: { orientation: "horizontal", position: "center" },
+      operatingTime: "03:28:00",
       defaultParams: {
         current: getRandomCurrent(),
         temperature: getRandomTemperature(),
@@ -82,6 +85,7 @@ export const demoData: { devices: Device[] } = {
       type: "SlurryPump",
       status: "blue",
       lightsConfig: { orientation: "vertical", position: "top" },
+      operatingTime: "06:12:00",
       defaultParams: {
         current: getRandomCurrent(),
         temperature: getRandomTemperature(),
@@ -110,13 +114,14 @@ export const demoData: { devices: Device[] } = {
         current: getRandomCurrent(),
         temperature: getRandomTemperature(),
       },
-    },
+    },    
     {
       id: "slurry_pit_right_1",
       name: "حوضچه 1",
       type: "SlurryPitRight",
       status: "blue",
       lightsConfig: { orientation: "vertical", position: "right" },
+      operatingTime: "04:22:00",
       defaultParams: {
         current: getRandomCurrent(),
         temperature: getRandomTemperature(),
@@ -152,6 +157,7 @@ export const demoData: { devices: Device[] } = {
       type: "SlurryPitRight",
       status: "blue",
       lightsConfig: { orientation: "vertical", position: "right" },
+      operatingTime: "06:07:00",
       defaultParams: {
         current: getRandomCurrent(),
         temperature: getRandomTemperature(),
@@ -163,6 +169,7 @@ export const demoData: { devices: Device[] } = {
       type: "SlurryPitRight",
       status: "blue",
       lightsConfig: { orientation: "vertical", position: "right" },
+      operatingTime: "01:53:00",
       defaultParams: {
         current: getRandomCurrent(),
         temperature: getRandomTemperature(),
@@ -175,6 +182,7 @@ export const demoData: { devices: Device[] } = {
       status: "blue",
       lightsConfig: { orientation: "vertical", position: "left" },
       extraTooltip: "احتمال خرابی پره",
+      operatingTime: "02:34:00",
       defaultParams: {
         current: getRandomCurrent(),
         temperature: getRandomTemperature(),
@@ -210,6 +218,7 @@ export const demoData: { devices: Device[] } = {
       type: "SlurryPitLeft",
       status: "blue",
       lightsConfig: { orientation: "vertical", position: "left" },
+      operatingTime: "03:05:00",
       defaultParams: {
         current: getRandomCurrent(),
         temperature: getRandomTemperature(),
@@ -221,17 +230,19 @@ export const demoData: { devices: Device[] } = {
       type: "SlurryPitLeft",
       status: "blue",
       lightsConfig: { orientation: "vertical", position: "left" },
+      operatingTime: "05:48:00",
       defaultParams: {
         current: getRandomCurrent(),
         temperature: getRandomTemperature(),
       },
-    },
+    },    
     {
       id: "continues_ball_mill_1",
       name: "بالمیل 1",
       type: "ContinuesBallMill",
       status: "blue",
       lightsConfig: { orientation: "vertical", position: "left" },
+      operatingTime: "01:59:00",
       defaultParams: {
         current: getRandomCurrent(),
         temperature: getRandomTemperature(),
@@ -245,13 +256,14 @@ export const demoData: { devices: Device[] } = {
       type: "ContinuesBallMill",
       status: "blue",
       lightsConfig: { orientation: "vertical", position: "right" },
+      operatingTime: "06:40:00",
       defaultParams: {
         current: getRandomCurrent(),
         temperature: getRandomTemperature(),
         WeightIncomingSoil: getRandomWeightIncomingSoil(),
         OutputSoilWeight: getRandomOutputSoilWeight(),
       },
-    },
+    },    
     {
       id: "vibrating_screen_1",
       name: "صفحه 1",
@@ -269,6 +281,7 @@ export const demoData: { devices: Device[] } = {
       type: "VibratingScreen",
       status: "blue",
       lightsConfig: { orientation: "vertical", position: "top" },
+      operatingTime: "03:31:00",
       defaultParams: {
         current: "36A",
         temperature: getRandomTemperature(),
@@ -303,6 +316,7 @@ export const demoData: { devices: Device[] } = {
       type: "VibratingScreen",
       status: "blue",
       lightsConfig: { orientation: "vertical", position: "top" },
+      operatingTime: "05:14:00",
       defaultParams: {
         current: "43A",
         temperature: getRandomTemperature(),
@@ -319,13 +333,14 @@ export const demoData: { devices: Device[] } = {
         current: getRandomCurrent(),
         temperature: getRandomTemperature(),
       },
-    },    
+    },       
     {
       id: "granule_sillo_1",
       type: "GranuleSillo",
       name: "سیلو 1",
       status: "blue",
       lightsConfig: { orientation: "vertical", position: "left" },
+      operatingTime: "02:45:00",
       defaultParams: {
         temperature: getRandomTemperature(),
         soilSurface: getRandomSoilSurface(),
@@ -337,6 +352,7 @@ export const demoData: { devices: Device[] } = {
       type: "GranuleSillo",
       status: "blue",
       lightsConfig: { orientation: "vertical", position: "left" },
+      operatingTime: "04:17:00",
       defaultParams: {
         temperature: getRandomTemperature(),
         soilSurface: getRandomSoilSurface(),
@@ -348,6 +364,7 @@ export const demoData: { devices: Device[] } = {
       type: "GranuleSillo",
       status: "blue",
       lightsConfig: { orientation: "vertical", position: "left" },
+      operatingTime: "06:04:00",
       defaultParams: {
         temperature: getRandomTemperature(),
         soilSurface: getRandomSoilSurface(),
@@ -452,7 +469,6 @@ export const demoData: { devices: Device[] } = {
         temperature: getRandomTemperature(),
         soilSurface: getRandomSoilSurface(),
       },
-    },
-    
+    },    
   ],
 };
