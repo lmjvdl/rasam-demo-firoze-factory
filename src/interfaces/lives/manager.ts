@@ -14,6 +14,7 @@ export interface MultiSensorLiveSchema extends BaseLiveSchema {
       current?: number;
       temperature?: number;
       soilSurface?: number;
+      time?: string;
     };
 }
 

@@ -1,5 +1,5 @@
 import { Device } from "@/interfaces/user/layout/layoutBodyPrep";
-import { getRandomBurnerTemperature, getRandomCurrent, getRandomMonopumpCurrent, getRandomMonopumpTemprature, getRandomOutletTemperature, getRandomOutputGranuleMoisture, getRandomOutputGranuleTemperature, getRandomOutputGranuleWeight, getRandomOutputSoilWeight, getRandomSoilSurface, getRandomTemperature, getRandomWeightIncomingSoil } from "@/utils/homeless/randomStaticGenerator";
+import { getRandomBurnerTemperature, getRandomCurrent, getRandomFlowRate, getRandomMonopumpCurrent, getRandomMonopumpTemprature, getRandomOutletTemperature, getRandomOutputGranuleMoisture, getRandomOutputGranuleTemperature, getRandomOutputGranuleWeight, getRandomOutputSoilWeight, getRandomSoilSurface, getRandomTemperature, getRandomWeightIncomingSoil } from "@/utils/homeless/randomStaticGenerator";
 
 export const demoData: { devices: Device[] } = {
   devices: [
@@ -89,6 +89,7 @@ export const demoData: { devices: Device[] } = {
       defaultParams: {
         current: getRandomCurrent(),
         temperature: getRandomTemperature(),
+        FlowRate: getRandomFlowRate()
       },
     },
     {
@@ -101,6 +102,7 @@ export const demoData: { devices: Device[] } = {
       defaultParams: {
         current: getRandomCurrent(),
         temperature: getRandomTemperature(),
+        FlowRate: getRandomFlowRate()
       },
     },
     {
@@ -113,6 +115,7 @@ export const demoData: { devices: Device[] } = {
       defaultParams: {
         current: getRandomCurrent(),
         temperature: getRandomTemperature(),
+        FlowRate: getRandomFlowRate()
       },
     },    
     {

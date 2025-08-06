@@ -94,6 +94,12 @@ export const useAllDevicesRandomData = ({
           updateDevice(device.id, { MonopumpTemprature: val });
           setDeviceData(device.id, { MonopumpTemprature: val });
         });
+        
+        // Monopump Flow Rate
+        const stopFlowRate = startRandomGenerator(40, 100, "m³/h", (val) => {
+          updateDevice(device.id, { FlowRate: val });
+          setDeviceData(device.id, { FlowRate: val });
+        });
 
         stopFunctions.push(
           stopTemp,
@@ -107,7 +113,8 @@ export const useAllDevicesRandomData = ({
           stopOutputGranuleTemperature,
           stopOutputGranuleMoisture,
           stopMonopumpCurrent,
-          stopMonopumpTemprature
+          stopMonopumpTemprature,
+          stopFlowRate
         );
       }
     });

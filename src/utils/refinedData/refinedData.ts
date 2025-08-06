@@ -9,11 +9,12 @@ export const paramNameMap: Record<string, string> = {
     OutputSoilWeight: "وزن آب ورودی",
     BurnerTemperature: "دمای مشعل",
     OutletTemperature: "دمای خروجی",
-    OutputGranuleWeight: "وزن گرانول خروجی",
+    OutputGranuleWeight: "دبی وزنی گرانول",
     OutputGranuleTemperature: "دمای گرانول خروجی",
     OutputGranuleMoisture: "رطوبت گرانول خروجی",
     MonopumpCurrent: "جریان مونوپمپ",
     MonopumpTemprature: "دمای مونوپمپ",
+    FlowRate: "دبی پمپ"
   };
   
 

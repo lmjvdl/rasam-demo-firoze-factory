@@ -57,6 +57,7 @@ export interface Device {
   OutputGranuleMoisture?: string;
   MonopumpCurrent?: string;
   MonopumpTemprature?: string;
+  FlowRate?: string;
   defaultParams?: Record<string, number | string>;
   extraTooltip?: string;
   paramUnits?: Record<string, string>;

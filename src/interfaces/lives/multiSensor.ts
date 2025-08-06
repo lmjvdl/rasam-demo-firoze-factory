@@ -16,6 +16,8 @@ export interface MultiSensorLiveSchema {
     OutputGranuleMoisture?: string;
     MonopumpCurrent?: string;
     MonopumpTemprature?: string;
+    FlowRate?: string;
+    time?: string;
   };
   online: string;
 }
