@@ -128,7 +128,7 @@ export const reports: ReportDetailResponse[] = [
         data: [
             {
                 id: 1,
-                name: "جریان مصرفی صفحه ویبره"
+                name: "جریان مصرفی الک ویبره"
             },
         ]
     },

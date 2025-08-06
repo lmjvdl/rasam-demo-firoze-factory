@@ -42,10 +42,10 @@ export const styles = {
     ...(position === "bottom" &&
       orientation !== "vertical" &&
       orientation !== "horizontal" && {
-        top: lightSize + margin,
-        left: "50%",
-        transform: "translateX(-50%)",
-      }),
+      top: lightSize + margin,
+      left: "50%",
+      transform: "translateX(-50%)",
+    }),
     ...(position === "left" && orientation === "vertical" && {
       left: -lightSize,
       top: "100%",
@@ -87,9 +87,9 @@ export const styles = {
     iconWidth: number,
     lightSize: number,
     margin: number,
-    status: string
+    status: "red" | "blue" | "grey" | "none"
   ): SxProps => ({
-    display: status === "grey" ? "block" : "none",
+    display: (status === "grey") || (status === "red") ? "block" : "none",
     position: "absolute",
     fontSize: iconSize * 1.5,
     color: "grey",
@@ -112,10 +112,10 @@ export const styles = {
     ...(position === "bottom" &&
       orientation !== "vertical" &&
       orientation !== "horizontal" && {
-        top: lightSize * 2 + margin * 2,
-        left: "50%",
-        transform: "translateX(-50%)",
-      }),
+      top: lightSize * 2 + margin * 2,
+      left: "50%",
+      transform: "translateX(-50%)",
+    }),
     ...(position === "left" && orientation === "vertical" && {
       left: -lightSize * 1.2 - margin,
       transform: "translateY(38%)",

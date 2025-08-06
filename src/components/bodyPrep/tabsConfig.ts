@@ -18,5 +18,5 @@ export const tabs = [
     { label: "حوضچه دوغاب چپ", name: "SlurryPitLeft", liveType: "multiSensor" },
     { label: "مونو پمپ", name: "SlurryPump", liveType: "multiSensor" },
     { label: "اسپری درایر", name: "SprayDryer", liveType: "multiSensor" },
-    { label: "صفحه ویبره", name: "VibratingScreen", liveType: "multiSensor" },
+    { label: "الک ویبره", name: "VibratingScreen", liveType: "multiSensor" },
 ];

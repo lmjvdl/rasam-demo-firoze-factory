@@ -303,7 +303,8 @@ export const demoData: { devices: Device[] } = {
       id: "vibrating_screen_4",
       name: "صفحه 4",
       type: "VibratingScreen",
-      status: "red",
+      status: "blue",
+      operatingTime: "05:26:00",
       lightsConfig: { orientation: "vertical", position: "top" },
       defaultParams: {
         current: getRandomCurrent(),
@@ -342,7 +343,6 @@ export const demoData: { devices: Device[] } = {
       lightsConfig: { orientation: "vertical", position: "left" },
       operatingTime: "02:45:00",
       defaultParams: {
-        temperature: getRandomTemperature(),
         soilSurface: getRandomSoilSurface(),
       },
     },
@@ -354,7 +354,6 @@ export const demoData: { devices: Device[] } = {
       lightsConfig: { orientation: "vertical", position: "left" },
       operatingTime: "04:17:00",
       defaultParams: {
-        temperature: getRandomTemperature(),
         soilSurface: getRandomSoilSurface(),
       },
     },
@@ -366,7 +365,6 @@ export const demoData: { devices: Device[] } = {
       lightsConfig: { orientation: "vertical", position: "left" },
       operatingTime: "06:04:00",
       defaultParams: {
-        temperature: getRandomTemperature(),
         soilSurface: getRandomSoilSurface(),
       },
     },
@@ -377,7 +375,6 @@ export const demoData: { devices: Device[] } = {
       status: "none",
       lightsConfig: { orientation: "vertical", position: "left" },
       defaultParams: {
-        temperature: getRandomTemperature(),
         soilSurface: getRandomSoilSurface(),
       },
     },
@@ -388,7 +385,6 @@ export const demoData: { devices: Device[] } = {
       status: "none",
       lightsConfig: { orientation: "vertical", position: "left" },
       defaultParams: {
-        temperature: getRandomTemperature(),
         soilSurface: getRandomSoilSurface(),
       },
     },
@@ -399,7 +395,6 @@ export const demoData: { devices: Device[] } = {
       status: "none",
       lightsConfig: { orientation: "vertical", position: "left" },
       defaultParams: {
-        temperature: "",
         soilSurface: "",
       },
     },
@@ -408,9 +403,9 @@ export const demoData: { devices: Device[] } = {
       name: "سیلو 7",
       type: "GranuleSillo",
       status: "red",
+      startTime: "01:00:48",
       lightsConfig: { orientation: "vertical", position: "right" },
       defaultParams: {
-        temperature: getRandomTemperature(),
         soilSurface: getRandomSoilSurface(),
       },
     },
@@ -419,9 +414,9 @@ export const demoData: { devices: Device[] } = {
       name: "سیلو 8",
       type: "GranuleSillo",
       status: "red",
+      startTime: "00:50:10",
       lightsConfig: { orientation: "vertical", position: "right" },
       defaultParams: {
-        temperature: getRandomTemperature(),
         soilSurface: getRandomSoilSurface(),
       },
     },
@@ -430,9 +425,9 @@ export const demoData: { devices: Device[] } = {
       name: "سیلو 9",
       type: "GranuleSillo",
       status: "red",
+      startTime: "08:18:17",
       lightsConfig: { orientation: "vertical", position: "right" },
       defaultParams: {
-        temperature: getRandomTemperature(),
         soilSurface: getRandomSoilSurface(),
       },
     },
@@ -441,9 +436,9 @@ export const demoData: { devices: Device[] } = {
       name: "سیلو 10",
       type: "GranuleSillo",
       status: "red",
+      startTime: "03:00:50",
       lightsConfig: { orientation: "vertical", position: "right" },
       defaultParams: {
-        temperature: getRandomTemperature(),
         soilSurface: getRandomSoilSurface(),
       },
     },
@@ -455,7 +450,6 @@ export const demoData: { devices: Device[] } = {
       startTime: "03:50:07",
       lightsConfig: { orientation: "vertical", position: "right" },
       defaultParams: {
-        temperature: getRandomTemperature(),
         soilSurface: getRandomSoilSurface(),
       },
     },
@@ -466,7 +460,6 @@ export const demoData: { devices: Device[] } = {
       status: "none",
       lightsConfig: { orientation: "vertical", position: "right" },
       defaultParams: {
-        temperature: getRandomTemperature(),
         soilSurface: getRandomSoilSurface(),
       },
     },    

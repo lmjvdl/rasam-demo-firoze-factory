@@ -44,7 +44,7 @@ export const tooltipTitle = (device: Device): string => {
   
       return paramsHTML + operatingTimeHTML;
     } else if (device.status === "red") {
-      return `مدت زمان خاموش بودن دستگاه: ${device.startTime || "00:00:00"}`;
+      return "";
     } else if (device.status === "none") {
       return "وضعیت نامشخص";
     }
