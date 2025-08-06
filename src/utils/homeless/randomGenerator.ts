@@ -15,7 +15,7 @@
  *
  * @example
  * const stop = startRandomGenerator(5, 10, 'kg', (value) => {
- *   console.log(value); // Example output: "7.3 kg"
+ *   console.log(value); // Example output: "7.3 kg/h"
  * });
  *
  * // To stop the generator later:

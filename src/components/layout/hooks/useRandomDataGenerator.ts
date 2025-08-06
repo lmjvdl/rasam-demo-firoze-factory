@@ -42,13 +42,13 @@ export const useAllDevicesRandomData = ({
         });
 
         // Weight Incoming Soil
-        const stopWeightIncomingSoil = startRandomGenerator(100, 300, "kg", (val) => {
+        const stopWeightIncomingSoil = startRandomGenerator(100, 300, "kg/h", (val) => {
           updateDevice(device.id, { WeightIncomingSoil: val });
           setDeviceData(device.id, { WeightIncomingSoil: val });
         });
 
         // Output Soil Weight
-        const stopOutputSoilWeight = startRandomGenerator(80, 280, "kg", (val) => {
+        const stopOutputSoilWeight = startRandomGenerator(80, 280, "kg/h", (val) => {
           updateDevice(device.id, { OutputSoilWeight: val });
           setDeviceData(device.id, { OutputSoilWeight: val });
         });
@@ -66,7 +66,7 @@ export const useAllDevicesRandomData = ({
         });
 
         // Output Granule Weight
-        const stopOutputGranuleWeight = startRandomGenerator(50, 150, "kg", (val) => {
+        const stopOutputGranuleWeight = startRandomGenerator(50, 150, "kg/h", (val) => {
           updateDevice(device.id, { OutputGranuleWeight: val });
           setDeviceData(device.id, { OutputGranuleWeight: val });
         });

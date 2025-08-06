@@ -105,11 +105,11 @@ export default function MultiSensorLiveCard({ container }: Props) {
             {renderAttribute("جریان دستگاه", "current", " A")}
             {renderAttribute("دمای دستگاه", "temperature", " C°")}
             {renderAttribute("سطح خاک", "soilSurface", " m")}
-            {renderAttribute("وزن خاک ورودی", "WeightIncomingSoil", " kg")}
-            {renderAttribute("وزن آب ورودی", "OutputSoilWeight", " kg")}
+            {renderAttribute("وزن خاک ورودی", "WeightIncomingSoil", " kg/h")}
+            {renderAttribute("وزن آب ورودی", "OutputSoilWeight", " kg/h")}
             {renderAttribute("دمای مشعل", "BurnerTemperature", " C°")}
             {renderAttribute("دمای خروجی", "OutletTemperature", " C°")}
-            {renderAttribute("وزن گرانول خروجی", "OutputGranuleWeight", " kg")}
+            {renderAttribute("وزن گرانول خروجی", "OutputGranuleWeight", " kg/h")}
             {renderAttribute("دمای گرانول خروجی", "OutputGranuleTemperature", " C°")}
             {renderAttribute("رطوبت گرانول خروجی", "OutputGranuleMoisture", " %")}
             {renderAttribute("جریان مونوپمپ", "MonopumpCurrent", " A")}
