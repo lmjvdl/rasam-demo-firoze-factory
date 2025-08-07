@@ -79,7 +79,6 @@ export default function BodyPrepLivePage() {
       if (device.status === "blue" && device.defaultParams) {
         const deviceId = device.id;
         const paramKeys = Object.keys(device.defaultParams);
-
         paramKeys.forEach((key) => {
           const rawDefault = device.defaultParams?.[key];
 
@@ -110,6 +109,7 @@ export default function BodyPrepLivePage() {
               },
             }));
           });
+          console.log(stops)
 
           stops.push(stop);
         });
@@ -134,12 +134,12 @@ export default function BodyPrepLivePage() {
           {filteredDevices.map((device, index) => {
             const liveData = liveValues[device.id] || {};
             const defaultParams = device.defaultParams || {};
-
+            
             // Build live data to pass down, handling device statuses and fallback values
             const dataEntries = Object.keys(defaultParams).reduce((acc, key) => {
               const liveVal = (liveData as Record<string, number | undefined>)[key];
               const defaultVal = defaultParams[key];
-
+            
               const defaultValNumber =
                 typeof defaultVal === "string"
                   ? parseFloat(defaultVal.replace(/[^\d.]/g, "") || "0")

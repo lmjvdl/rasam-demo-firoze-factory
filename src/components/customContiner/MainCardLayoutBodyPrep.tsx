@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { MainCardType } from "@/interfaces/ui/mainCard/MainCard";
 import { Box } from "@mui/material";
@@ -14,7 +14,7 @@ const MainCardLayoutBodyPrep: React.FC<MainCardType> = ({ children }) => {
   });
 
   React.useEffect(() => {
-    if (typeof window !== undefined) {
+    if (typeof window !== "undefined") {
       const updateSize = () =>
         setWindowSize({ width: window.innerWidth, height: window.innerHeight });
       updateSize();
@@ -30,27 +30,37 @@ const MainCardLayoutBodyPrep: React.FC<MainCardType> = ({ children }) => {
   return (
     <Box
       sx={{
+        width: "100%",
+        height: "100%",
         overflow: "auto",
         position: "relative",
         direction: "rtl",
       }}
-      >
+    >
       <Box
         sx={{
-          width: `${baseWidth}px`,
-          height: `${baseHeight}px`,
-          transform: `scale(${scale})`,
-          transformOrigin: "top left",
-          display: "flex",
-          justifyContent: "space-evenly",
-          alignItems: "flex-start",
+          width: `${baseWidth * scale}px`,
+          height: `${baseHeight * scale}px`,
           position: "relative",
-          direction: "ltr",
-          minWidth: `${baseWidth}px`,
-          minHeight: `${baseHeight}px`,
         }}
       >
-        {children}
+        <Box
+          sx={{
+            transform: `scale(${scale})`,
+            transformOrigin: "top left",
+            width: `${baseWidth}px`,
+            height: `${baseHeight}px`,
+            position: "absolute",
+            top: 0,
+            left: 0,
+            display: "flex",
+            justifyContent: "space-evenly",
+            alignItems: "flex-start",
+            direction: "ltr",
+          }}
+        >
+          {children}
+        </Box>
       </Box>
     </Box>
   );
