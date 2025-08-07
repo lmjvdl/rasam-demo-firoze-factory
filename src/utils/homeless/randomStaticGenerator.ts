@@ -49,12 +49,12 @@ export function getRandomOutputGranuleMoisture(): string {
   return `${moisture}%`;
 }
 
-export function getRandomMonopumpCurrent(): string {
+export function getRandomWeightSoilEnteringbatchMill(): string {
   const current = Math.floor(Math.random() * (30 - 10 + 1)) + 10;
   return `${current}A`;
 }
 
-export function getRandomMonopumpTemprature(): string {
+export function getRandomWeightIncomingWaterMilliliters(): string {
   const temp = Math.floor(Math.random() * (100 - 40 + 1)) + 40;
   return `${temp}°C`;
 }

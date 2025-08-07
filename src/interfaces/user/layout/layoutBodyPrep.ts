@@ -55,8 +55,8 @@ export interface Device {
   OutputGranuleWeight?: string;
   OutputGranuleTemperature?: string;
   OutputGranuleMoisture?: string;
-  MonopumpCurrent?: string;
-  MonopumpTemprature?: string;
+  WeightSoilEnteringbatchMill?: string;
+  WeightIncomingWaterMilliliters?: string;
   FlowRate?: string;
   defaultParams?: Record<string, number | string>;
   extraTooltip?: string;

@@ -84,17 +84,17 @@ export const useAllDevicesRandomData = ({
         });
 
         // Monopump Current
-        const stopMonopumpCurrent = startRandomGenerator(10, 30, "A", (val) => {
-          updateDevice(device.id, { MonopumpCurrent: val });
-          setDeviceData(device.id, { MonopumpCurrent: val });
+        const stopWeightSoilEnteringbatchMill = startRandomGenerator(10, 30, "A", (val) => {
+          updateDevice(device.id, { WeightSoilEnteringbatchMill: val });
+          setDeviceData(device.id, { WeightSoilEnteringbatchMill: val });
         });
 
         // Monopump Temperature
-        const stopMonopumpTemprature = startRandomGenerator(40, 100, "°C", (val) => {
-          updateDevice(device.id, { MonopumpTemprature: val });
-          setDeviceData(device.id, { MonopumpTemprature: val });
+        const stopWeightIncomingWaterMilliliters = startRandomGenerator(40, 100, "°C", (val) => {
+          updateDevice(device.id, { WeightIncomingWaterMilliliters: val });
+          setDeviceData(device.id, { WeightIncomingWaterMilliliters: val });
         });
-        
+
         // Monopump Flow Rate
         const stopFlowRate = startRandomGenerator(40, 100, "m³/h", (val) => {
           updateDevice(device.id, { FlowRate: val });
@@ -112,8 +112,8 @@ export const useAllDevicesRandomData = ({
           stopOutputGranuleWeight,
           stopOutputGranuleTemperature,
           stopOutputGranuleMoisture,
-          stopMonopumpCurrent,
-          stopMonopumpTemprature,
+          stopWeightSoilEnteringbatchMill,
+          stopWeightIncomingWaterMilliliters,
           stopFlowRate
         );
       }

@@ -1,5 +1,5 @@
 import { Device } from "@/interfaces/user/layout/layoutBodyPrep";
-import { getRandomBurnerTemperature, getRandomCurrent, getRandomFlowRate, getRandomMonopumpCurrent, getRandomMonopumpTemprature, getRandomOutletTemperature, getRandomOutputGranuleMoisture, getRandomOutputGranuleTemperature, getRandomOutputGranuleWeight, getRandomOutputSoilWeight, getRandomSoilSurface, getRandomTemperature, getRandomWeightIncomingSoil } from "@/utils/homeless/randomStaticGenerator";
+import { getRandomBurnerTemperature, getRandomCurrent, getRandomFlowRate, getRandomWeightSoilEnteringbatchMill, getRandomWeightIncomingWaterMilliliters, getRandomOutletTemperature, getRandomOutputGranuleMoisture, getRandomOutputGranuleTemperature, getRandomOutputGranuleWeight, getRandomOutputSoilWeight, getRandomSoilSurface, getRandomTemperature, getRandomWeightIncomingSoil } from "@/utils/homeless/randomStaticGenerator";
 
 export const demoData: { devices: Device[] } = {
   devices: [
@@ -14,8 +14,8 @@ export const demoData: { devices: Device[] } = {
       defaultParams: {
         current: getRandomCurrent(),
         temperature: getRandomTemperature(),
-        WeightIncomingSoil: getRandomWeightIncomingSoil(),
-        OutputSoilWeight: getRandomOutputSoilWeight(),
+        WeightSoilEnteringbatchMill: getRandomWeightSoilEnteringbatchMill(),
+        WeightIncomingWaterMilliliters: getRandomWeightIncomingWaterMilliliters(),
       },
     },
     {
@@ -28,8 +28,8 @@ export const demoData: { devices: Device[] } = {
       defaultParams: {
         current: getRandomCurrent(),
         temperature: getRandomTemperature(),
-        WeightIncomingSoil: getRandomWeightIncomingSoil(),
-        OutputSoilWeight: getRandomOutputSoilWeight(),
+        WeightSoilEnteringbatchMill: getRandomWeightSoilEnteringbatchMill(),
+        WeightIncomingWaterMilliliters: getRandomWeightIncomingWaterMilliliters(),
       },
     },
     {
@@ -42,8 +42,8 @@ export const demoData: { devices: Device[] } = {
       defaultParams: {
         current: getRandomCurrent(),
         temperature: getRandomTemperature(),
-        WeightIncomingSoil: getRandomWeightIncomingSoil(),
-        OutputSoilWeight: getRandomOutputSoilWeight(),
+        WeightSoilEnteringbatchMill: getRandomWeightSoilEnteringbatchMill(),
+        WeightIncomingWaterMilliliters: getRandomWeightIncomingWaterMilliliters(),
       },
     },
     {
@@ -56,8 +56,8 @@ export const demoData: { devices: Device[] } = {
       defaultParams: {
         current: getRandomCurrent(),
         temperature: getRandomTemperature(),
-        WeightIncomingSoil: getRandomWeightIncomingSoil(),
-        OutputSoilWeight: getRandomOutputSoilWeight(),
+        WeightSoilEnteringbatchMill: getRandomWeightSoilEnteringbatchMill(),
+        WeightIncomingWaterMilliliters: getRandomWeightIncomingWaterMilliliters(),
       },
     },
     {
@@ -75,8 +75,6 @@ export const demoData: { devices: Device[] } = {
         OutputGranuleWeight: getRandomOutputGranuleWeight(),
         OutputGranuleTemperature: getRandomOutputGranuleTemperature(),
         OutputGranuleMoisture: getRandomOutputGranuleMoisture(),
-        MonopumpCurrent: getRandomMonopumpCurrent(),
-        MonopumpTemprature: getRandomMonopumpTemprature(),
       },
     },
     {
@@ -117,7 +115,7 @@ export const demoData: { devices: Device[] } = {
         temperature: getRandomTemperature(),
         FlowRate: getRandomFlowRate()
       },
-    },    
+    },
     {
       id: "slurry_pit_right_1",
       name: "حوضچه 1",
@@ -238,7 +236,7 @@ export const demoData: { devices: Device[] } = {
         current: getRandomCurrent(),
         temperature: getRandomTemperature(),
       },
-    },    
+    },
     {
       id: "continues_ball_mill_1",
       name: "بالمیل 1",
@@ -266,7 +264,7 @@ export const demoData: { devices: Device[] } = {
         WeightIncomingSoil: getRandomWeightIncomingSoil(),
         OutputSoilWeight: getRandomOutputSoilWeight(),
       },
-    },    
+    },
     {
       id: "vibrating_screen_1",
       name: "صفحه 1",
@@ -337,7 +335,7 @@ export const demoData: { devices: Device[] } = {
         current: getRandomCurrent(),
         temperature: getRandomTemperature(),
       },
-    },       
+    },
     {
       id: "granule_sillo_1",
       type: "GranuleSillo",
@@ -465,6 +463,6 @@ export const demoData: { devices: Device[] } = {
       defaultParams: {
         soilSurface: getRandomSoilSurface(),
       },
-    },    
+    },
   ],
 };

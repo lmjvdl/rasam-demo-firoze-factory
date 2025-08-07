@@ -103,20 +103,16 @@ export default function MultiSensorLiveCard({ container }: Props) {
   const status = container.online; // expected values: "on", "disconnect", "none", or others
 
   // Define dynamic styles for card background color and box shadow based on status
-  let bgColor: string;
   let boxShadow: string;
 
   if (status === "on") {
     // Online state: primary color glow and default background
-    bgColor = `${theme.palette.primary.main}800`;
     boxShadow = `0 0 8px 2px ${theme.palette.primary.main}66`;
   } else if (status === "disconnect" || status === "none") {
     // Disconnected or none state: warning color glow with light grey background
-    bgColor = theme.palette.background.default;
     boxShadow = `0 0 8px 2px ${theme.palette.warning.main}66`;
   } else {
     // Offline or other states: error color glow with disabled background
-    bgColor = theme.palette.action.disabledBackground;
     boxShadow = `0 0 8px 2px ${theme.palette.error.main}33`;
   }
 
@@ -127,7 +123,7 @@ export default function MultiSensorLiveCard({ container }: Props) {
           boxShadow,
           height: "100%",
           borderRadius: 3,
-          backgroundColor: bgColor,
+          backgroundColor: `${theme.palette.primary.main}800`,
           transition: "background-color 0.3s ease, box-shadow 0.3s ease",
           display: "flex",
           flexDirection: "column",
@@ -213,8 +209,8 @@ export default function MultiSensorLiveCard({ container }: Props) {
             {renderAttribute("دبی وزنی گرانول", "OutputGranuleWeight", " kg/h")}
             {renderAttribute("دمای گرانول خروجی", "OutputGranuleTemperature", " C°")}
             {renderAttribute("رطوبت گرانول خروجی", "OutputGranuleMoisture", " %")}
-            {renderAttribute("جریان مونوپمپ", "MonopumpCurrent", " A")}
-            {renderAttribute("دمای مونوپمپ", "MonopumpTemprature", " C°")}
+            {renderAttribute("وزن خاک ورودی", "WeightSoilEnteringbatchMill", " kg")}
+            {renderAttribute("وزن آب ورودی", "WeightIncomingWaterMilliliters", " L")}
             {renderAttribute("دبی پمپ", "FlowRate", " m³/h")}
           </Box>
         </CardContent>
