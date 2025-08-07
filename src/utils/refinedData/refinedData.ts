@@ -2,7 +2,7 @@ import { Device } from "@/interfaces/user/layout/layoutBodyPrep";
 import { iconMapLayout } from "../icons/LayoutIcon";
 
 export const paramNameMap: Record<string, string> = {
-    temperature: "دما",
+    temperature: "دمای موتور",
     current: "جریان",
     soilSurface: "سطح خاک",
     WeightIncomingSoil: "وزن خاک ورودی",

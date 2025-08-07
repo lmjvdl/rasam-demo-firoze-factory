@@ -22,17 +22,17 @@ import { paramNameMap } from "@/utils/refinedData/refinedData";
  */
 
 export const tooltipTitle = (device: Device): string => {
-    if (device.status === "blue") {
-      const paramEntries = Object.entries(device.defaultParams || {});
-      const paramsHTML = paramEntries
-        .map(([key, value]) => {
-          const label = paramNameMap[key] || key;
-          return `${label}: ${value}`;
-        })
-        .join("<br />");
-  
-      const operatingTimeHTML = device.operatingTime
-        ? `<br /><br /><span style="display: flex; align-items: center; gap: 4px;">
+  if (device.status === "blue") {
+    const paramEntries = Object.entries(device.defaultParams || {});
+    const paramsHTML = paramEntries
+      .map(([key, value]) => {
+        const label = paramNameMap[key] || key;
+        return `${label}: ${value}`;
+      })
+      .join("<br />");
+
+    const operatingTimeHTML = device.operatingTime
+      ? `<br /><br /><span style="display: flex; align-items: center; gap: 4px;">
               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                 <circle cx="12" cy="12" r="9" />
@@ -40,15 +40,16 @@ export const tooltipTitle = (device: Device): string => {
               </svg>
               زمان کارکرد دستگاه: ${device.operatingTime}
           </span>`
-        : "";
-  
-      return paramsHTML + operatingTimeHTML;
-    } else if (device.status === "red") {
-      return "";
-    } else if (device.status === "none") {
-      return "وضعیت نامشخص";
-    }
-  
-    return "";
-  };
-  
+      : "";
+
+    return paramsHTML + operatingTimeHTML;
+  } else if (device.status === "red") {
+    return "خاموش";
+  } else if (device.status === "none") {
+    return "وضعیت نامشخص";
+  } else if (device.status === "grey") {
+    return "قطع ارتباط";
+  }
+
+  return "";
+};

@@ -82,14 +82,16 @@ export default function MultiSensorLiveCard({ container }: Props) {
           <Typography variant="body2" color="text.primary">
             {label}
           </Typography>
+
           {safeData[attr] !== undefined && (
-            <Typography
-              variant="body1"
-              fontWeight="bold"
-              color="text.primary"
-            >
-              {`${safeData[attr]}${unit}`}
-            </Typography>
+            <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
+              <Typography variant="body1" fontWeight="bold" color="text.primary">
+                {unit}
+              </Typography>
+              <Typography variant="body1" fontWeight="bold" color="text.primary">
+                {safeData[attr]}
+              </Typography>
+            </Box>
           )}
         </Paper>
       )
@@ -200,7 +202,7 @@ export default function MultiSensorLiveCard({ container }: Props) {
 
           <Box display="flex" flexDirection="column" gap={1}>
             {renderAttribute("جریان دستگاه", "current", " A")}
-            {renderAttribute("دمای دستگاه", "temperature", " C°")}
+            {renderAttribute("دمای موتور", "temperature", " C°")}
             {renderAttribute("سطح خاک", "soilSurface", " m")}
             {renderAttribute("وزن خاک ورودی", "WeightIncomingSoil", " kg/h")}
             {renderAttribute("وزن آب ورودی", "OutputSoilWeight", " kg/h")}
