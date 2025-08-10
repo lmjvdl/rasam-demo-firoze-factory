@@ -84,13 +84,13 @@ export const useAllDevicesRandomData = ({
         });
 
         // Monopump Current
-        const stopWeightSoilEnteringbatchMill = startRandomGenerator(10, 30, "A", (val) => {
+        const stopWeightSoilEnteringbatchMill = startRandomGenerator(10, 30, "kg", (val) => {
           updateDevice(device.id, { WeightSoilEnteringbatchMill: val });
           setDeviceData(device.id, { WeightSoilEnteringbatchMill: val });
         });
 
         // Monopump Temperature
-        const stopWeightIncomingWaterMilliliters = startRandomGenerator(40, 100, "°C", (val) => {
+        const stopWeightIncomingWaterMilliliters = startRandomGenerator(40, 100, "L", (val) => {
           updateDevice(device.id, { WeightIncomingWaterMilliliters: val });
           setDeviceData(device.id, { WeightIncomingWaterMilliliters: val });
         });

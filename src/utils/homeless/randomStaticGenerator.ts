@@ -51,12 +51,12 @@ export function getRandomOutputGranuleMoisture(): string {
 
 export function getRandomWeightSoilEnteringbatchMill(): string {
   const current = Math.floor(Math.random() * (30 - 10 + 1)) + 10;
-  return `\u200E${current} A`;
+  return `\u200E${current} kg`;
 }
 
 export function getRandomWeightIncomingWaterMilliliters(): string {
   const temp = Math.floor(Math.random() * (100 - 40 + 1)) + 40;
-  return `\u200E${temp} °C`;
+  return `\u200E${temp} L`;
 }
 
 export function getRandomFlowRate(): string {
