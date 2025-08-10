@@ -147,16 +147,10 @@ export default function MultiSensorLiveCard({ container }: Props) {
                 display: "flex",
                 alignItems: "center",
                 gap: 0.3,
-                backgroundColor:
-                  status === "on"
-                    ? theme.palette.background.default
-                    : theme.palette.grey[300],
+                backgroundColor: theme.palette.background.default,
                 padding: "2px 6px",
                 borderRadius: 2,
-                boxShadow:
-                  status === "on"
-                    ? `0 0 4px ${theme.palette.primary.main}`
-                    : "none",
+                boxShadow: boxShadow,
                 userSelect: "none",
                 fontFamily: "'Roboto Mono', monospace",
                 minWidth: 60,
@@ -168,20 +162,14 @@ export default function MultiSensorLiveCard({ container }: Props) {
               <AccessTimeIcon
                 fontSize="inherit"
                 sx={{
-                  color:
-                    status === "on"
-                      ? theme.palette.primary.main
-                      : theme.palette.grey[600],
+                  color: boxShadow,
                 }}
               />
               <Typography
                 variant="caption"
                 fontWeight="bold"
                 sx={{
-                  color:
-                    status === "on"
-                      ? theme.palette.primary.main
-                      : theme.palette.grey[600],
+                  color: boxShadow,
                   letterSpacing: "0.1em",
                   ml: 0.2,
                 }}
