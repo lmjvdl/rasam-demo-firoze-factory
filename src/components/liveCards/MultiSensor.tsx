@@ -1,3 +1,5 @@
+"use client"
+
 import {
   Card,
   CardContent,
@@ -6,11 +8,15 @@ import {
   Divider,
   useTheme,
   Paper,
+  Tooltip,
+  styled,
 } from "@mui/material";
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import OnOff from "./dependenciesLiveCards/OnOff";
 import { MultiSensorLiveSchema } from "@/interfaces/lives/multiSensor";
 import OnOffGranuleSillos from "./dependenciesLiveCards/OnOffGranolSillos";
+import { useEffect, useState } from "react";
+import { IconAlertCircle } from "@tabler/icons-react";
 
 interface Props {
   container: MultiSensorLiveSchema;
@@ -32,6 +38,15 @@ interface Props {
 export default function MultiSensorLiveCard({ container }: Props) {
   const theme = useTheme();
   const safeData = container.data || {};
+
+  // One Attribute for handling extra tooltip ans show warning in card
+  const [hasWarning, setHasWarning] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (container.data?.extraTooltip) {
+      setHasWarning(true);
+    }
+  }, [container.data?.extraTooltip]); // Only re-run if extraTooltip changes
 
   /**
    * Checks if a specific attribute exists in the sensor data.
@@ -98,6 +113,15 @@ export default function MultiSensorLiveCard({ container }: Props) {
     );
   }
 
+  const BlinkingIcon = styled(IconAlertCircle)({
+    animation: 'blink 1.5s infinite',
+    '@keyframes blink': {
+      '0%': { opacity: 1 },
+      '50%': { opacity: 0.1 },
+      '100%': { opacity: 1 }
+    }
+  });
+
   // Determine the silo number from device code
   const siloNumber = getSiloNumber(container.device_code);
 
@@ -138,10 +162,39 @@ export default function MultiSensorLiveCard({ container }: Props) {
             justifyContent="space-between"
             mb={2}
           >
-            <Typography variant="h6" fontWeight="bold" noWrap>
-              {container.device_code}
-            </Typography>
+            <Box display="flex" alignItems="center" gap={1}>
+              {hasWarning && (
+                <Tooltip
+                  title={container.data.extraTooltip || ''}
+                  arrow
+                  componentsProps={{
+                    tooltip: {
+                      sx: {
+                        bgcolor: '#FFA000',
+                        color: theme.palette.getContrastText('#FFA000'),
+                        fontSize: theme.typography.pxToRem(14),
+                        maxWidth: 300,
+                      }
+                    },
+                    arrow: {
+                      sx: {
+                        color: '#FFA000',
+                      }
+                    }
+                  }}
+                >
+                  <BlinkingIcon
+                    size={40}
+                    color="#FFA000"
+                    sx={{ cursor: 'pointer' }}
+                  />
+                </Tooltip>
+              )}
 
+              <Typography variant="h6" fontWeight="bold" noWrap>
+                {container.device_code}
+              </Typography>
+            </Box>
             <Box
               sx={{
                 display: "flex",
@@ -200,7 +253,7 @@ export default function MultiSensorLiveCard({ container }: Props) {
             {renderAttribute("دمای گرانول خروجی", "OutputGranuleTemperature", " C°")}
             {renderAttribute("رطوبت گرانول خروجی", "OutputGranuleMoisture", " %")}
             {renderAttribute("وزن خاک ورودی", "WeightSoilEnteringbatchMill", " kg")}
-            {renderAttribute("وزن آب ورودی", "WeightIncomingWaterMilliliters", " L")}
+            {renderAttribute("حجم آب ورودی", "WeightIncomingWaterMilliliters", " L")}
             {renderAttribute("دبی پمپ", "FlowRate", " m³/h")}
             {renderAttribute("دمای موتور راست", "rightEngineTemperature", " C°")}
             {renderAttribute("جریان موتور راست", "rightEngineCurrent", " A")}

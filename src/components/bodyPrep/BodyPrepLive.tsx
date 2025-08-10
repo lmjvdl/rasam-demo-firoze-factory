@@ -178,6 +178,7 @@ export default function BodyPrepLivePage() {
                     data: {
                       ...dataEntries,
                       time: secondsToTimeString(liveTimesRef.current[device.id] || 0),
+                      extraTooltip: device.extraTooltip ?? "" 
                     },
                   },
                 }}

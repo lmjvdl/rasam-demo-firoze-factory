@@ -22,6 +22,7 @@ export interface MultiSensorLiveSchema {
     rightEngineCurrent?: string;
     leftEngineTemperature?: string;
     leftEngineCurrent?: string;
+    extraTooltip?: string;
   };
   online: string;
 }
