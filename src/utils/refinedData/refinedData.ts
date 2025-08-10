@@ -14,7 +14,11 @@ export const paramNameMap: Record<string, string> = {
     OutputGranuleMoisture: "رطوبت گرانول خروجی",
     WeightSoilEnteringbatchMill: "وزن خاک ورودی",
     WeightIncomingWaterMilliliters: "وزن آب ورودی",
-    FlowRate: "دبی پمپ"
+    FlowRate: "دبی پمپ",
+    rightEngineTemperature: "دمای موتور راست",
+    rightEngineCurrent: "جریان موتور راست",
+    leftEngineTemperature: "دمای موتور چپ",
+    leftEngineCurrent: "جریان موتور چپ",
 };
 
 

@@ -57,6 +57,10 @@ export interface Device {
   WeightSoilEnteringbatchMill?: string;
   WeightIncomingWaterMilliliters?: string;
   FlowRate?: string;
+  rightEngineTemperature?: string;
+  rightEngineCurrent?: string;
+  leftEngineTemperature?: string;
+  leftEngineCurrent?: string;
   defaultParams?: Record<string, number | string>;
   extraTooltip?: string;
   paramUnits?: Record<string, string>;

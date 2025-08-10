@@ -214,6 +214,10 @@ export default function MultiSensorLiveCard({ container }: Props) {
             {renderAttribute("وزن خاک ورودی", "WeightSoilEnteringbatchMill", " kg")}
             {renderAttribute("وزن آب ورودی", "WeightIncomingWaterMilliliters", " L")}
             {renderAttribute("دبی پمپ", "FlowRate", " m³/h")}
+            {renderAttribute("دمای موتور راست", "rightEngineTemperature", " C°")}
+            {renderAttribute("جریان موتور راست", "rightEngineCurrent", " A")}
+            {renderAttribute("دمای موتور چپ", "leftEngineTemperature", " C°")}
+            {renderAttribute("جریان موتور چپ", "leftEngineCurrent", " A")}
           </Box>
         </CardContent>
       </Card>

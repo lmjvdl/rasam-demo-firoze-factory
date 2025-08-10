@@ -154,7 +154,7 @@ export const styles = {
     ...(position === "center" && {
       top: iconHeight / 2,
       left: iconWidth / 2,
-      transform: "translate(-300%, -150%)",
+      transform: "translate(-300%, -165%)",
     }),
   }),
 

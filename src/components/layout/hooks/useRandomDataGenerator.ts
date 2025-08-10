@@ -101,6 +101,30 @@ export const useAllDevicesRandomData = ({
           setDeviceData(device.id, { FlowRate: val });
         });
 
+        // Right engine temprature for slurry pit
+        const stopRightEngineTemperature = startRandomGenerator(40, 90, "°C", (val) => {
+          updateDevice(device.id, { rightEngineTemperature: val });
+          setDeviceData(device.id, { rightEngineTemperature: val });
+        });
+
+        // Right engine current for slurry pit
+        const stopRightEngineCurrent = startRandomGenerator(30, 90, "A", (val) => {
+          updateDevice(device.id, { rightEngineCurrent: val });
+          setDeviceData(device.id, { rightEngineCurrent: val });
+        });
+
+        // Left engine temprature for slurry pit
+        const stopLeftEngineTemperature = startRandomGenerator(40, 90, "°C", (val) => {
+          updateDevice(device.id, { leftEngineTemperature: val });
+          setDeviceData(device.id, { leftEngineTemperature: val });
+        });
+
+        // Right engine current for slurry pit
+        const stopLeftEngineCurrent = startRandomGenerator(30, 50, "A", (val) => {
+          updateDevice(device.id, { leftEngineCurrent: val });
+          setDeviceData(device.id, { leftEngineCurrent: val });
+        });
+
         stopFunctions.push(
           stopTemp,
           stopCurrent,
@@ -114,7 +138,11 @@ export const useAllDevicesRandomData = ({
           stopOutputGranuleMoisture,
           stopWeightSoilEnteringbatchMill,
           stopWeightIncomingWaterMilliliters,
-          stopFlowRate
+          stopFlowRate,
+          stopRightEngineTemperature,
+          stopLeftEngineTemperature,
+          stopRightEngineCurrent,
+          stopLeftEngineCurrent
         );
       }
     });

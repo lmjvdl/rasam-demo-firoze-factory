@@ -1,5 +1,5 @@
 import { Device } from "@/interfaces/user/layout/layoutBodyPrep";
-import { getRandomBurnerTemperature, getRandomCurrent, getRandomFlowRate, getRandomWeightSoilEnteringbatchMill, getRandomWeightIncomingWaterMilliliters, getRandomOutletTemperature, getRandomOutputGranuleMoisture, getRandomOutputGranuleTemperature, getRandomOutputGranuleWeight, getRandomOutputSoilWeight, getRandomSoilSurface, getRandomTemperature, getRandomWeightIncomingSoil } from "@/utils/homeless/randomStaticGenerator";
+import { getRandomBurnerTemperature, getRandomCurrent, getRandomFlowRate, getRandomWeightSoilEnteringbatchMill, getRandomWeightIncomingWaterMilliliters, getRandomOutletTemperature, getRandomOutputGranuleMoisture, getRandomOutputGranuleTemperature, getRandomOutputGranuleWeight, getRandomOutputSoilWeight, getRandomSoilSurface, getRandomTemperature, getRandomWeightIncomingSoil, getRandomRightEngineTemperature, getRandomRightEngineCurrent, getRandomLeftEngineTemperature, getRandomLeftEngineCurrent } from "@/utils/homeless/randomStaticGenerator";
 
 export const demoData: { devices: Device[] } = {
   devices: [
@@ -125,8 +125,10 @@ export const demoData: { devices: Device[] } = {
       extraTooltip: "احتمال خرابی پره",
       operatingTime: "02:34:00",
       defaultParams: {
-        current: getRandomCurrent(),
-        temperature: getRandomTemperature(),
+        rightEngineTemperature: getRandomRightEngineTemperature(),
+        rightEngineCurrent: getRandomRightEngineCurrent(),
+        leftEngineTemperature: getRandomLeftEngineTemperature(),
+        leftEngineCurrent: getRandomLeftEngineCurrent(),
       },
     },
     {
@@ -137,8 +139,10 @@ export const demoData: { devices: Device[] } = {
       lightsConfig: { orientation: "vertical", position: "both" },
       startTime: "02:30:00",
       defaultParams: {
-        current: getRandomCurrent(),
-        temperature: getRandomTemperature(),
+        rightEngineTemperature: getRandomRightEngineTemperature(),
+        rightEngineCurrent: getRandomRightEngineCurrent(),
+        leftEngineTemperature: getRandomLeftEngineTemperature(),
+        leftEngineCurrent: getRandomLeftEngineCurrent(),
       },
     },
     {
@@ -149,8 +153,10 @@ export const demoData: { devices: Device[] } = {
       lightsConfig: { orientation: "vertical", position: "both" },
       startTime: "00:30:00",
       defaultParams: {
-        current: getRandomCurrent(),
-        temperature: getRandomTemperature(),
+        rightEngineTemperature: getRandomRightEngineTemperature(),
+        rightEngineCurrent: getRandomRightEngineCurrent(),
+        leftEngineTemperature: getRandomLeftEngineTemperature(),
+        leftEngineCurrent: getRandomLeftEngineCurrent(),
       },
     },
     {
@@ -161,8 +167,10 @@ export const demoData: { devices: Device[] } = {
       lightsConfig: { orientation: "vertical", position: "both" },
       operatingTime: "03:05:00",
       defaultParams: {
-        current: getRandomCurrent(),
-        temperature: getRandomTemperature(),
+        rightEngineTemperature: getRandomRightEngineTemperature(),
+        rightEngineCurrent: getRandomRightEngineCurrent(),
+        leftEngineTemperature: getRandomLeftEngineTemperature(),
+        leftEngineCurrent: getRandomLeftEngineCurrent(),
       },
     },
     {
@@ -173,8 +181,10 @@ export const demoData: { devices: Device[] } = {
       lightsConfig: { orientation: "vertical", position: "both" },
       operatingTime: "05:48:00",
       defaultParams: {
-        current: getRandomCurrent(),
-        temperature: getRandomTemperature(),
+        rightEngineTemperature: getRandomRightEngineTemperature(),
+        rightEngineCurrent: getRandomRightEngineCurrent(),
+        leftEngineTemperature: getRandomLeftEngineTemperature(),
+        leftEngineCurrent: getRandomLeftEngineCurrent(),
       },
     },
     {

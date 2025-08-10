@@ -18,6 +18,10 @@ export interface MultiSensorLiveSchema {
     WeightIncomingWaterMilliliters?: string;
     FlowRate?: string;
     time?: string;
+    rightEngineTemperature?: string;
+    rightEngineCurrent?: string;
+    leftEngineTemperature?: string;
+    leftEngineCurrent?: string;
   };
   online: string;
 }
