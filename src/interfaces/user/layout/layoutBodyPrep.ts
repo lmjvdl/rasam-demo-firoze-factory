@@ -25,8 +25,7 @@ export type DeviceType =
   | "BatchBaalMill"
   | "ContinuesBallMill"
   | "GranuleSillo"
-  | "SlurryPitRight"
-  | "SlurryPitLeft"
+  | "SlurryPit"
   | "SlurryPump"
   | "SprayDryer"
   | "VibratingScreen";

@@ -1,11 +1,12 @@
 "use client";
 
 import { MainCardType } from "@/interfaces/ui/mainCard/MainCard";
-import { Box } from "@mui/material";
+import { Box, useTheme } from "@mui/material";
 import React from "react";
 
 const MainCardLayoutBodyPrep: React.FC<MainCardType> = ({ children }) => {
-  const baseWidth = 1000;
+  const theme = useTheme();
+  const baseWidth = 950;
   const baseHeight = 1700;
 
   const [windowSize, setWindowSize] = React.useState({
@@ -32,6 +33,7 @@ const MainCardLayoutBodyPrep: React.FC<MainCardType> = ({ children }) => {
       sx={{
         width: "100%",
         height: "100%",
+        backgroundColor: theme.palette.background.paper,
         overflow: "auto",
         position: "relative",
         direction: "rtl",

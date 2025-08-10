@@ -8,9 +8,7 @@ export const getIconDimensions = (type: Device["type"]) => {
             return { width: 130, height: 110 };
         case "SlurryPump":
             return { width: 13, height: 10 };
-        case "SlurryPitRight":
-            return { width: 33, height: 13 };
-        case "SlurryPitLeft":
+        case "SlurryPit":
             return { width: 33, height: 13 };
         case "ContinuesBallMill":
             return { width: 30, height: 48 };

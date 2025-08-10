@@ -10,7 +10,7 @@ export const reports: ReportDetailResponse[] = [
             },
             {
                 id: 2,
-                name: "مدت زمان چرخش بالمیل" 
+                name: "مدت زمان چرخش بالمیل"
             },
             {
                 id: 3,
@@ -40,7 +40,7 @@ export const reports: ReportDetailResponse[] = [
             },
             {
                 id: 2,
-                name: "مدت زمان چرخش بالمیل" 
+                name: "مدت زمان چرخش بالمیل"
             },
             {
                 id: 3,
@@ -72,21 +72,7 @@ export const reports: ReportDetailResponse[] = [
     },
 
     {
-        report_id: "SlurryPitRight",
-        data: [
-            {
-                id: 1,
-                name: "جریان مصرفی حوضچه های دوغاب"
-            },
-            {
-                id: 2,
-                name: "مدت زمان روشن/خاموش بودن"
-            },
-        ]
-    },
-
-    {
-        report_id: "SlurryPitLeft",
+        report_id: "SlurryPit",
         data: [
             {
                 id: 1,

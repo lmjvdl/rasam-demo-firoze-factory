@@ -70,19 +70,36 @@ export const DeviceRenderer: React.FC<DeviceRendererProps> = ({
                 onClick={() => onClick(device.type)}
             >
                 <Box sx={{ position: "relative", display: "inline-block" }}>
-                    <StatusLights
-                        orientation={device.lightsConfig.orientation}
-                        position={device.lightsConfig.position}
-                        status={device.status}
-                        iconSize={iconSize}
-                        startTime={device.startTime}
-                        iconWidth={width * iconSize}
-                        iconHeight={height * iconSize}
-                        hasExtraTooltip={!!device.extraTooltip}
-                        extraTooltipContent={device.extraTooltip}
-                    />
+                    {device.lightsConfig.position === "both" ? (
+                        <>
+                            <StatusLights
+                                orientation={device.lightsConfig.orientation}
+                                position="center"
+                                status={device.status}
+                                iconSize={iconSize}
+                                startTime={device.startTime}
+                                iconWidth={width * iconSize}
+                                iconHeight={height * iconSize}
+                                hasExtraTooltip={!!device.extraTooltip}
+                                extraTooltipContent={device.extraTooltip}
+                            />
+                        </>
+                    ) : (
+                        <StatusLights
+                            orientation={device.lightsConfig.orientation}
+                            position={device.lightsConfig.position}
+                            status={device.status}
+                            iconSize={iconSize}
+                            startTime={device.startTime}
+                            iconWidth={width * iconSize}
+                            iconHeight={height * iconSize}
+                            hasExtraTooltip={!!device.extraTooltip}
+                            extraTooltipContent={device.extraTooltip}
+                        />
+                    )}
                     <IconComponent width={width * iconSize} height={height * iconSize} />
                 </Box>
+
             </Box>
         </Tooltip>
     );

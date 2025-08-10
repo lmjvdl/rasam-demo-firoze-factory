@@ -89,19 +89,11 @@ const BodyPrepLayout = ({ initialDevices = demoData.devices }: BodyPrepLayoutPro
         onDeviceClick={handleDeviceClick}
       />
 
-      {/* Right Slurry Pit Devices */}
+      {/* Slurry Pit Devices */}
       <DeviceGroupRenderer
         devices={devices}
-        filterType="SlurryPitRight"
-        positionCalculator={(i: number) => ({ top: 300 + i * 132, left: 600 })}
-        onDeviceClick={handleDeviceClick}
-      />
-
-      {/* Left Slurry Pit Devices */}
-      <DeviceGroupRenderer
-        devices={devices}
-        filterType="SlurryPitLeft"
-        positionCalculator={(i: number) => ({ top: 300 + i * 132, left: 700 })}
+        filterType="SlurryPit"
+        positionCalculator={(i: number) => ({ top: 300 + i * 132, left: 620 })}
         onDeviceClick={handleDeviceClick}
       />
 

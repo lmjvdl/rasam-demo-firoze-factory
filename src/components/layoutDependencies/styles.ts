@@ -67,7 +67,17 @@ export const styles = {
       top: "100%",
       transform: "translateY(270%)",
     }),
-    ...(position === "both" && {
+    ...(position === "both" && orientation === "horizontal" && {
+      top: -lightSize - margin,
+      left: "50%",
+      transform: "translateX(-150%)",
+    }),
+    ...(position === "both" && orientation === "vertical" && {
+      top: "50%",
+      left: lightSize - margin,
+      transform: "translateY(-50%)",
+    }),
+    ...(position === "both" && orientation !== "horizontal" && orientation !== "vertical" && {
       top: -lightSize - margin,
       left: -lightSize - margin,
       transform: "none",
@@ -142,9 +152,9 @@ export const styles = {
       transform: "none",
     }),
     ...(position === "center" && {
-      top: iconHeight / 2 + lightSize + margin,
+      top: iconHeight / 2,
       left: iconWidth / 2,
-      transform: "translate(-50%, 0%)",
+      transform: "translate(-300%, -150%)",
     }),
   }),
 
@@ -171,6 +181,11 @@ export const styles = {
     ...(position === "right" && {
       right: -lightSize * 1.1,
       top: "50%",
+      transform: "translateY(-50%)",
+    }),
+    ...(position === "center" && {
+      right: -lightSize * -6.5,
+      top: "65%",
       transform: "translateY(-50%)",
     }),
   }),
