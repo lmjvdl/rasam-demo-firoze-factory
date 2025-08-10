@@ -51,7 +51,7 @@ export default function BodyPrepPage() {
         tabLabels={tabs.map((tab) => tab.label)}
         onReportChange={handleReportChange}
       >
-        <BodyPrepLivePage />
+        <BodyPrepLivePage key={selectedTabName} />
       </TabsSection>
     </MainCard>
   );

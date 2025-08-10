@@ -1,4 +1,4 @@
-import { Box, Grid2, Typography, useColorScheme } from "@mui/material";
+import { Box, Grid2, Typography, useColorScheme, useTheme } from "@mui/material";
 import { companyMap } from "@/utils/icons/IconsMenu";
 import SidebarItemList from "./SidebarItemList";
 import { DrawerContentProps } from "@/interfaces/ui/sidebar/sidebar";
@@ -9,6 +9,8 @@ const DrawerContent = ({
   isCollapsed = false,
 }: DrawerContentProps) => {
   const mode = useColorScheme();
+  const theme = useTheme();
+
   const FactoryIcon =
     mode.colorScheme === "light"
       ? companyMap["RasamLight"]
@@ -27,7 +29,7 @@ const DrawerContent = ({
           alignItems: "center",
         }}
       >
-        <FactoryIcon fill={mode.colorScheme === "dark" ? "#fff" : "#292D32"} />
+        <FactoryIcon fill={theme.palette.primary.main} />
         <Typography
           color="text.primary"
           gutterBottom

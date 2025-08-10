@@ -15,6 +15,7 @@ export default function RootLayout({
   const drawerWidth = 240;
   const collapsedWidth = 47;
   const [desktopOpen, setDesktopOpen] = useState(true);
+  
   return (
     <html lang="fa" dir="rtl" className={`${vazir.variable} font-sans`}>
       <head>

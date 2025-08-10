@@ -11,22 +11,6 @@ import { useSearchParams } from "next/navigation";
 import { Device } from "@/interfaces/user/layout/layoutBodyPrep";
 import { secondsToTimeString, timeStringToSeconds } from "@/utils/formatters/liveTimer";
 
-/**
- * Live page component displaying real-time data of devices filtered by type.
- * 
- * It:
- * - Reads the device type from the URL query parameter `device` (defaults to "BatchBaalMill").
- * - Filters devices based on the selected type from demo data.
- * - Maintains live time counters for each device and updates them every second.
- * - Generates live parameter values for devices with status "blue" by simulating random fluctuations.
- * - Passes live data and device info down to LiveCardManager components for rendering.
- *
- * This component uses React hooks for state and side effects, including:
- * - `useRef` for mutable live timers that persist without causing rerenders.
- * - `useEffect` for setting up intervals and live data generation with cleanup.
- *
- * @returns JSX element rendering the live devices inside a responsive grid layout.
- */
 export default function BodyPrepLivePage() {
   const searchParams = useSearchParams();
   const name = searchParams.get("device") || "BatchBaalMill";
@@ -43,6 +27,9 @@ export default function BodyPrepLivePage() {
   // Ref to keep track of operating time in seconds for each device without triggering rerenders
   const liveTimesRef = useRef<Record<string, number>>({});
 
+  // Ref to store the current random values to batch updates
+  const pendingValuesRef = useRef<LiveValues>({});
+
   // New state to hold the current timestamp for hydration-safe live time
   const [currentTime, setCurrentTime] = useState(Date.now());
 
@@ -51,7 +38,6 @@ export default function BodyPrepLivePage() {
     filteredDevices.forEach((device) => {
       const deviceId = device.id;
       if (liveTimesRef.current[deviceId] === undefined) {
-        // Use operatingTime or startTime from device or fallback to zero
         const timeStr = device.operatingTime || device.startTime || "00:00:00";
         liveTimesRef.current[deviceId] = timeStringToSeconds(timeStr);
       }
@@ -68,7 +54,19 @@ export default function BodyPrepLivePage() {
       forceUpdate((prev) => prev + 1);
     }, 1000);
 
-    return () => clearInterval(interval); // Cleanup on unmount
+    return () => clearInterval(interval);
+  }, []);
+
+  // Batch update liveValues every 2 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setLiveValues((prev) => ({
+        ...prev,
+        ...pendingValuesRef.current,
+      }));
+    }, 2000);
+
+    return () => clearInterval(interval);
   }, []);
 
   // For devices with "blue" status, start random value generators for each default parameter
@@ -99,18 +97,16 @@ export default function BodyPrepLivePage() {
               ? rawDefault.replace(/[\d.\-]/g, "")
               : "";
 
-          // Start the random value generator and update liveValues state on each new value
+          // Start the random value generator and update pendingValuesRef
           const stop = startRandomGenerator(min, max, unit, (val) => {
-            setLiveValues((prev) => ({
-              ...prev,
+            pendingValuesRef.current = {
+              ...pendingValuesRef.current,
               [deviceId]: {
-                ...(prev[deviceId] || {}),
+                ...(pendingValuesRef.current[deviceId] || {}),
                 [key]: parseFloat(val),
               },
-            }));
+            };
           });
-          console.log(stops)
-
           stops.push(stop);
         });
       }
@@ -134,12 +130,12 @@ export default function BodyPrepLivePage() {
           {filteredDevices.map((device, index) => {
             const liveData = liveValues[device.id] || {};
             const defaultParams = device.defaultParams || {};
-            
+
             // Build live data to pass down, handling device statuses and fallback values
             const dataEntries = Object.keys(defaultParams).reduce((acc, key) => {
               const liveVal = (liveData as Record<string, number | undefined>)[key];
               const defaultVal = defaultParams[key];
-            
+
               const defaultValNumber =
                 typeof defaultVal === "string"
                   ? parseFloat(defaultVal.replace(/[^\d.]/g, "") || "0")
@@ -178,7 +174,7 @@ export default function BodyPrepLivePage() {
                     data: {
                       ...dataEntries,
                       time: secondsToTimeString(liveTimesRef.current[device.id] || 0),
-                      extraTooltip: device.extraTooltip ?? "" 
+                      extraTooltip: device.extraTooltip ?? "",
                     },
                   },
                 }}

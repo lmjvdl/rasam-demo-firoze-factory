@@ -152,9 +152,10 @@ export const styles = {
       transform: "none",
     }),
     ...(position === "center" && {
-      top: iconHeight / 2,
-      left: iconWidth / 2,
-      transform: "translate(-300%, -165%)",
+      top: -lightSize * 4.2 - margin,
+      right: -lightSize * 0.7 - margin,
+      transform: "translateY(-50%)",
+      left: "auto",
     }),
   }),
 

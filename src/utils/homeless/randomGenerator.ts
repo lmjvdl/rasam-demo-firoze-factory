@@ -28,10 +28,14 @@ export default function startRandomGenerator(
   unit: string = "",
   callback: (value: string) => void
 ): () => void {
-  const interval = setInterval(() => {
+  const generate = () => {
     const randomValue = (Math.random() * (max - min) + min).toFixed(2);
     callback(`${randomValue}${unit}`);
-  }, 2000);
+  };
+
+  generate(); // Generate immediately on start
+
+  const interval = setInterval(generate, 2000);
 
   // return a function to stop the generator
   return () => {

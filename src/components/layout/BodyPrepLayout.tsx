@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import MainCardLayoutBodyPrep from "@/components/customContiner/MainCardLayoutBodyPrep";
 import { demoData } from "@/components/fakeData/layout/fakeData";
 import { BodyPrepLayoutProps, Device } from "@/interfaces/user/layout/layoutBodyPrep";
@@ -10,20 +10,14 @@ import LoadingScreen from "../loadingScreen/LoadingScreen";
 import { useAllDevicesRandomData } from "./hooks/useRandomDataGenerator";
 import { DeviceGroupRenderer } from "./DeviceGroupRenderer";
 
-/**
- * Main layout component for the Body Preparation section of the application.
- * Manages device state, handles device interactions, and renders the device layout.
- * 
- * @component
- * @param {BodyPrepLayoutProps} props - Component props
- * @param {Device[]} [props.initialDevices=demoData.devices] - Initial array of devices to display
- * @returns {React.ReactElement} The rendered body preparation layout
- */
 const BodyPrepLayout = ({ initialDevices = demoData.devices }: BodyPrepLayoutProps) => {
   const router = useRouter();
   const { setDeviceData } = useLayoutLiveStore();
   const [devices, setDevices] = useState<Device[]>(initialDevices);
   const [isMounted, setIsMounted] = useState(false);
+
+  // Ref to store pending updates for batching
+  const pendingUpdatesRef = useRef<Record<string, Record<string, string>>>({});
 
   // Track component mount status to prevent memory leaks
   useEffect(() => {
@@ -31,15 +25,33 @@ const BodyPrepLayout = ({ initialDevices = demoData.devices }: BodyPrepLayoutPro
     return () => setIsMounted(false);
   }, []);
 
-  /**
-   * Updates device data in local state and global store
-   * @param {string} id - Device ID to update
-   * @param {Record<string, string>} data - New device data properties
-   */
+  // Batch update devices every 2 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (Object.keys(pendingUpdatesRef.current).length > 0) {
+        setDevices((prev) =>
+          prev.map((d) =>
+            pendingUpdatesRef.current[d.id]
+              ? { ...d, ...pendingUpdatesRef.current[d.id] }
+              : d
+          )
+        );
+        pendingUpdatesRef.current = {}; // Clear pending updates after applying
+      }
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  // Updates device data in local state and global store
   const updateDevice = useCallback((id: string, data: Record<string, string>) => {
-    setDevices(prev =>
-      prev.map(d => d.id === id ? { ...d, ...data } : d)
-    );
+    pendingUpdatesRef.current = {
+      ...pendingUpdatesRef.current,
+      [id]: {
+        ...(pendingUpdatesRef.current[id] || {}),
+        ...data,
+      },
+    };
   }, []);
 
   // Initialize random data generation for all devices
@@ -47,16 +59,13 @@ const BodyPrepLayout = ({ initialDevices = demoData.devices }: BodyPrepLayoutPro
     devices,
     updateDevice,
     setDeviceData,
-    isActive: isMounted
+    isActive: isMounted,
   });
 
-  /**
-   * Handles device click navigation
-   * @param {string} deviceType - Type of device clicked
-   */
-  const handleDeviceClick = (deviceType: string) => {
+  // Handles device click navigation
+  const handleDeviceClick = useCallback((deviceType: string) => {
     router.push(`/bodyPrep?device=${deviceType}`);
-  };
+  }, [router]);
 
   // Show loading screen until component is fully mounted
   if (!isMounted) {
