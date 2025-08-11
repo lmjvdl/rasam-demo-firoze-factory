@@ -9,14 +9,19 @@ import startRandomGenerator from "@/utils/homeless/randomGenerator";
 import { LiveValues } from "@/interfaces/lives/liveConfig";
 import { useSearchParams } from "next/navigation";
 import { Device } from "@/interfaces/user/layout/layoutBodyPrep";
-import { secondsToTimeString, timeStringToSeconds } from "@/utils/formatters/liveTimer";
+import {
+  secondsToTimeString,
+  timeStringToSeconds,
+} from "@/utils/formatters/liveTimer";
 
 export default function BodyPrepLivePage() {
   const searchParams = useSearchParams();
   const name = searchParams.get("device") || "BatchBaalMill";
 
   // Filter devices by selected type
-  const filteredDevices = demoData.devices.filter((device) => device.type === name);
+  const filteredDevices = demoData.devices.filter(
+    (device) => device.type === name
+  );
 
   // Holds live parameter values per device
   const [liveValues, setLiveValues] = useState<LiveValues>({});
@@ -38,7 +43,8 @@ export default function BodyPrepLivePage() {
     filteredDevices.forEach((device) => {
       const deviceId = device.id;
       if (liveTimesRef.current[deviceId] === undefined) {
-        const timeStr = device.operatingTime || device.startTime || "00:00:00";
+        const timeStr =
+          device.operatingTime || device.startTime || "00:00:00";
         liveTimesRef.current[deviceId] = timeStringToSeconds(timeStr);
       }
     });
@@ -69,18 +75,17 @@ export default function BodyPrepLivePage() {
     return () => clearInterval(interval);
   }, []);
 
-  // For devices with "blue" status, start random value generators for each default parameter
+  // Start random generators for blue devices (all params) and red devices (only temperature params)
   useEffect(() => {
     const stops: (() => void)[] = [];
 
     filteredDevices.forEach((device: Device) => {
-      if (device.status === "blue" && device.defaultParams) {
+      if (device.defaultParams) {
         const deviceId = device.id;
         const paramKeys = Object.keys(device.defaultParams);
+
         paramKeys.forEach((key) => {
           const rawDefault = device.defaultParams?.[key];
-
-          // Parse numeric default value from string or number
           const numericDefault =
             typeof rawDefault === "string"
               ? parseFloat(rawDefault.replace(/[^\d.-]/g, ""))
@@ -88,31 +93,46 @@ export default function BodyPrepLivePage() {
               ? rawDefault
               : 0;
 
-          // Set range for random generator ±10 around default value
           const [min, max] = [numericDefault - 10, numericDefault + 10];
-
-          // Extract unit from string default value if any
           const unit =
             typeof rawDefault === "string"
               ? rawDefault.replace(/[\d.\-]/g, "")
               : "";
 
-          // Start the random value generator and update pendingValuesRef
-          const stop = startRandomGenerator(min, max, unit, (val) => {
-            pendingValuesRef.current = {
-              ...pendingValuesRef.current,
-              [deviceId]: {
-                ...(pendingValuesRef.current[deviceId] || {}),
-                [key]: parseFloat(val),
-              },
-            };
-          });
-          stops.push(stop);
+          // Blue devices => all params get random values
+          if (device.status === "blue") {
+            const stop = startRandomGenerator(min, max, unit, (val) => {
+              pendingValuesRef.current = {
+                ...pendingValuesRef.current,
+                [deviceId]: {
+                  ...(pendingValuesRef.current[deviceId] || {}),
+                  [key]: parseFloat(val),
+                },
+              };
+            });
+            stops.push(stop);
+          }
+
+          // Red devices => only params containing "temperature" get random values
+          if (
+            device.status === "red" &&
+            key.toLowerCase().includes("temperature")
+          ) {
+            const stop = startRandomGenerator(min, max, unit, (val) => {
+              pendingValuesRef.current = {
+                ...pendingValuesRef.current,
+                [deviceId]: {
+                  ...(pendingValuesRef.current[deviceId] || {}),
+                  [key]: parseFloat(val),
+                },
+              };
+            });
+            stops.push(stop);
+          }
         });
       }
     });
 
-    // Cleanup all random generators when dependencies change or component unmounts
     return () => {
       stops.forEach((stop) => stop());
     };
@@ -131,27 +151,39 @@ export default function BodyPrepLivePage() {
             const liveData = liveValues[device.id] || {};
             const defaultParams = device.defaultParams || {};
 
-            // Build live data to pass down, handling device statuses and fallback values
-            const dataEntries = Object.keys(defaultParams).reduce((acc, key) => {
-              const liveVal = (liveData as Record<string, number | undefined>)[key];
-              const defaultVal = defaultParams[key];
+            // Build live data entries
+            const dataEntries = Object.keys(defaultParams).reduce(
+              (acc, key) => {
+                const liveVal = (liveData as Record<
+                  string,
+                  number | undefined
+                >)[key];
+                const defaultVal = defaultParams[key];
 
-              const defaultValNumber =
-                typeof defaultVal === "string"
-                  ? parseFloat(defaultVal.replace(/[^\d.]/g, "") || "0")
-                  : typeof defaultVal === "number"
-                  ? defaultVal
-                  : 0;
+                const defaultValNumber =
+                  typeof defaultVal === "string"
+                    ? parseFloat(defaultVal.replace(/[^\d.]/g, "") || "0")
+                    : typeof defaultVal === "number"
+                    ? defaultVal
+                    : 0;
 
-              acc[key] =
-                device.status === "blue"
-                  ? liveVal ?? defaultValNumber
-                  : device.status === "red"
-                  ? 0
-                  : undefined;
+                if (device.status === "blue") {
+                  acc[key] = liveVal ?? defaultValNumber;
+                } else if (device.status === "red") {
+                  if (key.toLowerCase().includes("temperature")) {
+                    // Live value from generator, fallback to default if missing
+                    acc[key] = liveVal ?? defaultValNumber;
+                  } else {
+                    acc[key] = 0;
+                  }
+                } else {
+                  acc[key] = undefined;
+                }
 
-              return acc;
-            }, {} as Record<string, number | undefined>);
+                return acc;
+              },
+              {} as Record<string, number | undefined>
+            );
 
             return (
               <LiveCardManager
@@ -173,7 +205,9 @@ export default function BodyPrepLivePage() {
                         : "unknown",
                     data: {
                       ...dataEntries,
-                      time: secondsToTimeString(liveTimesRef.current[device.id] || 0),
+                      time: secondsToTimeString(
+                        liveTimesRef.current[device.id] || 0
+                      ),
                       extraTooltip: device.extraTooltip ?? "",
                     },
                   },
