@@ -154,7 +154,7 @@ export const styles = {
     ...(position === "center" && {
       top: -lightSize * 4.2 - margin,
       right: -lightSize * 0.7 - margin,
-      transform: "translateY(-50%)",
+      transform: "translateY(280%)",
       left: "auto",
     }),
   }),
