@@ -349,7 +349,7 @@ export const demoData: { devices: Device[] } = {
       startTime: "01:06:22",
       lightsConfig: { orientation: "vertical", position: "left" },
       defaultParams: {
-        soilSurface: "",
+        soilSurface: getRandomSoilSurface(),
       },
     },
     {

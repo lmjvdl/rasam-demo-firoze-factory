@@ -180,13 +180,22 @@ export const tooltipTitle = (device: Device): string => {
         .map(([key, value]) => createParamItem(paramNameMap[key] || key, value))
         .join("");
 
+      const sufaceParamsBlue = paramEntries
+        .filter(([key]) => isSoilSurfaceParam(key))
+        .map(([key, value]) => createParamItem(paramNameMap[key] || key, value))
+        .join("");
+
       const operatingTimeHTML = device.operatingTime
         ? createOperatingTime(device.operatingTime)
         : "";
 
+      const blueTitle = sufaceParamsBlue
+        ? "در حال بارگیری"
+        : "وضعیت دستگاه";
+
       return `
         <div style="${baseStyle} ${statusStyles.blue}">
-          ${createHeader('وضعیت دستگاه', statusIcons.blue)}
+          ${createHeader(blueTitle, statusIcons.blue)}
           ${paramsHTML}
           ${operatingTimeHTML}
         </div>
@@ -207,21 +216,30 @@ export const tooltipTitle = (device: Device): string => {
         ? createOperatingTime(device.operatingTime, true)
         : "";
 
+      const redTitle = sufaceParams
+        ? "درحال تخلیه"
+        : "دستگاه خاموش است";
+
       return `
-        <div style="${baseStyle} ${statusStyles.red}">
-          ${createHeader('دستگاه خاموش است', statusIcons.red)}
-          ${temperatureParams}
-          ${sufaceParams}
-          ${redOperatingTimeHTML}
-        </div>
-      `;
+          <div style="${baseStyle} ${statusStyles.red}">
+            ${createHeader(redTitle, statusIcons.red)}
+            ${temperatureParams}
+            ${sufaceParams}
+            ${redOperatingTimeHTML}
+          </div>
+        `;
 
     case "none":
+      const sufaceParamsNone = paramEntries
+        .filter(([key]) => isSoilSurfaceParam(key))
+        .map(([key, value]) => createParamItem(paramNameMap[key] || key, value))
+        .join("");
+
       return `
-        <div style="${baseStyle} ${statusStyles.none}">
-          ${createHeader('وضعیت نامشخص', statusIcons.none)}
-        </div>
-      `;
+            <div style="${baseStyle} ${statusStyles.none}">
+              ${sufaceParamsNone}
+            </div>
+          `;
 
     case "grey":
       return `
