@@ -30,7 +30,7 @@ const OnOffGranuleSillos = ({ on, index }: Props) => {
     } else if (state === "disconnect") {
       return "قطع ارتباط";
     } else {
-      return "نامشخص";
+      return "خاموش";
     }
   }
 
@@ -40,11 +40,11 @@ const OnOffGranuleSillos = ({ on, index }: Props) => {
       color={
         isOn
           ? isDischarging
-            ? "error"       // Red for discharging silos (even-indexed)
+            ? "warning"       // Red for discharging silos (even-indexed)
             : "primary"     // Blue for loading silos (odd-indexed)
           : state === "disconnect"
           ? "inherit"       // Yellow for disconnect
-          : "warning"       // Default color for "off" and "unknown"
+          : "error"       // Default color for "off" and "unknown"
       }
       disableFocusRipple
       disableTouchRipple

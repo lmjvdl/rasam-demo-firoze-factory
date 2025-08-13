@@ -45,6 +45,11 @@ export const tooltipTitle = (device: Device): string => {
     return lowerKey.includes('temperature');
   };
 
+  const isSoilSurfaceParam = (key: string): boolean => {
+    const lowerKey = key.toLowerCase();
+    return lowerKey.includes('soilsurface');
+  };
+
   // Base styling for all tooltips
   const baseStyle = `
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -193,6 +198,11 @@ export const tooltipTitle = (device: Device): string => {
         .map(([key, value]) => createParamItem(paramNameMap[key] || key, value))
         .join("");
 
+      const sufaceParams = paramEntries
+        .filter(([key]) => isSoilSurfaceParam(key))
+        .map(([key, value]) => createParamItem(paramNameMap[key] || key, value))
+        .join("");
+
       const redOperatingTimeHTML = device.operatingTime
         ? createOperatingTime(device.operatingTime, true)
         : "";
@@ -201,6 +211,7 @@ export const tooltipTitle = (device: Device): string => {
         <div style="${baseStyle} ${statusStyles.red}">
           ${createHeader('دستگاه خاموش است', statusIcons.red)}
           ${temperatureParams}
+          ${sufaceParams}
           ${redOperatingTimeHTML}
         </div>
       `;
