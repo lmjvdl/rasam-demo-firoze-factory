@@ -127,6 +127,7 @@ export interface StatusLightsProps {
   iconHeight?: number;
   hasExtraTooltip?: boolean;
   extraTooltipContent?: string;
+  type: string;
 }
 
 

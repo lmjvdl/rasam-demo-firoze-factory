@@ -24,7 +24,7 @@ const StatusLights: React.FC<StatusLightsProps> = (props) => {
   const blink = useBlink();
 
   // Hook to compute how long the current fault status has been active
-  const timer = useFaultTimer(props.status, props.startTime);
+  const timer = useFaultTimer(props.status, props.startTime, props.type);
 
   // Provide fallback sizes if iconWidth or iconHeight are not explicitly passed
   const iconHeight = props.iconHeight ?? props.iconSize * 20;
@@ -37,6 +37,7 @@ const StatusLights: React.FC<StatusLightsProps> = (props) => {
       iconWidth={iconWidth}
       blink={blink}
       timer={timer}
+      type={props.type}
     />
   );
 };

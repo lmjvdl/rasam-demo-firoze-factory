@@ -279,7 +279,7 @@ export const demoData: { devices: Device[] } = {
       name: "صفحه 6",
       type: "VibratingScreen",
       status: "grey",
-      startTime: "10:20:47",
+      startTime: "00:15:58",
       lightsConfig: { orientation: "vertical", position: "top" },
       defaultParams: {
         current: getRandomCurrent(),
@@ -291,6 +291,7 @@ export const demoData: { devices: Device[] } = {
       type: "GranuleSillo",
       name: "سیلو 1",
       status: "blue",
+      startTime: "20:10:07",
       lightsConfig: { orientation: "vertical", position: "left" },
       operatingTime: "02:45:00",
       defaultParams: {
@@ -302,6 +303,7 @@ export const demoData: { devices: Device[] } = {
       name: "سیلو 2",
       type: "GranuleSillo",
       status: "blue",
+      startTime: "00:51:20",
       lightsConfig: { orientation: "vertical", position: "left" },
       operatingTime: "04:17:00",
       defaultParams: {
@@ -313,6 +315,7 @@ export const demoData: { devices: Device[] } = {
       name: "سیلو 3",
       type: "GranuleSillo",
       status: "blue",
+      startTime: "16:14:01",
       lightsConfig: { orientation: "vertical", position: "left" },
       operatingTime: "06:04:00",
       defaultParams: {

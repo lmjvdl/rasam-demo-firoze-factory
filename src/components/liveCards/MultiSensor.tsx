@@ -233,7 +233,7 @@ export default function MultiSensorLiveCard({ container }: Props) {
 
             {/* Render silo indicator if silo number is valid; otherwise generic OnOff indicator */}
             {siloNumber && siloNumber >= 1 && siloNumber <= 12 ? (
-              <OnOffGranuleSillos on={status} index={siloNumber} />
+              <OnOffGranuleSillos on={status} />
             ) : (
               <OnOff on={status} />
             )}

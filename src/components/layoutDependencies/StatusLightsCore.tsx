@@ -27,6 +27,8 @@ interface Props extends StatusLightsProps {
 
   /** Explicit width of the status icon container */
   iconWidth: number;
+
+  type: string;
 }
 
 /**
@@ -55,12 +57,12 @@ const StatusLightsCore: React.FC<Props> = ({
   hasExtraTooltip,
   extraTooltipContent,
   blink,
-  timer
+  timer,
+  type
 }) => {
-  const lightSize = iconSize * 2;           // Final size of the circular light
-  const margin = iconSize * 0.5;            // Margin around the light based on base size
+  const lightSize = iconSize * 2;
+  const margin = iconSize * 0.5;
 
-  // If there's no active status, don't render anything
   if (status === "none") return null;
 
   return (
@@ -76,10 +78,8 @@ const StatusLightsCore: React.FC<Props> = ({
         )}
       >
         <Box sx={{ position: "relative" }}>
-          {/* Circular status light with dynamic blinking background */}
           <Box sx={getLightStyle(status, status, blink, lightSize)} />
 
-          {/* Optional tooltip warning icon */}
           {hasExtraTooltip && (
             <Box sx={styles.getWarningIconStyle(position, lightSize)}>
               <Tooltip
@@ -101,23 +101,29 @@ const StatusLightsCore: React.FC<Props> = ({
             </Box>
           )}
 
-          {/* Live timer display for how long the status has been active */}
-          <Box
-            sx={styles.getTimerStyle(
-              position,
-              orientation,
-              iconSize,
-              iconHeight,
-              iconWidth,
-              lightSize,
-              margin,
-              status
-            )}
-          >
-            {`${timer.hours.toString().padStart(2, "0")}:${timer.minutes
-              .toString()
-              .padStart(2, "0")}:${timer.seconds.toString().padStart(2, "0")}`}
-          </Box>
+          {(status === "grey" ||
+            status === "red" ||
+            (status === "blue" && type === "GranuleSillo")) && (
+            <Box
+              sx={styles.getTimerStyle(
+                position,
+                orientation,
+                iconSize,
+                iconHeight,
+                iconWidth,
+                lightSize,
+                margin,
+                status,
+                type
+              )}
+            >
+              {`${timer.hours.toString().padStart(2, "0")}:${timer.minutes
+                .toString()
+                .padStart(2, "0")}:${timer.seconds
+                .toString()
+                .padStart(2, "0")}`}
+            </Box>
+          )}
         </Box>
       </Box>
     </Box>

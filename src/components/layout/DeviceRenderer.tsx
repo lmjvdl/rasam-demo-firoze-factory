@@ -82,6 +82,7 @@ export const DeviceRenderer: React.FC<DeviceRendererProps> = ({
                                 iconHeight={height * iconSize}
                                 hasExtraTooltip={!!device.extraTooltip}
                                 extraTooltipContent={device.extraTooltip}
+                                type={device.type}
                             />
                         </>
                     ) : (
@@ -95,8 +96,10 @@ export const DeviceRenderer: React.FC<DeviceRendererProps> = ({
                             iconHeight={height * iconSize}
                             hasExtraTooltip={!!device.extraTooltip}
                             extraTooltipContent={device.extraTooltip}
+                            type={device.type}
                         />
                     )}
+
                     <IconComponent width={width * iconSize} height={height * iconSize} />
                 </Box>
 

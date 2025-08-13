@@ -27,24 +27,26 @@ type Timer = {
  * // Timer resets to 00:00:00 when status changes to "green"
  * const timer = useFaultTimer("green", "05:30:00");
  */
-export const useFaultTimer = (status: TimerStatus, startTime?: string): Timer => {
-  const [timer, setTimer] = useState<Timer>({ 
-    hours: 0, 
-    minutes: 0, 
-    seconds: 0 
+export const useFaultTimer = (status: TimerStatus, startTime?: string, deviceType?: string): Timer => {
+  const [timer, setTimer] = useState<Timer>({
+    hours: 0,
+    minutes: 0,
+    seconds: 0
   });
 
   useEffect(() => {
-    // Reset timer if status is neither "grey" nor "red"
-    if (status !== "grey" && status !== "red") {
+    const shouldRunTimer =
+      status === "grey" ||
+      status === "red" ||
+      (status === "blue" && deviceType === "GranuleSillo");
+
+    if (!shouldRunTimer) {
       setTimer({ hours: 0, minutes: 0, seconds: 0 });
       return;
     }
 
-    // Initialize with parsed start time or 00:00:00
     setTimer(parseStartTime(startTime));
 
-    // Update timer every second
     const intervalId = setInterval(() => {
       setTimer(prev => {
         let seconds = prev.seconds + 1;
@@ -64,9 +66,8 @@ export const useFaultTimer = (status: TimerStatus, startTime?: string): Timer =>
       });
     }, 1000);
 
-    // Cleanup interval on unmount or dependency change
     return () => clearInterval(intervalId);
-  }, [status, startTime]);
+  }, [status, startTime, deviceType]);
 
   return timer;
 };

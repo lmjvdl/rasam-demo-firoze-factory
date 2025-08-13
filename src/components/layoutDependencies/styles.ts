@@ -97,9 +97,10 @@ export const styles = {
     iconWidth: number,
     lightSize: number,
     margin: number,
-    status: "red" | "blue" | "grey" | "none"
+    status: "red" | "blue" | "grey" | "none",
+    type: string,
   ): SxProps => ({
-    display: (status === "grey") || (status === "red") ? "block" : "none",
+    display: (status === "grey") || (status === "red") || (status === "blue" && type === "GranuleSillo") ? "block" : "none",
     position: "absolute",
     fontSize: iconSize * 1.5,
     color: "grey",
