@@ -324,6 +324,7 @@ export const demoData: { devices: Device[] } = {
       name: "سیلو 4",
       type: "GranuleSillo",
       status: "none",
+      startTime: "10:02:51",
       lightsConfig: { orientation: "vertical", position: "left" },
       defaultParams: {
         soilSurface: getRandomSoilSurface(),
@@ -334,6 +335,7 @@ export const demoData: { devices: Device[] } = {
       name: "سیلو 5",
       type: "GranuleSillo",
       status: "none",
+      startTime: "02:50:04",
       lightsConfig: { orientation: "vertical", position: "left" },
       defaultParams: {
         soilSurface: getRandomSoilSurface(),
@@ -344,6 +346,7 @@ export const demoData: { devices: Device[] } = {
       name: "سیلو 6",
       type: "GranuleSillo",
       status: "none",
+      startTime: "01:06:22",
       lightsConfig: { orientation: "vertical", position: "left" },
       defaultParams: {
         soilSurface: "",
