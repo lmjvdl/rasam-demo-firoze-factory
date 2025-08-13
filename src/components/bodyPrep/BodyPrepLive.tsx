@@ -75,7 +75,7 @@ export default function BodyPrepLivePage() {
     return () => clearInterval(interval);
   }, []);
 
-  // Start random generators for blue devices (all params) and red devices (only temperature params)
+  // Start random generators for blue devices (all params) and red devices (temperature + soilSurface)
   useEffect(() => {
     const stops: (() => void)[] = [];
 
@@ -90,8 +90,8 @@ export default function BodyPrepLivePage() {
             typeof rawDefault === "string"
               ? parseFloat(rawDefault.replace(/[^\d.-]/g, ""))
               : typeof rawDefault === "number"
-              ? rawDefault
-              : 0;
+                ? rawDefault
+                : 0;
 
           const [min, max] = [numericDefault - 10, numericDefault + 10];
           const unit =
@@ -99,8 +99,8 @@ export default function BodyPrepLivePage() {
               ? rawDefault.replace(/[\d.\-]/g, "")
               : "";
 
-          // Blue devices => all params get random values
           if (device.status === "blue") {
+            // Blue devices => all params get random values
             const stop = startRandomGenerator(min, max, unit, (val) => {
               pendingValuesRef.current = {
                 ...pendingValuesRef.current,
@@ -113,21 +113,20 @@ export default function BodyPrepLivePage() {
             stops.push(stop);
           }
 
-          // Red devices => only params containing "temperature" get random values
-          if (
-            device.status === "red" &&
-            key.toLowerCase().includes("temperature")
-          ) {
-            const stop = startRandomGenerator(min, max, unit, (val) => {
-              pendingValuesRef.current = {
-                ...pendingValuesRef.current,
-                [deviceId]: {
-                  ...(pendingValuesRef.current[deviceId] || {}),
-                  [key]: parseFloat(val),
-                },
-              };
-            });
-            stops.push(stop);
+          if (device.status === "red") {
+            // Red devices => only temperature + soilSurface params get random values
+            if (key.toLowerCase().includes("temperature") || key === "soilSurface") {
+              const stop = startRandomGenerator(min, max, unit, (val) => {
+                pendingValuesRef.current = {
+                  ...pendingValuesRef.current,
+                  [deviceId]: {
+                    ...(pendingValuesRef.current[deviceId] || {}),
+                    [key]: parseFloat(val),
+                  },
+                };
+              });
+              stops.push(stop);
+            }
           }
         });
       }
@@ -151,31 +150,28 @@ export default function BodyPrepLivePage() {
             const liveData = liveValues[device.id] || {};
             const defaultParams = device.defaultParams || {};
 
-            // Build live data entries
             const dataEntries = Object.keys(defaultParams).reduce(
               (acc, key) => {
-                const liveVal = (liveData as Record<
-                  string,
-                  number | undefined
-                >)[key];
+                const liveVal = (liveData as Record<string, number | undefined>)[key];
                 const defaultVal = defaultParams[key];
 
                 const defaultValNumber =
                   typeof defaultVal === "string"
                     ? parseFloat(defaultVal.replace(/[^\d.]/g, "") || "0")
                     : typeof defaultVal === "number"
-                    ? defaultVal
-                    : 0;
+                      ? defaultVal
+                      : 0;
 
                 if (device.status === "blue") {
                   acc[key] = liveVal ?? defaultValNumber;
                 } else if (device.status === "red") {
-                  if (key.toLowerCase().includes("temperature")) {
-                    // Live value from generator, fallback to default if missing
+                  if (key.toLowerCase().includes("temperature") || key === "soilSurface") {
                     acc[key] = liveVal ?? defaultValNumber;
                   } else {
                     acc[key] = 0;
                   }
+                } else if (key === "soilSurface" && device.status === "none") {
+                  acc[key] = 30
                 } else {
                   acc[key] = undefined;
                 }
@@ -199,10 +195,10 @@ export default function BodyPrepLivePage() {
                       device.status === "blue"
                         ? "on"
                         : device.status === "grey"
-                        ? "disconnect"
-                        : device.status === "red"
-                        ? "off"
-                        : "unknown",
+                          ? "disconnect"
+                          : device.status === "red"
+                            ? "off"
+                            : "unknown",
                     data: {
                       ...dataEntries,
                       time: secondsToTimeString(
